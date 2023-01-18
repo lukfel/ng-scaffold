@@ -2,26 +2,113 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
-## Development server
+__________
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Angular
+* Reference: https://github.com/angular/angular-cli/wiki
 
-## Code scaffolding
+### Requirements
+* Node: https://nodejs.org/en/download/
+* NPM: ``npm install npm@latest -g``
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Installation
+* ``npm install -g @angular/cli``
+* ``npm uninstall -g @angular/cli cache verify``
 
-## Build
+### Update
+* ``ng update @angular/cli @angular/core``
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Create Project
+* ``ng new [app] --prefix [lf] --style [scss] --routing --skipTests``
 
-## Running unit tests
+### Generate Route
+* ``ng generate module [name] --route [route] --module app.module``
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Serve Project
+* ``ng serve --host 0.0.0.0 --port 4200``
 
-## Running end-to-end tests
+### Deployement
+* ``ng build --configuration production``
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Testing
+* ``ng test --browsers ChromeHeadless --code-coverage true --watch false``
 
-## Further help
+__________
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Material (Design Language)
+* Reference: https://material.angular.io/guide/getting-started
+
+### Installation
+* ``ng add @angular/material``
+
+### Update
+* ``ng update @angular/material``
+
+### Optional
+* ``npm install material-design-icons``
+* ``npm install roboto-fontface``
+
+__________
+
+## Eslint
+* Reference: https://github.com/angular-eslint/angular-eslint
+
+### Installation
+* ``ng add @angular-eslint/schematics``
+* ``npm install prettier eslint-plugin-prettier eslint-config-prettier --save-dev``
+* ``npm install eslint-plugin-unused-imports --save-dev``
+
+__________
+
+## AngularFire/Firebase (Serverless Backend)
+* Reference: https://github.com/angular/angularfire
+
+### Installation
+* ``ng add @angular/fire``
+
+### Update
+* ``ng update @angular/fire``
+
+### Deployement
+* ``ng run [app]:deploy``
+* Note: Hostable build is created in the folder "dist/"
+
+### Optional
+* ``npm install -g firebase-tools``
+
+__________
+
+## Service worker (PWA)
+* Reference: https://angular.io/guide/service-worker-getting-started
+
+### Installation
+* ``ng add @angular/pwa --project [app]``
+
+__________
+
+## Husky (Git-hooks)
+* Reference: https://github.com/typicode/husky
+
+### Installation
+* ``npm install husky --save-dev``
+
+### Usage [package.json]
+```json
+"husky": {
+  "hooks": {
+    "pre-commit": "ng lint --fix && git add .",
+    "pre-push": "ng build --prod"
+  }
+},
+```
+
+__________
+
+## Scully (Static Pages)
+* Reference: https://github.com/scullyio/scully
+
+### Installation
+* ``ng add @scullyio/init``
+
+### Usage
+* ``npm run scully``
