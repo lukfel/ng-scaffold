@@ -1,4 +1,4 @@
-export interface AppHeaderConfig {
+export interface HeaderConfig {
   show?: boolean;
   title?: string;
 }

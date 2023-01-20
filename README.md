@@ -24,6 +24,9 @@ __________
 ### Generate Route
 * ``ng generate module [name] --route [route] --module app.module``
 
+### Generate Library
+* ``ng generate library [name] --prefix [lf]``
+
 ### Serve Project
 * ``ng serve --host 0.0.0.0 --port 4200``
 
