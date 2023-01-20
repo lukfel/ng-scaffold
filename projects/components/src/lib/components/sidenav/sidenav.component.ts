@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SidenavConfig } from '../../models';
 
 @Component({
@@ -9,5 +9,11 @@ import { SidenavConfig } from '../../models';
 export class SidenavComponent {
 
   @Input() public sidenavConfig: SidenavConfig = {};
+
+  @Output() public sidenavClickEvent = new EventEmitter<string>();
+
+  public buttonClicked(id?: string): void {
+    this.sidenavClickEvent.emit(id);
+  }
 
 }

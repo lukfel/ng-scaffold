@@ -1,9 +1,19 @@
-<div class="lf-container">
+<div class="lf-container mat-app-background">
+  <lf-loading-overlay *ngIf="containerConfig?.loading"></lf-loading-overlay>
   <lf-header [headerConfig]="headerConfig"></lf-header>
-  <lf-sidenav [sidenavConfig]="sidenavConfig"></lf-sidenav>
-  <div class="lf-content">
-    <ng-content></ng-content>
+  <lf-sidenav
+    [sidenavConfig]="sidenavConfig"
+    (sidenavClickEvent)="sidenavButtonClicked($event)"></lf-sidenav>
+  <div
+    class="lf-content-wrapper"
+    [class.lf-show-sidenav]="sidenavConfig?.show"
+    #scrollElement>
+    <div class="lf-content">
+      <ng-content></ng-content>
+    </div>
+    <lf-footer [footerConfig]="footerConfig"></lf-footer>
   </div>
-  <lf-footer [footerConfig]="footerConfig"></lf-footer>
-  <lf-to-top-button [toTopButtonConfig]="toTopButtonConfig"></lf-to-top-button>
+  <lf-to-top-button
+    [toTopButtonConfig]="toTopButtonConfig"
+    [scrollElement]="scrollElement"></lf-to-top-button>
 </div>

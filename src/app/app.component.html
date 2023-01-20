@@ -1,7 +1,9 @@
 <lf-container
+  [containerConfig]="containerConfig"
   [headerConfig]="headerConfig"
   [sidenavConfig]="sidenavConfig"
   [footerConfig]="footerConfig"
-  [toTopButtonConfig]="toTopButtonConfig">
+  [toTopButtonConfig]="toTopButtonConfig"
+  (sidenavClickEvent)="sidenavClickEvent($event)">
   <router-outlet></router-outlet>
 </lf-container>

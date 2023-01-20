@@ -1,0 +1,38 @@
+:host {
+  position: fixed;
+  z-index: 99;
+  left: 0;
+  top: 0;
+  width: 88px;
+  height: 100vh;
+}
+
+.lf-sidenav {
+  padding-top: 88px;
+  height: 100vh;
+
+  // .lf-sidenav-items {
+    .lf-sidenav-item {
+      width: 72px;
+      height: 72px;
+      display: block;
+      margin: auto;
+
+      .lf-sidenav-item-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .lf-sidenav-item-label {
+        max-width: calc(100% + 8px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: break-spaces;
+        text-transform: none;
+        vertical-align: top;
+        font-size: 12px;
+      }
+    }
+  // }
+}

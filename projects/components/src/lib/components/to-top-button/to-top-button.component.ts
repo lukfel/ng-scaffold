@@ -9,5 +9,12 @@ import { ToTopButtonConfig } from '../../models';
 export class ToTopButtonComponent {
 
   @Input() public toTopButtonConfig: ToTopButtonConfig = {};
+  @Input() public scrollElement: HTMLElement;
+
+  public backToTop(): void {
+    if(this.scrollElement) {
+      this.scrollElement.scrollTop = 0;
+    }
+  }
 
 }

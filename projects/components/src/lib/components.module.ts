@@ -5,6 +5,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ToTopButtonComponent } from './components/to-top-button/to-top-button.component';
 import { SharedModule } from './shared/shared.module';
+import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { SharedModule } from './shared/shared.module';
     HeaderComponent,
     SidenavComponent,
     FooterComponent,
-    ToTopButtonComponent
+    ToTopButtonComponent,
+    LoadingOverlayComponent
   ],
   imports: [
     SharedModule
@@ -22,7 +24,8 @@ import { SharedModule } from './shared/shared.module';
     HeaderComponent,
     SidenavComponent,
     FooterComponent,
-    ToTopButtonComponent
+    ToTopButtonComponent,
+    LoadingOverlayComponent
   ]
 })
 export class ComponentsModule { }

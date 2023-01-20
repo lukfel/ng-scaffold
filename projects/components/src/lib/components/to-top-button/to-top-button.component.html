@@ -2,6 +2,7 @@
   *ngIf="toTopButtonConfig && toTopButtonConfig.show"
   mat-fab
   color="accent"
-  class="lf-to-top-button">
+  class="lf-to-top-button"
+  (click)="backToTop()">
   <mat-icon>arrow_upward</mat-icon>
 </button>

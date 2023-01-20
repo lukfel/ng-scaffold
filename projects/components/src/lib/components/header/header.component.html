@@ -1,6 +1,12 @@
 <mat-toolbar
   *ngIf="headerConfig && headerConfig.show"
-  color="primary"
-  class="lf-header">
+  class="lf-header"
+  color="primary">
   <span>{{ headerConfig.title }}</span>
 </mat-toolbar>
+<mat-progress-bar
+  *ngIf="headerConfig && headerConfig.loading"
+  class="lf-header-progress-bar"
+  color="accent"
+  mode="indeterminate">
+</mat-progress-bar>

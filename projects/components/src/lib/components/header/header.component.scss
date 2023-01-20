@@ -1,4 +1,10 @@
 .lf-header {
+  z-index: 100;
   position: fixed;
   top: 0;
+}
+
+.lf-header-progress-bar {
+  position: fixed;
+  top: 64px;
 }

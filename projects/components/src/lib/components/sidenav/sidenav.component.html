@@ -1,1 +1,10 @@
-<div *ngIf="sidenavConfig && sidenavConfig.show" class="lf-sidenav"></div>
+<div *ngIf="sidenavConfig && sidenavConfig.show" class="lf-sidenav">
+  <button
+    *ngFor="let button of sidenavConfig.menuButtons"
+    mat-icon-button
+    class="lf-sidenav-item"
+    (click)="buttonClicked(button.id)">
+    <mat-icon class="lf-sidenav-item-icon">{{ button.matIcon }}</mat-icon>
+    <span class="lf-sidenav-item-label">{{ button.label }}</span>
+  </button>
+</div>
