@@ -1,0 +1,24 @@
+html {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.lf-container {
+  margin-top: 64px;
+
+  .lf-content {
+    transition: height 0.3s;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 24px;
+
+    // &.apa-show-sidenav {
+    //   margin-left: 88px;
+    // }
+  }
+}
+

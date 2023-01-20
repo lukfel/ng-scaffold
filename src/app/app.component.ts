@@ -10,7 +10,7 @@ export class AppComponent {
 
   public headerConfig: HeaderConfig = {
     show: true,
-    title: 'Titel'
+    title: 'Scaffold'
   }
 
   public sidenavConfig: SidenavConfig = {
@@ -19,7 +19,7 @@ export class AppComponent {
 
   public footerConfig: FooterConfig = {
     show: true,
-    copyright: 'Lukas Felbinger'
+    copyright: '© Lukas Felbinger 2023. All rights reserved.'
   }
 
   public toTopButtonConfig: ToTopButtonConfig = {

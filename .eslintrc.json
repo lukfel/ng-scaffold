@@ -79,6 +79,7 @@
         "prettier/prettier": [
           "error",
           {
+            "bracketSameLine": true,
             "endOfLine": "auto"
           }
         ]
