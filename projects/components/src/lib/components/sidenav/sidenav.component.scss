@@ -1,22 +1,19 @@
-:host {
-  position: fixed;
+.lf-sidenav {
   z-index: 99;
+  position: fixed;
   left: 0;
   top: 0;
-  width: 88px;
   height: 100vh;
-}
+  padding: 80px 4px 0 4px;
 
-.lf-sidenav {
-  padding-top: 88px;
-  height: 100vh;
+  .lf-sidenav-items {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 
-  // .lf-sidenav-items {
     .lf-sidenav-item {
       width: 72px;
       height: 72px;
-      display: block;
-      margin: auto;
 
       .lf-sidenav-item-icon {
         width: 24px;
@@ -34,5 +31,5 @@
         font-size: 12px;
       }
     }
-  // }
+  }
 }

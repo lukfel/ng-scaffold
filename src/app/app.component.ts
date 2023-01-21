@@ -16,7 +16,9 @@ export class AppComponent {
   public headerConfig: HeaderConfig = {
     show: true,
     title: 'Scaffold',
-    loading: false
+    subTitle: 'by Lukas Felbinger',
+    loading: false,
+    showRouteLoading: true
   }
 
   public sidenavConfig: SidenavConfig = {
@@ -25,12 +27,14 @@ export class AppComponent {
       {
         matIcon: 'home',
         label: 'Startseite',
-        id: 'start'
+        id: 'start',
+        outlineIcon: true
       },
       {
         matIcon: 'mail',
         label: 'Kontakt',
-        id: 'contact'
+        id: 'contact',
+        outlineIcon: true
       }
     ]
   }

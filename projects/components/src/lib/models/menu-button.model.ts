@@ -3,4 +3,5 @@ export interface MenuButton {
   svgIcon?: string;
   label?: string;
   id?: string;
+  outlineIcon?: boolean;
 }

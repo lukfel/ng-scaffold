@@ -2,10 +2,16 @@
   *ngIf="headerConfig && headerConfig.show"
   class="lf-header"
   color="primary">
-  <span>{{ headerConfig.title }}</span>
+  <button mat-icon-button><mat-icon>apps</mat-icon></button>
+  <div class="lf-header-title-wrapper">
+    <span class="lf-header-title">{{ headerConfig.title }}</span>
+    <span class="lf-header-subtitle">{{ headerConfig.subTitle }}</span>
+  </div>
+  <div class="spacer"></div>
+  <button mat-icon-button><mat-icon>settings</mat-icon></button>
 </mat-toolbar>
 <mat-progress-bar
-  *ngIf="headerConfig && headerConfig.loading"
+  *ngIf="(headerConfig && headerConfig.loading) || routeLoading"
   class="lf-header-progress-bar"
   color="accent"
   mode="indeterminate">

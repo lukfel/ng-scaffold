@@ -2,6 +2,16 @@
   z-index: 100;
   position: fixed;
   top: 0;
+
+  .lf-header-title-wrapper {
+    display: flex;
+    flex-flow: column;
+    margin-left: 40px;
+  }
+
+  .spacer {
+    flex: 1 0 auto;
+  }
 }
 
 .lf-header-progress-bar {
