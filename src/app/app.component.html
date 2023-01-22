@@ -4,6 +4,7 @@
   [sidenavConfig]="sidenavConfig"
   [footerConfig]="footerConfig"
   [toTopButtonConfig]="toTopButtonConfig"
+  (headerClickEvent)="headerClickEvent($event)"
   (sidenavClickEvent)="sidenavClickEvent($event)">
   <router-outlet></router-outlet>
 </lf-container>

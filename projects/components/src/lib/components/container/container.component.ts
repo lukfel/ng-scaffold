@@ -19,13 +19,15 @@ export class ContainerComponent implements OnInit, OnDestroy {
   @Input() public footerConfig: FooterConfig = {};
   @Input() public toTopButtonConfig: ToTopButtonConfig = {};
 
+  @Output() public headerClickEvent = new EventEmitter<string>();
   @Output() public sidenavClickEvent = new EventEmitter<string>();
 
   public isMobile: boolean = false;
 
   private _subscription: Subscription;
 
-  constructor(private breakpointService: BreakpointService, private logger: Logger) { }
+  constructor(private breakpointService: BreakpointService,
+              private logger: Logger) { }
 
   public ngOnInit(): void {
     this._subscription = this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
@@ -49,6 +51,10 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
   public sidenavButtonClicked(id: string): void {
     this.sidenavClickEvent.emit(id);
+  }
+
+  public headerButtonClicked(id: string): void {
+    this.headerClickEvent.emit(id);
   }
 
 }

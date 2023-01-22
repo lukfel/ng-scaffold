@@ -7,7 +7,7 @@
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromeHeadless --code-coverage true --watch false",
-    "lint": "ng lint",
+    "lint": "ng lint --fix",
     "build-lib": "ng build components --configuration production",
     "watch-lib": "ng build components --watch --configuration development"
   },

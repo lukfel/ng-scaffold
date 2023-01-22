@@ -1,4 +1,4 @@
-<div *ngIf="sidenavConfig && sidenavConfig.show" class="lf-sidenav">
+<div *ngIf="sidenavConfig?.show" class="lf-sidenav">
   <div class="lf-sidenav-items">
     <button
       *ngFor="let button of sidenavConfig.menuButtons"

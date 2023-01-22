@@ -1,17 +1,28 @@
-<mat-toolbar
-  *ngIf="headerConfig && headerConfig.show"
-  class="lf-header"
-  color="primary">
-  <button mat-icon-button><mat-icon>apps</mat-icon></button>
+<mat-toolbar *ngIf="headerConfig?.show" class="lf-header" color="primary">
+  <button
+    *ngIf="headerConfig?.leftMenuButton"
+    mat-icon-button
+    (click)="buttonClicked(headerConfig.leftMenuButton?.id)">
+    <mat-icon>{{ headerConfig?.leftMenuButton?.matIcon }}</mat-icon>
+  </button>
+
   <div class="lf-header-title-wrapper">
     <span class="lf-header-title">{{ headerConfig.title }}</span>
     <span class="lf-header-subtitle">{{ headerConfig.subTitle }}</span>
   </div>
+
   <div class="spacer"></div>
-  <button mat-icon-button><mat-icon>settings</mat-icon></button>
+
+  <button
+    *ngIf="headerConfig?.rightMenuButton"
+    mat-icon-button
+    (click)="buttonClicked(headerConfig.rightMenuButton?.id)">
+    <mat-icon>{{ headerConfig?.rightMenuButton?.matIcon }}</mat-icon>
+  </button>
 </mat-toolbar>
+
 <mat-progress-bar
-  *ngIf="(headerConfig && headerConfig.loading) || routeLoading"
+  *ngIf="headerConfig?.loading || routeLoading"
   class="lf-header-progress-bar"
   color="accent"
   mode="indeterminate">

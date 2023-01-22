@@ -1,4 +1,6 @@
-// .lf-footer {
-//   position: absolute;
-//   bottom: 0;
-// }
+.lf-footer {
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { HeaderConfig } from '../../models/header-config.model';
 import { RouterService } from '../../services/router.service';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() public headerConfig: HeaderConfig = {};
+
+  @Output() public headerClickEvent = new EventEmitter<string>();
 
   public routeLoading: boolean = false;
 
@@ -32,6 +34,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public navigateBack(): void {
     this.routerService.navigateBack();
+  }
+
+  public buttonClicked(id?: string): void {
+    this.headerClickEvent.emit(id);
   }
 
 }

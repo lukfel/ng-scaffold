@@ -9,6 +9,9 @@ import { LoadingOverlayComponent } from './components/loading-overlay/loading-ov
 import { RouterService } from './services/router.service';
 import { LibraryConfig } from './models/library-config.model';
 import { BreakpointService } from './services/breakpoint.service';
+import { SnackbarService } from './services/snackbar.service';
+import { DialogService } from './services/dialog.service';
+import { Logger } from './services/logger.service';
 
 export const CONFIG = new InjectionToken<LibraryConfig>('config');
 
@@ -33,8 +36,11 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     LoadingOverlayComponent
   ],
   providers: [
+    Logger,
     RouterService,
-    BreakpointService
+    BreakpointService,
+    SnackbarService,
+    DialogService
   ]
 })
 export class ComponentsModule {

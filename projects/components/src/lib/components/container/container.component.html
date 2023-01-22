@@ -1,6 +1,8 @@
 <div class="lf-container mat-app-background">
   <lf-loading-overlay *ngIf="containerConfig?.loading"></lf-loading-overlay>
-  <lf-header [headerConfig]="headerConfig"></lf-header>
+  <lf-header
+    [headerConfig]="headerConfig"
+    (headerClickEvent)="headerButtonClicked($event)"></lf-header>
   <lf-sidenav
     [sidenavConfig]="sidenavConfig"
     (sidenavClickEvent)="sidenavButtonClicked($event)"></lf-sidenav>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContainerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/components';
+import { ContainerConfig, FooterConfig, HeaderConfig, Logger, SidenavConfig, SnackbarService, ToTopButtonConfig } from '@lf/components';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,22 +19,38 @@ export class AppComponent {
     title: 'Scaffold',
     subTitle: 'by Lukas Felbinger',
     loading: false,
-    showRouteLoading: true
+    showRouteLoading: true,
+    leftMenuButton: {
+      id: 'menu',
+      matIcon: 'menu',
+      outlineIcon: true
+    },
+    rightMenuButton: {
+      id: 'settings',
+      matIcon: 'settings',
+      outlineIcon: true
+    }
   }
 
   public sidenavConfig: SidenavConfig = {
     show: true,
     menuButtons: [
       {
-        matIcon: 'home',
-        label: 'Startseite',
         id: 'start',
+        matIcon: 'home',
+        label: 'Home',
         outlineIcon: true
       },
       {
-        matIcon: 'mail',
-        label: 'Kontakt',
         id: 'contact',
+        matIcon: 'mail',
+        label: 'Contact',
+        outlineIcon: true
+      },
+      {
+        id: '404',
+        matIcon: 'block',
+        label: '404',
         outlineIcon: true
       }
     ]
@@ -48,7 +65,20 @@ export class AppComponent {
     show: true
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private logger: Logger,
+    private snackbarService: SnackbarService) {}
+
+    // Detects the click event in the header and navigates according to the id
+    public headerClickEvent(id: string): void {
+      if(id === 'menu') {
+        this.snackbarService.openDefaultSnackbar(`You have clicked menu button '${id}'`);
+      } else {
+        this.snackbarService.openDefaultSnackbarWithAction(`You have clicked menu button '${id}'`, 'Close').onAction().pipe(take(1)).subscribe(() => {
+          this.logger.log(`You have closed the snackbar of menu button '${id}'`);
+        });
+      }
+  }
 
   // Detects the click event in the sidenav and navigates according to the id
   public sidenavClickEvent(id: string): void {
