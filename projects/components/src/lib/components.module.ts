@@ -12,6 +12,7 @@ import { BreakpointService } from './services/breakpoint.service';
 import { SnackbarService } from './services/snackbar.service';
 import { DialogService } from './services/dialog.service';
 import { Logger } from './services/logger.service';
+import { DrawerComponent } from './components/drawer/drawer.component';
 
 export const CONFIG = new InjectionToken<LibraryConfig>('config');
 
@@ -20,6 +21,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     ContainerComponent,
     HeaderComponent,
     SidenavComponent,
+    DrawerComponent,
     FooterComponent,
     ToTopButtonComponent,
     LoadingOverlayComponent
@@ -31,6 +33,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     ContainerComponent,
     HeaderComponent,
     SidenavComponent,
+    DrawerComponent,
     FooterComponent,
     ToTopButtonComponent,
     LoadingOverlayComponent

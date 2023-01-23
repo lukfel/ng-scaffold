@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ContainerConfig, FooterConfig, HeaderConfig, Logger, SidenavConfig, SnackbarService, ToTopButtonConfig } from '@lf/components';
+import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, Logger, SidenavConfig, SnackbarService, ToTopButtonConfig } from '@lf/components';
 import { take } from 'rxjs';
 
 @Component({
@@ -57,6 +57,10 @@ export class AppComponent {
         outlineIcon: true
       }
     ]
+  }
+
+  public drawerConfig: DrawerConfig = {
+    show: true
   }
 
   public footerConfig: FooterConfig = {

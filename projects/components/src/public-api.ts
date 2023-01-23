@@ -9,6 +9,7 @@ export * from './lib/components.module';
 // components
 export * from './lib/components/container/container.component';
 export * from './lib/components/header/header.component';
+export * from './lib/components/drawer/drawer.component';
 export * from './lib/components/sidenav/sidenav.component';
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/to-top-button/to-top-button.component';

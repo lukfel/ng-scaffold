@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ContainerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
+import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { Logger } from '../../services/logger.service';
 
@@ -16,6 +16,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
   @Input() public containerConfig: ContainerConfig = {};
   @Input() public headerConfig: HeaderConfig = {};
   @Input() public sidenavConfig: SidenavConfig = {};
+  @Input() public drawerConfig: DrawerConfig = {};
   @Input() public footerConfig: FooterConfig = {};
   @Input() public toTopButtonConfig: ToTopButtonConfig = {};
 
@@ -36,7 +37,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
         this.isMobile = true;
       } else if (result.breakpoints[Breakpoints.Small]) {
         this.logger.log('Small')
-        this.isMobile = false;
+        this.isMobile = true;
       } else if (result.breakpoints[Breakpoints.Medium]) {
         this.logger.log('Medium')
         this.isMobile = false;

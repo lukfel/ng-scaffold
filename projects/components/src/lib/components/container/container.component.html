@@ -1,21 +1,31 @@
 <div class="lf-container mat-app-background">
+  <!-- loading overlay -->
   <lf-loading-overlay *ngIf="containerConfig?.loading"></lf-loading-overlay>
+  <!-- header -->
   <lf-header
     [headerConfig]="headerConfig"
     (headerClickEvent)="headerButtonClicked($event)"></lf-header>
+  <!-- sidenav -->
   <lf-sidenav
     [sidenavConfig]="sidenavConfig"
     [isMobile]="isMobile"
     (sidenavClickEvent)="sidenavButtonClicked($event)"></lf-sidenav>
+  <!-- content wrapper -->
   <div
     class="lf-content-wrapper"
     [class.lf-show-sidenav]="sidenavConfig?.show && !isMobile"
     #scrollElement>
-    <div class="lf-content">
-      <ng-content></ng-content>
-    </div>
-    <lf-footer [footerConfig]="footerConfig"></lf-footer>
+    <!-- drawer -->
+    <lf-drawer [drawerConfig]="drawerConfig" [isMobile]="isMobile">
+      <!-- content -->
+      <div class="lf-content">
+        <ng-content></ng-content>
+      </div>
+      <!-- footer -->
+      <lf-footer [footerConfig]="footerConfig"></lf-footer>
+    </lf-drawer>
   </div>
+  <!-- to top button -->
   <lf-to-top-button
     [toTopButtonConfig]="toTopButtonConfig"
     [scrollElement]="scrollElement"></lf-to-top-button>
