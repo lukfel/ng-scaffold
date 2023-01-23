@@ -9,6 +9,7 @@ import { SidenavConfig } from '../../models';
 export class SidenavComponent {
 
   @Input() public sidenavConfig: SidenavConfig = {};
+  @Input() public isMobile: boolean = false;
 
   @Output() public sidenavClickEvent = new EventEmitter<string>();
 

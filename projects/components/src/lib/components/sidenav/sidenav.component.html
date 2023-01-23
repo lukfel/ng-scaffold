@@ -1,16 +1,25 @@
-<div *ngIf="sidenavConfig?.show" class="lf-sidenav">
-  <div class="lf-sidenav-items">
+<div
+  *ngIf="sidenavConfig?.show"
+  [class.lf-sidenav]="!isMobile"
+  [class.lf-sidenav-mobile]="isMobile">
+  <!-- items -->
+  <div
+    [class.lf-sidenav-items]="!isMobile"
+    [class.lf-sidenav-mobile-items]="isMobile">
+    <!-- item -->
     <button
       *ngFor="let button of sidenavConfig.menuButtons"
       mat-icon-button
       class="lf-sidenav-item"
       (click)="buttonClicked(button.id)">
+      <!-- icon -->
       <mat-icon
         class="lf-sidenav-item-icon"
         [class.material-icons-outlined]="button.outlineIcon"
         routerLinkActive="active-link"
         >{{ button.matIcon }}</mat-icon
       >
+      <!-- label -->
       <span class="lf-sidenav-item-label">{{ button.label }}</span>
     </button>
   </div>

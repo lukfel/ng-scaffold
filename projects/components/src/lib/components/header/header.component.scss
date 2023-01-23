@@ -3,10 +3,31 @@
   position: fixed;
   top: 0;
 
-  .lf-header-title-wrapper {
+  .lf-header-logo-title-wrapper {
     display: flex;
-    flex-flow: column;
-    margin-left: 40px;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-left: 8px;
+
+    &.lf-show-left-button {
+      margin-left: 40px !important;
+    }
+
+    .lf-header-logo {
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+    }
+
+    .lf-header-title-wrapper {
+      display: flex;
+      flex-flow: column;
+      margin-left: 32px;
+
+      &.lf-show-left-button {
+        margin-left: 0px !important;
+      }
+    }
   }
 
   .spacer {

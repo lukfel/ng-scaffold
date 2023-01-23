@@ -5,10 +5,11 @@
     (headerClickEvent)="headerButtonClicked($event)"></lf-header>
   <lf-sidenav
     [sidenavConfig]="sidenavConfig"
+    [isMobile]="isMobile"
     (sidenavClickEvent)="sidenavButtonClicked($event)"></lf-sidenav>
   <div
     class="lf-content-wrapper"
-    [class.lf-show-sidenav]="sidenavConfig?.show"
+    [class.lf-show-sidenav]="sidenavConfig?.show && !isMobile"
     #scrollElement>
     <div class="lf-content">
       <ng-content></ng-content>

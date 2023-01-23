@@ -3,11 +3,8 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
 ## TODO:
-* Header - menu buttons
-* Header - allow logo (image or svgIcon)
 * Header - input field (search field)
 * Header - mobile version
-* Sidenav - mobile version
 * Sidenav - active links
 * Footer - overall styling
 * MenuButtons - functionality for svg icons

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentsModule } from '@lf/components';
 import { environment as env } from 'src/environments/environment';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { environment as env } from 'src/environments/environment';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    // SharedModule,
+    SharedModule,
     ComponentsModule.forRoot( { production: env.production } )
   ],
   providers: [],

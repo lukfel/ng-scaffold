@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ContainerConfig, FooterConfig, HeaderConfig, Logger, SidenavConfig, SnackbarService, ToTopButtonConfig } from '@lf/components';
 import { take } from 'rxjs';
@@ -16,6 +18,7 @@ export class AppComponent {
 
   public headerConfig: HeaderConfig = {
     show: true,
+    logo: 'lf_logo',
     title: 'Scaffold',
     subTitle: 'by Lukas Felbinger',
     loading: false,
@@ -66,8 +69,13 @@ export class AppComponent {
   }
 
   constructor(private router: Router,
-    private logger: Logger,
-    private snackbarService: SnackbarService) {}
+              private logger: Logger,
+              private snackbarService: SnackbarService,
+              private iconRegistry: MatIconRegistry,
+              private sanitizer: DomSanitizer) {
+                // Register custom svg for header logo
+                this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
+              }
 
     // Detects the click event in the header and navigates according to the id
     public headerClickEvent(id: string): void {

@@ -1,18 +1,34 @@
-<mat-toolbar *ngIf="headerConfig?.show" class="lf-header" color="primary">
+<mat-toolbar
+  *ngIf="headerConfig?.show"
+  class="lf-header mat-elevation-z3"
+  color="primary">
+  <!-- left menu button -->
   <button
     *ngIf="headerConfig?.leftMenuButton"
     mat-icon-button
     (click)="buttonClicked(headerConfig.leftMenuButton?.id)">
     <mat-icon>{{ headerConfig?.leftMenuButton?.matIcon }}</mat-icon>
   </button>
-
-  <div class="lf-header-title-wrapper">
-    <span class="lf-header-title">{{ headerConfig.title }}</span>
-    <span class="lf-header-subtitle">{{ headerConfig.subTitle }}</span>
+  <!-- logo & title -->
+  <div
+    class="lf-header-logo-title-wrapper"
+    [class.lf-show-left-button]="headerConfig?.leftMenuButton">
+    <!-- logo -->
+    <mat-icon
+      *ngIf="headerConfig?.logo"
+      class="lf-header-logo"
+      [svgIcon]="headerConfig.logo!"></mat-icon>
+    <!-- title -->
+    <div
+      class="lf-header-title-wrapper"
+      [class.lf-show-left-button]="headerConfig?.leftMenuButton">
+      <span class="lf-header-title">{{ headerConfig.title }}</span>
+      <span class="lf-header-subtitle">{{ headerConfig.subTitle }}</span>
+    </div>
   </div>
-
+  <!-- spacer -->
   <div class="spacer"></div>
-
+  <!-- right menu button -->
   <button
     *ngIf="headerConfig?.rightMenuButton"
     mat-icon-button
@@ -20,7 +36,7 @@
     <mat-icon>{{ headerConfig?.rightMenuButton?.matIcon }}</mat-icon>
   </button>
 </mat-toolbar>
-
+<!-- loading bar -->
 <mat-progress-bar
   *ngIf="headerConfig?.loading || routeLoading"
   class="lf-header-progress-bar"

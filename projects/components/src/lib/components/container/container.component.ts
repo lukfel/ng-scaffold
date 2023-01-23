@@ -36,13 +36,17 @@ export class ContainerComponent implements OnInit, OnDestroy {
         this.isMobile = true;
       } else if (result.breakpoints[Breakpoints.Small]) {
         this.logger.log('Small')
+        this.isMobile = false;
       } else if (result.breakpoints[Breakpoints.Medium]) {
         this.logger.log('Medium')
+        this.isMobile = false;
       } else if (result.breakpoints[Breakpoints.Large]) {
         this.logger.log('Large')
+        this.isMobile = false;
       }
     });
   }
+
   public ngOnDestroy(): void {
     if (this._subscription) {
       this._subscription.unsubscribe();
