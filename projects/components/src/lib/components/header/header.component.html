@@ -17,7 +17,7 @@
   <!-- logo & title -->
   <div
     class="lf-header-logo-title-wrapper"
-    [class.lf-show-left-button]="headerConfig?.leftMenuButton">
+    [class.lf-show-left-button]="headerConfig?.leftMenuButton && !isMobile">
     <!-- logo -->
     <mat-icon
       *ngIf="headerConfig?.logo"

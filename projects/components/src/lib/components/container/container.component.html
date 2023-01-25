@@ -4,16 +4,19 @@
   <!-- header -->
   <lf-header
     [headerConfig]="headerConfig"
+    [isMobile]="isMobile"
     (headerClickEvent)="headerButtonClicked($event)"></lf-header>
   <!-- sidenav -->
   <lf-sidenav
     [sidenavConfig]="sidenavConfig"
     [isMobile]="isMobile"
+    [currentRoute]="currentRoute"
     (sidenavClickEvent)="sidenavButtonClicked($event)"></lf-sidenav>
   <!-- content wrapper -->
   <div
     class="lf-content-wrapper"
     [class.lf-show-sidenav]="sidenavConfig?.show && !isMobile"
+    [class.lf-show-sidenav-mobile]="sidenavConfig?.show && isMobile"
     #scrollElement>
     <!-- drawer -->
     <lf-drawer [drawerConfig]="drawerConfig" [isMobile]="isMobile">

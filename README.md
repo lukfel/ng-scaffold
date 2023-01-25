@@ -3,22 +3,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
 ## Documentation
-There are two ways to use this library:
-
-### 1) Clone this project
-Clone this project, run the commands below and start editing the Angular project.
-``git clone https://github.com/lukfel/components.git``
-``cd scaffold/``
-``npm install``
-``npm run build-lib``
-``ng serve``
-
-### 2) Install the dependency
-Install the dependency and import the library to your Angular project
-
 ``npm install ...``
 
-import the module (optionally pass if production for logger)
+import the module (optionally pass the production boolean for the logger)
 ```.ts
 import { ComponentsModule } from '@lf/components';
 import { environment as env } from 'src/environments/environment';
@@ -29,7 +16,7 @@ imports: [
 ],
 ```
 
-add the container in the ``app.component.html`` (optionally omit configs of components you don't need)
+Add the container to the ``app.component.html`` (optionally omit configs of elements you don't need)
 ```.html
 <!-- container -->
 <lf-container
@@ -48,58 +35,67 @@ add the container in the ``app.component.html`` (optionally omit configs of comp
 </lf-container>
 ```
 
-create the config objects in the ``app.component.ts``
+Import the styles in your ``styles.scss``
+```.scss
+@use "@lf/components/styles" as lf;
+```
+
+Create the config objects in the ``app.component.ts``
 ```.ts
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/components';
 
 ...
 
-public containerConfig: ContainerConfig = {
-  loading: false
-}
+export class AppComponent {
 
-public headerConfig: HeaderConfig = {
-  show: true,
-  title: 'Scaffold',
-  subTitle: 'by Lukas Felbinger',
-  loading: false,
-  showRouteLoading: true,
-  leftMenuButton: {
-    id: 'menu',
-    matIcon: 'menu',
-    outlineIcon: true
-  },
-  rightMenuButton: {
-    id: 'settings',
-    matIcon: 'settings',
-    outlineIcon: true
+  public containerConfig: ContainerConfig = {
+    loading: false
   }
-}
 
-public sidenavConfig: SidenavConfig = {
-  show: true,
-  menuButtons: [
-    {
-      id: 'start',
-      matIcon: 'home',
-      label: 'Home',
+  public headerConfig: HeaderConfig = {
+    show: true,
+    title: 'Scaffold',
+    subTitle: 'by Lukas Felbinger',
+    loading: false,
+    showRouteLoading: true,
+    leftMenuButton: {
+      id: 'menu',
+      matIcon: 'menu',
       outlineIcon: true
     },
-  ]
-}
+    rightMenuButton: {
+      id: 'settings',
+      matIcon: 'settings',
+      outlineIcon: true
+    }
+  }
 
-public drawerConfig: DrawerConfig = {
-  show: false,
-  open: true
-}
+  public sidenavConfig: SidenavConfig = {
+    show: true,
+    menuButtons: [
+      {
+        id: 'start',
+        matIcon: 'home',
+        label: 'Home',
+        outlineIcon: true
+      },
+    ]
+  }
 
-public footerConfig: FooterConfig = {
-  show: true,
-  copyright: '© Lukas Felbinger 2023. All rights reserved.'
-}
+  public drawerConfig: DrawerConfig = {
+    show: false,
+    open: true
+  }
 
-public toTopButtonConfig: ToTopButtonConfig = {
-  show: true
+  public footerConfig: FooterConfig = {
+    show: true,
+    copyright: '© Lukas Felbinger 2023. All rights reserved.'
+  }
+
+  public toTopButtonConfig: ToTopButtonConfig = {
+    show: true
+  }
+
 }
 ```
 

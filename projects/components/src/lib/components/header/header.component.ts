@@ -38,6 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public buttonClicked(id?: string): void {
+    if(!id) {
+      return;
+    }
+
     this.headerClickEvent.emit(id);
   }
 

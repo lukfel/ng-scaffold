@@ -59,8 +59,8 @@ export class AppComponent {
   }
 
   public drawerConfig: DrawerConfig = {
-    show: false,
-    open: true
+    show: true,
+    open: false
   }
 
   public footerConfig: FooterConfig = {
@@ -85,10 +85,11 @@ export class AppComponent {
     // Detects the click event in the header and navigates according to the id
     public headerClickEvent(id: string): void {
       if(id === 'menu') {
-        this.snackbarService.openDefaultSnackbar(`You have clicked menu button '${id}'`);
+        this.drawerConfig.open = !this.drawerConfig.open;
+        this.snackbarService.openDefaultSnackbar(`You clicked the header button '${id}'`);
       } else {
-        this.snackbarService.openDefaultSnackbarWithAction(`You have clicked menu button '${id}'`, 'Close').then(() => {
-          this.dialogService.openConfirmDialog(`You have closed the snackbar of menu button '${id}'`).then(result => {
+        this.snackbarService.openDefaultSnackbarWithAction(`You clicked the header button  '${id}'`, 'Close').then(() => {
+          this.dialogService.openConfirmDialog(`You closed the snackbar of the header button '${id}'`).then(result => {
             this.logger.log(result);
           });
         });

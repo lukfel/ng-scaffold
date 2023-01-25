@@ -2,7 +2,7 @@ import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
-import { BreakpointService } from '../../services';
+import { BreakpointService, RouterService } from '../../services';
 
 @Component({
   selector: 'lf-container',
@@ -22,14 +22,18 @@ export class ContainerComponent implements OnInit, OnDestroy {
   @Output() public headerClickEvent = new EventEmitter<string>();
   @Output() public sidenavClickEvent = new EventEmitter<string>();
 
+  public routeHistory: string[] = [];
+  public currentRoute: string;
   public isMobile: boolean = false;
 
-  private _subscription: Subscription;
+  private _subscription: Subscription = new Subscription;
 
-  constructor(private breakpointService: BreakpointService) { }
+  constructor(private breakpointService: BreakpointService,
+              private routerService: RouterService) { }
 
   public ngOnInit(): void {
-    this._subscription = this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
+    // Listen for breakpoint changes
+    this._subscription.add(this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
       if (result.breakpoints[Breakpoints.XSmall]) {
         this.isMobile = true;
       } else if (result.breakpoints[Breakpoints.Small]) {
@@ -39,7 +43,15 @@ export class ContainerComponent implements OnInit, OnDestroy {
       } else if (result.breakpoints[Breakpoints.Large]) {
         this.isMobile = false;
       }
-    });
+    }));
+
+    // Listen for route changes
+    this._subscription.add(this.routerService.routeHistory$.subscribe((routeHistory: string[]) => {
+      if(routeHistory) {
+        this.routeHistory = routeHistory;
+        this.currentRoute = this.routeHistory[this.routeHistory.length - 1];
+      }
+    }))
   }
 
   public ngOnDestroy(): void {

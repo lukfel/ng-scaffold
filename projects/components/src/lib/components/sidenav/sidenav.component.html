@@ -10,8 +10,9 @@
     <button
       *ngFor="let button of sidenavConfig.menuButtons"
       mat-icon-button
+      [color]="isActive(button.id!) ? 'primary' : null"
       class="lf-sidenav-item"
-      (click)="buttonClicked(button.id)">
+      (click)="buttonClicked(button.id!)">
       <!-- icon -->
       <mat-icon
         class="lf-sidenav-item-icon"

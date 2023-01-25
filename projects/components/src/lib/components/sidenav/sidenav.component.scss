@@ -5,7 +5,7 @@
   top: 0;
   height: 100vh;
   padding: 80px 4px 0 4px;
-  background-color: #fafafa;
+  background-color: white;
 
   .lf-sidenav-items {
     display: flex;
@@ -20,7 +20,8 @@
   left: 0;
   bottom: 0;
   width: 100vw;
-  background-color: #fafafa;
+  padding: 4px 0;
+  background-color: white;
 
   .lf-sidenav-mobile-items {
     display: flex;
