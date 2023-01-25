@@ -4,20 +4,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Documentation
 There are two ways to use this library:
-1) Clone this project and customize the application
-2) Install the dependency with npm to your application
 
 ### 1) Clone this project
-* ``git clone ...``
-* ``cd scaffold/``
-* ``npm install``
-* ``npm run build-lib``
-* ``ng serve``
+Clone this project, run the commands below and start editing the Angular project.
+``git clone https://github.com/lukfel/components.git``
+``cd scaffold/``
+``npm install``
+``npm run build-lib``
+``ng serve``
 
 ### 2) Install the dependency
-* ``npm install ...``
-* import the module (optionally pass if production for logger)
-```
+Install the dependency and import the library to your Angular project
+
+``npm install ...``
+
+import the module (optionally pass if production for logger)
+```.ts
 import { ComponentsModule } from '@lf/components';
 import { environment as env } from 'src/environments/environment';
 
@@ -26,8 +28,9 @@ imports: [
   ComponentsModule.forRoot( { production: env.production } )
 ],
 ```
-* add the container in the ``app.component.html`` (optionally omit configs of components you don't need)
-```
+
+add the container in the ``app.component.html`` (optionally omit configs of components you don't need)
+```.html
 <!-- container -->
 <lf-container
   [containerConfig]="containerConfig"
@@ -44,8 +47,9 @@ imports: [
   <router-outlet></router-outlet>
 </lf-container>
 ```
-* create the config objects in the ``app.component.ts``
-```
+
+create the config objects in the ``app.component.ts``
+```.ts
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/components';
 
 ...
@@ -98,8 +102,9 @@ public toTopButtonConfig: ToTopButtonConfig = {
   show: true
 }
 ```
-* listen to click events
-```
+
+listen to click events
+```.ts
 public headerClickEvent(id: string): void {
   console.log(id);
 }
