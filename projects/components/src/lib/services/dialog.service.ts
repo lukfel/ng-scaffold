@@ -1,7 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
-import { ConfirmDialogComponent } from '../../public-api';
+import { ConfirmDialogComponent } from '../components/dialogs/confirm-dialog/confirm-dialog.component';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { HeaderConfig } from '../../models/header-config.model';
+import { HeaderConfig } from '../../models';
 import { RouterService } from '../../services';
 import { Subscription } from 'rxjs';
 
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() public headerConfig: HeaderConfig = {};
+  @Input() public isMobile: boolean = false;
 
   @Output() public headerClickEvent = new EventEmitter<string>();
 

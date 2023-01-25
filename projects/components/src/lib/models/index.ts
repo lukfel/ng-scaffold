@@ -5,3 +5,4 @@ export { ToTopButtonConfig } from './to-top-button-config.model';
 export { ContainerConfig } from './container-config.model';
 export { DrawerConfig } from './drawer-config.model';
 export { MenuButton } from './menu-button.model';
+export { LibraryConfig } from './library-config.model';

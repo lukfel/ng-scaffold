@@ -7,7 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToTopButtonComponent } from './components/to-top-button/to-top-button.component';
-import { LibraryConfig } from './models/library-config.model';
+import { LibraryConfig } from './models';
 import { BreakpointService, DialogService, Logger, RouterService, SnackbarService } from './services';
 import { SharedModule } from './shared/shared.module';
 

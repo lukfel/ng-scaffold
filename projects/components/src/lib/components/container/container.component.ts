@@ -2,7 +2,7 @@ import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
-import { BreakpointService, Logger } from '../../services';
+import { BreakpointService } from '../../services';
 
 @Component({
   selector: 'lf-container',
@@ -26,22 +26,17 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription;
 
-  constructor(private breakpointService: BreakpointService,
-              private logger: Logger) { }
+  constructor(private breakpointService: BreakpointService) { }
 
   public ngOnInit(): void {
     this._subscription = this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
       if (result.breakpoints[Breakpoints.XSmall]) {
-        this.logger.log('XSmall')
         this.isMobile = true;
       } else if (result.breakpoints[Breakpoints.Small]) {
-        this.logger.log('Small')
         this.isMobile = true;
       } else if (result.breakpoints[Breakpoints.Medium]) {
-        this.logger.log('Medium')
         this.isMobile = false;
       } else if (result.breakpoints[Breakpoints.Large]) {
-        this.logger.log('Large')
         this.isMobile = false;
       }
     });

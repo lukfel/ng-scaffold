@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { CONFIG } from '../components.module';
-import { LibraryConfig } from '../models/library-config.model';
+import { LibraryConfig } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class Logger {

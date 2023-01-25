@@ -2,6 +2,113 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
+## Documentation
+There are two ways to use this library:
+1) Clone this project and customize the application
+2) Install the dependency with npm to your application
+
+### 1) Clone this project
+* ``git clone ...``
+* ``cd scaffold/``
+* ``npm install``
+* ``npm run build-lib``
+* ``ng serve``
+
+### 2) Install the dependency
+* ``npm install ...``
+* import the module (optionally pass if production for logger)
+```
+import { ComponentsModule } from '@lf/components';
+import { environment as env } from 'src/environments/environment';
+
+imports: [
+  ...
+  ComponentsModule.forRoot( { production: env.production } )
+],
+```
+* add the container in the ``app.component.html`` (optionally omit configs of components you don't need)
+```
+<!-- container -->
+<lf-container
+  [containerConfig]="containerConfig"
+  [headerConfig]="headerConfig"
+  [sidenavConfig]="sidenavConfig"
+  [drawerConfig]="drawerConfig"
+  [footerConfig]="footerConfig"
+  [toTopButtonConfig]="toTopButtonConfig"
+  (headerClickEvent)="headerClickEvent($event)"
+  (sidenavClickEvent)="sidenavClickEvent($event)">
+  <!-- drawer content (optionally omit if no drawer) -->
+  <ng-container drawerContent>Drawer Content</ng-container>
+  <!-- main content -->
+  <router-outlet></router-outlet>
+</lf-container>
+```
+* create the config objects in the ``app.component.ts``
+```
+import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/components';
+
+...
+
+public containerConfig: ContainerConfig = {
+  loading: false
+}
+
+public headerConfig: HeaderConfig = {
+  show: true,
+  title: 'Scaffold',
+  subTitle: 'by Lukas Felbinger',
+  loading: false,
+  showRouteLoading: true,
+  leftMenuButton: {
+    id: 'menu',
+    matIcon: 'menu',
+    outlineIcon: true
+  },
+  rightMenuButton: {
+    id: 'settings',
+    matIcon: 'settings',
+    outlineIcon: true
+  }
+}
+
+public sidenavConfig: SidenavConfig = {
+  show: true,
+  menuButtons: [
+    {
+      id: 'start',
+      matIcon: 'home',
+      label: 'Home',
+      outlineIcon: true
+    },
+  ]
+}
+
+public drawerConfig: DrawerConfig = {
+  show: false,
+  open: true
+}
+
+public footerConfig: FooterConfig = {
+  show: true,
+  copyright: '© Lukas Felbinger 2023. All rights reserved.'
+}
+
+public toTopButtonConfig: ToTopButtonConfig = {
+  show: true
+}
+```
+* listen to click events
+```
+public headerClickEvent(id: string): void {
+  console.log(id);
+}
+
+public sidenavClickEvent(id: string): void {
+    this.router.navigate([id]);
+}
+```
+
 ## TODO:
 * Header - input field (search field)
 * Header - mobile version
