@@ -2,11 +2,11 @@
  * Public API Surface of components
  */
 
-// models
+/* MODELS */
 export * from './lib/models';
-// modules
+/* MODULES */
 export * from './lib/components.module';
-// components
+/* COMPONENTS */
 export * from './lib/components/container/container.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/drawer/drawer.component';
@@ -14,6 +14,7 @@ export * from './lib/components/sidenav/sidenav.component';
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/to-top-button/to-top-button.component';
 export * from './lib/components/loading-overlay/loading-overlay.component';
-// services
-export * from './lib/services/logger.service';
-export * from './lib/services/snackbar.service';
+
+export * from './lib/components/dialogs/confirm-dialog/confirm-dialog.component';
+/* SERVICES */
+export * from './lib/services';

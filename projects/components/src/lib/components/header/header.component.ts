@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { HeaderConfig } from '../../models/header-config.model';
-import { RouterService } from '../../services/router.service';
+import { RouterService } from '../../services';
 import { Subscription } from 'rxjs';
 
 @Component({

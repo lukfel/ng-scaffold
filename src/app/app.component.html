@@ -1,3 +1,4 @@
+<!-- container -->
 <lf-container
   [containerConfig]="containerConfig"
   [headerConfig]="headerConfig"
@@ -7,5 +8,8 @@
   [toTopButtonConfig]="toTopButtonConfig"
   (headerClickEvent)="headerClickEvent($event)"
   (sidenavClickEvent)="sidenavClickEvent($event)">
+  <!-- drawer content -->
+  <ng-container drawerContent>Drawer Content</ng-container>
+  <!-- main content -->
   <router-outlet></router-outlet>
 </lf-container>

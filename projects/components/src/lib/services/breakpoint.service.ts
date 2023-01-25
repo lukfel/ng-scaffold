@@ -1,7 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
 import { distinctUntilChanged, tap } from 'rxjs';
-import { Logger } from './logger.service';
+import { Logger } from './';
 
 @Injectable({ providedIn: 'root' })
 export class BreakpointService {

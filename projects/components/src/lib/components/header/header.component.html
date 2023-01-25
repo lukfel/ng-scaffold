@@ -7,7 +7,12 @@
     *ngIf="headerConfig?.leftMenuButton"
     mat-icon-button
     (click)="buttonClicked(headerConfig.leftMenuButton?.id)">
-    <mat-icon>{{ headerConfig?.leftMenuButton?.matIcon }}</mat-icon>
+    <mat-icon
+      [class.material-icons-outlined]="
+        headerConfig?.leftMenuButton?.outlineIcon
+      ">
+      {{ headerConfig?.leftMenuButton?.matIcon }}
+    </mat-icon>
   </button>
   <!-- logo & title -->
   <div
@@ -33,7 +38,12 @@
     *ngIf="headerConfig?.rightMenuButton"
     mat-icon-button
     (click)="buttonClicked(headerConfig.rightMenuButton?.id)">
-    <mat-icon>{{ headerConfig?.rightMenuButton?.matIcon }}</mat-icon>
+    <mat-icon
+      [class.material-icons-outlined]="
+        headerConfig?.rightMenuButton?.outlineIcon
+      ">
+      {{ headerConfig?.rightMenuButton?.matIcon }}
+    </mat-icon>
   </button>
 </mat-toolbar>
 <!-- loading bar -->
@@ -41,5 +51,4 @@
   *ngIf="headerConfig?.loading || routeLoading"
   class="lf-header-progress-bar"
   color="accent"
-  mode="indeterminate">
-</mat-progress-bar>
+  mode="indeterminate"></mat-progress-bar>

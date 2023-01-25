@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarRef, MatSnackBarVerticalPosition, SimpleSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,13 @@ export class SnackbarService {
 
   constructor(private snackbar: MatSnackBar) { }
 
-  public openDefaultSnackbarWithAction(message: string, action: string): MatSnackBarRef<SimpleSnackBar> {
-    return this.snackbar.open(message, action, this.actionConfig);
+  // Opens a snackbar with an action to wait for
+  public openDefaultSnackbarWithAction(message: string, action: string): Promise<void> {
+    const snackbarRef = this.snackbar.open(message, action, this.actionConfig);
+    return firstValueFrom(snackbarRef.onAction());
   }
 
+  // Opens a generic snackbar with a message
   public openDefaultSnackbar(message: string, action?: string): void {
     this.snackbar.open(message, action, this.defaultConfig);
   }

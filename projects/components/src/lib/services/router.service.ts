@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Logger } from './logger.service';
+import { Logger } from './';
 
 @Injectable({ providedIn: 'root' })
 

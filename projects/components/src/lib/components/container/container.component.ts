@@ -2,8 +2,7 @@ import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
-import { BreakpointService } from '../../services/breakpoint.service';
-import { Logger } from '../../services/logger.service';
+import { BreakpointService, Logger } from '../../services';
 
 @Component({
   selector: 'lf-container',

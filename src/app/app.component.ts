@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, Logger, SidenavConfig, SnackbarService, ToTopButtonConfig } from '@lf/components';
-import { take } from 'rxjs';
+import { ContainerConfig, DialogService, DrawerConfig, FooterConfig, HeaderConfig, Logger, SidenavConfig, SnackbarService, ToTopButtonConfig } from '@lf/components';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +59,8 @@ export class AppComponent {
   }
 
   public drawerConfig: DrawerConfig = {
-    show: true
+    show: false,
+    open: true
   }
 
   public footerConfig: FooterConfig = {
@@ -75,6 +75,7 @@ export class AppComponent {
   constructor(private router: Router,
               private logger: Logger,
               private snackbarService: SnackbarService,
+              private dialogService: DialogService,
               private iconRegistry: MatIconRegistry,
               private sanitizer: DomSanitizer) {
                 // Register custom svg for header logo
@@ -86,8 +87,10 @@ export class AppComponent {
       if(id === 'menu') {
         this.snackbarService.openDefaultSnackbar(`You have clicked menu button '${id}'`);
       } else {
-        this.snackbarService.openDefaultSnackbarWithAction(`You have clicked menu button '${id}'`, 'Close').onAction().pipe(take(1)).subscribe(() => {
-          this.logger.log(`You have closed the snackbar of menu button '${id}'`);
+        this.snackbarService.openDefaultSnackbarWithAction(`You have clicked menu button '${id}'`, 'Close').then(() => {
+          this.dialogService.openConfirmDialog(`You have closed the snackbar of menu button '${id}'`).then(result => {
+            this.logger.log(result);
+          });
         });
       }
   }

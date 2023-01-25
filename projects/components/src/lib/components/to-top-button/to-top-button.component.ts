@@ -10,6 +10,7 @@ export class ToTopButtonComponent implements OnInit {
 
   @Input() public toTopButtonConfig: ToTopButtonConfig = {};
   @Input() public scrollElement: HTMLElement;
+  @Input() public moveUp: boolean = false;
 
   public autoHide: boolean = true;
 

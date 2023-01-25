@@ -17,8 +17,10 @@
     #scrollElement>
     <!-- drawer -->
     <lf-drawer [drawerConfig]="drawerConfig" [isMobile]="isMobile">
-      <!-- content -->
+      <!-- drawer content -->
+      <ng-content select="[drawerContent]" drawerContent></ng-content>
       <div class="lf-content">
+        <!-- main content -->
         <ng-content></ng-content>
       </div>
       <!-- footer -->
@@ -28,5 +30,6 @@
   <!-- to top button -->
   <lf-to-top-button
     [toTopButtonConfig]="toTopButtonConfig"
-    [scrollElement]="scrollElement"></lf-to-top-button>
+    [scrollElement]="scrollElement"
+    [moveUp]="isMobile && sidenavConfig?.show!"></lf-to-top-button>
 </div>

@@ -1,18 +1,15 @@
 import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { ContainerComponent } from './components/container/container.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ToTopButtonComponent } from './components/to-top-button/to-top-button.component';
-import { SharedModule } from './shared/shared.module';
-import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
-import { RouterService } from './services/router.service';
-import { LibraryConfig } from './models/library-config.model';
-import { BreakpointService } from './services/breakpoint.service';
-import { SnackbarService } from './services/snackbar.service';
-import { DialogService } from './services/dialog.service';
-import { Logger } from './services/logger.service';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ToTopButtonComponent } from './components/to-top-button/to-top-button.component';
+import { LibraryConfig } from './models/library-config.model';
+import { BreakpointService, DialogService, Logger, RouterService, SnackbarService } from './services';
+import { SharedModule } from './shared/shared.module';
 
 export const CONFIG = new InjectionToken<LibraryConfig>('config');
 
@@ -24,7 +21,8 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     DrawerComponent,
     FooterComponent,
     ToTopButtonComponent,
-    LoadingOverlayComponent
+    LoadingOverlayComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     SharedModule
@@ -36,7 +34,8 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     DrawerComponent,
     FooterComponent,
     ToTopButtonComponent,
-    LoadingOverlayComponent
+    LoadingOverlayComponent,
+    ConfirmDialogComponent
   ],
   providers: [
     Logger,
@@ -49,12 +48,12 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
 export class ComponentsModule {
   public static forRoot(config: LibraryConfig): ModuleWithProviders<ComponentsModule> {
     return {
-     ngModule: ComponentsModule,
-     providers: [
-     {
-       provide: CONFIG,
-       useValue: config
-     }]
+      ngModule: ComponentsModule,
+      providers: [
+        {
+          provide: CONFIG,
+          useValue: config
+        }]
     }
-   }
+  }
 }

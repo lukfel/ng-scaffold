@@ -3,6 +3,7 @@
   mat-fab
   color="accent"
   class="lf-to-top-button"
+  [style.bottom]="moveUp ? 72 + 24 + 'px' : '24px'"
   (click)="backToTop()">
   <mat-icon>arrow_upward</mat-icon>
 </button>

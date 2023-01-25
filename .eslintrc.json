@@ -80,6 +80,8 @@
           "error",
           {
             "bracketSameLine": true,
+            "bracketSpacing": true,
+            "htmlWhitespaceSensitivity": "ignore",
             "endOfLine": "auto"
           }
         ]
