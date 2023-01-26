@@ -25,12 +25,14 @@ export class AppComponent {
     leftMenuButton: {
       id: 'menu',
       matIcon: 'menu',
-      outlineIcon: true
+      outlineIcon: true,
+      tooltip: 'Menu'
     },
     rightMenuButton: {
       id: 'settings',
       matIcon: 'settings',
-      outlineIcon: true
+      outlineIcon: true,
+      tooltip: 'Settings'
     }
   }
 
@@ -69,7 +71,8 @@ export class AppComponent {
   }
 
   public toTopButtonConfig: ToTopButtonConfig = {
-    show: true
+    show: true,
+    tooltip: 'To top'
   }
 
   constructor(private router: Router,

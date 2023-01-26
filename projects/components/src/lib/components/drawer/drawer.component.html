@@ -6,6 +6,8 @@
     class="lf-drawer"
     [mode]="isMobile ? 'over' : 'side'"
     [opened]="drawerConfig?.open"
+    [autoFocus]="false"
+    (closed)="onDrawerClosed()"
     #drawer>
     <!-- drawer content -->
     <ng-content select="[drawerContent]"></ng-content>

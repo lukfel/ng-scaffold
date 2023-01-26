@@ -1,10 +1,12 @@
+@import '../../../../styles/variables';
+
 .lf-sidenav {
-  z-index: 99;
+  z-index: $sidenav-z-index;
   position: fixed;
   left: 0;
   top: 0;
   height: 100vh;
-  padding: 80px 4px 0 4px;
+  padding: calc($header-height + 16px) $sidenav-padding 0 $sidenav-padding;
   background-color: white;
 
   .lf-sidenav-items {
@@ -15,12 +17,12 @@
 }
 
 .lf-sidenav-mobile {
-  z-index: 99;
+  z-index: $sidenav-z-index;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100vw;
-  padding: 4px 0;
+  padding: $sidenav-padding 0;
   background-color: white;
 
   .lf-sidenav-mobile-items {
@@ -32,16 +34,16 @@
 }
 
 .lf-sidenav-item {
-  width: 72px;
-  height: 72px;
+  width: $sidenav-width;
+  height: $sidenav-width;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-flow: column;
 
   .lf-sidenav-item-icon {
-    width: 24px;
-    height: 24px;
+    width: calc($sidenav-width / 3);
+    height: calc($sidenav-width / 3);
   }
 
   .lf-sidenav-item-label {

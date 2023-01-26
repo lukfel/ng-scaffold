@@ -1,34 +1,23 @@
-html {
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-body {
-  overflow: hidden !important;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
+@import '../../../../styles/variables';
 
 .lf-container {
   .lf-content-wrapper {
     transition: height 0.3s;
-    height: calc(100vh - 64px);  // var(--header-height));
+    height: calc(100vh - $header-height);
     overflow-y: auto;
-    margin-top: 64px;
+    margin-top: $header-height;
 
     &.lf-show-sidenav-mobile {
-      height: calc(100vh - 64px - 80px);  // var(--header-height));
+      height: calc(100vh - $header-height - ($sidenav-height + (2 * $sidenav-padding)));
     }
 
     &.lf-show-sidenav {
-      margin-left: 80px;
+      margin-left: calc($sidenav-height + (2 * $sidenav-padding));
     }
 
     .lf-content {
       min-height: 100%;
-      padding: 0 24px;
+      padding: $content-padding;
     }
   }
 }

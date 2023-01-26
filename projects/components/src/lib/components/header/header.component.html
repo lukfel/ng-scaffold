@@ -6,13 +6,25 @@
   <button
     *ngIf="headerConfig?.leftMenuButton"
     mat-icon-button
-    (click)="buttonClicked(headerConfig.leftMenuButton?.id)">
+    (click)="buttonClicked(headerConfig.leftMenuButton?.id)"
+    [matTooltip]="headerConfig.leftMenuButton!.tooltip!">
+    <!-- mat icon -->
     <mat-icon
+      *ngIf="headerConfig?.leftMenuButton?.matIcon; else leftSvgIcon"
       [class.material-icons-outlined]="
         headerConfig?.leftMenuButton?.outlineIcon
       ">
-      {{ headerConfig?.leftMenuButton?.matIcon }}
+      {{ headerConfig.leftMenuButton!.matIcon! }}
     </mat-icon>
+    <!-- svg icon -->
+    <ng-template #leftSvgIcon>
+      <mat-icon
+        *ngIf="headerConfig?.leftMenuButton?.svgIcon"
+        [svgIcon]="headerConfig.leftMenuButton!.svgIcon!"
+        [class.material-icons-outlined]="
+          headerConfig?.leftMenuButton?.outlineIcon
+        "></mat-icon>
+    </ng-template>
   </button>
   <!-- logo & title -->
   <div
@@ -37,13 +49,25 @@
   <button
     *ngIf="headerConfig?.rightMenuButton"
     mat-icon-button
-    (click)="buttonClicked(headerConfig.rightMenuButton?.id)">
+    (click)="buttonClicked(headerConfig.rightMenuButton?.id)"
+    [matTooltip]="headerConfig.rightMenuButton!.tooltip!">
+    <!-- mat icon -->
     <mat-icon
+      *ngIf="headerConfig?.rightMenuButton?.matIcon; else rightSvgIcon"
       [class.material-icons-outlined]="
         headerConfig?.rightMenuButton?.outlineIcon
       ">
-      {{ headerConfig?.rightMenuButton?.matIcon }}
+      {{ headerConfig.rightMenuButton!.matIcon! }}
     </mat-icon>
+    <!-- svg icon -->
+    <ng-template #rightSvgIcon>
+      <mat-icon
+        *ngIf="headerConfig?.rightMenuButton?.svgIcon"
+        [svgIcon]="headerConfig.rightMenuButton!.svgIcon!"
+        [class.material-icons-outlined]="
+          headerConfig?.rightMenuButton?.outlineIcon
+        "></mat-icon>
+    </ng-template>
   </button>
 </mat-toolbar>
 <!-- loading bar -->

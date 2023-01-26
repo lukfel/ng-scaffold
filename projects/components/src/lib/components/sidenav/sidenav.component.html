@@ -10,16 +10,23 @@
     <button
       *ngFor="let button of sidenavConfig.menuButtons"
       mat-icon-button
-      [color]="isActive(button.id!) ? 'primary' : null"
+      [color]="isActive(button.id) ? 'primary' : null"
       class="lf-sidenav-item"
-      (click)="buttonClicked(button.id!)">
-      <!-- icon -->
+      (click)="buttonClicked(button.id)">
+      <!-- mat icon -->
       <mat-icon
+        *ngIf="button?.matIcon; else svgIcon"
         class="lf-sidenav-item-icon"
-        [class.material-icons-outlined]="button.outlineIcon"
-        routerLinkActive="active-link">
+        [class.material-icons-outlined]="button.outlineIcon">
         {{ button.matIcon }}
       </mat-icon>
+      <!-- svg icon -->
+      <ng-template #svgIcon>
+        <mat-icon
+          *ngIf="button?.svgIcon"
+          class="lf-sidenav-item-icon"
+          [svgIcon]="button.svgIcon!"></mat-icon>
+      </ng-template>
       <!-- label -->
       <span class="lf-sidenav-item-label">{{ button.label }}</span>
     </button>

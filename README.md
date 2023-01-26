@@ -112,10 +112,7 @@ public sidenavClickEvent(id: string): void {
 
 ## TODO:
 * Header - input field (search field)
-* Header - mobile version
-* Sidenav - active links
 * Footer - overall styling
-* MenuButtons - functionality for svg icons
 * Library - styling overhaul (global variables)
 * Library - services for dialogs and snackbars
 

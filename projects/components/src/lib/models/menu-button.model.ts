@@ -1,7 +1,8 @@
 export interface MenuButton {
-  id?: string;
+  id: string;
   matIcon?: string;
   svgIcon?: string;
   label?: string;
   outlineIcon?: boolean;
+  tooltip?: string;
 }

@@ -1,5 +1,5 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
 import { BreakpointService, RouterService } from '../../services';
@@ -7,8 +7,7 @@ import { BreakpointService, RouterService } from '../../services';
 @Component({
   selector: 'lf-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent implements OnInit, OnDestroy {
 

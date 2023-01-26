@@ -34,4 +34,8 @@ export class ToTopButtonComponent implements OnInit {
     }
   }
 
+  public getButtomPosition(): number {
+    return this.moveUp ? 72 + 24 : 24;
+  }
+
 }

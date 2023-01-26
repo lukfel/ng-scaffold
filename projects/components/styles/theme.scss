@@ -17,6 +17,11 @@ $lf-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $lf-warn: mat.define-palette(mat.$red-palette);
 
+// Define the typography
+// $lf-typography: mat.define-typography-config(
+//   $font-family: 'Roboto'
+// );
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 
@@ -25,18 +30,9 @@ $lf-theme: mat.define-light-theme((
     primary: $lf-primary,
     accent: $lf-accent,
     warn: $lf-warn,
-  )
+  ),
+  // typography: $lf-typography
 ));
-
-.lf-dark-theme {
-  $lf-theme: mat.define-dark-theme((
-  color: (
-    primary: $lf-primary,
-    accent: $lf-accent,
-    warn: $lf-warn,
-  )
-));
-}
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

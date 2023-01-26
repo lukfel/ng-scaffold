@@ -1,5 +1,7 @@
+@import '../../../../styles/variables';
+
 .lf-drawer-container {
   .lf-drawer {
-    width: 208px;
+    width: $drawer-width;
   }
 }
