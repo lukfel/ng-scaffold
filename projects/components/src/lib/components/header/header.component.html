@@ -39,8 +39,12 @@
     <div
       class="lf-header-title-wrapper"
       [class.lf-show-left-button]="headerConfig?.leftMenuButton">
-      <span class="lf-header-title">{{ headerConfig.title }}</span>
-      <span class="lf-header-subtitle">{{ headerConfig.subTitle }}</span>
+      <span *ngIf="headerConfig?.title" class="lf-header-title">
+        {{ headerConfig.title }}
+      </span>
+      <span *ngIf="headerConfig?.subtitle" class="lf-header-subtitle">
+        {{ headerConfig.subtitle }}
+      </span>
     </div>
   </div>
   <!-- spacer -->

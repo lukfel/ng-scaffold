@@ -1,10 +1,11 @@
-<div class="lf-container mat-app-background">
+<div class="lf-container mat-app-background mat-typography">
   <!-- loading overlay -->
   <lf-loading-overlay *ngIf="containerConfig?.loading"></lf-loading-overlay>
   <!-- header -->
   <lf-header
     [headerConfig]="headerConfig"
     [isMobile]="isMobile"
+    [scrollElement]="scrollElement"
     (headerClickEvent)="headerButtonClicked($event)"></lf-header>
   <!-- sidenav -->
   <lf-sidenav

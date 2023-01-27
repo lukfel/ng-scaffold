@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @Input() public headerConfig: HeaderConfig = {};
   @Input() public isMobile: boolean = false;
+  @Input() public scrollElement: HTMLElement;
 
   @Output() public headerClickEvent = new EventEmitter<string>();
 

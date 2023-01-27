@@ -19,7 +19,7 @@ export class AppComponent {
     show: true,
     logo: 'lf_logo',
     title: 'Scaffold',
-    subTitle: 'by Lukas Felbinger',
+    subtitle: 'by Lukas Felbinger',
     loading: false,
     showRouteLoading: true,
     leftMenuButton: {
@@ -62,7 +62,8 @@ export class AppComponent {
 
   public drawerConfig: DrawerConfig = {
     show: true,
-    open: false
+    open: false,
+    fixed: true
   }
 
   public footerConfig: FooterConfig = {

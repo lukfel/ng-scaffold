@@ -55,7 +55,7 @@ export class AppComponent {
   public headerConfig: HeaderConfig = {
     show: true,
     title: 'Scaffold',
-    subTitle: 'by Lukas Felbinger',
+    subtitle: 'by Lukas Felbinger',
     loading: false,
     showRouteLoading: true,
     leftMenuButton: {

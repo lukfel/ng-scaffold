@@ -4,7 +4,7 @@ export interface HeaderConfig {
   show?: boolean;
   logo?: string;
   title?: string;
-  subTitle?: string;
+  subtitle?: string;
   loading?: boolean;
   showRouteLoading?: boolean;
   leftMenuButton?: MenuButton;

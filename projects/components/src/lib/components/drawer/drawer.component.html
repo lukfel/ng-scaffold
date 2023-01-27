@@ -1,22 +1,24 @@
-<mat-drawer-container
+<mat-sidenav-container
   *ngIf="drawerConfig?.show; else noDrawer"
   class="lf-drawer-container">
   <!-- drawer -->
-  <mat-drawer
+  <mat-sidenav
     class="lf-drawer"
     [mode]="isMobile ? 'over' : 'side'"
     [opened]="drawerConfig?.open"
     [autoFocus]="false"
+    [fixedInViewport]="drawerConfig?.fixed"
+    [fixedTopGap]="64"
     (closed)="onDrawerClosed()"
     #drawer>
     <!-- drawer content -->
     <ng-content select="[drawerContent]"></ng-content>
-  </mat-drawer>
-  <mat-drawer-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <!-- main content -->
     <ng-container *ngTemplateOutlet="content"></ng-container>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 <!-- render content without drawer -->
 <ng-template #noDrawer>
