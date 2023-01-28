@@ -8,5 +8,13 @@ export interface HeaderConfig {
   loading?: boolean;
   showRouteLoading?: boolean;
   leftMenuButton?: MenuButton;
-  rightMenuButton?: MenuButton;
+  rightMenuButtons?: MenuButton[];
+  inputConfig?: HeaderInputConfig;
+}
+
+export interface HeaderInputConfig {
+  show?: boolean;
+  label?: string;
+  matIcon?: string;
+  svgIcon?: string;
 }

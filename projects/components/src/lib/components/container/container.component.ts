@@ -19,6 +19,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
   @Input() public toTopButtonConfig: ToTopButtonConfig = {};
 
   @Output() public headerClickEvent = new EventEmitter<string>();
+  @Output() public headerInputEvent = new EventEmitter<string>();
   @Output() public sidenavClickEvent = new EventEmitter<string>();
 
   public routeHistory: string[] = [];
@@ -59,12 +60,16 @@ export class ContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  public sidenavButtonClicked(id: string): void {
-    this.sidenavClickEvent.emit(id);
-  }
-
   public headerButtonClicked(id: string): void {
     this.headerClickEvent.emit(id);
+  }
+
+  public headerInputChanged(value: string): void {
+    this.headerInputEvent.emit(value);
+  }
+
+  public sidenavButtonClicked(id: string): void {
+    this.sidenavClickEvent.emit(id);
   }
 
 }

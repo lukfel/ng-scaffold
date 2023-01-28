@@ -15,7 +15,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() public scrollElement: HTMLElement;
 
   @Output() public headerClickEvent = new EventEmitter<string>();
+  @Output() public headerInputEvent = new EventEmitter<string>();
 
+  public inputValue: string = '';
   public routeLoading: boolean = false;
 
   private _subscription: Subscription;
@@ -44,6 +46,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     this.headerClickEvent.emit(id);
+  }
+
+  public inputChanged(value: string): void {
+    this.headerInputEvent.emit(value);
   }
 
 }

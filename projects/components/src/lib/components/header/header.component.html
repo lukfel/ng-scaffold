@@ -47,30 +47,40 @@
       </span>
     </div>
   </div>
+  <!-- input -->
+  <ng-container *ngIf="headerConfig?.inputConfig?.show">
+    <div class="spacer"></div>
+    <mat-form-field class="lf-header-input" appearance="fill">
+      <mat-label>{{ headerConfig?.inputConfig?.label }}</mat-label>
+      <input
+        matInput
+        [(ngModel)]="inputValue"
+        (ngModelChange)="inputChanged($event)" />
+      <mat-icon matSuffix color="accent">
+        {{ headerConfig?.inputConfig?.matIcon }}
+      </mat-icon>
+    </mat-form-field>
+  </ng-container>
   <!-- spacer -->
   <div class="spacer"></div>
   <!-- right menu button -->
   <button
-    *ngIf="headerConfig?.rightMenuButton"
+    *ngFor="let button of headerConfig.rightMenuButtons"
     mat-icon-button
-    (click)="buttonClicked(headerConfig.rightMenuButton?.id)"
-    [matTooltip]="headerConfig.rightMenuButton!.tooltip!">
+    (click)="buttonClicked(button?.id)"
+    [matTooltip]="button!.tooltip!">
     <!-- mat icon -->
     <mat-icon
-      *ngIf="headerConfig?.rightMenuButton?.matIcon; else rightSvgIcon"
-      [class.material-icons-outlined]="
-        headerConfig?.rightMenuButton?.outlineIcon
-      ">
-      {{ headerConfig.rightMenuButton!.matIcon! }}
+      *ngIf="button?.matIcon; else rightSvgIcon"
+      [class.material-icons-outlined]="button?.outlineIcon">
+      {{ button.matIcon! }}
     </mat-icon>
     <!-- svg icon -->
     <ng-template #rightSvgIcon>
       <mat-icon
-        *ngIf="headerConfig?.rightMenuButton?.svgIcon"
-        [svgIcon]="headerConfig.rightMenuButton!.svgIcon!"
-        [class.material-icons-outlined]="
-          headerConfig?.rightMenuButton?.outlineIcon
-        "></mat-icon>
+        *ngIf="button?.svgIcon"
+        [svgIcon]="button!.svgIcon!"
+        [class.material-icons-outlined]="button?.outlineIcon"></mat-icon>
     </ng-template>
   </button>
 </mat-toolbar>

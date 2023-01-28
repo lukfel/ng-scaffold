@@ -28,11 +28,24 @@ export class AppComponent {
       outlineIcon: true,
       tooltip: 'Menu'
     },
-    rightMenuButton: {
-      id: 'settings',
-      matIcon: 'settings',
-      outlineIcon: true,
-      tooltip: 'Settings'
+    rightMenuButtons: [
+      {
+        id: 'settings',
+        matIcon: 'settings',
+        outlineIcon: true,
+        tooltip: 'Settings'
+      },
+      {
+        id: 'user',
+        matIcon: 'account_circle',
+        outlineIcon: true,
+        tooltip: 'User'
+      }
+    ],
+    inputConfig: {
+      show: false,
+      label: 'Search',
+      matIcon: 'search'
     }
   }
 
@@ -96,8 +109,15 @@ export class AppComponent {
           this.dialogService.openConfirmDialog(`You closed the snackbar of the header button '${id}'`).then(result => {
             this.logger.log(result);
           });
+        }).catch(error => {
+          this.logger.log(error);
         });
       }
+  }
+
+  // Detects changes in the header input field
+  public headerInputEvent(value: string): void {
+    this.logger.log(value);
   }
 
   // Detects the click event in the sidenav and navigates according to the id

@@ -6,7 +6,8 @@
     [headerConfig]="headerConfig"
     [isMobile]="isMobile"
     [scrollElement]="scrollElement"
-    (headerClickEvent)="headerButtonClicked($event)"></lf-header>
+    (headerClickEvent)="headerButtonClicked($event)"
+    (headerInputEvent)="headerInputChanged($event)"></lf-header>
   <!-- sidenav -->
   <lf-sidenav
     [sidenavConfig]="sidenavConfig"
