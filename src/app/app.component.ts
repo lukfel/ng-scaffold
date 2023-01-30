@@ -43,9 +43,10 @@ export class AppComponent {
       }
     ],
     inputConfig: {
-      show: false,
+      show: true,
       label: 'Search',
-      matIcon: 'search'
+      matIcon: 'search',
+      showCloseButton: false
     }
   }
 
@@ -81,6 +82,7 @@ export class AppComponent {
 
   public footerConfig: FooterConfig = {
     show: true,
+    logo: 'lf_logo',
     copyright: '© Lukas Felbinger 2023. All rights reserved.'
   }
 
@@ -90,39 +92,44 @@ export class AppComponent {
   }
 
   constructor(private router: Router,
-              private logger: Logger,
-              private snackbarService: SnackbarService,
-              private dialogService: DialogService,
-              private iconRegistry: MatIconRegistry,
-              private sanitizer: DomSanitizer) {
-                // Register custom svg for header logo
-                this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
-              }
-
-    // Detects the click event in the header and navigates according to the id
-    public headerClickEvent(id: string): void {
-      if(id === 'menu') {
-        this.drawerConfig.open = !this.drawerConfig.open;
-        this.snackbarService.openDefaultSnackbar(`You clicked the header button '${id}'`);
-      } else {
-        this.snackbarService.openDefaultSnackbarWithAction(`You clicked the header button  '${id}'`, 'Close').then(() => {
-          this.dialogService.openConfirmDialog(`You closed the snackbar of the header button '${id}'`).then(result => {
-            this.logger.log(result);
-          });
-        }).catch(error => {
-          this.logger.log(error);
-        });
-      }
+    private logger: Logger,
+    private snackbarService: SnackbarService,
+    private dialogService: DialogService,
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer) {
+    // Register custom svg for header logo
+    this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
   }
 
-  // Detects changes in the header input field
+  // Listen to header click events
+  public headerClickEvent(id: string): void {
+    if (id === 'menu') {
+      this.drawerConfig.open = !this.drawerConfig.open;
+      this.snackbarService.openDefaultSnackbar(`You clicked the header button '${id}'`);
+    } else {
+      this.snackbarService.openDefaultSnackbarWithAction(`You clicked the header button  '${id}'`, 'Close').then(() => {
+        this.dialogService.openConfirmDialog(`You closed the snackbar of the header button '${id}'`).then(result => {
+          this.logger.log(result);
+        });
+      }).catch(error => {
+        this.logger.log(error);
+      });
+    }
+  }
+
+  // Listen to header submit events
+  public headerSubmitEvent(value: string): void {
+    this.logger.log(value);
+  }
+
+  // Listen to header input events
   public headerInputEvent(value: string): void {
     this.logger.log(value);
   }
 
-  // Detects the click event in the sidenav and navigates according to the id
+  // Listen to sidenav click events
   public sidenavClickEvent(id: string): void {
-      this.router.navigate([id]);
+    this.router.navigate([id]);
   }
 
 }

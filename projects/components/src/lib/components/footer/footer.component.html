@@ -1,3 +1,9 @@
-<mat-toolbar *ngIf="footerConfig?.show" class="lf-footer">
-  <span>{{ footerConfig.copyright }}</span>
-</mat-toolbar>
+<mat-card *ngIf="footerConfig?.show" class="lf-footer">
+  <mat-icon
+    *ngIf="footerConfig?.logo"
+    class="lf-footer-logo"
+    [svgIcon]="footerConfig.logo!"></mat-icon>
+  <span class="lf-footer-copyright" *ngIf="footerConfig?.copyright">
+    {{ footerConfig.copyright }}
+  </span>
+</mat-card>

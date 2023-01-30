@@ -46,7 +46,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
   ]
 })
 export class ComponentsModule {
-  public static forRoot(config: LibraryConfig): ModuleWithProviders<ComponentsModule> {
+  public static forRoot(config?: LibraryConfig): ModuleWithProviders<ComponentsModule> {
     return {
       ngModule: ComponentsModule,
       providers: [

@@ -19,6 +19,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
   @Input() public toTopButtonConfig: ToTopButtonConfig = {};
 
   @Output() public headerClickEvent = new EventEmitter<string>();
+  @Output() public headerSubmitEvent = new EventEmitter<string>();
   @Output() public headerInputEvent = new EventEmitter<string>();
   @Output() public sidenavClickEvent = new EventEmitter<string>();
 
@@ -62,6 +63,10 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
   public headerButtonClicked(id: string): void {
     this.headerClickEvent.emit(id);
+  }
+
+  public headerInputSubmitted(value: string): void {
+    this.headerSubmitEvent.emit(value);
   }
 
   public headerInputChanged(value: string): void {

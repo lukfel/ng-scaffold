@@ -5,7 +5,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Documentation
 ``npm install ...``
 
-import the module (optionally pass the production boolean for the logger)
+Import the module (optionally pass the production boolean for the logger)
+* omit `.forRoot( { production: env.production } )` to fully disable the internal logger
 ```.ts
 import { ComponentsModule } from '@lf/components';
 import { environment as env } from 'src/environments/environment';
@@ -17,6 +18,7 @@ imports: [
 ```
 
 Add the container to the ``app.component.html`` (optionally omit configs of elements you don't need)
+* the `lf-container` is fully modular, so if you only need the header, you can just pass the `headerConfig`
 ```.html
 <!-- container -->
 <lf-container
@@ -27,9 +29,11 @@ Add the container to the ``app.component.html`` (optionally omit configs of elem
   [footerConfig]="footerConfig"
   [toTopButtonConfig]="toTopButtonConfig"
   (headerClickEvent)="headerClickEvent($event)"
+  (headerSubmitEvent)="headerSubmitEvent($event)"
+  (headerInputEvent)="headerInputEvent($event)"
   (sidenavClickEvent)="sidenavClickEvent($event)">
-  <!-- drawer content (optionally omit if no drawer) -->
-  <ng-container drawerContent>Drawer Content</ng-container>
+  <!-- drawer content -->
+  <ng-container drawerContent></ng-container>
   <!-- main content -->
   <router-outlet></router-outlet>
 </lf-container>
@@ -99,14 +103,26 @@ export class AppComponent {
 }
 ```
 
-listen to click events
+Listen to container events
 ```.ts
+// Listen to header click events
 public headerClickEvent(id: string): void {
-  console.log(id);
+  ...
 }
 
+// Listen to header submit events
+public headerSubmitEvent(value: string): void {
+  ...
+}
+
+// Listen to header input events
+public headerInputEvent(value: string): void {
+  ...
+}
+
+// Listen to sidenav click events
 public sidenavClickEvent(id: string): void {
-    this.router.navigate([id]);
+  ...
 }
 ```
 

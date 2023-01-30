@@ -48,7 +48,7 @@
     </div>
   </div>
   <!-- input -->
-  <ng-container *ngIf="headerConfig?.inputConfig?.show">
+  <ng-container *ngIf="headerConfig?.inputConfig?.show && !isMobile">
     <div class="spacer"></div>
     <mat-form-field class="lf-header-input" appearance="fill">
       <mat-label>{{ headerConfig?.inputConfig?.label }}</mat-label>
@@ -56,9 +56,24 @@
         matInput
         [(ngModel)]="inputValue"
         (ngModelChange)="inputChanged($event)" />
-      <mat-icon matSuffix color="accent">
-        {{ headerConfig?.inputConfig?.matIcon }}
-      </mat-icon>
+      <button
+        *ngIf="headerConfig?.inputConfig?.showCloseButton"
+        mat-icon-button
+        matPrefix
+        color="accent"
+        (click)="headerConfig.inputConfig!.show = false">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button
+        *ngIf="headerConfig?.inputConfig?.matIcon"
+        mat-icon-button
+        matSuffix
+        color="accent"
+        (click)="inputSubmitted(inputValue)">
+        <mat-icon>
+          {{ headerConfig?.inputConfig?.matIcon }}
+        </mat-icon>
+      </button>
     </mat-form-field>
   </ng-container>
   <!-- spacer -->
