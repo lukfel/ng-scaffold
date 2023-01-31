@@ -25,3 +25,9 @@ $lf-theme: mat.define-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($lf-theme);
+
+:root {
+  --color-primary: #{mat.get-color-from-palette($lf-primary, 500)};
+  --color-accent: #{mat.get-color-from-palette($lf-accent, 500)};
+  --color-warn: #{mat.get-color-from-palette($lf-warn, 500)};
+}

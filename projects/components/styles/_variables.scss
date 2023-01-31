@@ -1,3 +1,5 @@
+$loading-overlay-z-index: 101;
+
 $header-z-index: 100;
 $header-height: 64px;
 $header-logo-size: 40px;
@@ -6,9 +8,13 @@ $sidenav-z-index: 99;
 $sidenav-height: 72px;
 $sidenav-width: 72px;
 $sidenav-padding: 4px;
+$sidenav-item-label-font-size: 12px;
 
 $content-padding: 0 24px;
 
 $drawer-width: 208px;
 
 $footer-height: 100px;
+$footer-logo-size: 96px;
+
+$to-top-button-z-index: 100;

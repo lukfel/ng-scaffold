@@ -29,7 +29,9 @@
           [svgIcon]="button.svgIcon!"></mat-icon>
       </ng-template>
       <!-- label -->
-      <span class="lf-sidenav-item-label">{{ button.label }}</span>
+      <span *ngIf="button?.label" class="lf-sidenav-item-label">
+        {{ button.label }}
+      </span>
     </button>
   </div>
 </div>

@@ -8,7 +8,7 @@
     margin-top: $header-height;
 
     &.lf-show-sidenav-mobile {
-      height: calc(100vh - $header-height - ($sidenav-height + (2 * $sidenav-padding)));
+      height: calc(100vh - $header-height - $sidenav-height);
     }
 
     &.lf-show-sidenav {

@@ -33,7 +33,8 @@ export class AppComponent {
         id: 'settings',
         matIcon: 'settings',
         outlineIcon: true,
-        tooltip: 'Settings'
+        tooltip: 'Settings',
+        label: 'Settings'
       },
       {
         id: 'user',
@@ -43,7 +44,7 @@ export class AppComponent {
       }
     ],
     inputConfig: {
-      show: true,
+      show: false,
       label: 'Search',
       matIcon: 'search',
       showCloseButton: false
@@ -83,6 +84,21 @@ export class AppComponent {
   public footerConfig: FooterConfig = {
     show: true,
     logo: 'lf_logo',
+    links: [
+      {
+        label: 'Home',
+        routerLink: 'start'
+      },
+      {
+        label: 'About',
+        href: 'https://www.lukasfelbinger.at',
+        externalTab: true
+      },
+      {
+        label: 'Contact',
+        routerLink: 'contact'
+      }
+    ],
     copyright: '© Lukas Felbinger 2023. All rights reserved.'
   }
 

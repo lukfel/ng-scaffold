@@ -1,8 +1,23 @@
-<mat-card *ngIf="footerConfig?.show" class="lf-footer">
+<mat-card *ngIf="footerConfig?.show" class="lf-footer mat-elevation-z3">
+  <!-- logo -->
   <mat-icon
     *ngIf="footerConfig?.logo"
     class="lf-footer-logo"
     [svgIcon]="footerConfig.logo!"></mat-icon>
+  <!-- links -->
+  <div *ngIf="footerConfig?.links" class="lf-footer-links">
+    <div *ngFor="let link of footerConfig.links" class="lf-footer-link">
+      <ng-container *ngIf="link.routerLink; else hrefLink">
+        <a [routerLink]="[link.routerLink]">{{ link.label || "" }}</a>
+      </ng-container>
+      <ng-template #hrefLink>
+        <a [href]="link.href" [target]="link.externalTab ? '_blank' : null">
+          {{ link.label }}
+        </a>
+      </ng-template>
+    </div>
+  </div>
+  <!-- copyright -->
   <span class="lf-footer-copyright" *ngIf="footerConfig?.copyright">
     {{ footerConfig.copyright }}
   </span>
