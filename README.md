@@ -3,39 +3,48 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
 ## Documentation
-### What is it?
+### Introduction
 This library provides a basic app scaffold for modern web and mobile applications. Simply wrap your ``<router-outlet></router-outlet>`` with the ``<lf-container> ... </lf-container>`` component and pass the desired configs to personalize the scaffold.
 
-### How to use it?
-``npm install @lf/scaffold``
+### Installation
+Install the npm package with ``npm install @lf/scaffold``
 
+#### Module
 Import the module in your ``app.module.ts`` (optionally pass the production boolean for the logger)
-* omit ``.forRoot( { production: env.production } )`` to fully disable the internal logger
 ```.ts
 import { ScaffoldModule } from '@lf/scaffold';
 import { environment as env } from 'src/environments/environment';
 
 imports: [
   ...
+  // omit '.forRoot( { production: env.production } )' if you don't need the logger
   ScaffoldModule.forRoot( { production: env.production } )
 ],
 ```
 
-Add the container to your ``app.component.html`` (optionally omit configs of elements you don't need)
-* the ``lf-container`` is fully modular, so if you only need the header, you can just pass the ``headerConfig``
+#### Style
+Import the styles in your ``styles.scss``
+```.scss
+@use "@lf/scaffold/styles" as lf;
+```
+
+#### Template
+Add the container to your ``app.component.html``.
 ```.html
-<!-- container -->
+<lf-container>
+  <router-outlet></router-outlet>
+</lf-container>
+```
+
+To enable the ui elements within the scaffold, define the corresponding input configs. For example, to enable the ``HeaderComponent``, define and pass the ``headerConfig`` (see in section "Config" below).
+```.html
 <lf-container
   [containerConfig]="containerConfig"
   [headerConfig]="headerConfig"
   [sidenavConfig]="sidenavConfig"
   [drawerConfig]="drawerConfig"
   [footerConfig]="footerConfig"
-  [toTopButtonConfig]="toTopButtonConfig"
-  (headerClickEvent)="headerClickEvent($event)"
-  (headerSubmitEvent)="headerSubmitEvent($event)"
-  (headerInputEvent)="headerInputEvent($event)"
-  (sidenavClickEvent)="sidenavClickEvent($event)">
+  [toTopButtonConfig]="toTopButtonConfig">
   <!-- drawer content -->
   <ng-container drawerContent></ng-container>
   <!-- main content -->
@@ -43,12 +52,8 @@ Add the container to your ``app.component.html`` (optionally omit configs of ele
 </lf-container>
 ```
 
-Import the styles in your ``styles.scss``
-```.scss
-@use "@lf/scaffold/styles" as lf;
-```
-
-Create the config objects in your ``app.component.ts``
+#### Config
+Create the input config objects in your ``app.component.ts``. If a config is not defined or doesn't have ``show: true``, the corresponding ui element won't be displayed.
 ```.ts
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/scaffold';
 
@@ -155,7 +160,19 @@ export class AppComponent {
 }
 ```
 
-Listen to container events
+#### Events
+To listen to events within the scaffold, add the output events and define methods in your ``app.component.ts``.
+```.html
+<lf-container
+  ...
+  (headerClickEvent)="headerClickEvent($event)"
+  (headerSubmitEvent)="headerSubmitEvent($event)"
+  (headerInputEvent)="headerInputEvent($event)"
+  (sidenavClickEvent)="sidenavClickEvent($event)">
+  ...
+</lf-container>
+```
+
 ```.ts
 // Listen to header click events
 public headerClickEvent(id: string): void {
