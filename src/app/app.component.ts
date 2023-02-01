@@ -133,12 +133,12 @@ export class AppComponent {
     }
   }
 
-  // Listen to header submit events
+  // Listen to header input submit events
   public headerSubmitEvent(value: string): void {
     this.logger.log(value);
   }
 
-  // Listen to header input events
+  // Listen to header input change events
   public headerInputEvent(value: string): void {
     this.logger.log(value);
   }

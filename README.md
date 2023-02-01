@@ -62,6 +62,7 @@ export class AppComponent {
 
   public headerConfig: HeaderConfig = {
     show: true,
+    logo: 'lf_logo',
     title: 'Scaffold',
     subtitle: 'by Lukas Felbinger',
     loading: false,
@@ -69,12 +70,29 @@ export class AppComponent {
     leftMenuButton: {
       id: 'menu',
       matIcon: 'menu',
-      outlineIcon: true
+      outlineIcon: true,
+      tooltip: 'Menu'
     },
-    rightMenuButton: {
-      id: 'settings',
-      matIcon: 'settings',
-      outlineIcon: true
+    rightMenuButtons: [
+      {
+        id: 'home',
+        label: 'Home'
+      },
+      {
+        id: 'contact',
+        label: 'Contact'
+      },
+      {
+        id: 'settings',
+        matIcon: 'settings',
+        outlineIcon: true,
+        tooltip: 'Settings'
+      }
+    ],
+    inputConfig: {
+      show: true,
+      label: 'Search',
+      matIcon: 'search'
     }
   }
 
@@ -87,21 +105,51 @@ export class AppComponent {
         label: 'Home',
         outlineIcon: true
       },
+      {
+        id: 'contact',
+        matIcon: 'mail',
+        label: 'Contact',
+        outlineIcon: true
+      },
+      {
+        id: '404',
+        matIcon: 'block',
+        label: '404',
+        outlineIcon: true
+      }
     ]
   }
 
   public drawerConfig: DrawerConfig = {
-    show: false,
-    open: true
+    show: true,
+    open: false,
+    fixed: true
   }
 
   public footerConfig: FooterConfig = {
     show: true,
+    logo: 'lf_logo',
+    links: [
+      {
+        label: 'Home',
+        routerLink: 'start'
+      },
+      {
+        label: 'About',
+        href: 'https://www.lukasfelbinger.at',
+        externalTab: true
+      },
+      {
+        label: 'Contact',
+        routerLink: 'contact'
+      }
+    ],
     copyright: '© Lukas Felbinger 2023. All rights reserved.'
   }
 
   public toTopButtonConfig: ToTopButtonConfig = {
-    show: true
+    show: true,
+    tooltip: 'To top'
   }
 
 }
@@ -114,12 +162,12 @@ public headerClickEvent(id: string): void {
   ...
 }
 
-// Listen to header submit events
+// Listen to header input submit events
 public headerSubmitEvent(value: string): void {
   ...
 }
 
-// Listen to header input events
+// Listen to header input change events
 public headerInputEvent(value: string): void {
   ...
 }
