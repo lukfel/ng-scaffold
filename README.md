@@ -7,17 +7,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This library provides a basic app scaffold for modern web and mobile applications. Simply wrap your ``<router-outlet></router-outlet>`` with the ``<lf-container> ... </lf-container>`` component and pass the desired configs to personalize the scaffold.
 
 ### How to use it?
-``npm install ...``
+``npm install @lf/scaffold``
 
 Import the module in your ``app.module.ts`` (optionally pass the production boolean for the logger)
 * omit ``.forRoot( { production: env.production } )`` to fully disable the internal logger
 ```.ts
-import { ComponentsModule } from '@lf/components';
+import { ScaffoldModule } from '@lf/scaffold';
 import { environment as env } from 'src/environments/environment';
 
 imports: [
   ...
-  ComponentsModule.forRoot( { production: env.production } )
+  ScaffoldModule.forRoot( { production: env.production } )
 ],
 ```
 
@@ -45,12 +45,12 @@ Add the container to your ``app.component.html`` (optionally omit configs of ele
 
 Import the styles in your ``styles.scss``
 ```.scss
-@use "@lf/components/styles" as lf;
+@use "@lf/scaffold/styles" as lf;
 ```
 
 Create the config objects in your ``app.component.ts``
 ```.ts
-import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/components';
+import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/scaffold';
 
 ...
 

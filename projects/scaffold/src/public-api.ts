@@ -5,7 +5,7 @@
 /* MODELS */
 export * from './lib/models';
 /* MODULES */
-export * from './lib/components.module';
+export * from './lib/scaffold.module';
 /* COMPONENTS */
 export * from './lib/components/container/container.component';
 export * from './lib/components/header/header.component';

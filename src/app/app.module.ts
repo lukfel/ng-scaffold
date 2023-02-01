@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentsModule } from '@lf/components';
+import { ScaffoldModule } from '@lf/scaffold';
 import { SharedModule } from './shared/shared.module';
 import { environment as env } from 'src/environments/environment';
 
@@ -17,7 +17,7 @@ import { environment as env } from 'src/environments/environment';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    ComponentsModule.forRoot( { production: env.production } )
+    ScaffoldModule.forRoot( { production: env.production } )
   ],
   providers: [],
   bootstrap: [AppComponent]

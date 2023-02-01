@@ -45,10 +45,10 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     DialogService
   ]
 })
-export class ComponentsModule {
-  public static forRoot(config?: LibraryConfig): ModuleWithProviders<ComponentsModule> {
+export class ScaffoldModule {
+  public static forRoot(config?: LibraryConfig): ModuleWithProviders<ScaffoldModule> {
     return {
-      ngModule: ComponentsModule,
+      ngModule: ScaffoldModule,
       providers: [
         {
           provide: CONFIG,

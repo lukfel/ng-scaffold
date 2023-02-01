@@ -1,5 +1,5 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { CONFIG } from '../components.module';
+import { CONFIG } from '../scaffold.module';
 import { LibraryConfig } from '../models';
 
 @Injectable({ providedIn: 'root' })

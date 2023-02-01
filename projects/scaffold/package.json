@@ -1,5 +1,5 @@
 {
-  "name": "@lf/components",
+  "name": "@lf/scaffold",
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^15.1.0",

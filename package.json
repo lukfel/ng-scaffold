@@ -1,5 +1,5 @@
 {
-  "name": "scaffold",
+  "name": "scaffold-app",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,8 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromeHeadless --code-coverage true --watch false",
     "lint": "ng lint --fix",
-    "build-lib": "ng build components --configuration production",
-    "watch-lib": "ng build components --watch --configuration development"
+    "build-lib": "ng build scaffold --configuration production",
+    "watch-lib": "ng build scaffold --watch --configuration development"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +23,7 @@
     "@angular/platform-browser": "^15.1.0",
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
-    "@lf/components": "file:dist/components",
+    "@lf/scaffold": "file:dist/scaffold",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

@@ -4,8 +4,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@lf/components": [
-        "dist/components"
+      "@lf/scaffold": [
+        "dist/scaffold"
       ]
     },
     "baseUrl": "./",
