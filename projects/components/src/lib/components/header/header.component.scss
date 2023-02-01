@@ -44,8 +44,17 @@
   }
 
   .lf-header-input {
+    z-index: $header-z-index;
     width: 100%;
     max-width: 512px;
+  }
+
+  .lf-header-input-mobile {
+    position: fixed !important;
+    left: 4px !important;
+    right: 4px !important;
+    width: unset !important;
+    max-width: unset !important;
   }
 
   ::ng-deep {

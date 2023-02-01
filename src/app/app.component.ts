@@ -30,24 +30,24 @@ export class AppComponent {
     },
     rightMenuButtons: [
       {
+        id: 'home',
+        label: 'Home'
+      },
+      {
+        id: 'contact',
+        label: 'Contact'
+      },
+      {
         id: 'settings',
         matIcon: 'settings',
         outlineIcon: true,
-        tooltip: 'Settings',
-        label: 'Settings'
-      },
-      {
-        id: 'user',
-        matIcon: 'account_circle',
-        outlineIcon: true,
-        tooltip: 'User'
+        tooltip: 'Settings'
       }
     ],
     inputConfig: {
-      show: false,
+      show: true,
       label: 'Search',
-      matIcon: 'search',
-      showCloseButton: false
+      matIcon: 'search'
     }
   }
 

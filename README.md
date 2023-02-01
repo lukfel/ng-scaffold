@@ -3,10 +3,14 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
 ## Documentation
+### What is it?
+This library provides a basic app scaffold for modern web and mobile applications. Simply wrap your ``<router-outlet></router-outlet>`` with the ``<lf-container> ... </lf-container>`` component and pass the desired configs to personalize the scaffold.
+
+### How to use it?
 ``npm install ...``
 
-Import the module (optionally pass the production boolean for the logger)
-* omit `.forRoot( { production: env.production } )` to fully disable the internal logger
+Import the module in your ``app.module.ts`` (optionally pass the production boolean for the logger)
+* omit ``.forRoot( { production: env.production } )`` to fully disable the internal logger
 ```.ts
 import { ComponentsModule } from '@lf/components';
 import { environment as env } from 'src/environments/environment';
@@ -17,8 +21,8 @@ imports: [
 ],
 ```
 
-Add the container to the ``app.component.html`` (optionally omit configs of elements you don't need)
-* the `lf-container` is fully modular, so if you only need the header, you can just pass the `headerConfig`
+Add the container to your ``app.component.html`` (optionally omit configs of elements you don't need)
+* the ``lf-container`` is fully modular, so if you only need the header, you can just pass the ``headerConfig``
 ```.html
 <!-- container -->
 <lf-container
@@ -44,7 +48,7 @@ Import the styles in your ``styles.scss``
 @use "@lf/components/styles" as lf;
 ```
 
-Create the config objects in the ``app.component.ts``
+Create the config objects in your ``app.component.ts``
 ```.ts
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/components';
 
@@ -125,12 +129,6 @@ public sidenavClickEvent(id: string): void {
   ...
 }
 ```
-
-## TODO:
-* Header - input field (search field)
-* Footer - overall styling
-* Library - styling overhaul (global variables)
-* Library - services for dialogs and snackbars
 
 __________
 

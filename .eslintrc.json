@@ -46,6 +46,7 @@
         "@typescript-eslint/explicit-member-accessibility": [
           "error",
           {
+            "ignoredMethodNames": ["ngOnInit", "ngOnDestroy", "ngOnChanges"],
             "overrides": {
               "accessors": "off",
               "constructors": "no-public",

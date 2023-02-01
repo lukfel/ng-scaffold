@@ -25,13 +25,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private routerService: RouterService) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     if(this.headerConfig?.showRouteLoading) {
       this._subscription = this.routerService.loading$.subscribe(loading => this.routeLoading = loading);
     }
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     if(this._subscription) {
       this._subscription.unsubscribe();
     }

@@ -32,7 +32,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
   constructor(private breakpointService: BreakpointService,
               private routerService: RouterService) { }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     // Listen for breakpoint changes
     this._subscription.add(this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
       if (result.breakpoints[Breakpoints.XSmall]) {
@@ -55,7 +55,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
     }))
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     if (this._subscription) {
       this._subscription.unsubscribe();
     }

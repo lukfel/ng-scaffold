@@ -14,7 +14,7 @@ export class ToTopButtonComponent implements OnInit {
 
   public autoHide: boolean = true;
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     if(this.scrollElement) {
       this.scrollElement.addEventListener('scroll', (e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;

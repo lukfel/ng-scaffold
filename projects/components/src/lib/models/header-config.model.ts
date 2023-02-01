@@ -17,5 +17,4 @@ export interface HeaderInputConfig {
   label?: string;
   matIcon?: string;
   svgIcon?: string;
-  showCloseButton?: boolean;
 }
