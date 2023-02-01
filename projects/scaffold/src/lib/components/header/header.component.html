@@ -1,7 +1,4 @@
-<mat-toolbar
-  *ngIf="headerConfig?.show"
-  class="lf-header mat-elevation-z3"
-  color="primary">
+<mat-toolbar *ngIf="headerConfig?.show" class="lf-header mat-elevation-z3" color="primary">
   <!-- left menu button -->
   <ng-container
     *ngTemplateOutlet="
@@ -18,9 +15,7 @@
       class="lf-header-logo"
       [svgIcon]="headerConfig.logo!"></mat-icon>
     <!-- title -->
-    <div
-      class="lf-header-title-wrapper"
-      [class.lf-show-left-button]="headerConfig?.leftMenuButton">
+    <div class="lf-header-title-wrapper" [class.lf-show-left-button]="headerConfig?.leftMenuButton">
       <span *ngIf="headerConfig?.title" class="lf-header-title">
         {{ headerConfig.title }}
       </span>
@@ -68,16 +63,13 @@
   <!-- right menu buttons -->
   <ng-container *ngFor="let button of headerConfig.rightMenuButtons">
     <ng-container
-      *ngTemplateOutlet="
-        menuButtonTemplate;
-        context: { $implicit: button }
-      "></ng-container>
+      *ngTemplateOutlet="menuButtonTemplate; context: { $implicit: button }"></ng-container>
   </ng-container>
 </mat-toolbar>
 
 <!-- loading bar -->
 <mat-progress-bar
-  *ngIf="headerConfig?.loading || routeLoading"
+  *ngIf="headerConfig?.loading || (headerConfig?.showRouteLoading && routeLoading)"
   class="lf-header-progress-bar"
   color="accent"
   mode="indeterminate"></mat-progress-bar>
@@ -87,10 +79,7 @@
   <ng-container *ngIf="menuButton">
     <!-- icon button -->
     <button
-      *ngIf="
-        (menuButton.matIcon || menuButton.svgIcon) && !menuButton.label;
-        else textButton
-      "
+      *ngIf="(menuButton.matIcon || menuButton.svgIcon) && !menuButton.label; else textButton"
       mat-icon-button
       (click)="buttonClicked(menuButton.id)"
       [matTooltip]="menuButton.tooltip">

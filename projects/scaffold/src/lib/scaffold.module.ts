@@ -8,7 +8,6 @@ import { LoadingOverlayComponent } from './components/loading-overlay/loading-ov
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToTopButtonComponent } from './components/to-top-button/to-top-button.component';
 import { LibraryConfig } from './models';
-import { BreakpointService, DialogService, Logger, RouterService, SnackbarService } from './services';
 import { SharedModule } from './shared/shared.module';
 
 export const CONFIG = new InjectionToken<LibraryConfig>('config');
@@ -36,13 +35,6 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     ToTopButtonComponent,
     LoadingOverlayComponent,
     ConfirmDialogComponent
-  ],
-  providers: [
-    Logger,
-    RouterService,
-    BreakpointService,
-    SnackbarService,
-    DialogService
   ]
 })
 export class ScaffoldModule {

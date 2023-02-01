@@ -1,48 +1,26 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeaderConfig } from '../../models';
-import { RouterService } from '../../services';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'lf-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent {
 
   @Input() public headerConfig: HeaderConfig = {};
   @Input() public isMobile: boolean = false;
   @Input() public scrollElement: HTMLElement;
+  @Input() public routeLoading: boolean = false;
 
   @Output() public headerClickEvent = new EventEmitter<string>();
   @Output() public headerSubmitEvent = new EventEmitter<string>();
   @Output() public headerInputEvent = new EventEmitter<string>();
 
   public inputValue: string = '';
-  public routeLoading: boolean = false;
-
-  private _subscription: Subscription;
-
-  constructor(private routerService: RouterService) {}
-
-  ngOnInit(): void {
-    if(this.headerConfig?.showRouteLoading) {
-      this._subscription = this.routerService.loading$.subscribe(loading => this.routeLoading = loading);
-    }
-  }
-
-  ngOnDestroy(): void {
-    if(this._subscription) {
-      this._subscription.unsubscribe();
-    }
-  }
-
-  public navigateBack(): void {
-    this.routerService.navigateBack();
-  }
 
   public buttonClicked(id?: string): void {
-    if(!id) {
+    if (!id) {
       return;
     }
 

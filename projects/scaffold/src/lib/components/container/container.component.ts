@@ -26,6 +26,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
   public routeHistory: string[] = [];
   public currentRoute: string;
   public isMobile: boolean = false;
+  public routeLoading: boolean = false;
 
   private _subscription: Subscription = new Subscription;
 
@@ -52,7 +53,10 @@ export class ContainerComponent implements OnInit, OnDestroy {
         this.routeHistory = routeHistory;
         this.currentRoute = this.routeHistory[this.routeHistory.length - 1];
       }
-    }))
+    }));
+
+    // Listen for route loading
+    this._subscription.add(this.routerService.loading$.subscribe(loading => this.routeLoading = loading))
   }
 
   ngOnDestroy(): void {
