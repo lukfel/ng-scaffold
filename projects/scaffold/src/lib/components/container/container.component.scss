@@ -2,7 +2,7 @@
 
 .lf-container {
   .lf-content-wrapper {
-    transition: height 0.3s;
+    transition: height $transition;
     height: calc(100vh - $header-height);
     overflow-y: auto;
     margin-top: $header-height;

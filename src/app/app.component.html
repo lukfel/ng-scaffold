@@ -1,11 +1,11 @@
 <!-- container -->
 <lf-container
-  [containerConfig]="containerConfig"
-  [headerConfig]="headerConfig"
-  [sidenavConfig]="sidenavConfig"
-  [drawerConfig]="drawerConfig"
-  [footerConfig]="footerConfig"
-  [toTopButtonConfig]="toTopButtonConfig"
+  [containerConfig]="scaffoldService.containerConfig"
+  [headerConfig]="scaffoldService.headerConfig"
+  [sidenavConfig]="scaffoldService.sidenavConfig"
+  [drawerConfig]="scaffoldService.drawerConfig"
+  [footerConfig]="scaffoldService.footerConfig"
+  [toTopButtonConfig]="scaffoldService.toTopButtonConfig"
   (headerClickEvent)="headerClickEvent($event)"
   (headerSubmitEvent)="headerSubmitEvent($event)"
   (headerInputEvent)="headerInputEvent($event)"

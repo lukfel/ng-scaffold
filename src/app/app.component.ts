@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ContainerConfig, DialogService, DrawerConfig, FooterConfig, HeaderConfig, Logger, SidenavConfig, SnackbarService, ToTopButtonConfig } from '@lf/scaffold';
+import { DialogService, Logger, SnackbarService } from '@lf/scaffold';
+import { ScaffoldService } from 'src/app/shared/services/scaffold.service';
 
 @Component({
   selector: 'app-root',
@@ -11,108 +12,13 @@ import { ContainerConfig, DialogService, DrawerConfig, FooterConfig, HeaderConfi
 })
 export class AppComponent {
 
-  public containerConfig: ContainerConfig = {
-    loading: false
-  }
-
-  public headerConfig: HeaderConfig = {
-    show: true,
-    logo: 'lf_logo',
-    title: 'Scaffold',
-    subtitle: 'by Lukas Felbinger',
-    loading: false,
-    showRouteLoading: true,
-    leftMenuButton: {
-      id: 'menu',
-      matIcon: 'menu',
-      outlineIcon: true,
-      tooltip: 'Menu'
-    },
-    rightMenuButtons: [
-      {
-        id: 'home',
-        label: 'Home'
-      },
-      {
-        id: 'contact',
-        label: 'Contact'
-      },
-      {
-        id: 'settings',
-        matIcon: 'settings',
-        outlineIcon: true,
-        tooltip: 'Settings'
-      }
-    ],
-    inputConfig: {
-      show: true,
-      label: 'Search',
-      matIcon: 'search'
-    }
-  }
-
-  public sidenavConfig: SidenavConfig = {
-    show: true,
-    menuButtons: [
-      {
-        id: 'start',
-        matIcon: 'home',
-        label: 'Home',
-        outlineIcon: true
-      },
-      {
-        id: 'contact',
-        matIcon: 'mail',
-        label: 'Contact',
-        outlineIcon: true
-      },
-      {
-        id: '404',
-        matIcon: 'block',
-        label: '404',
-        outlineIcon: true
-      }
-    ]
-  }
-
-  public drawerConfig: DrawerConfig = {
-    show: true,
-    open: false,
-    fixed: true
-  }
-
-  public footerConfig: FooterConfig = {
-    show: true,
-    logo: 'lf_logo',
-    links: [
-      {
-        label: 'Home',
-        routerLink: 'start'
-      },
-      {
-        label: 'About',
-        href: 'https://www.lukasfelbinger.at',
-        externalTab: true
-      },
-      {
-        label: 'Contact',
-        routerLink: 'contact'
-      }
-    ],
-    copyright: '© Lukas Felbinger 2023. All rights reserved.'
-  }
-
-  public toTopButtonConfig: ToTopButtonConfig = {
-    show: true,
-    tooltip: 'To top'
-  }
-
   constructor(private router: Router,
     private logger: Logger,
     private snackbarService: SnackbarService,
     private dialogService: DialogService,
     private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    public scaffoldService: ScaffoldService) {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
   }
@@ -120,7 +26,7 @@ export class AppComponent {
   // Listen to header click events
   public headerClickEvent(id: string): void {
     if (id === 'menu') {
-      this.drawerConfig.open = !this.drawerConfig.open;
+      this.scaffoldService.drawerConfig.open = !this.scaffoldService.drawerConfig.open;
       this.snackbarService.openDefaultSnackbar(`You clicked the header button '${id}'`);
     } else {
       this.snackbarService.openDefaultSnackbarWithAction(`You clicked the header button  '${id}'`, 'Close').then(() => {

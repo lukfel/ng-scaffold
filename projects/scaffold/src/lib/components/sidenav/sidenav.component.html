@@ -4,9 +4,7 @@
   [class.lf-sidenav]="!isMobile"
   [class.lf-sidenav-mobile]="isMobile">
   <!-- items -->
-  <div
-    [class.lf-sidenav-items]="!isMobile"
-    [class.lf-sidenav-mobile-items]="isMobile">
+  <div [class.lf-sidenav-items]="!isMobile" [class.lf-sidenav-mobile-items]="isMobile">
     <!-- item -->
     <button
       *ngFor="let button of sidenavConfig.menuButtons"

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ScaffoldService } from 'src/app/shared/services/scaffold.service';
 
 @Component({
   selector: 'app-startpage',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./startpage.component.scss']
 })
 export class StartpageComponent {
+
+  constructor(public scaffoldService: ScaffoldService) {}
 
 }
