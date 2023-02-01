@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ComponentsModule } from '@lf/scaffold';
+import { ScaffoldModule } from '@lf/scaffold';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -9,7 +9,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         // SharedModule
-        ComponentsModule
+        ScaffoldModule
       ],
       declarations: [
         AppComponent
