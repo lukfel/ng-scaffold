@@ -4,9 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Documentation
 ### Introduction
-This library provides a basic app scaffold for modern web and mobile applications. Simply wrap your ``<router-outlet></router-outlet>`` with the ``<lf-container> ... </lf-container>`` component and pass the desired configs to personalize the scaffold.
+This library provides a basic scaffold for modern web and mobile applications including ui elements such as header, sidebar, drawer, footer, etc. Simply wrap your ``<router-outlet></router-outlet>`` with the ``<lf-container> ... </lf-container>`` component and pass the desired configs to personalize the scaffold.
 
-### Installation
+### Setup
+#### Installation
 Install the npm package with ``npm install @lf/scaffold``
 
 #### Module
@@ -169,7 +170,10 @@ To listen to events within the scaffold, add the output events and define method
   (headerSubmitEvent)="headerSubmitEvent($event)"
   (headerInputEvent)="headerInputEvent($event)"
   (sidenavClickEvent)="sidenavClickEvent($event)">
-  ...
+  <!-- drawer content -->
+  <ng-container drawerContent></ng-container>
+  <!-- main content -->
+  <router-outlet></router-outlet>
 </lf-container>
 ```
 
