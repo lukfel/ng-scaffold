@@ -1,5 +1,10 @@
 @import '../../../../styles/variables';
 
+.lf-header-spacer {
+  height: $header-height;
+  width: 100%;
+}
+
 .lf-header {
   z-index: $header-z-index;
   position: fixed;
@@ -9,7 +14,9 @@
   .lf-header-logo-title-wrapper {
     display: flex;
     flex-flow: row nowrap;
-    align-items: flex-end;
+    align-items: center;
+    max-width: $header-logo-title-wrapper-max-width;
+    overflow: hidden;
     margin-left: 8px;
 
     &.lf-show-left-button {
@@ -19,6 +26,8 @@
     .lf-header-logo {
       width: $header-logo-size;
       height: $header-logo-size;
+      min-width: $header-logo-size;
+      min-height: $header-logo-size;
       margin-right: 8px;
     }
 
@@ -46,7 +55,7 @@
   .lf-header-input {
     z-index: $header-z-index;
     width: 100%;
-    max-width: 512px;
+    max-width: $header-input-max-width;
   }
 
   .lf-header-input-mobile {

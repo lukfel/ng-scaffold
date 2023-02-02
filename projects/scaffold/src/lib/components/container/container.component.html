@@ -19,8 +19,12 @@
   <!-- content wrapper -->
   <div
     class="lf-content-wrapper"
-    [class.lf-show-sidenav]="sidenavConfig?.show && !isMobile"
-    [class.lf-show-sidenav-mobile]="sidenavConfig?.show && isMobile"
+    [class.lf-show-sidenav]="sidenavConfig?.enable && !isMobile"
+    [class.lf-show-header]="headerConfig?.enable && !(sidenavConfig?.enable && isMobile)"
+    [class.lf-show-sidenav-mobile]="sidenavConfig?.enable && isMobile && !headerConfig?.enable"
+    [class.lf-show-header-and-sidenav-mobile]="
+      headerConfig?.enable && sidenavConfig?.enable && isMobile
+    "
     #scrollElement>
     <!-- drawer -->
     <lf-drawer [drawerConfig]="drawerConfig" [isMobile]="isMobile">
@@ -38,5 +42,5 @@
   <lf-to-top-button
     [toTopButtonConfig]="toTopButtonConfig"
     [scrollElement]="scrollElement"
-    [moveUp]="isMobile && sidenavConfig?.show!"></lf-to-top-button>
+    [moveUp]="isMobile && sidenavConfig?.enable!"></lf-to-top-button>
 </div>

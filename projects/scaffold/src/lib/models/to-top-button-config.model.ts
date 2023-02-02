@@ -1,4 +1,4 @@
 export interface ToTopButtonConfig {
-  show?: boolean;
+  enable?: boolean;
   tooltip?: string;
 }

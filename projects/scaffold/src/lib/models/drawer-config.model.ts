@@ -1,5 +1,5 @@
 export interface DrawerConfig {
-  show?: boolean;
+  enable?: boolean;
   open?: boolean;
   fixed?: boolean;
 }

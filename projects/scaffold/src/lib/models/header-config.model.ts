@@ -1,8 +1,9 @@
 import { MenuButton } from './menu-button.model';
 
 export interface HeaderConfig {
-  show?: boolean;
-  logo?: string;
+  enable?: boolean;
+  svgLogo?: string;
+  imgLogo?: string;
   title?: string;
   subtitle?: string;
   loading?: boolean;
@@ -13,7 +14,7 @@ export interface HeaderConfig {
 }
 
 export interface HeaderInputConfig {
-  show?: boolean;
+  enable?: boolean;
   label?: string;
   matIcon?: string;
   svgIcon?: string;

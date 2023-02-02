@@ -3,16 +3,23 @@
 .lf-container {
   .lf-content-wrapper {
     transition: height $transition;
-    height: calc(100vh - $header-height);
+    height: 100vh;
     overflow-y: auto;
-    margin-top: $header-height;
-
-    &.lf-show-sidenav-mobile {
-      height: calc(100vh - $header-height - $sidenav-height);
-    }
 
     &.lf-show-sidenav {
       margin-left: calc($sidenav-height + (2 * $sidenav-padding));
+    }
+
+    &.lf-show-header {
+      height: calc(100vh - $header-height) !important;
+    }
+
+    &.lf-show-sidenav-mobile {
+      height: calc(100vh - $sidenav-height) !important;
+    }
+
+    &.lf-show-header-and-sidenav-mobile {
+      height: calc(100vh - $header-height - $sidenav-height) !important;
     }
 
     .lf-content {

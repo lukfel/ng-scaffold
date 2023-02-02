@@ -1,6 +1,6 @@
 import { MenuButton } from './menu-button.model';
 
 export interface SidenavConfig {
-  show?: boolean;
+  enable?: boolean;
   menuButtons?: MenuButton[]
 }

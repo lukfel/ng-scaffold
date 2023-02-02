@@ -4,7 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Documentation
 ### Introduction
-This library provides a basic scaffold for modern web and mobile applications including ui elements such as header, sidebar, drawer, footer, etc. Simply wrap your ``<router-outlet></router-outlet>`` with the ``<lf-container> ... </lf-container>`` component and pass the desired configs to personalize the scaffold.
+This library provides a basic scaffold for modern web and mobile applications including ui elements such as header, sidebar, drawer, footer, etc. Simply wrap your ``<router-outlet></router-outlet>`` with the ``<lf-container> ... </lf-container>`` element and pass the desired configs to personalize the scaffold.
+
+* Demo page: 
 
 ### Setup
 #### Installation
@@ -54,7 +56,7 @@ To enable the ui elements within the scaffold, define the corresponding input co
 ```
 
 #### Config
-Create the input config objects in your ``app.component.ts``. If a config is not defined or doesn't have ``show: true``, the corresponding ui element won't be displayed.
+Create the input config objects in your ``app.component.ts``. If a config is not defined or doesn't have ``enable: true``, the corresponding ui element won't be displayed.
 ```.ts
 import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '@lf/scaffold';
 
@@ -67,7 +69,7 @@ export class AppComponent {
   }
 
   public headerConfig: HeaderConfig = {
-    show: true,
+    enable: true,
     logo: 'lf_logo',
     title: 'Scaffold',
     subtitle: 'by Lukas Felbinger',
@@ -96,14 +98,14 @@ export class AppComponent {
       }
     ],
     inputConfig: {
-      show: true,
+      enable: true,
       label: 'Search',
       matIcon: 'search'
     }
   }
 
   public sidenavConfig: SidenavConfig = {
-    show: true,
+    enable: true,
     menuButtons: [
       {
         id: 'start',
@@ -127,13 +129,13 @@ export class AppComponent {
   }
 
   public drawerConfig: DrawerConfig = {
-    show: true,
+    enable: true,
     open: false,
     fixed: true
   }
 
   public footerConfig: FooterConfig = {
-    show: true,
+    enable: true,
     logo: 'lf_logo',
     links: [
       {
@@ -154,7 +156,7 @@ export class AppComponent {
   }
 
   public toTopButtonConfig: ToTopButtonConfig = {
-    show: true,
+    enable: true,
     tooltip: 'To top'
   }
 

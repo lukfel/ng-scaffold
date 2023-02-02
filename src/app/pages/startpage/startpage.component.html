@@ -1,7 +1,25 @@
+<h2>Container</h2>
+<p>
+  <button mat-flat-button color="accent" (click)="showContainerLoading()">
+    Loading (3 seconds)
+  </button>
+</p>
+<mat-divider></mat-divider>
+
 <h2>Header</h2>
+<p>
+  <mat-slide-toggle [(ngModel)]="scaffoldService.headerConfig.enable">Enable</mat-slide-toggle>
+</p>
 <p>
   <mat-slide-toggle [(ngModel)]="scaffoldService.headerConfig.loading">Loading</mat-slide-toggle>
 </p>
+<mat-form-field>
+  <mat-label>Image Logo (url)</mat-label>
+  <input
+    matInput
+    [(ngModel)]="scaffoldService.headerConfig.imgLogo"
+    (ngModelChange)="imgLogoChange($event)" />
+</mat-form-field>
 <mat-form-field>
   <mat-label>Titel</mat-label>
   <input matInput [(ngModel)]="scaffoldService.headerConfig.title" />
@@ -13,8 +31,8 @@
 
 <h3>Header Input</h3>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.headerConfig.inputConfig!.show">
-    Show
+  <mat-slide-toggle [(ngModel)]="scaffoldService.headerConfig.inputConfig!.enable">
+    Enable
   </mat-slide-toggle>
 </p>
 <mat-form-field>
@@ -25,13 +43,13 @@
 
 <h2>Sidenav</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.sidenavConfig.show">Show</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="scaffoldService.sidenavConfig.enable">Enable</mat-slide-toggle>
 </p>
 <mat-divider></mat-divider>
 
 <h2>Drawer</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.drawerConfig.show">Show</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="scaffoldService.drawerConfig.enable">Enable</mat-slide-toggle>
 </p>
 <p>
   <mat-slide-toggle [(ngModel)]="scaffoldService.drawerConfig.open">Open</mat-slide-toggle>
@@ -43,7 +61,7 @@
 
 <h2>Footer</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.footerConfig.show">Show</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="scaffoldService.footerConfig.enable">Enable</mat-slide-toggle>
 </p>
 <mat-form-field>
   <mat-label>Copyright</mat-label>
@@ -53,7 +71,7 @@
 
 <h2>To Top Button</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.toTopButtonConfig.show">Show</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="scaffoldService.toTopButtonConfig.enable">Enable</mat-slide-toggle>
 </p>
 <mat-form-field>
   <mat-label>Tooltip</mat-label>

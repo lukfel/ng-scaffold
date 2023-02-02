@@ -12,8 +12,8 @@ export class ScaffoldService {
   }
 
   public headerConfig: HeaderConfig = {
-    show: true,
-    logo: 'lf_logo',
+    enable: true,
+    svgLogo: 'lf_logo',
     title: 'Scaffold',
     subtitle: 'by Lukas Felbinger',
     loading: false,
@@ -41,14 +41,14 @@ export class ScaffoldService {
       }
     ],
     inputConfig: {
-      show: true,
+      enable: true,
       label: 'Search',
       matIcon: 'search'
     }
   }
 
   public sidenavConfig: SidenavConfig = {
-    show: true,
+    enable: true,
     menuButtons: [
       {
         id: 'start',
@@ -72,13 +72,13 @@ export class ScaffoldService {
   }
 
   public drawerConfig: DrawerConfig = {
-    show: true,
+    enable: true,
     open: false,
     fixed: true
   }
 
   public footerConfig: FooterConfig = {
-    show: true,
+    enable: true,
     logo: 'lf_logo',
     links: [
       {
@@ -99,7 +99,7 @@ export class ScaffoldService {
   }
 
   public toTopButtonConfig: ToTopButtonConfig = {
-    show: true,
+    enable: true,
     tooltip: 'To top'
   }
 }
