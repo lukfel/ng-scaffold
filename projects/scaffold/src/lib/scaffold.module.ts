@@ -1,5 +1,5 @@
 import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
-import { ContainerComponent } from './components/container/container.component';
+import { ScaffoldComponent } from './components/scaffold/scaffold.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -14,7 +14,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
 
 @NgModule({
   declarations: [
-    ContainerComponent,
+    ScaffoldComponent,
     HeaderComponent,
     SidenavComponent,
     DrawerComponent,
@@ -27,7 +27,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     SharedModule
   ],
   exports: [
-    ContainerComponent,
+    ScaffoldComponent,
     HeaderComponent,
     SidenavComponent,
     DrawerComponent,

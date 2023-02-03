@@ -25,6 +25,8 @@
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
     "@lf/scaffold": "file:dist/scaffold",
+    "marked": "^4.2.12",
+    "ngx-markdown": "^15.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

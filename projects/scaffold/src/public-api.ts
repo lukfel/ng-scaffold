@@ -7,7 +7,7 @@ export * from './lib/models';
 /* MODULES */
 export * from './lib/scaffold.module';
 /* COMPONENTS */
-export * from './lib/components/container/container.component';
+export * from './lib/components/scaffold/scaffold.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/drawer/drawer.component';
 export * from './lib/components/sidenav/sidenav.component';

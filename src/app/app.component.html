@@ -1,18 +1,9 @@
-<!-- container -->
-<lf-container
-  [containerConfig]="scaffoldService.containerConfig"
-  [headerConfig]="scaffoldService.headerConfig"
-  [sidenavConfig]="scaffoldService.sidenavConfig"
-  [drawerConfig]="scaffoldService.drawerConfig"
-  [footerConfig]="scaffoldService.footerConfig"
-  [toTopButtonConfig]="scaffoldService.toTopButtonConfig"
+<lf-scaffold
   (headerClickEvent)="headerClickEvent($event)"
   (headerSubmitEvent)="headerSubmitEvent($event)"
   (headerInputEvent)="headerInputEvent($event)"
   (sidenavClickEvent)="sidenavClickEvent($event)">
-  <!-- drawer content -->
   <ng-container drawerContent>
-    <!-- example drawer content -->
     <mat-nav-list>
       <div mat-subheader>Example content</div>
       <mat-list-item>
@@ -29,6 +20,5 @@
       </mat-list-item>
     </mat-nav-list>
   </ng-container>
-  <!-- main content -->
   <router-outlet></router-outlet>
-</lf-container>
+</lf-scaffold>

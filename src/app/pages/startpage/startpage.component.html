@@ -8,72 +8,67 @@
 
 <h2>Header</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.headerConfig.enable">Enable</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="headerConfig.enable">Enable</mat-slide-toggle>
 </p>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.headerConfig.loading">Loading</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="headerConfig.loading">Loading</mat-slide-toggle>
 </p>
 <mat-form-field>
   <mat-label>Image Logo (url)</mat-label>
-  <input
-    matInput
-    [(ngModel)]="scaffoldService.headerConfig.imgLogo"
-    (ngModelChange)="imgLogoChange($event)" />
+  <input matInput [(ngModel)]="headerConfig.imgLogo" (ngModelChange)="imgLogoChange($event)" />
 </mat-form-field>
 <mat-form-field>
   <mat-label>Titel</mat-label>
-  <input matInput [(ngModel)]="scaffoldService.headerConfig.title" />
+  <input matInput [(ngModel)]="headerConfig.title" />
 </mat-form-field>
 <mat-form-field>
   <mat-label>Subtitel</mat-label>
-  <input matInput [(ngModel)]="scaffoldService.headerConfig.subtitle" />
+  <input matInput [(ngModel)]="headerConfig.subtitle" />
 </mat-form-field>
 
 <h3>Header Input</h3>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.headerConfig.inputConfig!.enable">
-    Enable
-  </mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
 </p>
 <mat-form-field>
   <mat-label>Input Label</mat-label>
-  <input matInput [(ngModel)]="scaffoldService.headerConfig.inputConfig!.label" />
+  <input matInput [(ngModel)]="headerConfig.inputConfig!.label" />
 </mat-form-field>
 <mat-divider></mat-divider>
 
 <h2>Sidenav</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.sidenavConfig.enable">Enable</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="sidenavConfig.enable">Enable</mat-slide-toggle>
 </p>
 <mat-divider></mat-divider>
 
 <h2>Drawer</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.drawerConfig.enable">Enable</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
 </p>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.drawerConfig.open">Open</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="drawerConfig.open">Open</mat-slide-toggle>
 </p>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.drawerConfig.fixed">Fixed</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
 </p>
 <mat-divider></mat-divider>
 
 <h2>Footer</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.footerConfig.enable">Enable</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
 </p>
 <mat-form-field>
   <mat-label>Copyright</mat-label>
-  <input matInput [(ngModel)]="scaffoldService.footerConfig.copyright" />
+  <input matInput [(ngModel)]="footerConfig.copyright" />
 </mat-form-field>
 <mat-divider></mat-divider>
 
 <h2>To Top Button</h2>
 <p>
-  <mat-slide-toggle [(ngModel)]="scaffoldService.toTopButtonConfig.enable">Enable</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="toTopButtonConfig.enable">Enable</mat-slide-toggle>
 </p>
 <mat-form-field>
   <mat-label>Tooltip</mat-label>
-  <input matInput [(ngModel)]="scaffoldService.toTopButtonConfig.tooltip" />
+  <input matInput [(ngModel)]="toTopButtonConfig.tooltip" />
 </mat-form-field>

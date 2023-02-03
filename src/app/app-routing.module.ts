@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'start', loadChildren: () => import('./pages/startpage/startpage.module').then(m => m.StartpageModule)
   },
   {
-    path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule)
+    path: 'documentation', loadChildren: () => import('./pages/documentation/documentation.module').then(m => m.DocumentationModule)
   },
   {
     path: '**', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)

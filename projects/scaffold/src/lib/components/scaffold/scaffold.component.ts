@@ -1,22 +1,22 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ContainerConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
-import { BreakpointService, RouterService } from '../../services';
+import { ScaffoldConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
+import { BreakpointService, RouterService, ScaffoldService } from '../../services';
 
 @Component({
-  selector: 'lf-container',
-  templateUrl: './container.component.html',
-  styleUrls: ['./container.component.scss']
+  selector: 'lf-scaffold',
+  templateUrl: './scaffold.component.html',
+  styleUrls: ['./scaffold.component.scss']
 })
-export class ContainerComponent implements OnInit, OnDestroy {
+export class ScaffoldComponent implements OnInit, OnDestroy {
 
-  @Input() public containerConfig: ContainerConfig = {};
-  @Input() public headerConfig: HeaderConfig = {};
-  @Input() public sidenavConfig: SidenavConfig = {};
-  @Input() public drawerConfig: DrawerConfig = {};
-  @Input() public footerConfig: FooterConfig = {};
-  @Input() public toTopButtonConfig: ToTopButtonConfig = {};
+  public scaffoldConfig: ScaffoldConfig = {};
+  public headerConfig: HeaderConfig = {};
+  public sidenavConfig: SidenavConfig = {};
+  public drawerConfig: DrawerConfig = {};
+  public footerConfig: FooterConfig = {};
+  public toTopButtonConfig: ToTopButtonConfig = {};
 
   @Output() public headerClickEvent = new EventEmitter<string>();
   @Output() public headerSubmitEvent = new EventEmitter<string>();
@@ -30,10 +30,21 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription = new Subscription;
 
-  constructor(private breakpointService: BreakpointService,
+  constructor(private scaffoldService: ScaffoldService,
+    private breakpointService: BreakpointService,
               private routerService: RouterService) { }
 
   ngOnInit(): void {
+    // Listen for config changes
+    this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
+      this.scaffoldConfig = scaffoldConfig;
+      this.headerConfig = scaffoldConfig.headerConfig || {};
+      this.sidenavConfig = scaffoldConfig.sidenavConfig || {};
+      this.drawerConfig = scaffoldConfig.drawerConfig || {};
+      this.footerConfig = scaffoldConfig.footerConfig || {};
+      this.toTopButtonConfig = scaffoldConfig.toTopButtonConfig || {};
+     }));
+
     // Listen for breakpoint changes
     this._subscription.add(this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
       if (result.breakpoints[Breakpoints.XSmall]) {
