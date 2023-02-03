@@ -67,6 +67,7 @@ MIT
 MIT
 
 @lukfel/scaffold
+MIT
 
 marked
 MIT
