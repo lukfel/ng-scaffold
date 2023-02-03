@@ -77,7 +77,7 @@ export class AppComponent {
     // DrawerConfig
     drawerConfig: {
       enable: true,
-      open: false,
+      open: true,
       fixed: true
     },
     // FooterConfig

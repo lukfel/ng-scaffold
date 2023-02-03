@@ -1,6 +1,6 @@
 {
   "name": "@lukfel/scaffold",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This Angular library provides a basic scaffold for mordern web and mobile apps",
   "author": {
     "name": "Lukas Felbinger",
