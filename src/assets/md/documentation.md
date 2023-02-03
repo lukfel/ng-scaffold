@@ -2,7 +2,7 @@
 ## Introduction
 This library provides a basic scaffold for modern web and mobile applications including ui elements such as header, sidebar, drawer, footer, to-top button etc. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig``.
 
-* Demo @ https://lukfel.github.io/scaffold/start
+* Demo https://lukfel.github.io/scaffold
 
 ## Setup
 ### Installation

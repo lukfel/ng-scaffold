@@ -1,6 +1,6 @@
 {
   "name": "scaffold-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +10,7 @@
     "lint": "ng lint --fix",
     "build-lib": "ng build scaffold --configuration production",
     "watch-lib": "ng build scaffold --watch --configuration development",
-    "deploy": "ng deploy --project scaffold-app --base-href=/scaffold/ --repo=https://github.com/lukfel/scaffold.git"
+    "deploy": "npm run build-lib && ng deploy --project scaffold-app --base-href=/scaffold/ --repo=https://github.com/lukfel/scaffold.git"
   },
   "private": true,
   "dependencies": {

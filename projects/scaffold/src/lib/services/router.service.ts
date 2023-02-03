@@ -26,7 +26,7 @@ export class RouterService {
       if (event instanceof RouteConfigLoadStart) { asyncLoadCount++; }
       if (event instanceof RouteConfigLoadEnd) { asyncLoadCount--; }
       if (event instanceof NavigationEnd) {
-        const url: string = event.url;
+        const url: string = event.urlAfterRedirects;
         this.logger.log(`current route: ${url}`);
 
         const routeHistory: string[] = this._routeHistory$.value;

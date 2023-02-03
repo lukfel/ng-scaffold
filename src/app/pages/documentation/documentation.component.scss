@@ -1,0 +1,27 @@
+.lf-documentation {
+  max-width: 960px;
+  margin: auto;
+
+  ::ng-deep {
+
+    a[href] {
+      color: var(--color-primary);
+      text-decoration: unset;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    p, li {
+      code {
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        color: white;
+        background-color: #dbdbdb4d;
+        border-radius: 4px;
+        padding: 2px 4px;
+        white-space: nowrap;
+      }
+    }
+  }
+}
