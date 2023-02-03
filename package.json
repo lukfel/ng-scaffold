@@ -9,7 +9,8 @@
     "test": "ng test --browsers ChromeHeadless --code-coverage true --watch false",
     "lint": "ng lint --fix",
     "build-lib": "ng build scaffold --configuration production",
-    "watch-lib": "ng build scaffold --watch --configuration development"
+    "watch-lib": "ng build scaffold --watch --configuration development",
+    "deploy": "ng deploy --project scaffold-app --base-href=/scaffold/ --repo=https://github.com/lukfel/scaffold.git"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +41,7 @@
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.48.1",
     "@typescript-eslint/parser": "5.48.1",
+    "angular-cli-ghpages": "^1.0.5",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
