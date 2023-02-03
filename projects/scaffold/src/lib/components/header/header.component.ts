@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HeaderConfig } from '../../models';
 
 @Component({
@@ -6,7 +6,7 @@ import { HeaderConfig } from '../../models';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   @Input() public headerConfig: HeaderConfig = {};
   @Input() public isMobile: boolean = false;
@@ -18,6 +18,13 @@ export class HeaderComponent {
   @Output() public headerInputEvent = new EventEmitter<string>();
 
   public inputValue: string = '';
+
+  ngOnInit(): void {
+    // Avoid initializing the header with an open input field on mobile
+    if(this.isMobile && this.headerConfig?.inputConfig?.enable) {
+      this.headerConfig.inputConfig.enable = false;
+    }
+  }
 
   public buttonClicked(id?: string): void {
     if (!id) {

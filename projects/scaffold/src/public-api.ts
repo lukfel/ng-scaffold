@@ -14,7 +14,6 @@ export * from './lib/components/sidenav/sidenav.component';
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/to-top-button/to-top-button.component';
 export * from './lib/components/loading-overlay/loading-overlay.component';
-
 export * from './lib/components/dialogs/confirm-dialog/confirm-dialog.component';
 /* SERVICES */
 export * from './lib/services';
