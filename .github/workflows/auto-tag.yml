@@ -1,4 +1,4 @@
-name: Tag new npm package releases
+name: auto-tag
 on:
   push:
     branches:
