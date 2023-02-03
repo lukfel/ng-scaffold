@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { DialogService, Logger, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lf/scaffold';
+import { DialogService, Logger, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/scaffold';
 
 @Component({
   selector: 'app-root',

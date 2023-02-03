@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, SidenavConfig, ToTopButtonConfig } from '@lf/scaffold';
+import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, SidenavConfig, ToTopButtonConfig } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
 @Component({

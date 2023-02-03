@@ -10,13 +10,13 @@ This library provides a basic scaffold for modern web and mobile applications in
 
 ## Setup
 ### Installation
-Install the npm package with ``npm install @lf/scaffold``.
+Install the npm package with ``npm install @lukfel/scaffold``.
 
 ### Module
 Import the module ``ScaffoldModule`` in your ``app.module.ts``.
 * Hint: The library has a built in logger service ``Logger`` which logs certain events if a ``LibraryConfig`` is passed and the property ``production`` is set to ``false``.
 ```ts
-import { ScaffoldModule } from '@lf/scaffold';
+import { ScaffoldModule } from '@lukfel/scaffold';
 import { environment as env } from 'src/environments/environment';
 
 imports: [
@@ -27,10 +27,10 @@ imports: [
 ```
 
 ### Style
-Import the styles ``@lf/scaffold/styles`` in your ``styles.scss``.
+Import the styles ``@lukfel/scaffold/styles`` in your ``styles.scss``.
 * Hint: You can override styles and classes after the import.
 ```scss
-@use "@lf/scaffold/styles" as lf;
+@use "@lukfel/scaffold/styles" as lf;
 ```
 
 ### Template
@@ -45,7 +45,7 @@ Add the container ``lf-scaffold`` to your ``app.component.html``.
 Import the ``ScaffoldService`` in your ``app.component.ts``.
 * Hint: The ``ScaffoldService`` is the global store of the library. You can subscribe to its `Observable` to detect changes.
 ```ts
-import { ScaffoldService } from '@lf/scaffold';
+import { ScaffoldService } from '@lukfel/scaffold';
 
 export class AppComponent {
 
@@ -57,7 +57,7 @@ export class AppComponent {
 Create the ``ScaffoldConfig`` object in your ``app.component.ts`` and store it in the global ``ScaffoldService``.
 * Hint: If a sub config (e.g. ``headerConfig``) is not defined within the ``ScaffoldConfig`` or doesn't have the property ``enable: true``, the corresponding ui element won't be displayed.
 ```ts
-import { ScaffoldService, ScaffoldConfig } from '@lf/scaffold';
+import { ScaffoldService, ScaffoldConfig } from '@lukfel/scaffold';
 
 export class AppComponent {
 

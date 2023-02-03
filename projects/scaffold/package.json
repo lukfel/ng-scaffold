@@ -1,6 +1,15 @@
 {
-  "name": "@lf/scaffold",
+  "name": "@lukfel/scaffold",
   "version": "1.0.1",
+  "description": "This Angular library provides a basic scaffold for mordern web and mobile apps",
+  "author": {
+    "name": "Lukas Felbinger",
+    "url": "https://www.lukasfelbinger.at"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukfel/scaffold"
+  },
   "peerDependencies": {
     "@angular/common": "^15.1.0",
     "@angular/core": "^15.1.0",
