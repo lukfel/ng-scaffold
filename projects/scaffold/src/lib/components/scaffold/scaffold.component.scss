@@ -25,6 +25,10 @@
     .lf-content {
       min-height: 100%;
       padding: $content-padding;
+
+      &.lf-content-mobile {
+        padding: $content-padding-mobile !important;
+      }
     }
   }
 }

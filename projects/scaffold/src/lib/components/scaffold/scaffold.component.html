@@ -30,7 +30,7 @@
     <lf-drawer [drawerConfig]="drawerConfig" [isMobile]="isMobile">
       <!-- drawer content -->
       <ng-content select="[drawerContent]" drawerContent></ng-content>
-      <div class="lf-content">
+      <div class="lf-content" [class.lf-content-mobile]="isMobile">
         <!-- main content -->
         <ng-content></ng-content>
       </div>
