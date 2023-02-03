@@ -24,7 +24,7 @@ imports: [
 
 ### Style
 Import the styles ``@lukfel/scaffold/styles`` in your ``styles.scss``.
-* Hint: You can override styles and classes after the import.
+* Hint: The styles also include the material icons and roboto font.
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
 ```
@@ -99,6 +99,7 @@ export class AppComponent {
     // SidenavConfig
     sidenavConfig: {
       enable: true,
+      showAllLabels: true,
       menuButtons: [
         {
           id: 'start',
