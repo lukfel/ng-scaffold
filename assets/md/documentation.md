@@ -61,6 +61,7 @@ export class AppComponent {
   public scaffoldConfig: ScaffoldConfig = {
     // ScaffoldConfig
     loading: false,
+    scrollPositionRestoration: true,
     // HeaderConfig
     headerConfig: {
       enable: true,
@@ -97,8 +98,8 @@ export class AppComponent {
         matIcon: 'search'
       }
     },
-    // SidenavConfig
-    sidenavConfig: {
+    // NavbarConfig
+    navbarConfig: {
       enable: true,
       showAllLabels: true,
       menuButtons: [
@@ -168,7 +169,7 @@ To listen to scaffold user events, add the output events and define the correspo
   (headerClickEvent)="headerClickEvent($event)"
   (headerSubmitEvent)="headerSubmitEvent($event)"
   (headerInputEvent)="headerInputEvent($event)"
-  (sidenavClickEvent)="sidenavClickEvent($event)">
+  (navbarClickEvent)="navbarClickEvent($event)">
   <!-- drawer content (content that is placed in the left drawer if enabled) -->
   <ng-container drawerContent></ng-container>
   <!-- main content -->
@@ -192,8 +193,8 @@ public headerInputEvent(value: string): void {
   ...
 }
 
-// Listen to sidenav click events (sidenav menu buttons - click)
-public sidenavClickEvent(id: string): void {
+// Listen to navbar click events (navbar menu buttons - click)
+public navbarClickEvent(id: string): void {
   ...
 }
 ```
