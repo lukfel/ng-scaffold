@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ScaffoldConfig, DrawerConfig, FooterConfig, HeaderConfig, SidenavConfig, ToTopButtonConfig } from '../../models';
+import { ScaffoldConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ToTopButtonConfig } from '../../models';
 import { BreakpointService, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -11,9 +11,11 @@ import { BreakpointService, RouterService, ScaffoldService } from '../../service
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
+  @ViewChild('scrollElement') public scrollElement: ElementRef;
+
   public scaffoldConfig: ScaffoldConfig = {};
   public headerConfig: HeaderConfig = {};
-  public sidenavConfig: SidenavConfig = {};
+  public navbarConfig: NavbarConfig = {};
   public drawerConfig: DrawerConfig = {};
   public footerConfig: FooterConfig = {};
   public toTopButtonConfig: ToTopButtonConfig = {};
@@ -21,7 +23,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   @Output() public headerClickEvent = new EventEmitter<string>();
   @Output() public headerSubmitEvent = new EventEmitter<string>();
   @Output() public headerInputEvent = new EventEmitter<string>();
-  @Output() public sidenavClickEvent = new EventEmitter<string>();
+  @Output() public navbarClickEvent = new EventEmitter<string>();
 
   public routeHistory: string[] = [];
   public currentRoute: string;
@@ -31,19 +33,19 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   private _subscription: Subscription = new Subscription;
 
   constructor(private scaffoldService: ScaffoldService,
-              private breakpointService: BreakpointService,
-              private routerService: RouterService) { }
+    private breakpointService: BreakpointService,
+    private routerService: RouterService) { }
 
   ngOnInit(): void {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = scaffoldConfig.headerConfig || {};
-      this.sidenavConfig = scaffoldConfig.sidenavConfig || {};
+      this.navbarConfig = scaffoldConfig.navbarConfig || {};
       this.drawerConfig = scaffoldConfig.drawerConfig || {};
       this.footerConfig = scaffoldConfig.footerConfig || {};
       this.toTopButtonConfig = scaffoldConfig.toTopButtonConfig || {};
-     }));
+    }));
 
     // Listen for breakpoint changes
     this._subscription.add(this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
@@ -60,9 +62,13 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for route changes
     this._subscription.add(this.routerService.routeHistory$.subscribe((routeHistory: string[]) => {
-      if(routeHistory) {
+      if (routeHistory) {
         this.routeHistory = routeHistory;
         this.currentRoute = this.routeHistory[this.routeHistory.length - 1];
+      }
+
+      if(this.scrollElement && this.scaffoldConfig?.scrollPositionRestoration) {
+        this.scrollElement.nativeElement.scrollTop = 0;
       }
     }));
 
@@ -88,8 +94,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this.headerInputEvent.emit(value);
   }
 
-  public sidenavButtonClicked(id: string): void {
-    this.sidenavClickEvent.emit(id);
+  public navbarButtonClicked(id: string): void {
+    this.navbarClickEvent.emit(id);
   }
 
 }

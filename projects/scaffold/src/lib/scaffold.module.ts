@@ -5,7 +5,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { ToTopButtonComponent } from './components/to-top-button/to-top-button.component';
 import { LibraryConfig } from './models';
 import { SharedModule } from './shared/shared.module';
@@ -16,7 +16,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
   declarations: [
     ScaffoldComponent,
     HeaderComponent,
-    SidenavComponent,
+    NavbarComponent,
     DrawerComponent,
     FooterComponent,
     ToTopButtonComponent,
@@ -29,7 +29,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
   exports: [
     ScaffoldComponent,
     HeaderComponent,
-    SidenavComponent,
+    NavbarComponent,
     DrawerComponent,
     FooterComponent,
     ToTopButtonComponent,

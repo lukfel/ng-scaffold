@@ -1,7 +1,12 @@
-mat-divider {
-  margin: 40px 0;
-}
+.lf-startpage {
+  max-width: 960px;
+  margin: auto;
 
-mat-form-field {
-  margin: 0 8px 8px 0;
+  mat-divider {
+    margin: 48px 0;
+  }
+
+  mat-form-field {
+    margin: 0 8px 8px 0;
+  }
 }

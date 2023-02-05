@@ -1,31 +1,31 @@
 @import '../../../../styles/variables';
 
-.lf-sidenav {
-  z-index: $sidenav-z-index;
+.lf-navbar {
+  z-index: $navbar-z-index;
   position: fixed;
   left: 0;
   top: 0;
   height: 100vh;
-  padding: calc($header-height + 16px) $sidenav-padding 0 $sidenav-padding;
+  padding: calc($header-height + 16px) $navbar-padding 0 $navbar-padding;
   border-right: solid 1px rgba(0, 0, 0, 0.12);
 
-  .lf-sidenav-items {
+  .lf-navbar-items {
     display: flex;
     flex-flow: column;
     align-items: center;
   }
 }
 
-.lf-sidenav-mobile {
-  z-index: $sidenav-z-index;
+.lf-navbar-mobile {
+  z-index: $navbar-z-index;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100vw;
-  padding: 0 $sidenav-padding;
+  padding: 0 $navbar-padding;
   border-top: solid 1px rgba(0, 0, 0, 0.12);
 
-  .lf-sidenav-mobile-items {
+  .lf-navbar-mobile-items {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -33,28 +33,28 @@
   }
 }
 
-.lf-sidenav-item {
-  width: $sidenav-width;
-  height: $sidenav-width;
+.lf-navbar-item {
+  width: $navbar-width;
+  height: $navbar-width;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-flow: column;
 
-  .lf-sidenav-item-icon {
-    width: calc($sidenav-width / 3);
-    height: calc($sidenav-width / 3);
+  .lf-navbar-item-icon {
+    width: calc($navbar-width / 3);
+    height: calc($navbar-width / 3);
     overflow: visible !important;
   }
 
-  .lf-sidenav-item-label {
-    max-width: $sidenav-width;
+  .lf-navbar-item-label {
+    max-width: $navbar-width;
     white-space: nowrap !important;
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: none;
     vertical-align: top;
-    font-size: $sidenav-item-label-font-size;
+    font-size: $navbar-item-label-font-size;
     line-height: 18px;
   }
 }

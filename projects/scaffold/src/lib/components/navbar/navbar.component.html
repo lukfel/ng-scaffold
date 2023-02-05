@@ -1,21 +1,21 @@
 <div
-  *ngIf="sidenavConfig?.enable"
+  *ngIf="navbarConfig?.enable"
   class="mat-app-background"
-  [class.lf-sidenav]="!isMobile"
-  [class.lf-sidenav-mobile]="isMobile">
+  [class.lf-navbar]="!isMobile"
+  [class.lf-navbar-mobile]="isMobile">
   <!-- items -->
-  <div [class.lf-sidenav-items]="!isMobile" [class.lf-sidenav-mobile-items]="isMobile">
+  <div [class.lf-navbar-items]="!isMobile" [class.lf-navbar-mobile-items]="isMobile">
     <!-- item -->
     <button
-      *ngFor="let button of sidenavConfig.menuButtons"
+      *ngFor="let button of navbarConfig.menuButtons"
       mat-icon-button
       [color]="isActive(button.id) ? 'primary' : null"
-      class="lf-sidenav-item"
+      class="lf-navbar-item"
       (click)="buttonClicked(button.id)">
       <!-- mat icon -->
       <mat-icon
         *ngIf="button?.matIcon; else svgIcon"
-        class="lf-sidenav-item-icon"
+        class="lf-navbar-item-icon"
         [class.material-icons-outlined]="button.outlineIcon">
         {{ button.matIcon }}
       </mat-icon>
@@ -23,12 +23,12 @@
       <ng-template #svgIcon>
         <mat-icon
           *ngIf="button?.svgIcon"
-          class="lf-sidenav-item-icon"
+          class="lf-navbar-item-icon"
           [svgIcon]="button.svgIcon!"></mat-icon>
       </ng-template>
       <!-- label -->
-      <span *ngIf="button?.label" class="lf-sidenav-item-label">
-        {{ isActive(button.id) || sidenavConfig?.showAllLabels ? button.label : "&nbsp;" }}
+      <span *ngIf="button?.label" class="lf-navbar-item-label">
+        {{ isActive(button.id) || navbarConfig?.showAllLabels ? button.label : "&nbsp;" }}
       </span>
     </button>
   </div>

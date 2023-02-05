@@ -10,20 +10,20 @@
     (headerClickEvent)="headerButtonClicked($event)"
     (headerSubmitEvent)="headerInputSubmitted($event)"
     (headerInputEvent)="headerInputChanged($event)"></lf-header>
-  <!-- sidenav -->
-  <lf-sidenav
-    [sidenavConfig]="sidenavConfig"
+  <!-- navbar -->
+  <lf-navbar
+    [navbarConfig]="navbarConfig"
     [isMobile]="isMobile"
     [currentRoute]="currentRoute"
-    (sidenavClickEvent)="sidenavButtonClicked($event)"></lf-sidenav>
+    (navbarClickEvent)="navbarButtonClicked($event)"></lf-navbar>
   <!-- content wrapper -->
   <div
     class="lf-content-wrapper"
-    [class.lf-show-sidenav]="sidenavConfig?.enable && !isMobile"
-    [class.lf-show-header]="headerConfig?.enable && !(sidenavConfig?.enable && isMobile)"
-    [class.lf-show-sidenav-mobile]="sidenavConfig?.enable && isMobile && !headerConfig?.enable"
-    [class.lf-show-header-and-sidenav-mobile]="
-      headerConfig?.enable && sidenavConfig?.enable && isMobile
+    [class.lf-show-navbar]="navbarConfig?.enable && !isMobile"
+    [class.lf-show-header]="headerConfig?.enable && !(navbarConfig?.enable && isMobile)"
+    [class.lf-show-navbar-mobile]="navbarConfig?.enable && isMobile && !headerConfig?.enable"
+    [class.lf-show-header-and-navbar-mobile]="
+      headerConfig?.enable && navbarConfig?.enable && isMobile
     "
     #scrollElement>
     <!-- drawer -->
@@ -42,5 +42,5 @@
   <lf-to-top-button
     [toTopButtonConfig]="toTopButtonConfig"
     [scrollElement]="scrollElement"
-    [moveUp]="isMobile && sidenavConfig?.enable!"></lf-to-top-button>
+    [moveUp]="isMobile && navbarConfig?.enable!"></lf-to-top-button>
 </div>

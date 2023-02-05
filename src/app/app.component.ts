@@ -14,6 +14,7 @@ export class AppComponent {
   public scaffoldConfig: ScaffoldConfig = {
     // ScaffoldConfig
     loading: false,
+    scrollPositionRestoration: true,
     // HeaderConfig
     headerConfig: {
       enable: true,
@@ -50,8 +51,8 @@ export class AppComponent {
         matIcon: 'search'
       }
     },
-    // SidenavConfig
-    sidenavConfig: {
+    // NavbarConfig
+    navbarConfig: {
       enable: true,
       showAllLabels: true,
       menuButtons: [
@@ -150,8 +151,8 @@ export class AppComponent {
     this.logger.log(value);
   }
 
-  // Listen to sidenav click events
-  public sidenavClickEvent(id: string): void {
+  // Listen to navbar click events
+  public navbarClickEvent(id: string): void {
     this.router.navigate([id]);
   }
 

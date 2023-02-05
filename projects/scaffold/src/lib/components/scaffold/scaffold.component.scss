@@ -6,20 +6,20 @@
     height: 100vh;
     overflow-y: auto;
 
-    &.lf-show-sidenav {
-      margin-left: calc($sidenav-height + (2 * $sidenav-padding));
+    &.lf-show-navbar {
+      margin-left: calc($navbar-height + (2 * $navbar-padding));
     }
 
     &.lf-show-header {
       height: calc(100vh - $header-height) !important;
     }
 
-    &.lf-show-sidenav-mobile {
-      height: calc(100vh - $sidenav-height) !important;
+    &.lf-show-navbar-mobile {
+      height: calc(100vh - $navbar-height) !important;
     }
 
-    &.lf-show-header-and-sidenav-mobile {
-      height: calc(100vh - $header-height - $sidenav-height) !important;
+    &.lf-show-header-and-navbar-mobile {
+      height: calc(100vh - $header-height - $navbar-height) !important;
     }
 
     .lf-content {

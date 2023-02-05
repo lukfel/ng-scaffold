@@ -1,25 +1,25 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { SidenavConfig } from '../../models';
+import { NavbarConfig } from '../../models';
 
 @Component({
-  selector: 'lf-sidenav',
-  templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  selector: 'lf-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
-export class SidenavComponent {
+export class NavbarComponent {
 
-  @Input() public sidenavConfig: SidenavConfig = {};
+  @Input() public navbarConfig: NavbarConfig = {};
   @Input() public isMobile: boolean = false;
   @Input() public currentRoute: string;
 
-  @Output() public sidenavClickEvent = new EventEmitter<string>();
+  @Output() public navbarClickEvent = new EventEmitter<string>();
 
   public buttonClicked(id: string): void {
     if(!id) {
       return;
     }
 
-    this.sidenavClickEvent.emit(id);
+    this.navbarClickEvent.emit(id);
   }
 
   public isActive(id: string): boolean {

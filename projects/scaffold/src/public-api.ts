@@ -10,7 +10,7 @@ export * from './lib/scaffold.module';
 export * from './lib/components/scaffold/scaffold.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/drawer/drawer.component';
-export * from './lib/components/sidenav/sidenav.component';
+export * from './lib/components/navbar/navbar.component';
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/to-top-button/to-top-button.component';
 export * from './lib/components/loading-overlay/loading-overlay.component';

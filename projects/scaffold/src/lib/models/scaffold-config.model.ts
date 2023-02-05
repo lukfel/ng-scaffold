@@ -1,13 +1,14 @@
 import { DrawerConfig } from './drawer-config.model';
 import { FooterConfig } from './footer-config.model';
 import { HeaderConfig } from './header-config.model';
-import { SidenavConfig } from './sidenav-config.model';
+import { NavbarConfig } from './navbar-config.model';
 import { ToTopButtonConfig } from './to-top-button-config.model';
 
 export interface ScaffoldConfig {
   loading?: boolean;
+  scrollPositionRestoration?: boolean;
   headerConfig?: HeaderConfig;
-  sidenavConfig?: SidenavConfig;
+  navbarConfig?: NavbarConfig;
   drawerConfig?: DrawerConfig;
   footerConfig?: FooterConfig;
   toTopButtonConfig?: ToTopButtonConfig;

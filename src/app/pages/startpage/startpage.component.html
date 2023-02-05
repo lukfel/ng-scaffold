@@ -1,82 +1,109 @@
-<h2>Container</h2>
-<p>
-  <button mat-flat-button color="accent" (click)="showContainerLoading()">
-    Loading (3 seconds)
-  </button>
-</p>
-<mat-divider></mat-divider>
+<div class="lf-startpage">
+  <h1>Demo</h1>
+  <p>This is a simple demo application that lets you play around with the scaffold elements.</p>
+  <mat-divider></mat-divider>
 
-<h2>Header</h2>
-<!-- <p>
+  <h2>Scaffold</h2>
+  <p>
+    The scaffold is the global wrapper element that controls all ui elements based on its config.
+  </p>
+  <p>
+    <button mat-flat-button color="accent" (click)="showContainerLoading()">
+      Loading (3 seconds)
+    </button>
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="scaffoldConfig.scrollPositionRestoration">
+      Restore scroll position after navigation
+    </mat-slide-toggle>
+  </p>
+  <mat-divider></mat-divider>
+
+  <h2>Header</h2>
+  <p>
+    The header is a responsive mat-toolbar with a customizable logo, title, subtitle, menu-buttons
+    and an input field.
+  </p>
+  <!-- <p>
   <mat-slide-toggle [(ngModel)]="headerConfig.enable">Enable</mat-slide-toggle>
 </p> -->
-<p>
-  <mat-slide-toggle [(ngModel)]="headerConfig.loading">Loading</mat-slide-toggle>
-</p>
-<p>
-  <mat-slide-toggle [(ngModel)]="headerConfig.showRouteLoading">
-    Show navigation loading
-  </mat-slide-toggle>
-</p>
-<mat-form-field>
-  <mat-label>Image Logo (url)</mat-label>
-  <input matInput [(ngModel)]="headerConfig.imgLogo" (ngModelChange)="imgLogoChange($event)" />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Titel</mat-label>
-  <input matInput [(ngModel)]="headerConfig.title" />
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Subtitel</mat-label>
-  <input matInput [(ngModel)]="headerConfig.subtitle" />
-</mat-form-field>
+  <p>
+    <mat-slide-toggle [(ngModel)]="headerConfig.loading">Loading</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="headerConfig.showRouteLoading">
+      Show navigation loading
+    </mat-slide-toggle>
+  </p>
+  <mat-form-field>
+    <mat-label>Image Logo (url)</mat-label>
+    <input matInput [(ngModel)]="headerConfig.imgLogo" (ngModelChange)="imgLogoChange($event)" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Titel</mat-label>
+    <input matInput [(ngModel)]="headerConfig.title" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Subtitel</mat-label>
+    <input matInput [(ngModel)]="headerConfig.subtitle" />
+  </mat-form-field>
 
-<h3>Header Input</h3>
-<p>
-  <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
-</p>
-<mat-form-field>
-  <mat-label>Input Label</mat-label>
-  <input matInput [(ngModel)]="headerConfig.inputConfig!.label" />
-</mat-form-field>
-<mat-divider></mat-divider>
+  <h3>Header Input</h3>
+  <p>
+    <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
+  </p>
+  <mat-form-field>
+    <mat-label>Input Label</mat-label>
+    <input matInput [(ngModel)]="headerConfig.inputConfig!.label" />
+  </mat-form-field>
+  <mat-divider></mat-divider>
 
-<h2>Sidenav</h2>
-<p>
-  <mat-slide-toggle [(ngModel)]="sidenavConfig.enable">Enable</mat-slide-toggle>
-</p>
-<p>
-  <mat-slide-toggle [(ngModel)]="sidenavConfig.showAllLabels">Show all labels</mat-slide-toggle>
-</p>
-<mat-divider></mat-divider>
+  <h2>Navbar</h2>
+  <p>
+    The navbar is a fixed navigation element that is positioned vertically left on desktop and moves
+    horizontally to the bottom on mobile.
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="navbarConfig.enable">Enable</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="navbarConfig.showAllLabels">Show all labels</mat-slide-toggle>
+  </p>
+  <mat-divider></mat-divider>
 
-<h2>Drawer</h2>
-<p>
-  <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
-</p>
-<p>
-  <mat-slide-toggle [(ngModel)]="drawerConfig.open">Open</mat-slide-toggle>
-</p>
-<p>
-  <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
-</p>
-<mat-divider></mat-divider>
+  <h2>Drawer</h2>
+  <p>
+    The drawer is an empty mat-sidenav that let's you place custom html templates as its content.
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="drawerConfig.open">Open</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
+  </p>
+  <mat-divider></mat-divider>
 
-<h2>Footer</h2>
-<p>
-  <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
-</p>
-<mat-form-field>
-  <mat-label>Copyright</mat-label>
-  <input matInput [(ngModel)]="footerConfig.copyright" />
-</mat-form-field>
-<mat-divider></mat-divider>
+  <h2>Footer</h2>
+  <p>The footer is a bottom element with a logo, navigation links and the copyright.</p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
+  </p>
+  <mat-form-field>
+    <mat-label>Copyright</mat-label>
+    <input matInput [(ngModel)]="footerConfig.copyright" />
+  </mat-form-field>
+  <mat-divider></mat-divider>
 
-<h2>To Top Button</h2>
-<p>
-  <mat-slide-toggle [(ngModel)]="toTopButtonConfig.enable">Enable</mat-slide-toggle>
-</p>
-<mat-form-field>
-  <mat-label>Tooltip</mat-label>
-  <input matInput [(ngModel)]="toTopButtonConfig.tooltip" />
-</mat-form-field>
+  <h2>To-Top Button</h2>
+  <p>The to-top button is a floating action button to scroll back to the top of the application.</p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="toTopButtonConfig.enable">Enable</mat-slide-toggle>
+  </p>
+  <mat-form-field>
+    <mat-label>Tooltip</mat-label>
+    <input matInput [(ngModel)]="toTopButtonConfig.tooltip" />
+  </mat-form-field>
+</div>

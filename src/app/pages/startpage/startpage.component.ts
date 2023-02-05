@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, SidenavConfig, ToTopButtonConfig } from '@lukfel/scaffold';
+import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, NavbarConfig, ToTopButtonConfig } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
   public scaffoldConfig: ScaffoldConfig = {};
   public headerConfig: HeaderConfig = {};
-  public sidenavConfig: SidenavConfig = {};
+  public navbarConfig: NavbarConfig = {};
   public drawerConfig: DrawerConfig = {};
   public footerConfig: FooterConfig = {};
   public toTopButtonConfig: ToTopButtonConfig = {};
@@ -25,7 +25,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = scaffoldConfig.headerConfig || {};
-      this.sidenavConfig = scaffoldConfig.sidenavConfig || {};
+      this.navbarConfig = scaffoldConfig.navbarConfig || {};
       this.drawerConfig = scaffoldConfig.drawerConfig || {};
       this.footerConfig = scaffoldConfig.footerConfig || {};
       this.toTopButtonConfig = scaffoldConfig.toTopButtonConfig || {};
