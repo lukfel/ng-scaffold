@@ -1,0 +1,45 @@
+@import '../../../../styles/variables';
+
+.lf-footer {
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  min-height: $footer-height;
+  padding: 16px;
+  border-radius: 0;
+  border-top: solid 1px rgba(0, 0, 0, 0.12);
+
+  .lf-footer-logo {
+    width: $footer-logo-size;
+    height: $footer-logo-size;
+    margin: 0 0 16px 0;
+  }
+
+  .lf-footer-links {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 16px 0;
+
+    .lf-footer-link {
+      &:not(:last-child) {
+        margin-right: 8px;
+      }
+
+      a {
+        text-decoration: none;
+        color: unset;
+        font-size: 12px;
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+
+  .lf-footer-copyright {
+    font-size: 12px;
+  }
+}

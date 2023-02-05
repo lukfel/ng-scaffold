@@ -1,0 +1,35 @@
+@import '../../../../styles/variables';
+
+.lf-scaffold {
+  .lf-content-wrapper {
+    transition: height $transition;
+    height: 100vh;
+    overflow-y: auto;
+
+    &.lf-show-sidenav {
+      margin-left: calc($sidenav-height + (2 * $sidenav-padding));
+    }
+
+    &.lf-show-header {
+      height: calc(100vh - $header-height) !important;
+    }
+
+    &.lf-show-sidenav-mobile {
+      height: calc(100vh - $sidenav-height) !important;
+    }
+
+    &.lf-show-header-and-sidenav-mobile {
+      height: calc(100vh - $header-height - $sidenav-height) !important;
+    }
+
+    .lf-content {
+      min-height: 100%;
+      padding: $content-padding;
+
+      &.lf-content-mobile {
+        padding: $content-padding-mobile !important;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,8 @@
+@import '../../../../styles/variables';
+
+.lf-to-top-button {
+  position: fixed;
+  transition: bottom $transition;
+  z-index: $to-top-button-z-index;
+  right: 24px;
+}

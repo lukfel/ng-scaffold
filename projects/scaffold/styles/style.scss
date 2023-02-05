@@ -1,0 +1,45 @@
+@import './theme.scss';
+@import './fonts/material-icons.scss';
+@import './fonts/roboto-font.scss';
+
+html {
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+button span {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 7px;
+  background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a0a0a0;
+  border: none;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #909090;
+  }
+
+  &:active {
+    background-color: #808080;
+  }
+}

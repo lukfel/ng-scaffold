@@ -1,0 +1,35 @@
+<div
+  *ngIf="sidenavConfig?.enable"
+  class="mat-app-background"
+  [class.lf-sidenav]="!isMobile"
+  [class.lf-sidenav-mobile]="isMobile">
+  <!-- items -->
+  <div [class.lf-sidenav-items]="!isMobile" [class.lf-sidenav-mobile-items]="isMobile">
+    <!-- item -->
+    <button
+      *ngFor="let button of sidenavConfig.menuButtons"
+      mat-icon-button
+      [color]="isActive(button.id) ? 'primary' : null"
+      class="lf-sidenav-item"
+      (click)="buttonClicked(button.id)">
+      <!-- mat icon -->
+      <mat-icon
+        *ngIf="button?.matIcon; else svgIcon"
+        class="lf-sidenav-item-icon"
+        [class.material-icons-outlined]="button.outlineIcon">
+        {{ button.matIcon }}
+      </mat-icon>
+      <!-- svg icon -->
+      <ng-template #svgIcon>
+        <mat-icon
+          *ngIf="button?.svgIcon"
+          class="lf-sidenav-item-icon"
+          [svgIcon]="button.svgIcon!"></mat-icon>
+      </ng-template>
+      <!-- label -->
+      <span *ngIf="button?.label" class="lf-sidenav-item-label">
+        {{ isActive(button.id) || sidenavConfig?.showAllLabels ? button.label : "&nbsp;" }}
+      </span>
+    </button>
+  </div>
+</div>

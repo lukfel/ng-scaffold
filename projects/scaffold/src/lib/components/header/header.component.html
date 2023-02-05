@@ -1,0 +1,124 @@
+<ng-container *ngIf="headerConfig?.enable">
+  <div class="lf-header-spacer"></div>
+  <mat-toolbar
+    class="lf-header mat-elevation-z3"
+    [class.lf-header-mobile]="isMobile"
+    color="primary">
+    <!-- left menu button -->
+    <ng-container
+      *ngTemplateOutlet="
+        menuButtonTemplate;
+        context: { $implicit: headerConfig.leftMenuButton! }
+      "></ng-container>
+    <!-- logo & title -->
+    <div
+      class="lf-header-logo-title-wrapper"
+      [class.lf-show-left-button]="headerConfig?.leftMenuButton && !isMobile">
+      <!-- svg logo -->
+      <mat-icon
+        *ngIf="headerConfig?.svgLogo; else imgLogo"
+        class="lf-header-logo"
+        [svgIcon]="headerConfig.svgLogo!"></mat-icon>
+      <!-- img logo -->
+      <ng-template #imgLogo>
+        <img
+          *ngIf="headerConfig?.imgLogo"
+          class="lf-header-logo"
+          [src]="headerConfig.imgLogo"
+          alt="Logo" />
+      </ng-template>
+      <!-- title -->
+      <div
+        *ngIf="!isMobile"
+        class="lf-header-title-wrapper"
+        [class.lf-show-left-button]="headerConfig?.leftMenuButton">
+        <span *ngIf="headerConfig?.title" class="lf-header-title">
+          {{ headerConfig.title }}
+        </span>
+        <span *ngIf="headerConfig?.subtitle" class="lf-header-subtitle">
+          {{ headerConfig.subtitle }}
+        </span>
+      </div>
+    </div>
+    <!-- input -->
+    <ng-container *ngIf="headerConfig?.inputConfig?.enable">
+      <div class="spacer"></div>
+      <mat-form-field
+        class="lf-header-input"
+        [class.lf-header-input-mobile]="isMobile"
+        appearance="fill">
+        <mat-label>{{ headerConfig?.inputConfig?.label }}</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="inputValue"
+          (keyup.enter)="inputSubmitted(inputValue)"
+          (ngModelChange)="inputChanged($event)" />
+        <button
+          *ngIf="isMobile"
+          mat-icon-button
+          matPrefix
+          color="accent"
+          (click)="headerConfig.inputConfig!.enable = false">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button
+          *ngIf="headerConfig?.inputConfig?.matIcon"
+          mat-icon-button
+          matSuffix
+          color="accent"
+          (click)="inputSubmitted(inputValue)">
+          <mat-icon>
+            {{ headerConfig?.inputConfig?.matIcon }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+    </ng-container>
+    <!-- spacer -->
+    <div class="spacer"></div>
+    <!-- right menu buttons -->
+    <ng-container *ngFor="let button of headerConfig.rightMenuButtons">
+      <ng-container
+        *ngTemplateOutlet="menuButtonTemplate; context: { $implicit: button }"></ng-container>
+    </ng-container>
+  </mat-toolbar>
+
+  <!-- loading bar -->
+  <mat-progress-bar
+    *ngIf="headerConfig?.loading || (headerConfig?.showRouteLoading && routeLoading)"
+    class="lf-header-progress-bar"
+    color="accent"
+    mode="indeterminate"></mat-progress-bar>
+</ng-container>
+
+<!-- header menu button -->
+<ng-template #menuButtonTemplate let-menuButton>
+  <ng-container *ngIf="menuButton">
+    <!-- icon button -->
+    <button
+      *ngIf="(menuButton.matIcon || menuButton.svgIcon) && !menuButton.label; else textButton"
+      mat-icon-button
+      (click)="buttonClicked(menuButton.id)"
+      [matTooltip]="menuButton.tooltip">
+      <!-- mat icon -->
+      <mat-icon
+        *ngIf="menuButton.matIcon; else svgIcon"
+        [class.material-icons-outlined]="menuButton.outlineIcon">
+        {{ menuButton.matIcon }}
+      </mat-icon>
+      <!-- svg icon -->
+      <ng-template #svgIcon>
+        <mat-icon
+          *ngIf="menuButton.svgIcon"
+          [svgIcon]="menuButton.svgIcon"
+          [class.material-icons-outlined]="menuButton.outlineIcon"></mat-icon>
+      </ng-template>
+    </button>
+    <!-- text button -->
+    <ng-template #textButton>
+      <button mat-button (click)="buttonClicked(menuButton.id)">
+        {{ menuButton.label }}
+      </button>
+    </ng-template>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,10 @@
+<button
+  *ngIf="toTopButtonConfig?.enable && !autoHide"
+  mat-fab
+  color="accent"
+  class="lf-to-top-button"
+  [style.bottom]="getButtomPosition() + 'px'"
+  (click)="backToTop()"
+  [matTooltip]="toTopButtonConfig.tooltip!">
+  <mat-icon>arrow_upward</mat-icon>
+</button>
