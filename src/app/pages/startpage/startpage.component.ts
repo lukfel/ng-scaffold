@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, NavbarConfig, ToTopButtonConfig } from '@lukfel/scaffold';
+import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, NavbarConfig, ToTopButtonConfig, ContentTitleCardConfig } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,6 +14,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
   public navbarConfig: NavbarConfig = {};
   public drawerConfig: DrawerConfig = {};
   public footerConfig: FooterConfig = {};
+  public contentTitleCardConfig: ContentTitleCardConfig = {};
   public toTopButtonConfig: ToTopButtonConfig = {};
 
   private _subscription: Subscription = new Subscription;
@@ -28,6 +29,8 @@ export class StartpageComponent implements OnInit, OnDestroy {
       this.navbarConfig = scaffoldConfig.navbarConfig || {};
       this.drawerConfig = scaffoldConfig.drawerConfig || {};
       this.footerConfig = scaffoldConfig.footerConfig || {};
+      this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
+      this.contentTitleCardConfig.label = 'Home';
       this.toTopButtonConfig = scaffoldConfig.toTopButtonConfig || {};
     }));
   }
@@ -46,11 +49,19 @@ export class StartpageComponent implements OnInit, OnDestroy {
     }, 3000);
   }
 
-  public imgLogoChange(event: string): void {
+  public headerImgLogoChange(event: string): void {
     if (event) {
       this.headerConfig.svgLogo = '';
     } else {
       this.headerConfig.svgLogo = 'lf_logo'
+    }
+  }
+
+  public footerImgLogoChange(event: string): void {
+    if (event) {
+      this.footerConfig.svgLogo = '';
+    } else {
+      this.footerConfig.svgLogo = 'lf_logo'
     }
   }
 

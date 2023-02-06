@@ -26,6 +26,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -63,6 +64,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatIconModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatRippleModule,
     MatDialogModule,
     MatTooltipModule,
     MatSnackBarModule,

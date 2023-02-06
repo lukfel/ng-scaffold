@@ -147,6 +147,12 @@ export class AppComponent {
       ],
       copyright: '© Lukas Felbinger 2023. All rights reserved.'
     },
+    // ContentTitleCardConfig
+    contentTitleCardConfig: {
+      enable: true,
+      label: 'Example Title',
+      showBackButton: true
+    },
     // ToTopButtonConfig
     toTopButtonConfig: {
       enable: true,

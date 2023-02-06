@@ -30,8 +30,14 @@
     <lf-drawer [drawerConfig]="drawerConfig" [isMobile]="isMobile">
       <!-- drawer content -->
       <ng-content select="[drawerContent]" drawerContent></ng-content>
+      <!-- content title card -->
+      <lf-content-title-card
+        [contentTitleCardConfig]="contentTitleCardConfig"
+        [isMobile]="isMobile"
+        [routeHistory]="routeHistory"
+        (backButtonClickEvent)="backButtonClickEvent()"></lf-content-title-card>
+      <!-- main content -->
       <div class="lf-content" [class.lf-content-mobile]="isMobile">
-        <!-- main content -->
         <ng-content></ng-content>
       </div>
       <!-- footer -->

@@ -1,7 +1,9 @@
 @import '../../../../styles/variables';
 
 .lf-drawer-container {
+  z-index: unset !important;
   .lf-drawer {
     width: $drawer-width;
+    z-index: $drawer-z-index;
   }
 }

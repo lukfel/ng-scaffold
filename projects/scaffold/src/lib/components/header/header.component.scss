@@ -10,11 +10,6 @@
   position: fixed;
   top: 0;
   height: $header-height !important;
-  padding: $header-padding;
-
-  &.lf-header-mobile {
-    padding: $header-padding-mobile;
-  }
 
   .lf-header-logo-title-wrapper {
     display: flex;
@@ -22,28 +17,17 @@
     align-items: center;
     max-width: $header-logo-title-wrapper-max-width;
     overflow: hidden;
-    margin-left: 8px;
-
-    &.lf-show-left-button {
-      margin-left: 40px !important;
-    }
 
     .lf-header-logo {
       width: $header-logo-size;
       height: $header-logo-size;
       min-width: $header-logo-size;
       min-height: $header-logo-size;
-      margin-right: 8px;
     }
 
     .lf-header-title-wrapper {
       display: flex;
       flex-flow: column;
-      margin-left: 32px;
-
-      &.lf-show-left-button {
-        margin-left: 0px !important;
-      }
 
       .lf-header-title {
         font-size: 20px;

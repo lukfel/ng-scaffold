@@ -1,7 +1,9 @@
-@import './theme.scss';
+@import './_theme.scss';
+@import './_classes';
 @import './fonts/material-icons.scss';
 @import './fonts/roboto-font.scss';
 
+// Global Styling
 html {
   height: 100% !important;
   margin: 0 !important;
@@ -20,6 +22,7 @@ button span {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+// Scrollbar
 ::-webkit-scrollbar-track {
   background-color: #f1f1f1;
 }

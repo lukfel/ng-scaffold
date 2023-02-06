@@ -5,8 +5,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # TODO:
 * add swipe actions
 * fix height on mobile
-* fix label position on nav-items in navbar
-* implement back-button
 
 # Documentation
 ## Introduction
@@ -156,6 +154,12 @@ export class AppComponent {
         },
       ],
       copyright: '© Lukas Felbinger 2023. All rights reserved.'
+    },
+    // ContentTitleCardConfig
+    contentTitleCardConfig: {
+      enable: true,
+      label: 'Example Title',
+      showBackButton: true
     },
     // ToTopButtonConfig
     toTopButtonConfig: {

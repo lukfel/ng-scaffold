@@ -37,7 +37,10 @@
   </p>
   <mat-form-field>
     <mat-label>Image Logo (url)</mat-label>
-    <input matInput [(ngModel)]="headerConfig.imgLogo" (ngModelChange)="imgLogoChange($event)" />
+    <input
+      matInput
+      [(ngModel)]="headerConfig.imgLogo"
+      (ngModelChange)="headerImgLogoChange($event)" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Titel</mat-label>
@@ -55,6 +58,25 @@
   <mat-form-field>
     <mat-label>Input Label</mat-label>
     <input matInput [(ngModel)]="headerConfig.inputConfig!.label" />
+  </mat-form-field>
+  <mat-divider></mat-divider>
+
+  <h2>Title Card</h2>
+  <p>
+    The title card is a mat-card below the header that can display the current page title and a back
+    button.
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.enable">Enable</mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.showBackButton">
+      Show back button
+    </mat-slide-toggle>
+  </p>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="contentTitleCardConfig.label" />
   </mat-form-field>
   <mat-divider></mat-divider>
 
@@ -91,6 +113,13 @@
   <p>
     <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
   </p>
+  <mat-form-field>
+    <mat-label>Image Logo (url)</mat-label>
+    <input
+      matInput
+      [(ngModel)]="footerConfig.imgLogo"
+      (ngModelChange)="footerImgLogoChange($event)" />
+  </mat-form-field>
   <mat-form-field>
     <mat-label>Copyright</mat-label>
     <input matInput [(ngModel)]="footerConfig.copyright" />

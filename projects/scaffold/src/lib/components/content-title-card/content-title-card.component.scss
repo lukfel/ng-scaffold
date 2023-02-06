@@ -1,0 +1,14 @@
+@import '../../../../styles/variables';
+
+.lf-content-title-card {
+  z-index: $content-title-card-z-index;
+  height: $content-title-card-height;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  border-radius: 0;
+
+  .lf-content-title-card-label {
+    font-size: 24px;
+  }
+}

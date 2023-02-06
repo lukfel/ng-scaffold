@@ -6,11 +6,11 @@
   <!-- items -->
   <div [class.lf-navbar-items]="!isMobile" [class.lf-navbar-mobile-items]="isMobile">
     <!-- item -->
-    <button
+    <a
       *ngFor="let button of navbarConfig.menuButtons"
-      mat-icon-button
-      [color]="isActive(button.id) ? 'primary' : null"
+      matRipple
       class="lf-navbar-item"
+      [class.lf-navbar-item-active]="isActive(button.id)"
       (click)="buttonClicked(button.id)">
       <!-- mat icon -->
       <mat-icon
@@ -27,9 +27,16 @@
           [svgIcon]="button.svgIcon!"></mat-icon>
       </ng-template>
       <!-- label -->
+      <!-- show a protected space on desktop so the icon doesn't move up and down -->
       <span *ngIf="button?.label" class="lf-navbar-item-label">
-        {{ isActive(button.id) || navbarConfig?.showAllLabels ? button.label : "&nbsp;" }}
+        {{
+          isActive(button.id) || navbarConfig?.showAllLabels
+            ? button.label
+            : isMobile
+            ? ""
+            : "&nbsp;"
+        }}
       </span>
-    </button>
+    </a>
   </div>
 </div>

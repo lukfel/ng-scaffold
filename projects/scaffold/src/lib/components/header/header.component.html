@@ -2,7 +2,8 @@
   <div class="lf-header-spacer"></div>
   <mat-toolbar
     class="lf-header mat-elevation-z3"
-    [class.lf-header-mobile]="isMobile"
+    [class.px-4]="!isMobile"
+    [class.px-1]="isMobile"
     color="primary">
     <!-- left menu button -->
     <ng-container
@@ -12,12 +13,12 @@
       "></ng-container>
     <!-- logo & title -->
     <div
-      class="lf-header-logo-title-wrapper"
-      [class.lf-show-left-button]="headerConfig?.leftMenuButton && !isMobile">
+      class="lf-header-logo-title-wrapper ml-2"
+      [class.ml-10]="headerConfig?.leftMenuButton && !isMobile">
       <!-- svg logo -->
       <mat-icon
         *ngIf="headerConfig?.svgLogo; else imgLogo"
-        class="lf-header-logo"
+        class="lf-header-logo mr-2"
         [svgIcon]="headerConfig.svgLogo!"></mat-icon>
       <!-- img logo -->
       <ng-template #imgLogo>
@@ -28,10 +29,7 @@
           alt="Logo" />
       </ng-template>
       <!-- title -->
-      <div
-        *ngIf="!isMobile"
-        class="lf-header-title-wrapper"
-        [class.lf-show-left-button]="headerConfig?.leftMenuButton">
+      <div *ngIf="!isMobile" class="lf-header-title-wrapper">
         <span *ngIf="headerConfig?.title" class="lf-header-title">
           {{ headerConfig.title }}
         </span>

@@ -38,8 +38,14 @@
   height: $navbar-width;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   flex-flow: column;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &.lf-navbar-item-active {
+    color: var(--color-primary);
+  }
 
   .lf-navbar-item-icon {
     width: calc($navbar-width / 3);

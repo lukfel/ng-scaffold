@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 import { Logger } from './';
 
 @Injectable({ providedIn: 'root' })
@@ -39,16 +39,19 @@ export class RouterService {
     });
   }
 
+  // Navigate to the last route
   public navigateBack(): void {
-    const routeHistory: string[] = this._routeHistory$.value;
-    routeHistory.pop();
-    const lastRoute: string = routeHistory[routeHistory.length - 1] || '';
+    this._routeHistory$.pipe(take(1)).subscribe(routeHistory => {
+      if (routeHistory.length > 1) {
+        const previousRoute: string = routeHistory[routeHistory.length - 2];
 
-    if(!lastRoute) {
-      return;
-    }
-
-    this.router.navigate([lastRoute]);
+        this.router.navigateByUrl(previousRoute).then(result => {
+          if (result) {
+            routeHistory.pop();
+          }
+        });
+      }
+    })
   }
 
 }

@@ -1,13 +1,24 @@
-<mat-card *ngIf="footerConfig?.enable" class="lf-footer mat-elevation-z3">
-  <!-- logo -->
+<mat-card *ngIf="footerConfig?.enable" class="lf-footer mat-elevation-z3 p-4">
+  <!-- svg logo -->
   <mat-icon
-    *ngIf="footerConfig?.logo"
-    class="lf-footer-logo"
+    *ngIf="footerConfig?.svgLogo; else imgLogo"
+    class="lf-footer-logo mb-4"
     color="primary"
-    [svgIcon]="footerConfig.logo!"></mat-icon>
+    [svgIcon]="footerConfig.svgLogo!"></mat-icon>
+  <!-- img logo -->
+  <ng-template #imgLogo>
+    <img
+      *ngIf="footerConfig?.imgLogo"
+      class="lf-footer-logo mb-4"
+      [src]="footerConfig.imgLogo"
+      alt="Logo" />
+  </ng-template>
   <!-- links -->
-  <div *ngIf="footerConfig?.links" class="lf-footer-links">
-    <div *ngFor="let link of footerConfig.links" class="lf-footer-link">
+  <div *ngIf="footerConfig?.links" class="lf-footer-links mb-4">
+    <div
+      *ngFor="let link of footerConfig.links; let i = index"
+      class="lf-footer-link"
+      [class.mr-2]="i < footerConfig.links!.length - 1">
       <ng-container *ngIf="link.routerLink; else hrefLink">
         <a [routerLink]="[link.routerLink]">{{ link.label || "" }}</a>
       </ng-container>

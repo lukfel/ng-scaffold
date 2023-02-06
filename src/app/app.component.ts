@@ -85,7 +85,7 @@ export class AppComponent {
     // FooterConfig
     footerConfig: {
       enable: true,
-      logo: 'lf_logo',
+      svgLogo: 'lf_logo',
       links: [
         {
           label: 'About',
@@ -99,6 +99,12 @@ export class AppComponent {
         },
       ],
       copyright: '© Lukas Felbinger 2023. All rights reserved.'
+    },
+    // ContentTitleCardConfig
+    contentTitleCardConfig: {
+      enable: true,
+      label: 'Example Title',
+      showBackButton: true
     },
     // ToTopButtonConfig
     toTopButtonConfig: {
@@ -125,25 +131,23 @@ export class AppComponent {
   // Listen to header click events
   public headerClickEvent(id: string): void {
     if (id === 'menu') {
-      if(this.scaffoldConfig.drawerConfig) {
+      if (this.scaffoldConfig.drawerConfig) {
         this.scaffoldConfig.drawerConfig.open = !this.scaffoldConfig.drawerConfig.open;
       }
     } else if (id === 'github') {
       window.open('https://github.com/lukfel/scaffold', '_blank');
     } else {
-      this.snackbarService.openSnackbarWithAction(`You clicked the header button  '${id}'`, 'Close').then(() => {
-        this.dialogService.openConfirmDialog(`You closed the snackbar of the header button '${id}'`).then((result: boolean) => {
-          this.logger.log(result);
-        });
-      }).catch((error: string) => {
-        this.logger.log(error);
-      });
+      this.snackbarService.openSnackbar(`You clicked the header button  '${id}'`);
     }
   }
 
   // Listen to header input submit events
   public headerSubmitEvent(value: string): void {
-    this.logger.log(value);
+    this.dialogService.openConfirmDialog('You have entered:', value).then(result => {
+      if(result) {
+        this.logger.log(result);
+      }
+    })
   }
 
   // Listen to header input change events

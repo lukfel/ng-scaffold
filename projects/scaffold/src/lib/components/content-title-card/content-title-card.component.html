@@ -1,0 +1,23 @@
+<mat-card
+  *ngIf="contentTitleCardConfig?.enable"
+  class="lf-content-title-card mat-elevation-z1 px-2">
+  <!-- back button -->
+  <button mat-icon-button color="accent" (click)="backButtonClicked()">
+    <mat-icon *ngIf="contentTitleCardConfig?.showBackButton && routeHistory.length > 1">
+      arrow_back_ios
+    </mat-icon>
+  </button>
+  <!-- spacer -->
+  <div style="flex: 1 1 auto"></div>
+  <!-- label -->
+  <span class="lf-content-title-card-label">
+    {{ contentTitleCardConfig?.label || "Startseite" }}
+  </span>
+  <!-- spacer -->
+  <div style="flex: 1 1 auto"></div>
+  <!-- empty button spacer -->
+  <div
+    [style.width]="
+      contentTitleCardConfig?.showBackButton && routeHistory.length > 1 ? '48px' : '0px'
+    "></div>
+</mat-card>

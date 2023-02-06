@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ScaffoldConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ToTopButtonConfig } from '../../models';
+import { ScaffoldConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ToTopButtonConfig, ContentTitleCardConfig } from '../../models';
 import { BreakpointService, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -18,6 +18,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public navbarConfig: NavbarConfig = {};
   public drawerConfig: DrawerConfig = {};
   public footerConfig: FooterConfig = {};
+  public contentTitleCardConfig: ContentTitleCardConfig = {};
   public toTopButtonConfig: ToTopButtonConfig = {};
 
   @Output() public headerClickEvent = new EventEmitter<string>();
@@ -44,6 +45,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
       this.navbarConfig = scaffoldConfig.navbarConfig || {};
       this.drawerConfig = scaffoldConfig.drawerConfig || {};
       this.footerConfig = scaffoldConfig.footerConfig || {};
+      this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
       this.toTopButtonConfig = scaffoldConfig.toTopButtonConfig || {};
     }));
 
@@ -96,6 +98,10 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
   public navbarButtonClicked(id: string): void {
     this.navbarClickEvent.emit(id);
+  }
+
+  public backButtonClickEvent(): void {
+    this.routerService.navigateBack();
   }
 
 }
