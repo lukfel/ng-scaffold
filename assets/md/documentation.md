@@ -132,7 +132,7 @@ export class AppComponent {
     // FooterConfig
     footerConfig: {
       enable: true,
-      logo: 'lf_logo',
+      svgLogo: 'lf_logo',
       links: [
         {
           label: 'About',
@@ -292,7 +292,7 @@ export class AppComponent {
       } else if (result.breakpoints[Breakpoints.Large]) {
         ...
       }
-    }
+    });
   }
 }
 ```
