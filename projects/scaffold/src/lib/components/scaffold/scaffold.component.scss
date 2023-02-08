@@ -24,10 +24,12 @@
 
     .lf-content {
       min-height: 100%;
-      padding: $content-padding;
+      padding-left: $content-padding;
+      padding-right: $content-padding;
 
       &.lf-content-mobile {
-        padding: $content-padding-mobile !important;
+        padding-left: $content-padding-mobile !important;
+        padding-right: $content-padding-mobile !important;
       }
     }
   }

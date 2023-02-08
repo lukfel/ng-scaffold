@@ -13,7 +13,7 @@
       "></ng-container>
     <!-- logo & title -->
     <div
-      class="lf-header-logo-title-wrapper ml-2"
+      class="lf-header-logo-title-wrapper ml-1"
       [class.ml-10]="headerConfig?.leftMenuButton && !isMobile">
       <!-- svg logo -->
       <mat-icon
@@ -29,7 +29,7 @@
           alt="Logo" />
       </ng-template>
       <!-- title -->
-      <div *ngIf="!isMobile" class="lf-header-title-wrapper">
+      <div class="lf-header-title-wrapper">
         <span *ngIf="headerConfig?.title" class="lf-header-title">
           {{ headerConfig.title }}
         </span>

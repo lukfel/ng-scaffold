@@ -1,3 +1,5 @@
+// npm install prettier eslint-plugin-prettier eslint-config-prettier --save-dev
+// npm install eslint-plugin-unused-imports --save-dev
 {
   "root": true,
   "ignorePatterns": [
