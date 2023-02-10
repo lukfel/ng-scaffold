@@ -31,27 +31,20 @@ export class AppComponent {
       },
       rightMenuButtons: [
         {
-          id: 'item1',
-          label: 'Item 1'
+          id: 'start',
+          label: 'Home'
         },
         {
-          id: 'item2',
-          label: 'Item 2'
+          id: 'documentation',
+          label: 'Documentation'
         },
         {
-          id: 'item3',
-          label: 'Item 3'
-        },
-        {
-          id: 'settings',
-          matIcon: 'settings',
-          tooltip: 'Settings',
-          outlineIcon: true
+          id: 'typography',
+          label: 'Typography'
         },
         {
           id: 'github',
           svgIcon: 'github_logo',
-          outlineIcon: true,
           tooltip: 'GitHub'
         }
       ],
@@ -68,20 +61,20 @@ export class AppComponent {
       menuButtons: [
         {
           id: 'start',
-          matIcon: 'home',
           label: 'Home',
+          matIcon: 'home',
           outlineIcon: true
         },
         {
           id: 'documentation',
-          matIcon: 'description',
           label: 'Docu',
+          matIcon: 'description',
           outlineIcon: true
         },
         {
-          id: '404',
-          matIcon: 'block',
-          label: '404',
+          id: 'typography',
+          label: 'Typography',
+          matIcon: 'text_fields',
           outlineIcon: true
         }
       ]
@@ -127,17 +120,7 @@ export class AppComponent {
   public mobileRightMenuButtons: MenuButton[] = [
     {
       id: 'menu',
-      matIcon: 'more_vert',
-      menuButtons: [
-        {
-          id: 'item1',
-          label: 'Item 1'
-        },
-        {
-          id: 'item2',
-          label: 'Item 2'
-        }
-      ]
+      matIcon: 'more_vert'
     }
   ]
 
@@ -164,6 +147,7 @@ export class AppComponent {
       if (this.scaffoldConfig?.headerConfig) {
         // Check which breakpoint is active
         if (result.breakpoints[Breakpoints.XSmall]) {
+          this.mobileRightMenuButtons[0].menuButtons = defaultRightMenuButtons;
           this.scaffoldConfig.headerConfig.rightMenuButtons = this.mobileRightMenuButtons;
         } else {
           this.scaffoldConfig.headerConfig.rightMenuButtons = defaultRightMenuButtons;
@@ -174,15 +158,23 @@ export class AppComponent {
 
   // Listen to header click events
   public headerClickEvent(id: string): void {
+    this.snackbarService.openSnackbar(`You clicked the header button with id:   ${id}`);
+
     if (id === 'drawer') {
       if (this.scaffoldConfig.drawerConfig) {
         this.scaffoldConfig.drawerConfig.open = !this.scaffoldConfig.drawerConfig.open;
       }
+      return;
     } else if (id === 'github') {
       window.open('https://github.com/lukfel/scaffold', '_blank');
-    } else {
-      this.snackbarService.openSnackbar(`You clicked the header button  '${id}'`);
+      return;
+    } else if (id === 'settings') {
+      return;
+    } else if (id === 'menu') {
+      return;
     }
+      this.router.navigate([id]);
+      return;
   }
 
   // Listen to header input submit events

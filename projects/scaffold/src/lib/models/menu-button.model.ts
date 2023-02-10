@@ -5,5 +5,6 @@ export interface MenuButton {
   label?: string;
   outlineIcon?: boolean;
   tooltip?: string;
+  class?: string;
   menuButtons?: MenuButton[];
 }

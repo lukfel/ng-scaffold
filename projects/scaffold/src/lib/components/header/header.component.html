@@ -96,6 +96,7 @@
     <button
       *ngIf="(menuButton.matIcon || menuButton.svgIcon) && !menuButton.label; else textButton"
       mat-icon-button
+      [ngClass]="menuButton.class"
       (click)="buttonClicked(menuButton.id)"
       [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
       [matTooltip]="menuButton.tooltip">
@@ -117,6 +118,7 @@
     <ng-template #textButton>
       <button
         mat-button
+        [ngClass]="menuButton.class"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip">
@@ -126,9 +128,46 @@
 
     <!-- menu -->
     <mat-menu #menu="matMenu">
-      <button *ngFor="let button of menuButton.menuButtons" mat-menu-item>
-        {{ button.label }}
-      </button>
+      <!-- label menu buttons -->
+      <ng-container *ngFor="let button of menuButton.menuButtons">
+        <!-- menu button -->
+        <button
+          *ngIf="button.label"
+          mat-menu-item
+          [ngClass]="button.class"
+          (click)="buttonClicked(button.id)">
+          <!-- icon -->
+          <mat-icon *ngIf="button.matIcon">{{ button.matIcon }}</mat-icon>
+          <!-- label -->
+          <span *ngIf="button.label">{{ button.label }}</span>
+        </button>
+      </ng-container>
+      <!-- icon menu buttons -->
+      <div class="lf-menu-icons px-1">
+        <ng-container *ngFor="let button of menuButton.menuButtons">
+          <!-- icon button -->
+          <button
+            *ngIf="!button.label && (button.matIcon || button.svgIcon)"
+            mat-icon-button
+            [ngClass]="button.class"
+            (click)="buttonClicked(button.id)"
+            [matTooltip]="button.tooltip">
+            <!-- mat icon -->
+            <mat-icon
+              *ngIf="button.matIcon; else menuSvgIcon"
+              [class.material-icons-outlined]="button.outlineIcon">
+              {{ button.matIcon }}
+            </mat-icon>
+            <!-- svg icon -->
+            <ng-template #menuSvgIcon>
+              <mat-icon
+                *ngIf="button.svgIcon"
+                [svgIcon]="button.svgIcon"
+                [class.material-icons-outlined]="button.outlineIcon"></mat-icon>
+            </ng-template>
+          </button>
+        </ng-container>
+      </div>
     </mat-menu>
   </ng-container>
 </ng-template>

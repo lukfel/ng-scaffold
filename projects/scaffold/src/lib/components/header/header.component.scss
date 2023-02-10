@@ -17,6 +17,7 @@
     align-items: center;
     flex: 1 0 auto;
     overflow: hidden;
+    max-width: $header-logo-title-wrapper-max-width;
 
     .lf-header-logo {
       width: $header-logo-size;
@@ -64,6 +65,13 @@
   .spacer {
     flex: 1 0 auto;
   }
+}
+
+.lf-menu-icons {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .lf-header-progress-bar {

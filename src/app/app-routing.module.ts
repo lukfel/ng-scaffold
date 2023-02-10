@@ -12,6 +12,9 @@ const routes: Routes = [
     path: 'documentation', loadChildren: () => import('./pages/documentation/documentation.module').then(m => m.DocumentationModule)
   },
   {
+    path: 'typography', loadChildren: () => import('./pages/typography/typography.module').then(m => m.TypographyModule)
+  },
+  {
     path: '**', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)
   }
 ];

@@ -6,37 +6,40 @@
   <!-- items -->
   <div [class.lf-navbar-items]="!isMobile" [class.lf-navbar-mobile-items]="isMobile">
     <!-- item -->
-    <a
-      *ngFor="let button of navbarConfig.menuButtons"
-      matRipple
-      class="lf-navbar-item"
-      [class.lf-navbar-item-active]="isActive(button.id)"
-      (click)="buttonClicked(button.id)">
-      <!-- mat icon -->
-      <mat-icon
-        *ngIf="button?.matIcon; else svgIcon"
-        class="lf-navbar-item-icon"
-        [class.material-icons-outlined]="button.outlineIcon">
-        {{ button.matIcon }}
-      </mat-icon>
-      <!-- svg icon -->
-      <ng-template #svgIcon>
+    <ng-container *ngFor="let button of navbarConfig.menuButtons; let i = index">
+      <a
+        *ngIf="i < 5"
+        matRipple
+        class="lf-navbar-item"
+        [class.lf-navbar-item-active]="isActive(button.id)"
+        [ngClass]="button.class"
+        (click)="buttonClicked(button.id)">
+        <!-- mat icon -->
         <mat-icon
-          *ngIf="button?.svgIcon"
+          *ngIf="button?.matIcon; else svgIcon"
           class="lf-navbar-item-icon"
-          [svgIcon]="button.svgIcon!"></mat-icon>
-      </ng-template>
-      <!-- label -->
-      <!-- show a protected space on desktop so the icon doesn't move up and down -->
-      <span *ngIf="button?.label" class="lf-navbar-item-label">
-        {{
-          isActive(button.id) || navbarConfig?.showAllLabels
-            ? button.label
-            : isMobile
-            ? ""
-            : "&nbsp;"
-        }}
-      </span>
-    </a>
+          [class.material-icons-outlined]="button.outlineIcon">
+          {{ button.matIcon }}
+        </mat-icon>
+        <!-- svg icon -->
+        <ng-template #svgIcon>
+          <mat-icon
+            *ngIf="button?.svgIcon"
+            class="lf-navbar-item-icon"
+            [svgIcon]="button.svgIcon!"></mat-icon>
+        </ng-template>
+        <!-- label -->
+        <!-- show a protected space on desktop so the icon doesn't move up and down -->
+        <span *ngIf="button?.label" class="lf-navbar-item-label">
+          {{
+            isActive(button.id) || navbarConfig?.showAllLabels
+              ? button.label
+              : isMobile
+              ? ""
+              : "&nbsp;"
+          }}
+        </span>
+      </a>
+    </ng-container>
   </div>
 </div>
