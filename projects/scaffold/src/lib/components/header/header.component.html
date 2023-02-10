@@ -13,7 +13,7 @@
       "></ng-container>
     <!-- logo & title -->
     <div
-      class="lf-header-logo-title-wrapper ml-1"
+      class="lf-header-logo-title-wrapper ml-1 mr-2"
       [class.ml-10]="headerConfig?.leftMenuButton && !isMobile">
       <!-- svg logo -->
       <mat-icon
@@ -24,12 +24,12 @@
       <ng-template #imgLogo>
         <img
           *ngIf="headerConfig?.imgLogo"
-          class="lf-header-logo"
+          class="lf-header-logo mr-2"
           [src]="headerConfig.imgLogo"
           alt="Logo" />
       </ng-template>
       <!-- title -->
-      <div class="lf-header-title-wrapper">
+      <div *ngIf="headerConfig?.title || headerConfig?.subtitle" class="lf-header-title-wrapper">
         <span *ngIf="headerConfig?.title" class="lf-header-title">
           {{ headerConfig.title }}
         </span>
@@ -97,6 +97,7 @@
       *ngIf="(menuButton.matIcon || menuButton.svgIcon) && !menuButton.label; else textButton"
       mat-icon-button
       (click)="buttonClicked(menuButton.id)"
+      [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
       [matTooltip]="menuButton.tooltip">
       <!-- mat icon -->
       <mat-icon
@@ -114,9 +115,20 @@
     </button>
     <!-- text button -->
     <ng-template #textButton>
-      <button mat-button (click)="buttonClicked(menuButton.id)">
+      <button
+        mat-button
+        (click)="buttonClicked(menuButton.id)"
+        [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
+        [matTooltip]="menuButton.tooltip">
         {{ menuButton.label }}
       </button>
     </ng-template>
+
+    <!-- menu -->
+    <mat-menu #menu="matMenu">
+      <button *ngFor="let button of menuButton.menuButtons" mat-menu-item>
+        {{ button.label }}
+      </button>
+    </mat-menu>
   </ng-container>
 </ng-template>

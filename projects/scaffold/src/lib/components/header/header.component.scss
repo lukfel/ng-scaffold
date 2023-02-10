@@ -15,7 +15,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    max-width: $header-logo-title-wrapper-max-width;
+    flex: 1 0 auto;
     overflow: hidden;
 
     .lf-header-logo {
@@ -44,7 +44,7 @@
   .lf-header-input {
     z-index: $header-z-index;
     width: 100%;
-    max-width: $header-input-max-width;
+    flex: 0 1 $header-input-max-width;
   }
 
   .lf-header-input-mobile {

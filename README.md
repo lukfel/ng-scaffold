@@ -3,6 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
 
 # TODO:
+* allow to override the mat theme
 * add swipe actions
 * fix height on mobile
 

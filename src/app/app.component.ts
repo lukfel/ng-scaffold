@@ -1,8 +1,9 @@
+import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { DialogService, Logger, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/scaffold';
+import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/scaffold';
 
 @Component({
   selector: 'app-root',
@@ -24,10 +25,9 @@ export class AppComponent {
       loading: false,
       showRouteLoading: true,
       leftMenuButton: {
-        id: 'menu',
+        id: 'drawer',
         matIcon: 'menu',
-        outlineIcon: true,
-        tooltip: 'Menu'
+        outlineIcon: true
       },
       rightMenuButtons: [
         {
@@ -37,6 +37,16 @@ export class AppComponent {
         {
           id: 'item2',
           label: 'Item 2'
+        },
+        {
+          id: 'item3',
+          label: 'Item 3'
+        },
+        {
+          id: 'settings',
+          matIcon: 'settings',
+          tooltip: 'Settings',
+          outlineIcon: true
         },
         {
           id: 'github',
@@ -113,24 +123,58 @@ export class AppComponent {
     }
   }
 
+  // RightMenuButtons for mobile
+  public mobileRightMenuButtons: MenuButton[] = [
+    {
+      id: 'menu',
+      matIcon: 'more_vert',
+      menuButtons: [
+        {
+          id: 'item1',
+          label: 'Item 1'
+        },
+        {
+          id: 'item2',
+          label: 'Item 2'
+        }
+      ]
+    }
+  ]
+
   constructor(private router: Router,
     private logger: Logger,
     private snackbarService: SnackbarService,
     private dialogService: DialogService,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
-    private scaffoldService: ScaffoldService) {
+    private scaffoldService: ScaffoldService,
+    private breakpointService: BreakpointService) {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
     this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
 
     // Set config for scaffold
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+
+    // Store the rightMenuButtons from the scaffoldConfig for desktop
+    const defaultRightMenuButtons: MenuButton[] = this.scaffoldConfig.headerConfig?.rightMenuButtons || [];
+
+    // Update the rightMenuButtons when on mobile breakpoint
+    this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
+      if (this.scaffoldConfig?.headerConfig) {
+        // Check which breakpoint is active
+        if (result.breakpoints[Breakpoints.XSmall]) {
+          this.scaffoldConfig.headerConfig.rightMenuButtons = this.mobileRightMenuButtons;
+        } else {
+          this.scaffoldConfig.headerConfig.rightMenuButtons = defaultRightMenuButtons;
+        }
+      }
+    });
   }
 
   // Listen to header click events
   public headerClickEvent(id: string): void {
-    if (id === 'menu') {
+    if (id === 'drawer') {
       if (this.scaffoldConfig.drawerConfig) {
         this.scaffoldConfig.drawerConfig.open = !this.scaffoldConfig.drawerConfig.open;
       }
@@ -144,7 +188,7 @@ export class AppComponent {
   // Listen to header input submit events
   public headerSubmitEvent(value: string): void {
     this.dialogService.openConfirmDialog('You have entered:', value).then(result => {
-      if(result) {
+      if (result) {
         this.logger.log(result);
       }
     })
