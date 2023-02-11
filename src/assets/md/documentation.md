@@ -4,11 +4,10 @@ This Angular library provides a basic scaffold for modern web and mobile applica
 
 * Demo https://lukfel.github.io/scaffold
 
-## Setup
-### Installation
+## Installation
 Install the npm package ``npm install @lukfel/scaffold``.
 
-### Module
+## Module
 Import the module ``ScaffoldModule`` in your ``app.module.ts``.
 * Hint: The library has a built in logger service ``Logger`` which logs certain events if a ``LibraryConfig`` is passed and the property ``production`` is to ``false`` (no logging in production mode).
 ```ts
@@ -22,15 +21,32 @@ imports: [
 ],
 ```
 
-### Style
-Import the styles ``@lukfel/scaffold/styles`` on top of your ``styles.scss``.
+## Style
+Import the styles ``@lukfel/scaffold/styles`` on top of your ``styles.scss`` and include the theme.
 * Hint: The styles also include material icons and the roboto font.
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
+@include lf.import_theme();
 ...
 ```
 
-### Template
+To customize the theme, you need to overwrite the color palettes with your own directly after the ``@use "@lukfel/scaffold/styles" as lf`` import.
+* Hint: To use Material palettes, you need to install and import the Angular Material library in your application.
+```scss
+@use "@lukfel/scaffold/styles" as lf;
+@use '@angular/material' as mat;
+
+$theme: (
+  primary: mat.define-palette(mat.$pink-palette),
+  accent: mat.define-palette(mat.$blue-palette, A200, A100, A400),
+  warn: mat.define-palette(mat.$red-palette),
+  dark: false
+);
+
+@include lf.import_theme($theme);
+```
+
+## Template
 Add the ``lf-scaffold`` element to your ``app.component.html``.
 ```html
 <lf-scaffold>
@@ -38,7 +54,7 @@ Add the ``lf-scaffold`` element to your ``app.component.html``.
 </lf-scaffold>
 ```
 
-### Config
+## Config
 Import the ``ScaffoldService`` in your ``app.component.ts``.
 * Hint: The ``ScaffoldService`` is the global store of the library. With this service you can change the ``ScaffoldConfig`` and subscribe to the `Observable` to detect changes.
 ```ts
@@ -104,7 +120,7 @@ export class AppComponent {
 }
 ```
 
-### Events
+## Events
 To listen to scaffold user events, add the output events and define the corresponding methods in your ``app.component.ts``.
 ```html
 <lf-scaffold
@@ -141,10 +157,10 @@ public navbarClickEvent(id: string): void {
 }
 ```
 
-### Additional Services
+## Additional Services
 The library provides additional commonly needed services.
 
-#### Logger
+### Logger
 This service only logs out information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).
 ```ts
 import { Logger } from '@lukfel/scaffold';
@@ -164,7 +180,7 @@ export class AppComponent {
 }
 ```
 
-#### SnackbarService
+### SnackbarService
 This service provides basic methods to display a simple snackbar with or without an action.
 ```ts
 import { SnackbarService } from '@lukfel/scaffold';
@@ -184,7 +200,7 @@ export class AppComponent {
 }
 ```
 
-#### DialogService
+### DialogService
 This service provide a basic confirmation dialog with a ``boolean`` response. Additionally you can use the method `openCustomDialog` to pass your own dialog template and config.
 ```ts
 import { DialogService } from '@lukfel/scaffold';
@@ -209,7 +225,7 @@ export class AppComponent {
 }
 ```
 
-#### BreakpointService
+### BreakpointService
 This service allows you to subscribe to breakpoint changes and act accordingly
 ```ts
 import { BreakpointService } from '@lukfel/scaffold';
