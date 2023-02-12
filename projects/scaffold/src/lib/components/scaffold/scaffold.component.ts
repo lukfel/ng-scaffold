@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ScaffoldConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ToTopButtonConfig, ContentTitleCardConfig } from '../../models';
+import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ToTopButtonConfig } from '../../models';
 import { BreakpointService, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -66,13 +66,15 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this._subscription.add(this.routerService.routeHistory$.subscribe((routeHistory: string[]) => {
       if (routeHistory) {
         this.routeHistory = routeHistory;
-        this.currentRoute = this.routeHistory[this.routeHistory.length - 1];
       }
 
-      if(this.scrollElement && this.scaffoldConfig?.scrollPositionRestoration) {
+      if (this.scrollElement && this.scaffoldConfig?.scrollPositionRestoration) {
         this.scrollElement.nativeElement.scrollTop = 0;
       }
     }));
+
+    // Listen for current route changes
+    this._subscription.add(this.routerService.currentRoute$.subscribe((currentRout: string) => this.currentRoute = currentRout));
 
     // Listen for route loading
     this._subscription.add(this.routerService.loading$.subscribe(loading => this.routeLoading = loading))

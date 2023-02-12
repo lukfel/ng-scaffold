@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # TODO:
 * allow for more theme customizations (typography, density, ...)
-* add swipe actions
 * fix height on mobile
+* add swipe actions
 
 # Documentation
 ## Introduction
@@ -35,24 +35,52 @@ Import the styles ``@lukfel/scaffold/styles`` on top of your ``styles.scss`` and
 * Hint: The styles also include material icons and the roboto font.
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
-@include lf.import_theme();
+@include lf.scaffold-theme();     // include the default theme
 ...
 ```
 
-To customize the theme, you need to overwrite the color palettes with your own directly after the ``@use "@lukfel/scaffold/styles" as lf`` import.
-* Hint: To use Material palettes, you need to install and import the Angular Material library in your application.
+### Custom Theme
+To customize the theme, overwrite the color palettes directly after the ``@use "@lukfel/scaffold/styles" as lf`` import.
+* Hint: To use Material palettes, install and import the Angular Material library in your application.
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
 $theme: (
   primary: mat.define-palette(mat.$pink-palette),
-  accent: mat.define-palette(mat.$blue-palette, A200, A100, A400),
+  accent: mat.define-palette(mat.$blue-palette),
   warn: mat.define-palette(mat.$red-palette),
   dark: false
 );
 
-@include lf.import_theme($theme);
+@include lf.scaffold-theme($theme);
+...
+```
+
+### Multiple Themes
+To define multiple themes that can be changed dynamically, include the additional theme with ``lf.scaffold-colors($theme2, 'theme2')`` where the second parameter is the class name that needs to be present on the body like ``<body class="theme2">``.
+* Hint: You can dymanically add classes to the body with ``document.body.classList.add('theme2')``.
+```scss
+@use "@lukfel/scaffold/styles" as lf;
+@use '@angular/material' as mat;
+
+$theme1: (
+  primary: mat.define-palette(mat.$pink-palette),
+  accent: mat.define-palette(mat.$blue-palette),
+  warn: mat.define-palette(mat.$red-palette),
+  dark: false
+);
+
+$theme2: (
+  primary: mat.define-palette(mat.$purple-palette),
+  accent: mat.define-palette(mat.$amber-palette),
+  warn: mat.define-palette(mat.$red-palette),
+  dark: false
+);
+
+@include lf.scaffold-theme($theme1);              // Set the primary theme with lf.scaffold-theme(...)
+@include lf.scaffold-colors($theme2, 'theme2');   // Set additional themes with lf.scaffold-colors(...)
+...
 ```
 
 ## Template

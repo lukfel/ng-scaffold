@@ -9,40 +9,70 @@ $lf-default-theme: (
   dark: false
 );
 
-// Set custom theme
-@mixin import_theme($theme: $lf-default-theme) {
-
+// Set theme
+// Material requires to split up the mat.all-component-themes and mat.all-component-colors
+// since mat.all-component-themes should also be imported once, but mat.all-component-colors
+// can be imported multiple times
+@mixin scaffold-theme($theme: $lf-default-theme) {
   $theme: map-merge($lf-default-theme, $theme);
 
-  @if(map-get($theme, 'dark') == false) {
-    $mat-theme: mat.define-light-theme((
-      color: (
-        primary: map-get($theme, 'primary'),
-        accent: map-get($theme, 'accent'),
-        warn: map-get($theme, 'warn'),
-      ),
-      typography: mat.define-typography-config(),
-      density: 0,
-    ));
+  $mat-theme: mat.define-light-theme((
+    color: (
+      primary: map-get($theme, 'primary'),
+      accent: map-get($theme, 'accent'),
+      warn: map-get($theme, 'warn'),
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  ));
+  @include mat.all-component-themes($mat-theme);
+  @include color-variables($theme, 'body');
+}
 
-    @include mat.all-component-themes($mat-theme);
-  } @else {
-    $mat-theme: mat.define-dark-theme((
-      color: (
-        primary: map-get($theme, 'primary'),
-        accent: map-get($theme, 'accent'),
-        warn: map-get($theme, 'warn'),
-      ),
-      typography: mat.define-typography-config(),
-      density: 0,
-    ));
+// Set colors
+@mixin scaffold-colors($theme: $lf-default-theme, $class) {
+  $theme: map-merge($lf-default-theme, $theme);
 
-    @include mat.all-component-themes($mat-theme);
+  .#{$class} {
+    @if(map-get($theme, 'dark') == false) {
+      $mat-theme: mat.define-light-theme((
+        color: (
+          primary: map-get($theme, 'primary'),
+          accent: map-get($theme, 'accent'),
+          warn: map-get($theme, 'warn'),
+        ),
+        typography: mat.define-typography-config(),
+        density: 0,
+      ));
+      @include mat.all-component-colors($mat-theme);
+    } @else {
+      $mat-theme: mat.define-dark-theme((
+        color: (
+          primary: map-get($theme, 'primary'),
+          accent: map-get($theme, 'accent'),
+          warn: map-get($theme, 'warn'),
+        ),
+        typography: mat.define-typography-config(),
+        density: 0,
+      ));
+      @include mat.all-component-colors($mat-theme);
+    }
   }
 
-  :root {
-    --color-primary: #{mat.get-color-from-palette(map-get($theme, 'primary'), 500)};
-    --color-accent: #{mat.get-color-from-palette(map-get($theme, 'accent'), 500)};
-    --color-warn: #{mat.get-color-from-palette(map-get($theme, 'warn'), 500)};
+  @include color-variables($theme, #{'body.'+$class});
+}
+
+@mixin color-variables($theme, $scope) {
+  #{$scope}{
+    @for $i from 0 through 9 {
+      $hue: $i * 100;
+      @if ($hue == 0) {
+        $hue: 50
+      }
+
+      --color-primary-#{$hue}: #{mat.get-color-from-palette(map-get($theme, 'primary'), $hue)};
+      --color-accent-#{$hue}: #{mat.get-color-from-palette(map-get($theme, 'accent'), $hue)};
+      --color-warn-#{$hue}: #{mat.get-color-from-palette(map-get($theme, 'warn'), $hue)};
+    }
   }
 }

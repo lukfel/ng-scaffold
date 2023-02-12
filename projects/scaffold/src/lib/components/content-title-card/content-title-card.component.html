@@ -3,7 +3,7 @@
   class="lf-content-title-card mat-elevation-z1 px-4">
   <!-- back button -->
   <button
-    *ngIf="contentTitleCardConfig?.showBackButton && routeHistory.length > 2"
+    *ngIf="contentTitleCardConfig?.showBackButton && routeHistory.length > 1"
     mat-icon-button
     color="accent"
     (click)="backButtonClicked()">
@@ -20,6 +20,6 @@
   <!-- empty button spacer -->
   <div
     [style.width]="
-      contentTitleCardConfig?.showBackButton && routeHistory.length > 2 ? '48px' : '0px'
+      contentTitleCardConfig?.showBackButton && routeHistory.length > 1 ? '48px' : '0px'
     "></div>
 </mat-card>

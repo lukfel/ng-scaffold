@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, NavbarConfig, ToTopButtonConfig, ContentTitleCardConfig } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +20,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription = new Subscription;
 
-  constructor(private scaffoldService: ScaffoldService) { }
+  constructor(private scaffoldService: ScaffoldService, @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     // Listen for config changes
@@ -63,6 +64,13 @@ export class StartpageComponent implements OnInit, OnDestroy {
     } else {
       this.footerConfig.svgLogo = 'lf_logo'
     }
+  }
+
+  public setTheme(theme: string): void {
+    this.document.body.classList.forEach(value => {
+      this.document.body.classList.remove(value);
+    })
+    this.document.body.classList.add(theme);
   }
 
 }

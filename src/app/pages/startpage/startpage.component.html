@@ -3,6 +3,16 @@
   <p>This is a simple demo application that lets you play around with the scaffold elements.</p>
   <mat-divider></mat-divider>
 
+  <h2>Themes</h2>
+  <p>
+    You can define multiple themes and switch through them by setting the corresponding css class.
+  </p>
+  <button mat-flat-button color="accent" (click)="setTheme('theme1')">Theme 1</button>
+  <button mat-flat-button color="accent" (click)="setTheme('theme2')">Theme 2</button>
+  <button mat-flat-button color="accent" (click)="setTheme('theme3')">Theme 3</button>
+  <button mat-flat-button color="accent" (click)="setTheme('theme4')">Theme 4</button>
+  <mat-divider></mat-divider>
+
   <h2>Scaffold</h2>
   <p>
     The scaffold is the global wrapper element that controls all ui elements based on its config.
