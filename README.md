@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # TODO:
 * allow for more theme customizations (typography, density, ...)
-* fix height on mobile
-* add swipe actions
+* fix 100vh height on mobile (https://dev.to/rachelg/a-javascript-fix-for-the-100vh-problem-on-mobile-screens-9im)
+* add swipe actions (evaluate hammerjs)
 
 # Documentation
 ## Introduction

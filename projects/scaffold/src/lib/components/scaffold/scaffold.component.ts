@@ -2,7 +2,7 @@ import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ToTopButtonConfig } from '../../models';
-import { BreakpointService, RouterService, ScaffoldService } from '../../services';
+import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
   selector: 'lf-scaffold',
@@ -35,7 +35,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
   constructor(private scaffoldService: ScaffoldService,
     private breakpointService: BreakpointService,
-    private routerService: RouterService) { }
+    private routerService: RouterService,
+    private logger: Logger) { }
 
   ngOnInit(): void {
     // Listen for config changes
@@ -77,7 +78,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this._subscription.add(this.routerService.currentRoute$.subscribe((currentRout: string) => this.currentRoute = currentRout));
 
     // Listen for route loading
-    this._subscription.add(this.routerService.loading$.subscribe(loading => this.routeLoading = loading))
+    this._subscription.add(this.routerService.loading$.subscribe(loading => this.routeLoading = loading));
   }
 
   ngOnDestroy(): void {
@@ -95,6 +96,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   public headerInputChanged(value: string): void {
+    this.scaffoldService.headerInputValue = value;
     this.headerInputEvent.emit(value);
   }
 
@@ -105,5 +107,9 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public backButtonClickEvent(): void {
     this.routerService.navigateBack();
   }
+
+  // public swiperight(value: string): void {
+  //   this.logger.log(value);
+  // }
 
 }

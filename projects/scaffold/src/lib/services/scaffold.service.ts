@@ -20,6 +20,21 @@ export class ScaffoldService {
     this._scaffoldConfig$.next(value);
   }
 
+  // Header Input
+  private _headerInputValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  public get headerInputValue$(): Observable<string> {
+    return this._headerInputValue$;
+  }
+
+  public get headerInputValue(): string {
+    return this._headerInputValue$.value;
+  }
+
+  public set headerInputValue(value: string) {
+    this._headerInputValue$.next(value);
+  }
+
   // constructor(@Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
 
