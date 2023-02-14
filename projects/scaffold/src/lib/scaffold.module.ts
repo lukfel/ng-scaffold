@@ -1,5 +1,4 @@
 import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
-import { HammerModule } from '@angular/platform-browser';
 import { ContentTitleCardComponent } from './components/content-title-card/content-title-card.component';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
@@ -14,14 +13,6 @@ import { SharedModule } from './shared/shared.module';
 
 export const CONFIG = new InjectionToken<LibraryConfig>('config');
 
-// @Injectable()
-// export class CustomHammerConfig extends HammerGestureConfig {
-//   public override overrides = {
-//     pinch: { enable: false },
-//     rotate: { enable: false }
-//   };
-// }
-
 @NgModule({
   declarations: [
     ScaffoldComponent,
@@ -35,8 +26,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     ConfirmDialogComponent
   ],
   imports: [
-    SharedModule,
-    HammerModule
+    SharedModule
   ],
   exports: [
     ScaffoldComponent,
@@ -55,8 +45,7 @@ export class ScaffoldModule {
     return {
       ngModule: ScaffoldModule,
       providers: [
-        { provide: CONFIG, useValue: config },
-        // { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
+        { provide: CONFIG, useValue: config }
       ]
     }
   }

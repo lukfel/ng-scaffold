@@ -11,7 +11,7 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
-  @ViewChild('scrollElement') public scrollElement: ElementRef;
+  @ViewChild('scrollElement', { static: true }) public scrollElement: ElementRef;
 
   public scaffoldConfig: ScaffoldConfig = {};
   public headerConfig: HeaderConfig = {};
@@ -30,6 +30,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public currentRoute: string;
   public isMobile: boolean = false;
   public routeLoading: boolean = false;
+  public scrollTopPosition: number = 0;
 
   private _subscription: Subscription = new Subscription;
 
@@ -79,6 +80,14 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for route loading
     this._subscription.add(this.routerService.loading$.subscribe(loading => this.routeLoading = loading));
+
+    // Listen to scroll events
+    if(this.scrollElement) {
+      this.scrollElement.nativeElement.addEventListener('scroll', (e: Event) => {
+        const target: HTMLElement = e.target as HTMLElement;
+        this.scrollTopPosition = target.scrollTop;
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -107,9 +116,5 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public backButtonClickEvent(): void {
     this.routerService.navigateBack();
   }
-
-  // public swiperight(value: string): void {
-  //   this.logger.log(value);
-  // }
 
 }

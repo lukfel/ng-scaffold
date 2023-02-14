@@ -6,6 +6,7 @@
 }
 
 .lf-header {
+  transition: top $transition;
   z-index: $header-z-index;
   position: fixed;
   top: 0;

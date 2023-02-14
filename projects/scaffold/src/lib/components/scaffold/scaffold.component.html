@@ -5,7 +5,6 @@
   <lf-header
     [headerConfig]="headerConfig"
     [isMobile]="isMobile"
-    [scrollElement]="scrollElement"
     [routeLoading]="routeLoading"
     (headerClickEvent)="headerButtonClicked($event)"
     (headerSubmitEvent)="headerInputSubmitted($event)"
@@ -48,5 +47,6 @@
   <lf-to-top-button
     [toTopButtonConfig]="toTopButtonConfig"
     [scrollElement]="scrollElement"
+    [autoHide]="scrollTopPosition <= 0"
     [moveUp]="isMobile && navbarConfig?.enable!"></lf-to-top-button>
 </div>

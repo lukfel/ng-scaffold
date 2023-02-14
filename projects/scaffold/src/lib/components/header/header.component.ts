@@ -10,7 +10,6 @@ export class HeaderComponent implements OnInit {
 
   @Input() public headerConfig: HeaderConfig = {};
   @Input() public isMobile: boolean = false;
-  @Input() public scrollElement: HTMLElement;
   @Input() public routeLoading: boolean = false;
 
   @Output() public headerClickEvent = new EventEmitter<string>();

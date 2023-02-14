@@ -1,7 +1,7 @@
 <mat-sidenav-container *ngIf="drawerConfig?.enable; else noDrawer" class="lf-drawer-container">
   <!-- drawer -->
   <mat-sidenav
-    class="lf-drawer"
+    class="lf-drawer mat-elevation-z2"
     [mode]="isMobile ? 'over' : 'side'"
     [opened]="drawerConfig?.open"
     [autoFocus]="false"
