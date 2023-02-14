@@ -11,7 +11,8 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
-  @ViewChild('scrollElement', { static: true }) public scrollElement: ElementRef;
+  @ViewChild('scaffold', { static: true }) public scaffoldElement: ElementRef;
+  @ViewChild('scrollContent', { static: true }) public scrollContent: ElementRef;
 
   public scaffoldConfig: ScaffoldConfig = {};
   public headerConfig: HeaderConfig = {};
@@ -20,6 +21,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public footerConfig: FooterConfig = {};
   public contentTitleCardConfig: ContentTitleCardConfig = {};
   public toTopButtonConfig: ToTopButtonConfig = {};
+
+  public mobileOffset: number = 0;
 
   @Output() public headerClickEvent = new EventEmitter<string>();
   @Output() public headerSubmitEvent = new EventEmitter<string>();
@@ -70,8 +73,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         this.routeHistory = routeHistory;
       }
 
-      if (this.scrollElement && this.scaffoldConfig?.scrollPositionRestoration) {
-        this.scrollElement.nativeElement.scrollTop = 0;
+      if (this.scrollContent && this.scaffoldConfig?.scrollPositionRestoration) {
+        this.scrollContent.nativeElement.scrollTop = 0;
       }
     }));
 
@@ -82,11 +85,18 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this._subscription.add(this.routerService.loading$.subscribe(loading => this.routeLoading = loading));
 
     // Listen to scroll events
-    if(this.scrollElement) {
-      this.scrollElement.nativeElement.addEventListener('scroll', (e: Event) => {
+    if(this.scrollContent) {
+      this.scrollContent.nativeElement.addEventListener('scroll', (e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;
         this.scrollTopPosition = target.scrollTop;
       });
+    }
+
+    // Offset height for address bar on mobile
+    if(this.scaffoldElement) {
+      const actualHeight: number = window.innerHeight;
+      const elementHeight: number = this.scaffoldElement.nativeElement.clientHeight;
+      this.mobileOffset = elementHeight - actualHeight;
     }
   }
 

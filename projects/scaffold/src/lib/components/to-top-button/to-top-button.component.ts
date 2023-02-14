@@ -9,13 +9,13 @@ import { ToTopButtonConfig } from '../../models';
 export class ToTopButtonComponent {
 
   @Input() public toTopButtonConfig: ToTopButtonConfig = {};
-  @Input() public scrollElement: HTMLElement;
+  @Input() public scrollContent: HTMLElement;
   @Input() public autoHide: boolean = true;
   @Input() public moveUp: boolean = false;
 
   public backToTop(): void {
-    if (this.scrollElement) {
-      this.scrollElement.scrollTop = 0;
+    if (this.scrollContent) {
+      this.scrollContent.scrollTop = 0;
     }
   }
 
