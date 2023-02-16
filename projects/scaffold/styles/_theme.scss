@@ -6,7 +6,8 @@ $lf-default-theme: (
   primary: mat.define-palette(mat.$blue-palette),
   accent: mat.define-palette(mat.$pink-palette, A200, A100, A400),
   warn: mat.define-palette(mat.$red-palette),
-  dark: false
+  dark: false,
+  font-family: 'Roboto'
 );
 
 // Set theme
@@ -16,16 +17,33 @@ $lf-default-theme: (
 @mixin scaffold-theme($theme: $lf-default-theme) {
   $theme: map-merge($lf-default-theme, $theme);
 
-  $mat-theme: mat.define-light-theme((
-    color: (
-      primary: map-get($theme, 'primary'),
-      accent: map-get($theme, 'accent'),
-      warn: map-get($theme, 'warn'),
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  ));
-  @include mat.all-component-themes($mat-theme);
+  @if(map-get($theme, 'dark') == false) {
+    $mat-theme: mat.define-light-theme((
+      color: (
+        primary: map-get($theme, 'primary'),
+        accent: map-get($theme, 'accent'),
+        warn: map-get($theme, 'warn'),
+      ),
+      typography: mat.define-typography-config(
+        $font-family: map-get($theme, 'font-family')
+      ),
+      density: 0,
+    ));
+    @include mat.all-component-themes($mat-theme);
+  } @else {
+    $mat-theme: mat.define-dark-theme((
+      color: (
+        primary: map-get($theme, 'primary'),
+        accent: map-get($theme, 'accent'),
+        warn: map-get($theme, 'warn'),
+      ),
+      typography: mat.define-typography-config(
+        $font-family: map-get($theme, 'font-family')
+      ),
+      density: 0,
+    ));
+    @include mat.all-component-themes($mat-theme);
+  }
   @include color-variables($theme, 'body');
 }
 
@@ -40,9 +58,7 @@ $lf-default-theme: (
           primary: map-get($theme, 'primary'),
           accent: map-get($theme, 'accent'),
           warn: map-get($theme, 'warn'),
-        ),
-        typography: mat.define-typography-config(),
-        density: 0,
+        )
       ));
       @include mat.all-component-colors($mat-theme);
     } @else {
@@ -51,9 +67,7 @@ $lf-default-theme: (
           primary: map-get($theme, 'primary'),
           accent: map-get($theme, 'accent'),
           warn: map-get($theme, 'warn'),
-        ),
-        typography: mat.define-typography-config(),
-        density: 0,
+        )
       ));
       @include mat.all-component-colors($mat-theme);
     }

@@ -14,7 +14,9 @@
     <!-- logo & title -->
     <div
       class="lf-header-logo-title-wrapper ml-1 mr-2"
-      [class.ml-10]="headerConfig?.leftMenuButton && !isMobile">
+      [class.ml-10]="headerConfig?.leftMenuButton && !isMobile"
+      [class.lf-clickable]="headerConfig?.titleRouterLink"
+      [routerLink]="headerConfig?.titleRouterLink ? [headerConfig?.titleRouterLink] : null">
       <!-- svg logo -->
       <mat-icon
         *ngIf="headerConfig?.svgLogo; else imgLogo"

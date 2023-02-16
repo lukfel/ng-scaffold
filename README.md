@@ -56,13 +56,13 @@ $theme: (
 ```
 
 ### Multiple Themes
-To define multiple themes that can be changed dynamically, include the additional theme with ``lf.scaffold-colors($theme2, 'theme2')`` where the second parameter is the class name that needs to be present on the body like ``<body class="theme2">``.
+To dynamically switch between themes, create and include the theme with ``lf.scaffold-colors($theme2, 'theme2')`` where the second parameter is the class name that needs to be present on the body like ``<body class="theme2">``.
 * Hint: You can dymanically add classes to the body with ``document.body.classList.add('theme2')``.
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$theme1: (
+$base-theme: (
   primary: mat.define-palette(mat.$pink-palette),
   accent: mat.define-palette(mat.$blue-palette),
   warn: mat.define-palette(mat.$red-palette),
@@ -72,12 +72,34 @@ $theme1: (
 $theme2: (
   primary: mat.define-palette(mat.$purple-palette),
   accent: mat.define-palette(mat.$amber-palette),
-  warn: mat.define-palette(mat.$red-palette),
   dark: false
 );
 
-@include lf.scaffold-theme($theme1);              // Set the primary theme with lf.scaffold-theme(...)
-@include lf.scaffold-colors($theme2, 'theme2');   // Set additional themes with lf.scaffold-colors(...)
+@include lf.scaffold-theme($base-theme);              // Set the primary theme with lf.scaffold-theme(...)
+@include lf.scaffold-colors($theme2, 'theme2');       // Set additional themes with lf.scaffold-colors(...)
+...
+```
+
+### Custom Typography
+The change the default typography from Roboto, you can pass an additional property ``font-family`` in the base theme map.
+* Hint: Don't forget to import and set your desired font-family in your application.
+```scss
+@use "@lukfel/scaffold/styles" as lf;
+@use '@angular/material' as mat;
+
+$base-theme: (
+  primary: mat.define-palette(mat.$pink-palette),
+  accent: mat.define-palette(mat.$blue-palette),
+  warn: mat.define-palette(mat.$red-palette),
+  dark: false,
+  font-family: 'Comic Sans'
+);
+
+@include lf.scaffold-theme($base-theme); 
+
+body {
+    font-family: "Comic Sans MS" !important;
+}
 ...
 ```
 
@@ -110,40 +132,81 @@ import { ScaffoldService, ScaffoldConfig } from '@lukfel/scaffold';
 export class AppComponent {
 
   public scaffoldConfig: ScaffoldConfig = {
-    ...
-    // HeaderConfig
+    scrollPositionRestoration: true,
+    // see HeaderConfig
     headerConfig: {
       enable: true,
-      ...
+      title: 'Scaffold',
+      subtitle: 'by Lukas Felbinger',
+      leftMenuButton: {
+        id: 'menu',
+        matIcon: 'menu'
+      },
+      rightMenuButtons: [
+        {
+          id: 'item1',
+          label: 'Item 1'
+        },
+        {
+          id: 'item2',
+          label: 'Item 2'
+        },
+        {
+          id: 'item3',
+          matIcon: 'settings'
+        }
+      ],
       inputConfig: {
-        enable: true,
-        ...
+        enable: false
       }
     },
-    // NavbarConfig
+    // see NavbarConfig
     navbarConfig: {
       enable: true,
-      ...
+      menuButtons: [
+        {
+          id: 'nav1',
+          label: 'Nav 1',
+          matIcon: 'looks_one'
+        },
+        {
+          id: 'nav2',
+          label: 'Nav 2',
+          matIcon: 'looks_two'
+        },
+        {
+          id: 'nav3',
+          label: 'Nav 3',
+          matIcon: 'looks_three'
+        }
+      ]
     },
-    // DrawerConfig
+    // see DrawerConfig
     drawerConfig: {
-      enable: true,
-      ...
+      enable: false
     },
-    // FooterConfig
+    // see FooterConfig
     footerConfig: {
       enable: true,
-      ...
+      links: [
+        {
+          label: 'Link 1'
+        },
+        {
+          label: 'Link 2'
+        },
+      ],
+      copyright: '© Lukas Felbinger 2023. All rights reserved.'
     },
-    // ContentTitleCardConfig
+    // see ContentTitleCardConfig
     contentTitleCardConfig: {
       enable: true,
-      ...
+      label: 'Example Title',
+      showBackButton: true
     },
-    // ToTopButtonConfig
+    // see ToTopButtonConfig
     toTopButtonConfig: {
-      enable: true,
-      ...
+      enable: true
     }
   }
 

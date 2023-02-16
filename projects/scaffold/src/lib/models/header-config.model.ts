@@ -6,6 +6,7 @@ export interface HeaderConfig {
   imgLogo?: string;
   title?: string;
   subtitle?: string;
+  titleRouterLink?: string;
   loading?: boolean;
   showRouteLoading?: boolean;
   leftMenuButton?: MenuButton;

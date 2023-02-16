@@ -20,6 +20,10 @@
     overflow: hidden;
     max-width: $header-logo-title-wrapper-max-width;
 
+    &.lf-clickable {
+      cursor: pointer;
+    }
+
     .lf-header-logo {
       width: $header-logo-size;
       height: $header-logo-size;

@@ -22,6 +22,7 @@ export class AppComponent {
       svgLogo: 'lf_logo',
       title: 'Scaffold',
       subtitle: 'by Lukas Felbinger',
+      titleRouterLink: 'start',
       loading: false,
       showRouteLoading: true,
       leftMenuButton: {

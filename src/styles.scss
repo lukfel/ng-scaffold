@@ -1,36 +1,34 @@
 @use "@lukfel/scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$theme1: (
+$base-theme: (
   primary: mat.define-palette(mat.$pink-palette),
   accent: mat.define-palette(mat.$blue-palette),
   warn: mat.define-palette(mat.$red-palette),
-  dark: false
+  dark: false,
+  font-family: 'Roboto'
 );
 
 $theme2: (
   primary: mat.define-palette(mat.$pink-palette),
   accent: mat.define-palette(mat.$blue-palette),
-  warn: mat.define-palette(mat.$red-palette),
   dark: true
 );
 
 $theme3: (
   primary: mat.define-palette(mat.$purple-palette),
   accent: mat.define-palette(mat.$amber-palette),
-  warn: mat.define-palette(mat.$red-palette),
   dark: false
 );
 
 $theme4: (
   primary: mat.define-palette(mat.$purple-palette),
   accent: mat.define-palette(mat.$amber-palette),
-  warn: mat.define-palette(mat.$red-palette),
   dark: true
 );
 
 // Main theme
-@include lf.scaffold-theme($theme1);
+@include lf.scaffold-theme($base-theme);
 
 // Additional themes
 @include lf.scaffold-colors($theme2, 'theme2');

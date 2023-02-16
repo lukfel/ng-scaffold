@@ -10,5 +10,8 @@
 
   .lf-content-title-card-label {
     font-size: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

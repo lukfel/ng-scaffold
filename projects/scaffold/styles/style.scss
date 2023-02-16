@@ -11,11 +11,14 @@ html {
 }
 
 body {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
   overflow: hidden !important;
   height: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
+
+  // Overwrite this for custom typography
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
 }
 
 // Scrollbar
