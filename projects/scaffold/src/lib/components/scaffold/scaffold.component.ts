@@ -11,7 +11,6 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
-  @ViewChild('scaffold', { static: true }) public scaffoldElement: ElementRef;
   @ViewChild('scrollContent', { static: true }) public scrollContent: ElementRef;
 
   public scaffoldConfig: ScaffoldConfig = {};
@@ -21,8 +20,6 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public footerConfig: FooterConfig = {};
   public contentTitleCardConfig: ContentTitleCardConfig = {};
   public toTopButtonConfig: ToTopButtonConfig = {};
-
-  public mobileOffset: number = 0;
 
   @Output() public headerClickEvent = new EventEmitter<string>();
   @Output() public headerSubmitEvent = new EventEmitter<string>();
@@ -93,11 +90,11 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }
 
     // Offset height for address bar on mobile
-    if(this.scaffoldElement) {
-      const actualHeight: number = window.innerHeight;
-      const elementHeight: number = this.scaffoldElement.nativeElement.clientHeight;
-      this.mobileOffset = elementHeight - actualHeight;
-    }
+    // if(this.scaffoldElement) {
+    //   const actualHeight: number = window.innerHeight;
+    //   const elementHeight: number = this.scaffoldElement.nativeElement.clientHeight;
+    //   this.mobileOffset = elementHeight - actualHeight;
+    // }
   }
 
   ngOnDestroy(): void {

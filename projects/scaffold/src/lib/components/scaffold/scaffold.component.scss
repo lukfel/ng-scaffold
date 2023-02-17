@@ -1,16 +1,24 @@
 @import '../../../../styles/variables';
 
 .lf-scaffold {
+  height: 100vh;
+
   .lf-content-wrapper {
     transition: height $transition;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     height: 100vh;
     overflow-y: auto;
 
     &.lf-show-navbar {
-      margin-left: calc($navbar-height + (2 * $navbar-padding));
+      left: calc($navbar-height + (2 * $navbar-padding));
     }
 
     &.lf-show-header {
+      top: $header-height;
       height: calc(100vh - $header-height);
     }
 
@@ -19,11 +27,12 @@
     }
 
     &.lf-show-header-and-navbar-mobile {
+      top: $header-height;
       height: calc(100vh - $header-height - $navbar-height);
     }
 
     .lf-content {
-      min-height: 100%;
+      // min-height: 100%;
       padding-left: $content-padding;
       padding-right: $content-padding;
 
