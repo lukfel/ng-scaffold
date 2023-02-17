@@ -11,15 +11,15 @@
     }
 
     &.lf-show-header {
-      height: calc(100vh - $header-height) !important;
+      height: calc(100vh - $header-height);
     }
 
     &.lf-show-navbar-mobile {
-      height: calc(100vh - $navbar-height) !important;
+      height: calc(100vh - $navbar-height);
     }
 
     &.lf-show-header-and-navbar-mobile {
-      height: calc(100vh - $header-height - $navbar-height) !important;
+      height: calc(100vh - $header-height - $navbar-height);
     }
 
     .lf-content {
@@ -28,8 +28,8 @@
       padding-right: $content-padding;
 
       &.lf-content-mobile {
-        padding-left: $content-padding-mobile !important;
-        padding-right: $content-padding-mobile !important;
+        padding-left: $content-padding-mobile;
+        padding-right: $content-padding-mobile;
       }
     }
   }

@@ -10,7 +10,7 @@
   z-index: $header-z-index;
   position: fixed;
   top: 0;
-  height: $header-height !important;
+  height: $header-height;
 
   .lf-header-logo-title-wrapper {
     display: flex;
