@@ -9,7 +9,7 @@
   border-radius: 0;
 
   .lf-content-title-card-label {
-    font-size: 24px;
+    font-size: $content-title-card-labe-font-size;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

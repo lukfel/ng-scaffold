@@ -14,30 +14,39 @@
     <!-- logo & title -->
     <div
       class="lf-header-logo-title-wrapper ml-1 mr-2"
-      [class.ml-10]="headerConfig?.leftMenuButton && !isMobile"
-      [class.lf-clickable]="headerConfig?.titleRouterLink"
-      [routerLink]="headerConfig?.titleRouterLink ? [headerConfig?.titleRouterLink] : null">
-      <!-- svg logo -->
-      <mat-icon
-        *ngIf="headerConfig?.svgLogo; else imgLogo"
-        class="lf-header-logo mr-2"
-        [svgIcon]="headerConfig.svgLogo!"></mat-icon>
-      <!-- img logo -->
-      <ng-template #imgLogo>
-        <img
-          *ngIf="headerConfig?.imgLogo"
-          class="lf-header-logo mr-2"
-          [src]="headerConfig.imgLogo"
-          alt="Logo" />
-      </ng-template>
-      <!-- title -->
-      <div *ngIf="headerConfig?.title || headerConfig?.subtitle" class="lf-header-title-wrapper">
-        <span *ngIf="headerConfig?.title" class="lf-header-title">
-          {{ headerConfig.title }}
-        </span>
-        <span *ngIf="headerConfig?.subtitle" class="lf-header-subtitle">
-          {{ headerConfig.subtitle }}
-        </span>
+      [class.ml-10]="headerConfig?.leftMenuButton && !isMobile">
+      <!-- link wrapper -->
+      <div
+        class="lf-header-logo-title-wrapper-link"
+        [class.lf-clickable]="headerConfig?.titleRouterLink"
+        [routerLink]="headerConfig?.titleRouterLink ? [headerConfig?.titleRouterLink] : null">
+        <!-- svg logo -->
+        <mat-icon
+          *ngIf="headerConfig?.svgLogo; else imgLogo"
+          class="lf-header-logo"
+          [class.mr-2]="headerConfig?.title"
+          [svgIcon]="headerConfig.svgLogo!"></mat-icon>
+        <!-- img logo -->
+        <ng-template #imgLogo>
+          <img
+            *ngIf="headerConfig?.imgLogo"
+            class="lf-header-logo"
+            [class.mr-2]="headerConfig?.title"
+            [src]="headerConfig.imgLogo"
+            alt="Logo" />
+        </ng-template>
+        <!-- title -->
+        <div
+          *ngIf="headerConfig?.title"
+          class="lf-header-title-wrapper"
+          [class.mt-2]="!headerConfig?.subtitle">
+          <span *ngIf="headerConfig?.title" class="lf-header-title">
+            {{ headerConfig.title }}
+          </span>
+          <span *ngIf="headerConfig?.subtitle" class="lf-header-subtitle">
+            {{ headerConfig.subtitle }}
+          </span>
+        </div>
       </div>
     </div>
     <!-- input -->
@@ -98,6 +107,7 @@
     <button
       *ngIf="(menuButton.matIcon || menuButton.svgIcon) && !menuButton.label; else textButton"
       mat-icon-button
+      class="lf-header-menu-button"
       [ngClass]="menuButton.class"
       (click)="buttonClicked(menuButton.id)"
       [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
@@ -120,6 +130,7 @@
     <ng-template #textButton>
       <button
         mat-button
+        class="lf-header-menu-button"
         [ngClass]="menuButton.class"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"

@@ -23,7 +23,7 @@
       a {
         text-decoration: none;
         color: unset;
-        font-size: 12px;
+        font-size: $footer-font-size;
 
         &:hover {
           color: var(--color-primary-500);
@@ -33,6 +33,6 @@
   }
 
   .lf-footer-copyright {
-    font-size: 12px;
+    font-size: $footer-font-size;
   }
 }

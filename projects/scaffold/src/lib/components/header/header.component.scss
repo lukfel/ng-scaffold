@@ -12,16 +12,25 @@
   top: 0;
   height: $header-height;
 
-  .lf-header-logo-title-wrapper {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    flex: 1 0 auto;
-    overflow: hidden;
-    max-width: $header-logo-title-wrapper-max-width;
+  .lf-header-menu-button {
+    flex-shrink: 0;
+  }
 
-    &.lf-clickable {
-      cursor: pointer;
+  .lf-header-logo-title-wrapper {
+    flex: 1 0 auto;
+    max-width: $header-logo-title-wrapper-max-width;
+    overflow: hidden;
+    display: flex;
+
+    .lf-header-logo-title-wrapper-link {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      flex: 0;
+
+      &.lf-clickable {
+        cursor: pointer;
+      }
     }
 
     .lf-header-logo {
@@ -36,13 +45,13 @@
       flex-flow: column;
 
       .lf-header-title {
-        font-size: 20px;
-        line-height: 28px;
+        font-size: $header-title-font-size;
+        line-height: calc($header-title-font-size + 8px);
       }
 
       .lf-header-subtitle {
-        font-size: 12px;
-        line-height: 10px;
+        font-size: $header-subtitle-font-size;
+        line-height: calc($header-subtitle-font-size - 2px);
       }
     }
   }
@@ -50,7 +59,7 @@
   .lf-header-input {
     z-index: $header-z-index;
     width: 100%;
-    flex: 0 1 $header-input-max-width;
+    flex: 1 1 $header-input-max-width;
   }
 
   .lf-header-input-mobile {

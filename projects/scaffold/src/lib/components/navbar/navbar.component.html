@@ -13,7 +13,8 @@
         class="lf-navbar-item"
         [class.lf-navbar-item-active]="isActive(button.id)"
         [ngClass]="button.class"
-        (click)="buttonClicked(button.id)">
+        (click)="buttonClicked(button.id)"
+        tabindex="0">
         <!-- mat icon -->
         <mat-icon
           *ngIf="button?.matIcon; else svgIcon"
