@@ -111,7 +111,8 @@
       [ngClass]="menuButton.class"
       (click)="buttonClicked(menuButton.id)"
       [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
-      [matTooltip]="menuButton.tooltip">
+      [matTooltip]="menuButton.tooltip"
+      [attr.aria-label]="menuButton.id">
       <!-- mat icon -->
       <mat-icon
         *ngIf="menuButton.matIcon; else svgIcon"
