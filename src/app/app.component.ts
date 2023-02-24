@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/scaffold';
+import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService } from '@lukfel/scaffold';
 
 @Component({
   selector: 'app-root',
@@ -25,11 +25,11 @@ export class AppComponent {
       titleRouterLink: 'start',
       loading: false,
       showRouteLoading: true,
-      leftMenuButton: {
-        id: 'drawer',
-        matIcon: 'menu',
-        outlineIcon: true
-      },
+      // leftMenuButton: {
+      //   id: 'drawer',
+      //   matIcon: 'menu',
+      //   outlineIcon: true
+      // },
       rightMenuButtons: [
         {
           id: 'start',
@@ -132,7 +132,8 @@ export class AppComponent {
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
     private scaffoldService: ScaffoldService,
-    private breakpointService: BreakpointService) {
+    private breakpointService: BreakpointService,
+    private seoService: SeoService) {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
     this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
@@ -155,6 +156,13 @@ export class AppComponent {
         }
       }
     });
+
+    // Set Seo tags
+    this.seoService.setMetaTags({
+      metaPageTitle: 'Demo | Scaffold Library',
+      metaPageDescription: 'This Angular library provides a basic UI scaffold and services for mordern web and mobile apps',
+      metaImagePath: 'assets/img/meta.jpg'
+    });
   }
 
   // Listen to header click events
@@ -174,8 +182,8 @@ export class AppComponent {
     } else if (id === 'menu') {
       return;
     }
-      this.router.navigate([id]);
-      return;
+    this.router.navigate([id]);
+    return;
   }
 
   // Listen to header input submit events

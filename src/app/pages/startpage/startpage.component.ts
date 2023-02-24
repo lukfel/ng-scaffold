@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { DrawerConfig, FooterConfig, HeaderConfig, ScaffoldConfig, ScaffoldService, NavbarConfig, ToTopButtonConfig, ContentTitleCardConfig } from '@lukfel/scaffold';
+import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldService, ToTopButtonConfig } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,7 +20,8 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription = new Subscription;
 
-  constructor(private scaffoldService: ScaffoldService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(private scaffoldService: ScaffoldService,
+              @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     // Listen for config changes

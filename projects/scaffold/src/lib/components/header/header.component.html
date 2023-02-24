@@ -36,11 +36,11 @@
             alt="Logo" />
         </ng-template>
         <!-- title -->
-        <div
-          *ngIf="headerConfig?.title"
-          class="lf-header-title-wrapper"
-          [class.mt-2]="!headerConfig?.subtitle">
-          <span *ngIf="headerConfig?.title" class="lf-header-title">
+        <div *ngIf="headerConfig?.title" class="lf-header-title-wrapper">
+          <span
+            *ngIf="headerConfig?.title"
+            class="lf-header-title"
+            [class.mt-2]="!headerConfig?.subtitle">
             {{ headerConfig.title }}
           </span>
           <span *ngIf="headerConfig?.subtitle" class="lf-header-subtitle">

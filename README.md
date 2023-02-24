@@ -1,10 +1,6 @@
-# Scaffold
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
-
 # Documentation
 ## Introduction
-This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, to-top button etc as well as basic services to display snackbars and dialogs. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
+This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, to-top button etc as well as basic services to display snackbars, dialogs and more. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
 
 * Demo https://lukfel.github.io/scaffold
 
@@ -160,6 +156,7 @@ export class AppComponent {
     // see NavbarConfig
     navbarConfig: {
       enable: true,
+      showAllLabels: true,
       menuButtons: [
         {
           id: 'nav1',
@@ -174,7 +171,7 @@ export class AppComponent {
         {
           id: 'nav3',
           label: 'Nav 3',
-          matIcon: 'looks_three'
+          matIcon: 'looks_3'
         }
       ]
     },
@@ -253,7 +250,13 @@ public navbarClickEvent(id: string): void {
 ```
 
 ## Additional Services
-The library provides additional commonly needed services.
+The library provides some additional commonly used services, such as:
+* ``Logger`` (for logging during development only)
+* ``SnackbarService`` (provides methods to display snackbars)
+* ``DialogService`` (provides methods to display dialogs)
+* ``BreakpointService`` (allows listening for breakpoint changes)
+* ``RouterService`` (contains the current route and the route history)
+* ``SeoService`` (allows to set all meta tags with one method)
 
 ### Logger
 This service only logs out information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).
@@ -343,117 +346,3 @@ export class AppComponent {
   }
 }
 ```
-
-__________
-
-## Angular
-* Reference: https://github.com/angular/angular-cli/wiki
-
-### Requirements
-* Node: https://nodejs.org/en/download/
-* NPM: ``npm install npm@latest -g``
-
-### Installation
-* ``npm install -g @angular/cli``
-* ``npm uninstall -g @angular/cli cache verify``
-
-### Update
-* ``ng update @angular/cli @angular/core``
-
-### Create Project
-* ``ng new [app] --prefix [lf] --style [scss] --routing --skipTests``
-
-### Generate Route
-* ``ng generate module [name] --route [route] --module app.module``
-
-### Generate Library
-* ``ng generate library [name] --prefix [lf]``
-
-### Serve Project
-* ``ng serve --host 0.0.0.0 --port 4200``
-
-### Deployement
-* ``ng build --configuration production``
-
-### Testing
-* ``ng test --browsers ChromeHeadless --code-coverage true --watch false``
-
-__________
-
-## Material (Design Language)
-* Reference: https://material.angular.io/guide/getting-started
-
-### Installation
-* ``ng add @angular/material``
-
-### Update
-* ``ng update @angular/material``
-
-### Optional
-* ``npm install material-design-icons``
-* ``npm install roboto-fontface``
-
-__________
-
-## Eslint
-* Reference: https://github.com/angular-eslint/angular-eslint
-
-### Installation
-* ``ng add @angular-eslint/schematics``
-* ``npm install prettier eslint-plugin-prettier eslint-config-prettier --save-dev``
-* ``npm install eslint-plugin-unused-imports --save-dev``
-
-__________
-
-## AngularFire/Firebase (Serverless Backend)
-* Reference: https://github.com/angular/angularfire
-
-### Installation
-* ``ng add @angular/fire``
-
-### Update
-* ``ng update @angular/fire``
-
-### Deployement
-* ``ng run [app]:deploy``
-* Note: Hostable build is created in the folder "dist/"
-
-### Optional
-* ``npm install -g firebase-tools``
-
-__________
-
-## Service worker (PWA)
-* Reference: https://angular.io/guide/service-worker-getting-started
-
-### Installation
-* ``ng add @angular/pwa --project [app]``
-
-__________
-
-## Husky (Git-hooks)
-* Reference: https://github.com/typicode/husky
-
-### Installation
-* ``npm install husky --save-dev``
-
-### Usage [package.json]
-```json
-"husky": {
-  "hooks": {
-    "pre-commit": "npm run lint && git add .",
-    "pre-push": "npm run build"
-  }
-},
-```
-
-__________
-
-## Scully (Static Pages)
-* Reference: https://github.com/scullyio/scully
-
-### Installation
-* ``ng add @scullyio/init``
-
-### Usage
-* ``npm run scully``

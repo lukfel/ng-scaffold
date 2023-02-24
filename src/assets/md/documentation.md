@@ -1,6 +1,6 @@
 # Documentation
 ## Introduction
-This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, to-top button etc as well as basic services to display snackbars and dialogs. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
+This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, to-top button etc as well as basic services to display snackbars, dialogs and more. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
 
 * Demo https://lukfel.github.io/scaffold
 
@@ -156,6 +156,7 @@ export class AppComponent {
     // see NavbarConfig
     navbarConfig: {
       enable: true,
+      showAllLabels: true,
       menuButtons: [
         {
           id: 'nav1',
@@ -170,7 +171,7 @@ export class AppComponent {
         {
           id: 'nav3',
           label: 'Nav 3',
-          matIcon: 'looks_three'
+          matIcon: 'looks_3'
         }
       ]
     },
@@ -249,7 +250,13 @@ public navbarClickEvent(id: string): void {
 ```
 
 ## Additional Services
-The library provides additional commonly needed services.
+The library provides some additional commonly used services, such as:
+* ``Logger`` (for logging during development only)
+* ``SnackbarService`` (provides methods to display snackbars)
+* ``DialogService`` (provides methods to display dialogs)
+* ``BreakpointService`` (allows listening for breakpoint changes)
+* ``RouterService`` (contains the current route and the route history)
+* ``SeoService`` (allows to set all meta tags with one method)
 
 ### Logger
 This service only logs out information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).
