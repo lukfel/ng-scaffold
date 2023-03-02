@@ -1,0 +1,16 @@
+.drawer-container {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+
+  .active {
+    .mat-icon, span {
+      color: var(--color-primary-500) !important;
+    }
+  }
+
+  .hint {
+    font-size: 12px;
+  }
+}

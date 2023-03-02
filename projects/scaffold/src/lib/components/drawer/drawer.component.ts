@@ -10,6 +10,7 @@ export class DrawerComponent implements OnInit {
 
   @Input() public drawerConfig: DrawerConfig = {};
   @Input() public isMobile: boolean = false;
+  @Input() public fixedOffset: number = 0;
 
   ngOnInit(): void {
     // Avoid initializing an open drawer on mobile

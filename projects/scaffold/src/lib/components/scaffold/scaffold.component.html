@@ -26,7 +26,10 @@
     "
     #scrollContent>
     <!-- drawer -->
-    <lf-drawer [drawerConfig]="drawerConfig" [isMobile]="isMobile">
+    <lf-drawer
+      [drawerConfig]="drawerConfig"
+      [isMobile]="isMobile"
+      [fixedOffset]="headerConfig?.enable ? 64 : 0">
       <!-- drawer content -->
       <ng-content select="[drawerContent]" drawerContent></ng-content>
       <!-- content title card -->

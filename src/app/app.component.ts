@@ -25,11 +25,11 @@ export class AppComponent {
       titleRouterLink: 'start',
       loading: false,
       showRouteLoading: true,
-      // leftMenuButton: {
-      //   id: 'drawer',
-      //   matIcon: 'menu',
-      //   outlineIcon: true
-      // },
+      leftMenuButton: {
+        id: 'drawer',
+        matIcon: 'menu',
+        outlineIcon: true
+      },
       rightMenuButtons: [
         {
           id: 'start',
@@ -57,8 +57,8 @@ export class AppComponent {
     },
     // NavbarConfig
     navbarConfig: {
-      enable: true,
-      showAllLabels: true,
+      enable: false,
+      showAllLabels: false,
       menuButtons: [
         {
           id: 'start',
@@ -83,7 +83,7 @@ export class AppComponent {
     // DrawerConfig
     drawerConfig: {
       enable: true,
-      open: false,
+      open: true,
       fixed: true
     },
     // FooterConfig
@@ -149,13 +149,21 @@ export class AppComponent {
       if (this.scaffoldConfig?.headerConfig) {
         // Check which breakpoint is active
         if (result.breakpoints[Breakpoints.XSmall]) {
-          this.mobileRightMenuButtons[0].menuButtons = defaultRightMenuButtons;
-          this.scaffoldConfig.headerConfig.rightMenuButtons = this.mobileRightMenuButtons;
-        } else {
-          this.scaffoldConfig.headerConfig.rightMenuButtons = defaultRightMenuButtons;
+          if (this.scaffoldConfig?.headerConfig) {
+            this.mobileRightMenuButtons[0].menuButtons = defaultRightMenuButtons;
+            this.scaffoldConfig.headerConfig.rightMenuButtons = this.mobileRightMenuButtons;
+          } else {
+            this.scaffoldConfig.headerConfig.rightMenuButtons = defaultRightMenuButtons;
+          }
         }
       }
-    });
+
+        if (this.scaffoldConfig?.navbarConfig?.enable === false) {
+          if (result.breakpoints[Breakpoints.XSmall]) {
+            this.scaffoldConfig.navbarConfig.enable = true;
+          }
+        }
+      });
 
     // Set Seo tags
     this.seoService.setMetaTags({
