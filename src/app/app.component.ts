@@ -4,6 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService } from '@lukfel/scaffold';
+import packageJson from '../../package.json';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, S
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  public version = packageJson.version;
 
   public scaffoldConfig: ScaffoldConfig = {
     // ScaffoldConfig
@@ -21,7 +24,7 @@ export class AppComponent {
       enable: true,
       svgLogo: 'lf_logo',
       title: 'Scaffold',
-      subtitle: 'by Lukas Felbinger',
+      subtitle: `by Lukas Felbinger (v${packageJson.version})`,
       titleRouterLink: 'start',
       loading: false,
       showRouteLoading: true,
@@ -158,12 +161,12 @@ export class AppComponent {
         }
       }
 
-        if (this.scaffoldConfig?.navbarConfig?.enable === false) {
-          if (result.breakpoints[Breakpoints.XSmall]) {
-            this.scaffoldConfig.navbarConfig.enable = true;
-          }
+      if (this.scaffoldConfig?.navbarConfig?.enable === false) {
+        if (result.breakpoints[Breakpoints.XSmall]) {
+          this.scaffoldConfig.navbarConfig.enable = true;
         }
-      });
+      }
+    });
 
     // Set Seo tags
     this.seoService.setMetaTags({
