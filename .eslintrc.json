@@ -9,7 +9,8 @@
     "assets/*",
     ".vscode/*",
     "**/index.html",
-    "**/index.*.html"
+    "**/index.*.html",
+    "*.spec.ts"
   ],
   "overrides": [
     {

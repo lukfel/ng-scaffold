@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TypographyComponent } from './typography.component';
 
-describe('NotFoundComponent', () => {
+describe('TypographyComponent', () => {
   let component: TypographyComponent;
   let fixture: ComponentFixture<TypographyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TypographyComponent ]
+      declarations: [TypographyComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TypographyComponent);
     component = fixture.componentInstance;

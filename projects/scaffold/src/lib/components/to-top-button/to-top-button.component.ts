@@ -19,7 +19,7 @@ export class ToTopButtonComponent {
     }
   }
 
-  public getButtomPosition(): number {
+  public getBottomPosition(): number {
     return this.moveUp ? 72 + 24 : 24;
   }
 

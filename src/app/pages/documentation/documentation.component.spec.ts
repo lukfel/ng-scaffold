@@ -1,16 +1,22 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { DocumentationComponent } from './documentation.component';
 
-describe('ContactComponent', () => {
+describe('DocumentationComponent', () => {
   let component: DocumentationComponent;
   let fixture: ComponentFixture<DocumentationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DocumentationComponent ]
+      declarations: [DocumentationComponent],
+      imports: [
+        HttpClientModule,
+        MarkdownModule.forRoot({ loader: HttpClient })
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DocumentationComponent);
     component = fixture.componentInstance;
