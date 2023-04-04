@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { SharedModule } from '../../shared/shared.module';
 import { NavbarComponent } from './navbar.component';
 
@@ -20,5 +21,23 @@ describe('NavbarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show the navbar if the config is enabled', () => {
+    component.navbarConfig = {
+      enable: true
+    };
+    fixture.detectChanges();
+    const navbar = fixture.debugElement.query(By.css('.lf-navbar'));
+    expect(navbar).toBeTruthy();
+  });
+
+  it('should not show the navbar if the config is disabled', () => {
+    component.navbarConfig = {
+      enable: false
+    };
+    fixture.detectChanges();
+    const navbar = fixture.debugElement.query(By.css('.lf-navbar'));
+    expect(navbar).toBeFalsy();
   });
 });
