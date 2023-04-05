@@ -1,6 +1,6 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ToTopButtonConfig } from '../../models';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
@@ -42,6 +42,9 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
+      this.logger.log('scaffoldConfig:');
+      this.logger.log(scaffoldConfig);
+
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = scaffoldConfig.headerConfig || {};
       this.navbarConfig = scaffoldConfig.navbarConfig || {};
@@ -52,20 +55,26 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }));
 
     // Listen for breakpoint changes
-    this._subscription.add(this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
-      if (result.breakpoints[Breakpoints.XSmall]) {
+    this._subscription.add(this.breakpointService.breakpoint$.subscribe((breakpointState: BreakpointState) => {
+      this.logger.log('breakpointState:');
+      this.logger.log(breakpointState);
+
+      if (breakpointState.breakpoints[Breakpoints.XSmall]) {
         this.isMobile = true;
-      } else if (result.breakpoints[Breakpoints.Small]) {
+      } else if (breakpointState.breakpoints[Breakpoints.Small]) {
         this.isMobile = true;
-      } else if (result.breakpoints[Breakpoints.Medium]) {
+      } else if (breakpointState.breakpoints[Breakpoints.Medium]) {
         this.isMobile = false;
-      } else if (result.breakpoints[Breakpoints.Large]) {
+      } else if (breakpointState.breakpoints[Breakpoints.Large]) {
         this.isMobile = false;
       }
     }));
 
     // Listen for route changes
     this._subscription.add(this.routerService.routeHistory$.subscribe((routeHistory: string[]) => {
+      this.logger.log('routeHistory:');
+      this.logger.log(routeHistory);
+
       if (routeHistory) {
         this.routeHistory = routeHistory;
       }
@@ -76,17 +85,30 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }));
 
     // Listen for current route changes
-    this._subscription.add(this.routerService.currentRoute$.subscribe((currentRout: string) => this.currentRoute = currentRout));
+    this._subscription.add(this.routerService.currentRoute$.subscribe((currentRout: string) => {
+      this.logger.log('currentRout:');
+      this.logger.log(currentRout);
+      this.currentRoute = currentRout
+    }));
 
     // Listen for route loading
-    this._subscription.add(this.routerService.loading$.subscribe(loading => this.routeLoading = loading));
+    this._subscription.add(this.routerService.loading$.subscribe(routeLoading => {
+      this.routeLoading = routeLoading
+    }));
 
     // Listen to scroll events
-    if(this.scrollContent) {
-      this.scrollContent.nativeElement.addEventListener('scroll', (e: Event) => {
+    if (this.scrollContent) {
+      const element: HTMLElement = this.scrollContent.nativeElement;
+
+      this._subscription.add(fromEvent(element, 'scroll').pipe(
+        distinctUntilChanged(),
+        debounceTime(500)
+      ).subscribe((e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;
+        this.logger.log('scrollTopPosition:');
+        this.logger.log(target.scrollTop);
         this.scrollTopPosition = target.scrollTop;
-      });
+      }));
     }
 
     // Offset height for address bar on mobile

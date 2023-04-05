@@ -71,7 +71,7 @@ export class AppComponent {
         },
         {
           id: 'documentation',
-          label: 'Docu',
+          label: 'Documentation',
           matIcon: 'description',
           outlineIcon: true
         },

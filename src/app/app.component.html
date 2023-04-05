@@ -7,17 +7,15 @@
     <div class="drawer-container">
       <mat-nav-list>
         <div mat-subheader>Navigation</div>
-        <a mat-list-item [routerLink]="['/start']" routerLinkActive="active">
-          <span matListItemTitle>Home</span>
-          <mat-icon matListItemIcon class="mx-4 material-icons-outlined">home</mat-icon>
-        </a>
-        <a mat-list-item [routerLink]="['/documentation']" routerLinkActive="active">
-          <span matListItemTitle>Documentation</span>
-          <mat-icon matListItemIcon class="mx-4 material-icons-outlined">description</mat-icon>
-        </a>
-        <a mat-list-item [routerLink]="['/typography']" routerLinkActive="active">
-          <span matListItemTitle>Typography</span>
-          <mat-icon matListItemIcon class="mx-4 material-icons-outlined">text_fields</mat-icon>
+        <a
+          *ngFor="let item of scaffoldConfig?.navbarConfig?.menuButtons"
+          mat-list-item
+          [routerLink]="[item.id]"
+          routerLinkActive="active">
+          <span matListItemTitle>{{ item.label }}</span>
+          <mat-icon matListItemIcon class="mx-4 material-icons-outlined">
+            {{ item.matIcon }}
+          </mat-icon>
         </a>
       </mat-nav-list>
       <div class="p-4 hint">

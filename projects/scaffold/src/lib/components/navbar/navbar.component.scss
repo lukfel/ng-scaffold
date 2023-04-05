@@ -40,7 +40,7 @@
   align-items: center;
   justify-content: center;
   flex-flow: column;
-  border-radius: 50%;
+  border-radius: $navbar-item-border-radius;
   cursor: pointer;
 
   &.lf-navbar-item-active {
