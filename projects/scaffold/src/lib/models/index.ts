@@ -8,4 +8,6 @@ export { NavbarConfig } from './navbar-config.model';
 export { NavigationLink } from './navigation-link.model';
 export { ScaffoldConfig } from './scaffold-config.model';
 export { SeoConfig } from './seo-config.model';
+export { SimpleDialogConfig } from './simple-dialog-config.model';
 export { ToTopButtonConfig } from './to-top-button-config.model';
+

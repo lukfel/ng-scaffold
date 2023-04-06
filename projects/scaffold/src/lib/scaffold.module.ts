@@ -1,6 +1,6 @@
 import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { ContentTitleCardComponent } from './components/content-title-card/content-title-card.component';
-import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import { SimpleDialogComponent } from './components/dialogs/simple-dialog/simple-dialog.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,7 +23,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     ContentTitleCardComponent,
     ToTopButtonComponent,
     LoadingOverlayComponent,
-    ConfirmDialogComponent
+    SimpleDialogComponent
   ],
   imports: [
     SharedModule
@@ -37,7 +37,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     ContentTitleCardComponent,
     ToTopButtonComponent,
     LoadingOverlayComponent,
-    ConfirmDialogComponent
+    SimpleDialogComponent
   ]
 })
 export class ScaffoldModule {

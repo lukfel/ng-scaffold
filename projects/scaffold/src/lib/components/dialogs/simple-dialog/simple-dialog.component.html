@@ -1,0 +1,14 @@
+<h2 *ngIf="config?.title" mat-dialog-title>{{ config.title }}</h2>
+
+<mat-dialog-content>
+  <p *ngIf="config?.message">{{ config.message }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button *ngIf="config?.closeLabel" mat-button [mat-dialog-close]="false">
+    {{ config.closeLabel }}
+  </button>
+  <button *ngIf="config?.confirmLabel" mat-button color="primary" [mat-dialog-close]="true">
+    {{ config.confirmLabel }}
+  </button>
+</mat-dialog-actions>

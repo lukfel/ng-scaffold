@@ -1,7 +1,8 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
-import { ConfirmDialogComponent } from '../components/dialogs/confirm-dialog/confirm-dialog.component';
+import { SimpleDialogComponent } from '../components/dialogs/simple-dialog/simple-dialog.component';
+import { SimpleDialogConfig } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class DialogService {
     return firstValueFrom(dialogRef.afterClosed());
   }
 
-  // Opens a pre-made confirm dialog
-  public openConfirmDialog(title: string, hint?: string): Promise<boolean> {
-    const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
+  // Opens a simple pre-made dialog
+  public openSimpleDialog(config: SimpleDialogConfig): Promise<boolean> {
+    const dialogRef = this.matDialog.open(SimpleDialogComponent, {
       autoFocus: false,
       maxWidth: '368px',
-      data: { title, hint }
+      data: config
     });
     return firstValueFrom(dialogRef.afterClosed());
   }
