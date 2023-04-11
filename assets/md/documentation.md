@@ -3,6 +3,7 @@
 This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, to-top button etc as well as basic services to display snackbars, dialogs and more. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
 
 * Demo https://lukfel.github.io/scaffold
+* Example https://www.create-a-tournament.com
 
 ## Installation
 Install the npm package ``npm install @lukfel/scaffold``.
