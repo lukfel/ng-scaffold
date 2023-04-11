@@ -152,15 +152,14 @@ export class AppComponent {
       if (this.scaffoldConfig?.headerConfig) {
         // Check which breakpoint is active
         if (result.breakpoints[Breakpoints.XSmall]) {
-          if (this.scaffoldConfig?.headerConfig) {
-            this.mobileRightMenuButtons[0].menuButtons = defaultRightMenuButtons;
-            this.scaffoldConfig.headerConfig.rightMenuButtons = this.mobileRightMenuButtons;
-          } else {
-            this.scaffoldConfig.headerConfig.rightMenuButtons = defaultRightMenuButtons;
-          }
+          this.mobileRightMenuButtons[0].menuButtons = defaultRightMenuButtons;
+          this.scaffoldConfig.headerConfig.rightMenuButtons = this.mobileRightMenuButtons;
+        } else {
+          this.scaffoldConfig.headerConfig.rightMenuButtons = defaultRightMenuButtons;
         }
       }
 
+      // Initially disable navbar on desktop
       if (this.scaffoldConfig?.navbarConfig?.enable === false) {
         if (result.breakpoints[Breakpoints.XSmall]) {
           this.scaffoldConfig.navbarConfig.enable = true;
@@ -188,18 +187,15 @@ export class AppComponent {
     } else if (id === 'github') {
       window.open('https://github.com/lukfel/scaffold', '_blank');
       return;
-    } else if (id === 'settings') {
-      return;
-    } else if (id === 'menu') {
+    } else if (id === 'start' || id === 'documentation' || id === 'typography') {
+      this.router.navigate([id]);
       return;
     }
-    this.router.navigate([id]);
-    return;
   }
 
   // Listen to header input submit events
   public headerSubmitEvent(value: string): void {
-    this.dialogService.openSimpleDialog({ title: 'You have entered:', message: value }).then(result => {
+    this.dialogService.openSimpleDialog({ title: 'You have entered:', message: value, closeLabel: 'Close', confirmLabel: 'Confirm' }).then(result => {
       if (result) {
         this.logger.log(result);
       }

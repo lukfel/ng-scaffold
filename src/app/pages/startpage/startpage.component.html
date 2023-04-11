@@ -61,7 +61,34 @@
     <input matInput [(ngModel)]="headerConfig.subtitle" />
   </mat-form-field>
 
-  <h3>Header Input</h3>
+  <!-- <h3>Header Menu Buttons</h3>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>Edit Buttons</mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <h4>Left Button (Icon only)</h4>
+      <ng-container
+        [ngTemplateOutlet]="menuButtonFormTemplate"
+        [ngTemplateOutletContext]="{
+          menuButton: headerConfig.leftMenuButton!,
+          isLeftButton: true
+        }"></ng-container>
+
+      <h4>Right Buttons (Label has prio)</h4>
+      <ng-container *ngFor="let menuButton of headerConfig.rightMenuButtons">
+        <ng-container
+          [ngTemplateOutlet]="menuButtonFormTemplate"
+          [ngTemplateOutletContext]="{
+            menuButton: menuButton
+          }"></ng-container>
+      </ng-container>
+      <button mat-flat-button color="accent" (click)="addHeaderButton(false)">
+        Add right menu button
+      </button>
+    </ng-template>
+  </mat-expansion-panel> -->
+
+  <h3>Header Input Field</h3>
   <p>
     <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
   </p>
@@ -145,4 +172,42 @@
     <mat-label>Tooltip</mat-label>
     <input matInput [(ngModel)]="toTopButtonConfig.tooltip" />
   </mat-form-field>
+  <p><br /></p>
 </div>
+
+<!-- header menu button form -->
+<ng-template #menuButtonFormTemplate let-menuButton="menuButton" let-isLeftButton="isLeftButton">
+  <div *ngIf="menuButton" class="mb-2">
+    <mat-form-field>
+      <mat-label>Event id</mat-label>
+      <input matInput [(ngModel)]="menuButton.id" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input [disabled]="isLeftButton" matInput [(ngModel)]="menuButton.label" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Material Icon</mat-label>
+      <input matInput [(ngModel)]="menuButton.matIcon" />
+      <mat-icon *ngIf="menuButton.matIcon" matPrefix>{{ menuButton.matIcon }}</mat-icon>
+      <mat-slide-toggle *ngIf="menuButton.matIcon" matSuffix [(ngModel)]="menuButton.outlineIcon">
+        Outlined &#160;&#160;
+      </mat-slide-toggle>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tooltop</mat-label>
+      <input matInput [(ngModel)]="menuButton.tooltip" />
+    </mat-form-field>
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="removeHeaderButton(menuButton, isLeftButton)"
+      matTooltip="Remove button">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <!-- <mat-form-field>
+        <mat-label>CSS class</mat-label>
+        <input matInput [(ngModel)]="menuButton.class" />
+      </mat-form-field> -->
+  </div>
+</ng-template>

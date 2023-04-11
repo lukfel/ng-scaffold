@@ -14,4 +14,5 @@ export interface ScaffoldConfig {
   footerConfig?: FooterConfig;
   contentTitleCardConfig?: ContentTitleCardConfig;
   toTopButtonConfig?: ToTopButtonConfig;
+  class?: string;
 }

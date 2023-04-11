@@ -1,16 +1,16 @@
 <ng-container *ngIf="headerConfig?.enable">
-  <div class="lf-header-spacer"></div>
   <mat-toolbar
     class="lf-header mat-elevation-z3"
     [class.px-4]="!isMobile"
     [class.px-1]="isMobile"
+    [ngClass]="headerConfig.class"
     color="primary">
-    <!-- left menu button -->
     <ng-container
-      *ngTemplateOutlet="
-        menuButtonTemplate;
-        context: { $implicit: headerConfig.leftMenuButton! }
-      "></ng-container>
+      [ngTemplateOutlet]="menuButtonTemplate"
+      [ngTemplateOutletContext]="{
+        menuButton: headerConfig.leftMenuButton!,
+        hideLabel: true
+      }"></ng-container>
     <!-- logo & title -->
     <div
       class="lf-header-logo-title-wrapper ml-1 mr-2"
@@ -88,7 +88,10 @@
     <!-- right menu buttons -->
     <ng-container *ngFor="let button of headerConfig.rightMenuButtons">
       <ng-container
-        *ngTemplateOutlet="menuButtonTemplate; context: { $implicit: button }"></ng-container>
+        [ngTemplateOutlet]="menuButtonTemplate"
+        [ngTemplateOutletContext]="{
+          menuButton: button
+        }"></ng-container>
     </ng-container>
   </mat-toolbar>
 
@@ -101,11 +104,14 @@
 </ng-container>
 
 <!-- header menu button -->
-<ng-template #menuButtonTemplate let-menuButton>
+<ng-template #menuButtonTemplate let-menuButton="menuButton" let-hideLabel="hideLabel">
   <ng-container *ngIf="menuButton">
     <!-- icon button -->
     <button
-      *ngIf="(menuButton.matIcon || menuButton.svgIcon) && !menuButton.label; else textButton"
+      *ngIf="
+        (menuButton.matIcon || menuButton.svgIcon) && (!menuButton.label || hideLabel);
+        else textButton
+      "
       mat-icon-button
       class="lf-header-menu-button"
       [ngClass]="menuButton.class"
@@ -130,6 +136,7 @@
     <!-- text button -->
     <ng-template #textButton>
       <button
+        *ngIf="!hideLabel"
         mat-button
         class="lf-header-menu-button"
         [ngClass]="menuButton.class"

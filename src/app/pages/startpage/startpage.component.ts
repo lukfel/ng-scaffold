@@ -1,6 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldService, ToTopButtonConfig } from '@lukfel/scaffold';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService, ToTopButtonConfig } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,7 +20,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
   private _subscription: Subscription = new Subscription;
 
   constructor(private scaffoldService: ScaffoldService,
-              @Inject(DOCUMENT) private document: Document) { }
+    private themeService: ThemeService) { }
 
   ngOnInit(): void {
     // Listen for config changes
@@ -68,10 +67,23 @@ export class StartpageComponent implements OnInit, OnDestroy {
   }
 
   public setTheme(theme: string): void {
-    this.document.body.classList.forEach(value => {
-      this.document.body.classList.remove(value);
-    })
-    this.document.body.classList.add(theme);
+    this.themeService.setTheme(theme, true);
+  }
+
+  public addHeaderButton(isLeftButton: boolean): void {
+    if (!isLeftButton) {
+      this.headerConfig.rightMenuButtons?.push({ id: '' });
+    } else if (isLeftButton && !this.headerConfig?.leftMenuButton) {
+      this.headerConfig.leftMenuButton = { id: '' };
+    }
+  }
+
+  public removeHeaderButton(menuButton: MenuButton, isLeftButton: boolean): void {
+    if (!isLeftButton) {
+      this.headerConfig.rightMenuButtons = this.headerConfig.rightMenuButtons?.filter(button => button !== menuButton);
+    } else if (isLeftButton && this.headerConfig?.leftMenuButton === menuButton) {
+      this.headerConfig.leftMenuButton = undefined;
+    }
   }
 
 }

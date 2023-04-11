@@ -1,10 +1,5 @@
 @import '../../../../styles/variables';
 
-.lf-header-spacer {
-  height: $header-height;
-  width: 100%;
-}
-
 .lf-header {
   transition: top $transition;
   z-index: $header-z-index;
@@ -14,6 +9,12 @@
 
   .lf-header-menu-button {
     flex-shrink: 0;
+    max-width: $header-menu-button-max-width;
+
+    ::ng-deep .mdc-button__label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
   }
 
   .lf-header-logo-title-wrapper {
@@ -60,6 +61,20 @@
     z-index: $header-z-index;
     width: 100%;
     flex: 1 1 $header-input-max-width;
+
+    ::ng-deep .mdc-text-field {
+      border-radius: $border-radius !important;
+    }
+
+    ::ng-deep .mdc-line-ripple {
+      &::after {
+        border-bottom-width: 0 !important;
+      }
+
+      &::before {
+        border-bottom-width: 0 !important;
+      }
+    }
   }
 
   .lf-header-input-mobile {

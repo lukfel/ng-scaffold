@@ -50,7 +50,7 @@ $theme: (
 
 ### Multiple Themes
 To dynamically switch between themes, create and include the theme with ``lf.scaffold-colors($theme2, 'theme2')`` where the second parameter is the class name that needs to be present on the body like ``<body class="theme2">``.
-* Hint: You can dymanically add classes to the body with ``document.body.classList.add('theme2')``.
+* Hint: You can dynamically change to an available theme with the service ``ThemeService``.
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
 @use '@angular/material' as mat;
@@ -252,11 +252,12 @@ public navbarClickEvent(id: string): void {
 ## Additional Services
 The library provides some additional commonly used services, such as:
 * ``Logger`` (for logging during development only)
-* ``SnackbarService`` (provides methods to display snackbars)
-* ``DialogService`` (provides methods to display dialogs)
-* ``BreakpointService`` (allows listening for breakpoint changes)
-* ``RouterService`` (contains the current route and the route history)
-* ``SeoService`` (allows to set all meta tags with one method)
+* ``SnackbarService`` (display simple snackbars)
+* ``DialogService`` (display simple and custom dialogs)
+* ``BreakpointService`` (listen for breakpoint changes)
+* ``RouterService`` (listen for route changes and retrieve route history)
+* ``SeoService`` (set all meta tags with one method)
+* ``ThemeService`` (dynamically change the theme)
 
 ### Logger
 This service only logs out information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).

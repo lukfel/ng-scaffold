@@ -6,4 +6,5 @@ export interface FooterConfig {
   imgLogo?: string;
   copyright?: string;
   links?: NavigationLink[];
+  class?: string;
 }

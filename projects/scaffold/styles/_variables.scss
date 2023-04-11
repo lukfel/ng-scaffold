@@ -2,6 +2,8 @@ $transition: 0.3s;
 
 $loading-overlay-z-index: 101;
 
+$border-radius: 28px;
+
 $header-z-index: 100;
 $header-height: 64px;
 $header-logo-title-wrapper-max-width: 480px;
@@ -9,12 +11,12 @@ $header-logo-size: 48px;
 $header-title-font-size: 20px;
 $header-subtitle-font-size: 12px;
 $header-input-max-width: 480px;
+$header-menu-button-max-width: 144px;
 
 $navbar-z-index: 99;
 $navbar-height: 72px;
 $navbar-width: 72px;
 $navbar-padding: 4px;
-$navbar-item-border-radius: 16px;
 $navbar-item-label-font-size: 12px;
 
 $content-padding: 24px;

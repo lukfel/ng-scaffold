@@ -1,4 +1,7 @@
-<mat-card *ngIf="footerConfig?.enable" class="lf-footer mat-elevation-z2 p-4">
+<mat-card
+  *ngIf="footerConfig?.enable"
+  class="lf-footer mat-elevation-z2 p-4"
+  [ngClass]="footerConfig.class">
   <!-- svg logo -->
   <mat-icon
     *ngIf="footerConfig?.svgLogo; else imgLogo"

@@ -12,6 +12,7 @@ export interface HeaderConfig {
   leftMenuButton?: MenuButton;
   rightMenuButtons?: MenuButton[];
   inputConfig?: HeaderInputConfig;
+  class?: string;
 }
 
 export interface HeaderInputConfig {

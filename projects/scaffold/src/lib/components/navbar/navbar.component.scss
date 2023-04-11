@@ -22,7 +22,8 @@
   left: 0;
   bottom: 0;
   width: 100vw;
-  padding: 0 $navbar-padding;
+  padding: $navbar-padding 0;
+  box-sizing: border-box;
   border-top: solid 1px rgba(0, 0, 0, 0.12);
 
   .lf-navbar-mobile-items {
@@ -40,7 +41,7 @@
   align-items: center;
   justify-content: center;
   flex-flow: column;
-  border-radius: $navbar-item-border-radius;
+  border-radius: $border-radius;
   cursor: pointer;
 
   &.lf-navbar-item-active {

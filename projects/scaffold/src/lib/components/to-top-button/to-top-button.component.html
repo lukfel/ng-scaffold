@@ -4,6 +4,7 @@
   color="accent"
   class="lf-to-top-button"
   [style.bottom]="getBottomPosition() + 'px'"
+  [ngClass]="toTopButtonConfig.class"
   (click)="backToTop()"
   [matTooltip]="toTopButtonConfig.tooltip!">
   <mat-icon>arrow_upward</mat-icon>
