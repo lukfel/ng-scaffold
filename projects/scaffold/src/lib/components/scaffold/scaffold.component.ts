@@ -42,8 +42,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
-      this.logger.log('scaffoldConfig:');
-      this.logger.log(scaffoldConfig);
+      this.logger.log('scaffoldConfig: ', scaffoldConfig);
 
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = scaffoldConfig.headerConfig || {};
@@ -56,8 +55,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for breakpoint changes
     this._subscription.add(this.breakpointService.breakpoint$.subscribe((breakpointState: BreakpointState) => {
-      this.logger.log('breakpointState:');
-      this.logger.log(breakpointState);
+      this.logger.log('breakpointState: ', breakpointState);
 
       if (breakpointState.breakpoints[Breakpoints.XSmall]) {
         this.isMobile = true;
@@ -72,8 +70,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for route changes
     this._subscription.add(this.routerService.routeHistory$.subscribe((routeHistory: string[]) => {
-      this.logger.log('routeHistory:');
-      this.logger.log(routeHistory);
+      this.logger.log('routeHistory: ', routeHistory);
 
       if (routeHistory) {
         this.routeHistory = routeHistory;
@@ -86,8 +83,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for current route changes
     this._subscription.add(this.routerService.currentRoute$.subscribe((currentRout: string) => {
-      this.logger.log('currentRout:');
-      this.logger.log(currentRout);
+      this.logger.log('currentRout: ', currentRout);
       this.currentRoute = currentRout
     }));
 
@@ -102,21 +98,13 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
       this._subscription.add(fromEvent(element, 'scroll').pipe(
         distinctUntilChanged(),
-        debounceTime(500)
+        debounceTime(50)
       ).subscribe((e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;
-        this.logger.log('scrollTopPosition:');
-        this.logger.log(target.scrollTop);
+        // this.logger.log('scrollTopPosition: ', target.scrollTop);
         this.scrollTopPosition = target.scrollTop;
       }));
     }
-
-    // Offset height for address bar on mobile
-    // if(this.scaffoldElement) {
-    //   const actualHeight: number = window.innerHeight;
-    //   const elementHeight: number = this.scaffoldElement.nativeElement.clientHeight;
-    //   this.mobileOffset = elementHeight - actualHeight;
-    // }
   }
 
   ngOnDestroy(): void {

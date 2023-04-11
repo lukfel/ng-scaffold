@@ -1,23 +1,27 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { CONFIG } from '../scaffold.module';
 import { LibraryConfig } from '../models';
+import { CONFIG } from '../scaffold.module';
 
 @Injectable({ providedIn: 'root' })
 export class Logger {
 
   constructor(@Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
-  public log(message: any): void {
+  public log(message: string, ...args: any[]): void {
     if (this.config?.production === false) {
-      const currentTime = new Date().toLocaleTimeString();
-      console.log(currentTime + ': ' + JSON.stringify(message)); // eslint-disable-line no-console
+      console.log(message, ...args);                // eslint-disable-line no-console
     }
   }
 
-  public error(message: any): void {
+  public warn(message: string, ...args: any[]): void {
     if (this.config?.production === false) {
-      const currentTime = new Date().toLocaleTimeString();
-      console.error(currentTime + ': ' + JSON.stringify(message)); // eslint-disable-line no-console
+      console.warn(message, ...args);               // eslint-disable-line no-console
+    }
+  }
+
+  public error(message: string, ...args: any[]): void {
+    if (this.config?.production === false) {
+      console.error(message, ...args);              // eslint-disable-line no-console
     }
   }
 

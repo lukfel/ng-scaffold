@@ -11,13 +11,24 @@ export class DialogService {
 
   constructor(private matDialog: MatDialog) { }
 
-  // Opens a dialog with custom template and custom config
+  /**
+   * Opens a dialog with custom template and custom config
+   *
+   * @param templateRef
+   * @param config
+   * @returns an asynchronous boolean response
+   */
   public openCustomDialog(templateRef: TemplateRef<any>, config: MatDialogConfig): Promise<boolean> {
     const dialogRef = this.matDialog.open(templateRef, config);
     return firstValueFrom(dialogRef.afterClosed());
   }
 
-  // Opens a simple pre-made dialog
+  /**
+   * Opens a simple pre-made dialog
+   *
+   * @param config
+   * @returns an asynchronous boolean response
+   */
   public openSimpleDialog(config: SimpleDialogConfig): Promise<boolean> {
     const dialogRef = this.matDialog.open(SimpleDialogComponent, {
       autoFocus: false,

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService } from '@lukfel/scaffold';
+import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService, ThemeService } from '@lukfel/scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -136,7 +136,8 @@ export class AppComponent {
     private sanitizer: DomSanitizer,
     private scaffoldService: ScaffoldService,
     private breakpointService: BreakpointService,
-    private seoService: SeoService) {
+    private seoService: SeoService,
+    private themeService: ThemeService) {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
     this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
@@ -173,6 +174,9 @@ export class AppComponent {
       metaPageDescription: 'This Angular library provides a basic UI scaffold and services for mordern web and mobile apps',
       metaImagePath: 'scaffold/assets/img/meta.jpg'
     });
+
+    // Set the theme
+    this.themeService.loadTheme();
   }
 
   // Listen to header click events
@@ -197,7 +201,7 @@ export class AppComponent {
   public headerSubmitEvent(value: string): void {
     this.dialogService.openSimpleDialog({ title: 'You have entered:', message: value, closeLabel: 'Close', confirmLabel: 'Confirm' }).then(result => {
       if (result) {
-        this.logger.log(result);
+        this.logger.log('result: ', result);
       }
     })
   }
