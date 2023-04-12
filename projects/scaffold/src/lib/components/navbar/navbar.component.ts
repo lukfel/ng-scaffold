@@ -12,14 +12,14 @@ export class NavbarComponent {
   @Input() public isMobile: boolean = false;
   @Input() public currentRoute: string;
 
-  @Output() public navbarClickEvent = new EventEmitter<string>();
+  @Output() public navbarButtonClickEvent = new EventEmitter<string>();
 
   public buttonClicked(id: string): void {
     if(!id) {
       return;
     }
 
-    this.navbarClickEvent.emit(id);
+    this.navbarButtonClickEvent.emit(id);
   }
 
   public isActive(id: string): boolean {

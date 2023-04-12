@@ -10,7 +10,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { ToTopButtonComponent } from '../to-top-button/to-top-button.component';
+import { ToTopButtonComponent } from '../floating-button/floating-button.component';
 import { ScaffoldComponent } from './scaffold.component';
 
 // @Component({
@@ -108,7 +108,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the button component', () => {
-    component.toTopButtonConfig = { enable: true };
+    component.floatingButtonConfig = { enable: true };
     fixture.detectChanges();
     const buttonDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(ToTopButtonComponent)

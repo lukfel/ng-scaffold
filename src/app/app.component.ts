@@ -113,8 +113,8 @@ export class AppComponent {
       label: 'Example Title',
       showBackButton: true
     },
-    // ToTopButtonConfig
-    toTopButtonConfig: {
+    // FloatingButtonConfig
+    floatingButtonConfig: {
       enable: true,
       tooltip: 'To top'
     }
@@ -180,7 +180,7 @@ export class AppComponent {
   }
 
   // Listen to header click events
-  public headerClickEvent(id: string): void {
+  public headerButtonClickEvent(id: string): void {
     this.snackbarService.openSnackbar(`You clicked the header button with id:   ${id}`);
 
     if (id === 'drawer') {
@@ -198,7 +198,7 @@ export class AppComponent {
   }
 
   // Listen to header input submit events
-  public headerSubmitEvent(value: string): void {
+  public headerInputSubmitEvent(value: string): void {
     this.dialogService.openSimpleDialog({ title: 'You have entered:', message: value, closeLabel: 'Close', confirmLabel: 'Confirm' }).then(result => {
       if (result) {
         this.logger.log('result: ', result);
@@ -207,13 +207,18 @@ export class AppComponent {
   }
 
   // Listen to header input change events
-  public headerInputEvent(value: string): void {
+  public headerInputChangeEvent(value: string): void {
     this.logger.log(value);
   }
 
   // Listen to navbar click events
-  public navbarClickEvent(id: string): void {
+  public navbarButtonClickEvent(id: string): void {
     this.router.navigate([id]);
+  }
+
+  // Listen to floating button click events
+  public floatingButtonClickEvent(id: string): void {
+    this.snackbarService.openSnackbar(`You clicked the floating button with id:   ${id}`);
   }
 
 }

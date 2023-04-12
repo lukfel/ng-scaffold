@@ -1,6 +1,6 @@
 # Documentation
 ## Introduction
-This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, to-top button etc as well as basic services to display snackbars, dialogs and more. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
+This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, floating button etc as well as basic services to display snackbars, dialogs and more. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
 
 * Demo https://lukfel.github.io/scaffold
 * Example https://www.create-a-tournament.com
@@ -199,8 +199,8 @@ export class AppComponent {
       label: 'Example Title',
       showBackButton: true
     },
-    // see ToTopButtonConfig
-    toTopButtonConfig: {
+    // see FloatingButtonConfig
+    floatingButtonConfig: {
       enable: true
     }
   }
@@ -217,10 +217,10 @@ export class AppComponent {
 To listen to scaffold user events, add the output events and define the corresponding methods in your ``app.component.ts``.
 ```html
 <lf-scaffold
-  (headerClickEvent)="headerClickEvent($event)"
-  (headerSubmitEvent)="headerSubmitEvent($event)"
-  (headerInputEvent)="headerInputEvent($event)"
-  (navbarClickEvent)="navbarClickEvent($event)">
+  (headerButtonClickEvent)="headerButtonClickEvent($event)"
+  (headerInputSubmitEvent)="headerInputSubmitEvent($event)"
+  (headerInputChangeEvent)="headerInputChangeEvent($event)"
+  (navbarButtonClickEvent)="navbarButtonClickEvent($event)">
   <!-- drawer content (content that is placed in the left drawer if enabled) -->
   <ng-container drawerContent></ng-container>
   <!-- main content -->
@@ -230,22 +230,22 @@ To listen to scaffold user events, add the output events and define the correspo
 
 ```ts
 // Listen to header click events (header menu buttons - click)
-public headerClickEvent(id: string): void {
+public headerButtonClickEvent(id: string): void {
   ...
 }
 
 // Listen to header input submit events (header input field - submit)
-public headerSubmitEvent(value: string): void {
+public headerInputSubmitEvent(value: string): void {
   ...
 }
 
 // Listen to header input change events (header input field - change)
-public headerInputEvent(value: string): void {
+public headerInputChangeEvent(value: string): void {
   ...
 }
 
 // Listen to navbar click events (navbar menu buttons - click)
-public navbarClickEvent(id: string): void {
+public navbarButtonClickEvent(id: string): void {
   ...
 }
 ```

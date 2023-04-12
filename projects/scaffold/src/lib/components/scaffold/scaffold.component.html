@@ -6,15 +6,15 @@
     [headerConfig]="headerConfig"
     [isMobile]="isMobile"
     [routeLoading]="routeLoading"
-    (headerClickEvent)="headerButtonClicked($event)"
-    (headerSubmitEvent)="headerInputSubmitted($event)"
-    (headerInputEvent)="headerInputChanged($event)"></lf-header>
+    (headerButtonClickEvent)="headerButtonClicked($event)"
+    (headerInputSubmitEvent)="headerInputSubmitted($event)"
+    (headerInputChangeEvent)="headerInputChanged($event)"></lf-header>
   <!-- navbar -->
   <lf-navbar
     [navbarConfig]="navbarConfig"
     [isMobile]="isMobile"
     [currentRoute]="currentRoute"
-    (navbarClickEvent)="navbarButtonClicked($event)"></lf-navbar>
+    (navbarButtonClickEvent)="navbarButtonClicked($event)"></lf-navbar>
   <!-- content wrapper -->
   <div
     class="lf-content-wrapper"
@@ -37,7 +37,7 @@
         [contentTitleCardConfig]="contentTitleCardConfig"
         [isMobile]="isMobile"
         [routeHistory]="routeHistory"
-        (backButtonClickEvent)="backButtonClickEvent()"></lf-content-title-card>
+        (backButtonClickEvent)="backButtonClicked()"></lf-content-title-card>
       <!-- main content -->
       <div class="lf-content" [class.lf-content-mobile]="isMobile">
         <ng-content></ng-content>
@@ -47,9 +47,9 @@
     </lf-drawer>
   </div>
   <!-- to top button -->
-  <lf-to-top-button
-    [toTopButtonConfig]="toTopButtonConfig"
-    [scrollContent]="scrollContent"
+  <lf-floating-button
+    [floatingButtonConfig]="floatingButtonConfig"
     [autoHide]="scrollTopPosition <= 0"
-    [moveUp]="isMobile && navbarConfig?.enable!"></lf-to-top-button>
+    [moveUp]="isMobile && navbarConfig?.enable!"
+    (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
 </div>

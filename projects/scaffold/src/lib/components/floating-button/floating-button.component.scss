@@ -1,8 +1,8 @@
 @import '../../../../styles/variables';
 
-.lf-to-top-button {
+.lf-floating-button {
   position: fixed;
   transition: bottom $transition;
-  z-index: $to-top-button-z-index;
+  z-index: $floating-button-z-index;
   right: 24px;
 }

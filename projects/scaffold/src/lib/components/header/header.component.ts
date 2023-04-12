@@ -12,9 +12,9 @@ export class HeaderComponent implements OnInit {
   @Input() public isMobile: boolean = false;
   @Input() public routeLoading: boolean = false;
 
-  @Output() public headerClickEvent = new EventEmitter<string>();
-  @Output() public headerSubmitEvent = new EventEmitter<string>();
-  @Output() public headerInputEvent = new EventEmitter<string>();
+  @Output() public headerButtonClickEvent = new EventEmitter<string>();
+  @Output() public headerInputSubmitEvent = new EventEmitter<string>();
+  @Output() public headerInputChangeEvent = new EventEmitter<string>();
 
   public inputValue: string = '';
 
@@ -30,15 +30,15 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    this.headerClickEvent.emit(id);
+    this.headerButtonClickEvent.emit(id);
   }
 
   public inputSubmitted(value: string): void {
-    this.headerSubmitEvent.emit(value);
+    this.headerInputSubmitEvent.emit(value);
   }
 
   public inputChanged(value: string): void {
-    this.headerInputEvent.emit(value);
+    this.headerInputChangeEvent.emit(value);
   }
 
 }

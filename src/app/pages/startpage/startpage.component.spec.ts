@@ -132,8 +132,8 @@ class MockScaffoldService {
       label: 'Example Title',
       showBackButton: true
     },
-    // ToTopButtonConfig
-    toTopButtonConfig: {
+    // FloatingButtonConfig
+    floatingButtonConfig: {
       enable: true,
       tooltip: 'To top'
     }

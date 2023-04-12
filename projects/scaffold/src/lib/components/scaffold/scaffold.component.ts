@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ToTopButtonConfig } from '../../models';
+import { ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig } from '../../models';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -19,12 +19,13 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public drawerConfig: DrawerConfig = {};
   public footerConfig: FooterConfig = {};
   public contentTitleCardConfig: ContentTitleCardConfig = {};
-  public toTopButtonConfig: ToTopButtonConfig = {};
+  public floatingButtonConfig: FloatingButtonConfig = {};
 
-  @Output() public headerClickEvent = new EventEmitter<string>();
-  @Output() public headerSubmitEvent = new EventEmitter<string>();
-  @Output() public headerInputEvent = new EventEmitter<string>();
-  @Output() public navbarClickEvent = new EventEmitter<string>();
+  @Output() public headerButtonClickEvent = new EventEmitter<string>();
+  @Output() public headerInputSubmitEvent = new EventEmitter<string>();
+  @Output() public headerInputChangeEvent = new EventEmitter<string>();
+  @Output() public navbarButtonClickEvent = new EventEmitter<string>();
+  @Output() public floatingButtonClickEvent = new EventEmitter<string>();
 
   public routeHistory: string[] = [];
   public currentRoute: string;
@@ -50,7 +51,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
       this.drawerConfig = scaffoldConfig.drawerConfig || {};
       this.footerConfig = scaffoldConfig.footerConfig || {};
       this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
-      this.toTopButtonConfig = scaffoldConfig.toTopButtonConfig || {};
+      this.floatingButtonConfig = scaffoldConfig.floatingButtonConfig || {};
     }));
 
     // Listen for breakpoint changes
@@ -114,24 +115,32 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   public headerButtonClicked(id: string): void {
-    this.headerClickEvent.emit(id);
+    this.headerButtonClickEvent.emit(id);
   }
 
   public headerInputSubmitted(value: string): void {
-    this.headerSubmitEvent.emit(value);
+    this.headerInputSubmitEvent.emit(value);
   }
 
   public headerInputChanged(value: string): void {
     this.scaffoldService.headerInputValue = value;
-    this.headerInputEvent.emit(value);
+    this.headerInputChangeEvent.emit(value);
   }
 
   public navbarButtonClicked(id: string): void {
-    this.navbarClickEvent.emit(id);
+    this.navbarButtonClickEvent.emit(id);
   }
 
-  public backButtonClickEvent(): void {
+  public backButtonClicked(): void {
     this.routerService.navigateBack();
+  }
+
+  public floatingButtonClicked(id: string): void {
+    if (!id && this.scrollContent) {
+      this.scrollContent.nativeElement.scrollTop = 0;
+    } else {
+      this.floatingButtonClickEvent.emit(id);
+    }
   }
 
 }

@@ -13,7 +13,7 @@ export * from './lib/components/drawer/drawer.component';
 export * from './lib/components/navbar/navbar.component';
 export * from './lib/components/footer/footer.component';
 export * from './lib/components/content-title-card/content-title-card.component';
-export * from './lib/components/to-top-button/to-top-button.component';
+export * from './lib/components/floating-button/floating-button.component';
 export * from './lib/components/loading-overlay/loading-overlay.component';
 export * from './lib/components/dialogs/simple-dialog/simple-dialog.component';
 /* SERVICES */

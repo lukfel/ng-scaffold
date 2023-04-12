@@ -2,12 +2,12 @@ import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { ContentTitleCardComponent } from './components/content-title-card/content-title-card.component';
 import { SimpleDialogComponent } from './components/dialogs/simple-dialog/simple-dialog.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
+import { FloatingButtonComponent } from './components/floating-button/floating-button.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ScaffoldComponent } from './components/scaffold/scaffold.component';
-import { ToTopButtonComponent } from './components/to-top-button/to-top-button.component';
 import { LibraryConfig } from './models';
 import { SharedModule } from './shared/shared.module';
 
@@ -21,7 +21,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     DrawerComponent,
     FooterComponent,
     ContentTitleCardComponent,
-    ToTopButtonComponent,
+    FloatingButtonComponent,
     LoadingOverlayComponent,
     SimpleDialogComponent
   ],
@@ -35,7 +35,7 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     DrawerComponent,
     FooterComponent,
     ContentTitleCardComponent,
-    ToTopButtonComponent,
+    FloatingButtonComponent,
     LoadingOverlayComponent,
     SimpleDialogComponent
   ]

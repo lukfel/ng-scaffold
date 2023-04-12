@@ -1,0 +1,12 @@
+<button
+  *ngIf="floatingButtonConfig?.enable && !autoHide"
+  mat-fab
+  color="accent"
+  class="lf-floating-button"
+  [style.bottom]="getBottomPosition() + 'px'"
+  [ngClass]="floatingButtonConfig.class"
+  (click)="buttonClicked(floatingButtonConfig.id)"
+  [matTooltip]="floatingButtonConfig.tooltip!">
+  <span>{{ floatingButtonConfig?.label || "" }}</span>
+  <mat-icon>{{ floatingButtonConfig?.matIcon || "arrow_upward" }}</mat-icon>
+</button>

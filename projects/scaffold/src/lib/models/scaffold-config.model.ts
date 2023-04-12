@@ -3,7 +3,7 @@ import { DrawerConfig } from './drawer-config.model';
 import { FooterConfig } from './footer-config.model';
 import { HeaderConfig } from './header-config.model';
 import { NavbarConfig } from './navbar-config.model';
-import { ToTopButtonConfig } from './to-top-button-config.model';
+import { FloatingButtonConfig } from './floating-button-config.model';
 
 export interface ScaffoldConfig {
   loading?: boolean;
@@ -13,6 +13,6 @@ export interface ScaffoldConfig {
   drawerConfig?: DrawerConfig;
   footerConfig?: FooterConfig;
   contentTitleCardConfig?: ContentTitleCardConfig;
-  toTopButtonConfig?: ToTopButtonConfig;
+  floatingButtonConfig?: FloatingButtonConfig;
   class?: string;
 }

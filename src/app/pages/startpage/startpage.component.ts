@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService, ToTopButtonConfig } from '@lukfel/scaffold';
+import { ContentTitleCardConfig, DrawerConfig, FooterConfig, HeaderConfig, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService, FloatingButtonConfig } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
   public drawerConfig: DrawerConfig = {};
   public footerConfig: FooterConfig = {};
   public contentTitleCardConfig: ContentTitleCardConfig = {};
-  public toTopButtonConfig: ToTopButtonConfig = {};
+  public floatingButtonConfig: FloatingButtonConfig = {};
 
   private _subscription: Subscription = new Subscription;
 
@@ -32,7 +32,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
       this.footerConfig = scaffoldConfig.footerConfig || {};
       this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
       this.contentTitleCardConfig.label = 'Home';
-      this.toTopButtonConfig = scaffoldConfig.toTopButtonConfig || {};
+      this.floatingButtonConfig = scaffoldConfig.floatingButtonConfig || {};
     }));
   }
 
