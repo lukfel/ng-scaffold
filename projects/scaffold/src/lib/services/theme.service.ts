@@ -33,7 +33,7 @@ export class ThemeService {
   /**
    * Set one of the defined themes by passing its class name
    *
-   * @param newTheme class name of the theme
+   * @param newTheme class name of the theme (pass empty string for default theme)
    * @param useLocalStorage persist the current theme in the LocalStorage
    */
   public setTheme(newTheme: string, useLocalStorage?: boolean): void {
@@ -48,10 +48,17 @@ export class ThemeService {
     }
 
     this._currentTheme$.next(newTheme);
-    this.document.body.classList.add(newTheme);
 
-    if (useLocalStorage) {
-      localStorage.setItem(this.THEME_KEY, JSON.stringify(newTheme));
+    if (newTheme) {
+      this.document.body.classList.add(newTheme);
+
+      if (useLocalStorage) {
+        localStorage.setItem(this.THEME_KEY, JSON.stringify(newTheme));
+      }
+    } else {
+      if (useLocalStorage) {
+        localStorage.removeItem(this.THEME_KEY);
+      }
     }
   }
 }
