@@ -12,30 +12,31 @@ export class ScaffoldService {
     return this._scaffoldConfig$;
   }
 
-  public get scaffoldConfig(): ScaffoldConfig {
-    return this._scaffoldConfig$.value;
-  }
-
   public set scaffoldConfig(value: ScaffoldConfig) {
     this._scaffoldConfig$.next(value);
   }
 
-  // Header Input
-  private _headerInputValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  // Header Input Change
+  private _headerInputChangeValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  public get headerInputValue$(): Observable<string> {
-    return this._headerInputValue$;
+  public get headerInputChangeValue$(): Observable<string> {
+    return this._headerInputChangeValue$;
   }
 
-  public get headerInputValue(): string {
-    return this._headerInputValue$.value;
+  public set headerInputChangeValue(value: string) {
+    this._headerInputChangeValue$.next(value);
   }
 
-  public set headerInputValue(value: string) {
-    this._headerInputValue$.next(value);
-  }
+    // Button Click Event
+    private _buttonClickEventValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+    public get buttonClickEventValue$(): Observable<string> {
+      return this._buttonClickEventValue$;
+    }
+
+    public set buttonClickEventValue(value: string) {
+      this._buttonClickEventValue$.next(value);
+    }
 
   // constructor(@Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
-
-
 }

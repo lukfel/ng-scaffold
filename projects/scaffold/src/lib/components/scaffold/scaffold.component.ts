@@ -124,6 +124,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   public headerButtonClicked(id: string): void {
+    this.scaffoldService.buttonClickEventValue = id;
     this.headerButtonClickEvent.emit(id);
   }
 
@@ -132,11 +133,12 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   public headerInputChanged(value: string): void {
-    this.scaffoldService.headerInputValue = value;
+    this.scaffoldService.headerInputChangeValue = value;
     this.headerInputChangeEvent.emit(value);
   }
 
   public navbarButtonClicked(id: string): void {
+    this.scaffoldService.buttonClickEventValue = id;
     this.navbarButtonClickEvent.emit(id);
   }
 
@@ -148,6 +150,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     if (!id && this.scrollContainer) {
       this.scrollContainer.nativeElement.scrollTop = 0;
     } else {
+      this.scaffoldService.buttonClickEventValue = id;
       this.floatingButtonClickEvent.emit(id);
     }
   }

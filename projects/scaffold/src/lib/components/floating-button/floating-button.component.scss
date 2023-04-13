@@ -27,6 +27,7 @@
   }
 
   .lf-floating-button-label {
+    display: block;
     max-width: $floating-button-label-max-width !important;
     font-size: $floating-button-label-font-size;
     overflow: hidden;
