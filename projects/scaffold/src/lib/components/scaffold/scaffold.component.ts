@@ -11,7 +11,21 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
-  @ViewChild('scrollContent', { static: true }) public scrollContent: ElementRef;
+  // @HostListener('window:resize', ['$event'])
+  // public onResize(): void {
+  //   if (this.content) {
+  //     this.contentWidth = this.content.nativeElement.clientWidth;
+  //   }
+  // }
+
+  @ViewChild('scrollContainer', { static: true }) public scrollContainer: ElementRef;
+  @ViewChild('content', { static: true }) public content: ElementRef;
+
+  @Output() public headerButtonClickEvent = new EventEmitter<string>();
+  @Output() public headerInputSubmitEvent = new EventEmitter<string>();
+  @Output() public headerInputChangeEvent = new EventEmitter<string>();
+  @Output() public navbarButtonClickEvent = new EventEmitter<string>();
+  @Output() public floatingButtonClickEvent = new EventEmitter<string>();
 
   public scaffoldConfig: ScaffoldConfig = {};
   public headerConfig: HeaderConfig = {};
@@ -21,17 +35,12 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public contentTitleCardConfig: ContentTitleCardConfig = {};
   public floatingButtonConfig: FloatingButtonConfig = {};
 
-  @Output() public headerButtonClickEvent = new EventEmitter<string>();
-  @Output() public headerInputSubmitEvent = new EventEmitter<string>();
-  @Output() public headerInputChangeEvent = new EventEmitter<string>();
-  @Output() public navbarButtonClickEvent = new EventEmitter<string>();
-  @Output() public floatingButtonClickEvent = new EventEmitter<string>();
-
   public routeHistory: string[] = [];
   public currentRoute: string;
   public isMobile: boolean = false;
   public routeLoading: boolean = false;
   public scrollTopPosition: number = 0;
+  // public contentWidth: number = 0;
 
   private _subscription: Subscription = new Subscription;
 
@@ -77,8 +86,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         this.routeHistory = routeHistory;
       }
 
-      if (this.scrollContent && this.scaffoldConfig?.scrollPositionRestoration) {
-        this.scrollContent.nativeElement.scrollTop = 0;
+      if (this.scrollContainer && this.scaffoldConfig?.scrollPositionRestoration) {
+        this.scrollContainer.nativeElement.scrollTop = 0;
       }
     }));
 
@@ -94,12 +103,12 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }));
 
     // Listen to scroll events
-    if (this.scrollContent) {
-      const element: HTMLElement = this.scrollContent.nativeElement;
+    if (this.scrollContainer) {
+      const element: HTMLElement = this.scrollContainer.nativeElement;
 
       this._subscription.add(fromEvent(element, 'scroll').pipe(
         distinctUntilChanged(),
-        debounceTime(50)
+        debounceTime(10)
       ).subscribe((e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;
         // this.logger.log('scrollTopPosition: ', target.scrollTop);
@@ -136,8 +145,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   public floatingButtonClicked(id: string): void {
-    if (!id && this.scrollContent) {
-      this.scrollContent.nativeElement.scrollTop = 0;
+    if (!id && this.scrollContainer) {
+      this.scrollContainer.nativeElement.scrollTop = 0;
     } else {
       this.floatingButtonClickEvent.emit(id);
     }

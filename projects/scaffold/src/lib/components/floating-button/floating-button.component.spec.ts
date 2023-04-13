@@ -23,44 +23,62 @@ describe('FloatingButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show the button if enabled and not auto hidden', () => {
-    component.floatingButtonConfig = { enable: true, tooltip: 'Back to top' };
+  it('should display the button when enable is true and autoHide is false', () => {
+    component.floatingButtonConfig = { enable: true };
     component.autoHide = false;
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     expect(button).toBeTruthy();
   });
 
-  it('should not show the button if disabled', () => {
-    component.floatingButtonConfig = { enable: false, tooltip: 'Back to top' };
+  it('should not display the button when enable is false', () => {
+    component.floatingButtonConfig = { enable: false };
     component.autoHide = false;
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     expect(button).toBeFalsy();
   });
 
-  it('should not show the button if auto hidden', () => {
-    component.floatingButtonConfig = { enable: true, tooltip: 'Back to top' };
+  it('should not display the button when autoHide is true', () => {
+    component.floatingButtonConfig = { enable: true };
     component.autoHide = true;
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     expect(button).toBeFalsy();
   });
 
-  it('should set the bottom position of the button', () => {
-    component.floatingButtonConfig = { enable: true, tooltip: 'Back to top' };
+  it('should set the button position based on getBottomPosition()', () => {
+    spyOn(component, 'getBottomPosition').and.returnValue(10);
+    component.floatingButtonConfig = { enable: true };
     component.autoHide = false;
     fixture.detectChanges();
-    expect(component.getBottomPosition()).toBeGreaterThan(0);
+    const button = fixture.debugElement.query(By.css('.lf-floating-button'));
+    expect(button.styles['bottom']).toEqual('10px');
   });
 
-  it('should emit backToTop event when clicked', () => {
-    spyOn(component, 'backToTop');
-    component.floatingButtonConfig = { enable: true, tooltip: 'Back to top' };
+  it('should emit the buttonClicked event when button is clicked', () => {
+    spyOn(component, 'buttonClicked');
+    component.floatingButtonConfig = { enable: true };
     component.autoHide = false;
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     button.triggerEventHandler('click', null);
-    expect(component.backToTop).toHaveBeenCalled();
+    expect(component.buttonClicked).toHaveBeenCalledWith(component.floatingButtonConfig.id);
+  });
+
+  it('should display the label if it is provided', () => {
+    component.floatingButtonConfig = { enable: true, label: 'Test Button' };
+    component.autoHide = false;
+    fixture.detectChanges();
+    const label = fixture.debugElement.query(By.css('.lf-floating-button-label'));
+    expect(label.nativeElement.innerText).toEqual('Test Button');
+  });
+
+  it('should not display the label if it is not provided', () => {
+    component.floatingButtonConfig = { enable: true };
+    component.autoHide = false;
+    fixture.detectChanges();
+    const label = fixture.debugElement.query(By.css('.lf-floating-button-label'));
+    expect(label).toBeFalsy();
   });
 });

@@ -1,12 +1,17 @@
 <button
-  *ngIf="floatingButtonConfig?.enable && !autoHide"
+  *ngIf="floatingButtonConfig?.enable && (!floatingButtonConfig?.autoHide || !onTop)"
   mat-fab
   color="accent"
   class="lf-floating-button"
   [style.bottom]="getBottomPosition() + 'px'"
   [ngClass]="floatingButtonConfig.class"
+  [ngClass]="floatingButtonConfig.horizontalPosition"
+  [class.px-4]="floatingButtonConfig?.label"
+  [class.py-1]="floatingButtonConfig?.label"
   (click)="buttonClicked(floatingButtonConfig.id)"
   [matTooltip]="floatingButtonConfig.tooltip!">
-  <span>{{ floatingButtonConfig?.label || "" }}</span>
   <mat-icon>{{ floatingButtonConfig?.matIcon || "arrow_upward" }}</mat-icon>
+  <span *ngIf="floatingButtonConfig?.label" class="lf-floating-button-label mx-1">
+    {{ floatingButtonConfig.label }}
+  </span>
 </button>

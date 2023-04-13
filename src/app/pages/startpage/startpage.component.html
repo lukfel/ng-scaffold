@@ -176,13 +176,25 @@
     <input matInput [(ngModel)]="floatingButtonConfig.id" />
   </mat-form-field>
   <mat-form-field>
+    <mat-label>Label</mat-label>
+    <input matInput [(ngModel)]="floatingButtonConfig.label" />
+  </mat-form-field>
+  <mat-form-field>
     <mat-label>Material Icon</mat-label>
     <input matInput [(ngModel)]="floatingButtonConfig.matIcon" />
   </mat-form-field>
-  <mat-form-field>
+  <!-- <mat-form-field>
+    <mat-label>Position</mat-label>
+    <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
+      <mat-option *ngFor="let option of ['left', 'center', 'right']" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+  <!-- <mat-form-field>
     <mat-label>Tooltip</mat-label>
     <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
-  </mat-form-field>
+  </mat-form-field> -->
   <p><br /></p>
 </div>
 

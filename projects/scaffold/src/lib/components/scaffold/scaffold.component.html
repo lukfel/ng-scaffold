@@ -24,7 +24,7 @@
     [class.lf-show-header-and-navbar-mobile]="
       headerConfig?.enable && navbarConfig?.enable && isMobile
     "
-    #scrollContent>
+    #scrollContainer>
     <!-- drawer -->
     <lf-drawer
       [drawerConfig]="drawerConfig"
@@ -39,7 +39,7 @@
         [routeHistory]="routeHistory"
         (backButtonClickEvent)="backButtonClicked()"></lf-content-title-card>
       <!-- main content -->
-      <div class="lf-content" [class.lf-content-mobile]="isMobile">
+      <div class="lf-content" [class.lf-content-mobile]="isMobile" #content>
         <ng-content></ng-content>
       </div>
       <!-- footer -->
@@ -49,7 +49,7 @@
   <!-- to top button -->
   <lf-floating-button
     [floatingButtonConfig]="floatingButtonConfig"
-    [autoHide]="scrollTopPosition <= 0"
-    [moveUp]="isMobile && navbarConfig?.enable!"
+    [onTop]="scrollTopPosition <= 0"
+    [isMobile]="isMobile && navbarConfig?.enable!"
     (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
 </div>

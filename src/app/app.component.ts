@@ -110,13 +110,12 @@ export class AppComponent {
     // ContentTitleCardConfig
     contentTitleCardConfig: {
       enable: true,
-      label: 'Example Title',
       showBackButton: true
     },
     // FloatingButtonConfig
     floatingButtonConfig: {
       enable: true,
-      tooltip: 'To top'
+      autoHide: true
     }
   }
 

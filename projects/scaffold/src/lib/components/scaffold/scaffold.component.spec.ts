@@ -6,11 +6,11 @@ import { Logger } from '../../services';
 import { SharedModule } from '../../shared/shared.module';
 import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
 import { DrawerComponent } from '../drawer/drawer.component';
+import { FloatingButtonComponent } from '../floating-button/floating-button.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { ToTopButtonComponent } from '../floating-button/floating-button.component';
 import { ScaffoldComponent } from './scaffold.component';
 
 // @Component({
@@ -23,7 +23,7 @@ import { ScaffoldComponent } from './scaffold.component';
 //   @Input() public routeLoading: boolean = false;
 // }
 
-class MockLogger {}
+class MockLogger { }
 
 describe('ScaffoldComponent', () => {
   let component: ScaffoldComponent;
@@ -40,7 +40,7 @@ describe('ScaffoldComponent', () => {
         DrawerComponent,
         ContentTitleCardComponent,
         FooterComponent,
-        ToTopButtonComponent
+        FloatingButtonComponent
       ],
       imports: [
         SharedModule,
@@ -111,7 +111,7 @@ describe('ScaffoldComponent', () => {
     component.floatingButtonConfig = { enable: true };
     fixture.detectChanges();
     const buttonDebugElement: DebugElement = fixture.debugElement.query(
-      By.directive(ToTopButtonComponent)
+      By.directive(FloatingButtonComponent)
     );
     expect(buttonDebugElement).toBeTruthy();
   });
