@@ -127,19 +127,11 @@
       [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
       [matTooltip]="menuButton.tooltip"
       [attr.aria-label]="menuButton.id">
-      <!-- mat icon -->
-      <mat-icon
-        *ngIf="menuButton.matIcon; else svgIcon"
-        [class.material-icons-outlined]="menuButton.outlineIcon">
-        {{ menuButton.matIcon }}
-      </mat-icon>
-      <!-- svg icon -->
-      <ng-template #svgIcon>
-        <mat-icon
-          *ngIf="menuButton.svgIcon"
-          [svgIcon]="menuButton.svgIcon"
-          [class.material-icons-outlined]="menuButton.outlineIcon"></mat-icon>
-      </ng-template>
+      <!-- icon -->
+      <lf-icon
+        [matIcon]="menuButton.matIcon"
+        [svgIcon]="menuButton.svgIcon"
+        [outlineIcon]="menuButton.outlineIcon"></lf-icon>
     </button>
     <!-- text button -->
     <ng-template #textButton>

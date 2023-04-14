@@ -10,9 +10,19 @@
   [class.py-1]="floatingButtonConfig?.label"
   (click)="buttonClicked(floatingButtonConfig.id)"
   [matTooltip]="floatingButtonConfig.tooltip!">
-  <mat-icon [class.material-icons-outlined]="floatingButtonConfig?.outlineIcon">
-    {{ floatingButtonConfig?.matIcon || "arrow_upward" }}
+  <!-- mat icon -->
+  <mat-icon
+    *ngIf="floatingButtonConfig?.matIcon; else svgIconTemplate"
+    [class.material-icons-outlined]="floatingButtonConfig?.outlineIcon">
+    {{ floatingButtonConfig.matIcon }}
   </mat-icon>
+  <!-- svg icon -->
+  <ng-template #svgIconTemplate>
+    <mat-icon
+      *ngIf="floatingButtonConfig?.svgIcon"
+      [svgIcon]="floatingButtonConfig.svgIcon!"></mat-icon>
+  </ng-template>
+  <!-- label -->
   <span *ngIf="floatingButtonConfig?.label" class="lf-floating-button-label mx-1">
     {{ floatingButtonConfig.label }}
   </span>

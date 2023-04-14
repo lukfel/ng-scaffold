@@ -1,11 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from './material/material.module';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IconComponent } from './components/icon/icon.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    IconComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -15,7 +18,8 @@ import { RouterModule } from '@angular/router';
   exports: [
     MaterialModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    IconComponent
   ]
 })
 export class SharedModule { }

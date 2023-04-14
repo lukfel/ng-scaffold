@@ -1,0 +1,8 @@
+<!-- mat icon -->
+<mat-icon *ngIf="matIcon; else svgIconTemplate" [class.material-icons-outlined]="outlineIcon">
+  {{ matIcon }}
+</mat-icon>
+<!-- svg icon -->
+<ng-template #svgIconTemplate>
+  <mat-icon *ngIf="svgIcon" [svgIcon]="svgIcon"></mat-icon>
+</ng-template>

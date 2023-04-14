@@ -17,20 +17,11 @@
         (click)="buttonClicked(button.id)"
         tabindex="0"
         role="button">
-        <!-- mat icon -->
-        <mat-icon
-          *ngIf="button?.matIcon; else svgIcon"
-          class="lf-navbar-item-icon"
-          [class.material-icons-outlined]="button.outlineIcon">
-          {{ button.matIcon }}
-        </mat-icon>
-        <!-- svg icon -->
-        <ng-template #svgIcon>
-          <mat-icon
-            *ngIf="button?.svgIcon"
-            class="lf-navbar-item-icon"
-            [svgIcon]="button.svgIcon!"></mat-icon>
-        </ng-template>
+        <!-- icon -->
+        <lf-icon
+          [matIcon]="button.matIcon!"
+          [svgIcon]="button.svgIcon!"
+          [outlineIcon]="button.outlineIcon!"></lf-icon>
         <!-- label -->
         <!-- show a protected space on desktop so the icon doesn't move up and down -->
         <span *ngIf="button?.label" class="lf-navbar-item-label">

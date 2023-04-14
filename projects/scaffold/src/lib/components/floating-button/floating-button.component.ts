@@ -15,8 +15,12 @@ export class FloatingButtonComponent implements OnInit {
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
 
   ngOnInit(): void {
-    if (!this.floatingButtonConfig.horizontalPosition) {
+    if (!this.floatingButtonConfig?.horizontalPosition) {
       this.floatingButtonConfig.horizontalPosition = 'right';
+    }
+
+    if (!this.floatingButtonConfig?.matIcon && !this.floatingButtonConfig?.svgIcon) {
+      this.floatingButtonConfig.matIcon = 'arrow_upward';
     }
   }
 
