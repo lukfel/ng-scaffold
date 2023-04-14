@@ -10,7 +10,9 @@
   [class.py-1]="floatingButtonConfig?.label"
   (click)="buttonClicked(floatingButtonConfig.id)"
   [matTooltip]="floatingButtonConfig.tooltip!">
-  <mat-icon>{{ floatingButtonConfig?.matIcon || "arrow_upward" }}</mat-icon>
+  <mat-icon [class.material-icons-outlined]="floatingButtonConfig?.outlineIcon">
+    {{ floatingButtonConfig?.matIcon || "arrow_upward" }}
+  </mat-icon>
   <span *ngIf="floatingButtonConfig?.label" class="lf-floating-button-label mx-1">
     {{ floatingButtonConfig.label }}
   </span>

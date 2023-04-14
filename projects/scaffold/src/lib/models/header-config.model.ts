@@ -19,5 +19,4 @@ export interface HeaderInputConfig {
   enable?: boolean;
   label?: string;
   matIcon?: string;
-  svgIcon?: string;
 }

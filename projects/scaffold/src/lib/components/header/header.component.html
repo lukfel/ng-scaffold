@@ -72,6 +72,14 @@
           <mat-icon>arrow_back</mat-icon>
         </button>
         <button
+          *ngIf="inputValue"
+          class="lf-header-input-close-button"
+          mat-icon-button
+          matSuffix
+          (click)="clearInput()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button
           *ngIf="headerConfig?.inputConfig?.matIcon"
           mat-icon-button
           matSuffix

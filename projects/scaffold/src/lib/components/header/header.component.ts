@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     // Avoid initializing the header with an open input field on mobile
-    if(this.isMobile && this.headerConfig?.inputConfig?.enable) {
+    if (this.isMobile && this.headerConfig?.inputConfig?.enable) {
       this.headerConfig.inputConfig.enable = false;
     }
   }
@@ -39,6 +39,10 @@ export class HeaderComponent implements OnInit {
 
   public inputChanged(value: string): void {
     this.headerInputChangeEvent.emit(value);
+  }
+
+  public clearInput(): void {
+    this.inputValue = '';
   }
 
 }
