@@ -78,6 +78,10 @@ $lf-default-theme: (
 
 @mixin color-variables($theme, $scope) {
   #{$scope}{
+    --color-primary: #{mat.get-color-from-palette(map-get($theme, 'primary'))};
+    --color-accent: #{mat.get-color-from-palette(map-get($theme, 'accent'))};
+    --color-warn: #{mat.get-color-from-palette(map-get($theme, 'warn'))};
+
     @for $i from 0 through 9 {
       $hue: $i * 100;
       @if ($hue == 0) {

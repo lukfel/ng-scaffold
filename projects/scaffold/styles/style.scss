@@ -43,3 +43,16 @@ body {
     background-color: #808080;
   }
 }
+
+// Overlays
+.lf-input-dialog {
+  position: absolute !important;
+  top: 0 !important;
+  max-width: 100vw !important;
+  padding: 4px;
+
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: unset !important;
+    box-shadow: unset !important;
+  }
+}

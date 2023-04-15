@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SimpleDialogConfig } from '../../../models';
+import { SimpleDialogConfig } from '../../../../models';
 
 @Component({
   selector: 'lf-simple-dialog',

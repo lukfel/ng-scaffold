@@ -2,8 +2,9 @@ import { ComponentType } from '@angular/cdk/portal';
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
-import { SimpleDialogComponent } from '../components/dialogs/simple-dialog/simple-dialog.component';
-import { SimpleDialogConfig } from '../models';
+import { HeaderInputConfig, SimpleDialogConfig } from '../models';
+import { SimpleDialogComponent } from '../shared/components/dialogs/simple-dialog/simple-dialog.component';
+import { InputComponent } from '../shared/components/input/input.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,22 @@ export class DialogService {
       autoFocus: false,
       maxWidth: '368px',
       data: config
+    });
+    return firstValueFrom(dialogRef.afterClosed());
+  }
+
+  /**
+ * Opens a simple pre-made dialog
+ *
+ * @param config
+ * @returns an asynchronous boolean response
+ */
+  public openInputDialog(config: HeaderInputConfig): Promise<string | undefined> {
+    const dialogRef = this.matDialog.open(InputComponent, {
+      autoFocus: false,
+      width: '100vw',
+      data: config,
+      panelClass: 'lf-input-dialog'
     });
     return firstValueFrom(dialogRef.afterClosed());
   }

@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HeaderInputConfig } from '../../../models';
 
 @Component({
   selector: 'lf-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent {
+export class InputComponent implements OnInit {
 
   @Input() public label: string;
   @Input() public matIconSubmit: string;
@@ -19,8 +21,23 @@ export class InputComponent {
 
   public inputValue: string = '';
 
+  constructor(@Optional() public dialogRef: MatDialogRef<InputComponent>,
+              @Optional() @Inject(MAT_DIALOG_DATA) public config: HeaderInputConfig) { }
+
+  ngOnInit(): void {
+    if (this.config) {
+      this.label = this.config.label || '';
+      this.matIconSubmit = this.config.matIcon || '';
+      this.matIconPrefix = 'arrow_back';
+    }
+  }
+
   public inputSubmitted(value: string): void {
     this.inputSubmitEvent.emit(value);
+
+    if (this.dialogRef) {
+      this.dialogRef.close(value);
+    }
   }
 
   public inputChanged(value: string): void {
@@ -29,6 +46,10 @@ export class InputComponent {
 
   public inputPrefixAction(): void {
     this.inputPrefixActionEvent.emit();
+
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   public clearInput(): void {

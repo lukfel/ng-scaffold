@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../../shared.module';
 import { SimpleDialogComponent } from './simple-dialog.component';
 
 describe('SimpleDialogComponent', () => {
