@@ -36,7 +36,7 @@ describe('HeaderComponent', () => {
     expect(header).toBeTruthy();
   });
 
-  it('should not show the footer if the config is disabled', () => {
+  it('should not show the header if the config is disabled', () => {
     component.headerConfig = {
       enable: false
     };
@@ -114,5 +114,17 @@ describe('HeaderComponent', () => {
     const menuButtonElement = fixture.nativeElement.querySelector('.lf-header-menu-button');
     expect(menuButtonElement).toBeTruthy();
     expect(menuButtonElement.querySelector('mat-icon').textContent).toContain('menu');
+  });
+
+  it('should display the input if headerConfig.inputConfig.enable is true', () => {
+    component.headerConfig = {
+      enable: true,
+      inputConfig: {
+        enable: true
+      }
+    };
+    fixture.detectChanges();
+    const inputElement = fixture.debugElement.query(By.css('lf-input'));
+    expect(inputElement).toBeTruthy();
   });
 });
