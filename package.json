@@ -11,7 +11,7 @@
     "build-lib": "ng build scaffold --configuration production",
     "watch-lib": "ng build scaffold --watch --configuration development",
     "publish-lib": "npm publish ./dist/scaffold --access public",
-    "deploy": "ng deploy --project scaffold-app --base-href=/scaffold/ --repo=https://github.com/lukfel/scaffold.git",
+    "deploy": "ng deploy --project scaffold-app --base-href /scaffold/ --repo https://github.com/lukfel/scaffold.git",
     "lazy": "npm run test && npm run build && npm run build-lib && npm run deploy && npm run publish-lib"
   },
   "dependencies": {
