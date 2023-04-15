@@ -202,7 +202,7 @@ export class AppComponent {
       if (result) {
         this.logger.log('result: ', result);
       }
-    })
+    });
   }
 
   // Listen to header input change events

@@ -52,44 +52,14 @@
     <!-- input -->
     <ng-container *ngIf="headerConfig?.inputConfig?.enable">
       <div class="spacer"></div>
-      <mat-form-field
-        class="lf-header-input"
+      <lf-input
         [class.lf-header-input-mobile]="isMobile"
-        appearance="fill">
-        <mat-label>{{ headerConfig?.inputConfig?.label }}</mat-label>
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="inputValue"
-          (keyup.enter)="inputSubmitted(inputValue)"
-          (ngModelChange)="inputChanged($event)" />
-        <button
-          *ngIf="isMobile"
-          mat-icon-button
-          matPrefix
-          color="accent"
-          (click)="headerConfig.inputConfig!.enable = false">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <button
-          *ngIf="inputValue"
-          class="lf-header-input-close-button"
-          mat-icon-button
-          matSuffix
-          (click)="clearInput()">
-          <mat-icon>close</mat-icon>
-        </button>
-        <button
-          *ngIf="headerConfig?.inputConfig?.matIcon"
-          mat-icon-button
-          matSuffix
-          color="accent"
-          (click)="inputSubmitted(inputValue)">
-          <mat-icon>
-            {{ headerConfig?.inputConfig?.matIcon }}
-          </mat-icon>
-        </button>
-      </mat-form-field>
+        [label]="headerConfig.inputConfig!.label!"
+        [matIconSubmit]="headerConfig.inputConfig!.matIcon!"
+        [matIconPrefix]="isMobile ? 'arrow_back' : ''"
+        (inputSubmitEvent)="inputSubmitted($event)"
+        (inputChangeEvent)="inputChanged($event)"
+        (inputPrefixActionEvent)="headerConfig.inputConfig!.enable = false"></lf-input>
     </ng-container>
     <!-- spacer -->
     <div class="spacer"></div>

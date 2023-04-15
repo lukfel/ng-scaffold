@@ -1,0 +1,38 @@
+<mat-form-field class="lf-input" appearance="fill" [class.lf-hide-hint]="!hint">
+  <mat-label>{{ label || "Search" }}</mat-label>
+  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="inputValue"
+    [disabled]="disabled"
+    (keyup.enter)="inputSubmitted(inputValue)"
+    (ngModelChange)="inputChanged($event)" />
+  <button
+    *ngIf="matIconPrefix"
+    mat-icon-button
+    matPrefix
+    color="accent"
+    (click)="inputPrefixAction()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <button
+    *ngIf="inputValue"
+    class="lf-input-close-button"
+    mat-icon-button
+    matSuffix
+    (click)="clearInput()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button
+    *ngIf="matIconSubmit"
+    mat-icon-button
+    matSuffix
+    color="accent"
+    type="submit"
+    (click)="inputSubmitted(inputValue)">
+    <mat-icon>
+      {{ matIconSubmit }}
+    </mat-icon>
+  </button>
+</mat-form-field>

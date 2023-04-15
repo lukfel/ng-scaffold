@@ -1,3 +1,4 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
@@ -18,7 +19,7 @@ export class DialogService {
    * @param config
    * @returns an asynchronous boolean response
    */
-  public openCustomDialog(templateRef: TemplateRef<any>, config: MatDialogConfig): Promise<boolean> {
+  public openCustomDialog(templateRef: ComponentType<any> | TemplateRef<any>, config: MatDialogConfig): Promise<boolean> {
     const dialogRef = this.matDialog.open(templateRef, config);
     return firstValueFrom(dialogRef.afterClosed());
   }
