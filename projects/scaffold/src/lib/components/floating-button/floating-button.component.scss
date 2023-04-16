@@ -4,10 +4,6 @@
   position: fixed;
   transition: bottom $transition;
   z-index: $floating-button-z-index;
-  // right: $floating-button-right;
-  width: unset !important;
-  min-width: $floating-button-min-width !important;
-  border-radius: $border-radius !important;
 
   &.left {
     left: $floating-button-right;
@@ -15,22 +11,10 @@
 
   &.center {
     left: 50%;
-    right: 50%;
+    transform: translateX(-50%);
   }
 
   &.right {
     right: $floating-button-right;
-  }
-
-  ::ng-deep .mdc-fab__ripple {
-    border-radius: unset !important;
-  }
-
-  .lf-floating-button-label {
-    display: block;
-    max-width: $floating-button-label-max-width !important;
-    font-size: $floating-button-label-font-size;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }

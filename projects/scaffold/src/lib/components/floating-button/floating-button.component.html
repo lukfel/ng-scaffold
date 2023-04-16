@@ -6,8 +6,7 @@
   [style.bottom]="getBottomPosition() + 'px'"
   [ngClass]="floatingButtonConfig.class"
   [ngClass]="floatingButtonConfig.horizontalPosition"
-  [class.px-4]="floatingButtonConfig?.label"
-  [class.py-1]="floatingButtonConfig?.label"
+  [extended]="!!floatingButtonConfig?.label"
   (click)="buttonClicked(floatingButtonConfig.id)"
   [matTooltip]="floatingButtonConfig.tooltip!">
   <!-- mat icon -->

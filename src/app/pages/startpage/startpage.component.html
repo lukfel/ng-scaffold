@@ -1,11 +1,18 @@
 <div class="lf-startpage">
   <h1>Demo</h1>
-  <p>This is a simple demo application that lets you play around with the scaffold elements.</p>
+  <p>
+    This is a simple demo application for the Angular scaffold library
+    <b>@lukfel/scaffold</b>
+    that lets you play around with the elements and services. For more technical information see the
+    <a class="lf-link" [routerLink]="['/documentation']">Documentation</a>
+    .
+  </p>
   <mat-divider></mat-divider>
 
   <h2>Themes</h2>
   <p>
-    You can define multiple themes and switch through them by setting the corresponding css class.
+    Define multiple themes and change them dynamically by using the library's ThemeService or
+    manually setting the corresponding css class of the theme.
   </p>
   <button mat-flat-button color="accent" (click)="setTheme('')">Theme 1</button>
   <button mat-flat-button color="accent" (click)="setTheme('theme2')">Theme 2</button>
@@ -15,7 +22,8 @@
 
   <h2>Scaffold</h2>
   <p>
-    The scaffold is the global wrapper element that controls all ui elements based on its config.
+    The scaffold is the global wrapper element that contains all ui elements and displays them based
+    on the ScaffoldConfig config.
   </p>
   <p>
     <button mat-flat-button color="accent" (click)="showContainerLoading()">
@@ -31,7 +39,7 @@
 
   <h2>Header</h2>
   <p>
-    The header is a responsive mat-toolbar with a customizable logo, title, subtitle, menu-buttons
+    The header is a fixed responsive toolbar with a customizable logo, title, subtitle, menu-buttons
     and an input field.
   </p>
   <p>
@@ -104,8 +112,8 @@
 
   <h2>Title Card</h2>
   <p>
-    The title card is a mat-card below the header that can display the current page title and a back
-    button.
+    The title card is a card below the header that can display a custom label such as a page title
+    and also has a back button.
   </p>
   <p>
     <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.enable">Enable</mat-slide-toggle>
@@ -116,27 +124,28 @@
     </mat-slide-toggle>
   </p>
   <mat-form-field>
-    <mat-label>Title</mat-label>
+    <mat-label>Label</mat-label>
     <input matInput [(ngModel)]="contentTitleCardConfig.label" />
   </mat-form-field>
   <mat-divider></mat-divider>
 
   <h2>Navbar</h2>
   <p>
-    The navbar is a fixed navigation element that is positioned vertically left on desktop and moves
-    horizontally to the bottom on mobile.
+    The navbar is a fixed navigation element that is positioned vertically left on desktop and
+    responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation items.
   </p>
   <p>
     <mat-slide-toggle [(ngModel)]="navbarConfig.enable">Enable</mat-slide-toggle>
   </p>
   <p>
-    <mat-slide-toggle [(ngModel)]="navbarConfig.showAllLabels">Show all labels</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="navbarConfig.showAllLabels">Always show labels</mat-slide-toggle>
   </p>
   <mat-divider></mat-divider>
 
   <h2>Drawer</h2>
   <p>
-    The drawer is an empty mat-sidenav that let's you place custom html templates as its content.
+    The drawer is a collapsible element that allows you to place custom side content. It is
+    responsive and changes to overlay mode on mobile.
   </p>
   <p>
     <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
@@ -150,7 +159,7 @@
   <mat-divider></mat-divider>
 
   <h2>Footer</h2>
-  <p>The footer is a bottom element with a logo, navigation links and the copyright.</p>
+  <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
   <p>
     <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
   </p>
@@ -169,8 +178,9 @@
 
   <h2>Floating Button</h2>
   <p>
-    The floating button is an action button to scroll back to the top of the application or to call
-    custom methods.
+    The floating button is a fixed action button that scrolls to the top on default, but you can
+    also add an id for custom actions. By adding a label, the button will expand into a rounded
+    rectangle shape.
   </p>
   <p>
     <mat-slide-toggle [(ngModel)]="floatingButtonConfig.enable">Enable</mat-slide-toggle>
@@ -200,8 +210,8 @@
         {{ option }}
       </mat-option>
     </mat-select>
-  </mat-form-field> -->
-  <!-- <mat-form-field>
+  </mat-form-field>
+  <mat-form-field>
     <mat-label>Tooltip</mat-label>
     <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
   </mat-form-field> -->
