@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/scaffold';
 import { Observable, of } from 'rxjs';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -15,7 +16,8 @@ describe('StartpageComponent', () => {
       declarations: [StartpageComponent],
       imports: [
         BrowserAnimationsModule,
-        SharedModule
+        SharedModule,
+        RouterTestingModule
       ],
       providers: [
         { provide: ScaffoldService, useClass: MockScaffoldService }
