@@ -8,6 +8,7 @@ import { FloatingButtonConfig } from './floating-button-config.model';
 export interface ScaffoldConfig {
   loading?: boolean;
   scrollPositionRestoration?: boolean;
+  anchorScrolling?: boolean;
   headerConfig?: HeaderConfig;
   navbarConfig?: NavbarConfig;
   drawerConfig?: DrawerConfig;

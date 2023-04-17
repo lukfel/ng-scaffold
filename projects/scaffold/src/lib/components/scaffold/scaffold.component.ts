@@ -1,5 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig } from '../../models';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
@@ -10,13 +12,6 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
   styleUrls: ['./scaffold.component.scss']
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
-
-  // @HostListener('window:resize', ['$event'])
-  // public onResize(): void {
-  //   if (this.content) {
-  //     this.contentWidth = this.content.nativeElement.clientWidth;
-  //   }
-  // }
 
   @ViewChild('scrollContainer', { static: true }) public scrollContainer: ElementRef;
   @ViewChild('content', { static: true }) public content: ElementRef;
@@ -40,14 +35,15 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public isMobile: boolean = false;
   public routeLoading: boolean = false;
   public scrollTopPosition: number = 0;
-  // public contentWidth: number = 0;
 
   private _subscription: Subscription = new Subscription;
 
   constructor(private scaffoldService: ScaffoldService,
     private breakpointService: BreakpointService,
     private routerService: RouterService,
-    private logger: Logger) { }
+    private logger: Logger,
+    private route: ActivatedRoute,
+    @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     // Listen for config changes
@@ -113,6 +109,21 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         const target: HTMLElement = e.target as HTMLElement;
         // this.logger.log('scrollTopPosition: ', target.scrollTop);
         this.scrollTopPosition = target.scrollTop;
+      }));
+    }
+
+    // Listen for fragments in the current route
+    if (this.scaffoldConfig?.anchorScrolling) {
+      this._subscription.add(this.route.fragment.subscribe((fragment: string | null) => {
+        if (fragment) {
+          this.logger.log('fragment: ', fragment);
+          setTimeout(() => {
+            const element = this.document.querySelector(`#${fragment}`);
+            if (element) {
+              element.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'nearest' });
+            }
+          }, 100);
+        }
       }));
     }
   }

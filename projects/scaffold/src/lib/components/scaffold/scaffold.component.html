@@ -24,7 +24,8 @@
     [class.lf-show-header-and-navbar-mobile]="
       headerConfig?.enable && navbarConfig?.enable && isMobile
     "
-    #scrollContainer>
+    #scrollContainer
+    cdkScrollable>
     <!-- drawer -->
     <lf-drawer
       [drawerConfig]="drawerConfig"

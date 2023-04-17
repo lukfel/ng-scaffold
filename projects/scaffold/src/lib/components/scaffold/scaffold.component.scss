@@ -1,8 +1,6 @@
 @import '../../../../styles/variables';
 
 .lf-scaffold {
-  height: 100vh;
-
   .lf-content-wrapper {
     transition: height $transition;
     position: absolute;
@@ -32,7 +30,6 @@
     }
 
     .lf-content {
-      // min-height: 100%;
       padding-left: $content-padding;
       padding-right: $content-padding;
 
