@@ -1,6 +1,8 @@
 @import '../../../../styles/variables';
 
 .lf-scaffold {
+  height: 100vh;
+
   .lf-content-wrapper {
     transition: height $transition;
     position: absolute;
@@ -8,7 +10,6 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 100vh;
     overflow-y: auto;
 
     &.lf-show-navbar {

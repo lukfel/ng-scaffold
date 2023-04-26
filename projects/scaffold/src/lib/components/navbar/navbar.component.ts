@@ -27,7 +27,8 @@ export class NavbarComponent {
       return false;
     }
 
-    return this.currentRoute.includes(id);
+    const route: string = this.currentRoute.substring(this.currentRoute.indexOf('/') + 1);
+    return route === id;
   }
 
 }
