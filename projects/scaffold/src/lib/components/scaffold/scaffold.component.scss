@@ -38,6 +38,10 @@
         padding-left: $content-padding-mobile;
         padding-right: $content-padding-mobile;
       }
+
+      &.lf-show-footer{
+        min-height: 100%;
+      }
     }
   }
 }

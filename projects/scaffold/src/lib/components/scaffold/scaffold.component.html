@@ -40,7 +40,11 @@
         [routeHistory]="routeHistory"
         (backButtonClickEvent)="backButtonClicked()"></lf-content-title-card>
       <!-- main content -->
-      <div class="lf-content" [class.lf-content-mobile]="isMobile" #content>
+      <div
+        class="lf-content"
+        [class.lf-content-mobile]="isMobile"
+        [class.lf-show-footer]="footerConfig?.enable"
+        #content>
         <ng-content></ng-content>
       </div>
       <!-- footer -->
