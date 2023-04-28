@@ -2,8 +2,8 @@ import { ComponentType } from '@angular/cdk/portal';
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
-import { HeaderInputConfig, SimpleDialogConfig } from '../models';
-import { SimpleDialogComponent } from '../shared/components/dialogs/simple-dialog/simple-dialog.component';
+import { HeaderInputConfig, ConfirmDialogConfig } from '../models';
+import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { InputComponent } from '../shared/components/input/input.component';
 
 @Injectable({
@@ -26,13 +26,13 @@ export class DialogService {
   }
 
   /**
-   * Opens a simple pre-made dialog
+   * Opens a simple pre-made confirm dialog
    *
    * @param config
    * @returns an asynchronous boolean response
    */
-  public openSimpleDialog(config: SimpleDialogConfig): Promise<boolean> {
-    const dialogRef = this.matDialog.open(SimpleDialogComponent, {
+  public openConfirmDialog(config: ConfirmDialogConfig): Promise<boolean> {
+    const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
       autoFocus: false,
       maxWidth: '368px',
       data: config
@@ -41,7 +41,7 @@ export class DialogService {
   }
 
   /**
- * Opens a simple pre-made dialog
+ * Opens a simple pre-made input dialog
  *
  * @param config
  * @returns an asynchronous boolean response

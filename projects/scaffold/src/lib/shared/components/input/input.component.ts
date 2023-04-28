@@ -54,5 +54,6 @@ export class InputComponent implements OnInit {
 
   public clearInput(): void {
     this.inputValue = '';
+    this.inputChangeEvent.emit(this.inputValue);
   }
 }

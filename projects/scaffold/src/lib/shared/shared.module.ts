@@ -9,7 +9,7 @@ import { FooterComponent } from './../components/footer/footer.component';
 import { HeaderComponent } from './../components/header/header.component';
 import { LoadingOverlayComponent } from './../components/loading-overlay/loading-overlay.component';
 import { NavbarComponent } from './../components/navbar/navbar.component';
-import { SimpleDialogComponent } from './components/dialogs/simple-dialog/simple-dialog.component';
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputComponent } from './components/input/input.component';
 import { MaterialModule } from './material/material.module';
@@ -23,7 +23,7 @@ import { MaterialModule } from './material/material.module';
     ContentTitleCardComponent,
     FloatingButtonComponent,
     LoadingOverlayComponent,
-    SimpleDialogComponent,
+    ConfirmDialogComponent,
     IconComponent,
     InputComponent
   ],
@@ -44,7 +44,7 @@ import { MaterialModule } from './material/material.module';
     ContentTitleCardComponent,
     FloatingButtonComponent,
     LoadingOverlayComponent,
-    SimpleDialogComponent,
+    ConfirmDialogComponent,
     IconComponent,
     InputComponent
   ]

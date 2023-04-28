@@ -103,7 +103,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
       this._subscription.add(fromEvent(element, 'scroll').pipe(
         distinctUntilChanged(),
-        debounceTime(10)
+        debounceTime(100)
       ).subscribe((e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;
         // this.logger.log('scrollTopPosition: ', target.scrollTop);

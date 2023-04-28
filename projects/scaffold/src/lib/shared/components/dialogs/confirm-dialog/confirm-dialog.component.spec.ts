@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { SharedModule } from '../../../shared.module';
-import { SimpleDialogComponent } from './simple-dialog.component';
+import { ConfirmDialogComponent } from './confirm-dialog.component';
 
-describe('SimpleDialogComponent', () => {
-  let component: SimpleDialogComponent;
-  let fixture: ComponentFixture<SimpleDialogComponent>;
+describe('ConfirmDialogComponent', () => {
+  let component: ConfirmDialogComponent;
+  let fixture: ComponentFixture<ConfirmDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SimpleDialogComponent],
+      declarations: [ConfirmDialogComponent],
       imports: [SharedModule],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} }
@@ -18,7 +18,7 @@ describe('SimpleDialogComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(SimpleDialogComponent);
+    fixture = TestBed.createComponent(ConfirmDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
