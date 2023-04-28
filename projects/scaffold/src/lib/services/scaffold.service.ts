@@ -40,6 +40,7 @@ export class ScaffoldService {
 
   public set buttonClickEventValue(value: string) {
     this._buttonClickEventValue$.next(value);
+    this._buttonClickEventValue$.next('');
   }
 
   // constructor(@Optional() @Inject(CONFIG) private config?: LibraryConfig) { }

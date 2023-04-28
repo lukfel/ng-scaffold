@@ -24,6 +24,20 @@ export class RouterService {
     return this._currentRoute$;
   }
 
+  public get currentRoute(): string {
+    return this._currentRoute$.value;
+  }
+
+  private _previousRoute$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  public get previousRoute$(): Observable<string> {
+    return this._previousRoute$;
+  }
+
+  public get previousRoute(): string {
+    return this._previousRoute$.value;
+  }
+
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       let asyncLoadCount = 0;
@@ -31,12 +45,15 @@ export class RouterService {
       if (event instanceof RouteConfigLoadStart) { asyncLoadCount++; }
       if (event instanceof RouteConfigLoadEnd) { asyncLoadCount--; }
       if (event instanceof NavigationEnd) {
-        const url: string = event.urlAfterRedirects;
-        this._currentRoute$.next(url);
+        const previousRoute: string = this._currentRoute$.value;
+        this._previousRoute$.next(previousRoute);
+
+        const currentRoute: string = event.urlAfterRedirects;
+        this._currentRoute$.next(currentRoute);
 
         if (!this.router.getCurrentNavigation()?.extras?.state?.['back']) {
           const routeHistory: string[] = this._routeHistory$.value;
-          routeHistory.push(url);
+          routeHistory.push(currentRoute);
 
           this._routeHistory$.next(routeHistory);
         }

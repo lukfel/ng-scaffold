@@ -89,7 +89,6 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for current route changes
     this._subscription.add(this.routerService.currentRoute$.subscribe((currentRout: string) => {
-      this.logger.log('currentRout: ', currentRout);
       this.currentRoute = currentRout
     }));
 
