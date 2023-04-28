@@ -311,7 +311,7 @@ export class AppComponent {
   
   // Generic api call with a subsequent confirmation dialog
   public apiCallWithDialogConfirmation(): void {
-    this.dialogService.openSimpleDialog('Do you really want to make this api call?').then(response => {
+    this.dialogService.openConfirmDialog('Do you really want to make this api call?').then(response => {
       // If the user confirmed the dialog, go through with the api call
       if(response === true) {
         this.apiService.apiCall().then(result => {
