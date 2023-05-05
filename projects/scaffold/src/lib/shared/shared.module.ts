@@ -1,19 +1,32 @@
 import { NgModule } from '@angular/core';
-import { IconModule } from './components/icon/icon.module';
-import { PlaceholderModule } from './components/placeholder/placeholder.module';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IconComponent } from './components/icon/icon.component';
+import { InputComponent } from './components/input/input.component';
+import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 import { MaterialModule } from './material/material.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InputComponent,
+    IconComponent,
+    PlaceholderComponent
+  ],
   imports: [
-    MaterialModule,
-    IconModule,
-    PlaceholderModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MaterialModule
   ],
   exports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
     MaterialModule,
-    IconModule,
-    PlaceholderModule
+    InputComponent,
+    IconComponent,
+    PlaceholderComponent
   ]
 })
 export class SharedModule { }

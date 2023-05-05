@@ -1,7 +1,4 @@
 import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ContentTitleCardComponent } from './components/content-title-card/content-title-card.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
@@ -13,8 +10,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ScaffoldComponent } from './components/scaffold/scaffold.component';
 import { LibraryConfig } from './models';
 import { ConfirmDialogComponent } from './shared/components/dialogs/confirm-dialog/confirm-dialog.component';
-import { InputComponent } from './shared/components/input/input.component';
-import { MaterialModule } from './shared/material/material.module';
 import { SharedModule } from './shared/shared.module';
 
 export const CONFIG = new InjectionToken<LibraryConfig>('config');
@@ -29,14 +24,9 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     FooterComponent,
     ContentTitleCardComponent,
     FloatingButtonComponent,
-    ConfirmDialogComponent,
-    InputComponent
+    ConfirmDialogComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
     RouterModule,
     SharedModule
   ],
