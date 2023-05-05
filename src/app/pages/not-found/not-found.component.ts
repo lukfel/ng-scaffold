@@ -19,7 +19,7 @@ export class NotFoundComponent implements OnInit {
 
   ngOnInit(): void {
     this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
-      if(scaffoldConfig.contentTitleCardConfig?.label) {
+      if(scaffoldConfig.contentTitleCardConfig) {
         scaffoldConfig.contentTitleCardConfig.label = '404 Not Found';
       }
     });
