@@ -1,0 +1,30 @@
+@import '../../../../../styles/variables';
+
+.lf-placeholder {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  ::ng-deep {
+    .lf-icon {
+      width: $placeholder-icon-size;
+      height: $placeholder-icon-size;
+      font-size: $placeholder-icon-size;
+      color: $color-gray;
+    }
+  }
+
+  .lf-placeholder-heading {
+    margin: 0;
+    font-size: $placeholder-heading-font-size;
+    color: $color-gray;
+  }
+
+  .lf-placeholder-message {
+    margin: 0;
+    font-size: $placeholder-message-font-size;
+    color: $color-gray;
+  }
+}

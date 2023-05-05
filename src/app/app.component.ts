@@ -173,9 +173,6 @@ export class AppComponent {
       metaPageDescription: 'This Angular library provides a basic UI scaffold and services for mordern web and mobile apps',
       metaImagePath: 'scaffold/assets/img/meta.jpg'
     });
-
-    // Set the theme
-    this.themeService.loadTheme();
   }
 
   // Listen to header click events

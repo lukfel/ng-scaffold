@@ -9,7 +9,7 @@ export class ScaffoldService {
   private _scaffoldConfig$: BehaviorSubject<ScaffoldConfig> = new BehaviorSubject<ScaffoldConfig>({});
 
   public get scaffoldConfig$(): Observable<ScaffoldConfig> {
-    return this._scaffoldConfig$;
+    return this._scaffoldConfig$.asObservable();
   }
 
   public set scaffoldConfig(value: ScaffoldConfig) {
@@ -24,7 +24,7 @@ export class ScaffoldService {
   private _headerInputChangeValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public get headerInputChangeValue$(): Observable<string> {
-    return this._headerInputChangeValue$;
+    return this._headerInputChangeValue$.asObservable();
   }
 
   public set headerInputChangeValue(value: string) {
@@ -35,7 +35,7 @@ export class ScaffoldService {
   private _buttonClickEventValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public get buttonClickEventValue$(): Observable<string> {
-    return this._buttonClickEventValue$;
+    return this._buttonClickEventValue$.asObservable();
   }
 
   public set buttonClickEventValue(value: string) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ScaffoldConfig, ScaffoldService } from '@lukfel/scaffold';
+import { ScaffoldConfig, ScaffoldService, PlaceholderConfig } from '@lukfel/scaffold';
 import { take } from 'rxjs';
 
 @Component({
@@ -8,6 +8,12 @@ import { take } from 'rxjs';
   styleUrls: ['./not-found.component.scss']
 })
 export class NotFoundComponent implements OnInit {
+
+  public placeholderConfig: PlaceholderConfig = {
+    matIcon: 'block',
+    heading: '404',
+    message: 'This page could not be found.'
+  }
 
   constructor(private scaffoldService: ScaffoldService) {}
 

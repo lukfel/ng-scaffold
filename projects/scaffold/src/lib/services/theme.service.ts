@@ -15,19 +15,8 @@ export class ThemeService {
     return this._currentTheme$.asObservable();
   }
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
-
-  /**
-   * Loads the theme that is currently persisted in the LocalStorage
-   *
-   */
-  public loadTheme(): void {
-    if (!localStorage?.getItem(this.THEME_KEY)) {
-      return;
-    }
-
-    const theme: string = JSON.parse(localStorage.getItem(this.THEME_KEY) as string)
-    this.setTheme(theme);
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.loadTheme();
   }
 
   /**
@@ -61,4 +50,17 @@ export class ThemeService {
       }
     }
   }
+
+  /**
+   * Loads the theme that is currently persisted in the LocalStorage
+   *
+   */
+    private loadTheme(): void {
+      if (!localStorage?.getItem(this.THEME_KEY)) {
+        return;
+      }
+
+      const theme: string = JSON.parse(localStorage.getItem(this.THEME_KEY) as string)
+      this.setTheme(theme);
+    }
 }

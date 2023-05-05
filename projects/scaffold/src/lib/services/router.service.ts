@@ -9,19 +9,19 @@ export class RouterService {
   private _loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public get loading$(): Observable<boolean> {
-    return this._loading$;
+    return this._loading$.asObservable();
   }
 
   private _routeHistory$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   public get routeHistory$(): Observable<string[]> {
-    return this._routeHistory$;
+    return this._routeHistory$.asObservable();
   }
 
   private _currentRoute$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public get currentRoute$(): Observable<string> {
-    return this._currentRoute$;
+    return this._currentRoute$.asObservable();
   }
 
   public get currentRoute(): string {
@@ -31,7 +31,7 @@ export class RouterService {
   private _previousRoute$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public get previousRoute$(): Observable<string> {
-    return this._previousRoute$;
+    return this._previousRoute$.asObservable();
   }
 
   public get previousRoute(): string {
