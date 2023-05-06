@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconComponent } from './components/icon/icon.component';
 import { InputComponent } from './components/input/input.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './modules/material.module';
 
 @NgModule({
   declarations: [
