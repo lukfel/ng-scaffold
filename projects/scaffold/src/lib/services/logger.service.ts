@@ -7,21 +7,21 @@ export class Logger {
 
   constructor(@Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
-  public log(message: string, ...args: any[]): void {
+  public log(message: string, ...args: any[]): void {     // eslint-disable-line @typescript-eslint/no-explicit-any
     if (this.config?.production === false) {
-      console.log(message, ...args);                // eslint-disable-line no-console
+      console.log(message, ...args);                      // eslint-disable-line no-console
     }
   }
 
-  public warn(message: string, ...args: any[]): void {
+  public warn(message: string, ...args: any[]): void {    // eslint-disable-line @typescript-eslint/no-explicit-any
     if (this.config?.production === false) {
-      console.warn(message, ...args);               // eslint-disable-line no-console
+      console.warn(message, ...args);                     // eslint-disable-line no-console
     }
   }
 
-  public error(message: string, ...args: any[]): void {
+  public error(message: string, ...args: any[]): void {   // eslint-disable-line @typescript-eslint/no-explicit-any
     if (this.config?.production === false) {
-      console.error(message, ...args);              // eslint-disable-line no-console
+      console.error(message, ...args);                    // eslint-disable-line no-console
     }
   }
 

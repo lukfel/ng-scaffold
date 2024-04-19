@@ -20,7 +20,7 @@ export class DialogService {
    * @param config
    * @returns an asynchronous boolean response
    */
-  public openCustomDialog(templateRef: ComponentType<any> | TemplateRef<any>, config: MatDialogConfig): Promise<boolean> {
+  public openCustomDialog(templateRef: ComponentType<any> | TemplateRef<any>, config: MatDialogConfig): Promise<boolean> {    // eslint-disable-line @typescript-eslint/no-explicit-any
     const dialogRef = this.matDialog.open(templateRef, config);
     return firstValueFrom(dialogRef.afterClosed());
   }
