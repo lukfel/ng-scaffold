@@ -1,6 +1,6 @@
 {
   "name": "@lukfel/scaffold",
-  "version": "16.0.0",
+  "version": "17.0.0",
   "description": "This Angular library provides a basic UI scaffold and services for mordern web and mobile apps",
   "license": "MIT",
   "author": {
@@ -12,9 +12,9 @@
     "url": "https://github.com/lukfel/scaffold"
   },
   "peerDependencies": {
-    "@angular/common": "^16.2.12",
-    "@angular/core": "^16.2.12",
-    "@angular/material": "^16.2.13"
+    "@angular/common": "^17.3.4",
+    "@angular/core": "^17.3.4",
+    "@angular/material": "^17.3.4"
   },
   "dependencies": {
     "tslib": "^2.3.0"
