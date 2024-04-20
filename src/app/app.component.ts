@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService, ThemeService } from '@lukfel/scaffold';
+import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService } from '@lukfel/scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -135,8 +135,7 @@ export class AppComponent {
     private sanitizer: DomSanitizer,
     private scaffoldService: ScaffoldService,
     private breakpointService: BreakpointService,
-    private seoService: SeoService,
-    private themeService: ThemeService) {
+    private seoService: SeoService) {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
     this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
