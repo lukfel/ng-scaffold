@@ -31,8 +31,8 @@ export class SnackbarService {
   }
 
   // Opens a generic snackbar with a message
-  public openSnackbar(message: string, action?: string): void {
-    this.snackbar.open(message, action, this.defaultConfig);
+  public openSnackbar(message: string): void {
+    this.snackbar.open(message, '', this.defaultConfig);
   }
 
 }

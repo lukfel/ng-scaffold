@@ -22,6 +22,10 @@ export class FloatingButtonComponent implements OnInit {
     if (!this.floatingButtonConfig?.matIcon && !this.floatingButtonConfig?.svgIcon) {
       this.floatingButtonConfig.matIcon = 'arrow_upward';
     }
+
+    if (!this.floatingButtonConfig?.BottomPositionPx) {
+      this.floatingButtonConfig.BottomPositionPx = 24;
+    }
   }
 
   public buttonClicked(id?: string): void {
@@ -29,7 +33,7 @@ export class FloatingButtonComponent implements OnInit {
   }
 
   public getBottomPosition(): number {
-    return this.isMobile ? 80 + 24 : 24;
+    return this.isMobile ? 80 + this.floatingButtonConfig.BottomPositionPx! : this.floatingButtonConfig.BottomPositionPx!;
   }
 
 }
