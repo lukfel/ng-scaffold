@@ -4,43 +4,65 @@
 bump_version() {
   current_version=$(node -p "require('./package.json').version")
   new_version=$(npm version patch --no-git-tag-version)
+  new_version=$(echo $new_version | sed 's/^v//')
+  pushd ./projects/scaffold > /dev/null
+  npm version $new_version --no-git-tag-version
+  popd > /dev/null
   echo "Bumping version from $current_version to $new_version"
 }
 
 # Main script execution starts here
-npm run lint      # Lints and formats the code based on the .eslintrc.json
+npm run lint         # Lints and formats the code based on the .eslintrc.json
 if [ $? -ne 0 ]; then
   echo "Linting failed. Aborting release."
   exit 1
 fi
 
-npm run test      # Runs all defined unit tests (currently no real tests)
+npm run test         # Runs all defined unit tests (currently no real tests)
 if [ $? -ne 0 ]; then
   echo "Tests failed. Aborting release."
   exit 1
 fi
 
-npm run build     # Builds the application in production environment
+npm run build        # Builds the application in production environment
 if [ $? -ne 0 ]; then
   echo "Build failed. Aborting release."
   exit 1
 fi
 
-bump_version      # Bump the version number in the package.json
+npm run build-lib    # Builds the library in production environment
+if [ $? -ne 0 ]; then
+  echo "Build failed. Aborting release."
+  exit 1
+fi
+
+bump_version         # Bump the version number in the package.json
 if [ $? -ne 0 ]; then
   echo "Version bump failed. Aborting release."
   exit 1
 fi
 
-npm run build     # Builds the application in production environment
+npm run build        # Builds the application in production environment
 if [ $? -ne 0 ]; then
   echo "Build failed."
   exit 1
 fi
 
-npm run deploy    # Deploy the application
+npm run build-lib    # Builds the library in production environment
+if [ $? -ne 0 ]; then
+  echo "Build failed. Aborting release."
+  exit 1
+fi
+
+npm run deploy       # Deploy the application
 if [ $? -ne 0 ]; then
   echo "Deploy failed."
+  exit 1
+fi
+
+npm run publish-lib   # Publish the library
+if [ $? -ne 0 ]; then
+  echo "Publish failed."
   exit 1
 fi
 
