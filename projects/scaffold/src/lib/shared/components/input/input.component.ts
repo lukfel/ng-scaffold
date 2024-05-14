@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HeaderInputConfig } from '../../../models';
 
 @Component({
@@ -7,29 +7,38 @@ import { HeaderInputConfig } from '../../../models';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent implements OnInit {
+export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() public label: string;
-  @Input() public matIconSubmit: string;
-  @Input() public matIconPrefix: string;
-  @Input() public hint: string;
-  @Input() public disabled: boolean = false;
+  @Input() public inputConfig: HeaderInputConfig = {};
+  @Input() public isMobile: boolean = false;
 
   @Output() public inputSubmitEvent = new EventEmitter<string>();
   @Output() public inputChangeEvent = new EventEmitter<string>();
   @Output() public inputPrefixActionEvent = new EventEmitter<void>();
 
+  @ViewChild('input') public input: ElementRef = null!;
+
   public inputValue: string = '';
 
   constructor(@Optional() public dialogRef: MatDialogRef<InputComponent>,
-              @Optional() @Inject(MAT_DIALOG_DATA) public config: HeaderInputConfig) { }
+    @Optional() @Inject(MAT_DIALOG_DATA) public config: HeaderInputConfig,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     if (this.config) {
-      this.label = this.config.label || '';
-      this.matIconSubmit = this.config.matIcon || '';
-      this.matIconPrefix = 'arrow_back';
+      this.inputConfig = this.config;
     }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.input && this.inputConfig.autoFocus) {
+      this.input.nativeElement.focus();
+      this.cd.detectChanges();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.inputChangeEvent.emit('');
   }
 
   public inputSubmitted(value: string): void {

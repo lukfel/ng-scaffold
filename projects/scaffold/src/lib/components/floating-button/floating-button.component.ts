@@ -23,8 +23,8 @@ export class FloatingButtonComponent implements OnInit {
       this.floatingButtonConfig.matIcon = 'arrow_upward';
     }
 
-    if (!this.floatingButtonConfig?.BottomPositionPx) {
-      this.floatingButtonConfig.BottomPositionPx = 24;
+    if (!this.floatingButtonConfig?.bottomPositionPx) {
+      this.floatingButtonConfig.bottomPositionPx = 24;
     }
   }
 
@@ -33,7 +33,7 @@ export class FloatingButtonComponent implements OnInit {
   }
 
   public getBottomPosition(): number {
-    return this.isMobile ? 80 + this.floatingButtonConfig.BottomPositionPx! : this.floatingButtonConfig.BottomPositionPx!;
+    return this.isMobile ? 80 + this.floatingButtonConfig.bottomPositionPx! : this.floatingButtonConfig.bottomPositionPx!;
   }
 
 }

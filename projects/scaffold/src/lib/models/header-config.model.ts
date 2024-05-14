@@ -18,5 +18,9 @@ export interface HeaderConfig {
 export interface HeaderInputConfig {
   enable?: boolean;
   label?: string;
-  matIcon?: string;
+  matIconSubmit?: string;
+  // matIconPrefix?: string;
+  hint?: string;
+  disabled?: boolean;
+  autoFocus?: boolean;
 }

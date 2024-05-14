@@ -54,9 +54,8 @@
       <div class="spacer"></div>
       <lf-input
         [class.lf-header-input-mobile]="isMobile"
-        [label]="headerConfig.inputConfig!.label!"
-        [matIconSubmit]="headerConfig.inputConfig!.matIcon!"
-        [matIconPrefix]="isMobile ? 'arrow_back' : ''"
+        [inputConfig]="headerConfig.inputConfig!"
+        [isMobile]="isMobile"
         (inputSubmitEvent)="inputSubmitted($event)"
         (inputChangeEvent)="inputChanged($event)"
         (inputPrefixActionEvent)="headerConfig.inputConfig!.enable = false"></lf-input>

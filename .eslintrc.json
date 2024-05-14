@@ -51,7 +51,8 @@
             "ignoredMethodNames": [
               "ngOnInit",
               "ngOnDestroy",
-              "ngOnChanges"
+              "ngOnChanges",
+              "ngAfterViewInit"
             ],
             "overrides": {
               "accessors": "off",

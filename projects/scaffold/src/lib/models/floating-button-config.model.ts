@@ -7,7 +7,7 @@ export interface FloatingButtonConfig {
   outlineIcon?: boolean;
   tooltip?: string;
   horizontalPosition?: 'left' | 'center' | 'right';
-  BottomPositionPx?: number;
+  bottomPositionPx?: number;
   autoHide?: boolean;
   class?: string;
 }

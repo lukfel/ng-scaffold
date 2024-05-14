@@ -55,7 +55,8 @@ export class AppComponent {
       inputConfig: {
         enable: true,
         label: 'Search',
-        matIcon: 'search'
+        matIconSubmit: 'search',
+        autoFocus: true
       }
     },
     // NavbarConfig

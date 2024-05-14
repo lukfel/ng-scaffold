@@ -15,9 +15,9 @@
     manually setting the corresponding css class of the theme.
   </p>
   <button mat-flat-button color="accent" (click)="setTheme('')">Theme 1</button>
-  <button mat-flat-button color="accent" (click)="setTheme('theme2')">Theme 2</button>
+  <button mat-flat-button color="primary" (click)="setTheme('theme2')">Theme 2</button>
   <button mat-flat-button color="accent" (click)="setTheme('theme3')">Theme 3</button>
-  <button mat-flat-button color="accent" (click)="setTheme('theme4')">Theme 4</button>
+  <button mat-flat-button color="primary" (click)="setTheme('theme4')">Theme 4</button>
   <mat-divider></mat-divider>
 
   <h2>Scaffold</h2>
@@ -106,7 +106,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Material Icon</mat-label>
-    <input matInput [(ngModel)]="headerConfig.inputConfig!.matIcon" />
+    <input matInput [(ngModel)]="headerConfig.inputConfig!.matIconSubmit" />
   </mat-form-field>
   <mat-divider></mat-divider>
 

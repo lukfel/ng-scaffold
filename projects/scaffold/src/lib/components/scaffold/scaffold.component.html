@@ -1,3 +1,5 @@
+<!-- header-height: 64px; navbar-size: 80px; floating-button-bottom: 24px -->
+
 <div class="lf-scaffold mat-app-background mat-typography" [ngClass]="scaffoldConfig?.class">
   <!-- loading overlay -->
   <lf-loading-overlay *ngIf="scaffoldConfig?.loading"></lf-loading-overlay>
@@ -8,7 +10,8 @@
     [routeLoading]="routeLoading"
     (headerButtonClickEvent)="headerButtonClicked($event)"
     (headerInputSubmitEvent)="headerInputSubmitted($event)"
-    (headerInputChangeEvent)="headerInputChanged($event)"></lf-header>
+    (headerInputChangeEvent)="headerInputChanged($event)"
+    #header></lf-header>
   <!-- navbar -->
   <lf-navbar
     [navbarConfig]="navbarConfig"
