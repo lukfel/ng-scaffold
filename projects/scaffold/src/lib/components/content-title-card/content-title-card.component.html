@@ -14,13 +14,13 @@
   <div style="flex: 1 1 auto"></div>
   <!-- label -->
   <span class="lf-content-title-card-label">
-    {{ contentTitleCardConfig?.label || "" }}
+    {{ contentTitleCardConfig.label || "" }}
   </span>
   <!-- spacer -->
   <div style="flex: 1 1 auto"></div>
   <!-- empty button spacer -->
   <div
     [style.width]="
-      contentTitleCardConfig?.showBackButton && routeHistory.length > 1 ? '48px' : '0px'
+      contentTitleCardConfig.showBackButton && routeHistory.length > 1 ? '48px' : '0px'
     "></div>
 </mat-card>

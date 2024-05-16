@@ -215,6 +215,27 @@
     <mat-label>Tooltip</mat-label>
     <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
   </mat-form-field> -->
+  <mat-divider></mat-divider>
+
+  <h2>Bottom Bar</h2>
+  <p>
+    The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
+    enabled). It can be used to handle custom bulk actions for selected items in large lists.
+  </p>
+  <p>(Select items to test the bottom bar)</p>
+  <!-- <p>
+    <mat-slide-toggle [(ngModel)]="bottomBarConfig.enable">Enable</mat-slide-toggle>
+  </p> -->
+  <p *ngFor="let item of bottomBarDemoList">
+    <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectBottomBarItem()">
+      {{ item.label }}
+    </mat-checkbox>
+  </p>
+  <lf-bottom-bar
+    [bottomBarConfig]="bottomBarConfig"
+    (bottomBarCloseClickEvent)="bottomBarCloseClicked()"
+    (bottomBarButtonClickEvent)="bottomBarButtonClicked()"></lf-bottom-bar>
+
   <p><br /></p>
 </div>
 

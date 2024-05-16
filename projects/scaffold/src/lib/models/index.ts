@@ -1,3 +1,4 @@
+export { BottomBarConfig } from './bottom-bar-config.model';
 export { ConfirmDialogConfig } from './confirm-dialog-config.model';
 export { ContentTitleCardConfig } from './content-title-card-config.model';
 export { DrawerConfig } from './drawer-config.model';
