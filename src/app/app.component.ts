@@ -56,7 +56,7 @@ export class AppComponent {
         enable: true,
         label: 'Search',
         matIconSubmit: 'search',
-        autoFocus: true
+        autoFocus: false
       }
     },
     // NavbarConfig
@@ -117,6 +117,10 @@ export class AppComponent {
     floatingButtonConfig: {
       enable: true,
       autoHide: true
+    },
+    // BottomBarConfig
+    bottomBarConfig: {
+      enable: false
     }
   }
 

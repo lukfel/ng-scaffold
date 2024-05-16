@@ -1,8 +1,9 @@
 <div
   *ngIf="bottomBarConfig?.enable"
   class="lf-bottom-bar px-4"
-  [class.lf-bottom-bar-mobile]="isMobile">
-  <button mat-icon-button (click)="bottomBarCloseClickEvent.emit()">
+  [class.lf-bottom-bar-show-navbar]="!isMobile && navbarEnabled"
+  [class.lf-bottom-bar-show-navbar-mobile]="isMobile && navbarEnabled">
+  <button mat-icon-button (click)="closeClicked()">
     <mat-icon>close</mat-icon>
   </button>
 

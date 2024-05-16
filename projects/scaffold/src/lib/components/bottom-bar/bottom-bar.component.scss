@@ -1,20 +1,26 @@
-@import '../../../../../styles/variables';
+@import '../../../../styles/variables';
 
 .lf-bottom-bar {
+  transition: bottom $transition;
+  transition: left $transition;
   z-index: 101;
   position: fixed;
   left: 0;
   bottom: 0;
+  right: 0;
   height: $bottom-bar-height;
-  width: 100%;
   display: flex;
   align-items: center;
   box-sizing: border-box;
   background-color: var(--color-accent-900);
   color: white;
 
-  &.lf-bottom-bar-mobile {
+  &.lf-bottom-bar-show-navbar-mobile {
     bottom: calc($navbar-height + (2 * $navbar-padding)) !important;
+  }
+
+  &.lf-bottom-bar-show-navbar {
+    left: calc($navbar-width + (2 * $navbar-padding)) !important;;
   }
 
   .lf-bottom-bar-add-action {

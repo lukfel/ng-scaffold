@@ -4,6 +4,7 @@ import { FooterConfig } from './footer-config.model';
 import { HeaderConfig } from './header-config.model';
 import { NavbarConfig } from './navbar-config.model';
 import { FloatingButtonConfig } from './floating-button-config.model';
+import { BottomBarConfig } from './bottom-bar-config.model';
 
 export interface ScaffoldConfig {
   loading?: boolean;
@@ -15,5 +16,6 @@ export interface ScaffoldConfig {
   footerConfig?: FooterConfig;
   contentTitleCardConfig?: ContentTitleCardConfig;
   floatingButtonConfig?: FloatingButtonConfig;
+  bottomBarConfig?: BottomBarConfig;
   class?: string;
 }

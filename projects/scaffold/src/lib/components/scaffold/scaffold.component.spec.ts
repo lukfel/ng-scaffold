@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Logger } from '../../services';
 import { SharedModule } from '../../shared/shared.module';
+import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
 import { DrawerComponent } from '../drawer/drawer.component';
 import { FloatingButtonComponent } from '../floating-button/floating-button.component';
@@ -40,7 +41,8 @@ describe('ScaffoldComponent', () => {
         DrawerComponent,
         ContentTitleCardComponent,
         FooterComponent,
-        FloatingButtonComponent
+        FloatingButtonComponent,
+        BottomBarComponent
       ],
       imports: [
         SharedModule,

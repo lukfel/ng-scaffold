@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { BottomBarComponent } from './bottom-bar.component';
 
 describe('BottomBarComponent', () => {

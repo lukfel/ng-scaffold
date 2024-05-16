@@ -11,8 +11,13 @@ export class FloatingButtonComponent implements OnInit {
   @Input() public floatingButtonConfig: FloatingButtonConfig = {};
   @Input() public onTop: boolean = false;
   @Input() public isMobile: boolean = false;
+  @Input() public bottomBarEnabled: boolean = false;
 
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
+
+  private readonly DEFAULT_OFFSET: number = 24;
+  private navbarOffset: number = 80;
+  private bottomBarOffset: number = 56;
 
   ngOnInit(): void {
     if (!this.floatingButtonConfig?.horizontalPosition) {
@@ -24,7 +29,7 @@ export class FloatingButtonComponent implements OnInit {
     }
 
     if (!this.floatingButtonConfig?.bottomPositionPx) {
-      this.floatingButtonConfig.bottomPositionPx = 24;
+      this.floatingButtonConfig.bottomPositionPx = this.DEFAULT_OFFSET;
     }
   }
 
@@ -33,7 +38,17 @@ export class FloatingButtonComponent implements OnInit {
   }
 
   public getBottomPosition(): number {
-    return this.isMobile ? 80 + this.floatingButtonConfig.bottomPositionPx! : this.floatingButtonConfig.bottomPositionPx!;
+    let bottomPosition: number = this.floatingButtonConfig.bottomPositionPx || this.DEFAULT_OFFSET;
+
+    if (this.isMobile) {
+      bottomPosition += this.navbarOffset;
+    }
+
+    if (this.bottomBarEnabled) {
+      bottomPosition += this.bottomBarOffset;
+    }
+
+    return bottomPosition;
   }
 
 }

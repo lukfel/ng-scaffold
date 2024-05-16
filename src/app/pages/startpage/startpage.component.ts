@@ -16,15 +16,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
   public footerConfig: FooterConfig = {};
   public contentTitleCardConfig: ContentTitleCardConfig = {};
   public floatingButtonConfig: FloatingButtonConfig = {};
-  public bottomBarConfig: BottomBarConfig = {
-    enable: false,
-    actions: [
-      {
-        id: 'bottom-bar-submit',
-        label: 'Submit'
-      }
-    ]
-  };
+  public bottomBarConfig: BottomBarConfig = {};
 
   public bottomBarDemoList = [
     {
@@ -39,7 +31,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
       checked: false,
       label: 'Demo item 3'
     }
-  ]
+  ];
 
   private _subscription: Subscription = new Subscription;
 
@@ -59,6 +51,15 @@ export class StartpageComponent implements OnInit, OnDestroy {
       this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
       this.contentTitleCardConfig.label = 'Home';
       this.floatingButtonConfig = scaffoldConfig.floatingButtonConfig || {};
+      this.bottomBarConfig = scaffoldConfig.bottomBarConfig || {};
+    }));
+
+    this._subscription.add(this.scaffoldService.buttonClickEventValue$.subscribe((value: string) => {
+      if (value === 'bottom-bar_submit') {
+        this.bottomBarButtonClicked();
+      } else if (value === 'bottom-bar_close') {
+        this.bottomBarCloseClicked();
+      }
     }));
   }
 
@@ -69,10 +70,10 @@ export class StartpageComponent implements OnInit, OnDestroy {
   }
 
   public showContainerLoading(): void {
-    this.scaffoldService.scaffoldConfig.loading = true;
+    this.scaffoldConfig.loading = true;
 
     setTimeout(() => {
-      this.scaffoldService.scaffoldConfig.loading = false;
+      this.scaffoldConfig.loading = false;
     }, 3000);
   }
 
@@ -106,7 +107,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
   public removeHeaderButton(menuButton: MenuButton, isLeftButton: boolean): void {
     if (!isLeftButton) {
-      this.headerConfig.rightMenuButtons = this.headerConfig.rightMenuButtons?.filter(button => button !== menuButton);
+      this.headerConfig.rightMenuButtons = this.headerConfig.rightMenuButtons?.filter((button: MenuButton) => button !== menuButton);
     } else if (isLeftButton && this.headerConfig?.leftMenuButton === menuButton) {
       this.headerConfig.leftMenuButton = undefined;
     }
@@ -133,7 +134,13 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
     if (selected > 0) {
       this.bottomBarConfig.enable = true;
-      this.bottomBarConfig.message = `${selected} Selected`;
+      this.bottomBarConfig.message = `${selected} selected`;
+      this.bottomBarConfig.actions = [
+        {
+          id: 'bottom-bar_submit',
+          label: 'Submit'
+        }
+      ];
     } else {
       this.bottomBarConfig.enable = false;
     }

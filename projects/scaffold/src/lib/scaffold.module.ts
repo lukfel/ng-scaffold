@@ -1,5 +1,6 @@
 import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from './components/content-title-card/content-title-card.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component';
@@ -24,7 +25,8 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     FooterComponent,
     ContentTitleCardComponent,
     FloatingButtonComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    BottomBarComponent
   ],
   imports: [
     RouterModule,

@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig } from '../../models';
+import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig } from '../../models';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -21,6 +21,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   @Output() public headerInputChangeEvent = new EventEmitter<string>();
   @Output() public navbarButtonClickEvent = new EventEmitter<string>();
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
+  @Output() public bottomBarButtonClickEvent = new EventEmitter<string>();
 
   public scaffoldConfig: ScaffoldConfig = {};
   public headerConfig: HeaderConfig = {};
@@ -29,6 +30,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public footerConfig: FooterConfig = {};
   public contentTitleCardConfig: ContentTitleCardConfig = {};
   public floatingButtonConfig: FloatingButtonConfig = {};
+  public bottomBarConfig: BottomBarConfig = {};
 
   public routeHistory: string[] = [];
   public currentRoute: string;
@@ -57,6 +59,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
       this.footerConfig = scaffoldConfig.footerConfig || {};
       this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
       this.floatingButtonConfig = scaffoldConfig.floatingButtonConfig || {};
+      this.bottomBarConfig = scaffoldConfig.bottomBarConfig || {};
     }));
 
     // Listen for breakpoint changes
@@ -163,6 +166,16 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
       this.scaffoldService.buttonClickEventValue = id;
       this.floatingButtonClickEvent.emit(id);
     }
+  }
+
+  public bottomBarCloseClicked(id: string): void {
+    this.scaffoldService.buttonClickEventValue = id;
+    this.bottomBarButtonClickEvent.emit(id);
+  }
+
+  public bottomBarButtonClicked(id: string): void {
+    this.scaffoldService.buttonClickEventValue = id;
+    this.bottomBarButtonClickEvent.emit(id);
   }
 
 }

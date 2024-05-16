@@ -58,5 +58,13 @@
     [floatingButtonConfig]="floatingButtonConfig"
     [onTop]="scrollTopPosition <= 0"
     [isMobile]="isMobile && navbarConfig?.enable!"
+    [bottomBarEnabled]="bottomBarConfig?.enable!"
     (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
+  <!-- bottom bar -->
+  <lf-bottom-bar
+    [bottomBarConfig]="bottomBarConfig"
+    [isMobile]="isMobile && navbarConfig?.enable!"
+    [navbarEnabled]="navbarConfig?.enable!"
+    (bottomBarCloseClickEvent)="bottomBarCloseClicked($event)"
+    (bottomBarButtonClickEvent)="bottomBarButtonClicked($event)"></lf-bottom-bar>
 </div>

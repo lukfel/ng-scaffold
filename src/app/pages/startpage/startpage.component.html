@@ -69,7 +69,7 @@
     <input matInput [(ngModel)]="headerConfig.subtitle" />
   </mat-form-field>
 
-  <!-- <h3>Header Menu Buttons</h3>
+  <h3>Header Menu Buttons</h3>
   <mat-expansion-panel>
     <mat-expansion-panel-header>Edit Buttons</mat-expansion-panel-header>
 
@@ -82,7 +82,7 @@
           isLeftButton: true
         }"></ng-container>
 
-      <h4>Right Buttons (Label has prio)</h4>
+      <h4>Right Buttons (Label has priority over icon)</h4>
       <ng-container *ngFor="let menuButton of headerConfig.rightMenuButtons">
         <ng-container
           [ngTemplateOutlet]="menuButtonFormTemplate"
@@ -94,7 +94,7 @@
         Add right menu button
       </button>
     </ng-template>
-  </mat-expansion-panel> -->
+  </mat-expansion-panel>
 
   <h3>Header Input Field</h3>
   <p>
@@ -203,7 +203,7 @@
       Outlined &#160;&#160;
     </mat-slide-toggle>
   </mat-form-field>
-  <!-- <mat-form-field>
+  <mat-form-field>
     <mat-label>Position</mat-label>
     <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
       <mat-option *ngFor="let option of ['left', 'center', 'right']" [value]="option">
@@ -211,7 +211,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Tooltip</mat-label>
     <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
   </mat-form-field> -->
@@ -222,19 +222,12 @@
     The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
     enabled). It can be used to handle custom bulk actions for selected items in large lists.
   </p>
-  <p>(Select items to test the bottom bar)</p>
-  <!-- <p>
-    <mat-slide-toggle [(ngModel)]="bottomBarConfig.enable">Enable</mat-slide-toggle>
-  </p> -->
+  <p>(select items to test the bottom bar)</p>
   <p *ngFor="let item of bottomBarDemoList">
     <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectBottomBarItem()">
       {{ item.label }}
     </mat-checkbox>
   </p>
-  <lf-bottom-bar
-    [bottomBarConfig]="bottomBarConfig"
-    (bottomBarCloseClickEvent)="bottomBarCloseClicked()"
-    (bottomBarButtonClickEvent)="bottomBarButtonClicked()"></lf-bottom-bar>
 
   <p><br /></p>
 </div>
