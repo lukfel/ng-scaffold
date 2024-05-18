@@ -44,14 +44,14 @@ export class StartpageComponent implements OnInit, OnDestroy {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
       this.scaffoldConfig = scaffoldConfig;
-      this.headerConfig = scaffoldConfig.headerConfig || {};
-      this.navbarConfig = scaffoldConfig.navbarConfig || {};
-      this.drawerConfig = scaffoldConfig.drawerConfig || {};
-      this.footerConfig = scaffoldConfig.footerConfig || {};
-      this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
+      this.headerConfig = this.scaffoldConfig.headerConfig!;
+      this.navbarConfig = this.scaffoldConfig.navbarConfig!;
+      this.drawerConfig = this.scaffoldConfig.drawerConfig!;
+      this.footerConfig = this.scaffoldConfig.footerConfig!;
+      this.contentTitleCardConfig = this.scaffoldConfig.contentTitleCardConfig!;
       this.contentTitleCardConfig.label = 'Home';
-      this.floatingButtonConfig = scaffoldConfig.floatingButtonConfig || {};
-      this.bottomBarConfig = scaffoldConfig.bottomBarConfig || {};
+      this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
+      this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;
     }));
 
     this._subscription.add(this.scaffoldService.buttonClickEventValue$.subscribe((value: string) => {

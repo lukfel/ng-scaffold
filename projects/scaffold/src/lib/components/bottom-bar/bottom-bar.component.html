@@ -1,19 +1,21 @@
 <div
   *ngIf="bottomBarConfig?.enable"
   class="lf-bottom-bar px-4"
+  [ngClass]="bottomBarConfig.class"
   [class.lf-bottom-bar-show-navbar]="!isMobile && navbarEnabled"
   [class.lf-bottom-bar-show-navbar-mobile]="isMobile && navbarEnabled">
   <button mat-icon-button (click)="closeClicked()">
     <mat-icon>close</mat-icon>
   </button>
 
-  <span *ngIf="bottomBarConfig?.message" class="ml-1">{{ bottomBarConfig.message }}</span>
+  <span *ngIf="bottomBarConfig?.message" class="ml-2">{{ bottomBarConfig.message }}</span>
 
-  <div *ngIf="bottomBarConfig?.actions" class="lf-bottom-bar-actions ml-6">
+  <div *ngIf="bottomBarConfig?.actions" class="lf-bottom-bar-actions ml-4">
     <ng-container *ngFor="let action of bottomBarConfig.actions">
       <button
         mat-button
-        class="lf-bottom-bar-action"
+        color="accent"
+        class="lf-bottom-bar-action ml-2"
         [ngClass]="action.class"
         (click)="actionClicked(action.id)"
         [matTooltip]="action.tooltip!">

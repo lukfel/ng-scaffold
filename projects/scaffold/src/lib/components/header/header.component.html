@@ -54,6 +54,7 @@
       <div class="spacer"></div>
       <lf-input
         [class.lf-header-input-mobile]="isMobile"
+        [class.mx-3]="!isMobile"
         [inputConfig]="headerConfig.inputConfig!"
         [isMobile]="isMobile"
         (inputSubmitEvent)="inputSubmitted($event)"

@@ -53,13 +53,13 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
       this.logger.log('scaffoldConfig: ', scaffoldConfig);
 
       this.scaffoldConfig = scaffoldConfig;
-      this.headerConfig = scaffoldConfig.headerConfig || {};
-      this.navbarConfig = scaffoldConfig.navbarConfig || {};
-      this.drawerConfig = scaffoldConfig.drawerConfig || {};
-      this.footerConfig = scaffoldConfig.footerConfig || {};
-      this.contentTitleCardConfig = scaffoldConfig.contentTitleCardConfig || {};
-      this.floatingButtonConfig = scaffoldConfig.floatingButtonConfig || {};
-      this.bottomBarConfig = scaffoldConfig.bottomBarConfig || {};
+      this.headerConfig = this.scaffoldConfig.headerConfig!;
+      this.navbarConfig = this.scaffoldConfig.navbarConfig!;
+      this.drawerConfig = this.scaffoldConfig.drawerConfig!;
+      this.footerConfig = this.scaffoldConfig.footerConfig!;
+      this.contentTitleCardConfig = this.scaffoldConfig.contentTitleCardConfig!;
+      this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
+      this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;
     }));
 
     // Listen for breakpoint changes

@@ -199,7 +199,7 @@ export class AppComponent {
 
   // Listen to header input submit events
   public headerInputSubmitEvent(value: string): void {
-    this.dialogService.openConfirmDialog({ title: 'You have entered:', message: value, closeLabel: 'Close', confirmLabel: 'Confirm' }).then(result => {
+    this.dialogService.openConfirmDialog({ title: 'You have entered:', message: value, closeLabel: 'Close', confirmLabel: 'Confirm' }).then((result: boolean) => {
       this.logger.log('close result: ', result);
     });
   }

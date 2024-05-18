@@ -202,6 +202,10 @@ export class AppComponent {
     // see FloatingButtonConfig
     floatingButtonConfig: {
       enable: true
+    },
+    // see BottomBarConfig
+    bottomBarConfig: {
+      enable: false
     }
   }
 

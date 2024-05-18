@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  background-color: var(--color-accent-900);
+  background-color: var(--color-accent);
   color: white;
 
   &.lf-bottom-bar-show-navbar-mobile {
@@ -23,9 +23,11 @@
     left: calc($navbar-width + (2 * $navbar-padding)) !important;;
   }
 
-  .lf-bottom-bar-add-action {
-    background-color: white !important;
-    color: var(--color-accent-900) !important;
+  .lf-bottom-bar-actions {
+    .lf-bottom-bar-action {
+      color: var(--color-accent) !important;
+      background-color: white !important;
+    }
   }
 }
 
