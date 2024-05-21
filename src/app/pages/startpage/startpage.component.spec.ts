@@ -147,4 +147,5 @@ class MockScaffoldService {
   });
 
   public buttonClickEventValue$: Observable<string> = of('');
+  public headerInputChangeValue$: Observable<string> = of('');
 }

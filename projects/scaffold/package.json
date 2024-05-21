@@ -1,6 +1,6 @@
 {
   "name": "@lukfel/scaffold",
-  "version": "17.0.8",
+  "version": "17.0.9",
   "description": "This Angular library provides a basic UI scaffold and services for mordern web and mobile apps",
   "license": "MIT",
   "author": {

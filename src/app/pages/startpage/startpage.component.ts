@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 
@@ -33,12 +33,15 @@ export class StartpageComponent implements OnInit, OnDestroy {
     }
   ];
 
+  public inputValue: string = '';
+
   private _subscription: Subscription = new Subscription;
 
   constructor(private scaffoldService: ScaffoldService,
     private themeService: ThemeService,
     private dialogService: DialogService,
-    private logger: Logger) { }
+    private logger: Logger,
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     // Listen for config changes
@@ -59,6 +62,14 @@ export class StartpageComponent implements OnInit, OnDestroy {
         this.bottomBarButtonClicked();
       } else if (value === 'bottom-bar_close') {
         this.bottomBarCloseClicked();
+      }
+    }));
+
+    this._subscription.add(this.scaffoldService.headerInputChangeValue$.subscribe((value: string) => {
+      this.inputValue = value;
+
+      if(!this.inputValue) {
+        this.cd.detectChanges();
       }
     }));
   }

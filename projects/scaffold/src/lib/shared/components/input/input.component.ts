@@ -38,7 +38,8 @@ export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.inputChangeEvent.emit('');
+    this.inputValue = '';
+    this.inputChangeEvent.emit(this.inputValue);
   }
 
   public inputSubmitted(value: string): void {
