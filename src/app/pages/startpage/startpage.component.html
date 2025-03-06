@@ -79,7 +79,7 @@
         [ngTemplateOutlet]="menuButtonFormTemplate"
         [ngTemplateOutletContext]="{
           menuButton: headerConfig.leftMenuButton!,
-          isLeftButton: true
+          isLeftButton: true,
         }"></ng-container>
 
       <h4>Right Buttons (Label has priority over icon)</h4>
@@ -87,7 +87,7 @@
         <ng-container
           [ngTemplateOutlet]="menuButtonFormTemplate"
           [ngTemplateOutletContext]="{
-            menuButton: menuButton
+            menuButton: menuButton,
           }"></ng-container>
       </ng-container>
       <button mat-flat-button color="accent" (click)="addHeaderButton(false)">

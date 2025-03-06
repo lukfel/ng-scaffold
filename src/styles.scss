@@ -2,28 +2,28 @@
 @use '@angular/material' as mat;
 
 $base-theme: (
-  primary: mat.define-palette(mat.$pink-palette),
-  accent: mat.define-palette(mat.$blue-palette),
-  warn: mat.define-palette(mat.$red-palette),
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  warn: mat.m2-define-palette(mat.$m2-red-palette),
   dark: false,
   font-family: 'Roboto'
 );
 
 $theme2: (
-  primary: mat.define-palette(mat.$pink-palette),
-  accent: mat.define-palette(mat.$blue-palette),
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
   dark: true
 );
 
 $theme3: (
-  primary: mat.define-palette(mat.$purple-palette),
-  accent: mat.define-palette(mat.$amber-palette),
+  primary: mat.m2-define-palette(mat.$m2-purple-palette),
+  accent: mat.m2-define-palette(mat.$m2-amber-palette),
   dark: false
 );
 
 $theme4: (
-  primary: mat.define-palette(mat.$purple-palette),
-  accent: mat.define-palette(mat.$amber-palette),
+  primary: mat.m2-define-palette(mat.$m2-purple-palette),
+  accent: mat.m2-define-palette(mat.$m2-amber-palette),
   dark: true
 );
 
