@@ -3,9 +3,10 @@ import { ScaffoldConfig, ScaffoldService } from '@lukfel/scaffold';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-typography',
-  templateUrl: './typography.component.html',
-  styleUrls: ['./typography.component.scss']
+    selector: 'app-typography',
+    templateUrl: './typography.component.html',
+    styleUrls: ['./typography.component.scss'],
+    standalone: false
 })
 export class TypographyComponent implements OnInit {
 

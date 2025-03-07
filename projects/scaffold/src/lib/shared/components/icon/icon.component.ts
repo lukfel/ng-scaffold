@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'lf-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss']
+    selector: 'lf-icon',
+    templateUrl: './icon.component.html',
+    styleUrls: ['./icon.component.scss'],
+    standalone: false
 })
 export class IconComponent {
 

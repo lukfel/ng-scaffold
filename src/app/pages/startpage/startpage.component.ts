@@ -3,9 +3,10 @@ import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, F
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-startpage',
-  templateUrl: './startpage.component.html',
-  styleUrls: ['./startpage.component.scss']
+    selector: 'app-startpage',
+    templateUrl: './startpage.component.html',
+    styleUrls: ['./startpage.component.scss'],
+    standalone: false
 })
 export class StartpageComponent implements OnInit, OnDestroy {
 

@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BottomBarConfig } from '../../models';
 
 @Component({
-  selector: 'lf-bottom-bar',
-  templateUrl: './bottom-bar.component.html',
-  styleUrls: ['./bottom-bar.component.scss']
+    selector: 'lf-bottom-bar',
+    templateUrl: './bottom-bar.component.html',
+    styleUrls: ['./bottom-bar.component.scss'],
+    standalone: false
 })
 export class BottomBarComponent {
 

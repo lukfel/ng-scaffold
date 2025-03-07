@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DrawerConfig } from '../../models';
 
 @Component({
-  selector: 'lf-drawer',
-  templateUrl: './drawer.component.html',
-  styleUrls: ['./drawer.component.scss']
+    selector: 'lf-drawer',
+    templateUrl: './drawer.component.html',
+    styleUrls: ['./drawer.component.scss'],
+    standalone: false
 })
 export class DrawerComponent implements OnInit {
 

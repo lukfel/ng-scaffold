@@ -3,9 +3,10 @@ import { ScaffoldConfig, ScaffoldService, PlaceholderConfig } from '@lukfel/scaf
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-not-found',
-  templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss']
+    selector: 'app-not-found',
+    templateUrl: './not-found.component.html',
+    styleUrls: ['./not-found.component.scss'],
+    standalone: false
 })
 export class NotFoundComponent implements OnInit {
 

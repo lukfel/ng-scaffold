@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FloatingButtonConfig } from '../../models';
 
 @Component({
-  selector: 'lf-floating-button',
-  templateUrl: './floating-button.component.html',
-  styleUrls: ['./floating-button.component.scss']
+    selector: 'lf-floating-button',
+    templateUrl: './floating-button.component.html',
+    styleUrls: ['./floating-button.component.scss'],
+    standalone: false
 })
 export class FloatingButtonComponent implements OnInit {
 

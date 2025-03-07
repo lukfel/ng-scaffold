@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContentTitleCardConfig } from '../../models';
 
 @Component({
-  selector: 'lf-content-title-card',
-  templateUrl: './content-title-card.component.html',
-  styleUrls: ['./content-title-card.component.scss']
+    selector: 'lf-content-title-card',
+    templateUrl: './content-title-card.component.html',
+    styleUrls: ['./content-title-card.component.scss'],
+    standalone: false
 })
 export class ContentTitleCardComponent {
 

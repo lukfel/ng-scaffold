@@ -7,9 +7,10 @@ import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonCo
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
-  selector: 'lf-scaffold',
-  templateUrl: './scaffold.component.html',
-  styleUrls: ['./scaffold.component.scss']
+    selector: 'lf-scaffold',
+    templateUrl: './scaffold.component.html',
+    styleUrls: ['./scaffold.component.scss'],
+    standalone: false
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
