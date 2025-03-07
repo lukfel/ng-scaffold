@@ -1,6 +1,6 @@
 {
   "name": "scaffold-app",
-  "version": "19.0.1",
+  "version": "19.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,8 +11,7 @@
     "build-lib": "ng build scaffold --configuration production",
     "watch-lib": "ng build scaffold --watch --configuration development",
     "publish-lib": "npm publish ./dist/scaffold --access public",
-    "deploy": "ng deploy --project scaffold-app --base-href /scaffold/ --repo https://github.com/lukfel/scaffold.git",
-    "lazy": "npm run test && npm run build && npm run build-lib && npm run deploy && npm run publish-lib"
+    "deploy": "ng deploy --project scaffold-app --base-href /scaffold/ --repo https://github.com/lukfel/scaffold.git"
   },
   "dependencies": {
     "@angular/animations": "^19.2.1",

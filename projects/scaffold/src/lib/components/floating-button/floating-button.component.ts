@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FloatingButtonConfig } from '../../models';
 
 @Component({
-    selector: 'lf-floating-button',
-    templateUrl: './floating-button.component.html',
-    styleUrls: ['./floating-button.component.scss'],
-    standalone: false
+  selector: 'lf-floating-button',
+  templateUrl: './floating-button.component.html',
+  styleUrls: ['./floating-button.component.scss'],
+  standalone: false
 })
 export class FloatingButtonComponent implements OnInit {
 
@@ -21,16 +21,18 @@ export class FloatingButtonComponent implements OnInit {
   private bottomBarOffset: number = 56;
 
   ngOnInit(): void {
-    if (!this.floatingButtonConfig?.horizontalPosition) {
-      this.floatingButtonConfig.horizontalPosition = 'right';
-    }
+    if (this.floatingButtonConfig) {
+      if (!this.floatingButtonConfig.horizontalPosition) {
+        this.floatingButtonConfig.horizontalPosition = 'right';
+      }
 
-    if (!this.floatingButtonConfig?.matIcon && !this.floatingButtonConfig?.svgIcon) {
-      this.floatingButtonConfig.matIcon = 'arrow_upward';
-    }
+      if (!this.floatingButtonConfig.matIcon && !this.floatingButtonConfig?.svgIcon) {
+        this.floatingButtonConfig.matIcon = 'arrow_upward';
+      }
 
-    if (!this.floatingButtonConfig?.bottomPositionPx) {
-      this.floatingButtonConfig.bottomPositionPx = this.DEFAULT_OFFSET;
+      if (!this.floatingButtonConfig.bottomPositionPx) {
+        this.floatingButtonConfig.bottomPositionPx = this.DEFAULT_OFFSET;
+      }
     }
   }
 

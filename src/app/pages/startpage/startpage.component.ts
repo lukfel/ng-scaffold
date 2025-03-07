@@ -53,7 +53,9 @@ export class StartpageComponent implements OnInit, OnDestroy {
       this.drawerConfig = this.scaffoldConfig.drawerConfig!;
       this.footerConfig = this.scaffoldConfig.footerConfig!;
       this.contentTitleCardConfig = this.scaffoldConfig.contentTitleCardConfig!;
-      this.contentTitleCardConfig.label = 'Home';
+      if (this.contentTitleCardConfig) {
+        this.contentTitleCardConfig.label = 'Home';
+      }
       this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
       this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;
     }));

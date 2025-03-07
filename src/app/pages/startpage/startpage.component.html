@@ -1,4 +1,4 @@
-<div class="lf-startpage">
+<div *ngIf="scaffoldConfig" class="lf-startpage">
   <h1>Demo</h1>
   <p>
     This is a simple demo application for the Angular scaffold library
@@ -37,198 +37,214 @@
   </p>
   <mat-divider></mat-divider>
 
-  <h2>Header</h2>
-  <p>
-    The header is a fixed responsive toolbar with a customizable logo, title, subtitle, menu-buttons
-    and an input field.
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="headerConfig.enable">Enable</mat-slide-toggle>
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="headerConfig.loading">Loading</mat-slide-toggle>
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="headerConfig.showRouteLoading">
-      Show navigation loading
-    </mat-slide-toggle>
-  </p>
-  <mat-form-field>
-    <mat-label>Image Logo (url)</mat-label>
-    <input
-      matInput
-      [(ngModel)]="headerConfig.imgLogo"
-      (ngModelChange)="headerImgLogoChange($event)" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Titel</mat-label>
-    <input matInput [(ngModel)]="headerConfig.title" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Subtitel</mat-label>
-    <input matInput [(ngModel)]="headerConfig.subtitle" />
-  </mat-form-field>
+  <ng-container *ngIf="headerConfig">
+    <h2>Header</h2>
+    <p>
+      The header is a fixed responsive toolbar with a customizable logo, title, subtitle,
+      menu-buttons and an input field.
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="headerConfig.enable">Enable</mat-slide-toggle>
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="headerConfig.loading">Loading</mat-slide-toggle>
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="headerConfig.showRouteLoading">
+        Show navigation loading
+      </mat-slide-toggle>
+    </p>
+    <mat-form-field>
+      <mat-label>Image Logo (url)</mat-label>
+      <input
+        matInput
+        [(ngModel)]="headerConfig.imgLogo"
+        (ngModelChange)="headerImgLogoChange($event)" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Titel</mat-label>
+      <input matInput [(ngModel)]="headerConfig.title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Subtitel</mat-label>
+      <input matInput [(ngModel)]="headerConfig.subtitle" />
+    </mat-form-field>
 
-  <h3>Header Menu Buttons</h3>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>Edit Buttons</mat-expansion-panel-header>
+    <h3>Header Menu Buttons</h3>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>Edit Buttons</mat-expansion-panel-header>
 
-    <ng-template matExpansionPanelContent>
-      <h4>Left Button (Icon only)</h4>
-      <ng-container
-        [ngTemplateOutlet]="menuButtonFormTemplate"
-        [ngTemplateOutletContext]="{
-          menuButton: headerConfig.leftMenuButton!,
-          isLeftButton: true,
-        }"></ng-container>
-
-      <h4>Right Buttons (Label has priority over icon)</h4>
-      <ng-container *ngFor="let menuButton of headerConfig.rightMenuButtons">
+      <ng-template matExpansionPanelContent>
+        <h4>Left Button (Icon only)</h4>
         <ng-container
           [ngTemplateOutlet]="menuButtonFormTemplate"
           [ngTemplateOutletContext]="{
-            menuButton: menuButton,
+            menuButton: headerConfig.leftMenuButton!,
+            isLeftButton: true,
           }"></ng-container>
-      </ng-container>
-      <button mat-flat-button color="accent" (click)="addHeaderButton(false)">
-        Add right menu button
-      </button>
-    </ng-template>
-  </mat-expansion-panel>
 
-  <h3>Header Input Field</h3>
-  <p>
-    <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
-  </p>
-  <p>&nbsp;Value: {{ inputValue || "empty" }}</p>
-  <mat-form-field>
-    <mat-label>Label</mat-label>
-    <input matInput [(ngModel)]="headerConfig.inputConfig!.label" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Material Icon</mat-label>
-    <input matInput [(ngModel)]="headerConfig.inputConfig!.matIconSubmit" />
-  </mat-form-field>
-  <mat-divider></mat-divider>
+        <h4>Right Buttons (Label has priority over icon)</h4>
+        <ng-container *ngFor="let menuButton of headerConfig.rightMenuButtons">
+          <ng-container
+            [ngTemplateOutlet]="menuButtonFormTemplate"
+            [ngTemplateOutletContext]="{
+              menuButton: menuButton,
+            }"></ng-container>
+        </ng-container>
+        <button mat-flat-button color="accent" (click)="addHeaderButton(false)">
+          Add right menu button
+        </button>
+      </ng-template>
+    </mat-expansion-panel>
 
-  <h2>Title Card</h2>
-  <p>
-    The title card is a card below the header that can display a custom label such as a page title
-    and also has a back button.
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.enable">Enable</mat-slide-toggle>
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.showBackButton">
-      Show back button
-    </mat-slide-toggle>
-  </p>
-  <mat-form-field>
-    <mat-label>Label</mat-label>
-    <input matInput [(ngModel)]="contentTitleCardConfig.label" />
-  </mat-form-field>
-  <mat-divider></mat-divider>
+    <h3>Header Input Field</h3>
+    <p>
+      <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
+    </p>
+    <p>&nbsp;Value: {{ inputValue || "empty" }}</p>
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput [(ngModel)]="headerConfig.inputConfig!.label" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Material Icon</mat-label>
+      <input matInput [(ngModel)]="headerConfig.inputConfig!.matIconSubmit" />
+    </mat-form-field>
+    <mat-divider></mat-divider>
+  </ng-container>
 
-  <h2>Navbar</h2>
-  <p>
-    The navbar is a fixed navigation element that is positioned vertically left on desktop and
-    responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation items.
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="navbarConfig.enable">Enable</mat-slide-toggle>
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="navbarConfig.showAllLabels">Always show labels</mat-slide-toggle>
-  </p>
-  <mat-divider></mat-divider>
+  <ng-container *ngIf="contentTitleCardConfig">
+    <h2>Title Card</h2>
+    <p>
+      The title card is a card below the header that can display a custom label such as a page title
+      and also has a back button.
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.enable">Enable</mat-slide-toggle>
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.showBackButton">
+        Show back button
+      </mat-slide-toggle>
+    </p>
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput [(ngModel)]="contentTitleCardConfig.label" />
+    </mat-form-field>
+    <mat-divider></mat-divider>
+  </ng-container>
 
-  <h2>Drawer</h2>
-  <p>
-    The drawer is a collapsible element that allows you to place custom side content. It is
-    responsive and changes to overlay mode on mobile.
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="drawerConfig.open">Open</mat-slide-toggle>
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
-  </p>
-  <mat-divider></mat-divider>
+  <ng-container *ngIf="navbarConfig">
+    <h2>Navbar</h2>
+    <p>
+      The navbar is a fixed navigation element that is positioned vertically left on desktop and
+      responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation items.
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="navbarConfig.enable">Enable</mat-slide-toggle>
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="navbarConfig.showAllLabels">
+        Always show labels
+      </mat-slide-toggle>
+    </p>
+    <mat-divider></mat-divider>
+  </ng-container>
 
-  <h2>Footer</h2>
-  <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
-  </p>
-  <mat-form-field>
-    <mat-label>Image Logo (url)</mat-label>
-    <input
-      matInput
-      [(ngModel)]="footerConfig.imgLogo"
-      (ngModelChange)="footerImgLogoChange($event)" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Copyright</mat-label>
-    <input matInput [(ngModel)]="footerConfig.copyright" />
-  </mat-form-field>
-  <mat-divider></mat-divider>
+  <ng-container *ngIf="drawerConfig">
+    <h2>Drawer</h2>
+    <p>
+      The drawer is a collapsible element that allows you to place custom side content. It is
+      responsive and changes to overlay mode on mobile.
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="drawerConfig.open">Open</mat-slide-toggle>
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
+    </p>
+    <mat-divider></mat-divider>
+  </ng-container>
 
-  <h2>Floating Button</h2>
-  <p>
-    The floating button is a fixed action button that scrolls to the top on default, but you can
-    also add an id for custom actions. By adding a label, the button will expand into a rounded
-    rectangle shape.
-  </p>
-  <p>
-    <mat-slide-toggle [(ngModel)]="floatingButtonConfig.enable">Enable</mat-slide-toggle>
-  </p>
-  <mat-form-field>
-    <mat-label>Event id</mat-label>
-    <input matInput [(ngModel)]="floatingButtonConfig.id" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Label</mat-label>
-    <input matInput [(ngModel)]="floatingButtonConfig.label" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Material Icon</mat-label>
-    <input matInput [(ngModel)]="floatingButtonConfig.matIcon" />
-    <mat-slide-toggle
-      *ngIf="floatingButtonConfig?.matIcon"
-      matSuffix
-      [(ngModel)]="floatingButtonConfig.outlineIcon">
-      Outlined &#160;&#160;
-    </mat-slide-toggle>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Position</mat-label>
-    <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
-      <mat-option *ngFor="let option of ['left', 'center', 'right']" [value]="option">
-        {{ option }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <!-- <mat-form-field>
+  <ng-container *ngIf="footerConfig">
+    <h2>Footer</h2>
+    <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
+    </p>
+    <mat-form-field>
+      <mat-label>Image Logo (url)</mat-label>
+      <input
+        matInput
+        [(ngModel)]="footerConfig.imgLogo"
+        (ngModelChange)="footerImgLogoChange($event)" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Copyright</mat-label>
+      <input matInput [(ngModel)]="footerConfig.copyright" />
+    </mat-form-field>
+    <mat-divider></mat-divider>
+  </ng-container>
+
+  <ng-container *ngIf="floatingButtonConfig">
+    <h2>Floating Button</h2>
+    <p>
+      The floating button is a fixed action button that scrolls to the top on default, but you can
+      also add an id for custom actions. By adding a label, the button will expand into a rounded
+      rectangle shape.
+    </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="floatingButtonConfig.enable">Enable</mat-slide-toggle>
+    </p>
+    <mat-form-field>
+      <mat-label>Event id</mat-label>
+      <input matInput [(ngModel)]="floatingButtonConfig.id" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput [(ngModel)]="floatingButtonConfig.label" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Material Icon</mat-label>
+      <input matInput [(ngModel)]="floatingButtonConfig.matIcon" />
+      <mat-slide-toggle
+        *ngIf="floatingButtonConfig?.matIcon"
+        matSuffix
+        [(ngModel)]="floatingButtonConfig.outlineIcon">
+        Outlined &#160;&#160;
+      </mat-slide-toggle>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Position</mat-label>
+      <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
+        <mat-option *ngFor="let option of ['left', 'center', 'right']" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field>
     <mat-label>Tooltip</mat-label>
     <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
   </mat-form-field> -->
-  <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+  </ng-container>
 
-  <h2>Bottom Bar</h2>
-  <p>
-    The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
-    enabled). It can be used to handle custom bulk actions for selected items in large lists.
-  </p>
-  <p>(select items to test the bottom bar)</p>
-  <p *ngFor="let item of bottomBarDemoList">
-    <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectBottomBarItem()">
-      {{ item.label }}
-    </mat-checkbox>
-  </p>
+  <ng-container *ngIf="bottomBarConfig">
+    <h2>Bottom Bar</h2>
+    <p>
+      The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
+      enabled). It can be used to handle custom bulk actions for selected items in large lists.
+    </p>
+    <p>(select items to test the bottom bar)</p>
+    <p *ngFor="let item of bottomBarDemoList">
+      <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectBottomBarItem()">
+        {{ item.label }}
+      </mat-checkbox>
+    </p>
+  </ng-container>
 
   <p><br /></p>
 </div>
