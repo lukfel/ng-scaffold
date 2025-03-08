@@ -14,24 +14,24 @@
     <!-- logo & title -->
     <div
       class="lf-header-logo-title-wrapper ml-1 mr-2"
-      [class.ml-10]="headerConfig?.leftMenuButton && !isMobile">
+      [class.ml-10]="headerConfig.leftMenuButton && !isMobile">
       <!-- link wrapper -->
       <div
         class="lf-header-logo-title-wrapper-link"
-        [class.lf-clickable]="headerConfig?.titleRouterLink"
-        [routerLink]="headerConfig?.titleRouterLink ? [headerConfig?.titleRouterLink] : null">
+        [class.lf-clickable]="headerConfig.titleRouterLink"
+        [routerLink]="headerConfig.titleRouterLink ? [headerConfig.titleRouterLink] : null">
         <!-- svg logo -->
         <mat-icon
           *ngIf="headerConfig?.svgLogo; else imgLogo"
           class="lf-header-logo"
-          [class.mr-2]="headerConfig?.title"
+          [class.mr-2]="headerConfig.title"
           [svgIcon]="headerConfig.svgLogo!"></mat-icon>
         <!-- img logo -->
         <ng-template #imgLogo>
           <img
             *ngIf="headerConfig?.imgLogo"
             class="lf-header-logo"
-            [class.mr-2]="headerConfig?.title"
+            [class.mr-2]="headerConfig.title"
             [src]="headerConfig.imgLogo"
             alt="Logo" />
         </ng-template>
@@ -40,7 +40,7 @@
           <span
             *ngIf="headerConfig?.title"
             class="lf-header-title"
-            [class.mt-2]="!headerConfig?.subtitle">
+            [class.mt-2]="!headerConfig.subtitle">
             {{ headerConfig.title }}
           </span>
           <span *ngIf="headerConfig?.subtitle" class="lf-header-subtitle">
