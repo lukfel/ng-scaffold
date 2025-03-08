@@ -128,7 +128,9 @@
           [ngClass]="button.class"
           (click)="buttonClicked(button.id)">
           <!-- icon -->
-          <mat-icon *ngIf="button.matIcon">{{ button.matIcon }}</mat-icon>
+          <mat-icon *ngIf="button.matIcon" [class.material-icons-outlined]="button.outlineIcon">
+            {{ button.matIcon }}
+          </mat-icon>
           <!-- label -->
           <span *ngIf="button.label">{{ button.label }}</span>
         </button>
