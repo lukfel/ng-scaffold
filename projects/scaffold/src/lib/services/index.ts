@@ -1,5 +1,6 @@
 export { BreakpointService } from './breakpoint.service';
 export { DialogService } from './dialog.service';
+export { LocalStorageService } from './local-storage.service';
 export { Logger } from './logger.service';
 export { RouterService } from './router.service';
 export { ScaffoldService } from './scaffold.service';

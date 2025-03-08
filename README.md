@@ -263,6 +263,7 @@ The library provides some additional commonly used services, such as:
 * ``RouterService`` (listen for route changes and retrieve route history)
 * ``SeoService`` (set all meta tags with one method)
 * ``ThemeService`` (dynamically change the theme)
+* ``LocalStorageService`` (persist data in the local storage)
 
 ### Logger
 This service only logs out information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).

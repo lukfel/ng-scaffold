@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class ThemeService {
     return this._currentTheme$.asObservable();
   }
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(private storageService: LocalStorageService,
+    @Inject(DOCUMENT) private document: Document) {
     this.loadTheme();
   }
 
@@ -42,11 +44,11 @@ export class ThemeService {
       this.document.body.classList.add(newTheme);
 
       if (useLocalStorage) {
-        localStorage.setItem(this.THEME_KEY, JSON.stringify(newTheme));
+        this.storageService.setItem(this.THEME_KEY, JSON.stringify(newTheme));
       }
     } else {
       if (useLocalStorage) {
-        localStorage.removeItem(this.THEME_KEY);
+        this.storageService.removeItem(this.THEME_KEY);
       }
     }
   }
@@ -55,12 +57,13 @@ export class ThemeService {
    * Loads the theme that is currently persisted in the LocalStorage
    *
    */
-    private loadTheme(): void {
-      if (!localStorage?.getItem(this.THEME_KEY)) {
-        return;
-      }
+  private loadTheme(): void {
+    const theme: string | null = this.storageService.getItem(this.THEME_KEY);
 
-      const theme: string = JSON.parse(localStorage.getItem(this.THEME_KEY) as string)
-      this.setTheme(theme);
+    if (!theme) {
+      return;
     }
+
+    this.setTheme(theme.replace(/"/g, ''));
+  }
 }
