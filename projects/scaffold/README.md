@@ -23,7 +23,7 @@ npm install @lukfel/scaffold
 ## Module
 Import the `ScaffoldModule` into your `app.module.ts` file.
 
-**Note (Optional):** The library includes a built-in logging service called `Logger`, which logs library events when a `LibraryConfig` is provided, and `production` is set to `false`. Logging is automatically disabled in production mode.
+* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library events when a `LibraryConfig` is provided, and `production` is set to `false`. Logging is automatically disabled in production mode.
 
 ```ts
 import { ScaffoldModule } from '@lukfel/scaffold';
@@ -40,7 +40,7 @@ imports: [
 ## Styling
 Import the styles in your `styles.scss` and apply a default theme.
 
-**Note:** The library’s styles include Material icons and Roboto font styles.
+* **Note:** The library’s styles include Material icons and Roboto font styles.
 
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
@@ -67,7 +67,7 @@ $my-theme: (
 ### Multiple Themes (Optional)
 To switch between multiple themes dynamically, define additional themes using `lf.scaffold-colors($theme, 'theme-class')`, then apply the class to the `<body>` tag.
 
-**Note:** The `ThemeService` allows dynamic theme switching.
+* **Note:** The `ThemeService` allows dynamic theme switching.
 
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
@@ -93,7 +93,7 @@ $my-theme2: (
 ### Custom Typography (Optional)
 To change the default typography from Roboto, pass an additional parameter ``font-family`` in the theme map.
 
-**Note:** Don't forget to also import and set the font-family in the styles.
+* **Note:** Don't forget to also import and set the font-family in the styles.
 
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
@@ -122,7 +122,7 @@ Wrap your application’s content inside the `lf-scaffold` component in `app.com
 
 ```html
 <lf-scaffold>
-  <!-- optional drawer content (content that is placed inside the left drawer if enabled) -->
+  <!-- (Optional) drawer content shows inside the left drawer if enabled -->
   <ng-container drawerContent></ng-container>
   <router-outlet></router-outlet>
 </lf-scaffold>
@@ -145,7 +145,7 @@ export class AppComponent {
 ### Update Configuration
 Define the `ScaffoldConfig` in `app.component.ts` and update the `scaffoldConfig` property in `ScaffoldService`.
 
-**Notes:**
+* **Notes:**
 - If a sub-configuration (e.g., `headerConfig`) is missing or does not have `enable: true`, the corresponding UI element will not be displayed.
 - Refer to the demo project for full configuration details.
 
@@ -175,21 +175,23 @@ export class AppComponent {
 There are two ways to listen to scaffold user events (button clicks, input changes, ...):
 
 ### Option 1 (Recommended) – Subscribe to Observables
+Subscribe to the event Observables and listen to changes
 ```ts
 constructor(private scaffoldService: ScaffoldService, private router: Router) {
   // Listen to click events (header menu and navbar buttons - click)
-  this.scaffoldService.buttonClickEventValue$.subscribe((id: string) ={
+  this.scaffoldService.buttonClickEventValue$.subscribe((id: string) => {
     this.router.navigate([id]);
   });
 
   // Listen to header input change events (header input field - change)
-  this.scaffoldService.headerInputChangeValue$.subscribe((value: string) ={
+  this.scaffoldService.headerInputChangeValue$.subscribe((value: string) => {
     ...
   });
 }
 ```
 
 ### Option 2 – Use Output Events
+Specify the needed output events and call custom methods
 ```html
 <lf-scaffold
   (headerButtonClickEvent)="headerButtonClickEvent($event)"
@@ -238,7 +240,8 @@ This library includes several utility services:
 - **`LocalStorageService`** – Handle local storage
 
 ### Logger
-This service only logs out information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).
+Logs out library- and app information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).
+
 ```ts
 import { Logger } from '@lukfel/scaffold';
 
@@ -248,9 +251,9 @@ export class AppComponent {
   
   // Generic api call with logging
   public apiCallWithLogging(): void {
-    this.apiService.apiCall().then(result ={
+    this.apiService.apiCall().then(result => {
       this.logger.log(result);
-    }).catch(error ={
+    }).catch(error => {
       this.logger.error(error);
     });
   }
@@ -258,7 +261,8 @@ export class AppComponent {
 ```
 
 ### SnackbarService
-This service provides basic methods to display a simple snackbar with or without an action.
+Provides basic methods to display simple snackbar notifications with or without actions.
+
 ```ts
 import { SnackbarService } from '@lukfel/scaffold';
 
@@ -268,9 +272,9 @@ export class AppComponent {
   
   // Generic api call with snackbar response
   public apiCallWithSnackbarResponse(): void {
-    this.apiService.apiCall().then(result ={
+    this.apiService.apiCall().then(result => {
       this.snackbarService.openSnackbar('Call was successful');
-    }).catch(error ={
+    }).catch(error => {
       this.snackbarService.openSnackbar('Call was not successful');
     });
   }
@@ -278,7 +282,8 @@ export class AppComponent {
 ```
 
 ### DialogService
-This service provide a basic confirmation dialog with a ``boolean`` response. Additionally you can use the method `openCustomDialog` to pass your own dialog template and config.
+Includes a basic confirmation dialog thar returns a `Promise`. Use the method `openCustomDialog` to pass your own dialog template and config.
+
 ```ts
 import { DialogService } from '@lukfel/scaffold';
 
@@ -288,12 +293,12 @@ export class AppComponent {
   
   // Generic api call with a subsequent confirmation dialog
   public apiCallWithDialogConfirmation(): void {
-    this.dialogService.openConfirmDialog('Do you really want to make this api call?').then(response ={
+    this.dialogService.openConfirmDialog('Do you really want to make this api call?').then(response => {
       // If the user confirmed the dialog, go through with the api call
       if(response === true) {
-        this.apiService.apiCall().then(result ={
+        this.apiService.apiCall().then(result => {
           ...
-        }).catch(error ={
+        }).catch(error => {
           ...
         }); 
       }
@@ -303,14 +308,15 @@ export class AppComponent {
 ```
 
 ### BreakpointService
-This service allows you to subscribe to breakpoint changes and act accordingly.
+Allows you to subscribe to breakpoint changes.
+
 ```ts
 import { BreakpointService } from '@lukfel/scaffold';
 
 export class AppComponent {
 
   constructor(private breakpointService: BreakpointService) {
-    this.breakpointService.breakpoint$.subscribe((result: BreakpointState) ={
+    this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
       // Check which breakpoint is active
       if (result.breakpoints[Breakpoints.XSmall]) {
         ...
@@ -327,9 +333,9 @@ export class AppComponent {
 ```
 
 ### ThemeService
-This service allows you to dynamically change between your defined themes.
+Dynamically change between your defined themes.
 
-**Note:** The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
+* **Note:** The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
 
 ```ts
 import { ThemeService } from '@lukfel/scaffold';
