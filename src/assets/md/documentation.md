@@ -1,87 +1,105 @@
 # Documentation
 ## Introduction
-This Angular library provides a basic scaffold for modern web and mobile applications and includes ui elements such as header, sidebar, drawer, footer, floating button etc as well as basic services to display snackbars, dialogs and more. Simply wrap your ``router-outlet`` with the ``lf-scaffold`` element and start configuring the ``ScaffoldConfig`` in the `ScaffoldService` store.
 
-* Demo https://lukfel.github.io/scaffold
-* Example https://www.create-a-tournament.com, https://www.what-a-waste.at
+This Angular library provides a foundational scaffold for modern web and mobile applications. It includes essential UI elements such as a header, sidebar, drawer, footer, floating button, and built-in services for theme switching, snackbar notifications, dialog management, and breakpoint detection. Simply wrap your `router-outlet` with the `lf-scaffold` element and configure the `ScaffoldConfig` within the `ScaffoldService`.
+
+- **NPM**: [@lukfel/scaffold](https://www.npmjs.com/package/@lukfel/scaffold)
+- **Demo**: [lukfel.github.io/scaffold](https://lukfel.github.io/scaffold)
+- **Examples**: [Create a Tournament](https://www.create-a-tournament.com), [What a Waste](https://www.what-a-waste.at)
+
+
+
 
 ## Installation
-Install the npm package ``npm install @lukfel/scaffold``.
+Install the package using npm:
+
+```sh
+npm install @lukfel/scaffold
+```
+
+
+
 
 ## Module
-Import the module ``ScaffoldModule`` in your ``app.module.ts``.
-* Hint: The library has a built in logger service ``Logger`` which logs certain events if a ``LibraryConfig`` is passed and the property ``production`` is to ``false`` (no logging in production mode).
+Import the `ScaffoldModule` into your `app.module.ts` file.
+
+**Note (Optional):** The library includes a built-in logging service called `Logger`, which logs library events when a `LibraryConfig` is provided, and `production` is set to `false`. Logging is automatically disabled in production mode.
+
 ```ts
 import { ScaffoldModule } from '@lukfel/scaffold';
 import { environment as env } from 'src/environments/environment';
 
 imports: [
-  ...
-  // omit '.forRoot( { production: env.production } )' if you don't need the logger
-  ScaffoldModule.forRoot( { production: env.production } )
+  ScaffoldModule.forRoot({ production: env.production })    // Omit .forRoot(...) if logging is not required
 ],
 ```
 
-## Style
-Import the styles ``@lukfel/scaffold/styles`` on top of your ``styles.scss`` and include the theme.
-* Hint: The styles also include material icons and the roboto font.
+
+
+
+## Styling
+Import the styles in your `styles.scss` and apply a default theme.
+
+**Note:** The library’s styles include Material icons and Roboto font styles.
+
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
-@include lf.scaffold-theme();     // include the default theme
-...
+@include lf.scaffold-theme();           // include a default theme
 ```
 
-### Custom Theme
-To customize the theme, overwrite the color palettes directly after the ``@use "@lukfel/scaffold/styles" as lf`` import.
-* Hint: To use Material palettes, install and import the Angular Material library in your application.
+### Custom Themes (Optional)
+To customize the default theme, define a new theme map specifying `primary`, `accent`, and `warn` colors using Material palettes. Enabling the `dark` option applies a dark theme. Pass your custom theme to `lf.scaffold-theme($my-theme)`.
+
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$theme: (
+$my-theme: (
   primary: mat.define-palette(mat.$pink-palette),
   accent: mat.define-palette(mat.$blue-palette),
   warn: mat.define-palette(mat.$red-palette),
   dark: false
 );
 
-@include lf.scaffold-theme($theme);
-...
+@include lf.scaffold-theme($my-theme);
 ```
 
-### Multiple Themes
-To dynamically switch between themes, create and include the theme with ``lf.scaffold-colors($theme2, 'theme2')`` where the second parameter is the class name that needs to be present on the body like ``<body class="theme2">``.
-* Hint: You can dynamically change to an available theme with the service ``ThemeService``.
+### Multiple Themes (Optional)
+To switch between multiple themes dynamically, define additional themes using `lf.scaffold-colors($theme, 'theme-class')`, then apply the class to the `<body>` tag.
+
+**Note:** The `ThemeService` allows dynamic theme switching.
+
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$base-theme: (
+$my-theme: (
   primary: mat.define-palette(mat.$pink-palette),
   accent: mat.define-palette(mat.$blue-palette),
   warn: mat.define-palette(mat.$red-palette),
   dark: false
 );
 
-$theme2: (
+$my-theme2: (
   primary: mat.define-palette(mat.$purple-palette),
   accent: mat.define-palette(mat.$amber-palette),
   dark: false
 );
 
-@include lf.scaffold-theme($base-theme);              // Set the primary theme with lf.scaffold-theme(...)
-@include lf.scaffold-colors($theme2, 'theme2');       // Set additional themes with lf.scaffold-colors(...)
-...
+@include lf.scaffold-theme($my-theme);                      // Set the primary theme with lf.scaffold-theme(...)
+@include lf.scaffold-colors($my-theme2, 'my-theme2');       // Set additional themes with lf.scaffold-colors(...)
 ```
 
-### Custom Typography
-The change the default typography from Roboto, you can pass an additional property ``font-family`` in the base theme map.
-* Hint: Don't forget to import and set your desired font-family in your application.
+### Custom Typography (Optional)
+To change the default typography from Roboto, pass an additional parameter ``font-family`` in the theme map.
+
+**Note:** Don't forget to also import and set the font-family in the styles.
+
 ```scss
 @use "@lukfel/scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$base-theme: (
+$my-theme: (
   primary: mat.define-palette(mat.$pink-palette),
   accent: mat.define-palette(mat.$blue-palette),
   warn: mat.define-palette(mat.$red-palette),
@@ -89,37 +107,48 @@ $base-theme: (
   font-family: 'Comic Sans'
 );
 
-@include lf.scaffold-theme($base-theme); 
+@include lf.scaffold-theme($my-theme); 
 
 body {
     font-family: "Comic Sans MS" !important;
 }
-...
 ```
 
+
+
+
 ## Template
-Add the ``lf-scaffold`` element to your ``app.component.html``.
+Wrap your application’s content inside the `lf-scaffold` component in `app.component.html`.
+
 ```html
 <lf-scaffold>
+  <!-- optional drawer content (content that is placed inside the left drawer if enabled) -->
+  <ng-container drawerContent></ng-container>
   <router-outlet></router-outlet>
 </lf-scaffold>
 ```
 
-## Config
-Import the ``ScaffoldService`` in your ``app.component.ts``.
-* Hint: The ``ScaffoldService`` is the global store of the library. With this service you can change the ``ScaffoldConfig`` and subscribe to the `Observable` to detect changes.
+
+
+
+## Configuration
+Import the `ScaffoldService` in `app.component.ts` to manage the `ScaffoldConfig` settings.
+
 ```ts
 import { ScaffoldService } from '@lukfel/scaffold';
 
 export class AppComponent {
-
   constructor(private scaffoldService: ScaffoldService) {}
-
 }
 ```
 
-Create the ``ScaffoldConfig`` object in your ``app.component.ts`` and set it in the ``ScaffoldService``.
-* Hint: If a sub config (e.g. ``headerConfig``) is not defined within the ``ScaffoldConfig`` or doesn't have the property ``enable: true``, the corresponding ui element won't be displayed.
+### Update Configuration
+Define the `ScaffoldConfig` in `app.component.ts` and update the `scaffoldConfig` property in `ScaffoldService`.
+
+**Notes:**
+- If a sub-configuration (e.g., `headerConfig`) is missing or does not have `enable: true`, the corresponding UI element will not be displayed.
+- Refer to the demo project for full configuration details.
+
 ```ts
 import { ScaffoldService, ScaffoldConfig } from '@lukfel/scaffold';
 
@@ -127,107 +156,46 @@ export class AppComponent {
 
   public scaffoldConfig: ScaffoldConfig = {
     scrollPositionRestoration: true,
-    // see HeaderConfig
-    headerConfig: {
-      enable: true,
-      title: 'Scaffold',
-      subtitle: 'by Lukas Felbinger',
-      leftMenuButton: {
-        id: 'menu',
-        matIcon: 'menu'
-      },
-      rightMenuButtons: [
-        {
-          id: 'item1',
-          label: 'Item 1'
-        },
-        {
-          id: 'item2',
-          label: 'Item 2'
-        },
-        {
-          id: 'item3',
-          matIcon: 'settings'
-        }
-      ],
-      inputConfig: {
-        enable: false
-      }
-    },
-    // see NavbarConfig
-    navbarConfig: {
-      enable: true,
-      showAllLabels: true,
-      menuButtons: [
-        {
-          id: 'nav1',
-          label: 'Nav 1',
-          matIcon: 'looks_one'
-        },
-        {
-          id: 'nav2',
-          label: 'Nav 2',
-          matIcon: 'looks_two'
-        },
-        {
-          id: 'nav3',
-          label: 'Nav 3',
-          matIcon: 'looks_3'
-        }
-      ]
-    },
-    // see DrawerConfig
-    drawerConfig: {
-      enable: false
-    },
-    // see FooterConfig
-    footerConfig: {
-      enable: true,
-      links: [
-        {
-          label: 'Link 1'
-        },
-        {
-          label: 'Link 2'
-        },
-      ],
-      copyright: '© Lukas Felbinger 2023. All rights reserved.'
-    },
-    // see ContentTitleCardConfig
-    contentTitleCardConfig: {
-      enable: true,
-      label: 'Example Title',
-      showBackButton: true
-    },
-    // see FloatingButtonConfig
-    floatingButtonConfig: {
-      enable: true
-    },
-    // see BottomBarConfig
-    bottomBarConfig: {
-      enable: false
-    }
-  }
+    headerConfig: { enable: true, title: 'Scaffold', subtitle: 'by Lukas Felbinger' },
+    navbarConfig: { enable: true },
+    footerConfig: { enable: true, copyright: '© Lukas Felbinger 2023' },
+    floatingButtonConfig: { enable: true }
+  };
 
   constructor(private scaffoldService: ScaffoldService) {
-    // Set the new scaffoldConfig in the global store
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
   }
-
 }
 ```
 
+
+
+
 ## Events
-To listen to scaffold user events, add the output events and define the corresponding methods in your ``app.component.ts``.
+There are two ways to listen to scaffold user events (button clicks, input changes, ...):
+
+### Option 1 (Recommended) – Subscribe to Observables
+```ts
+constructor(private scaffoldService: ScaffoldService, private router: Router) {
+  // Listen to click events (header menu and navbar buttons - click)
+  this.scaffoldService.buttonClickEventValue$.subscribe((id: string) ={
+    this.router.navigate([id]);
+  });
+
+  // Listen to header input change events (header input field - change)
+  this.scaffoldService.headerInputChangeValue$.subscribe((value: string) ={
+    ...
+  });
+}
+```
+
+### Option 2 – Use Output Events
 ```html
 <lf-scaffold
   (headerButtonClickEvent)="headerButtonClickEvent($event)"
   (headerInputSubmitEvent)="headerInputSubmitEvent($event)"
   (headerInputChangeEvent)="headerInputChangeEvent($event)"
   (navbarButtonClickEvent)="navbarButtonClickEvent($event)">
-  <!-- drawer content (content that is placed in the left drawer if enabled) -->
-  <ng-container drawerContent></ng-container>
-  <!-- main content -->
   <router-outlet></router-outlet>
 </lf-scaffold>
 ```
@@ -235,7 +203,7 @@ To listen to scaffold user events, add the output events and define the correspo
 ```ts
 // Listen to header click events (header menu buttons - click)
 public headerButtonClickEvent(id: string): void {
-  ...
+  this.router.navigate([id]);
 }
 
 // Listen to header input submit events (header input field - submit)
@@ -250,20 +218,24 @@ public headerInputChangeEvent(value: string): void {
 
 // Listen to navbar click events (navbar menu buttons - click)
 public navbarButtonClickEvent(id: string): void {
-  ...
+  this.router.navigate([id]);
 }
 ```
 
+
+
+
 ## Additional Services
-The library provides some additional commonly used services, such as:
-* ``Logger`` (for logging during development only)
-* ``SnackbarService`` (display simple snackbars)
-* ``DialogService`` (display simple and custom dialogs)
-* ``BreakpointService`` (listen for breakpoint changes)
-* ``RouterService`` (listen for route changes and retrieve route history)
-* ``SeoService`` (set all meta tags with one method)
-* ``ThemeService`` (dynamically change the theme),
-* ``LocalStorageService`` (persist data in the local storage)
+This library includes several utility services:
+
+- **`Logger`** – Development-only logging
+- **`SnackbarService`** – Display snackbar notifications
+- **`DialogService`** – Display custom dialogs
+- **`BreakpointService`** – Detect screen breakpoints
+- **`ThemeService`** – Manage themes dynamically
+- **`RouterService`** – Track route changes and retreive route history
+- **`SeoService`** – Manage meta tags
+- **`LocalStorageService`** – Handle local storage
 
 ### Logger
 This service only logs out information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).
@@ -276,9 +248,9 @@ export class AppComponent {
   
   // Generic api call with logging
   public apiCallWithLogging(): void {
-    this.apiService.apiCall().then(result => {
+    this.apiService.apiCall().then(result ={
       this.logger.log(result);
-    }).catch(error => {
+    }).catch(error ={
       this.logger.error(error);
     });
   }
@@ -296,9 +268,9 @@ export class AppComponent {
   
   // Generic api call with snackbar response
   public apiCallWithSnackbarResponse(): void {
-    this.apiService.apiCall().then(result => {
+    this.apiService.apiCall().then(result ={
       this.snackbarService.openSnackbar('Call was successful');
-    }).catch(error => {
+    }).catch(error ={
       this.snackbarService.openSnackbar('Call was not successful');
     });
   }
@@ -316,12 +288,12 @@ export class AppComponent {
   
   // Generic api call with a subsequent confirmation dialog
   public apiCallWithDialogConfirmation(): void {
-    this.dialogService.openConfirmDialog('Do you really want to make this api call?').then(response => {
+    this.dialogService.openConfirmDialog('Do you really want to make this api call?').then(response ={
       // If the user confirmed the dialog, go through with the api call
       if(response === true) {
-        this.apiService.apiCall().then(result => {
+        this.apiService.apiCall().then(result ={
           ...
-        }).catch(error => {
+        }).catch(error ={
           ...
         }); 
       }
@@ -331,14 +303,14 @@ export class AppComponent {
 ```
 
 ### BreakpointService
-This service allows you to subscribe to breakpoint changes and act accordingly
+This service allows you to subscribe to breakpoint changes and act accordingly.
 ```ts
 import { BreakpointService } from '@lukfel/scaffold';
 
 export class AppComponent {
 
   constructor(private breakpointService: BreakpointService) {
-    this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
+    this.breakpointService.breakpoint$.subscribe((result: BreakpointState) ={
       // Check which breakpoint is active
       if (result.breakpoints[Breakpoints.XSmall]) {
         ...
@@ -350,6 +322,20 @@ export class AppComponent {
         ...
       }
     });
+  }
+}
+```
+
+### ThemeService
+This service allows you to dynamically change between your defined themes.
+* Hint: The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
+```ts
+import { ThemeService } from '@lukfel/scaffold';
+
+export class AppComponent {
+
+  constructor(private themeService: ThemeService) {
+    this.themeService.setTheme('my-theme2', true);    // the second parameter allows to persists the theme in the LocalStorage (using the built in LocalStorageService)
   }
 }
 ```

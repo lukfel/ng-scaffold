@@ -41,7 +41,7 @@ export class AppComponent {
         },
         {
           id: 'documentation',
-          label: 'Documentation'
+          label: 'Docs'
         },
         {
           id: 'typography',
@@ -50,7 +50,14 @@ export class AppComponent {
         {
           id: 'github',
           svgIcon: 'github_logo',
-          tooltip: 'GitHub'
+          tooltip: 'GitHub',
+          class: 'gray-icon'
+        },
+        {
+          id: 'npm',
+          svgIcon: 'npm_logo',
+          tooltip: 'NPM',
+          class: 'gray-icon'
         }
       ],
       inputConfig: {
@@ -73,7 +80,7 @@ export class AppComponent {
         },
         {
           id: 'documentation',
-          label: 'Documentation',
+          label: 'Docs',
           matIcon: 'description',
           outlineIcon: true
         },
@@ -145,6 +152,7 @@ export class AppComponent {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
     this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
+    this.iconRegistry.addSvgIcon('npm_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/npm.svg'));
 
     // Set config for scaffold
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
@@ -191,6 +199,9 @@ export class AppComponent {
       return;
     } else if (id === 'github') {
       window.open('https://github.com/lukfel/scaffold', '_blank');
+      return;
+    } else if (id === 'npm') {
+      window.open('https://www.npmjs.com/package/@lukfel/scaffold', '_blank');
       return;
     } else if (id === 'start' || id === 'documentation' || id === 'typography') {
       this.router.navigate([id]);
