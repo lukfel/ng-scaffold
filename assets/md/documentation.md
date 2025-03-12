@@ -328,7 +328,9 @@ export class AppComponent {
 
 ### ThemeService
 This service allows you to dynamically change between your defined themes.
-* Hint: The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
+
+**Note:** The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
+
 ```ts
 import { ThemeService } from '@lukfel/scaffold';
 
