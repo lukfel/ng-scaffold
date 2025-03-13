@@ -65,7 +65,7 @@ $my-theme: (
 ```
 
 ### Multiple Themes (Optional)
-To switch between multiple themes dynamically, define additional themes using `lf.scaffold-colors($theme, 'theme-class')`, then apply the class to the `<body>` tag.
+To switch between multiple themes dynamically, define additional themes using `lf.scaffold-colors($theme, 'theme-class')`, then apply the class to the `<body class="theme-class">` tag.
 
 * **Note:** The `ThemeService` allows dynamic theme switching.
 
@@ -146,8 +146,8 @@ export class AppComponent {
 Define the `ScaffoldConfig` in `app.component.ts` and update the `scaffoldConfig` property in `ScaffoldService`.
 
 * **Notes:**
-- If a sub-configuration (e.g., `headerConfig`) is missing or does not have `enable: true`, the corresponding UI element will not be displayed.
-- Refer to the demo project for full configuration details.
+    * If a sub-configuration (e.g., `headerConfig`) is missing or does not have `enable: true`, the corresponding UI element will not be displayed.
+    * Refer to the demo project for full configuration details.
 
 ```ts
 import { ScaffoldService, ScaffoldConfig } from '@lukfel/scaffold';
