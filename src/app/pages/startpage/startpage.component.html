@@ -51,7 +51,7 @@
     </p>
     <p>
       <mat-slide-toggle [(ngModel)]="headerConfig.showRouteLoading">
-        Show navigation loading
+        Show loading on navigation
       </mat-slide-toggle>
     </p>
     <mat-form-field>
@@ -154,8 +154,8 @@
   <ng-container *ngIf="drawerConfig">
     <h2>Drawer</h2>
     <p>
-      The drawer is a collapsible element that allows you to place custom side content. It is
-      responsive and changes to overlay mode on mobile.
+      The drawer is a collapsible element that allows you to place custom dynamic side content. It
+      is responsive and changes to overlay mode on mobile.
     </p>
     <p>
       <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
@@ -166,6 +166,17 @@
     <p>
       <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
     </p>
+    <p>
+      Content can either be set 1) by using content projection
+      <code>&lt;ng-content drawerContent&gt;</code>
+      or 2) by using the component portal
+      <code>scaffoldService.drawerPortal</code>
+      .
+    </p>
+    <button mat-flat-button color="accent" (click)="updateDrawerContent(true)">1 Navigation</button>
+    <button mat-flat-button color="primary" (click)="updateDrawerContent(false)">
+      2 Not found
+    </button>
     <mat-divider></mat-divider>
   </ng-container>
 
@@ -207,9 +218,12 @@
       <mat-label>Label</mat-label>
       <input matInput [(ngModel)]="floatingButtonConfig.label" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="lf-form-field-small">
       <mat-label>Material Icon</mat-label>
       <input matInput [(ngModel)]="floatingButtonConfig.matIcon" />
+      <mat-icon *ngIf="floatingButtonConfig.matIcon" matPrefix>
+        {{ floatingButtonConfig.matIcon }}
+      </mat-icon>
       <mat-slide-toggle
         *ngIf="floatingButtonConfig?.matIcon"
         matSuffix
@@ -225,10 +239,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <!-- <mat-form-field>
-    <mat-label>Tooltip</mat-label>
-    <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
-  </mat-form-field> -->
+    <mat-form-field>
+      <mat-label>Tooltip</mat-label>
+      <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
+    </mat-form-field>
     <mat-divider></mat-divider>
   </ng-container>
 
@@ -260,7 +274,7 @@
       <mat-label>Label</mat-label>
       <input [disabled]="isLeftButton" matInput [(ngModel)]="menuButton.label" />
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="lf-form-field-small">
       <mat-label>Material Icon</mat-label>
       <input matInput [(ngModel)]="menuButton.matIcon" />
       <mat-icon *ngIf="menuButton.matIcon" matPrefix>{{ menuButton.matIcon }}</mat-icon>

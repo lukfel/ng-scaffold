@@ -1,3 +1,4 @@
+import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ScaffoldConfig } from '../models';
@@ -41,6 +42,18 @@ export class ScaffoldService {
   public set buttonClickEventValue(value: string) {
     this._buttonClickEventValue$.next(value);
     this._buttonClickEventValue$.next('');
+  }
+
+  // Drawer component
+  private _drawerPortal$ = new BehaviorSubject<ComponentPortal<unknown> | TemplatePortal<unknown> | null>(null);
+
+  public get drawerPortal$(): Observable<ComponentPortal<unknown> | TemplatePortal<unknown> | null> {
+    return this._drawerPortal$.asObservable();
+  }
+
+  public set drawerPortal(value: ComponentType<unknown>) {
+    const componentPortal: ComponentPortal<unknown> = new ComponentPortal(value);
+    this._drawerPortal$.next(value ? componentPortal : null);
   }
 
   // constructor(@Optional() @Inject(CONFIG) private config?: LibraryConfig) { }

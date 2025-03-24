@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
+import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
     selector: 'app-startpage',
@@ -125,6 +126,10 @@ export class StartpageComponent implements OnInit, OnDestroy {
     } else if (isLeftButton && this.headerConfig?.leftMenuButton === menuButton) {
       this.headerConfig.leftMenuButton = undefined;
     }
+  }
+
+  public updateDrawerContent(reset: boolean): void {
+    this.scaffoldService.drawerPortal = reset ? null! : NotFoundComponent;
   }
 
   public bottomBarCloseClicked(): void {

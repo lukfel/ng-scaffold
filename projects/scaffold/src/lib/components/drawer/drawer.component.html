@@ -6,14 +6,20 @@
   <mat-sidenav
     class="lf-drawer mat-elevation-z2"
     [mode]="isMobile ? 'over' : 'side'"
-    [opened]="drawerConfig?.open"
+    [opened]="drawerConfig.open"
     [autoFocus]="false"
-    [fixedInViewport]="drawerConfig?.fixed"
+    [fixedInViewport]="drawerConfig.fixed"
     [fixedTopGap]="fixedOffset"
     (closed)="onDrawerClosed()"
     #drawer>
     <!-- drawer content -->
-    <ng-content select="[drawerContent]"></ng-content>
+    <!-- <ng-content select="[drawerContent]"></ng-content> -->
+    <ng-container *ngIf="drawerPortal; else drawerContent">
+      <ng-template [cdkPortalOutlet]="drawerPortal"></ng-template>
+    </ng-container>
+    <ng-template #drawerContent>
+      <ng-content select="[drawerContent]"></ng-content>
+    </ng-template>
   </mat-sidenav>
   <mat-sidenav-content>
     <!-- main content -->

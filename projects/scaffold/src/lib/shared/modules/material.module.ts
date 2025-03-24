@@ -1,3 +1,4 @@
+import { PortalModule } from '@angular/cdk/portal';
 import { NgModule } from '@angular/core';
 
 //Angular Material Components
@@ -67,7 +68,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSnackBarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    PortalModule
   ],
   providers: [],
   bootstrap: []

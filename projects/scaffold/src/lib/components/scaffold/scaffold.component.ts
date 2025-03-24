@@ -1,4 +1,5 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -7,10 +8,10 @@ import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonCo
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
-    selector: 'lf-scaffold',
-    templateUrl: './scaffold.component.html',
-    styleUrls: ['./scaffold.component.scss'],
-    standalone: false
+  selector: 'lf-scaffold',
+  templateUrl: './scaffold.component.html',
+  styleUrls: ['./scaffold.component.scss'],
+  standalone: false
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
@@ -28,6 +29,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public headerConfig: HeaderConfig = {};
   public navbarConfig: NavbarConfig = {};
   public drawerConfig: DrawerConfig = {};
+  public drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null;
   public footerConfig: FooterConfig = {};
   public contentTitleCardConfig: ContentTitleCardConfig = {};
   public floatingButtonConfig: FloatingButtonConfig = {};
@@ -61,6 +63,13 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
       this.contentTitleCardConfig = this.scaffoldConfig.contentTitleCardConfig!;
       this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
       this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;
+    }));
+
+    // Listen for drawer portal changes
+    this._subscription.add(this.scaffoldService.drawerPortal$.subscribe((drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null) => {
+      this.logger.log('drawerPortal: ', drawerPortal);
+      
+      this.drawerPortal = drawerPortal;
     }));
 
     // Listen for breakpoint changes
