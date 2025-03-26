@@ -36,8 +36,35 @@
   <meta name="twitter:description" content="This Angular library provides a foundational scaffold and built-in services for modern web and mobile applications">
   <meta name="twitter:image" content="https://lukfel.github.io/scaffold/assets/img/meta.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <style>
+    .preload {
+      position: absolute;
+      top: 48%;
+      right: 50%;
+      bottom: auto;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .no-javascript {
+      width: 100%;
+      padding: 8px 16px;
+      text-align: center;
+      box-sizing: border-box;
+      border-radius: 4px;
+      color: white;
+      background: #ef5350;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
+  </style>
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <!-- <img class="preload" src="assets/img/logos/ic_launcher-web.png" width="128" height="128" alt="Logo"> -->
+  </app-root>
+  <noscript>
+    <div class="no-javascript">
+      Please enable JavaScript to continue using this application.
+    </div>
+  </noscript>
 </body>
 </html>
