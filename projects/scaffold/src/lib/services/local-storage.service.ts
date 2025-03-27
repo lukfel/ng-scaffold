@@ -17,11 +17,32 @@ export class LocalStorageService {
     }
   }
 
+  public setItemEncoded<T>(key: string, value: T | null): void {
+    try {
+      const encodedValue: string = btoa(JSON.stringify(value));
+      this.logger.log(`[SET ITEM] ${key} with value: ${encodedValue}`);
+      localStorage.setItem(key, encodedValue);
+    } catch (error) {
+      this.logger.error(`[ERROR SET ITEM] ${key}: ${error}`);
+    }
+  }
+
   public getItem<T>(key: string): T | null {
     try {
       this.logger.log(`[GET ITEM] ${key}`);
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item, this.dateReviver) as T : null;
+    } catch (error) {
+      this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
+      return null;
+    }
+  }
+
+  public getDecoded<T>(key: string): T | null {
+    try {
+      this.logger.log(`[GET ITEM] ${key}`);
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(atob(item), this.dateReviver) as T : null;
     } catch (error) {
       this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
       return null;
