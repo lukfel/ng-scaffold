@@ -17,7 +17,7 @@ export class FloatingButtonComponent implements OnInit {
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
 
   private readonly DEFAULT_OFFSET: number = 24;
-  private navbarOffset: number = 80;
+  private navbarOffset: number = 64;
   private bottomBarOffset: number = 56;
 
   ngOnInit(): void {

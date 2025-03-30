@@ -2,10 +2,15 @@
 <mat-icon
   *ngIf="matIcon; else svgIconTemplate"
   class="lf-icon"
-  [class.material-icons-outlined]="outlineIcon">
+  [class.material-icons-outlined]="outlineIcon"
+  [class.lf-icon-align-middle]="alignMiddle">
   {{ matIcon }}
 </mat-icon>
 <!-- svg icon -->
 <ng-template #svgIconTemplate>
-  <mat-icon *ngIf="svgIcon" class="lf-icon" [svgIcon]="svgIcon"></mat-icon>
+  <mat-icon
+    *ngIf="svgIcon"
+    class="lf-icon"
+    [svgIcon]="svgIcon"
+    [class.lf-icon-align-middle]="alignMiddle"></mat-icon>
 </ng-template>

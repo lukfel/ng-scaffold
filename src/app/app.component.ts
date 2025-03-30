@@ -7,10 +7,10 @@ import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, S
 import packageJson from '../../package.json';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    standalone: false
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  standalone: false
 })
 export class AppComponent {
 
@@ -130,7 +130,7 @@ export class AppComponent {
     bottomBarConfig: {
       enable: false
     }
-  }
+  };
 
   // RightMenuButtons for mobile
   public mobileRightMenuButtons: MenuButton[] = [
@@ -138,7 +138,29 @@ export class AppComponent {
       id: 'menu',
       matIcon: 'more_vert'
     }
-  ]
+  ];
+
+  // External links
+  public externalMenuButtons: MenuButton[] = [
+    {
+      id: 'https://www.create-a-tournament.com',
+      label: 'Create A Tournament',
+      svgIcon: 'cat_logo',
+      class: 'lf-cat-blue'
+    },
+    {
+      id: 'https://www.what-a-waste.at',
+      label: 'What A Waste',
+      svgIcon: 'waw_logo',
+      class: 'lf-waw-cyan'
+    },
+    // {
+    //   id: 'https://www.uglygotchi.at',
+    //   label: 'Uglygotchi',
+    //   svgIcon: 'ugly_logo',
+    //   class: 'lf-ugly-blue'
+    // }
+  ];
 
   constructor(private router: Router,
     private logger: Logger,
@@ -153,6 +175,9 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
     this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
     this.iconRegistry.addSvgIcon('npm_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/npm.svg'));
+    this.iconRegistry.addSvgIcon('cat_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/cat.svg'));
+    this.iconRegistry.addSvgIcon('waw_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/waw.svg'));
+    this.iconRegistry.addSvgIcon('ugly_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/uglygotchi.svg'));
 
     // Set config for scaffold
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
@@ -230,5 +255,4 @@ export class AppComponent {
   public floatingButtonClickEvent(id: string): void {
     this.snackbarService.openSnackbar(`You clicked the floating button with id:   ${id}`);
   }
-
 }

@@ -22,12 +22,12 @@
     }
 
     &.lf-show-navbar-mobile {
-      height: calc(100vh - $navbar-height);
+      height: calc(100vh - $navbar-height-mobile);
     }
 
     &.lf-show-header-and-navbar-mobile {
       top: $header-height;
-      height: calc(100vh - $header-height - $navbar-height);
+      height: calc(100vh - $header-height - $navbar-height-mobile);
     }
 
     .lf-content {

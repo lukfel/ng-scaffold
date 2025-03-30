@@ -16,7 +16,7 @@
   color: white;
 
   &.lf-bottom-bar-show-navbar-mobile {
-    bottom: calc($navbar-height + (2 * $navbar-padding)) !important;
+    bottom: calc($navbar-height-mobile + (2 * $navbar-padding)) !important;
   }
 
   &.lf-bottom-bar-show-navbar {

@@ -31,12 +31,16 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-evenly;
+
+    .lf-navbar-item {
+      height: $navbar-height-mobile !important;
+    }
   }
 }
 
 .lf-navbar-item {
   width: $navbar-width;
-  height: $navbar-width;
+  height: $navbar-height;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +54,7 @@
 
   .lf-navbar-item-icon {
     width: calc($navbar-width / 3);
-    height: calc($navbar-width / 3);
+    height: calc($navbar-height / 3);
     overflow: visible !important;
   }
 

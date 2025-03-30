@@ -34,3 +34,16 @@ $theme4: (
 @include lf.scaffold-colors($theme2, 'theme2');
 @include lf.scaffold-colors($theme3, 'theme3');
 @include lf.scaffold-colors($theme4, 'theme4');
+
+// Additional classes
+.lf-cat-blue {
+  color: #607d8b !important;
+}
+
+.lf-waw-cyan {
+  color: #00838f !important;
+}
+
+.lf-ugly-blue {
+  color: #2196F3 !important;
+}

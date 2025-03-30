@@ -10,7 +10,6 @@
     <ng-container *ngFor="let button of navbarConfig.menuButtons; let i = index">
       <div
         *ngIf="i < 5"
-        matRipple
         class="lf-navbar-item"
         [class.lf-navbar-item-active]="isActive(button.id)"
         [ngClass]="button.class"
