@@ -1,0 +1,139 @@
+{
+  "configVersion": 1,
+  "timestamp": 1743725828713,
+  "index": "/scaffold/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/scaffold/chunk-FZUJDNK2.js",
+        "/scaffold/chunk-HWW3LQ6S.js",
+        "/scaffold/chunk-LW7EFEZG.js",
+        "/scaffold/chunk-LWBHYLYP.js",
+        "/scaffold/chunk-M4I5CHVP.js",
+        "/scaffold/chunk-R3NKDZMG.js",
+        "/scaffold/chunk-S23G6IXK.js",
+        "/scaffold/favicon.ico",
+        "/scaffold/index.html",
+        "/scaffold/main-FGR25OD3.js",
+        "/scaffold/manifest.webmanifest",
+        "/scaffold/polyfills-FFHMD2TL.js",
+        "/scaffold/styles-OXBZVK75.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/scaffold/assets/img/cat.svg",
+        "/scaffold/assets/img/github.svg",
+        "/scaffold/assets/img/logo.svg",
+        "/scaffold/assets/img/logos/ic_launcher-web.png",
+        "/scaffold/assets/img/logos/logo.svg",
+        "/scaffold/assets/img/logos/res/mipmap-anydpi-v26/ic_launcher.xml",
+        "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher.png",
+        "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher_background.png",
+        "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher_foreground.png",
+        "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher_monochrome.png",
+        "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher.png",
+        "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher_background.png",
+        "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher_foreground.png",
+        "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher_monochrome.png",
+        "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher.png",
+        "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher_background.png",
+        "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher_foreground.png",
+        "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher_monochrome.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher_background.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher_monochrome.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher_background.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+        "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher_monochrome.png",
+        "/scaffold/assets/img/meta.jpg",
+        "/scaffold/assets/img/npm.svg",
+        "/scaffold/assets/img/uglygotchi.svg",
+        "/scaffold/assets/img/waw.svg",
+        "/scaffold/assets/md/documentation.md"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/scaffold/assets/img/cat.svg": "55dc5fdc67f607801ade349167f835204e3d8d74",
+    "/scaffold/assets/img/github.svg": "19fbd549f240f1d743b55a691163b9fc49326590",
+    "/scaffold/assets/img/logo.svg": "08512e520e47c67524decd28d44b0f434e67f1a6",
+    "/scaffold/assets/img/logos/ic_launcher-web.png": "0023855322939ffb4c6b5a78125204d332436965",
+    "/scaffold/assets/img/logos/logo.svg": "6af3394a6d37b62022ddde321a8c705352b75df4",
+    "/scaffold/assets/img/logos/res/mipmap-anydpi-v26/ic_launcher.xml": "718dff5dc143a3c643d1979a5cf310baf7f82cf1",
+    "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher.png": "ec306f3035c394d58412630f2df70802cf11496d",
+    "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher_background.png": "e64b4a87783864bebc2ee591c8b8d86f4d51d2a4",
+    "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher_foreground.png": "85f448e89ecd107072e818c75e5bd98e1088c3de",
+    "/scaffold/assets/img/logos/res/mipmap-hdpi/ic_launcher_monochrome.png": "41c59b983c4c108b4d1b3a1a55fba5a450bd9fe3",
+    "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher.png": "d923318b0b56506781e2320b6e8c7cf01a054b6d",
+    "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher_background.png": "27d707b6391be6518f2c0b452631ce0b8b20efac",
+    "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher_foreground.png": "39ae7a4edec099d0535f3d9064dca21cd8925b37",
+    "/scaffold/assets/img/logos/res/mipmap-mdpi/ic_launcher_monochrome.png": "e6ecb7245fc8fbcecd54ae190b80249fc7a7632b",
+    "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher.png": "a97b8c3442c940156a90dc138895c42ab714f5e0",
+    "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher_background.png": "746a77e78aee05fafa7b7416464bc8e96dede0d4",
+    "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher_foreground.png": "d2e6973bd35a003cb154b2166b62f8b454a9404c",
+    "/scaffold/assets/img/logos/res/mipmap-xhdpi/ic_launcher_monochrome.png": "f418d73adf0e5c266577a450ae184dc921f9f90e",
+    "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher.png": "01b4038d5ddb6579a74ceac09cfebece78097712",
+    "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher_background.png": "89d49f117723e7c085584b89226b184f65f717f5",
+    "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher_foreground.png": "468d968cece677faaaeb2884ed32ca9d9c235dda",
+    "/scaffold/assets/img/logos/res/mipmap-xxhdpi/ic_launcher_monochrome.png": "892f7b905cd701c1e835e23ac533f3898b35aa50",
+    "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher.png": "d2ed3b8dfbb612653a2ec1bc75d5b96ead364718",
+    "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher_background.png": "f3bc100c4b933d9cc2b6961e7cf98ff2a6d2478d",
+    "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher_foreground.png": "aa408e45fe7e0514230558bd2cec4a495b864db4",
+    "/scaffold/assets/img/logos/res/mipmap-xxxhdpi/ic_launcher_monochrome.png": "fd35c2d280d580c462141975dc2b21bb4b642088",
+    "/scaffold/assets/img/meta.jpg": "6c1b8c9e439626a8e2aea02a57fdc66466019be0",
+    "/scaffold/assets/img/npm.svg": "5ea446611c0e581d16571448143cc418d50280e6",
+    "/scaffold/assets/img/uglygotchi.svg": "56cffbfd863bbd0acfb88c6695e1763175de7c46",
+    "/scaffold/assets/img/waw.svg": "86b139b68e4bd49ebc6735846c2cfc550491a8ac",
+    "/scaffold/assets/md/documentation.md": "8cd1c0ceabe1fdc31c94a5ba98f9927b03307ca3",
+    "/scaffold/chunk-FZUJDNK2.js": "1086c626639daeb977d126d200d0974ea21c1ad8",
+    "/scaffold/chunk-HWW3LQ6S.js": "3445515caf11e8c20b1fc3044f55e77cbe093a1f",
+    "/scaffold/chunk-LW7EFEZG.js": "9ca848e42c57998c91347f5b7dce3d4db0dae83a",
+    "/scaffold/chunk-LWBHYLYP.js": "7b8cd4865b7b2d58a9903588c45a2a35e12d4543",
+    "/scaffold/chunk-M4I5CHVP.js": "4f7794cfe0700183d3a34302ec1b82edb163fffe",
+    "/scaffold/chunk-R3NKDZMG.js": "5ade1aa631b7ddf640330c48e461d925f8ed8d10",
+    "/scaffold/chunk-S23G6IXK.js": "523d5a3512741f10206e6dfed788b61f343534b2",
+    "/scaffold/favicon.ico": "b6316de8699747db228ca88f0c12a36600548c36",
+    "/scaffold/index.html": "1d88c186350373675cb1f764a103844e5d2e6e29",
+    "/scaffold/main-FGR25OD3.js": "acb516f25a5e435eec60376269d8c058bdea6625",
+    "/scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
+    "/scaffold/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
+    "/scaffold/styles-OXBZVK75.css": "9139688fc5ca2bbc9504b3aee0beaddf21f7f57a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

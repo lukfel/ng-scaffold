@@ -1,0 +1,17 @@
+{
+  "name": "Scaffold",
+  "short_name": "Scaffold",
+  "theme_color": "#e91e63",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    { "src": "assets/img/logos/res/mipmap-mdpi/ic_launcher.png", "type": "image/png", "sizes": "48x48", "purpose": "maskable any" },
+    { "src": "assets/img/logos/res/mipmap-hdpi/ic_launcher.png", "type": "image/png", "sizes": "72x72", "purpose": "maskable any" },
+    { "src": "assets/img/logos/res/mipmap-xhdpi/ic_launcher.png", "type": "image/png", "sizes": "96x96", "purpose": "maskable any" },
+    { "src": "assets/img/logos/res/mipmap-xxhdpi/ic_launcher.png", "type": "image/png", "sizes": "144x144", "purpose": "maskable any" },
+    { "src": "assets/img/logos/res/mipmap-xxxhdpi/ic_launcher.png", "type": "image/png", "sizes": "192x192", "purpose": "maskable any" },
+    { "src": "assets/img/logos/ic_launcher-web.png", "type": "image/png", "sizes": "256x256", "purpose": "maskable any" }
+  ]
+}
