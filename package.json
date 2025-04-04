@@ -1,6 +1,6 @@
 {
   "name": "scaffold-app",
-  "version": "19.1.1",
+  "version": "19.1.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^19.2.1",
     "@angular/platform-browser-dynamic": "^19.2.1",
     "@angular/router": "^19.2.1",
+    "@angular/service-worker": "^19.2.1",
     "@lukfel/scaffold": "file:dist/scaffold",
     "marked": "^15.0.0",
     "ngx-markdown": "^19.1.0",

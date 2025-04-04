@@ -44,7 +44,7 @@ class MockScaffoldService {
     // HeaderConfig
     headerConfig: {
       enable: true,
-      svgLogo: 'lf_logo',
+      svgLogo: 'logo',
       title: 'Scaffold',
       subtitle: `by Lukas Felbinger`,
       titleRouterLink: 'start',
@@ -114,7 +114,7 @@ class MockScaffoldService {
     // FooterConfig
     footerConfig: {
       enable: true,
-      svgLogo: 'lf_logo',
+      svgLogo: 'logo',
       links: [
         {
           label: 'About',

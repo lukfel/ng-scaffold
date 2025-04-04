@@ -23,7 +23,7 @@ export class AppComponent {
     // HeaderConfig
     headerConfig: {
       enable: true,
-      svgLogo: 'lf_logo',
+      svgLogo: 'logo',
       title: 'Scaffold',
       subtitle: `by Lukas Felbinger (v${packageJson.version})`,
       titleRouterLink: 'start',
@@ -101,7 +101,7 @@ export class AppComponent {
     // FooterConfig
     footerConfig: {
       enable: true,
-      svgLogo: 'lf_logo',
+      svgLogo: 'logo',
       links: [
         {
           label: 'About',
@@ -172,6 +172,7 @@ export class AppComponent {
     private breakpointService: BreakpointService,
     private seoService: SeoService) {
     // Register custom svg for header logo
+    this.iconRegistry.addSvgIcon('logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'));
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
     this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
     this.iconRegistry.addSvgIcon('npm_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/npm.svg'));

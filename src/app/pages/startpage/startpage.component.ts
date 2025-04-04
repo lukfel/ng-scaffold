@@ -96,7 +96,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
     if (event) {
       this.headerConfig.svgLogo = '';
     } else {
-      this.headerConfig.svgLogo = 'lf_logo'
+      this.headerConfig.svgLogo = 'logo'
     }
   }
 
@@ -104,7 +104,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
     if (event) {
       this.footerConfig.svgLogo = '';
     } else {
-      this.footerConfig.svgLogo = 'lf_logo'
+      this.footerConfig.svgLogo = 'logo'
     }
   }
 

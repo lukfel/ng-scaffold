@@ -16,14 +16,14 @@ $theme2: (
 );
 
 $theme3: (
-  primary: mat.m2-define-palette(mat.$m2-purple-palette),
-  accent: mat.m2-define-palette(mat.$m2-amber-palette),
+  primary: mat.m2-define-palette(mat.$m2-blue-palette),
+  accent: mat.m2-define-palette(mat.$m2-pink-palette),
   dark: false
 );
 
 $theme4: (
-  primary: mat.m2-define-palette(mat.$m2-purple-palette),
-  accent: mat.m2-define-palette(mat.$m2-amber-palette),
+  primary: mat.m2-define-palette(mat.$m2-blue-palette),
+  accent: mat.m2-define-palette(mat.$m2-pink-palette),
   dark: true
 );
 
