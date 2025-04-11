@@ -104,13 +104,18 @@ export class AppComponent {
       svgLogo: 'logo',
       links: [
         {
-          label: 'About',
+          label: 'About me',
           href: 'https://www.lukasfelbinger.at',
           externalTab: true
         },
         {
           label: 'GitHub',
           href: 'https://github.com/lukfel/scaffold',
+          externalTab: true
+        },
+        {
+          label: 'NPM',
+          href: 'https://www.npmjs.com/package/@lukfel/scaffold',
           externalTab: true
         },
       ],
