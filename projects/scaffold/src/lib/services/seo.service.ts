@@ -27,7 +27,7 @@ export class SeoService {
         this.logger.error(`SeoService: The set meta title is too long. Recommended length is ${titleLimit}. The title will be trimmed.`);
       }
       const titleTrim: string = (title.length > titleLimit) ? title.substring(0, titleLimit-3) + '...' : title;
-      this._setMetaTitle(titleTrim);
+      this._setMetaTitle(seoConfig.autoTrim ? titleTrim : title);
     }
 
     // Set meta description
@@ -36,7 +36,7 @@ export class SeoService {
         this.logger.error(`SeoService: The set meta description is too long. Recommended length is ${descriptionLimit}. The description will be trimmed.`);
       }
       const descriptionTrim: string = (description.length > descriptionLimit) ? description.substring(0, descriptionLimit-3) + '...' : description;
-      this._setMetaDescription(descriptionTrim);
+      this._setMetaDescription(seoConfig.autoTrim ? descriptionTrim : description);
     }
 
     // Set meta image
