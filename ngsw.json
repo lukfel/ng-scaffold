@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1744663247761,
+  "timestamp": 1744735372623,
   "index": "/scaffold/index.html",
   "assetGroups": [
     {
@@ -20,10 +20,11 @@
         "/scaffold/chunk-ZEZHSFCC.js",
         "/scaffold/favicon.ico",
         "/scaffold/index.html",
-        "/scaffold/main-VDA5EVZV.js",
+        "/scaffold/main-ACUZ2NMC.js",
         "/scaffold/manifest.webmanifest",
         "/scaffold/polyfills-FFHMD2TL.js",
-        "/scaffold/styles-OXBZVK75.css"
+        "/scaffold/scripts-LS2XAREJ.js",
+        "/scaffold/styles-4RK3Q2FR.css"
       ],
       "patterns": []
     },
@@ -113,11 +114,12 @@
     "/scaffold/chunk-YU22VMCH.js": "8be293641c9b330637106fa5112350586c0ebcde",
     "/scaffold/chunk-ZEZHSFCC.js": "cf547fad154f1f46261e53d151707a036598bcf9",
     "/scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/scaffold/index.html": "6183ddab1c6e623812dc40ba2e631eafa2250bb8",
-    "/scaffold/main-VDA5EVZV.js": "8d6ac5114a818ad27fac6e1564f42e6e30a19605",
+    "/scaffold/index.html": "087dfcb2ee93fe502e58ce4e2a4017ed203825e7",
+    "/scaffold/main-ACUZ2NMC.js": "fbf36fd64358d839f534e38ba6f605d135ce1541",
     "/scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/scaffold/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
-    "/scaffold/styles-OXBZVK75.css": "9139688fc5ca2bbc9504b3aee0beaddf21f7f57a"
+    "/scaffold/scripts-LS2XAREJ.js": "5c83ba58163a6dc795296ce4b4cfe09ba27cd293",
+    "/scaffold/styles-4RK3Q2FR.css": "3f8aefa69df8bd9ef247ef0dc50fa20fec91984f"
   },
   "navigationUrls": [
     {
