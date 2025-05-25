@@ -1,4 +1,4 @@
-<ng-container *ngIf="headerConfig?.enable">
+<ng-container *ngIf="headerConfig && headerConfig.enable">
   <mat-toolbar
     class="lf-header mat-elevation-z3"
     [class.px-4]="!isMobile"

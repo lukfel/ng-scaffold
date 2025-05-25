@@ -9,7 +9,7 @@ import { ContentTitleCardConfig } from '../../models';
 })
 export class ContentTitleCardComponent {
 
-  @Input() public contentTitleCardConfig: ContentTitleCardConfig = {};
+  @Input() public contentTitleCardConfig: ContentTitleCardConfig | null = null;
   @Input() public isMobile: boolean = false;
   @Input() public routeHistory: string[] = [];
 

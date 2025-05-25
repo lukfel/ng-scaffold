@@ -1,5 +1,5 @@
 <div
-  *ngIf="bottomBarConfig?.enable"
+  *ngIf="bottomBarConfig && bottomBarConfig.enable"
   class="lf-bottom-bar px-4"
   [ngClass]="bottomBarConfig.class"
   [class.lf-bottom-bar-show-navbar]="!isMobile && navbarEnabled"

@@ -1,18 +1,22 @@
 <button
-  *ngIf="floatingButtonConfig?.enable && (!floatingButtonConfig?.autoHide || !onTop)"
+  *ngIf="
+    floatingButtonConfig &&
+    floatingButtonConfig?.enable &&
+    (!floatingButtonConfig?.autoHide || !onTop)
+  "
   mat-fab
   color="accent"
   class="lf-floating-button"
   [style.bottom]="getBottomPosition() + 'px'"
   [ngClass]="floatingButtonConfig.class"
   [ngClass]="floatingButtonConfig.horizontalPosition"
-  [extended]="!!floatingButtonConfig?.label"
+  [extended]="!!floatingButtonConfig.label"
   (click)="buttonClicked(floatingButtonConfig.id)"
   [matTooltip]="floatingButtonConfig.tooltip!">
   <!-- mat icon -->
   <mat-icon
     *ngIf="floatingButtonConfig?.matIcon; else svgIconTemplate"
-    [class.material-icons-outlined]="floatingButtonConfig?.outlineIcon">
+    [class.material-icons-outlined]="floatingButtonConfig.outlineIcon">
     {{ floatingButtonConfig.matIcon }}
   </mat-icon>
   <!-- svg icon -->

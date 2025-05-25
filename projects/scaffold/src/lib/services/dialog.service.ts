@@ -2,7 +2,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
-import { HeaderInputConfig, ConfirmDialogConfig } from '../models';
+import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
 import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { InputComponent } from '../shared/components/input/input.component';
 
@@ -16,9 +16,9 @@ export class DialogService {
   /**
    * Opens a dialog with custom template and custom config
    *
-   * @param templateRef
-   * @param config
-   * @returns an asynchronous boolean response
+   * @param templateRef reference to the component or template
+   * @param config of the dialog
+   * @returns an asynchronous any response
    */
   public openCustomDialog(templateRef: ComponentType<any> | TemplateRef<any>, config: MatDialogConfig): Promise<any> {    // eslint-disable-line @typescript-eslint/no-explicit-any
     const dialogRef = this.matDialog.open(templateRef, config);
@@ -28,7 +28,7 @@ export class DialogService {
   /**
    * Opens a simple pre-made confirm dialog
    *
-   * @param config
+   * @param config of the dialog
    * @returns an asynchronous boolean response
    */
   public openConfirmDialog(config: ConfirmDialogConfig): Promise<boolean> {
@@ -41,11 +41,11 @@ export class DialogService {
   }
 
   /**
- * Opens a simple pre-made input dialog
- *
- * @param config
- * @returns an asynchronous boolean response
- */
+   * Opens a simple pre-made input dialog
+   *
+   * @param config of the dialog
+   * @returns an asynchronous string response
+   */
   public openInputDialog(config: HeaderInputConfig): Promise<string | undefined> {
     const dialogRef = this.matDialog.open(InputComponent, {
       autoFocus: false,

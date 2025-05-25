@@ -63,17 +63,25 @@ export class RouterService {
     });
   }
 
-  // Navigate to the last route
-  public navigateBack(): void {
+  /**
+   * Navigates to the previous route found in the routeHistory Observable
+   * 
+   * @param fallbackRoute fallback in case there is no previous route
+   */
+  public navigateBack(fallbackRoute?: string): void {
     this._routeHistory$.pipe(take(1)).subscribe(routeHistory => {
       if (routeHistory.length > 1) {
         const previousRoute: string = routeHistory[routeHistory.length - 2];
 
-        this.router.navigateByUrl(previousRoute, { state: { back: true } }).then(result => {
-          if (result) {
-            routeHistory.pop();
-          }
-        });
+        if (previousRoute) {
+          this.router.navigateByUrl(previousRoute, { state: { back: true } }).then(result => {
+            if (result) {
+              routeHistory.pop();
+            }
+          });
+        } else if (fallbackRoute) {
+          this.router.navigate([fallbackRoute]);
+        }
       }
     })
   }

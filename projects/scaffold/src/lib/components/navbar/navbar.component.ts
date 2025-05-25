@@ -9,7 +9,7 @@ import { NavbarConfig } from '../../models';
 })
 export class NavbarComponent {
 
-  @Input() public navbarConfig: NavbarConfig = {};
+  @Input() public navbarConfig: NavbarConfig | null = null;
   @Input() public isMobile: boolean = false;
   @Input() public currentRoute: string;
 

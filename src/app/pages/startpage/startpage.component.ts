@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
-    selector: 'app-startpage',
-    templateUrl: './startpage.component.html',
-    styleUrls: ['./startpage.component.scss'],
-    standalone: false
+  selector: 'app-startpage',
+  templateUrl: './startpage.component.html',
+  styleUrls: ['./startpage.component.scss'],
+  standalone: false
 })
 export class StartpageComponent implements OnInit, OnDestroy {
 
@@ -72,7 +72,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
     this._subscription.add(this.scaffoldService.headerInputChangeValue$.subscribe((value: string) => {
       this.inputValue = value;
 
-      if(!this.inputValue) {
+      if (!this.inputValue) {
         this.cd.detectChanges();
       }
     }));
@@ -85,10 +85,10 @@ export class StartpageComponent implements OnInit, OnDestroy {
   }
 
   public showContainerLoading(): void {
-    this.scaffoldConfig.loading = true;
+    this.scaffoldService.updateScaffoldProperty('loading', true);
 
     setTimeout(() => {
-      this.scaffoldConfig.loading = false;
+      this.scaffoldService.updateScaffoldProperty('loading', false);
     }, 3000);
   }
 

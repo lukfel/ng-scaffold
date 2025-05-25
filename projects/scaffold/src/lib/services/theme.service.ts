@@ -17,8 +17,8 @@ export class ThemeService {
   }
 
   constructor(private storageService: LocalStorageService,
-    @Inject(DOCUMENT) private document: Document) {
-    this.loadTheme();
+              @Inject(DOCUMENT) private document: Document) {
+              this.loadTheme();
   }
 
   /**
@@ -54,7 +54,7 @@ export class ThemeService {
   }
 
   /**
-   * Loads the theme that is currently persisted in the LocalStorage
+   * Loads the current theme stored in the local storage if available
    *
    */
   private loadTheme(): void {

@@ -9,7 +9,7 @@ import { BottomBarConfig } from '../../models';
 })
 export class BottomBarComponent {
 
-  @Input() public bottomBarConfig: BottomBarConfig = {};
+  @Input() public bottomBarConfig: BottomBarConfig | null = null;
   @Input() public isMobile: boolean = false;
   @Input() public navbarEnabled: boolean = false;
 

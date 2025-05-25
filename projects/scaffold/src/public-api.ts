@@ -12,3 +12,5 @@ export * from './lib/components/scaffold/scaffold.component';
 export * from './lib/shared/components/placeholder/placeholder.component';
 /* SERVICES */
 export * from './lib/services';
+/* INTERCEPTORS */
+export * from './lib/interceptors/loading.interceptor';

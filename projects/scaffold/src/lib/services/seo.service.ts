@@ -14,7 +14,14 @@ export class SeoService {
               @Inject(DOCUMENT) private document: Document,
               private logger: Logger) { }
 
+  /**
+   * Pass a configuration to set meta tags such as title, description and image for search results and social media
+   * 
+   * @param seoConfig config that contains all the meta information
+   * 
+   */
   public setMetaTags(seoConfig: SeoConfig): void {
+    const autoTrim: boolean = seoConfig.autoTrim || false;
     const title: string = seoConfig.metaPageTitle || '';
     const description: string = seoConfig.metaPageDescription || '';
     const imagePath: string = seoConfig.metaImagePath || '';
@@ -23,20 +30,20 @@ export class SeoService {
 
     // Set meta title
     if(title) {
-      if(title.length > titleLimit) {
-        this.logger.error(`SeoService: The set meta title is too long. Recommended length is ${titleLimit}. The title will be trimmed.`);
+      if(autoTrim && title.length > titleLimit) {
+        this.logger.error(`[SeoService] The set meta title is too long. Recommended length is ${titleLimit}. The title will be trimmed.`);
       }
       const titleTrim: string = (title.length > titleLimit) ? title.substring(0, titleLimit-3) + '...' : title;
-      this._setMetaTitle(seoConfig.autoTrim ? titleTrim : title);
+      this._setMetaTitle(autoTrim ? titleTrim : title);
     }
 
     // Set meta description
     if (description) {
-      if(description.length > descriptionLimit) {
-        this.logger.error(`SeoService: The set meta description is too long. Recommended length is ${descriptionLimit}. The description will be trimmed.`);
+      if(autoTrim && description.length > descriptionLimit) {
+        this.logger.error(`[SeoService] The set meta description is too long. Recommended length is ${descriptionLimit}. The description will be trimmed.`);
       }
       const descriptionTrim: string = (description.length > descriptionLimit) ? description.substring(0, descriptionLimit-3) + '...' : description;
-      this._setMetaDescription(seoConfig.autoTrim ? descriptionTrim : description);
+      this._setMetaDescription(autoTrim ? descriptionTrim : description);
     }
 
     // Set meta image

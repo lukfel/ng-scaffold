@@ -1,5 +1,5 @@
 <div
-  *ngIf="navbarConfig?.enable"
+  *ngIf="navbarConfig && navbarConfig.enable"
   class="mat-app-background mat-elevation-z3"
   [class.lf-navbar]="!isMobile"
   [class.lf-navbar-mobile]="isMobile"
@@ -25,7 +25,7 @@
         <!-- show a protected space on desktop so the icon doesn't move up and down -->
         <span *ngIf="button?.label" class="lf-navbar-item-label">
           {{
-            isActive(button.id) || navbarConfig?.showAllLabels
+            isActive(button.id) || navbarConfig.showAllLabels
               ? button.label
               : isMobile
                 ? ""

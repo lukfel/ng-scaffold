@@ -1,10 +1,11 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig } from '../../models';
+import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, LibraryConfig, NavbarConfig, ScaffoldConfig } from '../../models';
+import { CONFIG } from '../../scaffold.module';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -25,15 +26,15 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
   @Output() public bottomBarButtonClickEvent = new EventEmitter<string>();
 
-  public scaffoldConfig: ScaffoldConfig = {};
-  public headerConfig: HeaderConfig = {};
-  public navbarConfig: NavbarConfig = {};
-  public drawerConfig: DrawerConfig = {};
+  public scaffoldConfig: ScaffoldConfig | null = null;
+  public headerConfig: HeaderConfig | null = null;
+  public navbarConfig: NavbarConfig | null = null;
+  public drawerConfig: DrawerConfig | null = null;
   public drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null;
-  public footerConfig: FooterConfig = {};
-  public contentTitleCardConfig: ContentTitleCardConfig = {};
-  public floatingButtonConfig: FloatingButtonConfig = {};
-  public bottomBarConfig: BottomBarConfig = {};
+  public footerConfig: FooterConfig | null = null;
+  public contentTitleCardConfig: ContentTitleCardConfig | null = null;
+  public floatingButtonConfig: FloatingButtonConfig | null = null;
+  public bottomBarConfig: BottomBarConfig | null = null;
 
   public routeHistory: string[] = [];
   public currentRoute: string;
@@ -44,16 +45,17 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   private _subscription: Subscription = new Subscription;
 
   constructor(private scaffoldService: ScaffoldService,
-    private breakpointService: BreakpointService,
-    private routerService: RouterService,
-    private logger: Logger,
-    private route: ActivatedRoute,
-    @Inject(DOCUMENT) private document: Document) { }
+              private breakpointService: BreakpointService,
+              private routerService: RouterService,
+              private logger: Logger,
+              private route: ActivatedRoute,
+              @Inject(DOCUMENT) private document: Document,
+              @Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
   ngOnInit(): void {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
-      this.logger.log('scaffoldConfig: ', scaffoldConfig);
+      if (this.config?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
 
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = this.scaffoldConfig.headerConfig!;
@@ -67,14 +69,14 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for drawer portal changes
     this._subscription.add(this.scaffoldService.drawerPortal$.subscribe((drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null) => {
-      this.logger.log('drawerPortal: ', drawerPortal);
-      
+      if (this.config?.debugging) this.logger.log('[DrawerPortal]', drawerPortal);
+
       this.drawerPortal = drawerPortal;
     }));
 
     // Listen for breakpoint changes
     this._subscription.add(this.breakpointService.breakpoint$.subscribe((breakpointState: BreakpointState) => {
-      this.logger.log('breakpointState: ', breakpointState);
+      if (this.config?.debugging) this.logger.log('[BreakpointState]', breakpointState);
 
       if (breakpointState.breakpoints[Breakpoints.XSmall]) {
         this.isMobile = true;
@@ -89,7 +91,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for route changes
     this._subscription.add(this.routerService.routeHistory$.subscribe((routeHistory: string[]) => {
-      this.logger.log('routeHistory: ', routeHistory);
+      if (this.config?.debugging) this.logger.log('[RouteHistory]', routeHistory);
 
       if (routeHistory) {
         this.routeHistory = routeHistory;
@@ -128,7 +130,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     if (this.scaffoldConfig?.anchorScrolling) {
       this._subscription.add(this.route.fragment.subscribe((fragment: string | null) => {
         if (fragment) {
-          this.logger.log('fragment: ', fragment);
+          if (this.config?.debugging) this.logger.log('[RouteFragment]', fragment);
           setTimeout(() => {
             const element = this.document.querySelector(`#${fragment}`);
             if (element) {

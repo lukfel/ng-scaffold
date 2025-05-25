@@ -9,7 +9,7 @@ import { FloatingButtonConfig } from '../../models';
 })
 export class FloatingButtonComponent implements OnInit {
 
-  @Input() public floatingButtonConfig: FloatingButtonConfig = {};
+  @Input() public floatingButtonConfig: FloatingButtonConfig | null = null;
   @Input() public onTop: boolean = false;
   @Input() public isMobile: boolean = false;
   @Input() public bottomBarEnabled: boolean = false;
@@ -41,7 +41,7 @@ export class FloatingButtonComponent implements OnInit {
   }
 
   public getBottomPosition(): number {
-    let bottomPosition: number = this.floatingButtonConfig.bottomPositionPx || this.DEFAULT_OFFSET;
+    let bottomPosition: number = this.floatingButtonConfig?.bottomPositionPx || this.DEFAULT_OFFSET;
 
     if (this.isMobile) {
       bottomPosition += this.navbarOffset;

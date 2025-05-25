@@ -4,6 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService } from '@lukfel/scaffold';
+import { ThemeService } from 'projects/scaffold/src/public-api';
 import packageJson from '../../package.json';
 
 @Component({
@@ -159,13 +160,15 @@ export class AppComponent {
       svgIcon: 'waw_logo',
       class: 'lf-waw-cyan'
     },
-    // {
-    //   id: 'https://www.uglygotchi.at',
-    //   label: 'Uglygotchi',
-    //   svgIcon: 'ugly_logo',
-    //   class: 'lf-ugly-blue'
-    // }
+    {
+      id: 'https://uglygotchi.web.app',
+      label: 'Uglygotchi',
+      svgIcon: 'ugly_logo',
+      class: 'lf-ugly-orange'
+    }
   ];
+
+  private currentTheme: string = '';
 
   constructor(private router: Router,
     private logger: Logger,
@@ -175,7 +178,8 @@ export class AppComponent {
     private sanitizer: DomSanitizer,
     private scaffoldService: ScaffoldService,
     private breakpointService: BreakpointService,
-    private seoService: SeoService) {
+    private seoService: SeoService,
+    private themeService: ThemeService) {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'));
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
@@ -210,6 +214,9 @@ export class AppComponent {
         }
       }
     });
+
+    // Listen to theme changes
+    this.themeService.currentTheme$.subscribe((currentTheme: string) => this.currentTheme = currentTheme);
 
     // Set Seo tags
     this.seoService.setMetaTags({

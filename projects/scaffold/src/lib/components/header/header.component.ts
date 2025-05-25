@@ -9,7 +9,7 @@ import { HeaderConfig } from '../../models';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() public headerConfig: HeaderConfig = {};
+  @Input() public headerConfig: HeaderConfig | null = null;
   @Input() public isMobile: boolean = false;
   @Input() public routeLoading: boolean = false;
 

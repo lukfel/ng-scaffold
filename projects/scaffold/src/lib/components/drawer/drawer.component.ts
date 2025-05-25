@@ -10,7 +10,7 @@ import { DrawerConfig } from '../../models';
 })
 export class DrawerComponent implements OnInit {
 
-  @Input() public drawerConfig: DrawerConfig = {};
+  @Input() public drawerConfig: DrawerConfig | null = null;
   @Input() public isMobile: boolean = false;
   @Input() public fixedOffset: number = 0;
   @Input() public drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null;
@@ -24,7 +24,7 @@ export class DrawerComponent implements OnInit {
 
   // Detect when the drawer is closed without clicking a button
   public onDrawerClosed(): void {
-    this.drawerConfig.open = false;
+    if(this.drawerConfig) this.drawerConfig.open = false;
   }
 
 }

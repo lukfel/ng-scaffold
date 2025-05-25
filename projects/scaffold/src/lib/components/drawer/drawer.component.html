@@ -1,5 +1,5 @@
 <mat-sidenav-container
-  *ngIf="drawerConfig?.enable; else noDrawer"
+  *ngIf="drawerConfig && drawerConfig.enable; else noDrawer"
   class="lf-drawer-container"
   [ngClass]="drawerConfig.class">
   <!-- drawer -->

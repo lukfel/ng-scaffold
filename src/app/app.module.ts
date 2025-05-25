@@ -1,13 +1,12 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ScaffoldModule } from '@lukfel/scaffold';
-import { environment as env } from 'src/environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { LoadingInterceptor, ScaffoldModule } from '@lukfel/scaffold';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
     declarations: [
@@ -19,14 +18,21 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         BrowserAnimationsModule,
         AppRoutingModule,
         SharedModule,
-        ScaffoldModule.forRoot({ production: env.production }),
+        ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode() }),
         ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: !isDevMode(),
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
         })
     ],
-    providers: [provideHttpClient(withInterceptorsFromDi())],
+    providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoadingInterceptor,
+            multi: true
+        }
+    ]
 })
 export class AppModule { }

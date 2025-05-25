@@ -9,6 +9,6 @@ import { FooterConfig } from '../../models';
 })
 export class FooterComponent {
 
-  @Input() public footerConfig: FooterConfig = {};
+  @Input() public footerConfig: FooterConfig | null = null;
 
 }
