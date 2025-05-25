@@ -5,7 +5,7 @@ This Angular library provides a foundational scaffold for modern web and mobile 
 
 - **NPM**: [@lukfel/scaffold](https://www.npmjs.com/package/@lukfel/scaffold)
 - **Demo**: [lukfel.github.io/scaffold](https://lukfel.github.io/scaffold)
-- **Examples**: [Create a Tournament](https://www.create-a-tournament.com), [What a Waste](https://www.what-a-waste.at), [Uglygotchi](https://uglygotchi.at)
+- **Examples**: [Create a Tournament](https://www.create-a-tournament.com), [What a Waste](https://www.what-a-waste.at)
 
 
 
@@ -23,15 +23,19 @@ npm install @lukfel/scaffold
 ## Module
 Import the `ScaffoldModule` into your `app.module.ts` file.
 
-* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library events when a `LibraryConfig` is provided, and `production` is set to `false`. Logging is automatically disabled in production mode.
+* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library deugging events when a `LibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `prodution` is set to `true`.
 
 ```ts
 import { ScaffoldModule } from '@lukfel/scaffold';
-import { environment as env } from 'src/environments/environment';
+import { isDevMode } from '@angular/core';
 
-imports: [
-  ScaffoldModule.forRoot({ production: env.production })    // Omit .forRoot(...) if logging is not required
-],
+@NgModule({
+  ...
+  imports: [
+    ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode() }),    // Omit .forRoot(...) if logging is not required
+  ]
+})
+export class AppModule { }
 ```
 
 
@@ -240,7 +244,8 @@ This library includes several utility services:
 - **`LocalStorageService`** – Handle local storage
 
 ### Logger
-Logs out library- and app information if you set ``ScaffoldModule.forRoot( { production: env.production } )`` where the ``production`` property must be ``false`` (no console logging in production mode).
+Logs internal library information if `debugging` is `true` and hides application logs during production if `production` is `true`.
+* **Note:** `LibraryConfig` must be set during initialization ``ScaffoldModule.forRoot( { production: !isDevMode(), debugging: isDevMode() } )``
 
 ```ts
 import { Logger } from '@lukfel/scaffold';
@@ -346,4 +351,32 @@ export class AppComponent {
     this.themeService.setTheme('my-theme2', true);    // the second parameter allows to persists the theme in the LocalStorage (using the built in LocalStorageService)
   }
 }
+```
+
+
+
+
+## Interceptors
+Intercept HTTP Calls and automatically show a loading spinner.
+
+* **Note:** The loading spinner can also be manually shown by udpating the value for `scaffoldConfig.loading` in the `ScaffoldService`
+
+```ts
+import { ScaffoldModule } from '@lukfel/scaffold';
+import { isDevMode } from '@angular/core';
+
+@NgModule({
+  ...
+  imports: [
+    ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode() }),    // Omit .forRoot(...) if logging is not required
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ]
+})
+export class AppModule { }
 ```
