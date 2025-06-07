@@ -1,6 +1,6 @@
 {
   "name": "scaffold-app",
-  "version": "19.1.9",
+  "version": "19.1.10",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
