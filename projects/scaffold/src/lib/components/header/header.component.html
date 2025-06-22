@@ -24,14 +24,14 @@
         <mat-icon
           *ngIf="headerConfig?.svgLogo; else imgLogo"
           class="lf-header-logo"
-          [class.mr-2]="headerConfig.title"
+          [class.mr-3]="headerConfig.title"
           [svgIcon]="headerConfig.svgLogo!"></mat-icon>
         <!-- img logo -->
         <ng-template #imgLogo>
           <img
             *ngIf="headerConfig?.imgLogo"
             class="lf-header-logo"
-            [class.mr-2]="headerConfig.title"
+            [class.mr-3]="headerConfig.title"
             [src]="headerConfig.imgLogo"
             alt="Logo" />
         </ng-template>

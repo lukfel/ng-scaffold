@@ -160,12 +160,12 @@ export class AppComponent {
       svgIcon: 'waw_logo',
       class: 'lf-waw-cyan'
     },
-    // {
-    //   id: 'https://uglygotchi.web.app',
-    //   label: 'Uglygotchi',
-    //   svgIcon: 'ugly_logo',
-    //   class: 'lf-ugly-orange'
-    // }
+    {
+      id: 'https://uglygotchi.at',
+      label: 'Uglygotchi',
+      svgIcon: 'ugly_logo',
+      class: 'lf-ugly-orange'
+    }
   ];
 
   private currentTheme: string = '';

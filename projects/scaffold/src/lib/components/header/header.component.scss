@@ -52,7 +52,7 @@
 
       .lf-header-subtitle {
         font-size: $header-subtitle-font-size;
-        line-height: calc($header-subtitle-font-size - 2px);
+        line-height: $header-subtitle-font-size;
       }
     }
   }
