@@ -161,7 +161,7 @@ export class AppComponent {
       class: 'lf-waw-cyan'
     },
     {
-      id: 'https://uglygotchi.at',
+      id: 'https://www.uglygotchi.at',
       label: 'Uglygotchi',
       svgIcon: 'ugly_logo',
       class: 'lf-ugly-orange'
