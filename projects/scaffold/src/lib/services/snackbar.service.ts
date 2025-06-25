@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
 
@@ -6,6 +6,8 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class SnackbarService {
+  private snackbar = inject(MatSnackBar);
+
 
   private readonly SNACKBAR_DURATION: number = 5000;
   private readonly SNACKBAR_POSITION_HORIZONTAL: MatSnackBarHorizontalPosition = 'center';
@@ -21,8 +23,6 @@ export class SnackbarService {
     horizontalPosition: this.SNACKBAR_POSITION_HORIZONTAL,
     verticalPosition: this.SNACKBAR_POSITION_VERTICAL
   };
-
-  constructor(private snackbar: MatSnackBar) { }
 
   // Opens a snackbar with an action to wait for
   public openSnackbarWithAction(message: string, action: string, config?: MatSnackBarConfig): Promise<void> {

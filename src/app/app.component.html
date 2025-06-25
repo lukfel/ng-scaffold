@@ -8,34 +8,32 @@
     <div class="drawer-container">
       <mat-nav-list>
         <div mat-subheader class="hint">Navigation</div>
-        <a
-          *ngFor="let item of scaffoldConfig?.navbarConfig?.menuButtons"
-          mat-list-item
-          [routerLink]="[item.id]"
-          routerLinkActive="active">
-          <span matListItemTitle>{{ item.label }}</span>
-          <mat-icon
-            *ngIf="item.matIcon; else svgIcon"
-            matListItemIcon
-            class="mx-3 material-icons-outlined">
-            {{ item.matIcon }}
-          </mat-icon>
-          <ng-template #svgIcon>
+        @for (item of scaffoldConfig.navbarConfig?.menuButtons; track item) {
+          <a mat-list-item [routerLink]="[item.id]" routerLinkActive="active">
+            <span matListItemTitle>{{ item.label }}</span>
+            @if (item.matIcon) {
+              <mat-icon matListItemIcon class="mx-3 material-icons-outlined">
+                {{ item.matIcon }}
+              </mat-icon>
+            } @else {
+              <mat-icon
+                matListItemIcon
+                class="mx-3 material-icons-outlined"
+                [svgIcon]="item.svgIcon!"></mat-icon>
+            }
+          </a>
+        }
+        <div mat-subheader class="hint">Other projects</div>
+        @for (item of externalMenuButtons; track item) {
+          <a mat-list-item [href]="item.id" target="_blank">
+            <span matListItemTitle class="title-small">{{ item.label }}</span>
             <mat-icon
               matListItemIcon
-              class="mx-3 material-icons-outlined"
+              class="mx-3"
+              [ngClass]="item.class"
               [svgIcon]="item.svgIcon!"></mat-icon>
-          </ng-template>
-        </a>
-        <div mat-subheader class="hint">Other projects</div>
-        <a *ngFor="let item of externalMenuButtons" mat-list-item [href]="item.id" target="_blank">
-          <span matListItemTitle class="title-small">{{ item.label }}</span>
-          <mat-icon
-            matListItemIcon
-            class="mx-3"
-            [ngClass]="item.class"
-            [svgIcon]="item.svgIcon!"></mat-icon>
-        </a>
+          </a>
+        }
       </mat-nav-list>
       <div class="p-4 hint">
         The content of this drawer is customizable through content projection or component portal.

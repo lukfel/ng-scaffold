@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LibraryConfig } from '../models';
 import { Logger } from './logger.service';
 import { CONFIG } from '../scaffold.module';
@@ -7,9 +7,9 @@ import { CONFIG } from '../scaffold.module';
   providedIn: 'root'
 })
 export class LocalStorageService {
+  private logger = inject(Logger);
+  private config = inject<LibraryConfig>(CONFIG, { optional: true });
 
-  constructor(private logger: Logger,
-              @Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
   /**
    * Set an item into the browser's local storage

@@ -3,9 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@lukfel/scaffold": [
-        "dist/scaffold"
-      ]
+      "@lukfel/scaffold": ["dist/scaffold"]
     },
     "resolveJsonModule": true,
     "baseUrl": "./",
@@ -21,7 +19,7 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",

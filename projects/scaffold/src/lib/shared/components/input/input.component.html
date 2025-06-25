@@ -1,7 +1,9 @@
-<ng-container *ngIf="inputConfig">
+@if (inputConfig) {
   <mat-form-field class="lf-input" appearance="fill" [class.lf-hide-hint]="!inputConfig.hint">
     <mat-label>{{ inputConfig.label || "Search" }}</mat-label>
-    <mat-hint *ngIf="inputConfig.hint">{{ inputConfig.hint }}</mat-hint>
+    @if (inputConfig.hint) {
+      <mat-hint>{{ inputConfig.hint }}</mat-hint>
+    }
     <input
       matInput
       type="text"
@@ -10,27 +12,27 @@
       (keyup.enter)="inputSubmitted(inputValue)"
       (ngModelChange)="inputChanged($event)"
       #input />
-    <button *ngIf="isMobile" mat-icon-button matPrefix color="accent" (click)="inputPrefixAction()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-    <button
-      *ngIf="inputValue"
-      class="lf-input-close-button"
-      mat-icon-button
-      matSuffix
-      (click)="clearInput()">
-      <mat-icon>close</mat-icon>
-    </button>
-    <button
-      *ngIf="inputConfig.matIconSubmit"
-      mat-icon-button
-      matSuffix
-      color="accent"
-      type="submit"
-      (click)="inputSubmitted(inputValue)">
-      <mat-icon>
-        {{ inputConfig.matIconSubmit }}
-      </mat-icon>
-    </button>
+    @if (isMobile) {
+      <button mat-icon-button matPrefix color="accent" (click)="inputPrefixAction()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    }
+    @if (inputValue) {
+      <button class="lf-input-close-button" mat-icon-button matSuffix (click)="clearInput()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+    @if (inputConfig.matIconSubmit) {
+      <button
+        mat-icon-button
+        matSuffix
+        color="accent"
+        type="submit"
+        (click)="inputSubmitted(inputValue)">
+        <mat-icon>
+          {{ inputConfig.matIconSubmit }}
+        </mat-icon>
+      </button>
+    }
   </mat-form-field>
-</ng-container>
+}

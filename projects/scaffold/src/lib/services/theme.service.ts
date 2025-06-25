@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+
+import { Injectable, DOCUMENT, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 
@@ -7,6 +7,9 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class ThemeService {
+  private storageService = inject(LocalStorageService);
+  private document = inject<Document>(DOCUMENT);
+
 
   private readonly THEME_KEY: string = 'THEME';
 
@@ -16,8 +19,7 @@ export class ThemeService {
     return this._currentTheme$.asObservable();
   }
 
-  constructor(private storageService: LocalStorageService,
-              @Inject(DOCUMENT) private document: Document) {
+  constructor() {
               this.loadTheme();
   }
 

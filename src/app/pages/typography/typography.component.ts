@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/scaffold';
 import { take } from 'rxjs';
 
@@ -9,8 +9,8 @@ import { take } from 'rxjs';
     standalone: false
 })
 export class TypographyComponent implements OnInit {
+  private scaffoldService = inject(ScaffoldService);
 
-  constructor(private scaffoldService: ScaffoldService) {}
 
   ngOnInit(): void {
     this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {

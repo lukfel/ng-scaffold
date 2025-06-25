@@ -51,8 +51,7 @@ describe('ScaffoldComponent', () => {
       providers: [
         { provide: Logger, useClass: MockLogger }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ScaffoldComponent);
     component = fixture.componentInstance;

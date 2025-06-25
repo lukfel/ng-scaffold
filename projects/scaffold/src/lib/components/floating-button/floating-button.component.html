@@ -1,32 +1,32 @@
-<button
-  *ngIf="
-    floatingButtonConfig &&
-    floatingButtonConfig?.enable &&
-    (!floatingButtonConfig?.autoHide || !onTop)
-  "
-  mat-fab
-  color="accent"
-  class="lf-floating-button"
-  [style.bottom]="getBottomPosition() + 'px'"
-  [ngClass]="floatingButtonConfig.class"
-  [ngClass]="floatingButtonConfig.horizontalPosition"
-  [extended]="!!floatingButtonConfig.label"
-  (click)="buttonClicked(floatingButtonConfig.id)"
-  [matTooltip]="floatingButtonConfig.tooltip!">
-  <!-- mat icon -->
-  <mat-icon
-    *ngIf="floatingButtonConfig?.matIcon; else svgIconTemplate"
-    [class.material-icons-outlined]="floatingButtonConfig.outlineIcon">
-    {{ floatingButtonConfig.matIcon }}
-  </mat-icon>
-  <!-- svg icon -->
-  <ng-template #svgIconTemplate>
-    <mat-icon
-      *ngIf="floatingButtonConfig?.svgIcon"
-      [svgIcon]="floatingButtonConfig.svgIcon!"></mat-icon>
-  </ng-template>
-  <!-- label -->
-  <span *ngIf="floatingButtonConfig?.label" class="lf-floating-button-label">
-    {{ floatingButtonConfig.label }}
-  </span>
-</button>
+@if (
+  floatingButtonConfig && floatingButtonConfig.enable && (!floatingButtonConfig.autoHide || !onTop)
+) {
+  <button
+    mat-fab
+    color="accent"
+    class="lf-floating-button"
+    [style.bottom]="getBottomPosition() + 'px'"
+    [ngClass]="floatingButtonConfig.class"
+    [ngClass]="floatingButtonConfig.horizontalPosition"
+    [extended]="!!floatingButtonConfig.label"
+    (click)="buttonClicked(floatingButtonConfig.id)"
+    [matTooltip]="floatingButtonConfig.tooltip!">
+    <!-- mat icon -->
+    @if (floatingButtonConfig.matIcon) {
+      <mat-icon [class.material-icons-outlined]="floatingButtonConfig.outlineIcon">
+        {{ floatingButtonConfig.matIcon }}
+      </mat-icon>
+    } @else {
+      @if (floatingButtonConfig.svgIcon) {
+        <mat-icon [svgIcon]="floatingButtonConfig.svgIcon!"></mat-icon>
+      }
+    }
+    <!-- svg icon -->
+    <!-- label -->
+    @if (floatingButtonConfig.label) {
+      <span class="lf-floating-button-label">
+        {{ floatingButtonConfig.label }}
+      </span>
+    }
+  </button>
+}

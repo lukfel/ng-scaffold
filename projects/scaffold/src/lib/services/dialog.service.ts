@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable, TemplateRef, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
@@ -10,8 +10,8 @@ import { InputComponent } from '../shared/components/input/input.component';
   providedIn: 'root'
 })
 export class DialogService {
+  private matDialog = inject(MatDialog);
 
-  constructor(private matDialog: MatDialog) { }
 
   /**
    * Opens a dialog with custom template and custom config

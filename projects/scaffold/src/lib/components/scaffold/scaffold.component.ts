@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Inject, OnDestroy, OnInit, Optional, Output, ViewChild } from '@angular/core';
+
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild, DOCUMENT, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, LibraryConfig, NavbarConfig, ScaffoldConfig } from '../../models';
@@ -15,6 +15,13 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
   standalone: false
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
+  private scaffoldService = inject(ScaffoldService);
+  private breakpointService = inject(BreakpointService);
+  private routerService = inject(RouterService);
+  private logger = inject(Logger);
+  private route = inject(ActivatedRoute);
+  private document = inject<Document>(DOCUMENT);
+  private config = inject<LibraryConfig>(CONFIG, { optional: true });
 
   @ViewChild('scrollContainer', { static: true }) public scrollContainer: ElementRef;
   @ViewChild('content', { static: true }) public content: ElementRef;
@@ -43,14 +50,6 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public scrollTopPosition: number = 0;
 
   private _subscription: Subscription = new Subscription;
-
-  constructor(private scaffoldService: ScaffoldService,
-              private breakpointService: BreakpointService,
-              private routerService: RouterService,
-              private logger: Logger,
-              private route: ActivatedRoute,
-              @Inject(DOCUMENT) private document: Document,
-              @Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
   ngOnInit(): void {
     // Listen for config changes

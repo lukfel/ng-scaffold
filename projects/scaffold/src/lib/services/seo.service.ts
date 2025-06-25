@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+
+import { Injectable, DOCUMENT, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { SeoConfig } from '../models';
 import { Logger } from './logger.service';
@@ -8,11 +8,11 @@ import { Logger } from './logger.service';
   providedIn: 'root'
 })
 export class SeoService {
+  private metaTitle = inject(Title);
+  private metaTags = inject(Meta);
+  private document = inject<Document>(DOCUMENT);
+  private logger = inject(Logger);
 
-  constructor(private metaTitle: Title,
-              private metaTags: Meta,
-              @Inject(DOCUMENT) private document: Document,
-              private logger: Logger) { }
 
   /**
    * Pass a configuration to set meta tags such as title, description and image for search results and social media

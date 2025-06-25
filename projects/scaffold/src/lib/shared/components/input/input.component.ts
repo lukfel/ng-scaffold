@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HeaderInputConfig } from '../../../models';
 
@@ -9,6 +9,10 @@ import { HeaderInputConfig } from '../../../models';
     standalone: false
 })
 export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
+  private dialogRef = inject<MatDialogRef<InputComponent>>(MatDialogRef, { optional: true });
+  private config = inject<HeaderInputConfig>(MAT_DIALOG_DATA, { optional: true });
+  private cd = inject(ChangeDetectorRef);
+
 
   @Input() public inputConfig: HeaderInputConfig = {};
   @Input() public isMobile: boolean = false;
@@ -20,10 +24,6 @@ export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('input') public input: ElementRef = null!;
 
   public inputValue: string = '';
-
-  constructor(@Optional() public dialogRef: MatDialogRef<InputComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public config: HeaderInputConfig,
-    private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     if (this.config) {

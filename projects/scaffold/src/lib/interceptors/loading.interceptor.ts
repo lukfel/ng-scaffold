@@ -4,18 +4,17 @@ import {
   HttpInterceptor,
   HttpRequest
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
 import { ScaffoldService } from '../services';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
+  private scaffoldService = inject(ScaffoldService);
 
   private activeRequests = 0;
   private loadingDelay = 100; // milliseconds
   private spinnerTimeout: any;
-
-  constructor(private scaffoldService: ScaffoldService) { }
 
   public intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.activeRequests++;

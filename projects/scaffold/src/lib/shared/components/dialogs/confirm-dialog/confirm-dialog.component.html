@@ -1,14 +1,24 @@
-<h2 *ngIf="config?.title" mat-dialog-title>{{ config.title }}</h2>
+@if (config) {
+  @if (config.title) {
+    <h2 mat-dialog-title>{{ config.title }}</h2>
+  }
 
-<mat-dialog-content>
-  <p *ngIf="config?.message">{{ config.message }}</p>
-</mat-dialog-content>
+  <mat-dialog-content>
+    @if (config.message) {
+      <p>{{ config.message }}</p>
+    }
+  </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button *ngIf="config?.closeLabel" mat-button [mat-dialog-close]="false">
-    {{ config.closeLabel }}
-  </button>
-  <button *ngIf="config?.confirmLabel" mat-button color="primary" [mat-dialog-close]="true">
-    {{ config.confirmLabel }}
-  </button>
-</mat-dialog-actions>
+  <mat-dialog-actions align="end">
+    @if (config.closeLabel) {
+      <button mat-button [mat-dialog-close]="false">
+        {{ config.closeLabel }}
+      </button>
+    }
+    @if (config.confirmLabel) {
+      <button mat-button color="primary" [mat-dialog-close]="true">
+        {{ config.confirmLabel }}
+      </button>
+    }
+  </mat-dialog-actions>
+}

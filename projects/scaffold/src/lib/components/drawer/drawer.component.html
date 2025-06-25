@@ -1,36 +1,33 @@
-<mat-sidenav-container
-  *ngIf="drawerConfig && drawerConfig.enable; else noDrawer"
-  class="lf-drawer-container"
-  [ngClass]="drawerConfig.class">
-  <!-- drawer -->
-  <mat-sidenav
-    class="lf-drawer mat-elevation-z2"
-    [mode]="isMobile ? 'over' : 'side'"
-    [opened]="drawerConfig.open"
-    [autoFocus]="false"
-    [fixedInViewport]="drawerConfig.fixed"
-    [fixedTopGap]="fixedOffset"
-    (closed)="onDrawerClosed()"
-    #drawer>
-    <!-- drawer content -->
-    <!-- <ng-content select="[drawerContent]"></ng-content> -->
-    <ng-container *ngIf="drawerPortal; else drawerContent">
-      <ng-template [cdkPortalOutlet]="drawerPortal"></ng-template>
-    </ng-container>
-    <ng-template #drawerContent>
-      <ng-content select="[drawerContent]"></ng-content>
-    </ng-template>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <!-- main content -->
-    <ng-container *ngTemplateOutlet="content"></ng-container>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+@if (drawerConfig && drawerConfig.enable) {
+  <mat-sidenav-container class="lf-drawer-container" [ngClass]="drawerConfig.class">
+    <!-- drawer -->
+    <mat-sidenav
+      class="lf-drawer mat-elevation-z2"
+      [mode]="isMobile ? 'over' : 'side'"
+      [opened]="drawerConfig.open"
+      [autoFocus]="false"
+      [fixedInViewport]="drawerConfig.fixed"
+      [fixedTopGap]="fixedOffset"
+      (closed)="onDrawerClosed()"
+      #drawer>
+      <!-- drawer content -->
+      <!-- <ng-content select="[drawerContent]"></ng-content> -->
+      @if (drawerPortal) {
+        <ng-template [cdkPortalOutlet]="drawerPortal"></ng-template>
+      } @else {
+        <ng-content select="[drawerContent]"></ng-content>
+      }
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!-- main content -->
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+} @else {
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+}
 
 <!-- render content without drawer -->
-<ng-template #noDrawer>
-  <ng-container *ngTemplateOutlet="content"></ng-container>
-</ng-template>
 
 <!-- this template is required to allow multiple <ng-content></ng-content> -->
 <ng-template #content><ng-content></ng-content></ng-template>

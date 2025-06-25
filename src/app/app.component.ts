@@ -1,10 +1,9 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService } from '@lukfel/scaffold';
-import { ThemeService } from 'projects/scaffold/src/public-api';
+import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService, ThemeService } from '@lukfel/scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -14,6 +13,16 @@ import packageJson from '../../package.json';
   standalone: false
 })
 export class AppComponent {
+  private router = inject(Router);
+  private logger = inject(Logger);
+  private snackbarService = inject(SnackbarService);
+  private dialogService = inject(DialogService);
+  private iconRegistry = inject(MatIconRegistry);
+  private sanitizer = inject(DomSanitizer);
+  private scaffoldService = inject(ScaffoldService);
+  private breakpointService = inject(BreakpointService);
+  private seoService = inject(SeoService);
+  private themeService = inject(ThemeService);
 
   public version = packageJson.version;
 
@@ -120,7 +129,7 @@ export class AppComponent {
           externalTab: true
         },
       ],
-      copyright: '© Lukas Felbinger 2025. All rights reserved.'
+      copyright: `© Lukas Felbinger 2025. All rights reserved. (v${packageJson.version})`
     },
     // ContentTitleCardConfig
     contentTitleCardConfig: {
@@ -170,16 +179,7 @@ export class AppComponent {
 
   private currentTheme: string = '';
 
-  constructor(private router: Router,
-    private logger: Logger,
-    private snackbarService: SnackbarService,
-    private dialogService: DialogService,
-    private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer,
-    private scaffoldService: ScaffoldService,
-    private breakpointService: BreakpointService,
-    private seoService: SeoService,
-    private themeService: ThemeService) {
+  constructor() {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'));
     this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));

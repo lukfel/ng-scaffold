@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ScaffoldConfig, ScaffoldService, PlaceholderConfig } from '@lukfel/scaffold';
 import { take } from 'rxjs';
 
@@ -9,14 +9,14 @@ import { take } from 'rxjs';
     standalone: false
 })
 export class NotFoundComponent implements OnInit {
+  private scaffoldService = inject(ScaffoldService);
+
 
   public placeholderConfig: PlaceholderConfig = {
     matIcon: 'block',
     heading: '404',
     message: 'This page could not be found.'
   }
-
-  constructor(private scaffoldService: ScaffoldService) {}
 
   ngOnInit(): void {
     this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {

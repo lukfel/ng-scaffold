@@ -1,5 +1,5 @@
 import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LibraryConfig, ScaffoldConfig } from '../models';
 import { CONFIG } from '../scaffold.module';
@@ -7,6 +7,9 @@ import { Logger } from './logger.service';
 
 @Injectable({ providedIn: 'root' })
 export class ScaffoldService {
+  private logger = inject(Logger);
+  private config = inject<LibraryConfig>(CONFIG, { optional: true });
+
 
   // Scaffold Config
   private _scaffoldConfig$: BehaviorSubject<ScaffoldConfig> = new BehaviorSubject<ScaffoldConfig>({});
@@ -57,9 +60,6 @@ export class ScaffoldService {
     const componentPortal: ComponentPortal<unknown> = new ComponentPortal(value);
     this._drawerPortal$.next(value ? componentPortal : null);
   }
-
-  constructor(private logger: Logger,
-              @Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
   // Update a specific property in the ScaffoldConfig
   public updateScaffoldProperty(property: keyof ScaffoldConfig, value: unknown): void {

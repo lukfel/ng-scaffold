@@ -1,20 +1,21 @@
-<div *ngIf="placeholderConfig" class="lf-placeholder px-6 pt-2 pb-6">
-  <!-- icon -->
-  <lf-icon
-    [matIcon]="placeholderConfig.matIcon!"
-    [svgIcon]="placeholderConfig.svgIcon!"
-    [outlineIcon]="placeholderConfig.outlineIcon!"></lf-icon>
-
-  <!-- heading -->
-  <p *ngIf="placeholderConfig?.heading" class="lf-placeholder-heading">
-    {{ placeholderConfig.heading }}
-  </p>
-
-  <!-- message -->
-  <p
-    *ngIf="placeholderConfig?.message"
-    class="lf-placeholder-message"
-    [class.mt-6]="placeholderConfig.heading">
-    {{ placeholderConfig.message }}
-  </p>
-</div>
+@if (placeholderConfig) {
+  <div class="lf-placeholder px-6 pt-2 pb-6">
+    <!-- icon -->
+    <lf-icon
+      [matIcon]="placeholderConfig.matIcon!"
+      [svgIcon]="placeholderConfig.svgIcon!"
+      [outlineIcon]="placeholderConfig.outlineIcon!"></lf-icon>
+    <!-- heading -->
+    @if (placeholderConfig.heading) {
+      <p class="lf-placeholder-heading">
+        {{ placeholderConfig.heading }}
+      </p>
+    }
+    <!-- message -->
+    @if (placeholderConfig.message) {
+      <p class="lf-placeholder-message" [class.mt-6]="placeholderConfig.heading">
+        {{ placeholderConfig.message }}
+      </p>
+    }
+  </div>
+}

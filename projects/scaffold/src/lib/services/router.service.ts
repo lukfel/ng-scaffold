@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
 export class RouterService {
+  private router = inject(Router);
+
 
   private _loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -38,7 +40,7 @@ export class RouterService {
     return this._previousRoute$.value;
   }
 
-  constructor(private router: Router) {
+  constructor() {
     this.router.events.subscribe(event => {
       let asyncLoadCount = 0;
 

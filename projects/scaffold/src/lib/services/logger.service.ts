@@ -1,11 +1,11 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LibraryConfig } from '../models';
 import { CONFIG } from '../scaffold.module';
 
 @Injectable({ providedIn: 'root' })
 export class Logger {
+  private config = inject<LibraryConfig>(CONFIG, { optional: true });
 
-  constructor(@Optional() @Inject(CONFIG) private config?: LibraryConfig) { }
 
   /**
    * Uses the regular console log but can be automatically disabled during production by using the LibraryConfig in the ScaffoldModule.forRoot

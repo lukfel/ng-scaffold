@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmDialogConfig } from '../../../../models';
 
@@ -9,6 +9,6 @@ import { ConfirmDialogConfig } from '../../../../models';
     standalone: false
 })
 export class ConfirmDialogComponent {
+  public config = inject<ConfirmDialogConfig>(MAT_DIALOG_DATA);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public config: ConfirmDialogConfig) { }
 }

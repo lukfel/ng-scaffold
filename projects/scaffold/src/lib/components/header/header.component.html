@@ -1,4 +1,4 @@
-<ng-container *ngIf="headerConfig && headerConfig.enable">
+@if (headerConfig && headerConfig.enable) {
   <mat-toolbar
     class="lf-header mat-elevation-z3"
     [class.px-4]="!isMobile"
@@ -21,33 +21,40 @@
         [class.lf-clickable]="headerConfig.titleRouterLink"
         [routerLink]="headerConfig.titleRouterLink ? [headerConfig.titleRouterLink] : null">
         <!-- svg logo -->
-        <mat-icon
-          *ngIf="headerConfig?.svgLogo; else imgLogo"
-          class="lf-header-logo"
-          [class.mr-3]="headerConfig.title"
-          [svgIcon]="headerConfig.svgLogo!"></mat-icon>
-        <!-- img logo -->
-        <ng-template #imgLogo>
-          <img
-            *ngIf="headerConfig?.imgLogo"
+        @if (headerConfig.svgLogo) {
+          <mat-icon
             class="lf-header-logo"
             [class.mr-3]="headerConfig.title"
-            [src]="headerConfig.imgLogo"
-            alt="Logo" />
-        </ng-template>
+            [svgIcon]="headerConfig.svgLogo!"></mat-icon>
+        } @else {
+          @if (headerConfig.imgLogo) {
+            <img
+              class="lf-header-logo"
+              [class.mr-3]="headerConfig.title"
+              [src]="headerConfig.imgLogo"
+              alt="Logo" />
+          }
+        }
+        <!-- img logo -->
         <!-- title -->
-        <div *ngIf="headerConfig?.title" class="lf-header-title-wrapper">
-          <span *ngIf="headerConfig?.title" class="lf-header-title">
-            {{ headerConfig.title }}
-          </span>
-          <span *ngIf="headerConfig?.subtitle" class="lf-header-subtitle">
-            {{ headerConfig.subtitle }}
-          </span>
-        </div>
+        @if (headerConfig.title) {
+          <div class="lf-header-title-wrapper">
+            @if (headerConfig.title) {
+              <span class="lf-header-title">
+                {{ headerConfig.title }}
+              </span>
+            }
+            @if (headerConfig.subtitle) {
+              <span class="lf-header-subtitle">
+                {{ headerConfig.subtitle }}
+              </span>
+            }
+          </div>
+        }
       </div>
     </div>
     <!-- input -->
-    <ng-container *ngIf="headerConfig?.inputConfig?.enable">
+    @if (headerConfig.inputConfig?.enable) {
       <div class="spacer"></div>
       <lf-input
         [class.lf-header-input-mobile]="isMobile"
@@ -57,101 +64,99 @@
         (inputSubmitEvent)="inputSubmitted($event)"
         (inputChangeEvent)="inputChanged($event)"
         (inputPrefixActionEvent)="headerConfig.inputConfig!.enable = false"></lf-input>
-    </ng-container>
+    }
     <!-- spacer -->
     <div class="spacer"></div>
     <!-- right menu buttons -->
-    <ng-container *ngFor="let button of headerConfig.rightMenuButtons">
+    @for (button of headerConfig.rightMenuButtons; track button) {
       <ng-container
         [ngTemplateOutlet]="menuButtonTemplate"
         [ngTemplateOutletContext]="{
           menuButton: button,
         }"></ng-container>
-    </ng-container>
+    }
   </mat-toolbar>
-
   <!-- loading bar -->
-  <mat-progress-bar
-    *ngIf="headerConfig?.loading || (headerConfig?.showRouteLoading && routeLoading)"
-    class="lf-header-progress-bar"
-    color="accent"
-    mode="indeterminate"></mat-progress-bar>
-</ng-container>
+  @if (headerConfig.loading || (headerConfig.showRouteLoading && routeLoading)) {
+    <mat-progress-bar
+      class="lf-header-progress-bar"
+      color="accent"
+      mode="indeterminate"></mat-progress-bar>
+  }
+}
 
 <!-- header menu button -->
 <ng-template #menuButtonTemplate let-menuButton="menuButton" let-hideLabel="hideLabel">
-  <ng-container *ngIf="menuButton">
+  @if (menuButton) {
     <!-- icon button -->
-    <button
-      *ngIf="
-        (menuButton.matIcon || menuButton.svgIcon) && (!menuButton.label || hideLabel);
-        else textButton
-      "
-      mat-icon-button
-      class="lf-header-menu-button"
-      [ngClass]="menuButton.class"
-      (click)="buttonClicked(menuButton.id)"
-      [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
-      [matTooltip]="menuButton.tooltip"
-      [attr.aria-label]="menuButton.id">
-      <!-- icon -->
-      <lf-icon
-        [matIcon]="menuButton.matIcon"
-        [svgIcon]="menuButton.svgIcon"
-        [outlineIcon]="menuButton.outlineIcon"></lf-icon>
-    </button>
-    <!-- text button -->
-    <ng-template #textButton>
+    @if ((menuButton.matIcon || menuButton.svgIcon) && (!menuButton.label || hideLabel)) {
       <button
-        *ngIf="!hideLabel"
-        mat-button
+        mat-icon-button
         class="lf-header-menu-button"
         [ngClass]="menuButton.class"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
-        [matTooltip]="menuButton.tooltip">
-        {{ menuButton.label }}
+        [matTooltip]="menuButton.tooltip"
+        [attr.aria-label]="menuButton.id">
+        <!-- icon -->
+        <lf-icon
+          [matIcon]="menuButton.matIcon"
+          [svgIcon]="menuButton.svgIcon"
+          [outlineIcon]="menuButton.outlineIcon"></lf-icon>
       </button>
-    </ng-template>
-
+    } @else {
+      @if (!hideLabel) {
+        <button
+          mat-button
+          class="lf-header-menu-button"
+          [ngClass]="menuButton.class"
+          (click)="buttonClicked(menuButton.id)"
+          [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
+          [matTooltip]="menuButton.tooltip">
+          {{ menuButton.label }}
+        </button>
+      }
+    }
+    <!-- text button -->
     <!-- menu -->
     <mat-menu #menu="matMenu">
       <!-- label menu buttons -->
-      <ng-container *ngFor="let button of menuButton.menuButtons">
+      @for (button of menuButton.menuButtons; track button) {
         <!-- menu button -->
-        <button
-          *ngIf="button.label"
-          mat-menu-item
-          [ngClass]="button.class"
-          (click)="buttonClicked(button.id)">
-          <!-- icon -->
-          <lf-icon
-            [matIcon]="button.matIcon"
-            [svgIcon]="button.svgIcon"
-            [outlineIcon]="button.outlineIcon"
-            [alignMiddle]="true"></lf-icon>
-          <!-- label -->
-          <span *ngIf="button.label">{{ button.label }}</span>
-        </button>
-      </ng-container>
-      <!-- icon menu buttons -->
-      <div class="lf-menu-icons px-1">
-        <ng-container *ngFor="let button of menuButton.menuButtons">
-          <!-- icon button -->
-          <button
-            *ngIf="!button.label && (button.matIcon || button.svgIcon)"
-            mat-icon-button
-            [ngClass]="button.class"
-            (click)="buttonClicked(button.id)"
-            [matTooltip]="button.tooltip">
+        @if (button.label) {
+          <button mat-menu-item [ngClass]="button.class" (click)="buttonClicked(button.id)">
             <!-- icon -->
             <lf-icon
               [matIcon]="button.matIcon"
               [svgIcon]="button.svgIcon"
-              [outlineIcon]="button.outlineIcon"></lf-icon>
+              [outlineIcon]="button.outlineIcon"
+              [alignMiddle]="true"></lf-icon>
+            <!-- label -->
+            @if (button.label) {
+              <span>{{ button.label }}</span>
+            }
           </button>
-        </ng-container>
+        }
+      }
+      <!-- icon menu buttons -->
+      <div class="lf-menu-icons px-1">
+        @for (button of menuButton.menuButtons; track button) {
+          <!-- icon button -->
+          @if (!button.label && (button.matIcon || button.svgIcon)) {
+            <button
+              mat-icon-button
+              [ngClass]="button.class"
+              (click)="buttonClicked(button.id)"
+              [matTooltip]="button.tooltip">
+              <!-- icon -->
+              <lf-icon
+                [matIcon]="button.matIcon"
+                [svgIcon]="button.svgIcon"
+                [outlineIcon]="button.outlineIcon"></lf-icon>
+            </button>
+          }
+        }
       </div>
     </mat-menu>
-  </ng-container>
+  }
 </ng-template>

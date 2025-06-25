@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/scaffold';
 import { Subscription } from 'rxjs';
 import { NotFoundComponent } from '../not-found/not-found.component';
@@ -10,6 +10,12 @@ import { NotFoundComponent } from '../not-found/not-found.component';
   standalone: false
 })
 export class StartpageComponent implements OnInit, OnDestroy {
+  private scaffoldService = inject(ScaffoldService);
+  private themeService = inject(ThemeService);
+  private dialogService = inject(DialogService);
+  private logger = inject(Logger);
+  private cd = inject(ChangeDetectorRef);
+
 
   public scaffoldConfig: ScaffoldConfig = {};
   public headerConfig: HeaderConfig = {};
@@ -38,12 +44,6 @@ export class StartpageComponent implements OnInit, OnDestroy {
   public inputValue: string = '';
 
   private _subscription: Subscription = new Subscription;
-
-  constructor(private scaffoldService: ScaffoldService,
-    private themeService: ThemeService,
-    private dialogService: DialogService,
-    private logger: Logger,
-    private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     // Listen for config changes

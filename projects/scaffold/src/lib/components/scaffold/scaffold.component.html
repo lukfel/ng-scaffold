@@ -2,7 +2,9 @@
 
 <div class="lf-scaffold mat-app-background mat-typography" [ngClass]="scaffoldConfig?.class">
   <!-- loading overlay -->
-  <lf-loading-overlay *ngIf="scaffoldConfig?.loading"></lf-loading-overlay>
+  @if (scaffoldConfig?.loading) {
+    <lf-loading-overlay></lf-loading-overlay>
+  }
   <!-- header -->
   <lf-header
     [headerConfig]="headerConfig"
