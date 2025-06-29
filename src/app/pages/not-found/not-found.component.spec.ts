@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PlaceholderModule } from '@lukfel/scaffold';
 
 import { NotFoundComponent } from './not-found.component';
+import { PlaceholderComponent } from '@lukfel/scaffold';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -10,7 +10,7 @@ describe('NotFoundComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NotFoundComponent],
-      imports: [PlaceholderModule]
+      imports: [PlaceholderComponent]
     })
       .compileComponents();
 

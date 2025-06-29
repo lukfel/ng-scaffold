@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { StartpageRoutingModule } from './startpage-routing.module';
 import { StartpageComponent } from './startpage.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FileUploadComponent } from '@lukfel/scaffold';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     StartpageRoutingModule,
-    SharedModule
+    SharedModule,
+    FileUploadComponent
   ]
 })
 export class StartpageModule { }

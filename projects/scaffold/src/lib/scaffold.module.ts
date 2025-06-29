@@ -1,4 +1,6 @@
 import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from './components/content-title-card/content-title-card.component';
@@ -11,6 +13,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ScaffoldComponent } from './components/scaffold/scaffold.component';
 import { LibraryConfig } from './models';
 import { ConfirmDialogComponent } from './shared/components/dialogs/confirm-dialog/confirm-dialog.component';
+import { IconComponent } from './shared/components/icon/icon.component';
+import { InputComponent } from './shared/components/input/input.component';
 import { SharedModule } from './shared/shared.module';
 
 export const CONFIG = new InjectionToken<LibraryConfig>('config');
@@ -29,8 +33,12 @@ export const CONFIG = new InjectionToken<LibraryConfig>('config');
     BottomBarComponent
   ],
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    InputComponent,
+    IconComponent
   ],
   exports: [
     ScaffoldComponent

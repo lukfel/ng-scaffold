@@ -1,12 +1,14 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HeaderInputConfig } from '../../../models';
+import { SharedModule } from '../../shared.module';
 
 @Component({
-    selector: 'lf-input',
-    templateUrl: './input.component.html',
-    styleUrls: ['./input.component.scss'],
-    standalone: false
+  selector: 'lf-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.scss'],
+  standalone: true,
+  imports: [SharedModule]
 })
 export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
   private dialogRef = inject<MatDialogRef<InputComponent>>(MatDialogRef, { optional: true });

@@ -1,0 +1,21 @@
+<input
+  hidden
+  #file
+  type="file"
+  [accept]="accept"
+  onclick="this.value=null"
+  (change)="selectFile($event)" />
+
+<button
+  mat-flat-button
+  class="lf-button"
+  type="button"
+  [color]="color"
+  [disabled]="disabled"
+  (click)="triggerInput()"
+  [matTooltip]="tooltip">
+  @if (matIcon) {
+    <mat-icon [ngClass]="{ 'tab-button-icon': !!label }">{{ matIcon }}</mat-icon>
+  }
+  {{ label }}
+</button>
