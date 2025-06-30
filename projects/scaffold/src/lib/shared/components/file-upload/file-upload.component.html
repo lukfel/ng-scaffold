@@ -15,7 +15,7 @@
   (click)="triggerInput()"
   [matTooltip]="tooltip">
   @if (matIcon) {
-    <mat-icon [ngClass]="{ 'tab-button-icon': !!label }">{{ matIcon }}</mat-icon>
+    <mat-icon>{{ matIcon }}</mat-icon>
   }
   {{ label }}
 </button>
