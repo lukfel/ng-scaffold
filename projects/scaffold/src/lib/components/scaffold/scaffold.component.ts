@@ -107,7 +107,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }));
 
     // Listen for route loading
-    this._subscription.add(this.routerService.loading$.subscribe(routeLoading => {
+    this._subscription.add(this.routerService.loading$.subscribe((routeLoading: boolean) => {
       this.routeLoading = routeLoading
     }));
 
@@ -120,7 +120,6 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         debounceTime(100)
       ).subscribe((e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;
-        // this.logger.log('scrollTopPosition: ', target.scrollTop);
         this.scrollTopPosition = target.scrollTop;
       }));
     }

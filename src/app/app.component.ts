@@ -86,7 +86,7 @@ export class AppComponent {
           id: 'start',
           label: 'Home',
           matIcon: 'home',
-          outlineIcon: true
+          outlineIcon: true,
         },
         {
           id: 'documentation',
@@ -228,7 +228,8 @@ export class AppComponent {
 
   // Listen to header click events
   public headerButtonClickEvent(id: string): void {
-    this.snackbarService.openSnackbar(`You clicked the header button with id:   ${id}`);
+    this.logger.log('You clicked the floating button with id: ', id);
+    // this.snackbarService.openSnackbar(`You clicked the header button with id: ${id}`);
 
     if (id === 'drawer') {
       if (this.scaffoldConfig.drawerConfig) {
@@ -266,6 +267,6 @@ export class AppComponent {
 
   // Listen to floating button click events
   public floatingButtonClickEvent(id: string): void {
-    this.snackbarService.openSnackbar(`You clicked the floating button with id:   ${id}`);
+    this.logger.log('You clicked the floating button with id: ', id);
   }
 }
