@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751896076533,
+  "timestamp": 1751899151633,
   "index": "/scaffold/index.html",
   "assetGroups": [
     {
@@ -11,20 +11,20 @@
         "ignoreVary": true
       },
       "urls": [
-        "/scaffold/chunk-3Q7PHHAR.js",
-        "/scaffold/chunk-3VTPB6ES.js",
-        "/scaffold/chunk-DGSDF5Z6.js",
-        "/scaffold/chunk-KTOUNQFO.js",
-        "/scaffold/chunk-QRLXYP3H.js",
-        "/scaffold/chunk-RQYWIXHN.js",
-        "/scaffold/chunk-S5MEKEPL.js",
+        "/scaffold/chunk-DP7BRTDK.js",
+        "/scaffold/chunk-F3GSIM67.js",
+        "/scaffold/chunk-ILJ2HJKS.js",
+        "/scaffold/chunk-MRKPKUBN.js",
+        "/scaffold/chunk-R7UXM6NT.js",
+        "/scaffold/chunk-R7V7RLRG.js",
+        "/scaffold/chunk-YVG6C4UY.js",
         "/scaffold/favicon.ico",
         "/scaffold/index.html",
-        "/scaffold/main-ZW4Z6GUQ.js",
+        "/scaffold/main-FW4D33CZ.js",
         "/scaffold/manifest.webmanifest",
         "/scaffold/polyfills-SCHOHYNV.js",
         "/scaffold/scripts-LS2XAREJ.js",
-        "/scaffold/styles-FUMYL474.css"
+        "/scaffold/styles-CKO7X3SM.css"
       ],
       "patterns": []
     },
@@ -106,20 +106,20 @@
     "/scaffold/assets/img/uglygotchi.svg": "4217a98c5bcc2309835fdfe6177d1999d62a44c0",
     "/scaffold/assets/img/waw.svg": "e82ff0fa004b99fb0922079902a1b8ef33a6594b",
     "/scaffold/assets/md/documentation.md": "b6813aaea5c94d0417bc4e57039a7456f8114851",
-    "/scaffold/chunk-3Q7PHHAR.js": "781d32e8adba23a59521e6e0c51f6f3cfd2b9a43",
-    "/scaffold/chunk-3VTPB6ES.js": "608defb6729c73b8ad3da6baf813ca18620abbe6",
-    "/scaffold/chunk-DGSDF5Z6.js": "75f928a7f0eca948c8346e772a1f598539a36192",
-    "/scaffold/chunk-KTOUNQFO.js": "5939728d4f418f98b34f736b0c1f686e6e308c44",
-    "/scaffold/chunk-QRLXYP3H.js": "f7d1d2d01b5c85179fc2804ee47f3b69ef5d385e",
-    "/scaffold/chunk-RQYWIXHN.js": "008b69f02b5c9431aed43ace43144f4de4eed6a1",
-    "/scaffold/chunk-S5MEKEPL.js": "154518aff9875aa625cdd48c2e2b3bc9ff6b8b86",
+    "/scaffold/chunk-DP7BRTDK.js": "d3aa30d488c419fe0b6e5b64895a9f05c0e82a29",
+    "/scaffold/chunk-F3GSIM67.js": "b6c439a07baf901e3e9015f943fed68d10814178",
+    "/scaffold/chunk-ILJ2HJKS.js": "43df0cda41422d04097a92d9cc66af0ed2c3089a",
+    "/scaffold/chunk-MRKPKUBN.js": "f098545b43e186b4e59461ba5c1e8e9bc710bfd2",
+    "/scaffold/chunk-R7UXM6NT.js": "dae6774082ec75cd4be1d84d52844d9531a85f04",
+    "/scaffold/chunk-R7V7RLRG.js": "718fe87016a3a47a0e59f6c95570b21a199baf2d",
+    "/scaffold/chunk-YVG6C4UY.js": "053a958f1c13e08d1950c42fbf8413ea9ec7f0ab",
     "/scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/scaffold/index.html": "ffbe3e5a4a56f52937e6f09e3d0aac17659d1108",
-    "/scaffold/main-ZW4Z6GUQ.js": "449566d47c4078ba8ebc8d2650194bd49f48e545",
+    "/scaffold/index.html": "a573e8eb1d121f884aa1c962142d077062115651",
+    "/scaffold/main-FW4D33CZ.js": "e7b5ad346e5ab411e1063af6e5177c48cbf23236",
     "/scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/scaffold/polyfills-SCHOHYNV.js": "d45c76c5960bab3ace7fd6d211b9579456241f8a",
     "/scaffold/scripts-LS2XAREJ.js": "5c83ba58163a6dc795296ce4b4cfe09ba27cd293",
-    "/scaffold/styles-FUMYL474.css": "712830a85738c6df161a1a101b9f436e09f668aa"
+    "/scaffold/styles-CKO7X3SM.css": "61440143fde252bb6200dd1774e4f004a45055ad"
   },
   "navigationUrls": [
     {
