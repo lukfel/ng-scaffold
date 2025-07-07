@@ -221,7 +221,7 @@ export class AppComponent {
     // Set Seo tags
     this.seoService.setMetaTags({
       metaPageTitle: 'Demo | Scaffold Library',
-      metaPageDescription: 'This Angular library provides a basic UI scaffold and services for mordern web and mobile apps',
+      metaPageDescription: 'This Angular library provides a basic UI scaffold and services for modern web and mobile apps',
       metaImagePath: 'scaffold/assets/img/meta.jpg'
     });
   }
