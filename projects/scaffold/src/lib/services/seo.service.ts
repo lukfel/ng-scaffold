@@ -56,7 +56,6 @@ export class SeoService {
   // Set all meta titles
   private _setMetaTitle(title: string): void {
     this.metaTitle.setTitle(title);
-    this.metaTags.updateTag({ itemprop: 'name', content: title });
     this.metaTags.updateTag({ property: 'og:title', content: title });
     this.metaTags.updateTag({ name: 'twitter:title', content: title });
   }
@@ -64,14 +63,12 @@ export class SeoService {
   // Set all meta descriptions
   private _setMetaDescription(description: string): void {
     this.metaTags.updateTag({ name: 'description', content: description });
-    this.metaTags.updateTag({ itemprop: 'description', content: description });
     this.metaTags.updateTag({ property: 'og:description', content: description });
     this.metaTags.updateTag({ name: 'twitter:description', content: description });
   }
 
   // Set all meta images
   private _setMetaImage(image: string): void {
-    this.metaTags.updateTag({ itemprop: 'image', content: image });
     this.metaTags.updateTag({ property: 'og:image', content: image });
     this.metaTags.updateTag({ name: 'twitter:image', content: image });
   }
