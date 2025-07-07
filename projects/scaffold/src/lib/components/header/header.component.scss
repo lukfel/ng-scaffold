@@ -12,8 +12,12 @@
     max-width: $header-menu-button-max-width;
 
     ::ng-deep .mdc-button__label {
-        overflow: hidden;
-        text-overflow: ellipsis;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.lf-header-menu-button-active {
+      background-color: white;
     }
   }
 

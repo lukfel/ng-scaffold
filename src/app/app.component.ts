@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, SnackbarService, ThemeService } from '@lukfel/scaffold';
+import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -15,7 +15,6 @@ import packageJson from '../../package.json';
 export class AppComponent {
   private router = inject(Router);
   private logger = inject(Logger);
-  private snackbarService = inject(SnackbarService);
   private dialogService = inject(DialogService);
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
@@ -86,7 +85,7 @@ export class AppComponent {
           id: 'start',
           label: 'Home',
           matIcon: 'home',
-          outlineIcon: true,
+          outlineIcon: true
         },
         {
           id: 'documentation',

@@ -5,6 +5,7 @@
     [class.px-1]="isMobile"
     [ngClass]="headerConfig.class"
     color="primary">
+    <!-- left menu button -->
     <ng-container
       [ngTemplateOutlet]="menuButtonTemplate"
       [ngTemplateOutletContext]="{
@@ -109,6 +110,7 @@
         <button
           mat-button
           class="lf-header-menu-button"
+          [class.lf-header-menu-button-active]="isActive(menuButton.id)"
           [ngClass]="menuButton.class"
           (click)="buttonClicked(menuButton.id)"
           [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
@@ -124,7 +126,11 @@
       @for (button of menuButton.menuButtons; track button) {
         <!-- menu button -->
         @if (button.label) {
-          <button mat-menu-item [ngClass]="button.class" (click)="buttonClicked(button.id)">
+          <button
+            mat-menu-item
+            [class.lf-header-menu-button-active]="isActive(button.id)"
+            [ngClass]="button.class"
+            (click)="buttonClicked(button.id)">
             <!-- icon -->
             <lf-icon
               [matIcon]="button.matIcon"

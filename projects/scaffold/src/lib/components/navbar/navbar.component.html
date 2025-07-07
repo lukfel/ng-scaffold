@@ -15,7 +15,8 @@
             [ngClass]="button.class"
             (click)="buttonClicked(button.id)"
             tabindex="0"
-            role="button">
+            role="button"
+            [matTooltip]="button.tooltip">
             <!-- icon -->
             <lf-icon
               [matIcon]="button.matIcon!"
