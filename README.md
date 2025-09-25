@@ -23,7 +23,7 @@ npm install @lukfel/scaffold
 ## Module
 Import the `ScaffoldModule` into your `app.module.ts` file.
 
-* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library deugging events when a `LibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `prodution` is set to `true`.
+* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library deugging events when a `ScaffoldLibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `prodution` is set to `true`.
 
 ```ts
 import { ScaffoldModule } from '@lukfel/scaffold';
@@ -245,7 +245,7 @@ This library includes several utility services:
 
 ### Logger
 Logs internal library information if `debugging` is `true` and hides application logs during production if `production` is `true`.
-* **Note:** `LibraryConfig` must be set during initialization ``ScaffoldModule.forRoot( { production: !isDevMode(), debugging: isDevMode() } )``
+* **Note:** `ScaffoldLibraryConfig` must be set during initialization ``ScaffoldModule.forRoot( { production: !isDevMode(), debugging: isDevMode() } )``
 
 ```ts
 import { Logger } from '@lukfel/scaffold';

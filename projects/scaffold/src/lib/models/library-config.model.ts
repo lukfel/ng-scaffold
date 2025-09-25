@@ -1,4 +1,4 @@
-export interface LibraryConfig {
+export interface ScaffoldLibraryConfig {
   production?: boolean;
   debugging?: boolean;
 }

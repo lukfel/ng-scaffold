@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { LibraryConfig } from '../models';
+import { ScaffoldLibraryConfig } from '../models';
 import { Logger } from './logger.service';
 import { CONFIG } from '../scaffold.module';
 
@@ -8,7 +8,7 @@ import { CONFIG } from '../scaffold.module';
 })
 export class LocalStorageService {
   private logger = inject(Logger);
-  private config = inject<LibraryConfig>(CONFIG, { optional: true });
+  private config = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
 
   /**

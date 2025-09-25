@@ -4,7 +4,7 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild, DOCUMENT, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, LibraryConfig, NavbarConfig, ScaffoldConfig } from '../../models';
+import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, ScaffoldLibraryConfig, NavbarConfig, ScaffoldConfig } from '../../models';
 import { CONFIG } from '../../scaffold.module';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
@@ -21,7 +21,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   private logger = inject(Logger);
   private route = inject(ActivatedRoute);
   private document = inject<Document>(DOCUMENT);
-  private config = inject<LibraryConfig>(CONFIG, { optional: true });
+  private config = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
   @ViewChild('scrollContainer', { static: true }) public scrollContainer: ElementRef;
   @ViewChild('content', { static: true }) public content: ElementRef;
