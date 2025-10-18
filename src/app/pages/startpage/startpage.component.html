@@ -190,17 +190,15 @@
         <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
       </p>
       <p>
-        Content can either be set 1) by using content projection
+        Content can either be set by using content projection
         <code>&lt;ng-content drawerContent&gt;</code>
-        or 2) by using the component portal
+        or by using the component portal
         <code>scaffoldService.drawerPortal</code>
         .
       </p>
-      <button mat-flat-button color="accent" (click)="updateDrawerContent(true)">
-        1 Navigation
-      </button>
+      <button mat-flat-button color="accent" (click)="updateDrawerContent(true)">Navigation</button>
       <button mat-flat-button color="primary" (click)="updateDrawerContent(false)">
-        2 Not found
+        Not found
       </button>
       <mat-divider></mat-divider>
     }
