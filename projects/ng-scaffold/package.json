@@ -1,5 +1,5 @@
 {
-  "name": "@lukfel/scaffold",
+  "name": "@lukfel/ng-scaffold",
   "version": "20.0.10",
   "description": "This Angular library provides a basic UI scaffold and services for modern web and mobile apps",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lukfel/scaffold"
+    "url": "https://github.com/lukfel/ng-scaffold"
   },
   "peerDependencies": {
     "@angular/common": "^20.0.5",

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScaffoldConfig, ScaffoldService } from '@lukfel/scaffold';
+import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { Observable, of } from 'rxjs';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -133,7 +133,7 @@ class MockScaffoldService {
         },
         {
           label: 'GitHub',
-          href: 'https://github.com/lukfel/scaffold',
+          href: 'https://github.com/lukfel/ng-scaffold',
           externalTab: true
         },
       ],

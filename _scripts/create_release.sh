@@ -5,7 +5,7 @@ bump_version() {
   current_version=$(node -p "require('./package.json').version")
   new_version=$(npm version patch --no-git-tag-version)
   new_version=$(echo $new_version | sed 's/^v//')
-  pushd ./projects/scaffold > /dev/null
+  pushd ./projects/ng-scaffold > /dev/null
   npm version $new_version --no-git-tag-version
   popd > /dev/null
   echo "Bumping version from $current_version to $new_version"

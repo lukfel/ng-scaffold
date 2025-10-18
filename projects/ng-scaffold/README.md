@@ -3,8 +3,8 @@
 
 This Angular library provides a foundational scaffold for modern web and mobile applications. It includes essential UI elements such as a header, sidebar, drawer, footer, floating button, and built-in services for theme switching, snackbar notifications, dialog management, and breakpoint detection. Simply wrap your `router-outlet` with the `lf-scaffold` element and configure the `ScaffoldConfig` within the `ScaffoldService`.
 
-- **NPM**: [@lukfel/scaffold](https://www.npmjs.com/package/@lukfel/scaffold)
-- **Demo**: [lukfel.github.io/scaffold](https://lukfel.github.io/scaffold)
+- **NPM**: [@lukfel/ng-scaffold](https://www.npmjs.com/package/@lukfel/ng-scaffold)
+- **Demo**: [lukfel.github.io/ng-scaffold](https://lukfel.github.io/ng-scaffold)
 - **Examples**: [Create a Tournament](https://www.create-a-tournament.com), [What a Waste](https://www.what-a-waste.at), [Uglygotchi](https://www.uglygotchi.at)
 
 
@@ -14,7 +14,7 @@ This Angular library provides a foundational scaffold for modern web and mobile 
 Install the package using npm:
 
 ```sh
-npm install @lukfel/scaffold
+npm install @lukfel/ng-scaffold
 ```
 
 
@@ -26,7 +26,7 @@ Import the `ScaffoldModule` into your `app.module.ts` file.
 * **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library deugging events when a `ScaffoldLibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `prodution` is set to `true`.
 
 ```ts
-import { ScaffoldModule } from '@lukfel/scaffold';
+import { ScaffoldModule } from '@lukfel/ng-scaffold';
 import { isDevMode } from '@angular/core';
 
 @NgModule({
@@ -47,7 +47,7 @@ Import the styles in your `styles.scss` and apply a default theme.
 * **Note:** The library’s styles include Material icons and Roboto font styles.
 
 ```scss
-@use "@lukfel/scaffold/styles" as lf;
+@use "@lukfel/ng-scaffold/styles" as lf;
 @include lf.scaffold-theme();           // include a default theme
 ```
 
@@ -55,7 +55,7 @@ Import the styles in your `styles.scss` and apply a default theme.
 To customize the default theme, define a new theme map specifying `primary`, `accent`, and `warn` colors using Material palettes. Enabling the `dark` option applies a dark theme. Pass your custom theme to `lf.scaffold-theme($my-theme)`.
 
 ```scss
-@use "@lukfel/scaffold/styles" as lf;
+@use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
 $my-theme: (
@@ -74,7 +74,7 @@ To switch between multiple themes dynamically, define additional themes using `l
 * **Note:** The `ThemeService` allows dynamic theme switching.
 
 ```scss
-@use "@lukfel/scaffold/styles" as lf;
+@use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
 $my-theme: (
@@ -100,7 +100,7 @@ To change the default typography from Roboto, pass an additional parameter ``fon
 * **Note:** Don't forget to also import and set the font-family in the styles.
 
 ```scss
-@use "@lukfel/scaffold/styles" as lf;
+@use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
 $my-theme: (
@@ -139,7 +139,7 @@ Wrap your application’s content inside the `lf-scaffold` component in `app.com
 Import the `ScaffoldService` in `app.component.ts` to manage the `ScaffoldConfig` settings.
 
 ```ts
-import { ScaffoldService } from '@lukfel/scaffold';
+import { ScaffoldService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
   constructor(private scaffoldService: ScaffoldService) {}
@@ -154,7 +154,7 @@ Define the `ScaffoldConfig` in `app.component.ts` and update the `scaffoldConfig
     * Refer to the demo project for full configuration details.
 
 ```ts
-import { ScaffoldService, ScaffoldConfig } from '@lukfel/scaffold';
+import { ScaffoldService, ScaffoldConfig } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
@@ -248,7 +248,7 @@ Logs internal library information if `debugging` is `true` and hides application
 * **Note:** `ScaffoldLibraryConfig` must be set during initialization ``ScaffoldModule.forRoot( { production: !isDevMode(), debugging: isDevMode() } )``
 
 ```ts
-import { Logger } from '@lukfel/scaffold';
+import { Logger } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
@@ -269,7 +269,7 @@ export class AppComponent {
 Provides basic methods to display simple snackbar notifications with or without actions.
 
 ```ts
-import { SnackbarService } from '@lukfel/scaffold';
+import { SnackbarService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
@@ -290,7 +290,7 @@ export class AppComponent {
 Includes a basic confirmation dialog thar returns a `Promise`. Use the method `openCustomDialog` to pass your own dialog template and config.
 
 ```ts
-import { DialogService } from '@lukfel/scaffold';
+import { DialogService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
@@ -316,7 +316,7 @@ export class AppComponent {
 Allows you to subscribe to breakpoint changes.
 
 ```ts
-import { BreakpointService } from '@lukfel/scaffold';
+import { BreakpointService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
@@ -343,7 +343,7 @@ Dynamically change between your defined themes.
 * **Note:** The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
 
 ```ts
-import { ThemeService } from '@lukfel/scaffold';
+import { ThemeService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
@@ -362,7 +362,7 @@ Intercept HTTP Calls and automatically show a loading spinner.
 * **Note:** The loading spinner can also be manually shown by udpating the value for `scaffoldConfig.loading` in the `ScaffoldService`
 
 ```ts
-import { ScaffoldModule } from '@lukfel/scaffold';
+import { ScaffoldModule } from '@lukfel/ng-scaffold';
 import { isDevMode } from '@angular/core';
 
 @NgModule({

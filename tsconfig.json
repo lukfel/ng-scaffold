@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@lukfel/scaffold": ["dist/scaffold"]
+      "@lukfel/ng-scaffold": ["dist/ng-scaffold"]
     },
     "resolveJsonModule": true,
     "baseUrl": "./",

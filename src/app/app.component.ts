@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/scaffold';
+import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -33,7 +33,7 @@ export class AppComponent {
     headerConfig: {
       enable: true,
       svgLogo: 'logo',
-      title: 'Scaffold',
+      title: 'Angular Scaffold',
       subtitle: `by Lukas Felbinger (v${packageJson.version})`,
       titleRouterLink: 'start',
       loading: false,
@@ -119,12 +119,12 @@ export class AppComponent {
         },
         {
           label: 'GitHub',
-          href: 'https://github.com/lukfel/scaffold',
+          href: 'https://github.com/lukfel/ng-scaffold',
           externalTab: true
         },
         {
           label: 'NPM',
-          href: 'https://www.npmjs.com/package/@lukfel/scaffold',
+          href: 'https://www.npmjs.com/package/@lukfel/ng-scaffold',
           externalTab: true
         },
       ],
@@ -236,10 +236,10 @@ export class AppComponent {
       }
       return;
     } else if (id === 'github') {
-      window.open('https://github.com/lukfel/scaffold', '_blank');
+      window.open('https://github.com/lukfel/ng-scaffold', '_blank');
       return;
     } else if (id === 'npm') {
-      window.open('https://www.npmjs.com/package/@lukfel/scaffold', '_blank');
+      window.open('https://www.npmjs.com/package/@lukfel/ng-scaffold', '_blank');
       return;
     } else if (id === 'start' || id === 'documentation' || id === 'typography') {
       this.router.navigate([id]);

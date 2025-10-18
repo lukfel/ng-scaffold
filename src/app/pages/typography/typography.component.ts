@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ScaffoldConfig, ScaffoldService } from '@lukfel/scaffold';
+import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
 
 @Component({

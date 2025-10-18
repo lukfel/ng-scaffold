@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "scaffold-app": {
+    "ng-scaffold-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
           "builder": "@angular/build:application",
           "options": {
             "outputPath": {
-              "base": "dist/scaffold-app",
+              "base": "dist/ng-scaffold-app",
               "browser": ""
             },
             "index": "src/index.html",
@@ -76,10 +76,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "scaffold-app:build:production"
+              "buildTarget": "ng-scaffold-app:build:production"
             },
             "development": {
-              "buildTarget": "scaffold-app:build:development"
+              "buildTarget": "ng-scaffold-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -87,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "scaffold-app:build"
+            "buildTarget": "ng-scaffold-app:build"
           }
         },
         "test": {
@@ -125,23 +125,23 @@
         }
       }
     },
-    "scaffold": {
+    "ng-scaffold": {
       "projectType": "library",
-      "root": "projects/scaffold",
-      "sourceRoot": "projects/scaffold/src",
+      "root": "projects/ng-scaffold",
+      "sourceRoot": "projects/ng-scaffold/src",
       "prefix": "lf",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "options": {
-            "project": "projects/scaffold/ng-package.json"
+            "project": "projects/ng-scaffold/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/scaffold/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ng-scaffold/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/scaffold/tsconfig.lib.json"
+              "tsConfig": "projects/ng-scaffold/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -149,7 +149,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/scaffold/tsconfig.spec.json",
+            "tsConfig": "projects/ng-scaffold/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
@@ -160,8 +160,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/scaffold/**/*.ts",
-              "projects/scaffold/**/*.html"
+              "projects/ng-scaffold/**/*.ts",
+              "projects/ng-scaffold/**/*.html"
             ]
           }
         }

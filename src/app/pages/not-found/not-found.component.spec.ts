@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
-import { PlaceholderComponent } from '@lukfel/scaffold';
+import { PlaceholderComponent } from '@lukfel/ng-scaffold';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;

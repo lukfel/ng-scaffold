@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoadingInterceptor, ScaffoldModule } from '@lukfel/scaffold';
+import { LoadingInterceptor, ScaffoldModule } from '@lukfel/ng-scaffold';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
