@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NotFoundRoutingModule } from './typography-routing.module';
+import { TypographyRoutingModule } from './typography-routing.module';
 import { TypographyComponent } from './typography.component';
 
 
@@ -11,7 +11,7 @@ import { TypographyComponent } from './typography.component';
   ],
   imports: [
     CommonModule,
-    NotFoundRoutingModule
+    TypographyRoutingModule
   ]
 })
 export class TypographyModule { }

@@ -13,9 +13,15 @@
     }
     <!-- message -->
     @if (placeholderConfig.message) {
-      <p class="lf-placeholder-message" [class.mt-6]="placeholderConfig.heading">
+      <p class="lf-placeholder-message">
         {{ placeholderConfig.message }}
       </p>
+    }
+    <!-- action -->
+    @if (placeholderConfig.actionLabel) {
+      <button mat-button class="mt-4" color="accent" (click)="action.emit()">
+        {{ placeholderConfig.actionLabel }}
+      </button>
     }
   </div>
 }

@@ -1,4 +1,4 @@
-.lf-documentation {
+.lf-components {
   max-width: 1080px;
   margin: auto;
 
@@ -22,5 +22,17 @@
         white-space: nowrap;
       }
     }
+  }
+
+  mat-divider {
+    margin: 64px 0;
+  }
+
+  .row {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
   }
 }

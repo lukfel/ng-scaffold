@@ -10,6 +10,7 @@ export * from './lib/scaffold.module';
 export * from './lib/components/scaffold/scaffold.component';
 export * from './lib/shared/components/placeholder/placeholder.component';
 export * from './lib/shared/components/file-upload/file-upload.component';
+export * from './lib/shared/components/list/list.component';
 /* SERVICES */
 export * from './lib/services';
 /* INTERCEPTORS */

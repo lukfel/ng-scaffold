@@ -10,8 +10,8 @@ import { SharedModule } from '../../shared.module';
 })
 export class IconComponent {
 
-  @Input() public matIcon: string;
-  @Input() public svgIcon: string;
+  @Input() public matIcon: string | undefined;
+  @Input() public svgIcon: string | undefined;
   @Input() public outlineIcon: boolean = false;
   @Input() public alignMiddle: boolean = false;
 }

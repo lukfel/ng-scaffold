@@ -1,0 +1,69 @@
+<!-- lf-list.component.html -->
+<div class="lf-table">
+  <!-- Header -->
+  @if (showHeader) {
+    <div class="lf-table-item lf-table-item-header">
+      <div class="lf-table-item-avatar">
+        <!-- <mat-icon class="material-icons-outlined margin-auto">shopping_cart</mat-icon> -->
+      </div>
+
+      <div class="lf-table-item-title-wrapper flex-row">
+        <span>{{ headerTitle || "Items" }}</span>
+      </div>
+
+      <div class="lf-table-item-actions"></div>
+
+      @if (enableCheckboxes) {
+        <div class="lf-table-item-checkbox">
+          <mat-checkbox
+            [checked]="allSelected"
+            [indeterminate]="someSelected"
+            (change)="toggleAll($event)"></mat-checkbox>
+        </div>
+      }
+    </div>
+    <mat-divider></mat-divider>
+  }
+
+  <!-- Items -->
+  @for (item of items; track item.id ?? item.title) {
+    <div class="lf-table-item lf-table-item-data">
+      <div class="lf-table-item-avatar">
+        <img
+          [src]="item.avatarUrl"
+          [alt]="'Avatar of ' + item.title"
+          (error)="onImageError($event)" />
+      </div>
+
+      <div class="lf-table-item-title-wrapper">
+        <span class="lf-table-item-title">{{ item.title }}</span>
+        @if (item.subtitle) {
+          <span class="lf-table-item-subtitle">{{ item.subtitle }}</span>
+        }
+      </div>
+
+      <div class="lf-table-item-actions">
+        @for (action of actions; track action.id) {
+          @if (!item.hiddenActions?.includes(action.id)) {
+            <button
+              mat-icon-button
+              [color]="action.color"
+              [matTooltip]="action.tooltip"
+              [disabled]="action.disabled || item.disabledActions?.includes(action.id)"
+              (click)="actionClick.emit({ id: action.id, item })">
+              <lf-icon [matIcon]="action.matIcon" [svgIcon]="action.svgIcon"></lf-icon>
+            </button>
+          }
+        }
+      </div>
+
+      @if (enableCheckboxes) {
+        <div class="lf-table-item-checkbox">
+          <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="toggleItem()"></mat-checkbox>
+        </div>
+      }
+    </div>
+  } @empty {
+    <div class="lf-table-item-no-items">No items found.</div>
+  }
+</div>

@@ -77,6 +77,7 @@ $lf-default-theme: (
   @include color-variables($theme, #{'body.'+$class});
 }
 
+// Set variables
 @mixin color-variables($theme, $scope) {
   #{$scope}{
     --color-primary: #{mat.m2-get-color-from-palette(map-get($theme, 'primary'))};

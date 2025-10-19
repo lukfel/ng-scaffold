@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PlaceholderConfig } from '../../../models';
 import { SharedModule } from '../../shared.module';
 import { IconComponent } from '../icon/icon.component';
@@ -13,4 +13,6 @@ import { IconComponent } from '../icon/icon.component';
 export class PlaceholderComponent {
 
   @Input() public placeholderConfig: PlaceholderConfig;
+
+  @Output() public action = new EventEmitter<void>();
 }

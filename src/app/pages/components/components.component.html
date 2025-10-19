@@ -1,0 +1,72 @@
+<div class="lf-components">
+  <h1>More Components</h1>
+  <p>
+    In addition to the components provided by default by the the
+    <code>ScaffoldModule</code>
+    there are several standalone components that can be imported.
+  </p>
+  <mat-divider></mat-divider>
+
+  <h2>List</h2>
+  <p>
+    A flexible, Material Design–inspired list and table hybrid component for displaying structured
+    collections of items. It supports avatars, titles, subtitles, actions, and selection checkboxes
+    — making it ideal for dashboards, inventories, and administrative views.
+  </p>
+
+  <!-- <div class="row"> -->
+  <lf-list
+    [items]="items"
+    [actions]="actions"
+    [showHeader]="true"
+    [enableCheckboxes]="true"
+    avatarFallbackPath="assets/img/error/missing.png"
+    (actionClick)="onActionClick($event)"
+    (selectionChange)="onSelectionChange($event)"></lf-list>
+  <markdown [data]="listSnippet" [disableSanitizer]="true"></markdown>
+  <!-- </div> -->
+  <mat-divider></mat-divider>
+
+  <h2>File-Upload</h2>
+  <p>
+    A lightweight Angular component that provides a clean, Material Design–styled button for
+    selecting and uploading files. It wraps a hidden native file input and exposes a simple,
+    customizable interface with built-in icon, tooltip, and state management.
+  </p>
+  <div class="row">
+    <div class="cell">
+      <lf-file-upload
+        color="accent"
+        label="Upload File"
+        matIcon="upload"
+        [disabled]="false"
+        accept="*"
+        (fileChange)="uploadFile($event)"></lf-file-upload>
+      <p>
+        File name:
+        <b>{{ fileName }}</b>
+      </p>
+    </div>
+    <markdown [data]="fileUploadSnippet" [disableSanitizer]="true"></markdown>
+  </div>
+  <mat-divider></mat-divider>
+
+  <!-- <h2>Color-Picker</h2>
+  <p>A</p>
+
+  <p></p>
+  <mat-divider></mat-divider> -->
+
+  <h2>Placeholder</h2>
+  <p>
+    A versatile UI component designed to display an informative placeholder or empty state when no
+    data is available. It provides a structured layout for an icon, heading, message, and optional
+    action — helping guide users toward the next step.
+  </p>
+  <div class="row">
+    <lf-placeholder [placeholderConfig]="placeholderConfig"></lf-placeholder>
+    <markdown [data]="placeholderSnippet" [disableSanitizer]="true"></markdown>
+  </div>
+
+  <p><br /></p>
+</div>

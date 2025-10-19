@@ -55,7 +55,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
       this.footerConfig = this.scaffoldConfig.footerConfig!;
       this.contentTitleCardConfig = this.scaffoldConfig.contentTitleCardConfig!;
       if (this.contentTitleCardConfig) {
-        this.contentTitleCardConfig.label = 'Home';
+        this.contentTitleCardConfig.label = 'Scaffold';
       }
       this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
       this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;

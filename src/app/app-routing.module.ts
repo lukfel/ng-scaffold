@@ -9,6 +9,9 @@ const routes: Routes = [
     path: 'start', loadChildren: () => import('./pages/startpage/startpage.module').then(m => m.StartpageModule)
   },
   {
+    path: 'components', loadChildren: () => import('./pages/components/components.module').then(m => m.ComponentsModule)
+  },
+  {
     path: 'documentation', loadChildren: () => import('./pages/documentation/documentation.module').then(m => m.DocumentationModule)
   },
   {
@@ -20,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
+  imports: [RouterModule.forRoot(routes, {
     useHash: true,
     anchorScrolling: 'enabled',
     scrollPositionRestoration: 'enabled',

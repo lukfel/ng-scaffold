@@ -1,0 +1,81 @@
+@use '../../../../../styles/variables' as *;
+
+.lf-table {
+  width: 100%;
+}
+
+.lf-table-item {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  .lf-table-item-checkbox {
+    flex: 0 0 40px;
+    margin-left: 8px;
+  }
+
+  .lf-table-item-avatar {
+    flex: 0 0 48px;
+    display: flex;
+    padding: 0 8px;
+
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: white;
+    }
+  }
+
+  .lf-table-item-title-wrapper {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 200px;
+    padding: 0 8px;
+    overflow: hidden;
+
+    .lf-table-item-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .lf-table-item-subtitle {
+      font-size: 0.8rem;
+    }
+  }
+
+  .lf-table-item-actions {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    button:not(:last-child) {
+      margin-right: 2px;
+    }
+  }
+
+  &.lf-table-item-header {
+    font-weight: 500;
+  }
+
+  &.lf-table-item-data {
+    &:hover {
+      background-color: rgba(#000, 0.08);
+    }
+  }
+
+  .lf-table-item-no-items {
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+  }
+}

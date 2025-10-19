@@ -47,3 +47,13 @@ $theme4: (
 .lf-ugly-orange {
   color: #ff5722 !important;
 }
+
+
+// html {
+//   color-scheme: light dark;
+//   @include mat.theme((
+//     color: mat.$violet-palette,
+//     typography: Roboto,
+//     density: 0
+//   ));
+// }

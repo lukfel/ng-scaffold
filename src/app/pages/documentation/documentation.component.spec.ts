@@ -10,10 +10,10 @@ describe('DocumentationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [DocumentationComponent],
-    imports: [MarkdownModule.forRoot({ loader: HttpClient })],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
-})
+      declarations: [DocumentationComponent],
+      imports: [MarkdownModule.forRoot({ loader: HttpClient })],
+      providers: [provideHttpClient(withInterceptorsFromDi())]
+    })
       .compileComponents();
 
     fixture = TestBed.createComponent(DocumentationComponent);

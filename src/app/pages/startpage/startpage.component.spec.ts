@@ -68,7 +68,7 @@ class MockScaffoldService {
       rightMenuButtons: [
         {
           id: 'start',
-          label: 'Home'
+          label: 'Scaffold'
         },
         {
           id: 'documentation',
@@ -97,13 +97,19 @@ class MockScaffoldService {
       menuButtons: [
         {
           id: 'start',
-          label: 'Home',
-          matIcon: 'home',
+          label: 'Scaffold',
+          svgIcon: 'logo',
+          outlineIcon: true
+        },
+        {
+          id: 'components',
+          label: 'Components',
+          matIcon: 'widgets',
           outlineIcon: true
         },
         {
           id: 'documentation',
-          label: 'Docu',
+          label: 'Docs',
           matIcon: 'description',
           outlineIcon: true
         },
