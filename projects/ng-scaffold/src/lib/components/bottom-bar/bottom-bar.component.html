@@ -13,15 +13,34 @@
     @if (bottomBarConfig.actions) {
       <div class="lf-bottom-bar-actions ml-4">
         @for (action of bottomBarConfig.actions; track action) {
-          <button
-            mat-button
-            color="accent"
-            class="lf-bottom-bar-action ml-2"
-            [ngClass]="action.class"
-            (click)="actionClicked(action.id)"
-            [matTooltip]="action.tooltip!">
-            {{ action.label }}
-          </button>
+          @if (action.label) {
+            <button
+              mat-button
+              class="lf-bottom-bar-action ml-2"
+              [ngClass]="action.class"
+              (click)="actionClicked(action.id)"
+              [matTooltip]="action.tooltip">
+              <lf-icon
+                [matIcon]="action.matIcon"
+                [svgIcon]="action.svgIcon"
+                [outlineIcon]="action.outlineIcon!"
+                [alignMiddle]="true"></lf-icon>
+              {{ action.label }}
+            </button>
+          } @else {
+            <button
+              mat-icon-button
+              color="accent"
+              class="lf-bottom-bar-action-icon ml-2"
+              [ngClass]="action.class"
+              (click)="actionClicked(action.id)"
+              [matTooltip]="action.tooltip">
+              <lf-icon
+                [matIcon]="action.matIcon"
+                [svgIcon]="action.svgIcon"
+                [outlineIcon]="action.outlineIcon!"></lf-icon>
+            </button>
+          }
         }
       </div>
     }

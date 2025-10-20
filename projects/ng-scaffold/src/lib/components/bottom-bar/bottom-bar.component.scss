@@ -24,9 +24,16 @@
   }
 
   .lf-bottom-bar-actions {
+    display: flex;
+    align-items: center;
+    
     .lf-bottom-bar-action {
       color: var(--color-accent) !important;
       background-color: white !important;
+    }
+
+    .lf-bottom-bar-action-icon {
+      color: white !important;
     }
   }
 }

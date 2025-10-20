@@ -132,16 +132,16 @@ export class StartpageComponent implements OnInit, OnDestroy {
     this.scaffoldService.drawerPortal = reset ? null! : NotFoundComponent;
   }
 
-  public bottomBarCloseClicked(): void {
-    this.bottomBarDemoList.forEach(item => item.checked = false);
-    this.updateBottomBar();
-  }
-
   public bottomBarButtonClicked(): void {
     const selected: number = this.bottomBarDemoList.filter(item => item.checked).length;
     this.dialogService.openConfirmDialog({ title: 'Selection:', message: `You have selected ${selected} items`, closeLabel: 'Close', confirmLabel: 'Confirm' }).then(result => {
       this.logger.log('close result: ', result);
     });
+  }
+
+  public bottomBarCloseClicked(): void {
+    this.bottomBarDemoList.forEach(item => item.checked = false);
+    this.updateBottomBar();
   }
 
   public selectBottomBarItem(): void {
@@ -158,7 +158,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
         {
           id: 'bottom-bar_submit',
           label: 'Submit'
-        }
+        },
       ];
     } else {
       this.bottomBarConfig.enable = false;

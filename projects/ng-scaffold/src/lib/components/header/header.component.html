@@ -115,6 +115,7 @@
           (click)="buttonClicked(menuButton.id)"
           [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
           [matTooltip]="menuButton.tooltip">
+          <!-- label -->
           {{ menuButton.label }}
         </button>
       }
@@ -150,7 +151,7 @@
           <!-- icon button -->
           @if (!button.label && (button.matIcon || button.svgIcon)) {
             <button
-              mat-button
+              mat-icon-button
               class="lf-menu-icon-button"
               [ngClass]="button.class"
               (click)="buttonClicked(button.id)"
@@ -159,8 +160,7 @@
               <lf-icon
                 [matIcon]="button.matIcon"
                 [svgIcon]="button.svgIcon"
-                [outlineIcon]="button.outlineIcon"
-                [alignMiddle]="true"></lf-icon>
+                [outlineIcon]="button.outlineIcon"></lf-icon>
             </button>
           }
         }
