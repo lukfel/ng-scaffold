@@ -2,6 +2,7 @@ import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MarkdownModule } from 'ngx-markdown';
 
+import { ActivatedRoute } from '@angular/router';
 import { DocumentationComponent } from './documentation.component';
 
 describe('DocumentationComponent', () => {
@@ -12,7 +13,10 @@ describe('DocumentationComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [DocumentationComponent],
       imports: [MarkdownModule.forRoot({ loader: HttpClient })],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        { provide: ActivatedRoute, useValue: {} }
+      ]
     })
       .compileComponents();
 

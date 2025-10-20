@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 import { FileUploadComponent, ListComponent, PlaceholderComponent } from '@lukfel/ng-scaffold';
-import { MarkdownModule } from 'ngx-markdown';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentsComponent } from './components.component';
 
@@ -15,12 +14,11 @@ describe('ComponentsComponent', () => {
       declarations: [ComponentsComponent],
       imports: [
         SharedModule,
-        MarkdownModule.forRoot({ loader: HttpClient }),
+        RouterTestingModule,
         PlaceholderComponent,
         FileUploadComponent,
         ListComponent
-      ],
-      providers: [provideHttpClient(withInterceptorsFromDi())]
+      ]
     })
       .compileComponents();
 

@@ -5,6 +5,19 @@ $pink: #e91e63;
   max-width: 1080px;
   margin: auto;
 
+  a[href] {
+    color: var(--color-primary);
+    text-decoration: unset;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  mat-divider {
+    margin: 64px 0;
+  }
+
   .theme-selector {
     display: flex;
     gap: 24px;
@@ -68,10 +81,6 @@ $pink: #e91e63;
         background-color: $blue;
       }
     }
-  }
-
-  mat-divider {
-    margin: 64px 0;
   }
 
   mat-form-field {

@@ -2,25 +2,12 @@
   max-width: 1080px;
   margin: auto;
 
-  ::ng-deep {
-    a[href] {
-      color: var(--color-primary);
-      text-decoration: unset;
+  a[href] {
+    color: var(--color-primary);
+    text-decoration: unset;
 
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-
-    p,
-    li {
-      code {
-        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-        background-color: #dbdbdb89;
-        border-radius: 4px;
-        padding: 1px 3px;
-        white-space: nowrap;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 
@@ -28,11 +15,7 @@
     margin: 64px 0;
   }
 
-  .row {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+  .placeholder-wrapper {
+    max-width: 320px;
   }
 }

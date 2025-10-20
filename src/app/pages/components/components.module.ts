@@ -5,8 +5,6 @@ import { FileUploadComponent, ListComponent, PlaceholderComponent } from '@lukfe
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { ComponentsComponent } from './components.component';
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +15,6 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     ComponentsRoutingModule,
     SharedModule,
-    MarkdownModule.forRoot({ loader: HttpClient }),
     PlaceholderComponent,
     FileUploadComponent,
     ListComponent

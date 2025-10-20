@@ -46,7 +46,11 @@ export class AppComponent {
       rightMenuButtons: [
         {
           id: 'start',
-          label: 'Scaffold'
+          label: 'Demo'
+        },
+        {
+          id: 'components',
+          label: 'Components'
         },
         {
           id: 'documentation',
@@ -70,7 +74,7 @@ export class AppComponent {
         }
       ],
       inputConfig: {
-        enable: true,
+        enable: false,
         label: 'Search',
         matIconSubmit: 'search',
         autoFocus: false
@@ -83,8 +87,8 @@ export class AppComponent {
       menuButtons: [
         {
           id: 'start',
-          label: 'Scaffold',
-          svgIcon: 'logo',
+          label: 'Demo',
+          matIcon: 'home',
           outlineIcon: true
         },
         {
@@ -247,7 +251,7 @@ export class AppComponent {
     } else if (id === 'npm') {
       window.open('https://www.npmjs.com/package/@lukfel/ng-scaffold', '_blank');
       return;
-    } else if (id === 'start' || id === 'documentation' || id === 'typography') {
+    } else if (id === 'start' || id === 'components' || id === 'documentation' || id === 'typography') {
       this.router.navigate([id]);
       return;
     }

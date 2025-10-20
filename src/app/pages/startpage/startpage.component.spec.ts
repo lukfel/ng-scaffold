@@ -55,7 +55,7 @@ class MockScaffoldService {
     headerConfig: {
       enable: true,
       svgLogo: 'logo',
-      title: 'Scaffold',
+      title: 'Angular Scaffold',
       subtitle: `by Lukas Felbinger`,
       titleRouterLink: 'start',
       loading: false,
@@ -68,7 +68,7 @@ class MockScaffoldService {
       rightMenuButtons: [
         {
           id: 'start',
-          label: 'Scaffold'
+          label: 'Demo'
         },
         {
           id: 'documentation',
@@ -85,7 +85,7 @@ class MockScaffoldService {
         }
       ],
       inputConfig: {
-        enable: true,
+        enable: false,
         label: 'Search',
         matIcon: 'search'
       }
@@ -97,8 +97,8 @@ class MockScaffoldService {
       menuButtons: [
         {
           id: 'start',
-          label: 'Scaffold',
-          svgIcon: 'logo',
+          label: 'Demo',
+          matIcon: 'home',
           outlineIcon: true
         },
         {

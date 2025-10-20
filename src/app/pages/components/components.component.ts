@@ -21,41 +21,9 @@ export class ComponentsComponent implements OnInit {
   public actions: ListAction[] = [
     { id: 'edit', matIcon: 'edit' },
     { id: 'delete', matIcon: 'delete', color: 'warn' }
-  ]
-  public listSnippet = `
-                        \`\`\`ts
-                        public items: ListItem[] = [
-                          { title: 'Item 1' },
-                          { title: 'Item 2', subtitle: 'My delete action is disabled', disabledActions: ['delete'] },
-                          { title: 'Item 3', subtitle: 'My edit action is hidden', hiddenActions: ['edit'] }
-                        ];
-
-                        public actions: ListAction[] = [
-                          { id: 'edit', matIcon: 'edit' },
-                          { id: 'delete', matIcon: 'delete', color: 'warn' }
-                        ]
-                        \`\`\`
-                        \`\`\`html
-                        <lf-list [items]="items"
-                                 [actions]="actions"
-                                 [showHeader]="true"
-                                 [enableCheckboxes]="true"
-                                 avatarFallbackPath="assets/img/error/missing.png"
-                                 (selectionChange)="onSelectionChange($event)"></lf-list>
-                        \`\`\`
-                        `;
+  ];
 
   public fileName: string = '';
-  public fileUploadSnippet = `
-                              \`\`\`html
-                              <lf-file-upload color="accent"
-                                              label="Upload File"
-                                              matIcon="upload"
-                                              [disabled]="false"
-                                              accept="*"
-                                              (fileChange)="uploadFile($event)"></lf-file-upload>
-                              \`\`\`
-                              `;
 
   public placeholderConfig: PlaceholderConfig = {
     matIcon: 'widgets',
@@ -64,21 +32,6 @@ export class ComponentsComponent implements OnInit {
     message: 'This is a placeholder message.',
     actionLabel: 'ACTION'
   }
-  public placeholderSnippet = `
-                              \`\`\`ts
-                              public placeholderConfig: PlaceholderConfig = {
-                                matIcon: 'widgets',
-                                outlineIcon: true,
-                                heading: 'Heading',
-                                message: 'This is a placeholder message.',
-                                actionLabel: 'ACTION'
-                              };
-                              \`\`\`
-                              \`\`\`html
-                              <lf-placeholder [placeholderConfig]="placeholderConfig"></lf-placeholder>
-                              \`\`\`
-                              `;
-
 
   ngOnInit(): void {
     this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
