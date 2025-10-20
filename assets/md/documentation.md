@@ -356,6 +356,101 @@ export class AppComponent {
 
 
 
+## Standalone Components
+In addition to the components provided by default by the the `ScaffoldModule` there are several standalone components that can be utilized.
+
+* **Note:** Standalone components must be imported manually and are not part of the `ScaffoldModule` import
+
+### List
+A flexible, Material Design–inspired list and table hybrid component for displaying structured collections of items. It supports avatars, titles, subtitles, actions, and selection checkboxes — making it ideal for dashboards, inventories, and administrative views.
+
+```ts
+import { ListComponent } from '@lukfel/ng-scaffold';
+```
+
+```ts
+import { ListAction, ListItem } from '@lukfel/ng-scaffold';
+
+public items: ListItem[] = [
+  { title: 'Item 1' },
+  { title: 'Item 2', subtitle: 'My delete action is disabled', disabledActions: ['delete'] },
+  { title: 'Item 3', subtitle: 'My edit action is hidden', hiddenActions: ['edit'] }
+];
+
+public actions: ListAction[] = [
+  { id: 'edit', matIcon: 'edit' },
+  { id: 'delete', matIcon: 'delete', color: 'warn' }
+];
+
+public onActionClick(event: { id: string, item: ListItem }): void {
+  // handle list actions
+}
+
+public onSelectionChange(items: ListItem[]): void {
+  // handle selection changes
+}
+```
+
+```html
+<lf-list
+  [items]="items"
+  [actions]="actions"
+  [showHeader]="true"
+  [enableCheckboxes]="true"
+  avatarFallbackPath="assets/img/error/missing.png"
+  (actionClick)="onActionClick($event)"
+  (selectionChange)="onSelectionChange($event)"></lf-list>
+```
+
+### File-Upload
+A lightweight Angular component that provides a clean, Material Design–styled button for selecting and uploading files. It wraps a hidden native file input and exposes a simple, customizable interface with built-in icon, tooltip, and state management.
+
+```ts
+import { FileUploadComponent } from '@lukfel/ng-scaffold';
+```
+
+```ts
+public uploadFile(file: File): void {
+  // handle file upload
+}
+```
+
+```html
+<lf-file-upload
+  color="accent"
+  label="Upload File"
+  matIcon="upload"
+  [disabled]="false"
+  accept="*"
+  (fileChange)="uploadFile($event)"></lf-file-upload>
+```
+
+### Placeholder
+A versatile UI component designed to display an informative placeholder or empty state when no data is available. It provides a structured layout for an icon, heading, message, and optional action — helping guide users toward the next step.
+
+```ts
+import { PlaceholderComponent } from '@lukfel/ng-scaffold';
+```
+
+```ts
+import { PlaceholderConfig } from '@lukfel/ng-scaffold';
+
+public placeholderConfig: PlaceholderConfig = {
+  matIcon: 'widgets',
+  outlineIcon: true,
+  heading: 'Heading',
+  message: 'This is a placeholder message.',
+  actionLabel: 'ACTION'
+}
+```
+
+```html
+<lf-placeholder [placeholderConfig]="placeholderConfig"></lf-placeholder>
+```
+
+
+
+
 ## Interceptors
 Intercept HTTP Calls and automatically show a loading spinner.
 
