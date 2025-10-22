@@ -7,7 +7,6 @@ export interface Button {
   label?: string;
   matIcon?: string;
   svgIcon?: string;
-  outlineIcon?: boolean;
   tooltip?: string;
   disabled?: boolean;
   class?: string;

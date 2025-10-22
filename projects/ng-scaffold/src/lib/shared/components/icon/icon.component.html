@@ -2,16 +2,14 @@
 @if (matIcon) {
   <mat-icon
     class="lf-icon"
-    [class.material-icons-outlined]="outlineIcon"
+    [class.material-icons-outlined]="libraryConfig?.outlineIcons"
     [class.lf-icon-align-middle]="alignMiddle">
     {{ matIcon }}
   </mat-icon>
-} @else {
-  @if (svgIcon) {
-    <mat-icon
-      class="lf-icon"
-      [svgIcon]="svgIcon"
-      [class.lf-icon-align-middle]="alignMiddle"></mat-icon>
-  }
+  <!-- svg icon -->
+} @else if (svgIcon) {
+  <mat-icon
+    class="lf-icon"
+    [svgIcon]="svgIcon"
+    [class.lf-icon-align-middle]="alignMiddle"></mat-icon>
 }
-<!-- svg icon -->

@@ -1,14 +1,15 @@
 import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ScaffoldLibraryConfig, ScaffoldConfig } from '../models';
+import { ScaffoldConfig, ScaffoldLibraryConfig } from '../models';
 import { CONFIG } from '../scaffold.module';
 import { Logger } from './logger.service';
 
 @Injectable({ providedIn: 'root' })
 export class ScaffoldService {
+
+  private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private logger = inject(Logger);
-  private config = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
 
   // Scaffold Config
@@ -70,7 +71,7 @@ export class ScaffoldService {
     }
 
     const updatedState = { ...currentState, [property]: value };
-    if (this.config?.debugging) this.logger.log(`[UPDATE] ScaffoldConfig.${property}`, value);
+    if (this.libraryConfig?.debugging) this.logger.log(`[UPDATE] ScaffoldConfig.${property}`, value);
 
     this._scaffoldConfig$.next(updatedState);
   }

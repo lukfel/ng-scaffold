@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
         BrowserAnimationsModule,
         AppRoutingModule,
         SharedModule,
-        ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode() }),
+        ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode(), outlineIcons: true }),
         // ServiceWorkerModule.register('ngsw-worker.js', {
         //     enabled: true,
         //     // Register the ServiceWorker as soon as the application is stable

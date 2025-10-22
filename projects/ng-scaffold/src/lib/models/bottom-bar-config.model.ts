@@ -4,5 +4,6 @@ export interface BottomBarConfig {
   enable?: boolean;
   class?: string;
   message?: string;
+  closeButtonId?: string;
   buttons?: Button[];
 }

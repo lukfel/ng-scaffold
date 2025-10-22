@@ -1,10 +1,10 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild, DOCUMENT, inject } from '@angular/core';
+import { Component, DOCUMENT, ElementRef, EventEmitter, inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, ScaffoldLibraryConfig, NavbarConfig, ScaffoldConfig } from '../../models';
+import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
 import { CONFIG } from '../../scaffold.module';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
@@ -15,13 +15,16 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
   standalone: false
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
+  
+  public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+
   private scaffoldService = inject(ScaffoldService);
   private breakpointService = inject(BreakpointService);
   private routerService = inject(RouterService);
   private logger = inject(Logger);
   private route = inject(ActivatedRoute);
   private document = inject<Document>(DOCUMENT);
-  private config = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+
 
   @ViewChild('scrollContainer', { static: true }) public scrollContainer: ElementRef;
   @ViewChild('content', { static: true }) public content: ElementRef;
@@ -32,6 +35,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   @Output() public navbarButtonClickEvent = new EventEmitter<string>();
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
   @Output() public bottomBarButtonClickEvent = new EventEmitter<string>();
+
 
   public scaffoldConfig: ScaffoldConfig | null = null;
   public headerConfig: HeaderConfig | null = null;
@@ -51,10 +55,11 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription = new Subscription;
 
+
   ngOnInit(): void {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
-      if (this.config?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
+      if (this.libraryConfig?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
 
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = this.scaffoldConfig.headerConfig!;
@@ -68,14 +73,14 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for drawer portal changes
     this._subscription.add(this.scaffoldService.drawerPortal$.subscribe((drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null) => {
-      if (this.config?.debugging) this.logger.log('[DrawerPortal]', drawerPortal);
+      if (this.libraryConfig?.debugging) this.logger.log('[DrawerPortal]', drawerPortal);
 
       this.drawerPortal = drawerPortal;
     }));
 
     // Listen for breakpoint changes
     this._subscription.add(this.breakpointService.breakpoint$.subscribe((breakpointState: BreakpointState) => {
-      if (this.config?.debugging) this.logger.log('[BreakpointState]', breakpointState);
+      if (this.libraryConfig?.debugging) this.logger.log('[BreakpointState]', breakpointState);
 
       if (breakpointState.breakpoints[Breakpoints.XSmall]) {
         this.isMobile = true;
@@ -90,7 +95,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
     // Listen for route changes
     this._subscription.add(this.routerService.routeHistory$.subscribe((routeHistory: string[]) => {
-      if (this.config?.debugging) this.logger.log('[RouteHistory]', routeHistory);
+      if (this.libraryConfig?.debugging) this.logger.log('[RouteHistory]', routeHistory);
 
       if (routeHistory) {
         this.routeHistory = routeHistory;
@@ -128,7 +133,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     if (this.scaffoldConfig?.anchorScrolling) {
       this._subscription.add(this.route.fragment.subscribe((fragment: string | null) => {
         if (fragment) {
-          if (this.config?.debugging) this.logger.log('[RouteFragment]', fragment);
+          if (this.libraryConfig?.debugging) this.logger.log('[RouteFragment]', fragment);
           setTimeout(() => {
             const element = this.document.querySelector(`#${fragment}`);
             if (element) {

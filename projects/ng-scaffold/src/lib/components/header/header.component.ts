@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { HeaderConfig } from '../../models';
+import { HeaderConfig, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
   selector: 'lf-header',
@@ -9,6 +9,7 @@ import { HeaderConfig } from '../../models';
 })
 export class HeaderComponent implements OnInit {
 
+  @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
   @Input() public headerConfig: HeaderConfig | null = null;
   @Input() public isMobile: boolean = false;
   @Input() public routeLoading: boolean = false;
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
   @Output() public headerButtonClickEvent = new EventEmitter<string>();
   @Output() public headerInputSubmitEvent = new EventEmitter<string>();
   @Output() public headerInputChangeEvent = new EventEmitter<string>();
+
 
   ngOnInit(): void {
     // Avoid initializing the header with an open input field on mobile

@@ -7,6 +7,7 @@
   }
   <!-- header -->
   <lf-header
+    [libraryConfig]="libraryConfig"
     [headerConfig]="headerConfig"
     [isMobile]="isMobile"
     [routeLoading]="routeLoading"
@@ -16,6 +17,7 @@
     (headerInputChangeEvent)="headerInputChanged($event)"></lf-header>
   <!-- navbar -->
   <lf-navbar
+    [libraryConfig]="libraryConfig"
     [navbarConfig]="navbarConfig"
     [isMobile]="isMobile"
     [currentRoute]="currentRoute"
@@ -33,6 +35,7 @@
     cdkScrollable>
     <!-- drawer -->
     <lf-drawer
+      [libraryConfig]="libraryConfig"
       [drawerConfig]="drawerConfig"
       [drawerPortal]="drawerPortal"
       [isMobile]="isMobile"
@@ -41,6 +44,7 @@
       <ng-content select="[drawerContent]" drawerContent></ng-content>
       <!-- content title card -->
       <lf-content-title-card
+        [libraryConfig]="libraryConfig"
         [contentTitleCardConfig]="contentTitleCardConfig"
         [isMobile]="isMobile"
         [routeHistory]="routeHistory"
@@ -54,11 +58,12 @@
         <ng-content></ng-content>
       </div>
       <!-- footer -->
-      <lf-footer [footerConfig]="footerConfig"></lf-footer>
+      <lf-footer [libraryConfig]="libraryConfig" [footerConfig]="footerConfig"></lf-footer>
     </lf-drawer>
   </div>
   <!-- to top button -->
   <lf-floating-button
+    [libraryConfig]="libraryConfig"
     [floatingButtonConfig]="floatingButtonConfig"
     [onTop]="scrollTopPosition <= 0"
     [isMobile]="isMobile && navbarConfig?.enable!"
@@ -66,6 +71,7 @@
     (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
   <!-- bottom bar -->
   <lf-bottom-bar
+    [libraryConfig]="libraryConfig"
     [bottomBarConfig]="bottomBarConfig"
     [isMobile]="isMobile && navbarConfig?.enable!"
     [navbarEnabled]="navbarConfig?.enable!"

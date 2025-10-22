@@ -1,14 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { ScaffoldLibraryConfig } from '../models';
-import { Logger } from './logger.service';
 import { CONFIG } from '../scaffold.module';
+import { Logger } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
+
+  private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private logger = inject(Logger);
-  private config = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
 
   /**
@@ -20,7 +21,7 @@ export class LocalStorageService {
   public setItem<T>(key: string, value: T | null): void {
     try {
       const stringValue: string = JSON.stringify(value);
-      if (this.config?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, stringValue);
+      if (this.libraryConfig?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, stringValue);
       localStorage.setItem(key, stringValue);
     } catch (error) {
       this.logger.error(`[ERROR SET ITEM] ${key}: ${error}`);
@@ -36,7 +37,7 @@ export class LocalStorageService {
   public setItemEncoded<T>(key: string, value: T | null): void {
     try {
       const encodedValue: string = btoa(JSON.stringify(value));
-      if (this.config?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, encodedValue);
+      if (this.libraryConfig?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, encodedValue);
       localStorage.setItem(key, encodedValue);
     } catch (error) {
       this.logger.error(`[ERROR SET ITEM] ${key}: ${error}`);
@@ -52,7 +53,7 @@ export class LocalStorageService {
   public getItem<T>(key: string): T | null {
     try {
       const item: string | null = localStorage.getItem(key);
-      if (this.config?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
+      if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
       return item ? JSON.parse(item, this.dateReviver) as T : null;
     } catch (error) {
       this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
@@ -69,7 +70,7 @@ export class LocalStorageService {
   public getItemDecoded<T>(key: string): T | null {
     try {
       const item: string | null = localStorage.getItem(key);
-      if (this.config?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
+      if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
       return item ? JSON.parse(atob(item), this.dateReviver) as T : null;
     } catch (error) {
       this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
@@ -85,7 +86,7 @@ export class LocalStorageService {
   public getItemUnparsed(key: string): string | null {
     try {
       const item: string | null = localStorage.getItem(key);
-      if (this.config?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
+      if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
       return item || null;
     } catch (error) {
       this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
@@ -101,7 +102,7 @@ export class LocalStorageService {
    */
   public removeItem(key: string): void {
     try {
-      if (this.config?.debugging) this.logger.log(`[REMOVE ITEM] ${key}`);
+      if (this.libraryConfig?.debugging) this.logger.log(`[REMOVE ITEM] ${key}`);
       localStorage.removeItem(key);
     } catch (error) {
       this.logger.error(`[ERROR REMOVE ITEM] ${key}: ${error}`);

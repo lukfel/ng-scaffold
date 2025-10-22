@@ -4,7 +4,6 @@ export interface FloatingButtonConfig {
   label?: string;
   matIcon?: string;
   svgIcon?: string;
-  outlineIcon?: boolean;
   tooltip?: string;
   horizontalPosition?: 'left' | 'center' | 'right';
   bottomPositionPx?: number;

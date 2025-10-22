@@ -4,7 +4,6 @@
   @if (header) {
     <div class="lf-table-item lf-table-item-header">
       <!-- avatar -->
-      <!-- avatar -->
       @if (header.avatar) {
         <div class="lf-table-item-avatar">
           <img [src]="header.avatar" alt="Avatar of header" />
@@ -12,10 +11,7 @@
         </div>
       } @else if (header.matIcon || header.svgIcon) {
         <div class="lf-table-item-avatar">
-          <lf-icon
-            [matIcon]="header.matIcon"
-            [svgIcon]="header.svgIcon"
-            [outlineIcon]="header.outlineIcon!"></lf-icon>
+          <lf-icon [matIcon]="header.matIcon" [svgIcon]="header.svgIcon"></lf-icon>
         </div>
       } @else if (hasAvatars) {
         <div class="lf-table-item-avatar"></div>
@@ -55,7 +51,7 @@
 
   <!-- Items -->
   @for (item of items; track item.id) {
-    <div class="lf-table-item lf-table-item-data">
+    <div class="lf-table-item lf-table-item-data" [class.active]="item.checked">
       <!-- avatar -->
       @if (item.avatar) {
         <div class="lf-table-item-avatar">
@@ -64,16 +60,15 @@
         </div>
       } @else if (item.matIcon || item.svgIcon) {
         <div class="lf-table-item-avatar">
-          <lf-icon
-            [matIcon]="item.matIcon"
-            [svgIcon]="item.svgIcon"
-            [outlineIcon]="item.outlineIcon!"></lf-icon>
+          <lf-icon [matIcon]="item.matIcon" [svgIcon]="item.svgIcon"></lf-icon>
         </div>
       }
 
       <!-- title -->
       <div class="lf-table-item-title-wrapper">
-        <span class="lf-table-item-title">{{ item.title }}</span>
+        <span class="lf-table-item-title">
+          <span>{{ item.title }}</span>
+        </span>
         @if (item.subtitle) {
           <span class="lf-table-item-subtitle">{{ item.subtitle }}</span>
         }
@@ -95,7 +90,6 @@
                   <lf-icon
                     [matIcon]="button.matIcon"
                     [svgIcon]="button.svgIcon"
-                    [outlineIcon]="button.outlineIcon!"
                     [alignMiddle]="true"></lf-icon>
                 }
                 {{ button.label }}
@@ -108,10 +102,7 @@
                 (click)="buttonClickEvent.emit({ id: button.id, item })"
                 [disabled]="button.disabled || item.disabledActions?.includes(button.id)"
                 [matTooltip]="button.tooltip">
-                <lf-icon
-                  [matIcon]="button.matIcon"
-                  [svgIcon]="button.svgIcon"
-                  [outlineIcon]="button.outlineIcon!"></lf-icon>
+                <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
               </button>
             }
             <!-- [color]="button.color" -->

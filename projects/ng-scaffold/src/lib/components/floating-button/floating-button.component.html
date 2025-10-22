@@ -13,7 +13,7 @@
     [matTooltip]="floatingButtonConfig.tooltip!">
     <!-- mat icon -->
     @if (floatingButtonConfig.matIcon) {
-      <mat-icon [class.material-icons-outlined]="floatingButtonConfig.outlineIcon">
+      <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
         {{ floatingButtonConfig.matIcon }}
       </mat-icon>
     } @else {

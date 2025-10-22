@@ -4,7 +4,8 @@ import { CONFIG } from '../scaffold.module';
 
 @Injectable({ providedIn: 'root' })
 export class Logger {
-  private config = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+
+  private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
 
   /**
@@ -14,7 +15,7 @@ export class Logger {
    * @param args arguments of the log
    */
   public log(message: string, ...args: any[]): void {     // eslint-disable-line @typescript-eslint/no-explicit-any
-    if (this.config?.production === false) {
+    if (this.libraryConfig?.production === false) {
       console.log(message, ...args);                      // eslint-disable-line no-console
     }
   }
@@ -26,7 +27,7 @@ export class Logger {
    * @param args arguments of the warn
    */
   public warn(message: string, ...args: any[]): void {    // eslint-disable-line @typescript-eslint/no-explicit-any
-    if (this.config?.production === false) {
+    if (this.libraryConfig?.production === false) {
       console.warn(message, ...args);                     // eslint-disable-line no-console
     }
   }
@@ -38,7 +39,7 @@ export class Logger {
    * @param args arguments of the error
    */
   public error(message: string, ...args: any[]): void {   // eslint-disable-line @typescript-eslint/no-explicit-any
-    if (this.config?.production === false) {
+    if (this.libraryConfig?.production === false) {
       console.error(message, ...args);                    // eslint-disable-line no-console
     }
   }

@@ -18,10 +18,7 @@
             role="button"
             [matTooltip]="button.tooltip">
             <!-- icon -->
-            <lf-icon
-              [matIcon]="button.matIcon!"
-              [svgIcon]="button.svgIcon!"
-              [outlineIcon]="button.outlineIcon!"></lf-icon>
+            <lf-icon [matIcon]="button.matIcon!" [svgIcon]="button.svgIcon!"></lf-icon>
             <!-- label -->
             <!-- show a protected space on desktop so the icon doesn't move up and down -->
             @if (button?.label) {

@@ -100,10 +100,7 @@
         [matTooltip]="menuButton.tooltip"
         [attr.aria-label]="menuButton.id">
         <!-- icon -->
-        <lf-icon
-          [matIcon]="menuButton.matIcon"
-          [svgIcon]="menuButton.svgIcon"
-          [outlineIcon]="menuButton.outlineIcon"></lf-icon>
+        <lf-icon [matIcon]="menuButton.matIcon" [svgIcon]="menuButton.svgIcon"></lf-icon>
       </button>
     } @else {
       @if (!hideLabel) {
@@ -136,7 +133,6 @@
             <lf-icon
               [matIcon]="button.matIcon"
               [svgIcon]="button.svgIcon"
-              [outlineIcon]="button.outlineIcon"
               [alignMiddle]="true"></lf-icon>
             <!-- label -->
             @if (button.label) {
@@ -157,10 +153,7 @@
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
               <!-- icon -->
-              <lf-icon
-                [matIcon]="button.matIcon"
-                [svgIcon]="button.svgIcon"
-                [outlineIcon]="button.outlineIcon"></lf-icon>
+              <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
             </button>
           }
         }

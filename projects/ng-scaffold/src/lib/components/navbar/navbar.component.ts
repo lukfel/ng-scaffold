@@ -1,22 +1,24 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NavbarConfig } from '../../models';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
-    selector: 'lf-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss'],
-    standalone: false
+  selector: 'lf-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
+  standalone: false
 })
 export class NavbarComponent {
 
+  @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
   @Input() public navbarConfig: NavbarConfig | null = null;
   @Input() public isMobile: boolean = false;
   @Input() public currentRoute: string;
 
   @Output() public navbarButtonClickEvent = new EventEmitter<string>();
 
+
   public buttonClicked(id: string): void {
-    if(!id) {
+    if (!id) {
       return;
     }
 
@@ -24,7 +26,7 @@ export class NavbarComponent {
   }
 
   public isActive(id: string): boolean {
-    if(!id || !this.currentRoute) {
+    if (!id || !this.currentRoute) {
       return false;
     }
 

@@ -247,11 +247,6 @@
             {{ floatingButtonConfig.matIcon }}
           </mat-icon>
         }
-        @if (floatingButtonConfig.matIcon) {
-          <mat-slide-toggle matSuffix [(ngModel)]="floatingButtonConfig.outlineIcon">
-            Outlined &#160;&#160;
-          </mat-slide-toggle>
-        }
       </mat-form-field>
       <mat-form-field>
         <mat-label>Position</mat-label>
@@ -305,11 +300,6 @@
         <input matInput [(ngModel)]="menuButton.matIcon" />
         @if (menuButton.matIcon) {
           <mat-icon matPrefix>{{ menuButton.matIcon }}</mat-icon>
-        }
-        @if (menuButton.matIcon) {
-          <mat-slide-toggle matSuffix [(ngModel)]="menuButton.outlineIcon">
-            Outlined &#160;&#160;
-          </mat-slide-toggle>
         }
       </mat-form-field>
       <mat-form-field>

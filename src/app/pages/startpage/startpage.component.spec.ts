@@ -23,8 +23,7 @@ describe('StartpageComponent', () => {
       providers: [
         { provide: ScaffoldService, useClass: MockScaffoldService }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
 
     const iconRegistry = TestBed.inject(MatIconRegistry);
     const sanitizer = TestBed.inject(DomSanitizer);
@@ -62,8 +61,7 @@ class MockScaffoldService {
       showRouteLoading: true,
       leftMenuButton: {
         id: 'drawer',
-        matIcon: 'menu',
-        outlineIcon: true
+        matIcon: 'menu'
       },
       rightMenuButtons: [
         {
@@ -98,26 +96,22 @@ class MockScaffoldService {
         {
           id: 'start',
           label: 'Demo',
-          matIcon: 'home',
-          outlineIcon: true
+          matIcon: 'home'
         },
         {
           id: 'components',
           label: 'Components',
-          matIcon: 'widgets',
-          outlineIcon: true
+          matIcon: 'widgets'
         },
         {
           id: 'documentation',
           label: 'Docs',
-          matIcon: 'description',
-          outlineIcon: true
+          matIcon: 'description'
         },
         {
           id: 'typography',
           label: 'Typography',
-          matIcon: 'text_fields',
-          outlineIcon: true
+          matIcon: 'text_fields'
         }
       ]
     },

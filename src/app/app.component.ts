@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
+import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -18,6 +18,8 @@ export class AppComponent {
   private dialogService = inject(DialogService);
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
+
+  public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private scaffoldService = inject(ScaffoldService);
   private breakpointService = inject(BreakpointService);
   private seoService = inject(SeoService);
@@ -40,8 +42,7 @@ export class AppComponent {
       showRouteLoading: true,
       leftMenuButton: {
         id: 'drawer',
-        matIcon: 'menu',
-        outlineIcon: true
+        matIcon: 'menu'
       },
       rightMenuButtons: [
         {
@@ -88,26 +89,22 @@ export class AppComponent {
         {
           id: 'start',
           label: 'Demo',
-          matIcon: 'home',
-          outlineIcon: true
+          matIcon: 'home'
         },
         {
           id: 'components',
           label: 'Components',
-          matIcon: 'widgets',
-          outlineIcon: true
+          matIcon: 'widgets'
         },
         {
           id: 'documentation',
           label: 'Docs',
-          matIcon: 'description',
-          outlineIcon: true
+          matIcon: 'description'
         },
         {
           id: 'typography',
           label: 'Typography',
-          matIcon: 'text_fields',
-          outlineIcon: true
+          matIcon: 'text_fields'
         }
       ]
     },

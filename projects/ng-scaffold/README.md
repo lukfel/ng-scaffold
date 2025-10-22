@@ -437,7 +437,6 @@ import { PlaceholderConfig } from '@lukfel/ng-scaffold';
 
 public placeholderConfig: PlaceholderConfig = {
   matIcon: 'widgets',
-  outlineIcon: true,
   heading: 'Heading',
   message: 'This is a placeholder message.',
   actionLabel: 'ACTION'

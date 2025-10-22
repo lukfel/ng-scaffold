@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Button, ListHeader, ListItem, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
+import { BottomBarConfig, Button, ListHeader, ListItem, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
 
 @Component({
@@ -57,7 +57,6 @@ export class ComponentsComponent implements OnInit {
 
   public placeholderConfig: PlaceholderConfig = {
     matIcon: 'widgets',
-    outlineIcon: true,
     heading: 'Heading',
     message: 'This is a placeholder message.',
     buttonLabel: 'ACTION'
@@ -67,6 +66,13 @@ export class ComponentsComponent implements OnInit {
     this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (scaffoldConfig.contentTitleCardConfig) {
         scaffoldConfig.contentTitleCardConfig.label = 'Components';
+      }
+    });
+
+    this.scaffoldService.buttonClickEventValue$.subscribe((buttonClickEventValue: string) => {
+      if (buttonClickEventValue === 'bottombar_close') {
+        this.items.forEach((item: ListItem) => (item.checked = false));
+        this.onSelectionChange([]);
       }
     });
   }
@@ -80,7 +86,13 @@ export class ComponentsComponent implements OnInit {
   }
 
   public onSelectionChange(items: ListItem[]): void {
-    this.snackbar.openSnackbar(`Selected ${items?.length || 0} items`, 'Close');
+    const bottomBarConfig: BottomBarConfig = {
+      enable: items?.length > 0,
+      message: `Selected: ${items?.length || 0}`,
+      closeButtonId: 'bottombar_close'
+    }
+
+    this.scaffoldService.updateScaffoldProperty('bottomBarConfig', bottomBarConfig);
   }
 
   public onFileChangeEvent(file: File): void {

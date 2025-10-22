@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FloatingButtonConfig } from '../../models';
+import { FloatingButtonConfig, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
   selector: 'lf-floating-button',
@@ -9,6 +9,7 @@ import { FloatingButtonConfig } from '../../models';
 })
 export class FloatingButtonComponent implements OnInit {
 
+  @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
   @Input() public floatingButtonConfig: FloatingButtonConfig | null = null;
   @Input() public onTop: boolean = false;
   @Input() public isMobile: boolean = false;
@@ -16,9 +17,11 @@ export class FloatingButtonComponent implements OnInit {
 
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
 
+
   private readonly DEFAULT_OFFSET: number = 24;
   private navbarOffset: number = 64;
   private bottomBarOffset: number = 56;
+
 
   ngOnInit(): void {
     if (this.floatingButtonConfig) {
