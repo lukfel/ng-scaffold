@@ -15,13 +15,11 @@
     — making it ideal for dashboards, inventories, and administrative views.
   </p>
   <lf-list
+    [header]="header"
     [items]="items"
-    [actions]="actions"
-    [showHeader]="true"
-    [enableCheckboxes]="true"
-    avatarFallbackPath="assets/img/error/missing.png"
-    (actionClick)="onActionClick($event)"
-    (selectionChange)="onSelectionChange($event)"></lf-list>
+    [buttons]="buttons"
+    (selectionChangeEvent)="onSelectionChange($event)"
+    (buttonClickEvent)="onButtonClick($event)"></lf-list>
   <mat-divider></mat-divider>
 
   <h2>File-Upload</h2>
@@ -39,7 +37,7 @@
     matIcon="upload"
     [disabled]="false"
     accept="*"
-    (fileChange)="uploadFile($event)"></lf-file-upload>
+    (fileChangeEvent)="onFileChangeEvent($event)"></lf-file-upload>
   <p>
     File name:
     <b>{{ fileName }}</b>
@@ -62,7 +60,9 @@
     <br />
   </p>
   <div class="placeholder-wrapper">
-    <lf-placeholder [placeholderConfig]="placeholderConfig"></lf-placeholder>
+    <lf-placeholder
+      [placeholderConfig]="placeholderConfig"
+      (buttonClickEvent)="onButtonClickEvent()"></lf-placeholder>
   </div>
 
   <p><br /></p>

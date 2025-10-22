@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ListAction, ListItem, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
+import { Button, ListHeader, ListItem, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
 
 @Component({
@@ -12,15 +12,45 @@ export class ComponentsComponent implements OnInit {
   private scaffoldService = inject(ScaffoldService);
   private snackbar = inject(SnackbarService);
 
+  // private listData = [
+  //   {
+  //     id: 0,
+  //     name: 'Item 1',
+  //     initExpDays: 6,
+  //     imgUrl: '',
+  //     checked: false,
+  //     quantity: 'HIGH',
+  //     isDefault: false
+  //   },
+  //   {
+  //     id: 1,
+  //     name: 'Item 2',
+  //     initExpDays: 4,
+  //     imgUrl: '',
+  //     checked: false,
+  //     quantity: 'HALF',
+  //     isDefault: false
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Item 3',
+  //     initExpDays: 10,
+  //     imgUrl: '',
+  //     checked: false,
+  //     quantity: 'LOW',
+  //     isDefault: true
+  //   }
+  // ];
 
+  public header: ListHeader = { enableSorting: true, enableSelection: true, tokens: ['Title', 'Date'] };
   public items: ListItem[] = [
-    { title: 'Item 1' },
-    { title: 'Item 2', subtitle: 'My delete action is disabled', disabledActions: ['delete'] },
-    { title: 'Item 3', subtitle: 'My edit action is hidden', hiddenActions: ['edit'] }
+    { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1' },
+    { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'My delete action is disabled', disabledActions: ['delete'] },
+    { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'My edit action is hidden', hiddenActions: ['edit'] }
   ];
-  public actions: ListAction[] = [
+  public buttons: Button[] = [
     { id: 'edit', matIcon: 'edit' },
-    { id: 'delete', matIcon: 'delete', color: 'warn' }
+    { id: 'delete', matIcon: 'delete' }//, color: 'warn' }
   ];
 
   public fileName: string = '';
@@ -30,7 +60,7 @@ export class ComponentsComponent implements OnInit {
     outlineIcon: true,
     heading: 'Heading',
     message: 'This is a placeholder message.',
-    actionLabel: 'ACTION'
+    buttonLabel: 'ACTION'
   }
 
   ngOnInit(): void {
@@ -41,19 +71,23 @@ export class ComponentsComponent implements OnInit {
     });
   }
 
-  public onActionClick(event: { id: string, item: ListItem }): void {
+  public onButtonClick(event: { id: string, item: ListItem }): void {
     if (event?.id === 'edit') {
-      this.snackbar.openSnackbar(`Edit ${event?.item?.title}`);
+      this.snackbar.openSnackbar(`Edit ${event?.item?.title}`, 'Close');
     } else if (event?.id === 'delete') {
-      this.snackbar.openSnackbar(`Delete ${event?.item?.title}`);
+      this.snackbar.openSnackbar(`Delete ${event?.item?.title}`, 'Close');
     }
   }
 
   public onSelectionChange(items: ListItem[]): void {
-    this.snackbar.openSnackbar(`Selected ${items?.length || 0} items`);
+    this.snackbar.openSnackbar(`Selected ${items?.length || 0} items`, 'Close');
   }
 
-  public uploadFile(file: File): void {
+  public onFileChangeEvent(file: File): void {
     this.fileName = file.name;
+  }
+
+  public onButtonClickEvent(): void {
+    this.snackbar.openSnackbar('Clicked placeholder button', 'Close');
   }
 }

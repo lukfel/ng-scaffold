@@ -16,7 +16,7 @@ export class BottomBarComponent {
   @Output() public bottomBarCloseClickEvent = new EventEmitter<string>();
   @Output() public bottomBarButtonClickEvent = new EventEmitter<string>();
 
-  public actionClicked(id?: string): void {
+  public buttonClicked(id?: string): void {
     if (!id) {
       return;
     }

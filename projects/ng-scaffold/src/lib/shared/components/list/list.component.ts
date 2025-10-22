@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { ListAction, ListItem } from '../../../models';
+import { Button, ListHeader, ListItem } from '../../../models';
 import { SharedModule } from '../../shared.module';
 import { IconComponent } from '../icon/icon.component';
 
@@ -13,20 +13,26 @@ import { IconComponent } from '../icon/icon.component';
 })
 export class ListComponent {
 
+  @Input() public header: ListHeader | null = null;
   @Input() public items: ListItem[] = [];
-  @Input() public actions: ListAction[] = [];
-  @Input() public showHeader: boolean = false;
-  @Input() public headerTitle?: string;
-  @Input() public enableSorting: boolean = false;
-  @Input() public enableCheckboxes: boolean = false;
-  @Input() public avatarFallbackPath?: string;
+  @Input() public buttons: Button[] = [];
+  // @Input() public avatarFallbackPath?: string;
 
-  @Output() public actionClick = new EventEmitter<{ id: string, item: ListItem }>();
-  @Output() public selectionChange = new EventEmitter<ListItem[]>();
+  @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
+  @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();
+  @Output() public buttonClickEvent = new EventEmitter<{ id: string, item: ListItem }>();
 
+
+  public sortToken: string;
+  public sortAsc: boolean = false;
+
+
+  get hasAvatars(): boolean {
+    return !!this.items?.some((item: ListItem) => item.avatar);
+  }
 
   get allSelected(): boolean {
-    return this.items.length > 0 && this.items.every(i => i.checked);
+    return this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
   }
 
   get someSelected(): boolean {
@@ -34,23 +40,28 @@ export class ListComponent {
   }
 
 
-  public toggleAll(event: MatCheckboxChange): void {
-    const selected = event.checked;
-    this.items.forEach(i => (i.checked = selected));
+  public updateSortToken(token: string): void {
+    if (this.sortToken === token) this.sortAsc = !this.sortAsc;
+    this.sortToken = token;
+    this.sortChangeEvent.emit({ sortToken: this.sortToken, sortAsc: this.sortAsc });
+  }
+
+  public selectAll(event: MatCheckboxChange): void {
+    this.items.forEach((item: ListItem) => (item.checked = event.checked));
     this.emitSelection();
   }
 
-  public toggleItem(): void {
+  public selectItem(): void {
     this.emitSelection();
-  }
-
-  public onImageError(event: Event): void {
-    const target = event.target as HTMLImageElement;
-    target.src = this.avatarFallbackPath || '';
   }
 
   private emitSelection(): void {
-    const selected = this.items.filter(i => i.checked);
-    this.selectionChange.emit(selected);
+    const selected = this.items.filter((item: ListItem) => item.checked);
+    this.selectionChangeEvent.emit(selected);
   }
+
+  // public onImageError(event: Event): void {
+  //   const target = event.target as HTMLImageElement;
+  //   target.src = this.avatarFallbackPath || '';
+  // }
 }

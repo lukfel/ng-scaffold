@@ -14,5 +14,5 @@ export class PlaceholderComponent {
 
   @Input() public placeholderConfig: PlaceholderConfig;
 
-  @Output() public action = new EventEmitter<void>();
+  @Output() public buttonClickEvent = new EventEmitter<void>();
 }

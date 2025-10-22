@@ -1,24 +1,52 @@
 <!-- lf-list.component.html -->
 <div class="lf-table">
   <!-- Header -->
-  @if (showHeader) {
+  @if (header) {
     <div class="lf-table-item lf-table-item-header">
-      <div class="lf-table-item-avatar">
-        <!-- <mat-icon class="material-icons-outlined margin-auto">shopping_cart</mat-icon> -->
-      </div>
+      <!-- avatar -->
+      <!-- avatar -->
+      @if (header.avatar) {
+        <div class="lf-table-item-avatar">
+          <img [src]="header.avatar" alt="Avatar of header" />
+          <!-- (error)="onImageError($event)" -->
+        </div>
+      } @else if (header.matIcon || header.svgIcon) {
+        <div class="lf-table-item-avatar">
+          <lf-icon
+            [matIcon]="header.matIcon"
+            [svgIcon]="header.svgIcon"
+            [outlineIcon]="header.outlineIcon!"></lf-icon>
+        </div>
+      } @else if (hasAvatars) {
+        <div class="lf-table-item-avatar"></div>
+      }
 
+      <!-- title -->
       <div class="lf-table-item-title-wrapper flex-row">
-        <span>{{ headerTitle || "Items" }}</span>
+        @for (token of header.tokens; track $index) {
+          <span
+            [class.clickable]="header.enableSorting && sortToken === token"
+            (click)="updateSortToken(token)">
+            {{ token }}
+            @if (header.enableSorting && sortToken === token) {
+              <mat-icon class="lf-table-item-sort-icon">
+                {{ sortAsc ? "arrow_downward" : "arrow_upward" }}
+              </mat-icon>
+            }
+          </span>
+        }
       </div>
 
-      <div class="lf-table-item-actions"></div>
+      <!-- buttons -->
+      <div class="lf-table-item-buttons"></div>
 
-      @if (enableCheckboxes) {
+      <!-- checkbox -->
+      @if (header.enableSelection) {
         <div class="lf-table-item-checkbox">
           <mat-checkbox
             [checked]="allSelected"
             [indeterminate]="someSelected"
-            (change)="toggleAll($event)"></mat-checkbox>
+            (change)="selectAll($event)"></mat-checkbox>
         </div>
       }
     </div>
@@ -26,15 +54,24 @@
   }
 
   <!-- Items -->
-  @for (item of items; track item.id ?? item.title) {
+  @for (item of items; track item.id) {
     <div class="lf-table-item lf-table-item-data">
-      <div class="lf-table-item-avatar">
-        <img
-          [src]="item.avatarUrl"
-          [alt]="'Avatar of ' + item.title"
-          (error)="onImageError($event)" />
-      </div>
+      <!-- avatar -->
+      @if (item.avatar) {
+        <div class="lf-table-item-avatar">
+          <img [src]="item.avatar" [alt]="'Avatar of ' + item.title" />
+          <!-- (error)="onImageError($event)" -->
+        </div>
+      } @else if (item.matIcon || item.svgIcon) {
+        <div class="lf-table-item-avatar">
+          <lf-icon
+            [matIcon]="item.matIcon"
+            [svgIcon]="item.svgIcon"
+            [outlineIcon]="item.outlineIcon!"></lf-icon>
+        </div>
+      }
 
+      <!-- title -->
       <div class="lf-table-item-title-wrapper">
         <span class="lf-table-item-title">{{ item.title }}</span>
         @if (item.subtitle) {
@@ -42,24 +79,50 @@
         }
       </div>
 
-      <div class="lf-table-item-actions">
-        @for (action of actions; track action.id) {
-          @if (!item.hiddenActions?.includes(action.id)) {
-            <button
-              mat-icon-button
-              [color]="action.color"
-              [matTooltip]="action.tooltip"
-              [disabled]="action.disabled || item.disabledActions?.includes(action.id)"
-              (click)="actionClick.emit({ id: action.id, item })">
-              <lf-icon [matIcon]="action.matIcon" [svgIcon]="action.svgIcon"></lf-icon>
-            </button>
+      <!-- buttons -->
+      <div class="lf-table-item-buttons">
+        @for (button of buttons; track button.id) {
+          @if (!item.hiddenActions?.includes(button.id)) {
+            @if (button.label) {
+              <button
+                mat-button
+                class="lf-bottom-bar-button ml-2"
+                [ngClass]="button.class"
+                (click)="buttonClickEvent.emit({ id: button.id, item })"
+                [disabled]="button.disabled || item.disabledActions?.includes(button.id)"
+                [matTooltip]="button.tooltip">
+                @if (button.matIcon || button.svgIcon) {
+                  <lf-icon
+                    [matIcon]="button.matIcon"
+                    [svgIcon]="button.svgIcon"
+                    [outlineIcon]="button.outlineIcon!"
+                    [alignMiddle]="true"></lf-icon>
+                }
+                {{ button.label }}
+              </button>
+            } @else {
+              <button
+                mat-icon-button
+                class="lf-bottom-bar-button-icon ml-2"
+                [ngClass]="button.class"
+                (click)="buttonClickEvent.emit({ id: button.id, item })"
+                [disabled]="button.disabled || item.disabledActions?.includes(button.id)"
+                [matTooltip]="button.tooltip">
+                <lf-icon
+                  [matIcon]="button.matIcon"
+                  [svgIcon]="button.svgIcon"
+                  [outlineIcon]="button.outlineIcon!"></lf-icon>
+              </button>
+            }
+            <!-- [color]="button.color" -->
           }
         }
       </div>
 
-      @if (enableCheckboxes) {
+      <!-- checkbox -->
+      @if (header?.enableSelection) {
         <div class="lf-table-item-checkbox">
-          <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="toggleItem()"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectItem()"></mat-checkbox>
         </div>
       }
     </div>

@@ -10,35 +10,37 @@
     @if (bottomBarConfig.message) {
       <span class="ml-2">{{ bottomBarConfig.message }}</span>
     }
-    @if (bottomBarConfig.actions) {
-      <div class="lf-bottom-bar-actions ml-4">
-        @for (action of bottomBarConfig.actions; track action) {
-          @if (action.label) {
+    @if (bottomBarConfig.buttons) {
+      <div class="lf-bottom-bar-buttons ml-4">
+        @for (button of bottomBarConfig.buttons; track button.id) {
+          @if (button.label) {
             <button
               mat-button
-              class="lf-bottom-bar-action ml-2"
-              [ngClass]="action.class"
-              (click)="actionClicked(action.id)"
-              [matTooltip]="action.tooltip">
-              <lf-icon
-                [matIcon]="action.matIcon"
-                [svgIcon]="action.svgIcon"
-                [outlineIcon]="action.outlineIcon!"
-                [alignMiddle]="true"></lf-icon>
-              {{ action.label }}
+              class="lf-bottom-bar-button ml-2"
+              [ngClass]="button.class"
+              (click)="buttonClicked(button.id)"
+              [matTooltip]="button.tooltip">
+              @if (button.matIcon || button.svgIcon) {
+                <lf-icon
+                  [matIcon]="button.matIcon"
+                  [svgIcon]="button.svgIcon"
+                  [outlineIcon]="button.outlineIcon!"
+                  [alignMiddle]="true"></lf-icon>
+              }
+              {{ button.label }}
             </button>
           } @else {
             <button
               mat-icon-button
               color="accent"
-              class="lf-bottom-bar-action-icon ml-2"
-              [ngClass]="action.class"
-              (click)="actionClicked(action.id)"
-              [matTooltip]="action.tooltip">
+              class="lf-bottom-bar-button-icon ml-2"
+              [ngClass]="button.class"
+              (click)="buttonClicked(button.id)"
+              [matTooltip]="button.tooltip">
               <lf-icon
-                [matIcon]="action.matIcon"
-                [svgIcon]="action.svgIcon"
-                [outlineIcon]="action.outlineIcon!"></lf-icon>
+                [matIcon]="button.matIcon"
+                [svgIcon]="button.svgIcon"
+                [outlineIcon]="button.outlineIcon!"></lf-icon>
             </button>
           }
         }

@@ -4,5 +4,6 @@ export interface PlaceholderConfig {
   outlineIcon?: boolean;
   heading?: string;
   message?: string;
-  actionLabel?: string;
+  buttonLabel?: string;
+  class?: string;
 }

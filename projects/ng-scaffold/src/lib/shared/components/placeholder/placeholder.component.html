@@ -1,5 +1,5 @@
 @if (placeholderConfig) {
-  <div class="lf-placeholder px-6 pt-2 pb-6">
+  <div class="lf-placeholder px-6 pt-2 pb-6" [ngClass]="placeholderConfig.class">
     <!-- icon -->
     <lf-icon
       [matIcon]="placeholderConfig.matIcon!"
@@ -18,9 +18,9 @@
       </p>
     }
     <!-- action -->
-    @if (placeholderConfig.actionLabel) {
-      <button mat-button class="mt-4" color="accent" (click)="action.emit()">
-        {{ placeholderConfig.actionLabel }}
+    @if (placeholderConfig.buttonLabel) {
+      <button mat-button class="mt-4" color="accent" (click)="buttonClickEvent.emit()">
+        {{ placeholderConfig.buttonLabel }}
       </button>
     }
   </div>

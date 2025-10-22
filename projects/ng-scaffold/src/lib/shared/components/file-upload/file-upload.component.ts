@@ -22,7 +22,7 @@ export class FileUploadComponent {
   @Input() public accept: string;
   @Input() public tooltip: string;
 
-  @Output() public fileChange: EventEmitter<File> = new EventEmitter<File>();
+  @Output() public fileChangeEvent: EventEmitter<File> = new EventEmitter<File>();
 
   public selectFile(event: Event): void {
     const input: HTMLInputElement = event.target as HTMLInputElement;
@@ -33,11 +33,10 @@ export class FileUploadComponent {
     if (!file) return;
 
     this.logger.log('[FileUploadComponent]', file);
-    this.fileChange.emit(file);
+    this.fileChangeEvent.emit(file);
   }
 
   public triggerInput(): void {
     this.fileElement.nativeElement.click();
   }
-
 }

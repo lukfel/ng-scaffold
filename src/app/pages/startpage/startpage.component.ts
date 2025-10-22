@@ -154,7 +154,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
     if (selected > 0) {
       this.bottomBarConfig.enable = true;
       this.bottomBarConfig.message = `${selected} selected`;
-      this.bottomBarConfig.actions = [
+      this.bottomBarConfig.buttons = [
         {
           id: 'bottom-bar_submit',
           label: 'Submit'

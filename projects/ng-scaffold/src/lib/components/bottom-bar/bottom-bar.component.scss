@@ -23,16 +23,16 @@
     left: calc($navbar-width + (2 * $navbar-padding)) !important;;
   }
 
-  .lf-bottom-bar-actions {
+  .lf-bottom-bar-buttons {
     display: flex;
     align-items: center;
     
-    .lf-bottom-bar-action {
+    .lf-bottom-bar-button {
       color: var(--color-accent) !important;
       background-color: white !important;
     }
 
-    .lf-bottom-bar-action-icon {
+    .lf-bottom-bar-button-icon {
       color: white !important;
     }
   }

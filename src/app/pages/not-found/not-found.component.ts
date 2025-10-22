@@ -19,7 +19,7 @@ export class NotFoundComponent implements OnInit {
     outlineIcon: true,
     heading: '404',
     message: 'This page could not be found.',
-    actionLabel: 'STARTPAGE'
+    buttonLabel: 'STARTPAGE'
   }
 
   ngOnInit(): void {

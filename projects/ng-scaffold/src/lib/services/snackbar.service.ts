@@ -24,15 +24,15 @@ export class SnackbarService {
     verticalPosition: this.SNACKBAR_POSITION_VERTICAL
   };
 
+  // Opens a generic snackbar with a message
+  public openSnackbar(message: string, closeLabel?: string, config?: MatSnackBarConfig): void {
+    this.snackbar.open(message, closeLabel, config ? config : this.defaultConfig);
+  }
+
   // Opens a snackbar with an action to wait for
   public openSnackbarWithAction(message: string, action: string, config?: MatSnackBarConfig): Promise<void> {
     const snackbarRef = this.snackbar.open(message, action, config ? config : this.actionConfig);
     return firstValueFrom(snackbarRef.onAction());
-  }
-
-  // Opens a generic snackbar with a message
-  public openSnackbar(message: string, config?: MatSnackBarConfig): void {
-    this.snackbar.open(message, '', config ? config : this.defaultConfig);
   }
 
 }

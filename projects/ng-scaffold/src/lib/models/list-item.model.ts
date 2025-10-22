@@ -1,6 +1,9 @@
 export interface ListItem {
-  id?: string | number;
-  avatarUrl?: string;
+  id: string | number;
+  matIcon?: string;
+  svgIcon?: string;
+  outlineIcon?: boolean;
+  avatar?: string;
   title: string;
   subtitle?: string;
   checked?: boolean;
@@ -8,11 +11,12 @@ export interface ListItem {
   disabledActions?: string[];
 }
 
-export interface ListAction {
-  id: string;
+export interface ListHeader {
   matIcon?: string;
   svgIcon?: string;
-  tooltip?: string;
-  color?: 'primary' | 'accent' | 'warn';
-  disabled?: boolean;
+  outlineIcon?: boolean;
+  avatar?: string;
+  enableSorting?: boolean;
+  enableSelection?: boolean;
+  tokens?: string[];
 }
