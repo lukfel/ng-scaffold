@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
+import { CONFIG } from '../../../config/config.token';
 import { ScaffoldLibraryConfig } from '../../../models';
-import { CONFIG } from '../../../scaffold.module';
 import { SharedModule } from '../../shared.module';
 
 @Component({

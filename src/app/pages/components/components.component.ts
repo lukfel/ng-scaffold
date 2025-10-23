@@ -12,45 +12,24 @@ export class ComponentsComponent implements OnInit {
   private scaffoldService = inject(ScaffoldService);
   private snackbar = inject(SnackbarService);
 
-  // private listData = [
-  //   {
-  //     id: 0,
-  //     name: 'Item 1',
-  //     initExpDays: 6,
-  //     imgUrl: '',
-  //     checked: false,
-  //     quantity: 'HIGH',
-  //     isDefault: false
-  //   },
-  //   {
-  //     id: 1,
-  //     name: 'Item 2',
-  //     initExpDays: 4,
-  //     imgUrl: '',
-  //     checked: false,
-  //     quantity: 'HALF',
-  //     isDefault: false
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Item 3',
-  //     initExpDays: 10,
-  //     imgUrl: '',
-  //     checked: false,
-  //     quantity: 'LOW',
-  //     isDefault: true
-  //   }
-  // ];
 
-  public header: ListHeader = { enableSorting: true, enableSelection: true, tokens: ['Title', 'Date'] };
+  public header: ListHeader = {
+    matIcon: 'sort',
+    enableSelection: true,
+    items: [
+      { title: 'Items', sortToken: 'items' }
+    ]
+  };
+
   public items: ListItem[] = [
-    { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1' },
-    { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'My delete action is disabled', disabledActions: ['delete'] },
-    { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'My edit action is hidden', hiddenActions: ['edit'] }
+    { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
+    { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
+    { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtons: ['edit'] },
   ];
+
   public buttons: Button[] = [
     { id: 'edit', matIcon: 'edit' },
-    { id: 'delete', matIcon: 'delete' }//, color: 'warn' }
+    { id: 'delete', matIcon: 'delete', class: 'warn' }
   ];
 
   public fileName: string = '';
@@ -72,20 +51,20 @@ export class ComponentsComponent implements OnInit {
     this.scaffoldService.buttonClickEventValue$.subscribe((buttonClickEventValue: string) => {
       if (buttonClickEventValue === 'bottombar_close') {
         this.items.forEach((item: ListItem) => (item.checked = false));
-        this.onSelectionChange([]);
+        this.onListSelectionChange([]);
       }
     });
   }
 
-  public onButtonClick(event: { id: string, item: ListItem }): void {
-    if (event?.id === 'edit') {
-      this.snackbar.openSnackbar(`Edit ${event?.item?.title}`, 'Close');
-    } else if (event?.id === 'delete') {
-      this.snackbar.openSnackbar(`Delete ${event?.item?.title}`, 'Close');
-    }
+  public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
+    this.items.sort((a, b) => {
+      if (!a.title || !b.title) return 0;
+      if (event.sortAsc) return a.title.localeCompare(b.title);
+      return b.title.localeCompare(a.title);
+    });
   }
 
-  public onSelectionChange(items: ListItem[]): void {
+  public onListSelectionChange(items: ListItem[]): void {
     const bottomBarConfig: BottomBarConfig = {
       enable: items?.length > 0,
       message: `Selected: ${items?.length || 0}`,
@@ -95,11 +74,23 @@ export class ComponentsComponent implements OnInit {
     this.scaffoldService.updateScaffoldProperty('bottomBarConfig', bottomBarConfig);
   }
 
-  public onFileChangeEvent(file: File): void {
+  public onListButtonClick(event: { buttonId: string, item: ListItem }): void {
+    if (event?.buttonId === 'edit') {
+      this.snackbar.openSnackbar(`Edit ${event?.item?.title}`, 'Close');
+    } else if (event?.buttonId === 'delete') {
+      this.snackbar.openSnackbar(`Delete ${event?.item?.title}`, 'Close');
+    }
+  }
+
+  public onListItemClick(item: ListItem): void {
+    this.snackbar.openSnackbar(`Click ${item?.title}`, 'Close');
+  }
+
+  public onFileChange(file: File): void {
     this.fileName = file.name;
   }
 
-  public onButtonClickEvent(): void {
+  public onPlaceholderButtonClick(): void {
     this.snackbar.openSnackbar('Clicked placeholder button', 'Close');
   }
 }

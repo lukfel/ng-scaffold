@@ -2,6 +2,8 @@
  * Public API Surface of components
  */
 
+/* CONFIG */
+export * from './lib/config/config.token';
 /* MODELS */
 export * from './lib/models';
 /* MODULES */

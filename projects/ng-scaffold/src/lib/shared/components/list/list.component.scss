@@ -11,8 +11,20 @@
   align-items: center;
   justify-content: center;
   height: 72px;
-  border-radius: 8px;
+  border-radius: 4px;
   box-sizing: border-box;
+
+  &.disabled {
+    .lf-table-item-title-wrapper {
+      opacity: 0.64;
+    }
+  }
+
+  &.clickable {
+    .lf-table-item-title {
+      cursor: pointer;
+    }
+  }
 
   .lf-table-item-sort-icon {
     font-size: 16px;

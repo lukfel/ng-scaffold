@@ -1,3 +1,5 @@
+import { Button } from './menu-button.model';
+
 export interface ListItem {
   id: string | number;
   matIcon?: string;
@@ -6,15 +8,21 @@ export interface ListItem {
   title: string;
   subtitle?: string;
   checked?: boolean;
-  hiddenActions?: string[];
-  disabledActions?: string[];
+  disabled?: boolean;
+  clickable?: boolean;
+  buttons?: Button[];
+  hiddenButtons?: string[];
 }
 
 export interface ListHeader {
   matIcon?: string;
   svgIcon?: string;
   avatar?: string;
-  enableSorting?: boolean;
   enableSelection?: boolean;
-  tokens?: string[];
+  items?: HeaderItem[];
+}
+
+export interface HeaderItem {
+  title: string;
+  sortToken?: string;
 }

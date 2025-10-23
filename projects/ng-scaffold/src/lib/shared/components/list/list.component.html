@@ -19,12 +19,10 @@
 
       <!-- title -->
       <div class="lf-table-item-title-wrapper flex-row">
-        @for (token of header.tokens; track $index) {
-          <span
-            [class.clickable]="header.enableSorting && sortToken === token"
-            (click)="updateSortToken(token)">
-            {{ token }}
-            @if (header.enableSorting && sortToken === token) {
+        @for (item of header.items; track $index) {
+          <span [class.clickable]="item.sortToken" (click)="updateSortToken(item.sortToken)">
+            {{ item.title }}
+            @if (sortToken === item.sortToken) {
               <mat-icon class="lf-table-item-sort-icon">
                 {{ sortAsc ? "arrow_downward" : "arrow_upward" }}
               </mat-icon>
@@ -40,7 +38,7 @@
       @if (header.enableSelection) {
         <div class="lf-table-item-checkbox">
           <mat-checkbox
-            [checked]="allSelected"
+            [checked]="allSelected && !someSelected"
             [indeterminate]="someSelected"
             (change)="selectAll($event)"></mat-checkbox>
         </div>
@@ -51,7 +49,11 @@
 
   <!-- Items -->
   @for (item of items; track item.id) {
-    <div class="lf-table-item lf-table-item-data" [class.active]="item.checked">
+    <div
+      class="lf-table-item lf-table-item-data"
+      [class.active]="item.checked"
+      [class.disabled]="item.disabled"
+      [class.clickable]="item.clickable && !item.disabled">
       <!-- avatar -->
       @if (item.avatar) {
         <div class="lf-table-item-avatar">
@@ -66,7 +68,9 @@
 
       <!-- title -->
       <div class="lf-table-item-title-wrapper">
-        <span class="lf-table-item-title">
+        <span
+          class="lf-table-item-title"
+          (click)="item.clickable && !item.disabled ? itemClickEvent.emit(item) : null">
           <span>{{ item.title }}</span>
         </span>
         @if (item.subtitle) {
@@ -76,15 +80,16 @@
 
       <!-- buttons -->
       <div class="lf-table-item-buttons">
-        @for (button of buttons; track button.id) {
-          @if (!item.hiddenActions?.includes(button.id)) {
+        @let combinedButtons = getCombinedActions(item);
+        @for (button of combinedButtons; track button.id) {
+          @if (!item.hiddenButtons?.includes(button.id)) {
             @if (button.label) {
               <button
                 mat-button
                 class="lf-bottom-bar-button ml-2"
                 [ngClass]="button.class"
-                (click)="buttonClickEvent.emit({ id: button.id, item })"
-                [disabled]="button.disabled || item.disabledActions?.includes(button.id)"
+                (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
+                [disabled]="button.disabled || item.disabled"
                 [matTooltip]="button.tooltip">
                 @if (button.matIcon || button.svgIcon) {
                   <lf-icon
@@ -98,9 +103,9 @@
               <button
                 mat-icon-button
                 class="lf-bottom-bar-button-icon ml-2"
-                [ngClass]="button.class"
-                (click)="buttonClickEvent.emit({ id: button.id, item })"
-                [disabled]="button.disabled || item.disabledActions?.includes(button.id)"
+                [ngClass]="!button.disabled && !item.disabled ? button.class : ''"
+                (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
+                [disabled]="button.disabled || item.disabled"
                 [matTooltip]="button.tooltip">
                 <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
               </button>
@@ -113,7 +118,10 @@
       <!-- checkbox -->
       @if (header?.enableSelection) {
         <div class="lf-table-item-checkbox">
-          <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectItem()"></mat-checkbox>
+          <mat-checkbox
+            [(ngModel)]="item.checked"
+            (ngModelChange)="selectItem()"
+            [disabled]="item.disabled!"></mat-checkbox>
         </div>
       }
     </div>

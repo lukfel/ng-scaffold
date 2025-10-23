@@ -18,8 +18,10 @@
     [header]="header"
     [items]="items"
     [buttons]="buttons"
-    (selectionChangeEvent)="onSelectionChange($event)"
-    (buttonClickEvent)="onButtonClick($event)"></lf-list>
+    (sortChangeEvent)="onListSortChange($event)"
+    (selectionChangeEvent)="onListSelectionChange($event)"
+    (buttonClickEvent)="onListButtonClick($event)"
+    (itemClickEvent)="onListItemClick($event)"></lf-list>
   <mat-divider></mat-divider>
 
   <h2>File-Upload</h2>
@@ -37,7 +39,7 @@
     matIcon="upload"
     [disabled]="false"
     accept="*"
-    (fileChangeEvent)="onFileChangeEvent($event)"></lf-file-upload>
+    (fileChangeEvent)="onFileChange($event)"></lf-file-upload>
   <p>
     File name:
     <b>{{ fileName }}</b>
@@ -62,7 +64,7 @@
   <div class="placeholder-wrapper">
     <lf-placeholder
       [placeholderConfig]="placeholderConfig"
-      (buttonClickEvent)="onButtonClickEvent()"></lf-placeholder>
+      (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
   </div>
 
   <p><br /></p>

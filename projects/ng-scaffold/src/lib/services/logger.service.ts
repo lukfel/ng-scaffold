@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
+import { CONFIG } from '../config/config.token';
 import { ScaffoldLibraryConfig } from '../models';
-import { CONFIG } from '../scaffold.module';
 
 @Injectable({ providedIn: 'root' })
 export class Logger {

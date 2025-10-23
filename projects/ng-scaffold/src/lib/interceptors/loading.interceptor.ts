@@ -9,7 +9,7 @@ import { Observable, finalize } from 'rxjs';
 import { ScaffoldService } from '../services';
 
 @Injectable()
-export class LoadingInterceptor implements HttpInterceptor {
+export class ScaffoldLoadingInterceptor implements HttpInterceptor {
   private scaffoldService = inject(ScaffoldService);
 
   private activeRequests = 0;

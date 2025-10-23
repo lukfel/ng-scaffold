@@ -4,8 +4,8 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { Component, DOCUMENT, ElementRef, EventEmitter, inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
+import { CONFIG } from '../../config/config.token';
 import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
-import { CONFIG } from '../../scaffold.module';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -15,7 +15,7 @@ import { BreakpointService, Logger, RouterService, ScaffoldService } from '../..
   standalone: false
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
-  
+
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
   private scaffoldService = inject(ScaffoldService);

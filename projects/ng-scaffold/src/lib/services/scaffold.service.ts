@@ -1,8 +1,8 @@
 import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CONFIG } from '../config/config.token';
 import { ScaffoldConfig, ScaffoldLibraryConfig } from '../models';
-import { CONFIG } from '../scaffold.module';
 import { Logger } from './logger.service';
 
 @Injectable({ providedIn: 'root' })

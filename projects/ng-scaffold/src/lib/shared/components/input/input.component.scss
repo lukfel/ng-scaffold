@@ -4,7 +4,7 @@
   width: 100%;
 
   ::ng-deep .mdc-text-field {
-    border-radius: $border-radius !important;
+    border-radius: $header-input-border-radius !important;
   }
 
   ::ng-deep .mdc-line-ripple {

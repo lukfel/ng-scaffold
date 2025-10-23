@@ -20,7 +20,8 @@ export class ListComponent {
 
   @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
   @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();
-  @Output() public buttonClickEvent = new EventEmitter<{ id: string, item: ListItem }>();
+  @Output() public itemClickEvent = new EventEmitter<ListItem>();
+  @Output() public buttonClickEvent = new EventEmitter<{ buttonId: string, item: ListItem }>();
 
 
   public sortToken: string;
@@ -36,18 +37,28 @@ export class ListComponent {
   }
 
   get someSelected(): boolean {
-    return this.items.some(i => i.checked) && !this.allSelected;
+    return this.items.length > 0 && this.items.some((item: ListItem) => item.checked) && !this.allSelected;
   }
 
 
-  public updateSortToken(token: string): void {
-    if (this.sortToken === token) this.sortAsc = !this.sortAsc;
-    this.sortToken = token;
+  public getCombinedActions(item: ListItem): Button[] {
+    return [...(item.buttons ?? []), ...(this.buttons ?? [])];
+  }
+
+  public updateSortToken(sortToken: string | undefined): void {
+    if (!sortToken) return;
+    if (this.sortToken === sortToken) this.sortAsc = !this.sortAsc;
+    this.sortToken = sortToken;
     this.sortChangeEvent.emit({ sortToken: this.sortToken, sortAsc: this.sortAsc });
   }
 
   public selectAll(event: MatCheckboxChange): void {
-    this.items.forEach((item: ListItem) => (item.checked = event.checked));
+    // this.items.filter((item: ListItem) => !item.disabled).forEach((item: ListItem) => (item.checked = event.checked));
+
+    this.items.forEach((item: ListItem) => {
+      if (!item.disabled) item.checked = event.checked;
+    });
+
     this.emitSelection();
   }
 

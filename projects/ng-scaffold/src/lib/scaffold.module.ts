@@ -1,4 +1,4 @@
-import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
@@ -10,13 +10,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ScaffoldComponent } from './components/scaffold/scaffold.component';
+import { CONFIG } from './config/config.token';
 import { ScaffoldLibraryConfig } from './models';
 import { ConfirmDialogComponent } from './shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { IconComponent } from './shared/components/icon/icon.component';
 import { InputComponent } from './shared/components/input/input.component';
 import { SharedModule } from './shared/shared.module';
-
-export const CONFIG = new InjectionToken<ScaffoldLibraryConfig>('config');
 
 @NgModule({
   declarations: [
