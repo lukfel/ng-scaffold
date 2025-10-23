@@ -369,37 +369,52 @@ import { ListComponent } from '@lukfel/ng-scaffold';
 ```
 
 ```ts
-import { ListAction, ListItem } from '@lukfel/ng-scaffold';
+import { Button, ListHeader, ListItem } from '@lukfel/ng-scaffold';
+
+public header: ListHeader = {
+  enableSelection: true,
+  items: [
+    { title: 'Items', sortToken: 'items' }
+  ]
+};
 
 public items: ListItem[] = [
-  { title: 'Item 1' },
-  { title: 'Item 2', subtitle: 'My delete action is disabled', disabledActions: ['delete'] },
-  { title: 'Item 3', subtitle: 'My edit action is hidden', hiddenActions: ['edit'] }
+  { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
+  { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
+  { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtons: ['edit'] },
 ];
 
-public actions: ListAction[] = [
+public buttons: Button[] = [
   { id: 'edit', matIcon: 'edit' },
-  { id: 'delete', matIcon: 'delete', color: 'warn' }
+  { id: 'delete', matIcon: 'delete', class: 'warn' }
 ];
 
-public onActionClick(event: { id: string, item: ListItem }): void {
-  // handle list actions
+public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
+  // handle sort change
 }
 
-public onSelectionChange(items: ListItem[]): void {
-  // handle selection changes
+public onListSelectionChange(items: ListItem[]): void {
+  // handle selection change
+}
+
+public onListButtonClick(event: { buttonId: string, item: ListItem }): void {
+  // handle button click
+}
+
+public onListItemClick(item: ListItem): void {
+  // handle item click
 }
 ```
 
 ```html
 <lf-list
+  [header]="header"
   [items]="items"
-  [actions]="actions"
-  [showHeader]="true"
-  [enableCheckboxes]="true"
-  avatarFallbackPath="assets/img/error/missing.png"
-  (actionClick)="onActionClick($event)"
-  (selectionChange)="onSelectionChange($event)"></lf-list>
+  [buttons]="buttons"
+  (sortChangeEvent)="onListSortChange($event)"
+  (selectionChangeEvent)="onListSelectionChange($event)"
+  (buttonClickEvent)="onListButtonClick($event)"
+  (itemClickEvent)="onListItemClick($event)"></lf-list>
 ```
 
 ### File-Upload
@@ -410,7 +425,7 @@ import { FileUploadComponent } from '@lukfel/ng-scaffold';
 ```
 
 ```ts
-public uploadFile(file: File): void {
+public onFileChange(file: File): void {
   // handle file upload
 }
 ```
@@ -422,7 +437,7 @@ public uploadFile(file: File): void {
   matIcon="upload"
   [disabled]="false"
   accept="*"
-  (fileChange)="uploadFile($event)"></lf-file-upload>
+  (fileChangeEvent)="onFileChange($event)"></lf-file-upload>
 ```
 
 ### Placeholder
@@ -437,15 +452,20 @@ import { PlaceholderConfig } from '@lukfel/ng-scaffold';
 
 public placeholderConfig: PlaceholderConfig = {
   matIcon: 'widgets',
-  outlineIcon: true,
   heading: 'Heading',
   message: 'This is a placeholder message.',
   actionLabel: 'ACTION'
 }
+
+public onPlaceholderButtonClick(): void {
+  // handle placeholder click
+}
 ```
 
 ```html
-<lf-placeholder [placeholderConfig]="placeholderConfig"></lf-placeholder>
+<lf-placeholder
+  [placeholderConfig]="placeholderConfig"
+  (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
 ```
 
 
@@ -457,7 +477,7 @@ Intercept HTTP Calls and automatically show a loading spinner.
 * **Note:** The loading spinner can also be manually shown by udpating the value for `scaffoldConfig.loading` in the `ScaffoldService`
 
 ```ts
-import { ScaffoldModule } from '@lukfel/ng-scaffold';
+import { ScaffoldLoadingInterceptor, ScaffoldModule } from '@lukfel/ng-scaffold';
 import { isDevMode } from '@angular/core';
 
 @NgModule({
@@ -468,7 +488,7 @@ import { isDevMode } from '@angular/core';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
+      useClass: ScaffoldLoadingInterceptor,
       multi: true
     }
   ]
