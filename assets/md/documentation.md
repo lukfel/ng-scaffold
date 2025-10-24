@@ -340,7 +340,7 @@ export class AppComponent {
 ### ThemeService
 Dynamically change between your defined themes.
 
-* **Note:** The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
+* **Note:** The theme must be defined and included in your styles
 
 ```ts
 import { ThemeService } from '@lukfel/ng-scaffold';
@@ -386,7 +386,7 @@ public items: ListItem[] = [
 
 public buttons: Button[] = [
   { id: 'edit', matIcon: 'edit' },
-  { id: 'delete', matIcon: 'delete', class: 'warn' }
+  { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
 ];
 
 public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
