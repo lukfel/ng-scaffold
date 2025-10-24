@@ -3,7 +3,7 @@
     class="mat-app-background mat-elevation-z3"
     [class.lf-navbar]="!isMobile"
     [class.lf-navbar-mobile]="isMobile"
-    [ngClass]="navbarConfig.class">
+    [ngClass]="navbarConfig.cssClass">
     <!-- items -->
     <div [class.lf-navbar-items]="!isMobile" [class.lf-navbar-mobile-items]="isMobile">
       <!-- item -->
@@ -12,7 +12,7 @@
           <div
             class="lf-navbar-item"
             [class.lf-navbar-item-active]="isActive(button.id)"
-            [ngClass]="button.class"
+            [ngClass]="button.cssClass"
             (click)="buttonClicked(button.id)"
             tabindex="0"
             role="button"

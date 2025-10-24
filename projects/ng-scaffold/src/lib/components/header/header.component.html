@@ -3,7 +3,7 @@
     class="lf-header mat-elevation-z3"
     [class.px-4]="!isMobile"
     [class.px-1]="isMobile"
-    [ngClass]="headerConfig.class"
+    [ngClass]="headerConfig.cssClass"
     color="primary">
     <!-- left menu button -->
     <ng-container
@@ -94,7 +94,7 @@
       <button
         mat-icon-button
         class="lf-header-menu-button"
-        [ngClass]="menuButton.class"
+        [ngClass]="menuButton.cssClass"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip"
@@ -108,7 +108,7 @@
           mat-button
           class="lf-header-menu-button"
           [class.lf-header-menu-button-active]="isActive(menuButton.id)"
-          [ngClass]="menuButton.class"
+          [ngClass]="menuButton.cssClass"
           (click)="buttonClicked(menuButton.id)"
           [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
           [matTooltip]="menuButton.tooltip">
@@ -127,7 +127,7 @@
           <button
             mat-menu-item
             [class.lf-header-menu-button-active]="isActive(button.id)"
-            [ngClass]="button.class"
+            [ngClass]="button.cssClass"
             (click)="buttonClicked(button.id)">
             <!-- icon -->
             <lf-icon
@@ -149,7 +149,7 @@
             <button
               mat-icon-button
               class="lf-menu-icon-button"
-              [ngClass]="button.class"
+              [ngClass]="button.cssClass"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
               <!-- icon -->

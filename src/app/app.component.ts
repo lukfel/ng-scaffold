@@ -165,19 +165,19 @@ export class AppComponent {
       id: 'https://www.create-a-tournament.com',
       label: 'Create A Tournament',
       svgIcon: 'cat_logo',
-      class: 'lf-cat-blue'
+      cssClass: 'lf-cat-blue'
     },
     {
       id: 'https://www.what-a-waste.at',
       label: 'What A Waste',
       svgIcon: 'waw_logo',
-      class: 'lf-waw-cyan'
+      cssClass: 'lf-waw-cyan'
     },
     {
       id: 'https://www.uglygotchi.at',
       label: 'Uglygotchi',
       svgIcon: 'ugly_logo',
-      class: 'lf-ugly-orange'
+      cssClass: 'lf-ugly-orange'
     }
   ];
 

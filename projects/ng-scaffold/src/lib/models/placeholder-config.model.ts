@@ -4,5 +4,5 @@ export interface PlaceholderConfig {
   heading?: string;
   message?: string;
   buttonLabel?: string;
-  class?: string;
+  cssClass?: string;
 }

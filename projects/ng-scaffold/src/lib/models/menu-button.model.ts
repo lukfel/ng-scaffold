@@ -9,5 +9,5 @@ export interface Button {
   svgIcon?: string;
   tooltip?: string;
   disabled?: boolean;
-  class?: string;
+  cssClass?: string;
 }

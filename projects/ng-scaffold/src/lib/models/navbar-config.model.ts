@@ -4,5 +4,5 @@ export interface NavbarConfig {
   enable?: boolean;
   showAllLabels?: boolean;
   menuButtons?: MenuButton[];
-  class?: string;
+  cssClass?: string;
 }

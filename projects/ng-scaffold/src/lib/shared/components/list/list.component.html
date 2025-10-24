@@ -87,7 +87,7 @@
               <button
                 mat-button
                 class="lf-bottom-bar-button ml-2"
-                [ngClass]="button.class"
+                [ngClass]="button.cssClass"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
                 [disabled]="button.disabled || item.disabled"
                 [matTooltip]="button.tooltip">
@@ -103,7 +103,7 @@
               <button
                 mat-icon-button
                 class="lf-bottom-bar-button-icon ml-2"
-                [ngClass]="!button.disabled && !item.disabled ? button.class : ''"
+                [ngClass]="!button.disabled && !item.disabled ? button.cssClass : ''"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
                 [disabled]="button.disabled || item.disabled"
                 [matTooltip]="button.tooltip">

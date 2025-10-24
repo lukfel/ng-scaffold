@@ -10,6 +10,6 @@ interface ScaffoldConfig {
   contentTitleCardConfig?: ContentTitleCardConfig;
   floatingButtonConfig?: FloatingButtonConfig;
   bottomBarConfig?: BottomBarConfig;
-  class?: string;
+  cssClass?: string;
 }
 ```

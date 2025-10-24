@@ -8,5 +8,5 @@ export interface FloatingButtonConfig {
   horizontalPosition?: 'left' | 'center' | 'right';
   bottomPositionPx?: number;
   autoHide?: boolean;
-  class?: string;
+  cssClass?: string;
 }

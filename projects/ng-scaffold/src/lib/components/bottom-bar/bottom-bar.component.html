@@ -1,7 +1,7 @@
 @if (bottomBarConfig && bottomBarConfig.enable) {
   <div
     class="lf-bottom-bar px-4"
-    [ngClass]="bottomBarConfig.class"
+    [ngClass]="bottomBarConfig.cssClass"
     [class.lf-bottom-bar-show-navbar]="!isMobile && navbarEnabled"
     [class.lf-bottom-bar-show-navbar-mobile]="isMobile && navbarEnabled">
     @if (bottomBarConfig.closeButtonId) {
@@ -19,7 +19,7 @@
             <button
               mat-button
               class="lf-bottom-bar-button ml-2"
-              [ngClass]="button.class"
+              [ngClass]="button.cssClass"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
               @if (button.matIcon || button.svgIcon) {
@@ -35,7 +35,7 @@
               mat-icon-button
               color="accent"
               class="lf-bottom-bar-button-icon ml-2"
-              [ngClass]="button.class"
+              [ngClass]="button.cssClass"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
               <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>

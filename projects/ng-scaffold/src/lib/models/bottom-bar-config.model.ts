@@ -2,7 +2,7 @@ import { Button } from './menu-button.model';
 
 export interface BottomBarConfig {
   enable?: boolean;
-  class?: string;
+  cssClass?: string;
   message?: string;
   closeButtonId?: string;
   buttons?: Button[];

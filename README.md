@@ -386,7 +386,7 @@ public items: ListItem[] = [
 
 public buttons: Button[] = [
   { id: 'edit', matIcon: 'edit' },
-  { id: 'delete', matIcon: 'delete', class: 'warn' }
+  { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
 ];
 
 public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {

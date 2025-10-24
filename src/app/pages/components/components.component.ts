@@ -29,7 +29,7 @@ export class ComponentsComponent implements OnInit {
 
   public buttons: Button[] = [
     { id: 'edit', matIcon: 'edit' },
-    { id: 'delete', matIcon: 'delete', class: 'warn' }
+    { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
   ];
 
   public fileName: string = '';

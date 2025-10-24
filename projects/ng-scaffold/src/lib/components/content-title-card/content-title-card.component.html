@@ -1,7 +1,7 @@
 @if (contentTitleCardConfig && contentTitleCardConfig.enable) {
   <mat-card
     class="lf-content-title-card mat-elevation-z2 px-4"
-    [ngClass]="contentTitleCardConfig.class">
+    [ngClass]="contentTitleCardConfig.cssClass">
     <!-- back button -->
     @if (contentTitleCardConfig.showBackButton && routeHistory.length > 1) {
       <button mat-icon-button color="accent" (click)="backButtonClicked()">
