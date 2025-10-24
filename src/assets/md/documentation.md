@@ -340,7 +340,7 @@ export class AppComponent {
 ### ThemeService
 Dynamically change between your defined themes.
 
-* **Note:** The theme must be defined and included in your styles [see multiple themes](#multiple-themes-optional)
+* **Note:** The theme must be defined and included in your styles
 
 ```ts
 import { ThemeService } from '@lukfel/ng-scaffold';

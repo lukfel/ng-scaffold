@@ -16,8 +16,8 @@ describe('ComponentsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ComponentsComponent],
       imports: [
-        SharedModule,
         RouterTestingModule,
+        SharedModule,
         PlaceholderComponent,
         FileUploadComponent,
         ListComponent

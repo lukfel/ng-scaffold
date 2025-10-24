@@ -12,7 +12,9 @@ describe('DocumentationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DocumentationComponent],
-      imports: [MarkdownModule.forRoot({ loader: HttpClient })],
+      imports: [
+        MarkdownModule.forRoot({ loader: HttpClient })
+      ],
       providers: [
         provideHttpClient(withInterceptorsFromDi()),
         { provide: ActivatedRoute, useValue: {} }

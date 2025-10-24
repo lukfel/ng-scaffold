@@ -5,7 +5,8 @@ $pink: #e91e63;
   max-width: 1080px;
   margin: auto;
 
-  a[href] {
+  a[href], .link {
+    cursor: pointer;
     color: var(--color-primary);
     text-decoration: unset;
 

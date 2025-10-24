@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
 import { Subscription } from 'rxjs';
+import { MarkdownComponent } from 'src/app/shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
@@ -45,6 +46,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription = new Subscription;
 
+
   ngOnInit(): void {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
@@ -82,6 +84,14 @@ export class StartpageComponent implements OnInit, OnDestroy {
     if (this._subscription) {
       this._subscription.unsubscribe();
     }
+  }
+
+
+  public openMarkdownDialog(file: string): void {
+    this.dialogService.openCustomDialog(MarkdownComponent, {
+      autoFocus: false,
+      data: `assets/md/${file}`
+    });
   }
 
   public showContainerLoading(): void {

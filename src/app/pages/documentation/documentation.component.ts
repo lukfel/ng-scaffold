@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
@@ -9,7 +9,7 @@ import { take } from 'rxjs';
   styleUrls: ['./documentation.component.scss'],
   standalone: false
 })
-export class DocumentationComponent implements OnInit, AfterViewInit {
+export class DocumentationComponent implements OnInit {
   private scaffoldService = inject(ScaffoldService);
   private route = inject(ActivatedRoute);
 
@@ -22,7 +22,7 @@ export class DocumentationComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
+  public onMarkdownLoad(): void {
     setTimeout(() => {
       const fragment = this.route.snapshot.fragment;
       if (fragment) {

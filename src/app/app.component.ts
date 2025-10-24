@@ -64,14 +64,12 @@ export class AppComponent {
         {
           id: 'github',
           svgIcon: 'github_logo',
-          tooltip: 'GitHub',
-          class: 'gray-icon'
+          tooltip: 'GitHub'
         },
         {
           id: 'npm',
           svgIcon: 'npm_logo',
-          tooltip: 'NPM',
-          class: 'gray-icon'
+          tooltip: 'NPM'
         }
       ],
       inputConfig: {

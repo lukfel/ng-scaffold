@@ -51,6 +51,7 @@
     </div>
     <mat-divider></mat-divider>
     <h2>Scaffold</h2>
+    <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View ScaffoldConfig</a>
     <p>
       The scaffold is the global wrapper element that contains all ui elements and displays them
       based on the ScaffoldConfig config.
@@ -68,6 +69,7 @@
     <mat-divider></mat-divider>
     @if (headerConfig) {
       <h2>Header</h2>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View HeaderConfig</a>
       <p>
         The header is a fixed responsive toolbar with a customizable logo, title, subtitle,
         menu-buttons and an input field.
@@ -123,6 +125,7 @@
         </ng-template>
       </mat-expansion-panel>
       <h3>Header Input Field</h3>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View HeaderInputConfig</a>
       <p>
         <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
       </p>
@@ -139,6 +142,9 @@
     }
     @if (contentTitleCardConfig) {
       <h2>Title Card</h2>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">
+        View ContentTitleCardConfig
+      </a>
       <p>
         The title card is a card below the header that can display a custom label such as a page
         title and also has a back button.
@@ -159,6 +165,7 @@
     }
     @if (navbarConfig) {
       <h2>Navbar</h2>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View NavbarConfig</a>
       <p>
         The navbar is a fixed navigation element that is positioned vertically left on desktop and
         responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation
@@ -176,6 +183,7 @@
     }
     @if (drawerConfig) {
       <h2>Drawer</h2>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View DrawerConfig</a>
       <p>
         The drawer is a collapsible element that allows you to place custom dynamic side content. It
         is responsive and changes to overlay mode on mobile.
@@ -204,6 +212,7 @@
     }
     @if (footerConfig) {
       <h2>Footer</h2>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View FooterConfig</a>
       <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
       <p>
         <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
@@ -223,6 +232,9 @@
     }
     @if (floatingButtonConfig) {
       <h2>Floating Button</h2>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">
+        View FloatingButtonConfig
+      </a>
       <p>
         The floating button is a fixed action button that scrolls to the top on default, but you can
         also add an id for custom actions. By adding a label, the button will expand into a rounded
@@ -266,6 +278,7 @@
     }
     @if (bottomBarConfig) {
       <h2>Bottom Bar</h2>
+      <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View BottomBarConfig</a>
       <p>
         The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
         enabled). It can be used to handle custom bulk actions for selected items in large lists.
