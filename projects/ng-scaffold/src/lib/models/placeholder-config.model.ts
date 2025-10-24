@@ -1,8 +1,10 @@
+import { Button } from './menu-button.model';
+
 export interface PlaceholderConfig {
   matIcon?: string;
   svgIcon?: string;
   heading?: string;
   message?: string;
-  buttonLabel?: string;
+  button?: Button;
   cssClass?: string;
 }

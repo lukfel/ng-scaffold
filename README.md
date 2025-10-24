@@ -454,7 +454,10 @@ public placeholderConfig: PlaceholderConfig = {
   matIcon: 'widgets',
   heading: 'Heading',
   message: 'This is a placeholder message.',
-  actionLabel: 'ACTION'
+  button: {
+    id: 'placeholder',
+    label: 'ACTION'
+  }
 }
 
 public onPlaceholderButtonClick(): void {

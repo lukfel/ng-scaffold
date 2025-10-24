@@ -18,7 +18,10 @@ export class NotFoundComponent implements OnInit {
     matIcon: 'block',
     heading: '404',
     message: 'This page could not be found.',
-    buttonLabel: 'STARTPAGE'
+    button: {
+      id: 'placeholder',
+      label: 'STARTPAGE'
+    }
   }
 
   ngOnInit(): void {

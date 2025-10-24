@@ -38,7 +38,10 @@ export class ComponentsComponent implements OnInit {
     matIcon: 'widgets',
     heading: 'Heading',
     message: 'This is a placeholder message.',
-    buttonLabel: 'ACTION'
+    button: {
+      id: 'placeholder',
+      label: 'ACTION'
+    }
   }
 
   ngOnInit(): void {

@@ -5,20 +5,20 @@
     <div class="lf-table-item lf-table-item-header">
       <!-- avatar -->
       @if (header.avatar) {
-        <div class="lf-table-item-avatar">
+        <div class="lf-table-item-avatar px-2">
           <img [src]="header.avatar" alt="Avatar of header" />
           <!-- (error)="onImageError($event)" -->
         </div>
       } @else if (header.matIcon || header.svgIcon) {
-        <div class="lf-table-item-avatar">
+        <div class="lf-table-item-avatar px-2">
           <lf-icon [matIcon]="header.matIcon" [svgIcon]="header.svgIcon"></lf-icon>
         </div>
       } @else if (hasAvatars) {
-        <div class="lf-table-item-avatar"></div>
+        <div class="lf-table-item-avatar px-2"></div>
       }
 
       <!-- title -->
-      <div class="lf-table-item-title-wrapper flex-row">
+      <div class="lf-table-item-title-wrapper flex-row px-2">
         @for (item of header.items; track $index) {
           <span [class.clickable]="item.sortToken" (click)="updateSortToken(item.sortToken)">
             {{ item.title }}
@@ -36,7 +36,7 @@
 
       <!-- checkbox -->
       @if (header.enableSelection) {
-        <div class="lf-table-item-checkbox">
+        <div class="lf-table-item-checkbox ml-3">
           <mat-checkbox
             [checked]="allSelected && !someSelected"
             [indeterminate]="someSelected"
@@ -56,18 +56,18 @@
       [class.clickable]="item.clickable && !item.disabled">
       <!-- avatar -->
       @if (item.avatar) {
-        <div class="lf-table-item-avatar">
+        <div class="lf-table-item-avatar px-2">
           <img [src]="item.avatar" [alt]="'Avatar of ' + item.title" />
           <!-- (error)="onImageError($event)" -->
         </div>
       } @else if (item.matIcon || item.svgIcon) {
-        <div class="lf-table-item-avatar">
+        <div class="lf-table-item-avatar px-2">
           <lf-icon [matIcon]="item.matIcon" [svgIcon]="item.svgIcon"></lf-icon>
         </div>
       }
 
       <!-- title -->
-      <div class="lf-table-item-title-wrapper">
+      <div class="lf-table-item-title-wrapper px-2">
         <span
           class="lf-table-item-title"
           (click)="item.clickable && !item.disabled ? itemClickEvent.emit(item) : null">
@@ -117,7 +117,7 @@
 
       <!-- checkbox -->
       @if (header?.enableSelection) {
-        <div class="lf-table-item-checkbox">
+        <div class="lf-table-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="item.checked"
             (ngModelChange)="selectItem()"
@@ -125,7 +125,5 @@
         </div>
       }
     </div>
-  } @empty {
-    <div class="lf-table-item-no-items">No items found.</div>
   }
 </div>
