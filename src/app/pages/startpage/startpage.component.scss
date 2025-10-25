@@ -5,7 +5,8 @@ $pink: #e91e63;
   max-width: 1080px;
   margin: auto;
 
-  a[href], .link {
+  a[href],
+  .link {
     cursor: pointer;
     color: var(--color-primary);
     text-decoration: unset;
@@ -102,10 +103,6 @@ $pink: #e91e63;
     }
   }
 
-  button {
-    margin: 0 8px 8px 0;
-  }
-
   .lf-link {
     text-decoration: unset;
     color: var(--color-primary);
@@ -113,5 +110,11 @@ $pink: #e91e63;
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  .flex-row {
+    display: flex !important;
+    flex-flow: row wrap;
+    align-items: center;
   }
 }

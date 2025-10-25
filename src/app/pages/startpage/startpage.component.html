@@ -208,7 +208,9 @@
         <code>scaffoldService.drawerPortal</code>
         .
       </p>
-      <button mat-flat-button color="accent" (click)="updateDrawerContent(true)">Navigation</button>
+      <button mat-flat-button color="accent" class="mr-2" (click)="updateDrawerContent(true)">
+        Navigation
+      </button>
       <button mat-flat-button color="primary" (click)="updateDrawerContent(false)">
         Not found
       </button>
@@ -232,6 +234,22 @@
         <mat-label>Copyright</mat-label>
         <input matInput [(ngModel)]="footerConfig.copyright" />
       </mat-form-field>
+      <h3>Footer Links</h3>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Edit Links (Route has priority over link)
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          @for (navigationLink of footerConfig.links; track navigationLink) {
+            <ng-container
+              [ngTemplateOutlet]="navigationLinkTemplate"
+              [ngTemplateOutletContext]="{
+                navigationLink: navigationLink,
+              }"></ng-container>
+          }
+          <button mat-flat-button color="accent" (click)="addFooterLink()">Add link</button>
+        </ng-template>
+      </mat-expansion-panel>
       <mat-divider></mat-divider>
     }
     @if (floatingButtonConfig) {
@@ -303,7 +321,7 @@
 <!-- header menu button form -->
 <ng-template #menuButtonFormTemplate let-menuButton="menuButton" let-isLeftButton="isLeftButton">
   @if (menuButton) {
-    <div class="mb-2">
+    <div class="flex-row mb-2">
       <mat-form-field>
         <mat-label>Event id</mat-label>
         <input matInput [(ngModel)]="menuButton.id" />
@@ -328,6 +346,36 @@
         color="warn"
         (click)="removeHeaderButton(menuButton, isLeftButton)"
         matTooltip="Remove button">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  }
+</ng-template>
+
+<!-- footer link form -->
+<ng-template #navigationLinkTemplate let-navigationLink="navigationLink">
+  @if (navigationLink) {
+    <div class="flex-row mb-2">
+      <mat-form-field>
+        <mat-label>Label</mat-label>
+        <input matInput [(ngModel)]="navigationLink.label" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Route (internal)</mat-label>
+        <input matInput [(ngModel)]="navigationLink.routerLink" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Link (external)</mat-label>
+        <input matInput [(ngModel)]="navigationLink.href" />
+      </mat-form-field>
+      <!-- <p> -->
+      <mat-slide-toggle [(ngModel)]="navigationLink.externalTab">External Tab</mat-slide-toggle>
+      <!-- </p> -->
+      <button
+        mat-icon-button
+        color="warn"
+        (click)="removeFooterLink(navigationLink)"
+        matTooltip="Remove link">
         <mat-icon>delete</mat-icon>
       </button>
     </div>

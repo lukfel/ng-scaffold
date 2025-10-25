@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
+import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
 import { Subscription } from 'rxjs';
 import { MarkdownComponent } from 'src/app/shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
@@ -136,6 +136,14 @@ export class StartpageComponent implements OnInit, OnDestroy {
     } else if (isLeftButton && this.headerConfig?.leftMenuButton === menuButton) {
       this.headerConfig.leftMenuButton = undefined;
     }
+  }
+
+  public addFooterLink(): void {
+    this.footerConfig.links?.push({});
+  }
+
+  public removeFooterLink(navigationLink: NavigationLink): void {
+    this.footerConfig.links = this.footerConfig.links?.filter((link: NavigationLink) => link !== navigationLink);
   }
 
   public updateDrawerContent(reset: boolean): void {
