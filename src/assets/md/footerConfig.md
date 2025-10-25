@@ -1,8 +1,8 @@
 ```ts
  interface FooterConfig {
   enable?: boolean;
-  svgLogo?: string;
   imgLogo?: string;
+  svgLogo?: string;
   copyright?: string;
   links?: NavigationLink[];
   cssClass?: string;

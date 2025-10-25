@@ -66,6 +66,11 @@
         Reset scroll position after navigation
       </mat-slide-toggle>
     </p>
+    <p>
+      <mat-slide-toggle [(ngModel)]="scaffoldConfig.anchorScrolling">
+        Enable navigation to anchors
+      </mat-slide-toggle>
+    </p>
     <mat-divider></mat-divider>
     @if (headerConfig) {
       <h2>Header</h2>
@@ -260,6 +265,10 @@
         }
       </mat-form-field>
       <mat-form-field>
+        <mat-label>Tooltip</mat-label>
+        <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
+      </mat-form-field>
+      <mat-form-field>
         <mat-label>Position</mat-label>
         <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
           @for (option of ["left", "center", "right"]; track option) {
@@ -268,10 +277,6 @@
             </mat-option>
           }
         </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Tooltip</mat-label>
-        <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
       </mat-form-field>
       <mat-divider></mat-divider>
     }

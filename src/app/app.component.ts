@@ -147,7 +147,8 @@ export class AppComponent {
     },
     // BottomBarConfig
     bottomBarConfig: {
-      enable: false
+      enable: false,
+      closeButtonId: 'bottom-bar_close'
     }
   };
 

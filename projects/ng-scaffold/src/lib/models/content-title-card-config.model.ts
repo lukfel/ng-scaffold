@@ -1,6 +1,6 @@
 export interface ContentTitleCardConfig {
   enable?: boolean;
-  label?: string;
   showBackButton?: boolean;
+  label?: string;
   cssClass?: string;
 }
