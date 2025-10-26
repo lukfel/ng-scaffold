@@ -239,7 +239,7 @@ This library includes several utility services:
 - **`DialogService`** – Display custom dialogs
 - **`BreakpointService`** – Detect screen breakpoints
 - **`ThemeService`** – Manage themes dynamically
-- **`RouterService`** – Track route changes and retreive route history
+- **`RouterService`** – Track route changes and retrieve route history
 - **`SeoService`** – Manage meta tags
 - **`LocalStorageService`** – Handle local storage
 
