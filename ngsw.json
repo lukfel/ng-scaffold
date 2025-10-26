@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1761479086651,
+  "timestamp": 1761479179482,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -22,7 +22,7 @@
         "/ng-scaffold/chunk-ZAREJYYF.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-CA2XQCAS.js",
+        "/ng-scaffold/main-5455GKSH.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/polyfills-SCHOHYNV.js",
         "/ng-scaffold/scripts-LS2XAREJ.js",
@@ -119,7 +119,7 @@
     "/ng-scaffold/assets/img/waw.svg": "e82ff0fa004b99fb0922079902a1b8ef33a6594b",
     "/ng-scaffold/assets/md/bottomBarConfig.md": "19c663ab16d13f72b73a14f6756a53f5c7471862",
     "/ng-scaffold/assets/md/contentTitleCardConfig.md": "113026539fe35770e8d1897625924eca7ce64f58",
-    "/ng-scaffold/assets/md/documentation.md": "7a622342076bbf964075d04c4789e734e6b540fa",
+    "/ng-scaffold/assets/md/documentation.md": "b17a4edd31bcb96f60b52cd21b9146d43509fde4",
     "/ng-scaffold/assets/md/drawerConfig.md": "808183059698f50af510d2878085c12d94f036bb",
     "/ng-scaffold/assets/md/floatingButtonConfig.md": "4e51f52d04a90e03f80f585716af65982ddc9d67",
     "/ng-scaffold/assets/md/footerConfig.md": "8f21a1664fd3689d32d05d797c11c6547de6e23c",
@@ -136,8 +136,8 @@
     "/ng-scaffold/chunk-WPZSFDGO.js": "e97a6b71c7238f8e358236ddc92895e5ffb4107a",
     "/ng-scaffold/chunk-ZAREJYYF.js": "753c32c731d57549b5efbfc2669c5e374731e36e",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/ng-scaffold/index.html": "113f95e8560c7168d2dc111a8ffb277f723c6180",
-    "/ng-scaffold/main-CA2XQCAS.js": "c1c2fc1dd0299ab26a4e2c0e424470bca82559af",
+    "/ng-scaffold/index.html": "03e26682ad5e0c160b1c9660eb3e98c381522a22",
+    "/ng-scaffold/main-5455GKSH.js": "d033155c653115c7c3476ff98cc994381d021dff",
     "/ng-scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/ng-scaffold/polyfills-SCHOHYNV.js": "d45c76c5960bab3ace7fd6d211b9579456241f8a",
     "/ng-scaffold/scripts-LS2XAREJ.js": "5c83ba58163a6dc795296ce4b4cfe09ba27cd293",
