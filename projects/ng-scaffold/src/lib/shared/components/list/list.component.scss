@@ -55,6 +55,7 @@
   .lf-table-item-title-wrapper {
     display: flex;
     flex-flow: column;
+    align-items: flex-start;
     flex: 1 1 $list-item-title-width;
     overflow: hidden;
 

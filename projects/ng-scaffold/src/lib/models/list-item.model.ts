@@ -11,7 +11,8 @@ export interface ListItem {
   disabled?: boolean;
   clickable?: boolean;
   buttons?: Button[];
-  hiddenButtons?: string[];
+  hiddenButtonIds?: string[];
+  disabledButtonIds?: string[];
 }
 
 export interface ListHeader {

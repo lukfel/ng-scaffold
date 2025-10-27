@@ -11,10 +11,13 @@ import { SharedModule } from '../../shared.module';
   imports: [SharedModule]
 })
 export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
+
   private dialogRef = inject<MatDialogRef<InputComponent>>(MatDialogRef, { optional: true });
   private config = inject<HeaderInputConfig>(MAT_DIALOG_DATA, { optional: true });
   private cd = inject(ChangeDetectorRef);
 
+
+  @ViewChild('input') public input: ElementRef = null!;
 
   @Input() public inputConfig: HeaderInputConfig = {};
   @Input() public isMobile: boolean = false;
@@ -23,7 +26,6 @@ export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() public inputChangeEvent = new EventEmitter<string>();
   @Output() public inputPrefixActionEvent = new EventEmitter<void>();
 
-  @ViewChild('input') public input: ElementRef = null!;
 
   public inputValue: string = '';
 

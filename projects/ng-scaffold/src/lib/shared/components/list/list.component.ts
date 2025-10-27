@@ -16,7 +16,8 @@ export class ListComponent {
   @Input() public header: ListHeader | null = null;
   @Input() public items: ListItem[] = [];
   @Input() public buttons: Button[] = [];
-  // @Input() public avatarFallbackPath?: string;
+  @Input() public avatarFallbackPath: string;
+  @Input() public showDividers: boolean = false;
 
   @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
   @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();
@@ -71,8 +72,8 @@ export class ListComponent {
     this.selectionChangeEvent.emit(selected);
   }
 
-  // public onImageError(event: Event): void {
-  //   const target = event.target as HTMLImageElement;
-  //   target.src = this.avatarFallbackPath || '';
-  // }
+  public onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    target.src = this.avatarFallbackPath || '';
+  }
 }

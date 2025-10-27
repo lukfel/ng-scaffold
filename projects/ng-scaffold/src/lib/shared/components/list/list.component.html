@@ -6,8 +6,7 @@
       <!-- avatar -->
       @if (header.avatar) {
         <div class="lf-table-item-avatar px-2">
-          <img [src]="header.avatar" alt="Avatar of header" />
-          <!-- (error)="onImageError($event)" -->
+          <img [src]="header.avatar" alt="Avatar of header" (error)="onImageError($event)" />
         </div>
       } @else if (header.matIcon || header.svgIcon) {
         <div class="lf-table-item-avatar px-2">
@@ -57,8 +56,10 @@
       <!-- avatar -->
       @if (item.avatar) {
         <div class="lf-table-item-avatar px-2">
-          <img [src]="item.avatar" [alt]="'Avatar of ' + item.title" />
-          <!-- (error)="onImageError($event)" -->
+          <img
+            [src]="item.avatar"
+            [alt]="'Avatar of ' + item.title"
+            (error)="onImageError($event)" />
         </div>
       } @else if (item.matIcon || item.svgIcon) {
         <div class="lf-table-item-avatar px-2">
@@ -71,7 +72,7 @@
         <span
           class="lf-table-item-title"
           (click)="item.clickable && !item.disabled ? itemClickEvent.emit(item) : null">
-          <span>{{ item.title }}</span>
+          {{ item.title }}
         </span>
         @if (item.subtitle) {
           <span class="lf-table-item-subtitle">{{ item.subtitle }}</span>
@@ -82,14 +83,16 @@
       <div class="lf-table-item-buttons">
         @let combinedButtons = getCombinedActions(item);
         @for (button of combinedButtons; track button.id) {
-          @if (!item.hiddenButtons?.includes(button.id)) {
+          @if (!item.hiddenButtonIds?.includes(button.id)) {
             @if (button.label) {
               <button
                 mat-button
                 class="lf-bottom-bar-button ml-2"
                 [ngClass]="button.cssClass"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
-                [disabled]="button.disabled || item.disabled"
+                [disabled]="
+                  button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id)
+                "
                 [matTooltip]="button.tooltip">
                 @if (button.matIcon || button.svgIcon) {
                   <lf-icon
@@ -105,7 +108,9 @@
                 class="lf-bottom-bar-button-icon ml-2"
                 [ngClass]="!button.disabled && !item.disabled ? button.cssClass : ''"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
-                [disabled]="button.disabled || item.disabled"
+                [disabled]="
+                  button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id)
+                "
                 [matTooltip]="button.tooltip">
                 <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
               </button>
@@ -125,5 +130,8 @@
         </div>
       }
     </div>
+    @if (showDividers) {
+      <mat-divider></mat-divider>
+    }
   }
 </div>

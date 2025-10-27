@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { isDevMode, NgModule, SecurityContext } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { ScaffoldLoadingInterceptor, ScaffoldModule } from '@lukfel/ng-scaffold';
 import { marked, MarkedOptions, Tokens } from 'marked';
 import { MarkdownModule, MARKED_OPTIONS } from 'ngx-markdown';
@@ -22,17 +22,16 @@ export function markedOptionsFactory(): MarkedOptions {
 }
 
 @NgModule({
-    declarations: [AppComponent],
-    bootstrap: [AppComponent],
+    declarations: [
+        AppComponent
+    ],
     imports: [
-        BrowserAnimationsModule,
+        BrowserModule,
         AppRoutingModule,
         SharedModule,
         ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode(), outlineIcons: true }),
         // ServiceWorkerModule.register('ngsw-worker.js', {
         //     enabled: true,
-        //     // Register the ServiceWorker as soon as the application is stable
-        //     // or after 30 seconds (whichever comes first).
         //     registrationStrategy: 'registerWhenStable:30000'
         // }),
         MarkdownModule.forRoot(
@@ -53,6 +52,9 @@ export function markedOptionsFactory(): MarkedOptions {
             useClass: ScaffoldLoadingInterceptor,
             multi: true
         }
+    ],
+    bootstrap: [
+        AppComponent
     ]
 })
 export class AppModule { }

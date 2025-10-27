@@ -13,6 +13,7 @@ export class FileUploadComponent {
 
   private logger: Logger = inject(Logger);
 
+
   @ViewChild('file') public fileElement: ElementRef;
 
   @Input() public color: 'primary' | 'accent' | 'warn' = 'primary';
@@ -23,6 +24,7 @@ export class FileUploadComponent {
   @Input() public tooltip: string;
 
   @Output() public fileChangeEvent: EventEmitter<File> = new EventEmitter<File>();
+
 
   public selectFile(event: Event): void {
     const input: HTMLInputElement = event.target as HTMLInputElement;
