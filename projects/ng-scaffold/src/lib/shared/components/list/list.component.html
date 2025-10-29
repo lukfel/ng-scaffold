@@ -47,7 +47,7 @@
   }
 
   <!-- Items -->
-  @for (item of items; track item.id) {
+  @for (item of items; track item.id; let last = $last) {
     <div
       class="lf-table-item lf-table-item-data"
       [class.active]="item.checked"
@@ -131,7 +131,7 @@
         </div>
       }
     </div>
-    @if (showDividers) {
+    @if (showDividers && !last) {
       <mat-divider></mat-divider>
     }
   }
