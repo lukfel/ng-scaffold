@@ -54,8 +54,6 @@ export class ListComponent {
   }
 
   public selectAll(event: MatCheckboxChange): void {
-    // this.items.filter((item: ListItem) => !item.disabled).forEach((item: ListItem) => (item.checked = event.checked));
-
     this.items.forEach((item: ListItem) => {
       if (!item.disabled) item.checked = event.checked;
     });

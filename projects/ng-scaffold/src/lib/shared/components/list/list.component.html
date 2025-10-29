@@ -52,7 +52,8 @@
       class="lf-table-item lf-table-item-data"
       [class.active]="item.checked"
       [class.disabled]="item.disabled"
-      [class.clickable]="item.clickable && !item.disabled">
+      [class.clickable]="item.clickable && !item.disabled"
+      [ngClass]="item.cssClass">
       <!-- avatar -->
       @if (item.avatar) {
         <div class="lf-table-item-avatar px-2">
@@ -84,15 +85,16 @@
         @let combinedButtons = getCombinedActions(item);
         @for (button of combinedButtons; track button.id) {
           @if (!item.hiddenButtonIds?.includes(button.id)) {
+            @let disabled =
+              button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id);
             @if (button.label) {
               <button
                 mat-button
                 class="lf-bottom-bar-button ml-2"
+                [class.disabled]="disabled"
                 [ngClass]="button.cssClass"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
-                [disabled]="
-                  button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id)
-                "
+                [disabled]="disabled"
                 [matTooltip]="button.tooltip">
                 @if (button.matIcon || button.svgIcon) {
                   <lf-icon
@@ -106,11 +108,10 @@
               <button
                 mat-icon-button
                 class="lf-bottom-bar-button-icon ml-2"
-                [ngClass]="!button.disabled && !item.disabled ? button.cssClass : ''"
+                [class.disabled]="disabled"
+                [ngClass]="button.cssClass"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
-                [disabled]="
-                  button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id)
-                "
+                [disabled]="disabled"
                 [matTooltip]="button.tooltip">
                 <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
               </button>
