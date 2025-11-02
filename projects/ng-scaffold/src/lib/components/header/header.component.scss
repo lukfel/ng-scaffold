@@ -79,7 +79,8 @@
   }
 }
 
-// .lf-menu-icons {
+.lf-menu-icons {
+  min-height: unset !important;
 //   display: flex;
 //   flex-flow: row wrap;
 //   align-items: center;
@@ -93,7 +94,7 @@
 //   //   padding: 0;
 //   //   border-radius: 50%;
 //   // }
-// }
+}
 
 .lf-header-progress-bar {
   z-index: $header-z-index;
