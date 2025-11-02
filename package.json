@@ -1,6 +1,6 @@
 {
   "name": "ng-scaffold-app",
-  "version": "20.0.25",
+  "version": "20.0.26",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,9 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromeHeadless --code-coverage true --watch false",
     "lint": "ng lint --fix",
-    "build-lib": "ng build ng-scaffold --configuration production",
-    "watch-lib": "ng build ng-scaffold --watch --configuration development",
-    "publish-lib": "npm publish ./dist/ng-scaffold --access public",
+    "lib:build": "ng build ng-scaffold --configuration production",
+    "lib:watch": "ng build ng-scaffold --watch --configuration development",
+    "lib:publish": "npm publish ./dist/ng-scaffold --access public",
     "deploy": "ng deploy --project ng-scaffold-app --base-href /ng-scaffold/ --repo https://github.com/lukfel/ng-scaffold.git"
   },
   "dependencies": {

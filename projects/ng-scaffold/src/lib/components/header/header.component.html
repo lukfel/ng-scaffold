@@ -133,7 +133,7 @@
             <lf-icon
               [matIcon]="button.matIcon"
               [svgIcon]="button.svgIcon"
-              [alignMiddle]="true"></lf-icon>
+              verticalAlign="bottom"></lf-icon>
             <!-- label -->
             @if (button.label) {
               <span>{{ button.label }}</span>
@@ -142,7 +142,7 @@
         }
       }
       <!-- icon menu buttons -->
-      <div class="lf-menu-icons px-1">
+      <div mat-menu-item class="lf-menu-icons px-1">
         @for (button of menuButton.menuButtons; track button) {
           <!-- icon button -->
           @if (!button.label && (button.matIcon || button.svgIcon)) {
@@ -153,7 +153,10 @@
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
               <!-- icon -->
-              <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
+              <lf-icon
+                [matIcon]="button.matIcon"
+                [svgIcon]="button.svgIcon"
+                verticalAlign="top"></lf-icon>
             </button>
           }
         }

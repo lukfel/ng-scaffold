@@ -17,5 +17,5 @@ export class IconComponent {
 
   @Input() public matIcon: string | undefined;
   @Input() public svgIcon: string | undefined;
-  @Input() public alignMiddle: boolean = false;
+  @Input() public verticalAlign: 'top' | 'middle' | 'bottom' | null = null;
 }

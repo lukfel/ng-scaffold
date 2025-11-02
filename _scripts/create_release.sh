@@ -30,7 +30,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-npm run build-lib    # Builds the library in production environment
+npm run lib:build    # Builds the library in production environment
 if [ $? -ne 0 ]; then
   echo "Build failed. Aborting release."
   exit 1
@@ -48,7 +48,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-npm run build-lib    # Builds the library in production environment
+npm run lib:build    # Builds the library in production environment
 if [ $? -ne 0 ]; then
   echo "Build failed. Aborting release."
   exit 1
@@ -60,7 +60,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-npm run publish-lib   # Publish the library
+npm run lib:publish   # Publish the library
 if [ $? -ne 0 ]; then
   echo "Publish failed."
   exit 1
