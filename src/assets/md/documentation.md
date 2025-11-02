@@ -5,7 +5,7 @@ This Angular library provides a foundational scaffold for modern web and mobile 
 
 - **NPM**: [@lukfel/ng-scaffold](https://www.npmjs.com/package/@lukfel/ng-scaffold)
 - **Demo**: [lukfel.github.io/ng-scaffold](https://lukfel.github.io/ng-scaffold)
-- **Examples**: [Create a Tournament](https://www.create-a-tournament.com), [What a Waste](https://www.what-a-waste.at), [Uglygotchi](https://www.uglygotchi.at)
+- **Examples**: [Uglygotchi](https://www.uglygotchi.at), [What a Waste](https://www.what-a-waste.at), [Create a Tournament](https://www.create-a-tournament.com)
 
 
 
@@ -146,12 +146,11 @@ export class AppComponent {
 }
 ```
 
-### Update Configuration
-Define the `ScaffoldConfig` in `app.component.ts` and update the `scaffoldConfig` property in `ScaffoldService`.
+### Initialize Configuration
+Define the `ScaffoldConfig` in your `app.component.ts` and initialize the `scaffoldConfig` property in `ScaffoldService`.
 
 * **Notes:**
-    * If a sub-configuration (e.g., `headerConfig`) is missing or does not have `enable: true`, the corresponding UI element will not be displayed.
-    * Refer to the demo project for full configuration details.
+    * If a sub-configuration (e.g. `headerConfig`) is missing or does not have `enable: true`, the corresponding UI element will not be displayed.
 
 ```ts
 import { ScaffoldService, ScaffoldConfig } from '@lukfel/ng-scaffold';
@@ -162,12 +161,32 @@ export class AppComponent {
     scrollPositionRestoration: true,
     headerConfig: { enable: true, title: 'Scaffold', subtitle: 'by Lukas Felbinger' },
     navbarConfig: { enable: true },
-    footerConfig: { enable: true, copyright: '© Lukas Felbinger 2023' },
+    footerConfig: { enable: true, copyright: '© Lukas Felbinger 2025' },
     floatingButtonConfig: { enable: true }
   };
 
   constructor(private scaffoldService: ScaffoldService) {
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+  }
+}
+```
+
+### Update Configuration (immutable, partial)
+The `ScaffoldService` provides a method `updateScaffoldProperty()` to partially update the `ScaffoldConfig` in a type-safe way. It performs an immutable update, creating a new configuration object with the updated property and emits the new state.
+
+```ts
+import { ScaffoldService, DrawerConfig } from '@lukfel/ng-scaffold';
+
+export class AppComponent {
+
+  constructor(private scaffoldService: ScaffoldService) {
+    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+  }
+
+  public toggleDrawer(): void {
+    const currentDrawerConfig: DrawerConfig = this.scaffoldService.scaffoldConfig.drawerConfig;
+    const updatedDrawerConfig: DrawerConfig = { ...currentDrawerConfig, open: !currentDrawerConfig.open };
+    this.scaffoldService.updateScaffoldProperty('drawerConfig', updatedDrawerConfig);
   }
 }
 ```

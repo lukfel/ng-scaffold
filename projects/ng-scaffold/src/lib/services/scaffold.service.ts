@@ -20,6 +20,7 @@ export class ScaffoldService {
   }
 
   public set scaffoldConfig(value: ScaffoldConfig) {
+    if (this.libraryConfig?.debugging) this.logger.log('[UPDATE] ScaffoldConfig', value);
     this._scaffoldConfig$.next(value);
   }
 
@@ -63,10 +64,11 @@ export class ScaffoldService {
   }
 
   // Update a specific property in the ScaffoldConfig
-  public updateScaffoldProperty(property: keyof ScaffoldConfig, value: unknown): void {
+  public updateScaffoldProperty<K extends keyof ScaffoldConfig>(property: K, value: ScaffoldConfig[K]): void {
     const currentState: ScaffoldConfig = this._scaffoldConfig$.getValue();
 
     if (currentState[property] === value) {
+      if (this.libraryConfig?.debugging) this.logger.log(`[UNCHANGED] ScaffoldConfig.${property}`, value)
       return;
     }
 

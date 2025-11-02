@@ -15,6 +15,7 @@ export class FloatingButtonComponent implements OnInit {
   @Input() public isMobile: boolean = false;
   @Input() public bottomBarEnabled: boolean = false;
 
+  @Output() public floatingButtonConfigUpdateEvent = new EventEmitter<FloatingButtonConfig>();
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
 
 
@@ -25,18 +26,18 @@ export class FloatingButtonComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.floatingButtonConfig) {
-      if (!this.floatingButtonConfig.horizontalPosition) {
-        this.floatingButtonConfig.horizontalPosition = 'right';
-      }
+      const updatedFloatingButtonConfigConfig: FloatingButtonConfig = {
+        ...this.floatingButtonConfig,
+        matIcon: (!this.floatingButtonConfig.matIcon && !this.floatingButtonConfig.svgIcon) ? 'arrow_upward' : this.floatingButtonConfig.matIcon || this.floatingButtonConfig.svgIcon,
+        horizontalPosition: this.floatingButtonConfig.horizontalPosition ?? 'right',
+        bottomPositionPx: this.floatingButtonConfig.bottomPositionPx ?? this.DEFAULT_OFFSET,
+      };
 
-      if (!this.floatingButtonConfig.matIcon && !this.floatingButtonConfig?.svgIcon) {
-        this.floatingButtonConfig.matIcon = 'arrow_upward';
-      }
-
-      if (!this.floatingButtonConfig.bottomPositionPx) {
-        this.floatingButtonConfig.bottomPositionPx = this.DEFAULT_OFFSET;
+      if (JSON.stringify(updatedFloatingButtonConfigConfig) !== JSON.stringify(this.floatingButtonConfig)) {
+        this.floatingButtonConfigUpdateEvent.emit(updatedFloatingButtonConfigConfig);
       }
     }
+
   }
 
   public buttonClicked(id?: string): void {

@@ -137,7 +137,7 @@ class MockScaffoldService {
           externalTab: true
         },
       ],
-      copyright: '© Lukas Felbinger 2023. All rights reserved.'
+      copyright: '© Lukas Felbinger 2025. All rights reserved.'
     },
     // ContentTitleCardConfig
     contentTitleCardConfig: {

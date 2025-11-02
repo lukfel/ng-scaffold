@@ -42,11 +42,11 @@ describe('DrawerComponent', () => {
   });
 
   it('should call onDrawerClosed method when the drawer is closed', () => {
-    spyOn(component, 'onDrawerClosed');
+    spyOn(component, 'drawerClosed');
     component.drawerConfig = { enable: true };
     fixture.detectChanges();
     const drawer = fixture.debugElement.query(By.css('.lf-drawer'));
     drawer.nativeElement.dispatchEvent(new Event('closed'));
-    expect(component.onDrawerClosed).toHaveBeenCalled();
+    expect(component.drawerClosed).toHaveBeenCalled();
   });
 });

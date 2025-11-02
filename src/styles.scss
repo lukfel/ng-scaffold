@@ -48,12 +48,6 @@ $theme4: (
   color: #ff5722 !important;
 }
 
-
-// html {
-//   color-scheme: light dark;
-//   @include mat.theme((
-//     color: mat.$violet-palette,
-//     typography: Roboto,
-//     density: 0
-//   ));
-// }
+.lf-wowen-black:not(.disabled) {
+  color: #000 !important;
+}

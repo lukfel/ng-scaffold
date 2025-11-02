@@ -151,6 +151,11 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Header
+  public headerConfigUpdated(headerConfig: HeaderConfig): void {
+    this.scaffoldService.updateScaffoldProperty('headerConfig', headerConfig);
+  }
+
   public headerButtonClicked(id: string): void {
     this.scaffoldService.buttonClickEventValue = id;
     this.headerButtonClickEvent.emit(id);
@@ -165,13 +170,25 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this.headerInputChangeEvent.emit(value);
   }
 
+  // Navbar
   public navbarButtonClicked(id: string): void {
     this.scaffoldService.buttonClickEventValue = id;
     this.navbarButtonClickEvent.emit(id);
   }
 
+  // Drawer
+  public drawerConfigUpdated(drawerConfig: DrawerConfig): void {
+    this.scaffoldService.updateScaffoldProperty('drawerConfig', drawerConfig);
+  }
+
+  // Content title card
   public backButtonClicked(): void {
     this.routerService.navigateBack();
+  }
+
+  // Floating button
+  public floatingButtonConfigUpdated(floatingButtonConfig: FloatingButtonConfig): void {
+    this.scaffoldService.updateScaffoldProperty('floatingButtonConfig', floatingButtonConfig);
   }
 
   public floatingButtonClicked(id: string): void {
@@ -183,6 +200,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Bottom bar
   public bottomBarCloseClicked(id: string): void {
     this.scaffoldService.buttonClickEventValue = id;
     this.bottomBarButtonClickEvent.emit(id);

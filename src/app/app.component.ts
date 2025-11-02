@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
+import { BreakpointService, CONFIG, DialogService, DrawerConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -36,7 +36,7 @@ export class AppComponent {
       enable: true,
       svgLogo: 'logo',
       title: 'Angular Scaffold',
-      subtitle: `by Lukas Felbinger (v${packageJson.version})`,
+      subtitle: `v${packageJson.version}`,
       titleRouterLink: 'start',
       loading: false,
       showRouteLoading: true,
@@ -163,10 +163,10 @@ export class AppComponent {
   // External links
   public externalMenuButtons: MenuButton[] = [
     {
-      id: 'https://www.create-a-tournament.com',
-      label: 'Create A Tournament',
-      svgIcon: 'cat_logo',
-      cssClass: 'lf-cat-blue'
+      id: 'https://www.uglygotchi.at',
+      label: 'Uglygotchi',
+      svgIcon: 'ugly_logo',
+      cssClass: 'lf-ugly-orange'
     },
     {
       id: 'https://www.what-a-waste.at',
@@ -174,11 +174,17 @@ export class AppComponent {
       svgIcon: 'waw_logo',
       cssClass: 'lf-waw-cyan'
     },
+    // {
+    //   id: 'https://www.wowen.at',
+    //   label: 'Wowen',
+    //   svgIcon: 'wowen_logo',
+    //   cssClass: 'lf-wowen-black'
+    // },
     {
-      id: 'https://www.uglygotchi.at',
-      label: 'Uglygotchi',
-      svgIcon: 'ugly_logo',
-      cssClass: 'lf-ugly-orange'
+      id: 'https://www.create-a-tournament.com',
+      label: 'Create A Tournament',
+      svgIcon: 'cat_logo',
+      cssClass: 'lf-cat-blue'
     }
   ];
 
@@ -193,29 +199,35 @@ export class AppComponent {
     this.iconRegistry.addSvgIcon('cat_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/cat.svg'));
     this.iconRegistry.addSvgIcon('waw_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/waw.svg'));
     this.iconRegistry.addSvgIcon('ugly_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/uglygotchi.svg'));
+    this.iconRegistry.addSvgIcon('wowen_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/wowen.svg'));
 
     // Set config for scaffold
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
 
     // Store the rightMenuButtons from the scaffoldConfig for desktop
-    const defaultRightMenuButtons: MenuButton[] = this.scaffoldConfig.headerConfig?.rightMenuButtons || [];
+    const defaultRightMenuButtons: MenuButton[] = this.scaffoldService.scaffoldConfig.headerConfig?.rightMenuButtons || [];
 
     // Update the rightMenuButtons when on mobile breakpoint
     this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
-      if (this.scaffoldConfig?.headerConfig) {
+      const headerConfig: HeaderConfig | undefined = this.scaffoldService.scaffoldConfig.headerConfig;
+      if (headerConfig) {
         // Check which breakpoint is active
         if (result.breakpoints[Breakpoints.XSmall]) {
           this.mobileRightMenuButtons[0].menuButtons = defaultRightMenuButtons;
-          this.scaffoldConfig.headerConfig.rightMenuButtons = this.mobileRightMenuButtons;
+          const updatedHeaderConfig: HeaderConfig = { ...headerConfig, rightMenuButtons: this.mobileRightMenuButtons };
+          this.scaffoldService.updateScaffoldProperty('headerConfig', updatedHeaderConfig);
         } else {
-          this.scaffoldConfig.headerConfig.rightMenuButtons = defaultRightMenuButtons;
+          const updatedHeaderConfig: HeaderConfig = { ...headerConfig, rightMenuButtons: defaultRightMenuButtons };
+          this.scaffoldService.updateScaffoldProperty('headerConfig', updatedHeaderConfig);
         }
       }
 
       // Initially disable navbar on desktop
-      if (this.scaffoldConfig?.navbarConfig?.enable === false) {
+      const navbarConfig: DrawerConfig | undefined = this.scaffoldService.scaffoldConfig.navbarConfig;
+      if (navbarConfig?.enable === false) {
         if (result.breakpoints[Breakpoints.XSmall]) {
-          this.scaffoldConfig.navbarConfig.enable = true;
+          const updatedNavbarConfig: NavbarConfig = { ...navbarConfig, enable: true };
+          this.scaffoldService.updateScaffoldProperty('navbarConfig', updatedNavbarConfig);
         }
       }
     });
@@ -233,12 +245,13 @@ export class AppComponent {
 
   // Listen to header click events
   public headerButtonClickEvent(id: string): void {
-    this.logger.log('You clicked the floating button with id: ', id);
-    // this.snackbarService.openSnackbar(`You clicked the header button with id: ${id}`);
+    this.logger.log('You clicked the header button with id: ', id);
 
     if (id === 'drawer') {
-      if (this.scaffoldConfig.drawerConfig) {
-        this.scaffoldConfig.drawerConfig.open = !this.scaffoldConfig.drawerConfig.open;
+      const drawerConfig: DrawerConfig | undefined = this.scaffoldService?.scaffoldConfig?.drawerConfig;
+      if (drawerConfig) {
+        const updatedDrawerConfig: DrawerConfig = { ...drawerConfig, open: !drawerConfig.open }
+        this.scaffoldService.updateScaffoldProperty('drawerConfig', updatedDrawerConfig);
       }
       return;
     } else if (id === 'github') {

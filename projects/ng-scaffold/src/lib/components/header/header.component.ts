@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   @Input() public routeLoading: boolean = false;
   @Input() public currentRoute: string;
 
+  @Output() public headerConfigUpdateEvent = new EventEmitter<HeaderConfig>();
   @Output() public headerButtonClickEvent = new EventEmitter<string>();
   @Output() public headerInputSubmitEvent = new EventEmitter<string>();
   @Output() public headerInputChangeEvent = new EventEmitter<string>();
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // Avoid initializing the header with an open input field on mobile
     if (this.isMobile && this.headerConfig?.inputConfig?.enable) {
-      this.headerConfig.inputConfig.enable = false;
+      const updatedHeaderConfig: HeaderConfig = { ...this.headerConfig, inputConfig: { ...this.headerConfig?.inputConfig, enable: false } };
+      this.headerConfigUpdateEvent.emit(updatedHeaderConfig);
     }
   }
 
@@ -41,6 +43,11 @@ export class HeaderComponent implements OnInit {
 
   public inputChanged(value: string): void {
     this.headerInputChangeEvent.emit(value);
+  }
+
+  public inputClosed(): void {
+    const updatedHeaderConfig: HeaderConfig = { ...this.headerConfig, inputConfig: { ...this.headerConfig?.inputConfig, enable: false } };
+    this.headerConfigUpdateEvent.emit(updatedHeaderConfig);
   }
 
   public isActive(id: string): boolean {

@@ -103,7 +103,7 @@ describe('FooterComponent', () => {
   });
 
   it('should display copyright if provided', () => {
-    component.footerConfig = { enable: true, copyright: 'Copyright © 2023' };
+    component.footerConfig = { enable: true, copyright: 'Copyright © 2025' };
     fixture.detectChanges();
     const copyright = fixture.debugElement.query(By.css('.lf-footer-copyright'));
     expect((<HTMLElement>copyright.nativeElement).innerText).toContain('Copyright');

@@ -17,8 +17,6 @@ export class ContentTitleCardComponent {
   @Output() public backButtonClickEvent = new EventEmitter<void>();
 
 
-  public inputValue: string = '';
-
   public backButtonClicked(): void {
     this.backButtonClickEvent.emit();
   }

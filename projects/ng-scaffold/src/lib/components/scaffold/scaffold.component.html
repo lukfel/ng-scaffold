@@ -12,6 +12,7 @@
     [isMobile]="isMobile"
     [routeLoading]="routeLoading"
     [currentRoute]="currentRoute"
+    (headerConfigUpdateEvent)="headerConfigUpdated($event)"
     (headerButtonClickEvent)="headerButtonClicked($event)"
     (headerInputSubmitEvent)="headerInputSubmitted($event)"
     (headerInputChangeEvent)="headerInputChanged($event)"></lf-header>
@@ -39,7 +40,8 @@
       [drawerConfig]="drawerConfig"
       [drawerPortal]="drawerPortal"
       [isMobile]="isMobile"
-      [fixedOffset]="headerConfig?.enable ? 64 : 0">
+      [fixedOffset]="headerConfig?.enable ? 64 : 0"
+      (drawerConfigUpdateEvent)="drawerConfigUpdated($event)">
       <!-- drawer content -->
       <ng-content select="[drawerContent]" drawerContent></ng-content>
       <!-- content title card -->
@@ -68,6 +70,7 @@
     [onTop]="scrollTopPosition <= 0"
     [isMobile]="isMobile && navbarConfig?.enable!"
     [bottomBarEnabled]="bottomBarConfig?.enable!"
+    (floatingButtonConfigUpdateEvent)="floatingButtonConfigUpdated($event)"
     (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
   <!-- bottom bar -->
   <lf-bottom-bar

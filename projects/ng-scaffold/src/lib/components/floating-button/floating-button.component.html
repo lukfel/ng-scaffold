@@ -16,10 +16,8 @@
       <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
         {{ floatingButtonConfig.matIcon }}
       </mat-icon>
-    } @else {
-      @if (floatingButtonConfig.svgIcon) {
-        <mat-icon [svgIcon]="floatingButtonConfig.svgIcon!"></mat-icon>
-      }
+    } @else if (floatingButtonConfig.svgIcon) {
+      <mat-icon [svgIcon]="floatingButtonConfig.svgIcon!"></mat-icon>
     }
     <!-- svg icon -->
     <!-- label -->
