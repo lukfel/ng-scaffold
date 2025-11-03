@@ -174,18 +174,18 @@ export class AppComponent {
       svgIcon: 'waw_logo',
       cssClass: 'lf-waw-cyan'
     },
-    // {
-    //   id: 'https://www.wowen.at',
-    //   label: 'Wowen',
-    //   svgIcon: 'wowen_logo',
-    //   cssClass: 'lf-wowen-black'
-    // },
     {
       id: 'https://www.create-a-tournament.com',
       label: 'Create A Tournament',
       svgIcon: 'cat_logo',
       cssClass: 'lf-cat-blue'
-    }
+    },
+    {
+      id: 'https://www.wowen.at',
+      label: 'Wowen',
+      svgIcon: 'wowen_logo',
+      cssClass: 'lf-wowen-black'
+    },
   ];
 
   private currentTheme: string = '';

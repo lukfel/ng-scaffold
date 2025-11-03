@@ -5,7 +5,7 @@ This Angular library provides a foundational scaffold for modern web and mobile 
 
 - **NPM**: [@lukfel/ng-scaffold](https://www.npmjs.com/package/@lukfel/ng-scaffold)
 - **Demo**: [lukfel.github.io/ng-scaffold](https://lukfel.github.io/ng-scaffold)
-- **Examples**: [Uglygotchi](https://www.uglygotchi.at), [What a Waste](https://www.what-a-waste.at), [Create a Tournament](https://www.create-a-tournament.com)
+- **Examples**: [Uglygotchi](https://www.uglygotchi.at), [What a Waste](https://www.what-a-waste.at), [Create a Tournament](https://www.create-a-tournament.com), [Wowen](https://www.wowen.at)
 
 
 
