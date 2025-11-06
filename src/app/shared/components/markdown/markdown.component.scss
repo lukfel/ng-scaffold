@@ -1,5 +1,23 @@
-::ng-deep {
-    pre {
-        margin: 0 !important;
+.lf-dialog-content {
+    padding: 0 24px 16px 24px !important;
+    
+    ::ng-deep {
+        pre {
+            max-height: 400px;
+            margin: 0 !important;
+            overflow-x: hidden;
+
+            @media screen and (max-width: 800px) {
+                overflow-x: auto;
+            }
+        }
+
+        code {
+            font-size: 0.9em !important;
+        }
     }
+}
+
+.lf-dialog-actions {
+    padding: 0 24px 16px 24px !important;
 }

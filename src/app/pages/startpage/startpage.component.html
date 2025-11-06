@@ -2,13 +2,18 @@
   <div class="lf-startpage">
     <h1>Demo</h1>
     <p>
-      This is a simple demo application for the Angular scaffold library
-      <b>&#64;lukfel/ng-scaffold</b>
-      that lets you play around with the elements and services. For more technical information see
-      the
+      This is a simple demo page for the Angular Scaffold library
+      <b>&#64;lukfel/ng-scaffold.</b>
+      <br />
+      Play around with the individual UI elements and copy the configuration to your Angular
+      application. For more technical information see the
       <a class="lf-link" [routerLink]="['/documentation']">Documentation</a>
       .
     </p>
+    <button mat-flat-button color="accent" (click)="copyConfig()">
+      <mat-icon>content_copy</mat-icon>
+      Copy current config
+    </button>
     <mat-divider></mat-divider>
     <h2>Themes</h2>
     <p>
@@ -51,7 +56,9 @@
     </div>
     <mat-divider></mat-divider>
     <h2>Scaffold</h2>
-    <a class="link" (click)="openMarkdownDialog('scaffoldConfig.md')">View ScaffoldConfig</a>
+    <a class="link" (click)="openMarkdownDialog('ScaffoldConfig', 'scaffoldConfig.md')">
+      View ScaffoldConfig
+    </a>
     <p>
       The scaffold is the global wrapper element that contains all ui elements and displays them
       based on the ScaffoldConfig config.
@@ -74,7 +81,9 @@
     <mat-divider></mat-divider>
     @if (headerConfig) {
       <h2>Header</h2>
-      <a class="link" (click)="openMarkdownDialog('headerConfig.md')">View HeaderConfig</a>
+      <a class="link" (click)="openMarkdownDialog('HeaderConfig', 'headerConfig.md')">
+        View HeaderConfig
+      </a>
       <p>
         The header is a fixed responsive toolbar with a customizable logo, title, subtitle,
         menu-buttons and an input field.
@@ -146,7 +155,9 @@
     }
     @if (contentTitleCardConfig) {
       <h2>Title Card</h2>
-      <a class="link" (click)="openMarkdownDialog('contentTitleCardConfig.md')">
+      <a
+        class="link"
+        (click)="openMarkdownDialog('ContentTitleCardConfig', 'contentTitleCardConfig.md')">
         View ContentTitleCardConfig
       </a>
       <p>
@@ -169,7 +180,9 @@
     }
     @if (navbarConfig) {
       <h2>Navbar</h2>
-      <a class="link" (click)="openMarkdownDialog('navbarConfig.md')">View NavbarConfig</a>
+      <a class="link" (click)="openMarkdownDialog('NavbarConfig', 'navbarConfig.md')">
+        View NavbarConfig
+      </a>
       <p>
         The navbar is a fixed navigation element that is positioned vertically left on desktop and
         responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation
@@ -187,7 +200,9 @@
     }
     @if (drawerConfig) {
       <h2>Drawer</h2>
-      <a class="link" (click)="openMarkdownDialog('drawerConfig.md')">View DrawerConfig</a>
+      <a class="link" (click)="openMarkdownDialog('DrawerConfig', 'drawerConfig.md')">
+        View DrawerConfig
+      </a>
       <p>
         The drawer is a collapsible element that allows you to place custom dynamic side content. It
         is responsive and changes to overlay mode on mobile.
@@ -218,7 +233,9 @@
     }
     @if (footerConfig) {
       <h2>Footer</h2>
-      <a class="link" (click)="openMarkdownDialog('footerConfig.md')">View FooterConfig</a>
+      <a class="link" (click)="openMarkdownDialog('FooterConfig', 'footerConfig.md')">
+        View FooterConfig
+      </a>
       <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
       <p>
         <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
@@ -254,7 +271,9 @@
     }
     @if (floatingButtonConfig) {
       <h2>Floating Button</h2>
-      <a class="link" (click)="openMarkdownDialog('floatingButtonConfig.md')">
+      <a
+        class="link"
+        (click)="openMarkdownDialog('FloatingButtonConfig', 'floatingButtonConfig.md')">
         View FloatingButtonConfig
       </a>
       <p>
@@ -300,7 +319,9 @@
     }
     @if (bottomBarConfig) {
       <h2>Bottom Bar</h2>
-      <a class="link" (click)="openMarkdownDialog('bottomBarConfig.md')">View BottomBarConfig</a>
+      <a class="link" (click)="openMarkdownDialog('BottomBarConfig', 'bottomBarConfig.md')">
+        View BottomBarConfig
+      </a>
       <p>
         The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
         enabled). It can be used to handle custom bulk actions for selected items in large lists.

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
 import { Subscription } from 'rxjs';
-import { MarkdownComponent } from 'src/app/shared/components/markdown/markdown.component';
+import { MarkdownComponent, MarkdownDialogData } from 'src/app/shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
@@ -87,10 +87,35 @@ export class StartpageComponent implements OnInit, OnDestroy {
   }
 
 
-  public openMarkdownDialog(file: string): void {
+  public copyConfig(): void {
+    const replacer = (key: string, value: any): void => {
+      if (value === '' || value === null || value === undefined || value === false) {
+        return undefined;
+      }
+
+      if (value && typeof value === 'object') {
+        if ('enable' in value && value.enable === false) {
+          return undefined;
+        }
+      }
+
+      return value;
+    };
+
+    const formatted: string = 'public scaffoldConfig: ScaffoldConfig = ' + JSON.stringify(this.scaffoldConfig, replacer, 2).replace(/"([^"]+)":/g, '$1:').replace(/"/g, '\'');
+    this.openMarkdownDialog('Copy current config', '', formatted, true)
+  }
+
+  public openMarkdownDialog(title: string, file: string, data?: string, showCopy: boolean = false): void {
     this.dialogService.openCustomDialog(MarkdownComponent, {
       autoFocus: false,
-      data: `assets/md/${file}`
+      data: {
+        title,
+        src: file ? `assets/md/${file}` : '',
+        data,
+        showCopy
+      } as MarkdownDialogData,
+      maxWidth: '1000px'
     });
   }
 

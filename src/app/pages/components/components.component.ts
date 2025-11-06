@@ -10,7 +10,7 @@ import { take } from 'rxjs';
 })
 export class ComponentsComponent implements OnInit {
   private scaffoldService = inject(ScaffoldService);
-  private snackbar = inject(SnackbarService);
+  private snackbarService = inject(SnackbarService);
 
 
   public header: ListHeader = {
@@ -79,14 +79,14 @@ export class ComponentsComponent implements OnInit {
 
   public onListButtonClick(event: { buttonId: string, item: ListItem }): void {
     if (event?.buttonId === 'edit') {
-      this.snackbar.openSnackbar(`Edit ${event?.item?.title}`, 'Close');
+      this.snackbarService.openSnackbar(`Edit ${event?.item?.title}`, 'Close');
     } else if (event?.buttonId === 'delete') {
-      this.snackbar.openSnackbar(`Delete ${event?.item?.title}`, 'Close');
+      this.snackbarService.openSnackbar(`Delete ${event?.item?.title}`, 'Close');
     }
   }
 
   public onListItemClick(item: ListItem): void {
-    this.snackbar.openSnackbar(`Click ${item?.title}`, 'Close');
+    this.snackbarService.openSnackbar(`Click ${item?.title}`, 'Close');
   }
 
   public onFileChange(file: File): void {
@@ -94,6 +94,6 @@ export class ComponentsComponent implements OnInit {
   }
 
   public onPlaceholderButtonClick(): void {
-    this.snackbar.openSnackbar('Clicked placeholder button', 'Close');
+    this.snackbarService.openSnackbar('Clicked placeholder button', 'Close');
   }
 }

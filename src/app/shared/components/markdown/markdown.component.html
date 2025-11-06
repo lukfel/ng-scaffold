@@ -1,1 +1,17 @@
-<markdown [src]="data"></markdown>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content class="lf-dialog-content">
+  @if (data.src && !data.data) {
+    <markdown [src]="data.src"></markdown>
+  } @else if (!data.src && data.data) {
+    <markdown [data]="dataSnippet"></markdown>
+  }
+</mat-dialog-content>
+<mat-dialog-actions class="lf-dialog-actions" align="end">
+  <button mat-button color="warn" mat-dialog-close>Close</button>
+  @if (data.showCopy) {
+    <button mat-flat-button color="accent" class="ml-4" (click)="copy()">
+      <mat-icon>content_copy</mat-icon>
+      Copy
+    </button>
+  }
+</mat-dialog-actions>
