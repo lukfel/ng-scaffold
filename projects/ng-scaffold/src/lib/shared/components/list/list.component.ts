@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Button, ListHeader, ListItem } from '../../../models';
 import { SharedModule } from '../../shared.module';
@@ -18,6 +18,7 @@ export class ListComponent implements OnChanges {
   @Input() public buttons: Button[] = [];
   @Input() public avatarFallbackPath: string;
   @Input() public showDividers: boolean = false;
+  @Input() public subtitleTemplate: TemplateRef<any>;
 
   @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
   @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();

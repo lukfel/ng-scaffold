@@ -75,8 +75,16 @@
           (click)="item.clickable && !item.disabled ? itemClickEvent.emit(item) : null">
           {{ item.title }}
         </span>
-        @if (item.subtitle) {
-          <span class="lf-table-item-subtitle">{{ item.subtitle }}</span>
+        @if (item.subtitle || subtitleTemplate) {
+          <span class="lf-table-item-subtitle">
+            @if (subtitleTemplate) {
+              <ng-container
+                [ngTemplateOutlet]="subtitleTemplate"
+                [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+            } @else {
+              {{ item.subtitle }}
+            }
+          </span>
         }
       </div>
 
