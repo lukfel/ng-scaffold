@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1762547485040,
+  "timestamp": 1762548416776,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -22,7 +22,7 @@
         "/ng-scaffold/chunk-YVG3ONT7.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-IF5WP3SA.js",
+        "/ng-scaffold/main-XWOAUHKO.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/polyfills-SCHOHYNV.js",
         "/ng-scaffold/scripts-LS2XAREJ.js",
@@ -138,8 +138,8 @@
     "/ng-scaffold/chunk-YRNK2VPP.js": "76738ad083f432d75fc16e108032b570e8e424da",
     "/ng-scaffold/chunk-YVG3ONT7.js": "27c8a204028cadcadfde5547d30f48ef62033650",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/ng-scaffold/index.html": "75b46d5bda609f0387492559458ba842de633fc6",
-    "/ng-scaffold/main-IF5WP3SA.js": "328e45657daaf7a4b7c111966da79b7cb88298f7",
+    "/ng-scaffold/index.html": "5736b654ca489494c8901f025220e460d0998eb1",
+    "/ng-scaffold/main-XWOAUHKO.js": "d9e2ed738e8d01bdfb09ae153f176dee642febeb",
     "/ng-scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/ng-scaffold/polyfills-SCHOHYNV.js": "d45c76c5960bab3ace7fd6d211b9579456241f8a",
     "/ng-scaffold/scripts-LS2XAREJ.js": "5c83ba58163a6dc795296ce4b4cfe09ba27cd293",
