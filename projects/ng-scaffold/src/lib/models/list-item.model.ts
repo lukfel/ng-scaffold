@@ -13,6 +13,7 @@ export interface ListItem {
   buttons?: Button[];
   hiddenButtonIds?: string[];
   disabledButtonIds?: string[];
+  data?: any[];
   cssClass?: string;
 }
 

@@ -53,8 +53,8 @@ export class ComponentsComponent implements OnInit {
 
     this.scaffoldService.buttonClickEventValue$.subscribe((buttonClickEventValue: string) => {
       if (buttonClickEventValue === 'bottombar_close') {
-        this.items.forEach((item: ListItem) => (item.checked = false));
-        this.onListSelectionChange([]);
+        this.items = this.items.map((item: ListItem) => ({ ...item, checked: false }));
+        this.onListSelectionChange();
       }
     });
   }
@@ -67,10 +67,12 @@ export class ComponentsComponent implements OnInit {
     });
   }
 
-  public onListSelectionChange(items: ListItem[]): void {
+  public onListSelectionChange(): void {
+    const checkedItems: ListItem[] = this.items.filter((item: ListItem) => item.checked);
+
     const bottomBarConfig: BottomBarConfig = {
-      enable: items?.length > 0,
-      message: `Selected: ${items?.length || 0}`,
+      enable: checkedItems?.length > 0,
+      message: `Selected: ${checkedItems?.length || 0}`,
       closeButtonId: 'bottombar_close'
     }
 

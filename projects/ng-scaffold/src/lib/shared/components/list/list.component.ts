@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Button, ListHeader, ListItem } from '../../../models';
 import { SharedModule } from '../../shared.module';
@@ -11,7 +11,7 @@ import { IconComponent } from '../icon/icon.component';
   standalone: true,
   imports: [SharedModule, IconComponent]
 })
-export class ListComponent {
+export class ListComponent implements OnChanges {
 
   @Input() public header: ListHeader | null = null;
   @Input() public items: ListItem[] = [];
@@ -27,18 +27,21 @@ export class ListComponent {
 
   public sortToken: string;
   public sortAsc: boolean = false;
-
-
-  get hasAvatars(): boolean {
-    return !!this.items?.some((item: ListItem) => item.avatar);
-  }
-
-  get allSelected(): boolean {
-    return this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
-  }
+  public allSelected: boolean = false;
 
   get someSelected(): boolean {
     return this.items.length > 0 && this.items.some((item: ListItem) => item.checked) && !this.allSelected;
+  }
+
+  get hasAvatars(): boolean {
+    return !!this.items?.some((item: ListItem) => (item.avatar || item.matIcon || item.svgIcon));
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['items']) {
+      this.allSelected = this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
+    }
   }
 
 
@@ -54,20 +57,20 @@ export class ListComponent {
   }
 
   public selectAll(event: MatCheckboxChange): void {
+    this.allSelected = event.checked;
+
     this.items.forEach((item: ListItem) => {
-      if (!item.disabled) item.checked = event.checked;
+      if (!item.disabled) item.checked = this.allSelected;
     });
 
-    this.emitSelection();
+    this.selectionChangeEvent.emit(this.items);
   }
 
-  public selectItem(): void {
-    this.emitSelection();
-  }
+  public selectItem(item: ListItem, event: MatCheckboxChange): void {
+    this.allSelected = this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
 
-  private emitSelection(): void {
-    const selected = this.items.filter((item: ListItem) => item.checked);
-    this.selectionChangeEvent.emit(selected);
+    item.checked = event.checked;
+    this.selectionChangeEvent.emit([item]);
   }
 
   public onImageError(event: Event): void {

@@ -37,7 +37,7 @@
       @if (header.enableSelection) {
         <div class="lf-table-item-checkbox ml-3">
           <mat-checkbox
-            [checked]="allSelected && !someSelected"
+            [(ngModel)]="allSelected"
             [indeterminate]="someSelected"
             (change)="selectAll($event)"></mat-checkbox>
         </div>
@@ -126,7 +126,7 @@
         <div class="lf-table-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="item.checked"
-            (ngModelChange)="selectItem()"
+            (change)="selectItem(item, $event)"
             [disabled]="item.disabled!"></mat-checkbox>
         </div>
       }
