@@ -69,7 +69,7 @@
     <!-- spacer -->
     <div class="spacer"></div>
     <!-- right menu buttons -->
-    @for (button of headerConfig.rightMenuButtons; track button) {
+    @for (button of headerConfig.rightMenuButtons; track button.id) {
       <ng-container
         [ngTemplateOutlet]="menuButtonTemplate"
         [ngTemplateOutletContext]="{
@@ -121,7 +121,7 @@
     <!-- menu -->
     <mat-menu #menu="matMenu">
       <!-- label menu buttons -->
-      @for (button of menuButton.menuButtons; track button) {
+      @for (button of menuButton.menuButtons; track button.id) {
         <!-- menu button -->
         @if (button.label) {
           <button
@@ -143,7 +143,7 @@
       }
       <!-- icon menu buttons -->
       <div mat-menu-item class="lf-menu-icons px-1">
-        @for (button of menuButton.menuButtons; track button) {
+        @for (button of menuButton.menuButtons; track button.id) {
           <!-- icon button -->
           @if (!button.label && (button.matIcon || button.svgIcon)) {
             <button

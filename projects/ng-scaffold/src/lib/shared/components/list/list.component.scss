@@ -1,10 +1,10 @@
 @use '../../../../../styles/variables' as *;
 
-.lf-table {
+.lf-list {
   width: 100%;
 }
 
-.lf-table-item {
+.lf-list-item {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
@@ -15,29 +15,29 @@
   box-sizing: border-box;
 
   &.disabled {
-    .lf-table-item-title-wrapper {
+    .lf-list-item-title-wrapper {
       opacity: 0.64;
     }
   }
 
   &.clickable {
-    .lf-table-item-title {
+    .lf-list-item-title {
       cursor: pointer;
     }
   }
 
-  .lf-table-item-sort-icon {
+  .lf-list-item-sort-icon {
     font-size: $list-item-sort-icon-size;
     width: $list-item-sort-icon-size;
     height: $list-item-sort-icon-size;
     vertical-align: text-top;
   }
 
-  .lf-table-item-checkbox {
+  .lf-list-item-checkbox {
     flex: 0 0 $list-item-checkbox-width;
   }
 
-  .lf-table-item-avatar {
+  .lf-list-item-avatar {
     flex: 0 0 $list-item-avatar-size;
     display: flex;
     align-items: center;
@@ -52,25 +52,25 @@
     }
   }
 
-  .lf-table-item-title-wrapper {
+  .lf-list-item-title-wrapper {
     display: flex;
     flex-flow: column;
     align-items: flex-start;
     flex: 1 1 $list-item-title-width;
     overflow: hidden;
 
-    .lf-table-item-title {
+    .lf-list-item-title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .lf-table-item-subtitle {
+    .lf-list-item-subtitle {
       font-size: 0.8rem;
     }
   }
 
-  .lf-table-item-buttons {
+  .lf-list-item-buttons {
     flex: 0 0 auto;
     display: flex;
     flex-flow: row nowrap;
@@ -78,17 +78,17 @@
     justify-content: space-between;
   }
 
-  &.lf-table-item-header {
+  &.lf-list-item-header {
     font-weight: 500;
 
-    .lf-table-item-title-wrapper {
+    .lf-list-item-title-wrapper {
       span {
         width: $list-item-title-wrapper-width;
       }
     }
   }
 
-  &.lf-table-item-data {
+  &.lf-list-item-data {
     &:hover {
       background-color: rgba(#000, 0.08);
     }

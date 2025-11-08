@@ -8,7 +8,7 @@
     <div class="drawer-container">
       <mat-nav-list>
         <div mat-subheader class="hint">Navigation</div>
-        @for (item of scaffoldConfig.navbarConfig?.menuButtons; track item) {
+        @for (item of scaffoldConfig.navbarConfig?.menuButtons; track item.id) {
           <a mat-list-item [routerLink]="[item.id]" routerLinkActive="active">
             <span matListItemTitle>{{ item.label }}</span>
             @if (item.matIcon) {
@@ -28,7 +28,7 @@
           </a>
         }
         <div mat-subheader class="hint">Other projects</div>
-        @for (item of externalMenuButtons; track item) {
+        @for (item of externalMenuButtons; track item.id) {
           <a mat-list-item [href]="item.id" target="_blank">
             <span matListItemTitle class="title-small">{{ item.label }}</span>
             <mat-icon

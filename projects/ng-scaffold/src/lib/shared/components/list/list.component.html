@@ -1,28 +1,28 @@
 <!-- lf-list.component.html -->
-<div class="lf-table">
+<div class="lf-list">
   <!-- Header -->
   @if (header) {
-    <div class="lf-table-item lf-table-item-header">
+    <div class="lf-list-item lf-list-item-header">
       <!-- avatar -->
       @if (header.avatar) {
-        <div class="lf-table-item-avatar px-2">
+        <div class="lf-list-item-avatar px-2">
           <img [src]="header.avatar" alt="Avatar of header" (error)="onImageError($event)" />
         </div>
       } @else if (header.matIcon || header.svgIcon) {
-        <div class="lf-table-item-avatar px-2">
+        <div class="lf-list-item-avatar px-2">
           <lf-icon [matIcon]="header.matIcon" [svgIcon]="header.svgIcon"></lf-icon>
         </div>
       } @else if (hasAvatars) {
-        <div class="lf-table-item-avatar px-2"></div>
+        <div class="lf-list-item-avatar px-2"></div>
       }
 
       <!-- title -->
-      <div class="lf-table-item-title-wrapper flex-row px-2">
+      <div class="lf-list-item-title-wrapper flex-row px-2">
         @for (item of header.items; track $index) {
           <span [class.clickable]="item.sortToken" (click)="updateSortToken(item.sortToken)">
             {{ item.title }}
             @if (sortToken === item.sortToken) {
-              <mat-icon class="lf-table-item-sort-icon">
+              <mat-icon class="lf-list-item-sort-icon">
                 {{ sortAsc ? "arrow_downward" : "arrow_upward" }}
               </mat-icon>
             }
@@ -31,11 +31,11 @@
       </div>
 
       <!-- buttons -->
-      <div class="lf-table-item-buttons"></div>
+      <div class="lf-list-item-buttons"></div>
 
       <!-- checkbox -->
       @if (header.enableSelection) {
-        <div class="lf-table-item-checkbox ml-3">
+        <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="allSelected"
             [indeterminate]="someSelected"
@@ -49,34 +49,34 @@
   <!-- Items -->
   @for (item of items; track item.id; let last = $last) {
     <div
-      class="lf-table-item lf-table-item-data"
+      class="lf-list-item lf-list-item-data"
       [class.active]="item.checked"
       [class.disabled]="item.disabled"
       [class.clickable]="item.clickable && !item.disabled"
       [ngClass]="item.cssClass">
       <!-- avatar -->
       @if (item.avatar) {
-        <div class="lf-table-item-avatar px-2">
+        <div class="lf-list-item-avatar px-2">
           <img
             [src]="item.avatar"
             [alt]="'Avatar of ' + item.title"
             (error)="onImageError($event)" />
         </div>
       } @else if (item.matIcon || item.svgIcon) {
-        <div class="lf-table-item-avatar px-2">
+        <div class="lf-list-item-avatar px-2">
           <lf-icon [matIcon]="item.matIcon" [svgIcon]="item.svgIcon"></lf-icon>
         </div>
       }
 
       <!-- title -->
-      <div class="lf-table-item-title-wrapper px-2">
+      <div class="lf-list-item-title-wrapper px-2">
         <span
-          class="lf-table-item-title"
+          class="lf-list-item-title"
           (click)="item.clickable && !item.disabled ? itemClickEvent.emit(item) : null">
           {{ item.title }}
         </span>
         @if (item.subtitle || subtitleTemplate) {
-          <span class="lf-table-item-subtitle">
+          <span class="lf-list-item-subtitle">
             @if (subtitleTemplate) {
               <ng-container
                 [ngTemplateOutlet]="subtitleTemplate"
@@ -89,7 +89,7 @@
       </div>
 
       <!-- buttons -->
-      <div class="lf-table-item-buttons">
+      <div class="lf-list-item-buttons">
         @let combinedButtons = getCombinedActions(item);
         @for (button of combinedButtons; track button.id) {
           @if (!item.hiddenButtonIds?.includes(button.id)) {
@@ -98,7 +98,7 @@
             @if (button.label) {
               <button
                 mat-button
-                class="lf-bottom-bar-button ml-2"
+                class="lf-list-item-button ml-2"
                 [class.disabled]="disabled"
                 [ngClass]="button.cssClass"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
@@ -115,7 +115,7 @@
             } @else {
               <button
                 mat-icon-button
-                class="lf-bottom-bar-button-icon ml-2"
+                class="lf-list-item-icon ml-2"
                 [class.disabled]="disabled"
                 [ngClass]="button.cssClass"
                 (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
@@ -131,7 +131,7 @@
 
       <!-- checkbox -->
       @if (header?.enableSelection) {
-        <div class="lf-table-item-checkbox ml-3">
+        <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="item.checked"
             (change)="selectItem(item, $event)"

@@ -126,7 +126,7 @@
               isLeftButton: true,
             }"></ng-container>
           <h4>Right Buttons (Label has priority over icon)</h4>
-          @for (menuButton of headerConfig.rightMenuButtons; track menuButton) {
+          @for (menuButton of headerConfig.rightMenuButtons; track menuButton.id) {
             <ng-container
               [ngTemplateOutlet]="menuButtonFormTemplate"
               [ngTemplateOutletContext]="{
@@ -257,7 +257,7 @@
           Edit Links (Route has priority over link)
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-          @for (navigationLink of footerConfig.links; track navigationLink) {
+          @for (navigationLink of footerConfig.links; track $index) {
             <ng-container
               [ngTemplateOutlet]="navigationLinkTemplate"
               [ngTemplateOutletContext]="{
@@ -308,7 +308,7 @@
       <mat-form-field>
         <mat-label>Position</mat-label>
         <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
-          @for (option of ["left", "center", "right"]; track option) {
+          @for (option of ["left", "center", "right"]; track $index) {
             <mat-option [value]="option">
               {{ option }}
             </mat-option>
@@ -327,7 +327,7 @@
         enabled). It can be used to handle custom bulk actions for selected items in large lists.
       </p>
       <p>(select items to test the bottom bar)</p>
-      @for (item of bottomBarDemoList; track item) {
+      @for (item of bottomBarDemoList; track $index) {
         <p>
           <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectBottomBarItem()">
             {{ item.label }}

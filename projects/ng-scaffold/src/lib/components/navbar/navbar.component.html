@@ -7,7 +7,7 @@
     <!-- items -->
     <div [class.lf-navbar-items]="!isMobile" [class.lf-navbar-mobile-items]="isMobile">
       <!-- item -->
-      @for (button of navbarConfig.menuButtons; track button; let i = $index) {
+      @for (button of navbarConfig.menuButtons; track button.id; let i = $index) {
         @if (i < 5) {
           <div
             class="lf-navbar-item"
