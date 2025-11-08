@@ -36,7 +36,7 @@ export class ComponentsComponent implements OnInit {
 
   public placeholderConfig: PlaceholderConfig = {
     matIcon: 'widgets',
-    heading: 'Heading',
+    title: 'Title',
     message: 'This is a placeholder message.',
     button: {
       id: 'placeholder',

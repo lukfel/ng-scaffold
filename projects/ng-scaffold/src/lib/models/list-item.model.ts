@@ -21,8 +21,9 @@ export interface ListHeader {
   matIcon?: string;
   svgIcon?: string;
   avatar?: string;
-  enableSelection?: boolean;
   items?: HeaderItem[];
+  buttons?: Button[];
+  enableSelection?: boolean;
 }
 
 export interface HeaderItem {

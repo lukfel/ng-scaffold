@@ -16,7 +16,7 @@ export class NotFoundComponent implements OnInit {
 
   public placeholderConfig: PlaceholderConfig = {
     matIcon: 'block',
-    heading: '404',
+    title: '404',
     message: 'Page could not be found',
     button: {
       id: 'placeholder',

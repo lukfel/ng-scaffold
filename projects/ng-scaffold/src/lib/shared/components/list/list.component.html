@@ -1,4 +1,3 @@
-<!-- lf-list.component.html -->
 <div class="lf-list">
   <!-- Header -->
   @if (header) {
@@ -31,7 +30,39 @@
       </div>
 
       <!-- buttons -->
-      <div class="lf-list-item-buttons"></div>
+      <div class="lf-list-item-buttons">
+        @for (button of header.buttons; track button.id) {
+          @if (button.label) {
+            <button
+              mat-button
+              class="lf-list-item-button ml-2"
+              [class.disabled]="button.disabled"
+              [ngClass]="button.cssClass"
+              (click)="buttonClickEvent.emit({ buttonId: button.id, item: null! })"
+              [disabled]="button.disabled"
+              [matTooltip]="button.tooltip">
+              @if (button.matIcon || button.svgIcon) {
+                <lf-icon
+                  [matIcon]="button.matIcon"
+                  [svgIcon]="button.svgIcon"
+                  verticalAlign="bottom"></lf-icon>
+              }
+              {{ button.label }}
+            </button>
+          } @else {
+            <button
+              mat-icon-button
+              class="lf-list-item-icon ml-2"
+              [class.disabled]="button.disabled"
+              [ngClass]="button.cssClass"
+              (click)="buttonClickEvent.emit({ buttonId: button.id, item: null! })"
+              [disabled]="button.disabled"
+              [matTooltip]="button.tooltip">
+              <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
+            </button>
+          }
+        }
+      </div>
 
       <!-- checkbox -->
       @if (header.enableSelection) {
@@ -124,7 +155,6 @@
                 <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
               </button>
             }
-            <!-- [color]="button.color" -->
           }
         }
       </div>
