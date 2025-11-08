@@ -16,6 +16,7 @@ export class ComponentsComponent implements OnInit {
   public header: ListHeader = {
     matIcon: 'sort',
     enableSelection: true,
+    enableDragging: true,
     items: [
       { title: 'Items', sortToken: 'items' }
     ]

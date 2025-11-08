@@ -1,3 +1,4 @@
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Button, ListHeader, ListItem } from '../../../models';
@@ -15,14 +16,17 @@ export class ListComponent implements OnChanges {
 
   @Input() public header: ListHeader | null = null;
   @Input() public items: ListItem[] = [];
+  @Input() public groupedItems: Map<string, ListItem[]> = new Map();
   @Input() public buttons: Button[] = [];
   @Input() public avatarFallbackPath: string;
   @Input() public showDividers: boolean = false;
+  @Input() public mode: 'flat' | 'group' = 'flat';
   @Input() public subtitleTemplate: TemplateRef<any>;
 
   @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
   @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();
   @Output() public itemClickEvent = new EventEmitter<ListItem>();
+  @Output() public itemDropEvent = new EventEmitter<{ buttonId: string, item: ListItem }>();
   @Output() public buttonClickEvent = new EventEmitter<{ buttonId: string, item: ListItem }>();
 
 
@@ -46,10 +50,7 @@ export class ListComponent implements OnChanges {
   }
 
 
-  public getCombinedActions(item: ListItem): Button[] {
-    return [...(item.buttons ?? []), ...(this.buttons ?? [])];
-  }
-
+  // Update the sort token
   public updateSortToken(sortToken: string | undefined): void {
     if (!sortToken) return;
     if (this.sortToken === sortToken) this.sortAsc = !this.sortAsc;
@@ -57,6 +58,7 @@ export class ListComponent implements OnChanges {
     this.sortChangeEvent.emit({ sortToken: this.sortToken, sortAsc: this.sortAsc });
   }
 
+  // Select all items
   public selectAll(event: MatCheckboxChange): void {
     this.allSelected = event.checked;
 
@@ -67,15 +69,43 @@ export class ListComponent implements OnChanges {
     this.selectionChangeEvent.emit(this.items);
   }
 
+  // Select single item
   public selectItem(item: ListItem, event: MatCheckboxChange): void {
     this.allSelected = this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
-
     item.checked = event.checked;
     this.selectionChangeEvent.emit([item]);
   }
 
+  // Handle item click events
+  public clickItem(item: ListItem, click: Event): void {
+    this.stopPropagation(click);
+    this.itemClickEvent.emit(item)
+  }
+
+  // Handle item drop events
+  public dropItem(event: CdkDragDrop<ListItem[]>): void {
+    transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+  }
+
+  // Handle button click events
+  public clickButton(event: { buttonId: string, item: ListItem }, click: Event): void {
+    this.stopPropagation(click);
+    this.buttonClickEvent.emit(event);
+  }
+
+  // Combine list and item buttons
+  public getCombinedButtons(item: ListItem): Button[] {
+    return [...(item.buttons ?? []), ...(this.buttons ?? [])];
+  }
+
+  // Handle image errors
   public onImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
     target.src = this.avatarFallbackPath || '';
+  }
+
+  // Stop click trough events
+  public stopPropagation(click: Event): void {
+    click.stopImmediatePropagation();
   }
 }

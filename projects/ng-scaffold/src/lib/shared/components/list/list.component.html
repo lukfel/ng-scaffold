@@ -1,4 +1,4 @@
-<div class="lf-list">
+<div class="lf-list" cdkDropListGroup>
   <!-- Header -->
   @if (header) {
     <div class="lf-list-item lf-list-item-header">
@@ -38,9 +38,9 @@
               class="lf-list-item-button ml-2"
               [class.disabled]="button.disabled"
               [ngClass]="button.cssClass"
-              (click)="buttonClickEvent.emit({ buttonId: button.id, item: null! })"
               [disabled]="button.disabled"
-              [matTooltip]="button.tooltip">
+              [matTooltip]="button.tooltip"
+              (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
               @if (button.matIcon || button.svgIcon) {
                 <lf-icon
                   [matIcon]="button.matIcon"
@@ -55,9 +55,9 @@
               class="lf-list-item-icon ml-2"
               [class.disabled]="button.disabled"
               [ngClass]="button.cssClass"
-              (click)="buttonClickEvent.emit({ buttonId: button.id, item: null! })"
               [disabled]="button.disabled"
-              [matTooltip]="button.tooltip">
+              [matTooltip]="button.tooltip"
+              (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
               <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
             </button>
           }
@@ -77,14 +77,64 @@
     <mat-divider></mat-divider>
   }
 
-  <!-- Items -->
-  @for (item of items; track item.id; let last = $last) {
+  <!-- Grouped Items -->
+  @if (mode === "group" && groupedItems) {
+    @for (group of groupedItems | keyvalue; track group.key; let first = $first) {
+      <div class="lf-list-group" [class.mt-4]="!first">
+        <div class="lf-list-item lf-list-group-header">
+          <div class="lf-list-item-avatar px-2"></div>
+          <div class="lf-list-item-title-wrapper flex-row px-2">
+            <span>{{ group.key }}</span>
+          </div>
+        </div>
+        <div
+          [id]="group.key"
+          [class.drop-zone]="group.value.length <= 0"
+          cdkDropList
+          [cdkDropListData]="group.value"
+          (cdkDropListDropped)="dropItem($event)">
+          @for (item of group.value; track item.id; let last = $last) {
+            <div
+              cdkDrag
+              [cdkDragData]="item"
+              [cdkDragDisabled]="item.disabled || !header?.enableDragging">
+              <ng-container
+                [ngTemplateOutlet]="listItemTemplate"
+                [ngTemplateOutletContext]="{ $implicit: item, last: last }"></ng-container>
+            </div>
+          }
+        </div>
+      </div>
+    }
+    <!-- Flat Items -->
+  } @else {
+    <div
+      cdkDropList
+      [cdkDropListData]="items"
+      [cdkDropListDisabled]="!header?.enableDragging"
+      (cdkDropListDropped)="dropItem($event)">
+      @for (item of items; track item.id; let last = $last) {
+        <div
+          cdkDrag
+          [cdkDragData]="item"
+          [cdkDragDisabled]="item.disabled || !header?.enableDragging">
+          <ng-container
+            [ngTemplateOutlet]="listItemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: item, last: last }"></ng-container>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Item (template) -->
+  <ng-template #listItemTemplate let-item let-last="last">
     <div
       class="lf-list-item lf-list-item-data"
       [class.active]="item.checked"
       [class.disabled]="item.disabled"
       [class.clickable]="item.clickable && !item.disabled"
-      [ngClass]="item.cssClass">
+      [ngClass]="item.cssClass"
+      (click)="item.clickable && !item.disabled ? clickItem(item, $event) : null">
       <!-- avatar -->
       @if (item.avatar) {
         <div class="lf-list-item-avatar px-2">
@@ -101,9 +151,7 @@
 
       <!-- title -->
       <div class="lf-list-item-title-wrapper px-2">
-        <span
-          class="lf-list-item-title"
-          (click)="item.clickable && !item.disabled ? itemClickEvent.emit(item) : null">
+        <span class="lf-list-item-title">
           {{ item.title }}
         </span>
         @if (item.subtitle || subtitleTemplate) {
@@ -121,7 +169,7 @@
 
       <!-- buttons -->
       <div class="lf-list-item-buttons">
-        @let combinedButtons = getCombinedActions(item);
+        @let combinedButtons = getCombinedButtons(item);
         @for (button of combinedButtons; track button.id) {
           @if (!item.hiddenButtonIds?.includes(button.id)) {
             @let disabled =
@@ -132,9 +180,9 @@
                 class="lf-list-item-button ml-2"
                 [class.disabled]="disabled"
                 [ngClass]="button.cssClass"
-                (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
                 [disabled]="disabled"
-                [matTooltip]="button.tooltip">
+                [matTooltip]="button.tooltip"
+                (click)="clickButton({ buttonId: button.id, item }, $event)">
                 @if (button.matIcon || button.svgIcon) {
                   <lf-icon
                     [matIcon]="button.matIcon"
@@ -149,13 +197,26 @@
                 class="lf-list-item-icon ml-2"
                 [class.disabled]="disabled"
                 [ngClass]="button.cssClass"
-                (click)="buttonClickEvent.emit({ buttonId: button.id, item })"
                 [disabled]="disabled"
-                [matTooltip]="button.tooltip">
+                [matTooltip]="button.tooltip"
+                (click)="clickButton({ buttonId: button.id, item }, $event)">
                 <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
               </button>
             }
           }
+        }
+
+        <!-- drag -->
+        @if (header?.enableDragging) {
+          <button
+            mat-icon-button
+            class="lf-list-item-icon ml-2"
+            [class.disabled]="item.disabled"
+            [disabled]="item.disabled"
+            (click)="stopPropagation($event)"
+            cdkDragHandle>
+            <mat-icon>drag_indicator</mat-icon>
+          </button>
         }
       </div>
 
@@ -164,13 +225,15 @@
         <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="item.checked"
+            [disabled]="item.disabled!"
             (change)="selectItem(item, $event)"
-            [disabled]="item.disabled!"></mat-checkbox>
+            (click)="stopPropagation($event)"></mat-checkbox>
         </div>
       }
     </div>
+
     @if (showDividers && !last) {
       <mat-divider></mat-divider>
     }
-  }
+  </ng-template>
 </div>

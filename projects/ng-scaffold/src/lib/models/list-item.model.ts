@@ -21,12 +21,13 @@ export interface ListHeader {
   matIcon?: string;
   svgIcon?: string;
   avatar?: string;
-  items?: HeaderItem[];
+  items?: ListHeaderItem[];
   buttons?: Button[];
   enableSelection?: boolean;
+  enableDragging?: boolean;
 }
 
-export interface HeaderItem {
+interface ListHeaderItem {
   title: string;
   sortToken?: string;
 }
