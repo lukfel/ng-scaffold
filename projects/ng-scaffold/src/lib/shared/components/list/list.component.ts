@@ -20,13 +20,15 @@ export class ListComponent implements OnChanges {
   @Input() public buttons: Button[] = [];
   @Input() public avatarFallbackPath: string;
   @Input() public showDividers: boolean = false;
-  @Input() public mode: 'flat' | 'group' = 'flat';
   @Input() public subtitleTemplate: TemplateRef<any>;
+  @Input() public mode: 'flat' | 'group' = 'flat';
+  @Input() public dropListId: string;
+  @Input() public connectedDropListIds: string[];
 
   @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
   @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();
   @Output() public itemClickEvent = new EventEmitter<ListItem>();
-  @Output() public itemDropEvent = new EventEmitter<{ buttonId: string, item: ListItem }>();
+  @Output() public itemDropEvent = new EventEmitter<ListItem[]>();
   @Output() public buttonClickEvent = new EventEmitter<{ buttonId: string, item: ListItem }>();
 
 
@@ -85,6 +87,7 @@ export class ListComponent implements OnChanges {
   // Handle item drop events
   public dropItem(event: CdkDragDrop<ListItem[]>): void {
     transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    this.itemDropEvent.emit(event.container.data);
   }
 
   // Handle button click events

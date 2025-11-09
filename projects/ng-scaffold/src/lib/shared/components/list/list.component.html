@@ -89,10 +89,12 @@
         </div>
         <div
           [id]="group.key"
-          [class.drop-zone]="group.value.length <= 0"
           cdkDropList
           [cdkDropListData]="group.value"
-          (cdkDropListDropped)="dropItem($event)">
+          [cdkDropListDisabled]="!header?.enableDragging"
+          [cdkDropListConnectedTo]="connectedDropListIds"
+          (cdkDropListDropped)="dropItem($event)"
+          [class.drop-zone]="header?.enableDragging && group.value.length <= 0">
           @for (item of group.value; track item.id; let last = $last) {
             <div
               cdkDrag
@@ -109,10 +111,13 @@
     <!-- Flat Items -->
   } @else {
     <div
+      [id]="dropListId"
       cdkDropList
       [cdkDropListData]="items"
       [cdkDropListDisabled]="!header?.enableDragging"
-      (cdkDropListDropped)="dropItem($event)">
+      [cdkDropListConnectedTo]="connectedDropListIds"
+      (cdkDropListDropped)="dropItem($event)"
+      [class.drop-zone]="header?.enableDragging && items.length <= 0">
       @for (item of items; track item.id; let last = $last) {
         <div
           cdkDrag

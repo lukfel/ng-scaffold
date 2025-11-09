@@ -10,14 +10,6 @@
       font-weight: 500;
       height: calc($list-item-height - 16px);
     }
-
-    .drop-zone {
-      width: 100%;
-      height: $list-item-height;
-      border: 2px dashed $color-gray;
-      border-radius: $list-item-border-radius;
-      box-sizing: border-box;
-    }
   }
 }
 
@@ -115,6 +107,14 @@
     flex-flow: row nowrap;
     align-items: center;
   }
+}
+
+.drop-zone {
+  width: 100%;
+  height: $list-item-height;
+  border: 2px dashed $color-gray;
+  border-radius: $list-item-border-radius;
+  box-sizing: border-box;
 }
 
 .clickable {
