@@ -23,8 +23,16 @@ export interface ListHeader {
   avatar?: string;
   items?: ListHeaderItem[];
   buttons?: Button[];
+}
+
+export interface ListConfig {
   enableSelection?: boolean;
   enableDragging?: boolean;
+  mode?: 'flat' | 'group';
+  initialSortToken?: string;
+  initialSortAsc?: boolean;
+  showDividers?: boolean;
+  avatarFallbackPath?: string;
 }
 
 interface ListHeaderItem {

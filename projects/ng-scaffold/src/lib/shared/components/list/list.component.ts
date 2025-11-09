@@ -1,7 +1,7 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { Button, ListHeader, ListItem } from '../../../models';
+import { Button, ListConfig, ListHeader, ListItem } from '../../../models';
 import { SharedModule } from '../../shared.module';
 import { IconComponent } from '../icon/icon.component';
 
@@ -12,16 +12,15 @@ import { IconComponent } from '../icon/icon.component';
   standalone: true,
   imports: [SharedModule, IconComponent]
 })
-export class ListComponent implements OnChanges {
+export class ListComponent implements OnInit, OnChanges {
 
+  @Input() public config: ListConfig | null = null;
   @Input() public header: ListHeader | null = null;
   @Input() public items: ListItem[] = [];
   @Input() public groupedItems: Map<string, ListItem[]> = new Map();
   @Input() public buttons: Button[] = [];
-  @Input() public avatarFallbackPath: string;
-  @Input() public showDividers: boolean = false;
   @Input() public subtitleTemplate: TemplateRef<any>;
-  @Input() public mode: 'flat' | 'group' = 'flat';
+
   @Input() public dropListId: string;
   @Input() public connectedDropListIds: string[];
 
@@ -33,7 +32,7 @@ export class ListComponent implements OnChanges {
 
 
   public sortToken: string;
-  public sortAsc: boolean = false;
+  public sortAsc: boolean = true;
   public allSelected: boolean = false;
 
   get someSelected(): boolean {
@@ -45,6 +44,14 @@ export class ListComponent implements OnChanges {
   }
 
 
+  ngOnInit(): void {
+    if (this.config) {
+      this.sortToken = this.config.initialSortToken || '';
+      this.sortAsc = this.config.initialSortAsc || false;
+      this.updateSortToken(this.sortToken, true);
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items']) {
       this.allSelected = this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
@@ -53,9 +60,9 @@ export class ListComponent implements OnChanges {
 
 
   // Update the sort token
-  public updateSortToken(sortToken: string | undefined): void {
+  public updateSortToken(sortToken: string | undefined, initial?: boolean): void {
     if (!sortToken) return;
-    if (this.sortToken === sortToken) this.sortAsc = !this.sortAsc;
+    if (this.sortToken === sortToken && !initial) this.sortAsc = !this.sortAsc;
     this.sortToken = sortToken;
     this.sortChangeEvent.emit({ sortToken: this.sortToken, sortAsc: this.sortAsc });
   }
@@ -104,7 +111,7 @@ export class ListComponent implements OnChanges {
   // Handle image errors
   public onImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
-    target.src = this.avatarFallbackPath || '';
+    target.src = this.config?.avatarFallbackPath || '';
   }
 
   // Stop click trough events

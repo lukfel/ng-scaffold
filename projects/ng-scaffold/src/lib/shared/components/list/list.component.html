@@ -65,7 +65,7 @@
       </div>
 
       <!-- checkbox -->
-      @if (header.enableSelection) {
+      @if (config?.enableSelection) {
         <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="allSelected"
@@ -78,28 +78,30 @@
   }
 
   <!-- Grouped Items -->
-  @if (mode === "group" && groupedItems) {
+  @if (config?.mode === "group" && groupedItems) {
     @for (group of groupedItems | keyvalue; track group.key; let first = $first) {
       <div class="lf-list-group" [class.mt-4]="!first">
-        <div class="lf-list-item lf-list-group-header">
-          <div class="lf-list-item-avatar px-2"></div>
-          <div class="lf-list-item-title-wrapper flex-row px-2">
-            <span>{{ group.key }}</span>
+        @if (group.key) {
+          <div class="lf-list-item lf-list-group-header">
+            <div class="lf-list-item-avatar px-2"></div>
+            <div class="lf-list-item-title-wrapper flex-row px-2">
+              <span>{{ group.key }}</span>
+            </div>
           </div>
-        </div>
+        }
         <div
           [id]="group.key"
           cdkDropList
           [cdkDropListData]="group.value"
-          [cdkDropListDisabled]="!header?.enableDragging"
+          [cdkDropListDisabled]="!config?.enableDragging"
           [cdkDropListConnectedTo]="connectedDropListIds"
           (cdkDropListDropped)="dropItem($event, group.key)"
-          [class.drop-zone]="header?.enableDragging && group.value.length <= 0">
+          [class.drop-zone]="config?.enableDragging && group.value.length <= 0">
           @for (item of group.value; track item.id; let last = $last) {
             <div
               cdkDrag
               [cdkDragData]="item"
-              [cdkDragDisabled]="item.disabled || !header?.enableDragging">
+              [cdkDragDisabled]="item.disabled || !config?.enableDragging">
               <ng-container
                 [ngTemplateOutlet]="listItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: item, last: last }"></ng-container>
@@ -114,15 +116,15 @@
       [id]="dropListId"
       cdkDropList
       [cdkDropListData]="items"
-      [cdkDropListDisabled]="!header?.enableDragging"
+      [cdkDropListDisabled]="!config?.enableDragging"
       [cdkDropListConnectedTo]="connectedDropListIds"
       (cdkDropListDropped)="dropItem($event, dropListId)"
-      [class.drop-zone]="header?.enableDragging && items.length <= 0">
+      [class.drop-zone]="config?.enableDragging && items.length <= 0">
       @for (item of items; track item.id; let last = $last) {
         <div
           cdkDrag
           [cdkDragData]="item"
-          [cdkDragDisabled]="item.disabled || !header?.enableDragging">
+          [cdkDragDisabled]="item.disabled || !config?.enableDragging">
           <ng-container
             [ngTemplateOutlet]="listItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: item, last: last }"></ng-container>
@@ -212,7 +214,7 @@
         }
 
         <!-- drag -->
-        @if (header?.enableDragging) {
+        @if (config?.enableDragging) {
           <button
             mat-icon-button
             class="lf-list-item-icon ml-2"
@@ -226,7 +228,7 @@
       </div>
 
       <!-- checkbox -->
-      @if (header?.enableSelection) {
+      @if (config?.enableSelection) {
         <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="item.checked"
@@ -237,7 +239,7 @@
       }
     </div>
 
-    @if (showDividers && !last) {
+    @if (config?.showDividers && !last) {
       <mat-divider></mat-divider>
     }
   </ng-template>

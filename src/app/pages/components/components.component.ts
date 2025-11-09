@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { BottomBarConfig, Button, ListHeader, ListItem, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
+import { BottomBarConfig, Button, ListConfig, ListHeader, ListItem, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
 
 @Component({
@@ -13,22 +13,29 @@ export class ComponentsComponent implements OnInit {
   private snackbarService = inject(SnackbarService);
 
 
-  public header: ListHeader = {
-    matIcon: 'sort',
+  public listConfig: ListConfig = {
     enableSelection: true,
     enableDragging: true,
+    mode: 'flat',
+    initialSortToken: 'title',
+    initialSortAsc: true,
+    showDividers: true
+  }
+
+  public listHeader: ListHeader = {
+    matIcon: 'sort',
     items: [
-      { title: 'Items', sortToken: 'items' }
+      { title: 'Items', sortToken: 'title' }
     ]
   };
 
-  public items: ListItem[] = [
-    { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
+  public listItems: ListItem[] = [
     { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
+    { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
     { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
   ];
 
-  public buttons: Button[] = [
+  public listButtons: Button[] = [
     { id: 'edit', matIcon: 'edit' },
     { id: 'delete', matIcon: 'delete', cssClass: 'lf-ugly-orange' }
   ];
@@ -54,22 +61,24 @@ export class ComponentsComponent implements OnInit {
 
     this.scaffoldService.buttonClickEventValue$.subscribe((buttonClickEventValue: string) => {
       if (buttonClickEventValue === 'bottombar_close') {
-        this.items = this.items.map((item: ListItem) => ({ ...item, checked: false }));
+        this.listItems = this.listItems.map((item: ListItem) => ({ ...item, checked: false }));
         this.onListSelectionChange();
       }
     });
   }
 
   public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
-    this.items.sort((a, b) => {
-      if (!a.title || !b.title) return 0;
-      if (event.sortAsc) return a.title.localeCompare(b.title);
-      return b.title.localeCompare(a.title);
-    });
+    if (event?.sortToken === 'title') {
+      this.listItems.sort((a, b) => {
+        if (!a.title || !b.title) return 0;
+        if (event.sortAsc) return a.title.localeCompare(b.title);
+        return b.title.localeCompare(a.title);
+      });
+    }
   }
 
   public onListSelectionChange(): void {
-    const checkedItems: ListItem[] = this.items.filter((item: ListItem) => item.checked);
+    const checkedItems: ListItem[] = this.listItems.filter((item: ListItem) => item.checked);
 
     const bottomBarConfig: BottomBarConfig = {
       enable: checkedItems?.length > 0,

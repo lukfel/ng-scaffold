@@ -388,19 +388,28 @@ import { ListComponent } from '@lukfel/ng-scaffold';
 ```
 
 ```ts
-import { Button, ListHeader, ListItem } from '@lukfel/ng-scaffold';
+import { Button, ListConfig, ListHeader, ListItem } from '@lukfel/ng-scaffold';
 
-public header: ListHeader = {
+public listConfig: ListConfig = {
   enableSelection: true,
+  enableDragging: true,
+  mode: 'flat',
+  initialSortToken: 'title',
+  initialSortAsc: true,
+  showDividers: true
+}
+
+public listHeader: ListHeader = {
+  matIcon: 'sort',
   items: [
-    { title: 'Items', sortToken: 'items' }
+    { title: 'Items', sortToken: 'title' }
   ]
 };
 
-public items: ListItem[] = [
-  { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
+public listItems: ListItem[] = [
   { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
-  { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtons: ['edit'] },
+  { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
+  { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
 ];
 
 public buttons: Button[] = [
@@ -408,8 +417,15 @@ public buttons: Button[] = [
   { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
 ];
 
+// Handle sort events
 public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
-  // handle sort change
+  if (event?.sortToken === 'title') {
+    this.listItems.sort((a, b) => {
+      if (!a.title || !b.title) return 0;
+      if (event.sortAsc) return a.title.localeCompare(b.title);
+      return b.title.localeCompare(a.title);
+    });
+  }
 }
 
 public onListSelectionChange(items: ListItem[]): void {
@@ -427,11 +443,12 @@ public onListItemClick(item: ListItem): void {
 
 ```html
 <lf-list
-  [header]="header"
-  [items]="items"
-  [buttons]="buttons"
+  [config]="listConfig"
+  [header]="listHeader"
+  [items]="listItems"
+  [buttons]="listButtons"
   (sortChangeEvent)="onListSortChange($event)"
-  (selectionChangeEvent)="onListSelectionChange($event)"
+  (selectionChangeEvent)="onListSelectionChange()"
   (buttonClickEvent)="onListButtonClick($event)"
   (itemClickEvent)="onListItemClick($event)"></lf-list>
 ```

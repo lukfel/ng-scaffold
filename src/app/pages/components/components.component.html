@@ -15,9 +15,10 @@
     — making it ideal for dashboards, inventories, and administrative views.
   </p>
   <lf-list
-    [header]="header"
-    [items]="items"
-    [buttons]="buttons"
+    [config]="listConfig"
+    [header]="listHeader"
+    [items]="listItems"
+    [buttons]="listButtons"
     (sortChangeEvent)="onListSortChange($event)"
     (selectionChangeEvent)="onListSelectionChange()"
     (buttonClickEvent)="onListButtonClick($event)"

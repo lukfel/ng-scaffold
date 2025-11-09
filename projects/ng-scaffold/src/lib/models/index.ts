@@ -6,7 +6,7 @@ export { FloatingButtonConfig } from './floating-button-config.model';
 export { FooterConfig } from './footer-config.model';
 export { HeaderConfig, HeaderInputConfig } from './header-config.model';
 export { ScaffoldLibraryConfig } from './library-config.model';
-export { ListHeader, ListItem } from './list-item.model';
+export { ListConfig, ListHeader, ListItem } from './list-item.model';
 export { Button, MenuButton } from './menu-button.model';
 export { NavbarConfig } from './navbar-config.model';
 export { NavigationLink } from './navigation-link.model';
