@@ -93,7 +93,7 @@
           [cdkDropListData]="group.value"
           [cdkDropListDisabled]="!header?.enableDragging"
           [cdkDropListConnectedTo]="connectedDropListIds"
-          (cdkDropListDropped)="dropItem($event)"
+          (cdkDropListDropped)="dropItem($event, group.key)"
           [class.drop-zone]="header?.enableDragging && group.value.length <= 0">
           @for (item of group.value; track item.id; let last = $last) {
             <div
@@ -116,7 +116,7 @@
       [cdkDropListData]="items"
       [cdkDropListDisabled]="!header?.enableDragging"
       [cdkDropListConnectedTo]="connectedDropListIds"
-      (cdkDropListDropped)="dropItem($event)"
+      (cdkDropListDropped)="dropItem($event, dropListId)"
       [class.drop-zone]="header?.enableDragging && items.length <= 0">
       @for (item of items; track item.id; let last = $last) {
         <div

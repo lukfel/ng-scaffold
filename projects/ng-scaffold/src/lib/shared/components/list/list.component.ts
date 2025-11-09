@@ -28,7 +28,7 @@ export class ListComponent implements OnChanges {
   @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
   @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();
   @Output() public itemClickEvent = new EventEmitter<ListItem>();
-  @Output() public itemDropEvent = new EventEmitter<ListItem[]>();
+  @Output() public itemDropEvent = new EventEmitter<{ items: ListItem[], id: string }>();
   @Output() public buttonClickEvent = new EventEmitter<{ buttonId: string, item: ListItem }>();
 
 
@@ -85,9 +85,9 @@ export class ListComponent implements OnChanges {
   }
 
   // Handle item drop events
-  public dropItem(event: CdkDragDrop<ListItem[]>): void {
+  public dropItem(event: CdkDragDrop<ListItem[]>, id: string): void {
     transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-    this.itemDropEvent.emit(event.container.data);
+    this.itemDropEvent.emit({ items: event.container.data, id });
   }
 
   // Handle button click events
