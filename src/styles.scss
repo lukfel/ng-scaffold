@@ -51,3 +51,11 @@ $theme4: (
 .lf-wowen-black:not(.disabled) {
   color: #000 !important;
 }
+
+code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  background-color: #dbdbdb89;
+  border-radius: 4px;
+  padding: 1px 3px;
+  white-space: nowrap;
+}

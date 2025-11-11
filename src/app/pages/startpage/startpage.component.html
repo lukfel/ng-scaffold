@@ -3,7 +3,7 @@
     <h1>Demo</h1>
     <p>
       This is a simple demo page for the Angular Scaffold library
-      <b>&#64;lukfel/ng-scaffold.</b>
+      <code>&#64;lukfel/ng-scaffold.</code>
       <br />
       Play around with the individual UI elements and copy the configuration to your Angular
       application. For more technical information see the
@@ -17,8 +17,9 @@
     <mat-divider></mat-divider>
     <h2>Themes</h2>
     <p>
-      Define multiple themes and change them dynamically by using the library's ThemeService or
-      manually setting the corresponding css class of the theme.
+      Define multiple themes and change them dynamically by using the library's
+      <code>ThemeService</code>
+      or manually setting the corresponding css class of the theme.
     </p>
     <div class="theme-selector">
       <div class="theme-button light" (click)="setTheme('')">
@@ -60,8 +61,12 @@
       View ScaffoldConfig
     </a>
     <p>
-      The scaffold is the global wrapper element that contains all ui elements and displays them
-      based on the ScaffoldConfig config.
+      The
+      <code>&lt;lf-scaffold&gt;</code>
+      component is the global wrapper element that contains all UI elements and displays them based
+      on the provided
+      <code>ScaffoldConfig</code>
+      .
     </p>
     <p>
       <button mat-flat-button color="accent" (click)="showContainerLoading()">
@@ -218,9 +223,9 @@
       </p>
       <p>
         Content can either be set by using content projection
-        <code class="language-ts">&lt;ng-content drawerContent&gt;</code>
+        <code>&lt;ng-content drawerContent&gt;</code>
         or by using the component portal
-        <code class="language-ts">scaffoldService.drawerPortal</code>
+        <code>scaffoldService.drawerPortal</code>
         .
       </p>
       <button mat-flat-button color="accent" class="mr-2" (click)="updateDrawerContent(true)">

@@ -393,7 +393,6 @@ import { Button, ListConfig, ListHeader, ListItem } from '@lukfel/ng-scaffold';
 public listConfig: ListConfig = {
   enableSelection: true,
   enableDragging: true,
-  mode: 'flat',
   initialSortToken: 'title',
   initialSortAsc: true,
   showDividers: true
@@ -417,7 +416,7 @@ public buttons: Button[] = [
   { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
 ];
 
-// Handle sort events
+// Handle sort events (optional)
 public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
   if (event?.sortToken === 'title') {
     this.listItems.sort((a, b) => {
