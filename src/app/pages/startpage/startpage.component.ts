@@ -155,12 +155,18 @@ export class StartpageComponent implements OnInit, OnDestroy {
     }
   }
 
-  public removeHeaderButton(menuButton: MenuButton, isLeftButton: boolean): void {
-    if (!isLeftButton) {
+  public removeHeaderButton(menuButton: MenuButton, isLeftButton: boolean, isNavButton: boolean): void {
+    if (isNavButton) {
+      this.navbarConfig.menuButtons = this.navbarConfig.menuButtons?.filter((button: MenuButton) => button !== menuButton);
+    } else if (!isLeftButton) {
       this.headerConfig.rightMenuButtons = this.headerConfig.rightMenuButtons?.filter((button: MenuButton) => button !== menuButton);
     } else if (isLeftButton && this.headerConfig?.leftMenuButton === menuButton) {
       this.headerConfig.leftMenuButton = undefined;
     }
+  }
+
+  public addNavButton(): void {
+    this.navbarConfig.menuButtons?.push({ id: '' });
   }
 
   public addFooterLink(): void {

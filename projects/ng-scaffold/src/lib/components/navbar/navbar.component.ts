@@ -7,11 +7,30 @@ import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   animations: [
-    trigger('slideRightLift', [
-      state('void', style({ transform: 'translateX(-100%)' })),
-      state('*', style({ transform: 'translateX(0)' })),
-      transition(':enter', [style({ transform: 'translateX(-100%)' }), animate('200ms linear', style({ transform: 'translateX(0)' }))]),
-      transition(':leave', [animate('200ms linear', style({ transform: 'translateX(-100%)' }))])
+    trigger('responsiveSlide', [
+      // States for desktop and mobile
+      state('desktop', style({ transform: 'translateX(0)' })),
+      state('mobile', style({ transform: 'translateY(0)' })),
+
+      // Desktop enter (slide in from left)
+      transition('void => desktop', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('200ms linear')
+      ]),
+      // Desktop leave (slide back to left)
+      transition('desktop => void', [
+        animate('200ms linear', style({ transform: 'translateX(-100%)' }))
+      ]),
+
+      // Mobile enter (slide in from bottom)
+      transition('void => mobile', [
+        style({ transform: 'translateY(100%)' }),
+        animate('200ms linear')
+      ]),
+      // Mobile leave (slide back to bottom)
+      transition('mobile => void', [
+        animate('200ms linear', style({ transform: 'translateY(100%)' }))
+      ]),
     ])
   ],
   standalone: false

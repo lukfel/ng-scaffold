@@ -1,6 +1,7 @@
 @use '../../../../styles/variables' as *;
 
 .lf-scaffold {
+  transition: all $transition;
   height: 100vh;
 
   .lf-content-wrapper {

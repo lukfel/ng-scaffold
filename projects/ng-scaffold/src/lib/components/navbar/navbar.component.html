@@ -1,6 +1,6 @@
 @if (navbarConfig && navbarConfig.enable) {
   <div
-    [@slideRightLift]
+    [@responsiveSlide]="isMobile ? 'mobile' : 'desktop'"
     class="mat-app-background mat-elevation-z3"
     [class.lf-navbar]="!isMobile"
     [class.lf-navbar-mobile]="isMobile"

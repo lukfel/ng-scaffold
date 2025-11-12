@@ -2,7 +2,7 @@
 
 .lf-bottom-bar {
   transition: all $transition;
-  z-index: 101;
+  z-index: $bottom-bar-z-index;
   position: fixed;
   left: 0;
   bottom: 0;

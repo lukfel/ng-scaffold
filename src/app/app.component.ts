@@ -30,7 +30,7 @@ export class AppComponent {
   public scaffoldConfig: ScaffoldConfig = {
     // ScaffoldConfig
     loading: false,
-    scrollPositionRestoration: true,
+    scrollPositionRestoration: false,
     // HeaderConfig
     headerConfig: {
       enable: true,
