@@ -1,7 +1,7 @@
 @use '../../../../styles/variables' as *;
 
 .lf-header {
-  transition: top $transition;
+  transition: all $transition;
   z-index: $header-z-index;
   position: fixed;
   top: 0;

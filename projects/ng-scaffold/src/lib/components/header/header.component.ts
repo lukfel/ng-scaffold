@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HeaderConfig, ScaffoldLibraryConfig } from '../../models';
 
@@ -5,6 +6,14 @@ import { HeaderConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  animations: [
+    trigger('slideDownUp', [
+      state('void', style({ transform: 'translateY(-100%)' })),
+      state('*', style({ transform: 'translateY(0)' })),
+      transition(':enter', [style({ transform: 'translateY(-100%)' }), animate('200ms ease-out', style({ transform: 'translateY(0)' }))]),
+      transition(':leave', [animate('200ms ease-in', style({ transform: 'translateY(-100%)' }))])
+    ])
+  ],
   standalone: false
 })
 export class HeaderComponent implements OnInit {

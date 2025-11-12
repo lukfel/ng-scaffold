@@ -1,6 +1,7 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective } from '../../../directives';
 import { Button, ListConfig, ListHeader, ListItem } from '../../../models';
 import { SharedModule } from '../../shared.module';
 import { IconComponent } from '../icon/icon.component';
@@ -14,12 +15,16 @@ import { IconComponent } from '../icon/icon.component';
 })
 export class ListComponent implements OnInit, OnChanges {
 
+  @ContentChild(ListItemAvatarDirective) public avatarTemplate?: ListItemAvatarDirective;
+  @ContentChild(ListItemTitleDirective) public titleTemplate?: ListItemTitleDirective;
+  @ContentChild(ListItemSubtitleDirective) public subtitleTemplate?: ListItemSubtitleDirective;
+  @ContentChild(ListItemButtonsDirective) public buttonsTemplate?: ListItemButtonsDirective;
+
   @Input() public config: ListConfig | null = null;
   @Input() public header: ListHeader | null = null;
   @Input() public items: ListItem[] = [];
   @Input() public groupedItems: Map<string, ListItem[]> = new Map();
   @Input() public buttons: Button[] = [];
-  @Input() public subtitleTemplate: TemplateRef<any>;
 
   @Input() public dropListId: string;
   @Input() public connectedDropListIds: string[];
@@ -116,6 +121,8 @@ export class ListComponent implements OnInit, OnChanges {
 
   // Stop click trough events
   public stopPropagation(click: Event): void {
+    // click.preventDefault();
+    // click.stopPropagation();
     click.stopImmediatePropagation();
   }
 }

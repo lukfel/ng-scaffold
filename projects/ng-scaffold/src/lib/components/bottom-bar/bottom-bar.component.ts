@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
 
@@ -5,6 +6,14 @@ import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-bottom-bar',
   templateUrl: './bottom-bar.component.html',
   styleUrls: ['./bottom-bar.component.scss'],
+  animations: [
+    trigger('slideUpDown', [
+      state('void', style({ transform: 'translateY(100%)' })),
+      state('*', style({ transform: 'translateY(0)' })),
+      transition(':enter', [style({ transform: 'translateY(100%)' }), animate('200ms linear')]),
+      transition(':leave', [animate('200ms linear', style({ transform: 'translateY(100%)' }))])
+    ])
+  ],
   standalone: false
 })
 export class BottomBarComponent {

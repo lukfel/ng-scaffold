@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { FileUploadComponent, ListComponent, PlaceholderComponent } from '@lukfel/ng-scaffold';
+import { FileUploadComponent, ListComponent, ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective, PlaceholderComponent } from '@lukfel/ng-scaffold';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentsRoutingModule } from './components-routing.module';
 import { ComponentsComponent } from './components.component';
@@ -17,7 +17,11 @@ import { ComponentsComponent } from './components.component';
     SharedModule,
     PlaceholderComponent,
     FileUploadComponent,
-    ListComponent
+    ListComponent,
+    ListItemAvatarDirective,
+    ListItemTitleDirective,
+    ListItemSubtitleDirective,
+    ListItemButtonsDirective
   ]
 })
 export class ComponentsModule { }

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { SharedModule } from '../../shared/shared.module';
 import { NavbarComponent } from './navbar.component';
 
@@ -10,9 +11,9 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [SharedModule],
+      providers: [provideAnimations()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;

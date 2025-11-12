@@ -1,6 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { isDevMode, NgModule, SecurityContext } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { ScaffoldLoadingInterceptor, ScaffoldModule } from '@lukfel/ng-scaffold';
 import { marked, MarkedOptions, Tokens } from 'marked';
 import { MarkdownModule, MARKED_OPTIONS } from 'ngx-markdown';
@@ -46,6 +47,7 @@ export function markedOptionsFactory(): MarkedOptions {
         )
     ],
     providers: [
+        provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
         {
             provide: HTTP_INTERCEPTORS,

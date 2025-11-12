@@ -1,5 +1,5 @@
 
-import { Injectable, DOCUMENT, inject } from '@angular/core';
+import { DOCUMENT, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 
@@ -20,7 +20,7 @@ export class ThemeService {
   }
 
   constructor() {
-              this.loadTheme();
+    this.loadTheme();
   }
 
   /**

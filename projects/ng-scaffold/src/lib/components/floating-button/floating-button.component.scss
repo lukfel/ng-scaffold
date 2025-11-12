@@ -1,8 +1,8 @@
 @use '../../../../styles/variables' as *;
 
 .lf-floating-button {
+  transition: all $transition;
   position: fixed;
-  transition: bottom $transition;
   z-index: $floating-button-z-index;
 
   &.left {

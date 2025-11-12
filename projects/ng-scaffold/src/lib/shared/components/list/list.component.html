@@ -141,9 +141,15 @@
       [class.disabled]="item.disabled"
       [class.clickable]="item.clickable && !item.disabled"
       [ngClass]="item.cssClass"
+      matRipple
+      [matRippleDisabled]="!item.clickable"
       (click)="item.clickable && !item.disabled ? clickItem(item, $event) : null">
       <!-- avatar -->
-      @if (item.avatar) {
+      @if (avatarTemplate) {
+        <ng-container
+          [ngTemplateOutlet]="avatarTemplate.templateRef"
+          [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+      } @else if (item.avatar) {
         <div class="lf-list-item-avatar px-2">
           <img
             [src]="item.avatar"
@@ -159,13 +165,19 @@
       <!-- title -->
       <div class="lf-list-item-title-wrapper px-2">
         <span class="lf-list-item-title">
-          {{ item.title }}
+          @if (titleTemplate) {
+            <ng-container
+              [ngTemplateOutlet]="titleTemplate.templateRef"
+              [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+          } @else {
+            {{ item.title }}
+          }
         </span>
         @if (item.subtitle || subtitleTemplate) {
           <span class="lf-list-item-subtitle">
             @if (subtitleTemplate) {
               <ng-container
-                [ngTemplateOutlet]="subtitleTemplate"
+                [ngTemplateOutlet]="subtitleTemplate.templateRef"
                 [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
             } @else {
               {{ item.subtitle }}
@@ -176,39 +188,45 @@
 
       <!-- buttons -->
       <div class="lf-list-item-buttons">
-        @let combinedButtons = getCombinedButtons(item);
-        @for (button of combinedButtons; track button.id) {
-          @if (!item.hiddenButtonIds?.includes(button.id)) {
-            @let disabled =
-              button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id);
-            @if (button.label) {
-              <button
-                mat-button
-                class="lf-list-item-button ml-2"
-                [class.disabled]="disabled"
-                [ngClass]="button.cssClass"
-                [disabled]="disabled"
-                [matTooltip]="button.tooltip"
-                (click)="clickButton({ buttonId: button.id, item }, $event)">
-                @if (button.matIcon || button.svgIcon) {
-                  <lf-icon
-                    [matIcon]="button.matIcon"
-                    [svgIcon]="button.svgIcon"
-                    verticalAlign="bottom"></lf-icon>
-                }
-                {{ button.label }}
-              </button>
-            } @else {
-              <button
-                mat-icon-button
-                class="lf-list-item-icon ml-2"
-                [class.disabled]="disabled"
-                [ngClass]="button.cssClass"
-                [disabled]="disabled"
-                [matTooltip]="button.tooltip"
-                (click)="clickButton({ buttonId: button.id, item }, $event)">
-                <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
-              </button>
+        @if (buttonsTemplate) {
+          <ng-container
+            [ngTemplateOutlet]="buttonsTemplate.templateRef"
+            [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+        } @else {
+          @let combinedButtons = getCombinedButtons(item);
+          @for (button of combinedButtons; track button.id) {
+            @if (!item.hiddenButtonIds?.includes(button.id)) {
+              @let disabled =
+                button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id);
+              @if (button.label) {
+                <button
+                  mat-button
+                  class="lf-list-item-button ml-2"
+                  [class.disabled]="disabled"
+                  [ngClass]="button.cssClass"
+                  [disabled]="disabled"
+                  [matTooltip]="button.tooltip"
+                  (click)="clickButton({ buttonId: button.id, item }, $event)">
+                  @if (button.matIcon || button.svgIcon) {
+                    <lf-icon
+                      [matIcon]="button.matIcon"
+                      [svgIcon]="button.svgIcon"
+                      verticalAlign="bottom"></lf-icon>
+                  }
+                  {{ button.label }}
+                </button>
+              } @else {
+                <button
+                  mat-icon-button
+                  class="lf-list-item-icon ml-2"
+                  [class.disabled]="disabled"
+                  [ngClass]="button.cssClass"
+                  [disabled]="disabled"
+                  [matTooltip]="button.tooltip"
+                  (click)="clickButton({ buttonId: button.id, item }, $event)">
+                  <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
+                </button>
+              }
             }
           }
         }
