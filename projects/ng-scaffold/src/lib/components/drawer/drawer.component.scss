@@ -1,10 +1,15 @@
 @use '../../../../styles/variables' as *;
 
 .lf-drawer-container {
+  transition: all $transition;
   z-index: unset !important;
 
   .lf-drawer {
-    width: $drawer-width;
     z-index: $drawer-z-index;
+    width: $drawer-width;
+
+    &.mobile {
+      z-index: $loading-overlay-z-index;
+    }
   }
 }

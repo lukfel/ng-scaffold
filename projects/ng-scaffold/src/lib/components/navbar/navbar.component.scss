@@ -1,6 +1,7 @@
 @use '../../../../styles/variables' as *;
 
 .lf-navbar {
+  transition: all $transition;
   z-index: $navbar-z-index;
   position: fixed;
   left: 0;

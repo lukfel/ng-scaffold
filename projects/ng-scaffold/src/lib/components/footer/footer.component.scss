@@ -1,6 +1,7 @@
 @use '../../../../styles/variables' as *;
 
 .lf-footer {
+  transition: all $transition;
   overflow: hidden;
   flex-flow: column;
   align-items: center;

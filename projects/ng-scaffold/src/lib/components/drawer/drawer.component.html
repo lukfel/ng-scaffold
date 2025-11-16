@@ -3,6 +3,7 @@
     <!-- drawer -->
     <mat-sidenav
       class="lf-drawer mat-elevation-z2"
+      [class.mobile]="isMobile"
       [mode]="isMobile ? 'over' : 'side'"
       [opened]="drawerConfig.open"
       [autoFocus]="false"

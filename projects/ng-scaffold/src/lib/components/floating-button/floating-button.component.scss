@@ -2,8 +2,8 @@
 
 .lf-floating-button {
   transition: all $transition;
-  position: fixed;
   z-index: $floating-button-z-index;
+  position: fixed;
 
   &.left {
     left: $floating-button-right;

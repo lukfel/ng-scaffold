@@ -30,7 +30,7 @@ export class AppComponent {
   public scaffoldConfig: ScaffoldConfig = {
     // ScaffoldConfig
     loading: false,
-    scrollPositionRestoration: false,
+    scrollPositionRestoration: true,
     // HeaderConfig
     headerConfig: {
       enable: true,
@@ -57,10 +57,10 @@ export class AppComponent {
           id: 'documentation',
           label: 'Docs'
         },
-        {
-          id: 'typography',
-          label: 'Typography'
-        },
+        // {
+        //   id: 'typography',
+        //   label: 'Typography'
+        // },
         {
           id: 'github',
           svgIcon: 'github_logo',
@@ -99,11 +99,11 @@ export class AppComponent {
           label: 'Docs',
           matIcon: 'description'
         },
-        {
-          id: 'typography',
-          label: 'Typography',
-          matIcon: 'text_fields'
-        }
+        // {
+        //   id: 'typography',
+        //   label: 'Typography',
+        //   matIcon: 'text_fields'
+        // }
       ]
     },
     // DrawerConfig

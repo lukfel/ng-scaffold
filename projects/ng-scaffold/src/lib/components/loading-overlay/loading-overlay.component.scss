@@ -1,8 +1,8 @@
 @use '../../../../styles/variables' as *;
 
 .lf-loading-overlay {
-  position: fixed;
   z-index: $loading-overlay-z-index;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
