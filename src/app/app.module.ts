@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromD
 import { isDevMode, NgModule, SecurityContext } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { ScaffoldLoadingInterceptor, ScaffoldModule } from '@lukfel/ng-scaffold';
 import { marked, MarkedOptions, Tokens } from 'marked';
 import { MarkdownModule, MARKED_OPTIONS } from 'ngx-markdown';
@@ -23,28 +24,24 @@ export function markedOptionsFactory(): MarkedOptions {
 }
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
         SharedModule,
+        MarkdownModule.forRoot({
+            loader: HttpClient,
+            markedOptions: {
+                provide: MARKED_OPTIONS,
+                useFactory: markedOptionsFactory,
+            },
+            sanitize: SecurityContext.NONE
+        }),
         ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode(), outlineIcons: true }),
-        // ServiceWorkerModule.register('ngsw-worker.js', {
-        //     enabled: true,
-        //     registrationStrategy: 'registerWhenStable:30000'
-        // }),
-        MarkdownModule.forRoot(
-            {
-                loader: HttpClient,
-                markedOptions: {
-                    provide: MARKED_OPTIONS,
-                    useFactory: markedOptionsFactory,
-                },
-                sanitize: SecurityContext.NONE
-            }
-        )
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: false,
+            registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [
         provideAnimations(),
@@ -55,8 +52,6 @@ export function markedOptionsFactory(): MarkedOptions {
             multi: true
         }
     ],
-    bootstrap: [
-        AppComponent
-    ]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
