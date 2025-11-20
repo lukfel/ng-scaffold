@@ -1,7 +1,7 @@
 @if (navbarConfig && navbarConfig.enable) {
   <div
     [@responsiveSlide]="isMobile ? 'mobile' : 'desktop'"
-    class="mat-app-background mat-elevation-z3"
+    class="mat-app-background lf-transitions mat-elevation-z3"
     [class.lf-navbar]="!isMobile"
     [class.lf-navbar-mobile]="isMobile"
     [ngClass]="navbarConfig.cssClass">

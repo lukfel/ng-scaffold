@@ -1,5 +1,7 @@
 @if (drawerConfig && drawerConfig.enable) {
-  <mat-sidenav-container class="lf-drawer-container" [ngClass]="drawerConfig.cssClass">
+  <mat-sidenav-container
+    class="lf-drawer-container lf-transitions"
+    [ngClass]="drawerConfig.cssClass">
     <!-- drawer -->
     <mat-sidenav
       class="lf-drawer mat-elevation-z2"

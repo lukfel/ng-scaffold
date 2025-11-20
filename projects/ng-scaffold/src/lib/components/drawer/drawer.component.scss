@@ -1,7 +1,6 @@
 @use '../../../../styles/variables' as *;
 
 .lf-drawer-container {
-  transition: all $transition;
   z-index: unset !important;
 
   .lf-drawer {

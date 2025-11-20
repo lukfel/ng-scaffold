@@ -53,6 +53,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public routeLoading: boolean = false;
   public scrollTopPosition: number = 0;
 
+  public initialized: boolean = false;
+
   private _subscription: Subscription = new Subscription;
 
 
@@ -143,6 +145,8 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         }
       }));
     }
+
+    setTimeout(() => { this.initialized = true; });
   }
 
   ngOnDestroy(): void {

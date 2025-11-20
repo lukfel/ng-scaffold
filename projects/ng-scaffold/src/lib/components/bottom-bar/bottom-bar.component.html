@@ -1,7 +1,7 @@
 @if (bottomBarConfig && bottomBarConfig.enable) {
   <div
     [@slideUpDown]
-    class="lf-bottom-bar px-4"
+    class="lf-bottom-bar lf-transitions px-4"
     [ngClass]="bottomBarConfig.cssClass"
     [class.lf-bottom-bar-show-navbar]="!isMobile && navbarEnabled"
     [class.lf-bottom-bar-show-navbar-mobile]="isMobile && navbarEnabled">

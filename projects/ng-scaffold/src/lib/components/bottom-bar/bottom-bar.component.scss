@@ -1,7 +1,6 @@
 @use '../../../../styles/variables' as *;
 
 .lf-bottom-bar {
-  transition: all $transition;
   z-index: $bottom-bar-z-index;
   position: fixed;
   left: 0;

@@ -1,6 +1,6 @@
 @if (headerConfig && headerConfig.enable) {
   <mat-toolbar
-    class="lf-header mat-elevation-z3"
+    class="lf-header lf-transitions mat-elevation-z3"
     [class.px-4]="!isMobile"
     [class.px-1]="isMobile"
     [ngClass]="headerConfig.cssClass"
@@ -151,7 +151,8 @@
               class="lf-menu-icon-button"
               [ngClass]="button.cssClass"
               (click)="buttonClicked(button.id)"
-              [matTooltip]="button.tooltip">
+              [matTooltip]="button.tooltip"
+              tabindex="0">
               <!-- icon -->
               <lf-icon
                 [matIcon]="button.matIcon"
