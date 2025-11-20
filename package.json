@@ -1,6 +1,6 @@
 {
   "name": "ng-scaffold-app",
-  "version": "20.0.49",
+  "version": "20.0.50",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,10 +8,11 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --browsers ChromeHeadless --code-coverage true --watch false",
     "lint": "ng lint --fix",
+    "deploy": "ng deploy --project ng-scaffold-app --base-href /ng-scaffold/ --repo https://github.com/lukfel/ng-scaffold.git",
     "lib:build": "ng build ng-scaffold --configuration production",
     "lib:watch": "ng build ng-scaffold --watch --configuration development",
-    "lib:publish": "npm publish ./dist/ng-scaffold --access public",
-    "deploy": "ng deploy --project ng-scaffold-app --base-href /ng-scaffold/ --repo https://github.com/lukfel/ng-scaffold.git"
+    "lib:schematics": "cd projects/ng-scaffold && npm run build && npm run postbuild",
+    "lib:publish": "npm publish ./dist/ng-scaffold --access public"
   },
   "dependencies": {
     "@angular/animations": "^20.0.5",
