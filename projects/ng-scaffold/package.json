@@ -1,6 +1,6 @@
 {
   "name": "@lukfel/ng-scaffold",
-  "version": "20.0.48",
+  "version": "20.0.49",
   "description": "This Angular library provides a basic UI scaffold and services for modern web and mobile apps",
   "license": "MIT",
   "author": {
@@ -11,13 +11,18 @@
     "type": "git",
     "url": "https://github.com/lukfel/ng-scaffold"
   },
+  "scripts": {
+    "build": "tsc -p tsconfig.schematics.json",
+    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ng-scaffold/"
+  },
   "peerDependencies": {
     "@angular/common": "^20.0.5",
     "@angular/core": "^20.0.5",
     "@angular/material": "^20.0.5"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
+  "devDependencies": {
+    "copyfiles": "file:../../node_modules/copyfiles",
+    "typescript": "file:../../node_modules/typescript"
   },
   "exports": {
     "./styles": {
@@ -27,9 +32,6 @@
   "schematics": "./schematics/collection.json",
   "ng-add": {
     "save": true
-  },
-  "scripts": {
-    "build:schematics": "tsc -p tsconfig.schematics.json"
   },
   "sideEffects": false
 }

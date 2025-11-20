@@ -6,8 +6,6 @@
   },
   "assets": [
     "./styles/*.scss",
-    "./styles/**/*",
-    "schematics/**/*",
-    "!schematics/**/*.ts"
+    "./styles/**/*"
   ]
 }
