@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/ng-scaffold/schematics",
+    "rootDir": "./schematics",
+    "module": "CommonJS",
+    "target": "ES2020",
+    "declaration": true
+  },
+  "include": ["schematics/**/*.ts"]
+}

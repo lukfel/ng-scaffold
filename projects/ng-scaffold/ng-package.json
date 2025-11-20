@@ -7,6 +7,7 @@
   "assets": [
     "./styles/*.scss",
     "./styles/**/*",
-    "schematics/**/*"
+    "schematics/**/*",
+    "!schematics/**/*.ts"
   ]
 }
