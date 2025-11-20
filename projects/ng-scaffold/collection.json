@@ -1,8 +1,0 @@
-{
-  "schematics": {
-    "ng-add": {
-      "description": "Add ng-scaffold to the project",
-      "factory": "./schematics/ng-add/index#ngAdd"
-    }
-  }
-}

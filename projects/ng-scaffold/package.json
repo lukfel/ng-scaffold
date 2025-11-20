@@ -1,6 +1,6 @@
 {
   "name": "@lukfel/ng-scaffold",
-  "version": "20.0.45",
+  "version": "20.0.46",
   "description": "This Angular library provides a basic UI scaffold and services for modern web and mobile apps",
   "license": "MIT",
   "author": {
@@ -22,17 +22,11 @@
   "exports": {
     "./styles": {
       "sass": "./styles/style.scss"
-    },
-    "./package.json": {
-      "default": "./package.json"
-    },
-    "./schematics": {
-      "default": "./schematics/index.js"
-    },
-    "./schematics/*": {
-      "default": "./schematics/*"
     }
   },
-  "schematics": "./collection.json",
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": true
+  },
   "sideEffects": false
 }
