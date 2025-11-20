@@ -1,9 +1,8 @@
-import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BreakpointService, CONFIG, DialogService, DrawerConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
+import { CONFIG, DialogService, DrawerConfig, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -21,9 +20,9 @@ export class AppComponent {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private scaffoldService = inject(ScaffoldService);
-  private breakpointService = inject(BreakpointService);
   private seoService = inject(SeoService);
   private themeService = inject(ThemeService);
+
 
   public version = packageJson.version;
 
@@ -33,13 +32,12 @@ export class AppComponent {
     scrollPositionRestoration: true,
     // HeaderConfig
     headerConfig: {
+      showRouteLoading: true,
       enable: true,
       svgLogo: 'logo',
       title: 'Angular Scaffold',
       subtitle: `v${packageJson.version}`,
       titleRouterLink: 'start',
-      loading: false,
-      showRouteLoading: true,
       leftMenuButton: {
         id: 'drawer',
         matIcon: 'menu'
@@ -57,10 +55,6 @@ export class AppComponent {
           id: 'documentation',
           label: 'Docs'
         },
-        // {
-        //   id: 'typography',
-        //   label: 'Typography'
-        // },
         {
           id: 'github',
           svgIcon: 'github_logo',
@@ -72,6 +66,9 @@ export class AppComponent {
           tooltip: 'NPM'
         }
       ],
+      responsiveConfig: {
+        enable: true
+      },
       inputConfig: {
         enable: false,
         label: 'Search',
@@ -98,12 +95,7 @@ export class AppComponent {
           id: 'documentation',
           label: 'Docs',
           matIcon: 'description'
-        },
-        // {
-        //   id: 'typography',
-        //   label: 'Typography',
-        //   matIcon: 'text_fields'
-        // }
+        }
       ]
     },
     // DrawerConfig
@@ -190,6 +182,7 @@ export class AppComponent {
 
   private currentTheme: string = '';
 
+
   constructor() {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon('logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'));
@@ -203,34 +196,6 @@ export class AppComponent {
 
     // Set config for scaffold
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
-
-    // Store the rightMenuButtons from the scaffoldConfig for desktop
-    const defaultRightMenuButtons: MenuButton[] = this.scaffoldService.scaffoldConfig.headerConfig?.rightMenuButtons || [];
-
-    // Update the rightMenuButtons when on mobile breakpoint
-    this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
-      const headerConfig: HeaderConfig | undefined = this.scaffoldService.scaffoldConfig.headerConfig;
-      if (headerConfig) {
-        // Check which breakpoint is active
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          this.mobileRightMenuButtons[0].menuButtons = defaultRightMenuButtons;
-          const updatedHeaderConfig: HeaderConfig = { ...headerConfig, rightMenuButtons: this.mobileRightMenuButtons };
-          this.scaffoldService.updateScaffoldProperty('headerConfig', updatedHeaderConfig);
-        } else {
-          const updatedHeaderConfig: HeaderConfig = { ...headerConfig, rightMenuButtons: defaultRightMenuButtons };
-          this.scaffoldService.updateScaffoldProperty('headerConfig', updatedHeaderConfig);
-        }
-      }
-
-      // Initially disable navbar on desktop
-      const navbarConfig: DrawerConfig | undefined = this.scaffoldService.scaffoldConfig.navbarConfig;
-      if (navbarConfig?.enable === false) {
-        if (result.breakpoints[Breakpoints.XSmall]) {
-          const updatedNavbarConfig: NavbarConfig = { ...navbarConfig, enable: true };
-          this.scaffoldService.updateScaffoldProperty('navbarConfig', updatedNavbarConfig);
-        }
-      }
-    });
 
     // Listen to theme changes
     this.themeService.currentTheme$.subscribe((currentTheme: string) => this.currentTheme = currentTheme);

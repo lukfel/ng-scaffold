@@ -11,15 +11,22 @@ export interface HeaderConfig {
   titleRouterLink?: string;
   leftMenuButton?: MenuButton;
   rightMenuButtons?: MenuButton[];
+  responsiveConfig?: HeaderResponsiveConfig;
   inputConfig?: HeaderInputConfig;
   cssClass?: string;
+}
+
+export interface HeaderResponsiveConfig {
+  enable?: boolean;
+  matIcon?: string;
+  svgLogo?: string;
+  excludeButtonIds?: string[];
 }
 
 export interface HeaderInputConfig {
   enable?: boolean;
   label?: string;
   matIconSubmit?: string;
-  // matIconPrefix?: string;
   hint?: string;
   disabled?: boolean;
   autoFocus?: boolean;

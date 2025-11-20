@@ -4,7 +4,7 @@ export { ContentTitleCardConfig } from './content-title-card-config.model';
 export { DrawerConfig } from './drawer-config.model';
 export { FloatingButtonConfig } from './floating-button-config.model';
 export { FooterConfig } from './footer-config.model';
-export { HeaderConfig, HeaderInputConfig } from './header-config.model';
+export { HeaderConfig, HeaderInputConfig, HeaderResponsiveConfig } from './header-config.model';
 export { ScaffoldLibraryConfig } from './library-config.model';
 export { ListConfig, ListHeader, ListItem } from './list-item.model';
 export { Button, MenuButton } from './menu-button.model';

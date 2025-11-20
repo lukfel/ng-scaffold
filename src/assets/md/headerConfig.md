@@ -10,6 +10,7 @@ interface HeaderConfig {
   titleRouterLink?: string;
   leftMenuButton?: MenuButton;
   rightMenuButtons?: MenuButton[];
+  responsiveConfig?: HeaderResponsiveConfig;
   inputConfig?: HeaderInputConfig;
   cssClass?: string;
 }

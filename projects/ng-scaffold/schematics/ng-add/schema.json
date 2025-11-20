@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "id": "NgAddSchema",
+  "title": "Ng Add Options",
+  "type": "object",
+  "properties": {}
+}
