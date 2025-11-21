@@ -67,7 +67,7 @@ export class AppComponent {
 }
 ```
 
-### Update Configuration (immutable, partial)
+### (Optional) Update Configuration
 The `ScaffoldService` provides `updateScaffoldProperty()` to partially update the `ScaffoldConfig` in a type-safe way. It performs an immutable update, creating a new configuration object with the updated property and emits the new state.
 
 ```ts
@@ -128,7 +128,7 @@ Import the styles in your `styles.scss` and apply a default theme.
 @include lf.scaffold-theme();           // include a default theme
 ```
 
-### Custom Themes (Optional)
+### (Optional) Custom Themes
 To customize the default theme, define a new theme map specifying `primary`, `accent`, and `warn` colors using Material palettes. Enabling the `dark` option applies a dark theme. Pass your custom theme to `lf.scaffold-theme($my-theme)`.
 
 ```scss
@@ -145,7 +145,7 @@ $my-theme: (
 @include lf.scaffold-theme($my-theme);
 ```
 
-### Multiple Themes (Optional)
+### (Optional) Multiple Themes
 To switch between multiple themes dynamically, define additional themes using `lf.scaffold-colors($theme, 'theme-class')`, then apply the class to the `<body class="theme-class">` tag.
 
 * **Note:** The `ThemeService` allows dynamic theme switching.
@@ -171,7 +171,7 @@ $my-theme2: (
 @include lf.scaffold-colors($my-theme2, 'my-theme2');       // Set additional themes with lf.scaffold-colors(...)
 ```
 
-### Custom Typography (Optional)
+### (Optional) Custom Typography
 To change the default typography from Roboto, pass an additional parameter ``font-family`` in the theme map.
 
 * **Note:** Don't forget to also import and set the font-family in the styles.
@@ -201,7 +201,7 @@ body {
 ## Events
 There are two ways to listen to scaffold user events (button clicks, input changes, ...):
 
-### Option 1 (Recommended) – Subscribe to Event Observables
+### (Recommended) Option 1 – Subscribe to Event Observables
 Subscribe to the event Observables and listen to changes
 ```ts
 constructor(private scaffoldService: ScaffoldService, private router: Router) {
@@ -254,7 +254,7 @@ public navbarButtonClickEvent(id: string): void {
 
 
 
-## Additional Services
+## (Optional) Additional Services
 This library includes several utility services:
 
 - **`Logger`** – Development-only logging
@@ -513,7 +513,7 @@ public onPlaceholderButtonClick(): void {
 
 
 
-## Interceptors
+## (Optional) Interceptors
 Intercept HTTP Calls and automatically show a loading spinner.
 
 * **Note:** The loading spinner can also be manually shown by udpating the value for `scaffoldConfig.loading` in the `ScaffoldService`
