@@ -2,8 +2,26 @@ import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 
 const SNIPPET = `
 @use "@lukfel/ng-scaffold/styles" as lf;
-// Create a base theme and include it with @include lf.scaffold-theme($base-theme);
-// Include additional themes with @include lf.scaffold-colors($theme2, 'theme2');
+@use '@angular/material' as mat;
+
+// Define themes (uses Material palettes)
+$base-theme: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  warn: mat.m2-define-palette(mat.$m2-red-palette),
+  dark: false,
+  font-family: 'Roboto'
+);
+
+$theme2: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  dark: true
+);
+
+// Include themes (use ThemeService to switch between themes)
+@include lf.scaffold-theme($base-theme);
+@include lf.scaffold-colors($theme2, 'theme2');
 
 `;
 
@@ -32,7 +50,7 @@ export function addStyles(): Rule {
         }
 
         const recorder = tree.beginUpdate(path);
-        recorder.insertLeft(content.length, SNIPPET);
+        recorder.insertLeft(0, SNIPPET);
         tree.commitUpdate(recorder);
         context.logger.info('[Styles] Successfully added.');
         return tree;
