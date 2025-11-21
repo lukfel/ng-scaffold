@@ -1,17 +1,15 @@
-@use '../../../../styles/variables' as *;
-
 .lf-footer {
   overflow: hidden;
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  min-height: $footer-height;
+  min-height: var(--footer-height);
   border-radius: 0;
   border-top: solid 1px rgba(0, 0, 0, 0.12);
 
   .lf-footer-logo {
-    width: $footer-logo-size;
-    height: $footer-logo-size;
+    width: var(--footer-logo-size);
+    height: var(--footer-logo-size);
   }
 
   .lf-footer-links {
@@ -24,7 +22,7 @@
       a {
         text-decoration: none;
         color: unset;
-        font-size: $footer-font-size;
+        font-size: var(--footer-font-size);
 
         &:hover {
           color: var(--color-primary);
@@ -34,6 +32,6 @@
   }
 
   .lf-footer-copyright {
-    font-size: $footer-font-size;
+    font-size: var(--footer-font-size);
   }
 }

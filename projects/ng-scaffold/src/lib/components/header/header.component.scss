@@ -1,14 +1,12 @@
-@use '../../../../styles/variables' as *;
-
 .lf-header {
-  z-index: $header-z-index;
+  z-index: var(--header-z-index);
   position: fixed;
   top: 0;
-  height: $header-height;
+  height: var(--header-height);
 
   .lf-header-menu-button {
     flex-shrink: 0;
-    max-width: $header-menu-button-max-width;
+    max-width: var(--header-menu-button-max-width);
 
     ::ng-deep .mdc-button__label {
       overflow: hidden;
@@ -22,7 +20,7 @@
 
   .lf-header-logo-title-wrapper {
     flex: 0 0 auto;
-    max-width: $header-logo-title-wrapper-max-width;
+    max-width: var(--header-logo-title-wrapper-max-width);
     overflow: hidden;
     display: flex;
 
@@ -38,10 +36,10 @@
     }
 
     .lf-header-logo {
-      width: $header-logo-size;
-      height: $header-logo-size;
-      min-width: $header-logo-size;
-      min-height: $header-logo-size;
+      width: var(--header-logo-size);
+      height: var(--header-logo-size);
+      min-width: var(--header-logo-size);
+      min-height: var(--header-logo-size);
     }
 
     .lf-header-title-wrapper {
@@ -49,20 +47,20 @@
       flex-flow: column;
 
       .lf-header-title {
-        font-size: $header-title-font-size;
-        line-height: calc($header-title-font-size + 8px);
+        font-size: var(--header-title-font-size);
+        line-height: calc(var(--header-title-font-size) + 8px);
       }
 
       .lf-header-subtitle {
-        font-size: $header-subtitle-font-size;
-        line-height: $header-subtitle-font-size;
+        font-size: var(--header-subtitle-font-size);
+        line-height: var(--header-subtitle-font-size);
       }
     }
   }
 
   lf-input {
-    z-index: $header-z-index;
-    flex: 1 1 $header-input-max-width;
+    z-index: var(--header-z-index);
+    flex: 1 1 var(--header-input-max-width);
 
     &.lf-header-input-mobile {
       position: fixed !important;
@@ -96,7 +94,7 @@
 }
 
 .lf-header-progress-bar {
-  z-index: $header-z-index;
+  z-index: var(--header-z-index);
   position: fixed;
-  top: $header-height;
+  top: var(--header-height);
 }

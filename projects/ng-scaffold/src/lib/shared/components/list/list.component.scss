@@ -1,5 +1,3 @@
-@use '../../../../../styles/variables' as *;
-
 .lf-list {
   width: 100%;
 
@@ -8,7 +6,7 @@
 
     .lf-list-group-header {
       font-weight: 500;
-      height: calc($list-item-height - 16px);
+      height: calc(var(--list-item-height) - 16px);
     }
   }
 }
@@ -19,8 +17,8 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  height: $list-item-height;
-  border-radius: $list-item-border-radius;
+  height: var(--list-item-height);
+  border-radius: var(--list-item-border-radius);
   box-sizing: border-box;
   overflow: hidden;
 
@@ -31,25 +29,25 @@
   }
 
   .lf-list-item-sort-icon {
-    font-size: $list-item-sort-icon-size;
-    width: $list-item-sort-icon-size;
-    height: $list-item-sort-icon-size;
+    font-size: var(--list-item-sort-icon-size);
+    width: var(--list-item-sort-icon-size);
+    height: var(--list-item-sort-icon-size);
     vertical-align: text-top;
   }
 
   .lf-list-item-checkbox {
-    flex: 0 0 $list-item-checkbox-width;
+    flex: 0 0 var(--list-item-checkbox-width);
   }
 
   .lf-list-item-avatar {
-    flex: 0 0 $list-item-avatar-size;
+    flex: 0 0 var(--list-item-avatar-size);
     display: flex;
     align-items: center;
     justify-content: center;
 
     img {
-      width: $list-item-avatar-size;
-      height: $list-item-avatar-size;
+      width: var(--list-item-avatar-size);
+      height: var(--list-item-avatar-size);
       border-radius: 50%;
       object-fit: cover;
     }
@@ -59,7 +57,7 @@
     display: flex;
     flex-flow: column;
     align-items: flex-start;
-    flex: 1 1 $list-item-title-width;
+    flex: 1 1 var(--list-item-title-width);
     overflow: hidden;
 
     .lf-list-item-title {
@@ -91,7 +89,7 @@
 
     .lf-list-item-title-wrapper {
       span {
-        width: $list-item-title-wrapper-width;
+        width: var(--list-item-title-wrapper-width);
       }
     }
   }
@@ -111,9 +109,9 @@
 
 .drop-zone {
   width: 100%;
-  height: $list-item-height;
-  border: 2px dashed $color-gray;
-  border-radius: $list-item-border-radius;
+  height: var(--list-item-height);
+  border: 2px dashed var(--color-gray);
+  border-radius: var(--list-item-border-radius);
   box-sizing: border-box;
 }
 
@@ -126,7 +124,7 @@
   color: var(--mat-app-text-color, inherit) !important;
   background: var(--mat-app-background-color, inherit) !important;
   box-sizing: border-box;
-  border-radius: $list-item-border-radius;
+  border-radius: var(--list-item-border-radius);
   opacity: 0.8;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14),

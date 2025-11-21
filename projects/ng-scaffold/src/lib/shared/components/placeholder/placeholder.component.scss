@@ -1,5 +1,3 @@
-@use '../../../../../styles/variables' as *;
-
 .lf-placeholder {
   display: flex;
   flex-flow: column;
@@ -9,22 +7,22 @@
 
   ::ng-deep {
     .lf-icon {
-      width: $placeholder-icon-size;
-      height: $placeholder-icon-size;
-      font-size: $placeholder-icon-size;
-      color: $color-gray;
+      width: var(--placeholder-icon-size);
+      height: var(--placeholder-icon-size);
+      font-size: var(--placeholder-icon-size);
+      color: var(--color-gray);
     }
   }
 
   .lf-placeholder-title {
     margin: 0;
-    font-size: $placeholder-title-font-size;
-    color: $color-gray;
+    font-size: var(--placeholder-title-font-size);
+    color: var(--color-gray);
   }
 
   .lf-placeholder-message {
     margin: 0;
-    font-size: $placeholder-message-font-size;
-    color: $color-gray;
+    font-size: var(--placeholder-message-font-size);
+    color: var(--color-gray);
   }
 }

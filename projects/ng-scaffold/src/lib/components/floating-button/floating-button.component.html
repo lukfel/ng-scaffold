@@ -5,9 +5,11 @@
     mat-fab
     color="accent"
     class="lf-floating-button lf-transitions"
-    [style.bottom]="getBottomPosition() + 'px'"
     [ngClass]="floatingButtonConfig.cssClass"
     [ngClass]="floatingButtonConfig.horizontalPosition"
+    [class.show-navbar]="isMobile && !bottomBarEnabled"
+    [class.show-bottom-bar]="bottomBarEnabled && !isMobile"
+    [class.show-navbar-and-bottom-bar]="isMobile && bottomBarEnabled"
     [extended]="!!floatingButtonConfig.label"
     (click)="buttonClicked(floatingButtonConfig.id)"
     [matTooltip]="floatingButtonConfig.tooltip!">

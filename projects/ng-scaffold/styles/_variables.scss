@@ -1,58 +1,61 @@
-$transition: 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+:root {
+    --transition: 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 
-$loading-overlay-z-index: 101;
+    --loading-overlay-z-index: 101;
 
-$header-z-index: 100;
-$header-height: 64px;
-$header-logo-title-wrapper-max-width: 480px;
-$header-logo-size: 40px;
-$header-title-font-size: 20px;
-$header-subtitle-font-size: 12px;
-$header-input-max-width: 480px;
-$header-input-border-radius: 28px;
-$header-menu-button-max-width: 144px;
+    --header-z-index: 100;
+    --header-height: 64px;
+    --header-logo-title-wrapper-max-width: 480px;
+    --header-logo-size: 40px;
+    --header-title-font-size: 20px;
+    --header-subtitle-font-size: 12px;
+    --header-input-max-width: 480px;
+    --header-input-border-radius: 28px;
+    --header-menu-button-max-width: 144px;
 
-$navbar-z-index: 99;
-$navbar-height: 72px;
-$navbar-height-mobile: 56px;
-$navbar-width: 72px;
-$navbar-padding: 4px;
-$navbar-item-border-radius: 16px;
-$navbar-item-label-font-size: 12px;
+    --navbar-z-index: 99;
+    --navbar-height: 72px;
+    --navbar-height-mobile: 56px;
+    --navbar-width: 72px;
+    --navbar-padding: 4px;
+    --navbar-item-border-radius: 16px;
+    --navbar-item-label-font-size: 12px;
 
-$content-padding: 24px;
-$content-padding-mobile: 16px;
+    --content-padding: 24px;
+    --content-padding-mobile: 16px;
 
-$drawer-width: 208px;
-$drawer-z-index: 97;
+    --drawer-width: 208px;
+    --drawer-z-index: 97;
 
-$footer-height: 100px;
-$footer-logo-size: 96px;
-$footer-font-size: 12px;
+    --footer-height: 100px;
+    --footer-logo-size: 96px;
+    --footer-font-size: 12px;
 
-$content-title-card-z-index: 98;
-$content-title-card-height: 80px;
-$content-title-card-labe-font-size: 24px;
+    --content-title-card-z-index: 98;
+    --content-title-card-height: 80px;
+    --content-title-card-labe-font-size: 24px;
 
-$floating-button-z-index: 100;
-$floating-button-right: 24px;
-$floating-button-min-width: 56px;
-$floating-button-label-max-width: 256px;
-$floating-button-label-font-size: 16px;
+    --floating-button-z-index: 100;
+    --floating-button-right: 24px;
+    --floating-button-bottom: 24px;
+    --floating-button-min-width: 56px;
+    --floating-button-label-max-width: 256px;
+    --floating-button-label-font-size: 16px;
 
-$bottom-bar-z-index: 98;
-$bottom-bar-height: 56px;
+    --bottom-bar-z-index: 98;
+    --bottom-bar-height: 56px;
 
-$placeholder-icon-size: 96px;
-$placeholder-title-font-size: 28px;
-$placeholder-message-font-size: 18px;
+    --placeholder-icon-size: 96px;
+    --placeholder-title-font-size: 28px;
+    --placeholder-message-font-size: 18px;
 
-$list-item-height: 72px;
-$list-item-border-radius: 4px;
-$list-item-sort-icon-size: 16px;
-$list-item-avatar-size: 48px;
-$list-item-title-width: 200px;
-$list-item-title-wrapper-width: 80px;
-$list-item-checkbox-width: 40px;
+    --list-item-height: 72px;
+    --list-item-border-radius: 4px;
+    --list-item-sort-icon-size: 16px;
+    --list-item-avatar-size: 48px;
+    --list-item-title-width: 200px;
+    --list-item-title-wrapper-width: 80px;
+    --list-item-checkbox-width: 40px;
 
-$color-gray: rgba(128, 128, 128, 0.8);
+    --color-gray: rgba(128, 128, 128, 0.8);
+}

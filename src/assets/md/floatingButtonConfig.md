@@ -7,7 +7,6 @@ interface FloatingButtonConfig {
   svgIcon?: string;
   tooltip?: string;
   horizontalPosition?: 'left' | 'center' | 'right';
-  bottomPositionPx?: number;
   autoHide?: boolean;
   cssClass?: string;
 }

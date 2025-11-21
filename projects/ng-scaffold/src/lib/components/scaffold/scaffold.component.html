@@ -43,7 +43,7 @@
       [drawerConfig]="drawerConfig"
       [drawerPortal]="drawerPortal"
       [isMobile]="isMobile"
-      [fixedOffset]="headerConfig?.enable ? 64 : 0"
+      [headerEnabled]="headerConfig?.enable!"
       (drawerConfigUpdateEvent)="drawerConfigUpdated($event)">
       <!-- drawer content -->
       <ng-content select="[drawerContent]" drawerContent></ng-content>

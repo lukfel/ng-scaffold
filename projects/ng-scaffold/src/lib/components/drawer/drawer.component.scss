@@ -1,14 +1,16 @@
-@use '../../../../styles/variables' as *;
-
 .lf-drawer-container {
   z-index: unset !important;
 
   .lf-drawer {
-    z-index: $drawer-z-index;
-    width: $drawer-width;
+    z-index: var(--drawer-z-index);
+    width: var(--drawer-width);
 
     &.mobile {
-      z-index: $loading-overlay-z-index;
+      z-index: var(--loading-overlay-z-index);
+    }
+
+    &.lf-drawer-show-header {
+      top: var(--header-height) !important;
     }
   }
 }

@@ -29,11 +29,11 @@ export function addConfig(): Rule {
         const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
         const recorder = tree.beginUpdate(filePath);
 
+        // Add imports if missing
         if (!content.includes('from \'@lukfel/ng-scaffold\'')) {
             context.logger.info('[Config] Adding config import ...');
             recorder.insertLeft(0, 'import { ScaffoldConfig, ScaffoldService } from \'@lukfel/ng-scaffold\';\n');
         }
-
         if (!content.includes('inject')) {
             context.logger.info('[Config] Adding inject import ...');
             recorder.insertLeft(0, 'import { inject } from \'@angular/core\';\n');
@@ -48,37 +48,32 @@ export function addConfig(): Rule {
         const className = classNode.name?.text ?? '<unknown>';
         context.logger.info(`[Config] Modifying class ${className}`);
 
+        // Always inject ScaffoldService at class level
+        if (!content.includes('scaffoldService = inject(ScaffoldService)')) {
+            recorder.insertLeft(classNode.members.pos,
+                `  private scaffoldService = inject(ScaffoldService);
+  private scaffoldConfig: ScaffoldConfig = {
+    // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
+  };
+`);
+        }
+
+        // Ensure constructor exists and sets scaffoldConfig
         const constructorNode = classNode.members.find(ts.isConstructorDeclaration);
-
         if (constructorNode) {
-            const paramExists = constructorNode.parameters.some(p =>
-                p.type?.getText(sourceFile).includes('ScaffoldService')
-            );
-            if (!paramExists) {
-                const ctorStart = constructorNode.getStart(sourceFile);
-                const ctorText = constructorNode.getFullText(sourceFile);
-                const insertPos = ctorStart + ctorText.indexOf('(') + 1;
-                recorder.insertLeft(insertPos, 'private scaffoldService: ScaffoldService, ');
-            }
-
-            const bodyStart = constructorNode.body!.getStart(sourceFile);
-            const bodyEnd = constructorNode.body!.getEnd();
-            const bodyText = content.slice(bodyStart, bodyEnd);
+            const bodyText = constructorNode.body!.getFullText(sourceFile);
             if (!bodyText.includes('this.scaffoldService.scaffoldConfig')) {
-                recorder.insertLeft(bodyEnd - 1, '\n    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;\n');
+                recorder.insertLeft(constructorNode.body!.getEnd() - 1,
+                    `    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+`);
             }
         } else {
-            const snippet = `
-private scaffoldService = inject(ScaffoldService);
-private scaffoldConfig: ScaffoldConfig = {
-    // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
-};
-
-constructor() {
+            // Add a constructor if none exists
+            recorder.insertLeft(classNode.members.pos + (content.includes('private scaffoldService') ? 0 : 0),
+                `  constructor() {
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
-}
-`;
-            recorder.insertLeft(classNode.members.pos, snippet);
+  }
+`);
         }
 
         tree.commitUpdate(recorder);

@@ -1,5 +1,6 @@
 @import './_theme.scss';
 @import './_classes';
+@import './_variables';
 @import './fonts/material-icons.scss';
 @import './fonts/roboto-font.scss';
 
@@ -54,5 +55,5 @@ body {
 }
 
 .lf-transitions {
-  transition: all 400ms cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  transition: var(--transition) !important;
 }

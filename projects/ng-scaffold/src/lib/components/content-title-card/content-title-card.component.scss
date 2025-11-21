@@ -1,15 +1,13 @@
-@use '../../../../styles/variables' as *;
-
 .lf-content-title-card {
-  z-index: $content-title-card-z-index;
-  height: $content-title-card-height;
+  z-index: var(--content-title-card-z-index);
+  height: var(--content-title-card-height);
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   border-radius: 0;
 
   .lf-content-title-card-label {
-    font-size: $content-title-card-labe-font-size;
+    font-size: var(--content-title-card-labe-font-size);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

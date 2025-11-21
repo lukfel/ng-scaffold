@@ -1,7 +1,5 @@
-@use '../../../../styles/variables' as *;
-
 .lf-loading-overlay {
-  z-index: $loading-overlay-z-index;
+  z-index: var(--loading-overlay-z-index);
   position: fixed;
   top: 0;
   right: 0;

@@ -61,7 +61,12 @@ function addToNgModule(tree: Tree, context: SchematicContext, path: string): Tre
     }
 
     const importsArray = importsProp.initializer;
-    recorder.insertRight(importsArray.getEnd() - 1, `${importsArray.elements.length ? ', ' : ''}ScaffoldModule`);
+
+    const isMultiLine = importsArray.getFullText().includes('\n');
+    const indent = isMultiLine ? '\n  ' : ' ';
+    const comma = importsArray.elements.length ? ',' : '';
+
+    recorder.insertRight(importsArray.getEnd() - 1, `${comma}${indent}ScaffoldModule`);
 
     tree.commitUpdate(recorder);
     context.logger.info('[Module] Successfully added ScaffoldModule to NgModule.');
@@ -115,7 +120,12 @@ import { ScaffoldModule } from '@lukfel/ng-scaffold';
     if (match) {
         const full = match[0];
         const inner = match[1];
-        const updated = full.replace(inner, `${inner}${inner.trim().length > 0 ? ', ' : ''}importProvidersFrom(ScaffoldModule)`);
+
+        const trimmed = inner.trim();
+        const prefix = trimmed.length ? trimmed + ', ' : '';
+        const newInner = prefix + 'importProvidersFrom(ScaffoldModule)';
+        const updated = full.replace(inner, newInner);
+
         const newText = text.replace(full, updated);
         recorder.remove(0, text.length);
         recorder.insertLeft(0, newText);

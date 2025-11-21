@@ -10,7 +10,7 @@
       [opened]="drawerConfig.open"
       [autoFocus]="false"
       [fixedInViewport]="drawerConfig.fixed"
-      [fixedTopGap]="fixedOffset"
+      [class.lf-drawer-show-header]="headerEnabled && drawerConfig.fixed"
       (closed)="drawerClosed()"
       #drawer>
       <!-- drawer content -->

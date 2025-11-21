@@ -1,10 +1,8 @@
-@use '../../../../../styles/variables' as *;
-
 .lf-input {
   width: 100%;
 
   ::ng-deep .mdc-text-field {
-    border-radius: $header-input-border-radius !important;
+    border-radius: var(--header-input-border-radius) !important;
   }
 
   ::ng-deep .mdc-line-ripple {
@@ -18,7 +16,7 @@
   }
 
   .lf-input-close-button {
-    color: $color-gray;
+    color: var(--color-gray);
   }
 
   &.lf-hide-hint{

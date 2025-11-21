@@ -1,11 +1,22 @@
-@use '../../../../styles/variables' as *;
-
 .lf-floating-button {
-  z-index: $floating-button-z-index;
+  z-index: var(--floating-button-z-index);
   position: fixed;
+  bottom: var(--floating-button-bottom);
+
+  &.show-navbar {
+    bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile));
+  }
+
+  &.show-bottom-bar {
+    bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height));
+  }
+
+  &.show-navbar-and-bottom-bar {
+    bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile) + var(--bottom-bar-height));
+  }
 
   &.left {
-    left: $floating-button-right;
+    left: var(--floating-button-right);
   }
 
   &.center {
@@ -14,6 +25,6 @@
   }
 
   &.right {
-    right: $floating-button-right;
+    right: var(--floating-button-right);
   }
 }

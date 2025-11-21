@@ -1,12 +1,10 @@
-@use '../../../../styles/variables' as *;
-
 .lf-bottom-bar {
-  z-index: $bottom-bar-z-index;
+  z-index: var(--bottom-bar-z-index);
   position: fixed;
   left: 0;
   bottom: 0;
   right: 0;
-  height: $bottom-bar-height;
+  height: var(--bottom-bar-height);
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -14,11 +12,11 @@
   color: white;
 
   &.lf-bottom-bar-show-navbar-mobile {
-    bottom: calc($navbar-height-mobile + (2 * $navbar-padding)) !important;
+    bottom: calc(var(--navbar-height-mobile) + (2 * var(--navbar-padding))) !important;
   }
 
   &.lf-bottom-bar-show-navbar {
-    left: calc($navbar-width + (2 * $navbar-padding)) !important;;
+    left: calc(var(--navbar-width) + (2 * var(--navbar-padding))) !important;
   }
 
   .lf-bottom-bar-buttons {

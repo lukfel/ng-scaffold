@@ -13,7 +13,7 @@ export class DrawerComponent implements OnInit {
   @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
   @Input() public drawerConfig: DrawerConfig | null = null;
   @Input() public isMobile: boolean = false;
-  @Input() public fixedOffset: number = 0;
+  @Input() public headerEnabled: boolean = false;
   @Input() public drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null;
 
   @Output() public drawerConfigUpdateEvent = new EventEmitter<DrawerConfig>();

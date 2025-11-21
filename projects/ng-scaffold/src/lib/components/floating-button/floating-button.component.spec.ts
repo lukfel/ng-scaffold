@@ -47,15 +47,6 @@ describe('FloatingButtonComponent', () => {
     expect(button).toBeFalsy();
   });
 
-  it('should set the button position based on getBottomPosition()', () => {
-    spyOn(component, 'getBottomPosition').and.returnValue(10);
-    component.floatingButtonConfig = { enable: true };
-    component.onTop = false;
-    fixture.detectChanges();
-    const button = fixture.debugElement.query(By.css('.lf-floating-button'));
-    expect(button.styles['bottom']).toEqual('10px');
-  });
-
   it('should emit the buttonClicked event when button is clicked', () => {
     spyOn(component, 'buttonClicked');
     component.floatingButtonConfig = { enable: true };
