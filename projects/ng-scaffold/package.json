@@ -1,6 +1,6 @@
 {
   "name": "@lukfel/ng-scaffold",
-  "version": "20.0.54",
+  "version": "20.0.55",
   "description": "This Angular library provides a basic UI scaffold and services for modern web and mobile apps",
   "license": "MIT",
   "author": {
@@ -18,7 +18,8 @@
   "peerDependencies": {
     "@angular/common": "^20.0.5",
     "@angular/core": "^20.0.5",
-    "@angular/material": "^20.0.5"
+    "@angular/material": "^20.0.5",
+    "@angular/animations": "^20.0.5"
   },
   "devDependencies": {
     "copyfiles": "file:../../node_modules/copyfiles",
