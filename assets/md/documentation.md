@@ -11,19 +11,27 @@ This Angular library provides a foundational scaffold for modern web and mobile 
 
 
 ## Installation
-Install the package using npm:
+Install the package using `npm install` or `ng add` (with experimental Angular schematics):
 
 ```sh
 npm install @lukfel/ng-scaffold
 ```
 
+```sh
+ng add @lukfel/ng-scaffold
+```
 
+The ng add command will additionally try to perform the following actions:
+* Import `ScaffoldModule`
+* Inject `ScaffoldService` and initialize `ScaffoldConfig`
+* Wrap template with `<lf-scaffold>` 
+* Include styles
 
 
 ## Module
 Import the `ScaffoldModule` into your `app.module.ts` file.
 
-* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library deugging events when a `ScaffoldLibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `production` is set to `true`.
+* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library debugging events when a `ScaffoldLibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `production` is set to `true`.
 
 ```ts
 import { ScaffoldModule } from '@lukfel/ng-scaffold';
@@ -36,6 +44,75 @@ import { isDevMode } from '@angular/core';
   ]
 })
 export class AppModule { }
+```
+
+
+
+
+## Configuration
+Import the `ScaffoldService` in `app.component.ts` to manage the `ScaffoldConfig`.
+
+```ts
+import { ScaffoldService } from '@lukfel/ng-scaffold';
+
+export class AppComponent {
+
+  public scaffoldConfig: ScaffoldConfig = {
+    // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
+  };
+
+  constructor(private scaffoldService: ScaffoldService) {
+    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+  }
+}
+```
+
+### Update Configuration (immutable, partial)
+The `ScaffoldService` provides `updateScaffoldProperty()` to partially update the `ScaffoldConfig` in a type-safe way. It performs an immutable update, creating a new configuration object with the updated property and emits the new state.
+
+```ts
+import { ScaffoldService, DrawerConfig, HeaderConfig, MenuButton } from '@lukfel/ng-scaffold';
+
+export class AppComponent {
+
+  constructor(private scaffoldService: ScaffoldService) {
+    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+  }
+
+  // Example #1: Toggle the drawer open state
+  public toggleDrawer(): void {
+    const currentDrawerConfig: DrawerConfig = this.scaffoldService.scaffoldConfig.drawerConfig!;
+    const updatedDrawerConfig: DrawerConfig = { ...currentDrawerConfig, open: !currentDrawerConfig.open };
+    this.scaffoldService.updateScaffoldProperty('drawerConfig', updatedDrawerConfig);
+  }
+
+  // Example #2: Enable the header input field
+  public enableHeaderInput(): void {
+    const currentHeaderConfig: HeaderConfig = this.scaffoldService.scaffoldConfig.headerConfig!;
+    const updatedHeaderConfig: HeaderConfig = { ...currentHeaderConfig, inputConfig: { enable: true } };
+    this.scaffoldService.updateScaffoldProperty('headerConfig', updatedHeaderConfig);
+  }
+
+  // Example #2: Add new button to navbar
+  public addNavbarButton(button: MenuButton): void {
+    const currentNavbarConfig: NavbarConfig = this.scaffoldService.scaffoldConfig.navbarConfig!;
+    const updatedNavbarConfig: NavbarConfig = { ...currentNavbarConfig, menuButtons: [...currentNavbarConfig.menuButtons!, button] };
+    this.scaffoldService.updateScaffoldProperty('navbarConfig', updatedNavbarConfig);
+  }
+}
+```
+
+
+
+
+## Template
+Wrap your application’s content inside the `lf-scaffold` component in `app.component.html`.
+
+```html
+<lf-scaffold>
+  <ng-container drawerContent></ng-container>   <!-- (Optional) content projection for drawer -->
+  <router-outlet></router-outlet>
+</lf-scaffold>
 ```
 
 
@@ -121,83 +198,10 @@ body {
 
 
 
-## Template
-Wrap your application’s content inside the `lf-scaffold` component in `app.component.html`.
-
-```html
-<lf-scaffold>
-  <!-- (Optional) drawer content shows inside the left drawer if enabled -->
-  <ng-container drawerContent></ng-container>
-  <router-outlet></router-outlet>
-</lf-scaffold>
-```
-
-
-
-
-## Configuration
-Import the `ScaffoldService` in `app.component.ts` to manage the `ScaffoldConfig` settings.
-
-```ts
-import { ScaffoldService } from '@lukfel/ng-scaffold';
-
-export class AppComponent {
-  constructor(private scaffoldService: ScaffoldService) {}
-}
-```
-
-### Initialize Configuration
-Define the `ScaffoldConfig` in your `app.component.ts` and initialize the `scaffoldConfig` property in `ScaffoldService`.
-
-* **Notes:**
-    * If a sub-configuration (e.g. `headerConfig`) is missing or does not have `enable: true`, the corresponding UI element will not be displayed.
-
-```ts
-import { ScaffoldService, ScaffoldConfig } from '@lukfel/ng-scaffold';
-
-export class AppComponent {
-
-  public scaffoldConfig: ScaffoldConfig = {
-    scrollPositionRestoration: true,
-    headerConfig: { enable: true, title: 'Scaffold', subtitle: 'by Lukas Felbinger' },
-    navbarConfig: { enable: true },
-    footerConfig: { enable: true, copyright: '© Lukas Felbinger 2025' },
-    floatingButtonConfig: { enable: true }
-  };
-
-  constructor(private scaffoldService: ScaffoldService) {
-    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
-  }
-}
-```
-
-### Update Configuration (immutable, partial)
-The `ScaffoldService` provides a method `updateScaffoldProperty()` to partially update the `ScaffoldConfig` in a type-safe way. It performs an immutable update, creating a new configuration object with the updated property and emits the new state.
-
-```ts
-import { ScaffoldService, DrawerConfig } from '@lukfel/ng-scaffold';
-
-export class AppComponent {
-
-  constructor(private scaffoldService: ScaffoldService) {
-    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
-  }
-
-  public toggleDrawer(): void {
-    const currentDrawerConfig: DrawerConfig = this.scaffoldService.scaffoldConfig.drawerConfig;
-    const updatedDrawerConfig: DrawerConfig = { ...currentDrawerConfig, open: !currentDrawerConfig.open };
-    this.scaffoldService.updateScaffoldProperty('drawerConfig', updatedDrawerConfig);
-  }
-}
-```
-
-
-
-
 ## Events
 There are two ways to listen to scaffold user events (button clicks, input changes, ...):
 
-### Option 1 (Recommended) – Subscribe to Observables
+### Option 1 (Recommended) – Subscribe to Event Observables
 Subscribe to the event Observables and listen to changes
 ```ts
 constructor(private scaffoldService: ScaffoldService, private router: Router) {
