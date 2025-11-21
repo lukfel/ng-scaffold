@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1763756414599,
+  "timestamp": 1763759714204,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -22,7 +22,7 @@
         "/ng-scaffold/chunk-XZKJYPCP.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-OVUFY6UE.js",
+        "/ng-scaffold/main-AFW4GQJ6.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/polyfills-5CFQRCPP.js",
         "/ng-scaffold/scripts-5A55CVEY.js",
@@ -121,7 +121,7 @@
     "/ng-scaffold/assets/img/wowen.svg": "7330390e650bfa6f48733f806d367e3ce80cf2b8",
     "/ng-scaffold/assets/md/bottomBarConfig.md": "19c663ab16d13f72b73a14f6756a53f5c7471862",
     "/ng-scaffold/assets/md/contentTitleCardConfig.md": "113026539fe35770e8d1897625924eca7ce64f58",
-    "/ng-scaffold/assets/md/documentation.md": "5de06667ca99b933ae0aaaef8f568c95c2522940",
+    "/ng-scaffold/assets/md/documentation.md": "b5390e09b124d7a7ff2236e9cbafd9accd0a00f8",
     "/ng-scaffold/assets/md/drawerConfig.md": "808183059698f50af510d2878085c12d94f036bb",
     "/ng-scaffold/assets/md/floatingButtonConfig.md": "14b36a71f01bae942411a398f20cdf1dbcff7da2",
     "/ng-scaffold/assets/md/footerConfig.md": "8f21a1664fd3689d32d05d797c11c6547de6e23c",
@@ -138,8 +138,8 @@
     "/ng-scaffold/chunk-QIFXGZPU.js": "9b40e86c31fdc2028f26223dfe64c52d0d20819f",
     "/ng-scaffold/chunk-XZKJYPCP.js": "9c857a02d2016eea007bc85f8cbe69370635308a",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/ng-scaffold/index.html": "b5850f911e343ecb091af62a2119369d2ea60503",
-    "/ng-scaffold/main-OVUFY6UE.js": "11df489d28225c4e5b996e25a8099b06de93d0ed",
+    "/ng-scaffold/index.html": "8439359fdf0065a25092fccea16964fa772fb9d7",
+    "/ng-scaffold/main-AFW4GQJ6.js": "813beb91a4e467d5bcdc6735bc8c1c0c74ab287b",
     "/ng-scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/ng-scaffold/polyfills-5CFQRCPP.js": "f2241e9a25858f895ce299d15f6f22e849e2fd72",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
