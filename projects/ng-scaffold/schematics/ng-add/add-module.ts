@@ -1,3 +1,7 @@
+/**
+ * Check for root module or main.ts if standalone and import the library module
+ */
+
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 
@@ -5,9 +9,12 @@ export function addModule(): Rule {
     return (tree: Tree, context: SchematicContext) => {
         context.logger.info('[Module] Searching for root module ...');
 
-        const possiblePaths = ['src/app/app.module.ts', 'src/app/app-module.ts'];
-        const path = possiblePaths.find(p => tree.exists(p));
+        const possiblePaths = [
+            'src/app/app.module.ts',
+            'src/app/app-module.ts'
+        ];
 
+        const path = possiblePaths.find(p => tree.exists(p));
         if (path) {
             return addToNgModule(tree, context, path);
         }

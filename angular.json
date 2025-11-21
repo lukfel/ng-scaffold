@@ -40,7 +40,8 @@
             "scripts": [
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-scss.min.js",
-              "node_modules/prismjs/components/prism-typescript.min.js"
+              "node_modules/prismjs/components/prism-typescript.min.js",
+              "node_modules/prismjs/components/prism-bash.min.js"
             ],
             "browser": "src/main.ts"
           },

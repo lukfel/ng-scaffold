@@ -1,3 +1,7 @@
+/**
+ * Check for root template file and wrap the existing template in the library tags
+ */
+
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 
 export function addTemplate(): Rule {

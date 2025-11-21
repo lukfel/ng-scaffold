@@ -1,3 +1,7 @@
+/**
+ * Check for root component and set the initial library config
+ */
+
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 
@@ -67,7 +71,7 @@ export function addConfig(): Rule {
             const snippet = `
 private scaffoldService = inject(ScaffoldService);
 private scaffoldConfig: ScaffoldConfig = {
-// Create your own config or generate it at https://lukfel.github.io/ng-scaffold
+    // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
 };
 
 constructor() {
