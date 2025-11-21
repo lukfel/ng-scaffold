@@ -27,7 +27,7 @@ $theme2: (
 
 export function addStyles(): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        context.logger.info('[Styles] Searching for styles file ...');
+        context.logger.info('[Styles] Searching for root styles ...');
 
         const possiblePaths = [
             'src/styles.scss',

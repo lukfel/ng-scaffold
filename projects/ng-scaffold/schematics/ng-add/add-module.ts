@@ -1,0 +1,129 @@
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import * as ts from 'typescript';
+
+export function addModule(): Rule {
+    return (tree: Tree, context: SchematicContext) => {
+        context.logger.info('[Module] Searching for root module ...');
+
+        const hasModule = tree.exists('src/app/app.module.ts');
+
+        if (hasModule) {
+            context.logger.info('[Module] NgModule app detected');
+            return addToNgModule(tree, context);
+        }
+
+        context.logger.info('[Module] Standalone app detected');
+        return addToStandalone(tree, context);
+    };
+}
+
+function addToNgModule(tree: Tree, context: SchematicContext): Tree {
+    const path = 'src/app/app.module.ts';
+    const text = tree.read(path)!.toString('utf-8');
+    const sourceFile = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
+
+    if (text.includes('ScaffoldModule')) {
+        context.logger.info('[Module] Module already imported. Skip.');
+        return tree;
+    }
+
+    const recorder = tree.beginUpdate(path);
+    recorder.insertLeft(0, 'import { ScaffoldModule } from \'@lukfel/ng-scaffold\';\n');
+
+    const ngModuleDecoratorCall = findNgModuleDecorator(sourceFile);
+
+    if (!ngModuleDecoratorCall) {
+        context.logger.warn('No @NgModule decorator found. Skip.');
+        tree.commitUpdate(recorder);
+        return tree;
+    }
+
+    const arg = ngModuleDecoratorCall.arguments[0];
+    if (!arg || !ts.isObjectLiteralExpression(arg)) {
+        context.logger.warn('[Module] Invalid @NgModule metadata. Skip.');
+        tree.commitUpdate(recorder);
+        return tree;
+    }
+
+    const importsProp = arg.properties.find(
+        (p) =>
+            ts.isPropertyAssignment(p) &&
+            ts.isIdentifier(p.name) &&
+            p.name.text === 'imports'
+    ) as ts.PropertyAssignment;
+
+    if (!importsProp || !ts.isArrayLiteralExpression(importsProp.initializer)) {
+        context.logger.warn('[Module] No imports[] found in @NgModule. Skip.');
+        tree.commitUpdate(recorder);
+        return tree;
+    }
+
+    const importsArray = importsProp.initializer;
+    recorder.insertRight(importsArray.getEnd() - 1, `${importsArray.elements.length ? ', ' : ''}ScaffoldModule`);
+
+    tree.commitUpdate(recorder);
+    context.logger.info('[Module] Successfully added.');
+    return tree;
+}
+
+/** Helper to find @NgModule decorator in a class */
+function findNgModuleDecorator(sourceFile: ts.SourceFile): ts.CallExpression | null {
+    const classes = sourceFile.statements.filter(ts.isClassDeclaration);
+
+    for (const cls of classes) {
+        const decorators = ts.getDecorators(cls) ?? [];
+        for (const decorator of decorators) {
+            if (!ts.isCallExpression(decorator.expression)) continue;
+            const expr = decorator.expression;
+            if (ts.isIdentifier(expr.expression) && expr.expression.text === 'NgModule') {
+                return expr;
+            }
+        }
+    }
+
+    return null;
+}
+
+/** Add ScaffoldModule to standalone bootstrapApplication */
+function addToStandalone(tree: Tree, context: SchematicContext): Tree {
+    const path = 'src/main.ts';
+    if (!tree.exists(path)) {
+        context.logger.warn('[Module] main.ts not found. Skip.');
+        return tree;
+    }
+
+    const text = tree.read(path)!.toString('utf8');
+    if (text.includes('ScaffoldModule')) {
+        context.logger.info('[Module] Module already imported. Skip.');
+        return tree;
+    }
+
+    const importText = `
+import { importProvidersFrom } from '@angular/core';
+import { ScaffoldModule } from '@lukfel/ng-scaffold';
+
+`;
+
+    const recorder = tree.beginUpdate(path);
+    recorder.insertLeft(0, importText);
+
+    const providersRegex = /providers\s*:\s*\[([\s\S]*?)\]/;
+    const match = text.match(providersRegex);
+
+    if (match) {
+        const full = match[0];
+        const inner = match[1];
+        const updated = full.replace(inner, `${inner}${inner.trim().length > 0 ? ', ' : ''}importProvidersFrom(ScaffoldModule)`);
+        const newText = text.replace(full, updated);
+        recorder.remove(0, text.length);
+        recorder.insertLeft(0, newText);
+
+        tree.commitUpdate(recorder);
+        context.logger.info('[Module] Added to standalone providers.');
+        return tree;
+    }
+
+    context.logger.warn('[Module] No providers[] found in bootstrapApplication. Skip.');
+    tree.commitUpdate(recorder);
+    return tree;
+}
