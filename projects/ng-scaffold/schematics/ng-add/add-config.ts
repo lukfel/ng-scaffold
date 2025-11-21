@@ -45,22 +45,16 @@ export function addConfig(): Rule {
             return tree;
         }
 
-        const className = classNode.name?.text ?? '<unknown>';
-        context.logger.info(`[Config] Modifying class ${className}`);
-
-        // Always inject ScaffoldService at class level
         const lastProperty = classNode.members.filter(ts.isPropertyDeclaration).pop();
-
         const insertPos = lastProperty ? lastProperty.getEnd() : classNode.members.pos;
-
         recorder.insertLeft(insertPos, `
   private scaffoldService = inject(ScaffoldService);
   private scaffoldConfig: ScaffoldConfig = {
     // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
+    headerConfig: { enable: true, title: 'Scaffold works!' }
   };
 `);
 
-    // Ensure constructor exists and sets scaffoldConfig
     const constructorNode = classNode.members.find(ts.isConstructorDeclaration);
     if (constructorNode) {
         const bodyText = constructorNode.body!.getFullText(sourceFile);

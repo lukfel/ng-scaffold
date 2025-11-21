@@ -59,6 +59,7 @@ export class AppComponent {
 
   public scaffoldConfig: ScaffoldConfig = {
     // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
+    headerConfig: { enable: true, title: 'Scaffold works!' }
   };
 
   constructor(private scaffoldService: ScaffoldService) {
@@ -119,13 +120,13 @@ Wrap your application’s content inside the `lf-scaffold` component in `app.com
 
 
 ## Styling
-Import the styles in your `styles.scss` and apply a default theme.
+Import the styles in your `styles.scss` and apply the default theme.
 
 * **Note:** The library’s styles include Material icons and Roboto font styles.
 
 ```scss
 @use "@lukfel/ng-scaffold/styles" as lf;
-@include lf.scaffold-theme();           // include a default theme
+@include lf.scaffold-theme();           // Include default theme
 ```
 
 ### (Optional) Custom Themes
@@ -135,14 +136,15 @@ To customize the default theme, define a new theme map specifying `primary`, `ac
 @use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$my-theme: (
-  primary: mat.define-palette(mat.$pink-palette),
-  accent: mat.define-palette(mat.$blue-palette),
-  warn: mat.define-palette(mat.$red-palette),
+// Define theme (use Material palettes or create your own)
+$base-theme: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  warn: mat.m2-define-palette(mat.$m2-red-palette),
   dark: false
 );
 
-@include lf.scaffold-theme($my-theme);
+@include lf.scaffold-theme($base-theme);
 ```
 
 ### (Optional) Multiple Themes
@@ -154,21 +156,23 @@ To switch between multiple themes dynamically, define additional themes using `l
 @use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$my-theme: (
-  primary: mat.define-palette(mat.$pink-palette),
-  accent: mat.define-palette(mat.$blue-palette),
-  warn: mat.define-palette(mat.$red-palette),
+// Define themes (use Material palettes or create your own)
+$base-theme: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  warn: mat.m2-define-palette(mat.$m2-red-palette),
   dark: false
 );
 
-$my-theme2: (
-  primary: mat.define-palette(mat.$purple-palette),
-  accent: mat.define-palette(mat.$amber-palette),
-  dark: false
+$theme2: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  dark: true
 );
 
-@include lf.scaffold-theme($my-theme);                      // Set the primary theme with lf.scaffold-theme(...)
-@include lf.scaffold-colors($my-theme2, 'my-theme2');       // Set additional themes with lf.scaffold-colors(...)
+// Include themes (use ThemeService to switch between themes)
+@include lf.scaffold-theme($base-theme);
+@include lf.scaffold-colors($theme2, 'theme2');
 ```
 
 ### (Optional) Custom Typography
@@ -180,15 +184,15 @@ To change the default typography from Roboto, pass an additional parameter ``fon
 @use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-$my-theme: (
-  primary: mat.define-palette(mat.$pink-palette),
-  accent: mat.define-palette(mat.$blue-palette),
-  warn: mat.define-palette(mat.$red-palette),
+$base-theme: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  warn: mat.m2-define-palette(mat.$m2-red-palette),
   dark: false,
   font-family: 'Comic Sans'
 );
 
-@include lf.scaffold-theme($my-theme); 
+@include lf.scaffold-theme($base-theme);
 
 body {
     font-family: "Comic Sans MS" !important;
@@ -379,7 +383,7 @@ export class AppComponent {
 
 
 
-## Standalone Components
+## (Optional) Standalone Components
 In addition to the components provided by default by the the `ScaffoldModule` there are several standalone components that can be utilized.
 
 * **Note:** Standalone components must be imported manually and are not part of the `ScaffoldModule` import
@@ -394,7 +398,7 @@ import { ListComponent } from '@lukfel/ng-scaffold';
 ```ts
 import { Button, ListConfig, ListHeader, ListItem } from '@lukfel/ng-scaffold';
 
-public listConfig: ListConfig = {
+public listConfig: ListConfig = {   // (Optional) list config
   enableSelection: true,
   enableDragging: true,
   initialSortToken: 'title',
@@ -402,7 +406,7 @@ public listConfig: ListConfig = {
   showDividers: true
 }
 
-public listHeader: ListHeader = {
+public listHeader: ListHeader = {   // (Optional) list header
   matIcon: 'sort',
   items: [
     { title: 'Items', sortToken: 'title' }
@@ -415,12 +419,12 @@ public listItems: ListItem[] = [
   { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
 ];
 
-public buttons: Button[] = [
+public buttons: Button[] = [        // (Optional) list buttons
   { id: 'edit', matIcon: 'edit' },
   { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
 ];
 
-// Handle sort events (optional)
+// (Optional) Handle sort events
 public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
   if (event?.sortToken === 'title') {
     this.listItems.sort((a, b) => {

@@ -30,7 +30,7 @@ export function addStyles(): Rule {
 @use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
-// Define themes (uses Material palettes)
+// Define themes (use Material palettes or create your own)
 $base-theme: (
   primary: mat.m2-define-palette(mat.$m2-pink-palette),
   accent: mat.m2-define-palette(mat.$m2-blue-palette),
