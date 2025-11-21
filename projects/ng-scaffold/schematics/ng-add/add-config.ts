@@ -49,38 +49,40 @@ export function addConfig(): Rule {
         context.logger.info(`[Config] Modifying class ${className}`);
 
         // Always inject ScaffoldService at class level
-        if (!content.includes('scaffoldService = inject(ScaffoldService)')) {
-            recorder.insertLeft(classNode.members.pos,
-                `  private scaffoldService = inject(ScaffoldService);
+        const lastProperty = classNode.members.filter(ts.isPropertyDeclaration).pop();
+
+        const insertPos = lastProperty ? lastProperty.getEnd() : classNode.members.pos;
+
+        recorder.insertLeft(insertPos, `
+  private scaffoldService = inject(ScaffoldService);
   private scaffoldConfig: ScaffoldConfig = {
     // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
   };
 `);
-        }
 
-        // Ensure constructor exists and sets scaffoldConfig
-        const constructorNode = classNode.members.find(ts.isConstructorDeclaration);
-        if (constructorNode) {
-            const bodyText = constructorNode.body!.getFullText(sourceFile);
-            if (!bodyText.includes('this.scaffoldService.scaffoldConfig')) {
-                recorder.insertLeft(constructorNode.body!.getEnd() - 1,
-                    `    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+    // Ensure constructor exists and sets scaffoldConfig
+    const constructorNode = classNode.members.find(ts.isConstructorDeclaration);
+    if (constructorNode) {
+        const bodyText = constructorNode.body!.getFullText(sourceFile);
+        if (!bodyText.includes('this.scaffoldService.scaffoldConfig')) {
+            recorder.insertLeft(constructorNode.body!.getEnd() - 1,
+                `    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
 `);
-            }
-        } else {
-            // Add a constructor if none exists
-            recorder.insertLeft(classNode.members.pos + (content.includes('private scaffoldService') ? 0 : 0),
-                `  constructor() {
+        }
+    } else {
+        // Add a constructor if none exists
+        recorder.insertLeft(classNode.members.pos + (content.includes('private scaffoldService') ? 0 : 0),
+            `  constructor() {
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
   }
 `);
-        }
+    }
 
-        tree.commitUpdate(recorder);
-        context.logger.info('[Config] ScaffoldService configuration added successfully.');
+    tree.commitUpdate(recorder);
+    context.logger.info('[Config] ScaffoldService configuration added successfully.');
 
-        return tree;
-    };
+    return tree;
+};
 }
 
 // Helper: find the first class declaration

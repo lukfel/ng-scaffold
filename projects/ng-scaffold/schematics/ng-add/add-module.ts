@@ -63,10 +63,10 @@ function addToNgModule(tree: Tree, context: SchematicContext, path: string): Tre
     const importsArray = importsProp.initializer;
 
     const isMultiLine = importsArray.getFullText().includes('\n');
-    const indent = isMultiLine ? '\n  ' : ' ';
-    const comma = importsArray.elements.length ? ',' : '';
+    const indent = isMultiLine ? '  ' : ' ';
+    const prefix = importsArray.elements.length ? ',\n' + indent : indent;
 
-    recorder.insertRight(importsArray.getEnd() - 1, `${comma}${indent}ScaffoldModule`);
+    recorder.insertRight(importsArray.getEnd() - 1, `${prefix}ScaffoldModule`);
 
     tree.commitUpdate(recorder);
     context.logger.info('[Module] Successfully added ScaffoldModule to NgModule.');
