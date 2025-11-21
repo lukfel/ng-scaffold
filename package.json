@@ -1,6 +1,6 @@
 {
   "name": "ng-scaffold-app",
-  "version": "20.0.50",
+  "version": "20.0.51",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -27,8 +27,8 @@
     "@angular/router": "^20.0.5",
     "@angular/service-worker": "^20.0.5",
     "@lukfel/ng-scaffold": "file:dist/ng-scaffold",
-    "marked": "^15.0.0",
-    "ngx-markdown": "^20.0.0",
+    "marked": "^16.0.0",
+    "ngx-markdown": "^20.1.0",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"
   },
