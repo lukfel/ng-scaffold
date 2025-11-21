@@ -64,8 +64,6 @@ export function addConfig(): Rule {
                 recorder.insertLeft(bodyEnd - 1, '\n    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;\n');
             }
         } else {
-            const classStart = classNode.getStart(sourceFile);
-            const classHeaderEnd = content.indexOf('{', classStart) + 1;
             const snippet = `
 private scaffoldService = inject(ScaffoldService);
 private scaffoldConfig: ScaffoldConfig = {
@@ -76,7 +74,7 @@ constructor() {
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
 }
 `;
-            recorder.insertLeft(classHeaderEnd, snippet);
+            recorder.insertLeft(classNode.members.pos, snippet);
         }
 
         tree.commitUpdate(recorder);

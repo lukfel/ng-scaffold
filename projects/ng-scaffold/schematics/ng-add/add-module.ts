@@ -5,35 +5,33 @@ export function addModule(): Rule {
     return (tree: Tree, context: SchematicContext) => {
         context.logger.info('[Module] Searching for root module ...');
 
-        const hasModule = tree.exists('src/app/app.module.ts');
+        const possiblePaths = ['src/app/app.module.ts', 'src/app/app-module.ts'];
+        const path = possiblePaths.find(p => tree.exists(p));
 
-        if (hasModule) {
-            context.logger.info('[Module] NgModule app detected');
-            return addToNgModule(tree, context);
+        if (path) {
+            return addToNgModule(tree, context, path);
         }
 
-        context.logger.info('[Module] Standalone app detected');
         return addToStandalone(tree, context);
     };
 }
 
-function addToNgModule(tree: Tree, context: SchematicContext): Tree {
-    const path = 'src/app/app.module.ts';
+/** Add ScaffoldModule to NgModule app */
+function addToNgModule(tree: Tree, context: SchematicContext, path: string): Tree {
     const text = tree.read(path)!.toString('utf-8');
-    const sourceFile = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
-
     if (text.includes('ScaffoldModule')) {
-        context.logger.info('[Module] Module already imported. Skip.');
+        context.logger.info('[Module] ScaffoldModule already imported. Skip.');
         return tree;
     }
 
     const recorder = tree.beginUpdate(path);
     recorder.insertLeft(0, 'import { ScaffoldModule } from \'@lukfel/ng-scaffold\';\n');
 
+    const sourceFile = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
     const ngModuleDecoratorCall = findNgModuleDecorator(sourceFile);
 
     if (!ngModuleDecoratorCall) {
-        context.logger.warn('No @NgModule decorator found. Skip.');
+        context.logger.warn('[Module] No @NgModule decorator found. Skip.');
         tree.commitUpdate(recorder);
         return tree;
     }
@@ -46,11 +44,8 @@ function addToNgModule(tree: Tree, context: SchematicContext): Tree {
     }
 
     const importsProp = arg.properties.find(
-        (p) =>
-            ts.isPropertyAssignment(p) &&
-            ts.isIdentifier(p.name) &&
-            p.name.text === 'imports'
-    ) as ts.PropertyAssignment;
+        p => ts.isPropertyAssignment(p) && ts.isIdentifier(p.name) && p.name.text === 'imports'
+    ) as ts.PropertyAssignment | undefined;
 
     if (!importsProp || !ts.isArrayLiteralExpression(importsProp.initializer)) {
         context.logger.warn('[Module] No imports[] found in @NgModule. Skip.');
@@ -62,7 +57,7 @@ function addToNgModule(tree: Tree, context: SchematicContext): Tree {
     recorder.insertRight(importsArray.getEnd() - 1, `${importsArray.elements.length ? ', ' : ''}ScaffoldModule`);
 
     tree.commitUpdate(recorder);
-    context.logger.info('[Module] Successfully added.');
+    context.logger.info('[Module] Successfully added ScaffoldModule to NgModule.');
     return tree;
 }
 
@@ -94,7 +89,7 @@ function addToStandalone(tree: Tree, context: SchematicContext): Tree {
 
     const text = tree.read(path)!.toString('utf8');
     if (text.includes('ScaffoldModule')) {
-        context.logger.info('[Module] Module already imported. Skip.');
+        context.logger.info('[Module] ScaffoldModule already imported. Skip.');
         return tree;
     }
 
@@ -119,7 +114,7 @@ import { ScaffoldModule } from '@lukfel/ng-scaffold';
         recorder.insertLeft(0, newText);
 
         tree.commitUpdate(recorder);
-        context.logger.info('[Module] Added to standalone providers.');
+        context.logger.info('[Module] Added ScaffoldModule to standalone providers.');
         return tree;
     }
 
