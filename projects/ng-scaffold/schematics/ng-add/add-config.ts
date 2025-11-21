@@ -51,32 +51,32 @@ export function addConfig(): Rule {
   private scaffoldService = inject(ScaffoldService);
   private scaffoldConfig: ScaffoldConfig = {
     // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
-    headerConfig: { enable: true, title: 'Scaffold works!' }
+    headerConfig: { enable: true, title: 'Scaffold works!', gradient: true }
   };
 `);
 
-    const constructorNode = classNode.members.find(ts.isConstructorDeclaration);
-    if (constructorNode) {
-        const bodyText = constructorNode.body!.getFullText(sourceFile);
-        if (!bodyText.includes('this.scaffoldService.scaffoldConfig')) {
-            recorder.insertLeft(constructorNode.body!.getEnd() - 1,
-                `    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
+        const constructorNode = classNode.members.find(ts.isConstructorDeclaration);
+        if (constructorNode) {
+            const bodyText = constructorNode.body!.getFullText(sourceFile);
+            if (!bodyText.includes('this.scaffoldService.scaffoldConfig')) {
+                recorder.insertLeft(constructorNode.body!.getEnd() - 1,
+                    `    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
 `);
-        }
-    } else {
-        // Add a constructor if none exists
-        recorder.insertLeft(classNode.members.pos + (content.includes('private scaffoldService') ? 0 : 0),
-            `  constructor() {
+            }
+        } else {
+            const insertPos = classNode.members.pos + 1; // ensures insertion is NOT on the same line
+            recorder.insertLeft(insertPos,
+                `\n  constructor() {
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
   }
 `);
-    }
+        }
 
-    tree.commitUpdate(recorder);
-    context.logger.info('[Config] ScaffoldService configuration added successfully.');
+        tree.commitUpdate(recorder);
+        context.logger.info('[Config] ScaffoldService configuration added successfully.');
 
-    return tree;
-};
+        return tree;
+    };
 }
 
 // Helper: find the first class declaration

@@ -32,3 +32,11 @@ $init: 0;
   }
 }
 @include padding-classes;
+
+.lf-transitions {
+  transition: var(--transition) !important;
+}
+
+.lf-gradient {
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%) !important;
+}

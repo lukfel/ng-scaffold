@@ -66,6 +66,7 @@ export class AppComponent {
           tooltip: 'NPM'
         }
       ],
+      gradient: true,
       responsiveConfig: {
         enable: true
       },

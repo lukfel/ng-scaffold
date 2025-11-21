@@ -59,7 +59,7 @@ export class AppComponent {
 
   public scaffoldConfig: ScaffoldConfig = {
     // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
-    headerConfig: { enable: true, title: 'Scaffold works!' }
+    headerConfig: { enable: true, title: 'Scaffold works!', gradient: true }
   };
 
   constructor(private scaffoldService: ScaffoldService) {

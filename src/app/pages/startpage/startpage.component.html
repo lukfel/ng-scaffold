@@ -112,6 +112,9 @@
             Show header loading on navigation
           </mat-slide-toggle>
         </p>
+        <p>
+          <mat-slide-toggle [(ngModel)]="headerConfig.gradient">Gradient</mat-slide-toggle>
+        </p>
         <mat-form-field>
           <mat-label>Image Logo (url)</mat-label>
           <input
