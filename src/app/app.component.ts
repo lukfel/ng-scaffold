@@ -14,7 +14,6 @@ import packageJson from '../../package.json';
 export class AppComponent {
   private router = inject(Router);
   private logger = inject(Logger);
-  private dialogService = inject(DialogService);
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
 
@@ -22,6 +21,7 @@ export class AppComponent {
   private scaffoldService = inject(ScaffoldService);
   private seoService = inject(SeoService);
   private themeService = inject(ThemeService);
+  private dialogService = inject(DialogService);
 
 
   public version = packageJson.version;

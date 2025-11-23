@@ -97,32 +97,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         isMobile = false;
       }
 
-      if (this.headerConfig?.responsiveConfig?.enable) {
-        const config: HeaderResponsiveConfig = this.headerConfig.responsiveConfig;
-
-        if (isMobile && !this.isMobile) {
-          const rightMenuButtons: MenuButton[] = [...this.headerConfig?.rightMenuButtons || []];
-          this.previousRightMenuButtons = [...rightMenuButtons];
-          const excludedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => config?.excludeButtonIds?.includes(button.id));
-          const includedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => !config?.excludeButtonIds?.includes(button.id));
-
-          if (rightMenuButtons?.length) {
-            const updatedHeaderConfig: HeaderConfig = {
-              ...this.headerConfig,
-              rightMenuButtons: [...excludedButtons, { id: 'menu', matIcon: (!config.matIcon && !config.svgLogo) ? 'more_vert' : config.matIcon, svgIcon: config.svgLogo, menuButtons: [...includedButtons] }]
-            };
-            this.headerConfigUpdated(updatedHeaderConfig);
-          }
-        } else if (!isMobile && this.isMobile) {
-          if (this.previousRightMenuButtons?.length) {
-            const updatedHeaderConfig: HeaderConfig = {
-              ...this.headerConfig,
-              rightMenuButtons: [...this.previousRightMenuButtons]
-            };
-            this.headerConfigUpdated(updatedHeaderConfig);
-          }
-        }
-      }
+      if (this.isMobile !== isMobile) this.convertRightMenuButtonsToMobile(isMobile);
 
       this.isMobile = isMobile;
     }));
@@ -245,6 +220,37 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public bottomBarButtonClicked(id: string): void {
     this.scaffoldService.buttonClickEventValue = id;
     this.bottomBarButtonClickEvent.emit(id);
+  }
+
+
+  // Helper
+  private convertRightMenuButtonsToMobile(isMobile: boolean): void {
+    if (this.headerConfig?.responsiveConfig?.enable) {
+      const config: HeaderResponsiveConfig = this.headerConfig.responsiveConfig;
+
+      if (isMobile) {
+        const rightMenuButtons: MenuButton[] = [...this.headerConfig?.rightMenuButtons || []];
+        this.previousRightMenuButtons = [...rightMenuButtons];
+        const excludedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => config?.excludeButtonIds?.includes(button.id));
+        const includedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => !config?.excludeButtonIds?.includes(button.id));
+
+        if (rightMenuButtons?.length) {
+          const updatedHeaderConfig: HeaderConfig = {
+            ...this.headerConfig,
+            rightMenuButtons: [...excludedButtons, { id: 'menu', matIcon: (!config.matIcon && !config.svgLogo) ? 'more_vert' : config.matIcon, svgIcon: config.svgLogo, menuButtons: [...includedButtons] }]
+          };
+          this.headerConfigUpdated(updatedHeaderConfig);
+        }
+      } else if (!isMobile) {
+        if (this.previousRightMenuButtons?.length) {
+          const updatedHeaderConfig: HeaderConfig = {
+            ...this.headerConfig,
+            rightMenuButtons: [...this.previousRightMenuButtons]
+          };
+          this.headerConfigUpdated(updatedHeaderConfig);
+        }
+      }
+    }
   }
 
 }
