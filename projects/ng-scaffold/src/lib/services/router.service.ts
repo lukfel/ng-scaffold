@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 
@@ -6,6 +7,7 @@ import { BehaviorSubject, Observable, take } from 'rxjs';
 
 export class RouterService {
   private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
 
 
   private _loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -41,6 +43,11 @@ export class RouterService {
   }
 
   constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      history.replaceState({ ...history.state, back: false }, '');
+    }
+
+
     this.router.events.subscribe(event => {
       let asyncLoadCount = 0;
 
