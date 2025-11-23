@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
 
     const includedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => !config?.excludeButtonIds?.includes(button.id));
     return {
-      id: 'mobile',
+      id: '',
       matIcon: ' more_vert',
       menuButtons: [...includedButtons]
     };
