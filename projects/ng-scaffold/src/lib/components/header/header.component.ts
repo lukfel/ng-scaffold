@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { HeaderConfig, ScaffoldLibraryConfig } from '../../models';
+import { HeaderConfig, HeaderResponsiveConfig, MenuButton, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
   selector: 'lf-header',
@@ -28,6 +28,9 @@ export class HeaderComponent implements OnInit {
   @Output() public headerButtonClickEvent = new EventEmitter<string>();
   @Output() public headerInputSubmitEvent = new EventEmitter<string>();
   @Output() public headerInputChangeEvent = new EventEmitter<string>();
+
+
+  public mobileButton: MenuButton;
 
 
   ngOnInit(): void {
@@ -66,6 +69,32 @@ export class HeaderComponent implements OnInit {
 
     const route: string = this.currentRoute.substring(this.currentRoute.indexOf('/') + 1);
     return route === id;
+  }
+
+  public getRightMobileButton(): MenuButton | null {
+    const rightMenuButtons: MenuButton[] = this.headerConfig?.rightMenuButtons || [];
+    if (!rightMenuButtons?.length) return null;
+
+    const config: HeaderResponsiveConfig | undefined = this.headerConfig?.responsiveConfig;
+    if (!config?.enable) return null;
+
+    const includedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => !config?.excludeButtonIds?.includes(button.id));
+    return {
+      id: 'mobile',
+      matIcon: ' more_vert',
+      menuButtons: [...includedButtons]
+    };
+  }
+
+  public getRightExcludedButtons(): MenuButton[] | null {
+    const rightMenuButtons: MenuButton[] = this.headerConfig?.rightMenuButtons || [];
+    if (!rightMenuButtons?.length) return null;
+
+    const config: HeaderResponsiveConfig | undefined = this.headerConfig?.responsiveConfig;
+    if (!config?.enable) return null;
+
+    const excludedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => config?.excludeButtonIds?.includes(button.id));
+    return excludedButtons;
   }
 
 }

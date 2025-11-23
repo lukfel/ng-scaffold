@@ -5,7 +5,7 @@ import { Component, DOCUMENT, ElementRef, EventEmitter, inject, OnDestroy, OnIni
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { CONFIG } from '../../config/config.token';
-import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, HeaderResponsiveConfig, MenuButton, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
+import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
 import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
 
 @Component({
@@ -54,7 +54,6 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public scrollTopPosition: number = 0;
 
   public initialized: boolean = false;
-  private previousRightMenuButtons: MenuButton[];
 
   private _subscription: Subscription = new Subscription;
 
@@ -85,21 +84,15 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this._subscription.add(this.breakpointService.breakpoint$.subscribe((breakpointState: BreakpointState) => {
       if (this.libraryConfig?.debugging) this.logger.log('[BreakpointState]', breakpointState);
 
-      let isMobile: boolean = false;
-
       if (breakpointState.breakpoints[Breakpoints.XSmall]) {
-        isMobile = true;
+        this.isMobile = true;
       } else if (breakpointState.breakpoints[Breakpoints.Small]) {
-        isMobile = true;
+        this.isMobile = true;
       } else if (breakpointState.breakpoints[Breakpoints.Medium]) {
-        isMobile = false;
+        this.isMobile = false;
       } else if (breakpointState.breakpoints[Breakpoints.Large]) {
-        isMobile = false;
+        this.isMobile = false;
       }
-
-      if (this.isMobile !== isMobile) this.convertRightMenuButtonsToMobile(isMobile);
-
-      this.isMobile = isMobile;
     }));
 
     // Listen for route changes
@@ -220,37 +213,6 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   public bottomBarButtonClicked(id: string): void {
     this.scaffoldService.buttonClickEventValue = id;
     this.bottomBarButtonClickEvent.emit(id);
-  }
-
-
-  // Helper
-  private convertRightMenuButtonsToMobile(isMobile: boolean): void {
-    if (this.headerConfig?.responsiveConfig?.enable) {
-      const config: HeaderResponsiveConfig = this.headerConfig.responsiveConfig;
-
-      if (isMobile) {
-        const rightMenuButtons: MenuButton[] = [...this.headerConfig?.rightMenuButtons || []];
-        this.previousRightMenuButtons = [...rightMenuButtons];
-        const excludedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => config?.excludeButtonIds?.includes(button.id));
-        const includedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => !config?.excludeButtonIds?.includes(button.id));
-
-        if (rightMenuButtons?.length) {
-          const updatedHeaderConfig: HeaderConfig = {
-            ...this.headerConfig,
-            rightMenuButtons: [...excludedButtons, { id: 'menu', matIcon: (!config.matIcon && !config.svgLogo) ? 'more_vert' : config.matIcon, svgIcon: config.svgLogo, menuButtons: [...includedButtons] }]
-          };
-          this.headerConfigUpdated(updatedHeaderConfig);
-        }
-      } else if (!isMobile) {
-        if (this.previousRightMenuButtons?.length) {
-          const updatedHeaderConfig: HeaderConfig = {
-            ...this.headerConfig,
-            rightMenuButtons: [...this.previousRightMenuButtons]
-          };
-          this.headerConfigUpdated(updatedHeaderConfig);
-        }
-      }
-    }
   }
 
 }

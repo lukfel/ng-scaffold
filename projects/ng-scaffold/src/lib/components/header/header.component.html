@@ -70,12 +70,29 @@
     <!-- spacer -->
     <div class="spacer"></div>
     <!-- right menu buttons -->
-    @for (button of headerConfig.rightMenuButtons; track button.id) {
+    @if (headerConfig.responsiveConfig?.enable && isMobile) {
+      @let exludedButtons = getRightExcludedButtons();
+      @for (button of exludedButtons; track button.id) {
+        <ng-container
+          [ngTemplateOutlet]="menuButtonTemplate"
+          [ngTemplateOutletContext]="{
+            menuButton: button,
+          }"></ng-container>
+      }
+      @let mobileButton = getRightMobileButton();
       <ng-container
         [ngTemplateOutlet]="menuButtonTemplate"
         [ngTemplateOutletContext]="{
-          menuButton: button,
+          menuButton: mobileButton,
         }"></ng-container>
+    } @else {
+      @for (button of headerConfig.rightMenuButtons; track button.id) {
+        <ng-container
+          [ngTemplateOutlet]="menuButtonTemplate"
+          [ngTemplateOutletContext]="{
+            menuButton: button,
+          }"></ng-container>
+      }
     }
   </mat-toolbar>
   <!-- loading bar -->
@@ -143,7 +160,7 @@
         }
       }
       <!-- icon menu buttons -->
-      <div mat-menu-item class="lf-menu-icons px-1">
+      <div mat-menu-item class="lf-menu-icons px-1" [disableRipple]="true">
         @for (button of menuButton.menuButtons; track button.id) {
           <!-- icon button -->
           @if (!button.label && (button.matIcon || button.svgIcon)) {

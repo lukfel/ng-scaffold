@@ -78,19 +78,10 @@
 
 .lf-menu-icons {
   min-height: unset !important;
-//   display: flex;
-//   flex-flow: row wrap;
-//   align-items: center;
-//   justify-content: center;
 
-//   // .lf-menu-icon-button {
-//   //   width: 48px;
-//   //   min-width: unset;
-//   //   height: 48px;
-//   //   margin: 0;
-//   //   padding: 0;
-//   //   border-radius: 50%;
-//   // }
+  &:hover {
+    background: transparent !important;
+  }
 }
 
 .lf-header-progress-bar {
