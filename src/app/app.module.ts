@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { isDevMode, NgModule, SecurityContext } from '@angular/core';
+import { isDevMode, NgModule, provideZoneChangeDetection, SecurityContext } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -44,6 +44,7 @@ export function markedOptionsFactory(): MarkedOptions {
         })
     ],
     providers: [
+        provideZoneChangeDetection(),
         provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
         {

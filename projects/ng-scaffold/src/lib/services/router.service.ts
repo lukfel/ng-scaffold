@@ -60,7 +60,7 @@ export class RouterService {
         const currentRoute: string = event.urlAfterRedirects;
         this._currentRoute$.next(currentRoute);
 
-        if (!this.router.getCurrentNavigation()?.extras?.state?.['back']) {
+        if (!this.router.currentNavigation()?.extras?.state?.['back']) {
           const routeHistory: string[] = this._routeHistory$.value;
           routeHistory.push(currentRoute);
 
