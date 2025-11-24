@@ -42,16 +42,16 @@ export class RouterService {
     return this._previousRoute$.value;
   }
 
+  private asyncLoadCount: number = 0;
+
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       history.replaceState({ ...history.state, back: false }, '');
     }
 
     this.router.events.subscribe(event => {
-      let asyncLoadCount = 0;
-
-      if (event instanceof RouteConfigLoadStart) { asyncLoadCount++; }
-      if (event instanceof RouteConfigLoadEnd) { asyncLoadCount--; }
+      if (event instanceof RouteConfigLoadStart) { this.asyncLoadCount++; }
+      if (event instanceof RouteConfigLoadEnd) { this.asyncLoadCount--; }
       if (event instanceof NavigationEnd) {
         const previousRoute: string = this._currentRoute$.value;
         this._previousRoute$.next(previousRoute);
@@ -60,14 +60,15 @@ export class RouterService {
         this._currentRoute$.next(currentRoute);
 
         if (!this.router.currentNavigation()?.extras?.state?.['back']) {
-          const routeHistory: string[] = this._routeHistory$.value;
-          routeHistory.push(currentRoute);
-
-          this._routeHistory$.next(routeHistory);
+          if (previousRoute) {
+            const routeHistory: string[] = this._routeHistory$.value;
+            routeHistory.push(previousRoute);
+            this._routeHistory$.next(routeHistory);
+          }
         }
       }
 
-      this._loading$.next(!!asyncLoadCount);
+      this._loading$.next(!!this.asyncLoadCount);
     });
   }
 
@@ -78,8 +79,8 @@ export class RouterService {
    */
   public navigateBack(fallbackRoute?: string): void {
     this._routeHistory$.pipe(take(1)).subscribe(routeHistory => {
-      if (routeHistory.length > 1) {
-        const previousRoute: string = routeHistory[routeHistory.length - 2];
+      if (routeHistory.length > 0) {
+        const previousRoute: string = routeHistory[routeHistory.length - 1];
 
         if (previousRoute) {
           this.router.navigateByUrl(previousRoute, { state: { back: true } }).then(result => {

@@ -3,7 +3,7 @@
     class="lf-content-title-card mat-elevation-z2 px-4"
     [ngClass]="contentTitleCardConfig.cssClass">
     <!-- back button -->
-    @if (contentTitleCardConfig.showBackButton && routeHistory.length > 1) {
+    @if (contentTitleCardConfig.showBackButton && routeHistory.length > 0) {
       <button mat-icon-button color="accent" (click)="backButtonClicked()">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
