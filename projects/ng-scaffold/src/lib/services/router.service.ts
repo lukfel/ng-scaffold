@@ -47,7 +47,6 @@ export class RouterService {
       history.replaceState({ ...history.state, back: false }, '');
     }
 
-
     this.router.events.subscribe(event => {
       let asyncLoadCount = 0;
 
@@ -93,6 +92,13 @@ export class RouterService {
         }
       }
     })
+  }
+
+  /**
+   * Clear the current route history
+   */
+  public clearRouteHistory(): void {
+    this._routeHistory$.next([]);
   }
 
 }
