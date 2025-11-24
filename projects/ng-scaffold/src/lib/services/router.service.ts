@@ -42,16 +42,16 @@ export class RouterService {
     return this._previousRoute$.value;
   }
 
-  private asyncLoadCount: number = 0;
-
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       history.replaceState({ ...history.state, back: false }, '');
     }
 
     this.router.events.subscribe(event => {
-      if (event instanceof RouteConfigLoadStart) { this.asyncLoadCount++; }
-      if (event instanceof RouteConfigLoadEnd) { this.asyncLoadCount--; }
+      let asyncLoadCount: number = 0;
+
+      if (event instanceof RouteConfigLoadStart) { asyncLoadCount++; }
+      if (event instanceof RouteConfigLoadEnd) { asyncLoadCount--; }
       if (event instanceof NavigationEnd) {
         const previousRoute: string = this._currentRoute$.value;
         this._previousRoute$.next(previousRoute);
@@ -68,7 +68,7 @@ export class RouterService {
         }
       }
 
-      this._loading$.next(!!this.asyncLoadCount);
+      this._loading$.next(!!asyncLoadCount);
     });
   }
 

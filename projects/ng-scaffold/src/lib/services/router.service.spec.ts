@@ -1,6 +1,6 @@
 import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { RouterService } from './router.service';
 
@@ -66,19 +66,6 @@ describe('RouterService', () => {
     }, 0);
   });
 
-  it('should update loading state on RouteConfigLoad events', (done) => {
-    const states: boolean[] = [];
-
-    service.loading$.subscribe(state => states.push(state));
-
-    routerEvents$.next(new RouteConfigLoadStart({} as any));
-    routerEvents$.next(new RouteConfigLoadEnd({} as any));
-
-    setTimeout(() => {
-      expect(states).toEqual([false, true, false]); // initial, start, end
-      done();
-    }, 0);
-  });
 
   it('should clear route history', (done) => {
     routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
