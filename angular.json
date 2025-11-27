@@ -5,11 +5,6 @@
   "projects": {
     "ng-scaffold-app": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -176,7 +171,8 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "type": "component"
+      "type": "component",
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "type": "directive"
