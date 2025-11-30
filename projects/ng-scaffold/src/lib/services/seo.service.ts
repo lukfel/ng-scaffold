@@ -1,6 +1,7 @@
 
 import { DOCUMENT, inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SeoConfig } from '../models';
 import { Logger } from './logger.service';
 
@@ -14,6 +15,13 @@ export class SeoService {
   private logger = inject(Logger);
 
 
+  private _config$: BehaviorSubject<SeoConfig | null> = new BehaviorSubject<SeoConfig | null>(null);
+
+  public get config$(): Observable<SeoConfig | null> {
+    return this._config$.asObservable();
+  }
+
+
   /**
    * Pass a configuration to set meta tags such as title, description and image for search results and social media
    * 
@@ -21,6 +29,8 @@ export class SeoService {
    * 
    */
   public setMetaTags(seoConfig: SeoConfig): void {
+    this._config$.next(seoConfig);
+
     const autoTrim: boolean = seoConfig.autoTrim || false;
     const title: string = seoConfig.metaPageTitle || '';
     const description: string = seoConfig.metaPageDescription || '';

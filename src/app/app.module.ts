@@ -5,7 +5,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ScaffoldLoadingInterceptor, ScaffoldModule } from '@lukfel/ng-scaffold';
 import { marked, MarkedOptions, Tokens } from 'marked';
-import { MarkdownModule, MARKED_OPTIONS } from 'ngx-markdown';
+import { MarkdownModule, MARKED_OPTIONS, SANITIZE } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
@@ -35,7 +35,10 @@ export function markedOptionsFactory(): MarkedOptions {
                 provide: MARKED_OPTIONS,
                 useFactory: markedOptionsFactory,
             },
-            sanitize: SecurityContext.NONE
+            sanitize: {
+                provide: SANITIZE,
+                useValue: SecurityContext.NONE
+            },
         }),
         ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode(), outlineIcons: true }),
         ServiceWorkerModule.register('ngsw-worker.js', {

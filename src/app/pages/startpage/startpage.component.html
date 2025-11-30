@@ -371,13 +371,16 @@
         <mat-form-field>
           <mat-label>Position</mat-label>
           <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
-            @for (option of ["left", "center", "right"]; track $index) {
+            @for (option of ["center", "right"]; track $index) {
               <mat-option [value]="option">
                 {{ option }}
               </mat-option>
             }
           </mat-select>
         </mat-form-field>
+        <!-- <p>
+          <mat-slide-toggle [(ngModel)]="floatingButtonConfig.sticky">Sticky</mat-slide-toggle>
+        </p> -->
       }
       <mat-divider></mat-divider>
     }
@@ -401,7 +404,6 @@
         </p>
       }
     }
-    <p><br /></p>
   </div>
 }
 

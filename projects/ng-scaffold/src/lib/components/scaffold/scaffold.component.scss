@@ -30,10 +30,12 @@
     .lf-content {
       padding-left: var(--content-padding);
       padding-right: var(--content-padding);
+      padding-bottom: var(--content-padding);
 
       &.lf-content-mobile {
         padding-left: var(--content-padding-mobile);
         padding-right: var(--content-padding-mobile);
+        padding-bottom: var(--content-padding-mobile);
       }
 
       &.lf-show-footer{

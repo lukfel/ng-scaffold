@@ -3,28 +3,50 @@
   position: fixed;
   bottom: var(--floating-button-bottom);
 
-  &.show-navbar {
-    bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile));
+  &.sticky {
+    position: sticky !important;
+
+    &.show-bottom-bar,
+    &.show-navbar-and-bottom-bar {
+      bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height));
+    }
+
+    &.center {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.right {
+      left: 100%
+    }
   }
 
-  &.show-bottom-bar {
-    bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height));
+  &:not(.sticky) {
+    &.show-navbar {
+      bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile));
+    }
+
+    &.show-bottom-bar {
+      bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height));
+    }
+
+    &.show-navbar-and-bottom-bar {
+      bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile) + var(--bottom-bar-height));
+    }
+
+    // &.left {
+    //   left: var(--floating-button-right);
+    // }
+
+    &.center {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.right {
+      left: calc(100% - var(--floating-button-right));
+      transform: translateX(-100%);
+    }
   }
 
-  &.show-navbar-and-bottom-bar {
-    bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile) + var(--bottom-bar-height));
-  }
-
-  &.left {
-    left: var(--floating-button-right);
-  }
-
-  &.center {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &.right {
-    right: var(--floating-button-right);
-  }
 }

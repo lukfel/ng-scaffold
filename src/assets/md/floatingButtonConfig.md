@@ -6,8 +6,9 @@ interface FloatingButtonConfig {
   matIcon?: string;
   svgIcon?: string;
   tooltip?: string;
-  horizontalPosition?: 'left' | 'center' | 'right';
+  horizontalPosition?: 'center' | 'right';
   autoHide?: boolean;
+  sticky?: boolean;
   cssClass?: string;
 }
 ```

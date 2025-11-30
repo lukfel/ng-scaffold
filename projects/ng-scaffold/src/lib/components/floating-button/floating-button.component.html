@@ -7,6 +7,7 @@
     class="lf-floating-button lf-transitions"
     [ngClass]="floatingButtonConfig.cssClass"
     [ngClass]="floatingButtonConfig.horizontalPosition"
+    [class.sticky]="floatingButtonConfig.sticky"
     [class.show-navbar]="isMobile && !bottomBarEnabled"
     [class.show-bottom-bar]="bottomBarEnabled && !isMobile"
     [class.show-navbar-and-bottom-bar]="isMobile && bottomBarEnabled"

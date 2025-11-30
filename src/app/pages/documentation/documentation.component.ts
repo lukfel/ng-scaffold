@@ -31,6 +31,6 @@ export class DocumentationComponent implements OnInit {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
-    }, 100);
+    }, 10);
   }
 }

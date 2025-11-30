@@ -1,5 +1,6 @@
 .lf-drawer-container {
   z-index: unset !important;
+  overflow: unset !important;
 
   .lf-drawer {
     z-index: var(--drawer-z-index);
