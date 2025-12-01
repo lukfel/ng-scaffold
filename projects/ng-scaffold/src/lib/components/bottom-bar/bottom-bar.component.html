@@ -16,6 +16,7 @@
     @if (bottomBarConfig.buttons) {
       <div class="lf-bottom-bar-buttons ml-4">
         @for (button of bottomBarConfig.buttons; track button.id) {
+          <!-- label button -->
           @if (button.label) {
             <button
               mat-button
@@ -23,14 +24,17 @@
               [ngClass]="button.cssClass"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
+              <!-- icon -->
               @if (button.matIcon || button.svgIcon) {
                 <lf-icon
                   [matIcon]="button.matIcon"
                   [svgIcon]="button.svgIcon"
                   verticalAlign="bottom"></lf-icon>
               }
+              <!-- label -->
               {{ button.label }}
             </button>
+            <!-- icon button -->
           } @else {
             <button
               mat-icon-button
@@ -39,6 +43,7 @@
               [ngClass]="button.cssClass"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
+              <!-- icon -->
               <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
             </button>
           }

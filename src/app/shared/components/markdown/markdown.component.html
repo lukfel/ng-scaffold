@@ -7,9 +7,9 @@
   }
 </mat-dialog-content>
 <mat-dialog-actions class="lf-dialog-actions" align="end">
-  <button mat-button color="warn" mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close>Close</button>
   @if (data.showCopy) {
-    <button mat-flat-button color="accent" class="ml-4" (click)="copy()">
+    <button mat-flat-button color="primary" class="ml-4" (click)="copy()">
       <mat-icon>content_copy</mat-icon>
       Copy
     </button>

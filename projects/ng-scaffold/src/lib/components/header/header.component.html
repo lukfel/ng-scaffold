@@ -107,8 +107,28 @@
 <!-- header menu button -->
 <ng-template #menuButtonTemplate let-menuButton="menuButton" let-hideLabel="hideLabel">
   @if (menuButton) {
-    <!-- icon button -->
-    @if ((menuButton.matIcon || menuButton.svgIcon) && (!menuButton.label || hideLabel)) {
+    <!-- label button -->
+    @if (menuButton.label && !hideLabel) {
+      <button
+        mat-button
+        class="lf-header-menu-button"
+        [class.lf-header-menu-button-active]="isActive(menuButton.id)"
+        [ngClass]="menuButton.cssClass"
+        (click)="buttonClicked(menuButton.id)"
+        [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
+        [matTooltip]="menuButton.tooltip">
+        <!-- icon -->
+        @if (menuButton.matIcon || menuButton.svgIcon) {
+          <lf-icon
+            [matIcon]="menuButton.matIcon"
+            [svgIcon]="menuButton.svgIcon"
+            verticalAlign="bottom"></lf-icon>
+        }
+        <!-- label -->
+        {{ menuButton.label }}
+      </button>
+      <!-- icon button -->
+    } @else {
       <button
         mat-icon-button
         class="lf-header-menu-button"
@@ -120,22 +140,7 @@
         <!-- icon -->
         <lf-icon [matIcon]="menuButton.matIcon" [svgIcon]="menuButton.svgIcon"></lf-icon>
       </button>
-    } @else {
-      @if (!hideLabel) {
-        <button
-          mat-button
-          class="lf-header-menu-button"
-          [class.lf-header-menu-button-active]="isActive(menuButton.id)"
-          [ngClass]="menuButton.cssClass"
-          (click)="buttonClicked(menuButton.id)"
-          [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
-          [matTooltip]="menuButton.tooltip">
-          <!-- label -->
-          {{ menuButton.label }}
-        </button>
-      }
     }
-    <!-- text button -->
     <!-- menu -->
     <mat-menu #menu="matMenu">
       <!-- label menu buttons -->
@@ -146,16 +151,17 @@
             mat-menu-item
             [class.lf-header-menu-button-active]="isActive(button.id)"
             [ngClass]="button.cssClass"
-            (click)="buttonClicked(button.id)">
+            (click)="buttonClicked(button.id)"
+            [matTooltip]="button.tooltip">
             <!-- icon -->
-            <lf-icon
-              [matIcon]="button.matIcon"
-              [svgIcon]="button.svgIcon"
-              verticalAlign="bottom"></lf-icon>
-            <!-- label -->
-            @if (button.label) {
-              <span>{{ button.label }}</span>
+            @if (button.matIcon || button.svgIcon) {
+              <lf-icon
+                [matIcon]="button.matIcon"
+                [svgIcon]="button.svgIcon"
+                verticalAlign="bottom"></lf-icon>
             }
+            <!-- label -->
+            <span>{{ button.label }}</span>
           </button>
         }
       }

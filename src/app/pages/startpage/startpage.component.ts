@@ -61,6 +61,10 @@ export class StartpageComponent implements OnInit, OnDestroy {
       }
       this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
       this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;
+
+      setTimeout(() => {
+        this.scaffoldService.updateScaffoldProperty('loading', true);
+      }, 3000);
     }));
 
     this._subscription.add(this.scaffoldService.buttonClickEventValue$.subscribe((value: string) => {

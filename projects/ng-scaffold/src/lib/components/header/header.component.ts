@@ -81,7 +81,8 @@ export class HeaderComponent implements OnInit {
     const includedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => !config?.excludeButtonIds?.includes(button.id));
     return {
       id: '',
-      matIcon: ' more_vert',
+      matIcon: (!config.matIcon && !config.svgLogo) ? 'more_vert' : config.matIcon,
+      svgIcon: config.svgLogo,
       menuButtons: [...includedButtons]
     };
   }
