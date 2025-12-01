@@ -1,16 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PlaceholderConfig } from '../../../models';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { CONFIG } from '../../../config/config.token';
+import { PlaceholderConfig, ScaffoldLibraryConfig } from '../../../models';
 import { SharedModule } from '../../shared.module';
-import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'lf-placeholder',
   templateUrl: './placeholder.component.html',
   styleUrls: ['./placeholder.component.scss'],
   standalone: true,
-  imports: [SharedModule, IconComponent]
+  imports: [SharedModule]
 })
 export class PlaceholderComponent {
+
+  public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+
 
   @Input() public placeholderConfig: PlaceholderConfig;
 

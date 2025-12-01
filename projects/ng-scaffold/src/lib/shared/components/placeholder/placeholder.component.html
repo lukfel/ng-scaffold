@@ -1,9 +1,13 @@
 @if (placeholderConfig) {
   <div class="lf-placeholder" [ngClass]="placeholderConfig.cssClass">
     <!-- icon -->
-    <lf-icon
-      [matIcon]="placeholderConfig.matIcon!"
-      [svgIcon]="placeholderConfig.svgIcon!"></lf-icon>
+    @if (placeholderConfig.matIcon) {
+      <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+        {{ placeholderConfig.matIcon }}
+      </mat-icon>
+    } @else if (placeholderConfig.svgIcon) {
+      <mat-icon [svgIcon]="placeholderConfig.svgIcon"></mat-icon>
+    }
     <!-- heading -->
     @if (placeholderConfig.title) {
       <p class="lf-placeholder-title">
@@ -25,11 +29,13 @@
         [ngClass]="placeholderConfig.button.cssClass"
         (click)="buttonClickEvent.emit()"
         [matTooltip]="placeholderConfig.button.tooltip">
-        @if (placeholderConfig.button.matIcon || placeholderConfig.button.svgIcon) {
-          <lf-icon
-            [matIcon]="placeholderConfig.button.matIcon"
-            [svgIcon]="placeholderConfig.button.svgIcon"
-            verticalAlign="bottom"></lf-icon>
+        <!-- icon -->
+        @if (placeholderConfig.button.matIcon) {
+          <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+            {{ placeholderConfig.button.matIcon }}
+          </mat-icon>
+        } @else if (placeholderConfig.button.svgIcon) {
+          <mat-icon [svgIcon]="placeholderConfig.button.svgIcon"></mat-icon>
         }
         {{ placeholderConfig.button.label }}
       </button>

@@ -28,6 +28,7 @@
             class="lf-header-logo"
             [class.mr-3]="headerConfig.title"
             [svgIcon]="headerConfig.svgLogo!"></mat-icon>
+          <!-- img logo -->
         } @else {
           @if (headerConfig.imgLogo) {
             <img
@@ -37,7 +38,6 @@
               alt="Logo" />
           }
         }
-        <!-- img logo -->
         <!-- title -->
         @if (headerConfig.title) {
           <div class="lf-header-title-wrapper">
@@ -118,17 +118,18 @@
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip">
         <!-- icon -->
-        @if (menuButton.matIcon || menuButton.svgIcon) {
-          <lf-icon
-            [matIcon]="menuButton.matIcon"
-            [svgIcon]="menuButton.svgIcon"
-            verticalAlign="bottom"></lf-icon>
+        @if (menuButton.matIcon) {
+          <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+            {{ menuButton.matIcon }}
+          </mat-icon>
+        } @else if (menuButton.svgIcon) {
+          <mat-icon [svgIcon]="menuButton.svgIcon"></mat-icon>
         }
         <!-- label -->
         {{ menuButton.label }}
       </button>
       <!-- icon button -->
-    } @else {
+    } @else if (menuButton.matIcon || menuButton.svgIcon) {
       <button
         mat-icon-button
         class="lf-header-menu-button"
@@ -138,8 +139,26 @@
         [matTooltip]="menuButton.tooltip"
         [attr.aria-label]="menuButton.id">
         <!-- icon -->
-        <lf-icon [matIcon]="menuButton.matIcon" [svgIcon]="menuButton.svgIcon"></lf-icon>
+        @if (menuButton.matIcon) {
+          <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+            {{ menuButton.matIcon }}
+          </mat-icon>
+        } @else if (menuButton.svgIcon) {
+          <mat-icon [svgIcon]="menuButton.svgIcon"></mat-icon>
+        }
       </button>
+      <!-- img button -->
+    } @else if (menuButton.imgIcon) {
+      <img
+        class="lf-header-menu-img px-1"
+        [src]="menuButton.imgIcon"
+        width="48"
+        height="48"
+        [ngClass]="menuButton.cssClass"
+        (click)="buttonClicked(menuButton.id)"
+        [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
+        [matTooltip]="menuButton.tooltip"
+        [attr.aria-label]="menuButton.id" />
     }
     <!-- menu -->
     <mat-menu #menu="matMenu">
@@ -154,11 +173,12 @@
             (click)="buttonClicked(button.id)"
             [matTooltip]="button.tooltip">
             <!-- icon -->
-            @if (button.matIcon || button.svgIcon) {
-              <lf-icon
-                [matIcon]="button.matIcon"
-                [svgIcon]="button.svgIcon"
-                verticalAlign="bottom"></lf-icon>
+            @if (button.matIcon) {
+              <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                {{ button.matIcon }}
+              </mat-icon>
+            } @else if (button.svgIcon) {
+              <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
             }
             <!-- label -->
             <span>{{ button.label }}</span>
@@ -178,10 +198,13 @@
               [matTooltip]="button.tooltip"
               tabindex="0">
               <!-- icon -->
-              <lf-icon
-                [matIcon]="button.matIcon"
-                [svgIcon]="button.svgIcon"
-                verticalAlign="top"></lf-icon>
+              @if (button.matIcon) {
+                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                  {{ button.matIcon }}
+                </mat-icon>
+              } @else if (button.svgIcon) {
+                <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+              }
             </button>
           }
         }

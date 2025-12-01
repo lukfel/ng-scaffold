@@ -81,7 +81,7 @@ export class AppComponent {
     navbarConfig: {
       enable: false,
       showAllLabels: false,
-      menuButtons: [
+      buttons: [
         {
           id: 'start',
           label: 'Demo',

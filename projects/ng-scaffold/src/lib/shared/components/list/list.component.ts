@@ -1,19 +1,22 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, ContentChild, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ContentChild, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { CONFIG } from '../../../config/config.token';
 import { ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective } from '../../../directives';
-import { Button, ListConfig, ListHeader, ListItem } from '../../../models';
+import { Button, ListConfig, ListHeader, ListItem, ScaffoldLibraryConfig } from '../../../models';
 import { SharedModule } from '../../shared.module';
-import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'lf-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   standalone: true,
-  imports: [SharedModule, IconComponent]
+  imports: [SharedModule]
 })
 export class ListComponent implements OnInit, OnChanges {
+
+  public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+
 
   @ContentChild(ListItemAvatarDirective) public avatarTemplate?: ListItemAvatarDirective;
   @ContentChild(ListItemTitleDirective) public titleTemplate?: ListItemTitleDirective;

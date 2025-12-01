@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { IconComponent } from '../../shared/components/icon/icon.component';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { SharedModule } from '../../shared/shared.module';
 import { HeaderComponent } from './header.component';
@@ -16,8 +15,7 @@ describe('HeaderComponent', () => {
       imports: [
         RouterTestingModule,
         SharedModule,
-        InputComponent,
-        IconComponent
+        InputComponent
       ]
     })
       .compileComponents();

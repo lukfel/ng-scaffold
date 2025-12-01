@@ -7,7 +7,7 @@
     width: var(--drawer-width);
 
     &.mobile {
-      z-index: var(--loading-overlay-z-index);
+      z-index: var(--drawer-z-index-mobile);
     }
 
     &.lf-drawer-show-header {

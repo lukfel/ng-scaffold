@@ -18,6 +18,15 @@
     }
   }
 
+  .lf-header-menu-img {
+    width: var(--header-menu-img-size);
+    height: var(--header-menu-img-size);;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
   .lf-header-logo-title-wrapper {
     flex: 0 0 auto;
     max-width: var(--header-logo-title-wrapper-max-width);

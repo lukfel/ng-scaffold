@@ -20,7 +20,8 @@ export interface HeaderConfig {
 export interface HeaderResponsiveConfig {
   enable?: boolean;
   matIcon?: string;
-  svgLogo?: string;
+  svgIcon?: string;
+  label?: string;
   excludeButtonIds?: string[];
 }
 

@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedModule } from '../../shared.module';
 import { PlaceholderComponent } from './placeholder.component';
-import { IconComponent } from '../icon/icon.component';
 
 describe('PlaceholderComponent', () => {
   let component: PlaceholderComponent;
@@ -9,7 +8,7 @@ describe('PlaceholderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedModule, IconComponent]
+      imports: [SharedModule]
     })
       .compileComponents();
 

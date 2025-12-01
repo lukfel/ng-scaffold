@@ -13,7 +13,6 @@ import { ScaffoldComponent } from './components/scaffold/scaffold.component';
 import { CONFIG } from './config/config.token';
 import { ScaffoldLibraryConfig } from './models';
 import { ConfirmDialogComponent } from './shared/components/dialogs/confirm-dialog/confirm-dialog.component';
-import { IconComponent } from './shared/components/icon/icon.component';
 import { InputComponent } from './shared/components/input/input.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -34,8 +33,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     RouterModule,
     SharedModule,
-    InputComponent,
-    IconComponent
+    InputComponent
   ],
   exports: [
     ScaffoldComponent

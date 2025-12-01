@@ -2,7 +2,7 @@
 interface NavbarConfig {
   enable?: boolean;
   showAllLabels?: boolean;
-  menuButtons?: MenuButton[];
+  buttons?: Button[];
   cssClass?: string;
 }
 ```

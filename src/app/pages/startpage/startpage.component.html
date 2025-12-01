@@ -232,7 +232,7 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>Edit Nav Button</mat-expansion-panel-header>
           <ng-template matExpansionPanelContent>
-            @for (menuButton of navbarConfig.menuButtons; track menuButton.id) {
+            @for (menuButton of navbarConfig.buttons; track menuButton.id) {
               <ng-container
                 [ngTemplateOutlet]="menuButtonFormTemplate"
                 [ngTemplateOutletContext]="{

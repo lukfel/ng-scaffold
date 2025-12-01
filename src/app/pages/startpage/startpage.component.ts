@@ -62,9 +62,9 @@ export class StartpageComponent implements OnInit, OnDestroy {
       this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
       this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;
 
-      setTimeout(() => {
-        this.scaffoldService.updateScaffoldProperty('loading', true);
-      }, 3000);
+      // setTimeout(() => {
+      //   this.scaffoldService.updateScaffoldProperty('loading', true);
+      // }, 3000);
     }));
 
     this._subscription.add(this.scaffoldService.buttonClickEventValue$.subscribe((value: string) => {
@@ -161,7 +161,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
   public removeHeaderButton(menuButton: MenuButton, isLeftButton: boolean, isNavButton: boolean): void {
     if (isNavButton) {
-      this.navbarConfig.menuButtons = this.navbarConfig.menuButtons?.filter((button: MenuButton) => button !== menuButton);
+      this.navbarConfig.buttons = this.navbarConfig.buttons?.filter((button: MenuButton) => button !== menuButton);
     } else if (!isLeftButton) {
       this.headerConfig.rightMenuButtons = this.headerConfig.rightMenuButtons?.filter((button: MenuButton) => button !== menuButton);
     } else if (isLeftButton && this.headerConfig?.leftMenuButton === menuButton) {
@@ -170,7 +170,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
   }
 
   public addNavButton(): void {
-    this.navbarConfig.menuButtons?.push({ id: '' });
+    this.navbarConfig.buttons?.push({ id: '' });
   }
 
   public addFooterLink(): void {

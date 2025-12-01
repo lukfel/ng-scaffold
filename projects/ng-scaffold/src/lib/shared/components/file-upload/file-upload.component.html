@@ -3,7 +3,7 @@
   #file
   type="file"
   [accept]="accept"
-  onclick="this.value=null"
+  onclick="this.value = null"
   (change)="selectFile($event)" />
 
 <button
@@ -14,8 +14,14 @@
   [disabled]="disabled"
   (click)="triggerInput()"
   [matTooltip]="tooltip">
+  <!-- icon -->
   @if (matIcon) {
-    <mat-icon>{{ matIcon }}</mat-icon>
+    <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+      {{ matIcon }}
+    </mat-icon>
   }
+  <!-- @else if (svgIcon) {
+    <mat-icon [svgIcon]="svgIcon"></mat-icon>
+  } -->
   {{ label }}
 </button>

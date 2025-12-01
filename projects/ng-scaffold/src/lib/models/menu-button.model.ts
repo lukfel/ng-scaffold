@@ -1,5 +1,6 @@
 export interface MenuButton extends Button {
   menuButtons?: Button[];
+  imgIcon?: string;
 }
 
 export interface Button {

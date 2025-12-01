@@ -9,7 +9,14 @@
         </div>
       } @else if (header.matIcon || header.svgIcon) {
         <div class="lf-list-item-avatar px-2">
-          <lf-icon [matIcon]="header.matIcon" [svgIcon]="header.svgIcon"></lf-icon>
+          <!-- icon -->
+          @if (header.matIcon) {
+            <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+              {{ header.matIcon }}
+            </mat-icon>
+          } @else if (header.svgIcon) {
+            <mat-icon [svgIcon]="header.svgIcon"></mat-icon>
+          }
         </div>
       } @else if (hasAvatars) {
         <div class="lf-list-item-avatar px-2"></div>
@@ -41,11 +48,13 @@
               [disabled]="button.disabled"
               [matTooltip]="button.tooltip"
               (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
-              @if (button.matIcon || button.svgIcon) {
-                <lf-icon
-                  [matIcon]="button.matIcon"
-                  [svgIcon]="button.svgIcon"
-                  verticalAlign="bottom"></lf-icon>
+              <!-- icon -->
+              @if (button.matIcon) {
+                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                  {{ button.matIcon }}
+                </mat-icon>
+              } @else if (button.svgIcon) {
+                <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
               }
               {{ button.label }}
             </button>
@@ -58,7 +67,14 @@
               [disabled]="button.disabled"
               [matTooltip]="button.tooltip"
               (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
-              <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
+              <!-- icon -->
+              @if (button.matIcon) {
+                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                  {{ button.matIcon }}
+                </mat-icon>
+              } @else if (button.svgIcon) {
+                <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+              }
             </button>
           }
         }
@@ -158,7 +174,14 @@
         </div>
       } @else if (item.matIcon || item.svgIcon) {
         <div class="lf-list-item-avatar px-2">
-          <lf-icon [matIcon]="item.matIcon" [svgIcon]="item.svgIcon"></lf-icon>
+          <!-- icon -->
+          @if (item.matIcon) {
+            <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+              {{ item.matIcon }}
+            </mat-icon>
+          } @else if (item.svgIcon) {
+            <mat-icon [svgIcon]="item.svgIcon"></mat-icon>
+          }
         </div>
       }
 
@@ -207,11 +230,13 @@
                   [disabled]="disabled"
                   [matTooltip]="button.tooltip"
                   (click)="clickButton({ buttonId: button.id, item }, $event)">
-                  @if (button.matIcon || button.svgIcon) {
-                    <lf-icon
-                      [matIcon]="button.matIcon"
-                      [svgIcon]="button.svgIcon"
-                      verticalAlign="bottom"></lf-icon>
+                  <!-- icon -->
+                  @if (button.matIcon) {
+                    <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                      {{ button.matIcon }}
+                    </mat-icon>
+                  } @else if (button.svgIcon) {
+                    <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
                   }
                   {{ button.label }}
                 </button>
@@ -224,7 +249,14 @@
                   [disabled]="disabled"
                   [matTooltip]="button.tooltip"
                   (click)="clickButton({ buttonId: button.id, item }, $event)">
-                  <lf-icon [matIcon]="button.matIcon" [svgIcon]="button.svgIcon"></lf-icon>
+                  <!-- icon -->
+                  @if (button.matIcon) {
+                    <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                      {{ button.matIcon }}
+                    </mat-icon>
+                  } @else if (button.svgIcon) {
+                    <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+                  }
                 </button>
               }
             }

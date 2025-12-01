@@ -1,4 +1,6 @@
 import { Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
+import { CONFIG } from '../../../config/config.token';
+import { ScaffoldLibraryConfig } from '../../../models';
 import { Logger } from '../../../services';
 import { SharedModule } from '../../shared.module';
 
@@ -10,6 +12,8 @@ import { SharedModule } from '../../shared.module';
   imports: [SharedModule]
 })
 export class FileUploadComponent {
+
+  public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
   private logger: Logger = inject(Logger);
 

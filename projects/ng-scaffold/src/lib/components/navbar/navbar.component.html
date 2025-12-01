@@ -8,7 +8,7 @@
     <!-- items -->
     <div [class.lf-navbar-items]="!isMobile" [class.lf-navbar-mobile-items]="isMobile">
       <!-- item -->
-      @for (button of navbarConfig.menuButtons; track button.id; let i = $index) {
+      @for (button of navbarConfig.buttons; track button.id; let i = $index) {
         @if (i < 5) {
           <div
             class="lf-navbar-item"
@@ -19,7 +19,13 @@
             role="button"
             [matTooltip]="button.tooltip">
             <!-- icon -->
-            <lf-icon [matIcon]="button.matIcon!" [svgIcon]="button.svgIcon!"></lf-icon>
+            @if (button.matIcon) {
+              <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                {{ button.matIcon }}
+              </mat-icon>
+            } @else if (button.svgIcon) {
+              <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+            }
             <!-- label -->
             <!-- show a protected space on desktop so the icon doesn't move up and down -->
             @if (button?.label) {

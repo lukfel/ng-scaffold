@@ -1,7 +1,7 @@
 :root {
     --transition: 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 
-    --loading-overlay-z-index: 101;
+    --loading-overlay-z-index: 1001;
 
     --header-z-index: 100;
     --header-height: 64px;
@@ -12,6 +12,7 @@
     --header-input-max-width: 480px;
     --header-input-border-radius: 28px;
     --header-menu-button-max-width: 144px;
+    --header-menu-img-size: 48px;
 
     --navbar-z-index: 99;
     --navbar-height: 72px;
@@ -26,6 +27,7 @@
 
     --drawer-width: 208px;
     --drawer-z-index: 97;
+    --drawer-z-index-mobile: 100;
 
     --footer-height: 100px;
     --footer-logo-size: 96px;
