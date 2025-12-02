@@ -1,8 +1,8 @@
 ```ts
 interface ScaffoldConfig {
-  loading?: boolean;
   scrollPositionRestoration?: boolean;
-  anchorScrolling?: boolean;
+  loading?: boolean;
+  loadingOverlayConfig?: LoadingOverlayConfig;
   headerConfig?: HeaderConfig;
   navbarConfig?: NavbarConfig;
   drawerConfig?: DrawerConfig;
