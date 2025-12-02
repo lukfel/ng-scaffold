@@ -7,6 +7,7 @@ export { FooterConfig } from './footer-config.model';
 export { HeaderConfig, HeaderInputConfig, HeaderResponsiveConfig } from './header-config.model';
 export { ScaffoldLibraryConfig } from './library-config.model';
 export { ListConfig, ListHeader, ListItem } from './list-item.model';
+export { LoadingOverlayConfig } from './loading-overlay-config.model';
 export { Button, MenuButton } from './menu-button.model';
 export { NavbarConfig } from './navbar-config.model';
 export { NavigationLink } from './navigation-link.model';

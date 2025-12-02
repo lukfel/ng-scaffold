@@ -28,8 +28,10 @@ export class AppComponent {
 
   public scaffoldConfig: ScaffoldConfig = {
     // ScaffoldConfig
-    loading: false,
     scrollPositionRestoration: true,
+    // LoadingOverlayConfig
+    loading: false,
+    loadingOverlayConfig: {},
     // HeaderConfig
     headerConfig: {
       showRouteLoading: true,

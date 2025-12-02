@@ -1,5 +1,4 @@
-import { ComponentType } from '@angular/cdk/portal';
-import { Injectable, TemplateRef, inject } from '@angular/core';
+import { Injectable, Type, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
@@ -20,7 +19,7 @@ export class DialogService {
    * @param config of the dialog
    * @returns an asynchronous any response
    */
-  public openCustomDialog(templateRef: ComponentType<any> | TemplateRef<any>, config: MatDialogConfig): Promise<any> {    // eslint-disable-line @typescript-eslint/no-explicit-any
+  public openCustomDialog<T>(templateRef: Type<T>, config: MatDialogConfig): Promise<any> {    // eslint-disable-line @typescript-eslint/no-explicit-any
     const dialogRef = this.matDialog.open(templateRef, config);
     return firstValueFrom(dialogRef.afterClosed());
   }

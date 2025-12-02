@@ -1,3 +1,9 @@
-<div class="lf-loading-overlay">
-  <mat-spinner class="lf-loading-spinner" color="accent" mode="indeterminate"></mat-spinner>
-</div>
+@if (!portal) {
+  <div
+    [ngClass]="loadingOverlayConfig?.cssClass"
+    [class.lf-gradient-spinner]="loadingOverlayConfig?.gradient">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+} @else {
+  <ng-template [cdkPortalOutlet]="portal"></ng-template>
+}

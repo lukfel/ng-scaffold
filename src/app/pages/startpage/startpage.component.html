@@ -73,20 +73,27 @@
       .
     </p>
     <p>
-      <button mat-flat-button color="accent" (click)="showContainerLoading()">
-        Loading (3 seconds)
-      </button>
-    </p>
-    <p>
       <mat-slide-toggle [(ngModel)]="scaffoldConfig.scrollPositionRestoration">
         Reset scroll position after navigation
       </mat-slide-toggle>
     </p>
+    <!-- <p>
+      <button mat-flat-button color="accent" (click)="showContainerLoading()">
+        Loading (3 seconds)
+      </button>
+    </p> -->
     <p>
+      <mat-slide-toggle
+        [(ngModel)]="loadingOverlayConfig.gradient"
+        (change)="showContainerLoading()">
+        Gradient loading spinner
+      </mat-slide-toggle>
+    </p>
+    <!-- <p>
       <mat-slide-toggle [(ngModel)]="scaffoldConfig.anchorScrolling">
         Enable navigation to anchors
       </mat-slide-toggle>
-    </p>
+    </p> -->
     <mat-divider></mat-divider>
 
     <!-- HeaderConfig -->

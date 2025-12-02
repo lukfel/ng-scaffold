@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
+import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, LoadingOverlayConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
 import { Subscription } from 'rxjs';
 import { MarkdownComponent, MarkdownDialogData } from 'src/app/shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
@@ -19,6 +19,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
 
   public scaffoldConfig: ScaffoldConfig = {};
+  public loadingOverlayConfig: LoadingOverlayConfig = {};
   public headerConfig: HeaderConfig = {};
   public navbarConfig: NavbarConfig = {};
   public drawerConfig: DrawerConfig = {};
@@ -51,6 +52,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
       this.scaffoldConfig = scaffoldConfig;
+      this.loadingOverlayConfig = this.scaffoldConfig.loadingOverlayConfig || {};
       this.headerConfig = this.scaffoldConfig.headerConfig!;
       this.navbarConfig = this.scaffoldConfig.navbarConfig!;
       this.drawerConfig = this.scaffoldConfig.drawerConfig!;
@@ -61,10 +63,6 @@ export class StartpageComponent implements OnInit, OnDestroy {
       }
       this.floatingButtonConfig = this.scaffoldConfig.floatingButtonConfig!;
       this.bottomBarConfig = this.scaffoldConfig.bottomBarConfig!;
-
-      // setTimeout(() => {
-      //   this.scaffoldService.updateScaffoldProperty('loading', true);
-      // }, 3000);
     }));
 
     this._subscription.add(this.scaffoldService.buttonClickEventValue$.subscribe((value: string) => {
@@ -93,14 +91,20 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
   public copyConfig(): void {
     const replacer = (key: string, value: any): void => {
+
+      // Remove empty strings, null, undefined, false
       if (value === '' || value === null || value === undefined || value === false) {
         return undefined;
       }
 
-      if (value && typeof value === 'object') {
-        if ('enable' in value && value.enable === false) {
-          return undefined;
-        }
+      // Remove objects with { enable: false }
+      if (value && typeof value === 'object' && 'enable' in value && value.enable === false) {
+        return undefined;
+      }
+
+      // Remove empty objects
+      if (value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === 0) {
+        return undefined;
       }
 
       return value;
@@ -128,7 +132,7 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.scaffoldService.updateScaffoldProperty('loading', false);
-    }, 3000);
+    }, 2000);
   }
 
   public headerImgLogoChange(event: string): void {

@@ -6,7 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { CONFIG } from '../../config/config.token';
 import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
-import { BreakpointService, Logger, RouterService, ScaffoldService } from '../../services';
+import { BreakpointService, Logger, OverlayService, RouterService, ScaffoldService } from '../../services';
+import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
 
 @Component({
   selector: 'lf-scaffold',
@@ -21,6 +22,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   private scaffoldService = inject(ScaffoldService);
   private breakpointService = inject(BreakpointService);
   private routerService = inject(RouterService);
+  private overlayService = inject(OverlayService)
   private logger = inject(Logger);
   private route = inject(ActivatedRoute);
   private document = inject<Document>(DOCUMENT);
@@ -62,6 +64,12 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     // Listen for config changes
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (this.libraryConfig?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
+
+      if (scaffoldConfig.loading) {
+        this.overlayService.open(LoadingOverlayComponent);
+      } else {
+        this.overlayService.close();
+      }
 
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = this.scaffoldConfig.headerConfig!;

@@ -27,7 +27,9 @@
               <!-- icon -->
               <!-- icon -->
               @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">{{ button.matIcon }}</mat-icon>
+                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                  {{ button.matIcon }}
+                </mat-icon>
               } @else if (button.svgIcon) {
                 <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
               }
@@ -45,7 +47,9 @@
               [matTooltip]="button.tooltip">
               <!-- icon -->
               @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">{{ button.matIcon }}</mat-icon>
+                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                  {{ button.matIcon }}
+                </mat-icon>
               } @else if (button.svgIcon) {
                 <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
               }
