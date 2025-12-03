@@ -64,17 +64,23 @@ export class ScaffoldService {
   }
 
   // Update a specific property in the ScaffoldConfig
-  public updateScaffoldProperty<K extends keyof ScaffoldConfig>(property: K, value: ScaffoldConfig[K]): void {
+  public updateScaffoldProperty<K extends keyof ScaffoldConfig>(property: K, value: Partial<ScaffoldConfig[K]> | ScaffoldConfig[K]): void {
     const currentState: ScaffoldConfig = this._scaffoldConfig$.getValue();
+    const currentValue: ScaffoldConfig[K] = currentState[property];
+    let newValue: ScaffoldConfig[K];
 
-    if (currentState[property] === value) {
-      if (this.libraryConfig?.debugging) this.logger.log(`[UNCHANGED] ScaffoldConfig.${property}`, value)
+    if (currentValue && typeof currentValue === 'object' && value && typeof value === 'object') {
+      newValue = { ...currentValue, ...value } as ScaffoldConfig[K];
+    } else {
+      newValue = value as ScaffoldConfig[K];
+    }
+
+    if (newValue === currentValue) {
+      if (this.libraryConfig?.debugging) this.logger.log(`[UNCHANGED] ScaffoldConfig.${property}`, newValue)
       return;
     }
 
-    const updatedState = { ...currentState, [property]: value };
-    if (this.libraryConfig?.debugging) this.logger.log(`[UPDATE] ScaffoldConfig.${property}`, value);
-
-    this._scaffoldConfig$.next(updatedState);
+    if (this.libraryConfig?.debugging) this.logger.log(`[UPDATE] ScaffoldConfig.${property}`, newValue);
+    this._scaffoldConfig$.next({ ...currentState, [property]: newValue });
   }
 }

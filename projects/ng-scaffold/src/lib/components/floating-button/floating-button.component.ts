@@ -15,14 +15,13 @@ export class FloatingButtonComponent implements OnInit {
   @Input() public isMobile: boolean = false;
   @Input() public bottomBarEnabled: boolean = false;
 
-  @Output() public floatingButtonConfigUpdateEvent = new EventEmitter<FloatingButtonConfig>();
+  @Output() public floatingButtonConfigUpdateEvent = new EventEmitter<Partial<FloatingButtonConfig>>();
   @Output() public floatingButtonClickEvent = new EventEmitter<string>();
 
 
   ngOnInit(): void {
     if (this.floatingButtonConfig) {
-      const updatedFloatingButtonConfigConfig: FloatingButtonConfig = {
-        ...this.floatingButtonConfig,
+      const updatedFloatingButtonConfigConfig: Partial<FloatingButtonConfig> = {
         matIcon: (!this.floatingButtonConfig.matIcon && !this.floatingButtonConfig.svgIcon) ? 'arrow_upward' : this.floatingButtonConfig.matIcon || this.floatingButtonConfig.svgIcon,
         horizontalPosition: this.floatingButtonConfig.horizontalPosition ?? 'right'
       };

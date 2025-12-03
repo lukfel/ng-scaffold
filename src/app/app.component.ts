@@ -1,8 +1,9 @@
+import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { CONFIG, DialogService, DrawerConfig, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
+import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -22,6 +23,7 @@ export class AppComponent {
   private seoService = inject(SeoService);
   private themeService = inject(ThemeService);
   private dialogService = inject(DialogService);
+  private breakpointService = inject(BreakpointService);
 
 
   public version = packageJson.version;
@@ -203,6 +205,13 @@ export class AppComponent {
     // Listen to theme changes
     this.themeService.currentTheme$.subscribe((currentTheme: string) => this.currentTheme = currentTheme);
 
+    // Listen for breakpoint changes
+    this.breakpointService.breakpoint$.subscribe((breakpointState: BreakpointState) => {
+      if (breakpointState.breakpoints[Breakpoints.XSmall] || breakpointState.breakpoints[Breakpoints.Small]) {
+        this.scaffoldService.updateScaffoldProperty('drawerConfig', { open: false });
+      }
+    });
+
     // Set Seo tags
     this.seoService.setMetaTags({
       metaPageTitle: 'Demo | Scaffold Library',
@@ -216,11 +225,8 @@ export class AppComponent {
     this.logger.log('You clicked the header button with id: ', id);
 
     if (id === 'drawer') {
-      const drawerConfig: DrawerConfig | undefined = this.scaffoldService?.scaffoldConfig?.drawerConfig;
-      if (drawerConfig) {
-        const updatedDrawerConfig: DrawerConfig = { ...drawerConfig, open: !drawerConfig.open }
-        this.scaffoldService.updateScaffoldProperty('drawerConfig', updatedDrawerConfig);
-      }
+      const open: boolean = this.scaffoldService?.scaffoldConfig?.drawerConfig?.open || false;
+      this.scaffoldService.updateScaffoldProperty('drawerConfig', { open: !open });
       return;
     } else if (id === 'github') {
       window.open('https://github.com/lukfel/ng-scaffold', '_blank');

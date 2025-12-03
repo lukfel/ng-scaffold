@@ -164,7 +164,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   // Header
-  public headerConfigUpdated(headerConfig: HeaderConfig): void {
+  public headerConfigUpdated(headerConfig: Partial<HeaderConfig>): void {
     this.scaffoldService.updateScaffoldProperty('headerConfig', headerConfig);
   }
 
@@ -189,7 +189,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   // Drawer
-  public drawerConfigUpdated(drawerConfig: DrawerConfig): void {
+  public drawerConfigUpdated(drawerConfig: Partial<DrawerConfig>): void {
     this.scaffoldService.updateScaffoldProperty('drawerConfig', drawerConfig);
   }
 
@@ -199,7 +199,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   // Floating button
-  public floatingButtonConfigUpdated(floatingButtonConfig: FloatingButtonConfig): void {
+  public floatingButtonConfigUpdated(floatingButtonConfig: Partial<FloatingButtonConfig>): void {
     this.scaffoldService.updateScaffoldProperty('floatingButtonConfig', floatingButtonConfig);
   }
 

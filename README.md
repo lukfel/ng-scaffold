@@ -76,29 +76,23 @@ import { ScaffoldService, DrawerConfig, HeaderConfig, MenuButton } from '@lukfel
 
 export class AppComponent {
 
-  constructor(private scaffoldService: ScaffoldService) {
-    this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
-  }
+  ...
 
   // Example #1: Toggle the drawer open state
   public toggleDrawer(): void {
-    const currentDrawerConfig: DrawerConfig = this.scaffoldService.scaffoldConfig.drawerConfig!;
-    const updatedDrawerConfig: DrawerConfig = { ...currentDrawerConfig, open: !currentDrawerConfig.open };
-    this.scaffoldService.updateScaffoldProperty('drawerConfig', updatedDrawerConfig);
+    const open: boolean = this.scaffoldService?.scaffoldConfig?.drawerConfig?.open || false;
+    this.scaffoldService.updateScaffoldProperty('drawerConfig', { open: !open });
   }
 
   // Example #2: Enable the header input field
   public enableHeaderInput(): void {
-    const currentHeaderConfig: HeaderConfig = this.scaffoldService.scaffoldConfig.headerConfig!;
-    const updatedHeaderConfig: HeaderConfig = { ...currentHeaderConfig, inputConfig: { enable: true } };
-    this.scaffoldService.updateScaffoldProperty('headerConfig', updatedHeaderConfig);
+    this.scaffoldService.updateScaffoldProperty('headerConfig', inputConfig: { enable: true });
   }
 
   // Example #2: Add new button to navbar
   public addNavbarButton(button: MenuButton): void {
-    const currentNavbarConfig: NavbarConfig = this.scaffoldService.scaffoldConfig.navbarConfig!;
-    const updatedNavbarConfig: NavbarConfig = { ...currentNavbarConfig, menuButtons: [...currentNavbarConfig.menuButtons!, button] };
-    this.scaffoldService.updateScaffoldProperty('navbarConfig', updatedNavbarConfig);
+    const currentNavbarConfig: NavbarConfig = this.scaffoldService.scaffoldConfig.navbarConfig;
+    this.scaffoldService.updateScaffoldProperty('navbarConfig', { menuButtons: [...currentNavbarConfig.menuButtons, button] });
   }
 }
 ```

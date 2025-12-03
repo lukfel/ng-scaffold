@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HeaderConfig, HeaderResponsiveConfig, MenuButton, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
@@ -16,7 +16,7 @@ import { HeaderConfig, HeaderResponsiveConfig, MenuButton, ScaffoldLibraryConfig
   ],
   standalone: false
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
   @Input() public headerConfig: HeaderConfig | null = null;
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   @Input() public routeLoading: boolean = false;
   @Input() public currentRoute: string;
 
-  @Output() public headerConfigUpdateEvent = new EventEmitter<HeaderConfig>();
+  @Output() public headerConfigUpdateEvent = new EventEmitter<Partial<HeaderConfig>>();
   @Output() public headerButtonClickEvent = new EventEmitter<string>();
   @Output() public headerInputSubmitEvent = new EventEmitter<string>();
   @Output() public headerInputChangeEvent = new EventEmitter<string>();
@@ -32,14 +32,6 @@ export class HeaderComponent implements OnInit {
 
   public mobileButton: MenuButton;
 
-
-  ngOnInit(): void {
-    // Avoid initializing the header with an open input field on mobile
-    if (this.isMobile && this.headerConfig?.inputConfig?.enable) {
-      const updatedHeaderConfig: HeaderConfig = { ...this.headerConfig, inputConfig: { ...this.headerConfig?.inputConfig, enable: false } };
-      this.headerConfigUpdateEvent.emit(updatedHeaderConfig);
-    }
-  }
 
   public buttonClicked(id?: string): void {
     if (!id) {
@@ -58,8 +50,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public inputClosed(): void {
-    const updatedHeaderConfig: HeaderConfig = { ...this.headerConfig, inputConfig: { ...this.headerConfig?.inputConfig, enable: false } };
-    this.headerConfigUpdateEvent.emit(updatedHeaderConfig);
+    this.headerConfigUpdateEvent.emit({ inputConfig: { enable: false } });
   }
 
   public isActive(id: string): boolean {
