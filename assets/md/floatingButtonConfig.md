@@ -6,6 +6,7 @@ interface FloatingButtonConfig {
   matIcon?: string;
   svgIcon?: string;
   tooltip?: string;
+  disabled?: boolean;
   horizontalPosition?: 'center' | 'right';
   autoHide?: boolean;
   sticky?: boolean;
