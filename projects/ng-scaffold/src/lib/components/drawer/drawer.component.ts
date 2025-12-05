@@ -1,5 +1,5 @@
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
@@ -8,7 +8,7 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
   styleUrls: ['./drawer.component.scss'],
   standalone: false
 })
-export class DrawerComponent {
+export class DrawerComponent implements OnInit {
 
   @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
   @Input() public drawerConfig: DrawerConfig | null = null;
@@ -17,6 +17,14 @@ export class DrawerComponent {
   @Input() public drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null;
 
   @Output() public drawerConfigUpdateEvent = new EventEmitter<Partial<DrawerConfig>>();
+
+
+  ngOnInit(): void {
+    // Avoid initializing an open drawer on mobile
+    if (this.isMobile && this.drawerConfig?.enable && this.drawerConfig?.open) {
+      this.drawerConfigUpdateEvent.emit({ open: false });
+    }
+  }
 
 
   // Detect when the drawer is closed without clicking a button
