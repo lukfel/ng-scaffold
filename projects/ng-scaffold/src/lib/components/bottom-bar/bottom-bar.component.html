@@ -22,6 +22,7 @@
               mat-button
               class="lf-bottom-bar-button ml-2"
               [ngClass]="button.cssClass"
+              [disabled]="button.disabled"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
               <!-- icon -->
@@ -43,6 +44,7 @@
               color="accent"
               class="lf-bottom-bar-button-icon ml-2"
               [ngClass]="button.cssClass"
+              [disabled]="button.disabled"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip">
               <!-- icon -->

@@ -5,13 +5,13 @@
     mat-fab
     color="accent"
     class="lf-floating-button lf-transitions"
-    [ngClass]="floatingButtonConfig.cssClass"
-    [ngClass]="floatingButtonConfig.horizontalPosition"
+    [ngClass]="floatingButtonConfig.cssClass + ' ' + floatingButtonConfig.horizontalPosition"
     [class.sticky]="floatingButtonConfig.sticky"
     [class.show-navbar]="isMobile && !bottomBarEnabled"
     [class.show-bottom-bar]="bottomBarEnabled && !isMobile"
     [class.show-navbar-and-bottom-bar]="isMobile && bottomBarEnabled"
     [extended]="!!floatingButtonConfig.label"
+    [disabled]="floatingButtonConfig.disabled"
     (click)="buttonClicked(floatingButtonConfig.id)"
     [matTooltip]="floatingButtonConfig.tooltip!">
     <!-- icon -->

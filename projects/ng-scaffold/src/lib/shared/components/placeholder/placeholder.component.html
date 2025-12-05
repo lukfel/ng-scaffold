@@ -27,6 +27,7 @@
         class="mt-4"
         color="accent"
         [ngClass]="placeholderConfig.button.cssClass"
+        [disabled]="placeholderConfig.button.disabled"
         (click)="buttonClickEvent.emit()"
         [matTooltip]="placeholderConfig.button.tooltip">
         <!-- icon -->
