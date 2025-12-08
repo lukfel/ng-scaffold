@@ -112,8 +112,9 @@
       <button
         mat-button
         class="lf-header-menu-button"
-        [class.lf-header-menu-button-active]="isActive(menuButton.id)"
+        [class.lf-header-menu-button-active]="isActive(menuButton.id) && !menuButton.disabled"
         [ngClass]="menuButton.cssClass"
+        [disabled]="menuButton.disabled"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip">
@@ -134,6 +135,7 @@
         mat-icon-button
         class="lf-header-menu-button"
         [ngClass]="menuButton.cssClass"
+        [disabled]="menuButton.disabled"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip"
@@ -170,6 +172,7 @@
             mat-menu-item
             [class.lf-header-menu-button-active]="isActive(button.id)"
             [ngClass]="button.cssClass"
+            [disabled]="button.disabled"
             (click)="buttonClicked(button.id)"
             [matTooltip]="button.tooltip">
             <!-- icon -->
@@ -194,6 +197,7 @@
               mat-icon-button
               class="lf-menu-icon-button"
               [ngClass]="button.cssClass"
+              [disabled]="button.disabled"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip"
               tabindex="0">
