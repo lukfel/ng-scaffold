@@ -1,0 +1,29 @@
+<input
+  #colorPicker
+  type="color"
+  onclick="this.value = null"
+  [ngModel]="selectedColor"
+  (ngModelChange)="selectColor($event)"
+  style="opacity: 0; position: absolute; width: 0; height: 36px; border: none" />
+
+<button
+  mat-flat-button
+  class="lf-button"
+  type="button"
+  [color]="selectedColor ? null : color"
+  [style.background]="selectedColor"
+  [style.color]="getContrastTextColor(selectedColor)"
+  [disabled]="disabled"
+  (click)="colorPicker.click()"
+  [matTooltip]="tooltip">
+  <!-- icon -->
+  @if (matIcon) {
+    <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+      {{ matIcon }}
+    </mat-icon>
+  }
+  <!-- @else if (svgIcon) {
+    <mat-icon [svgIcon]="svgIcon"></mat-icon>
+  } -->
+  {{ label }}
+</button>

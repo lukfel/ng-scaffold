@@ -41,6 +41,7 @@ export class ComponentsComponent implements OnInit {
   ];
 
   public fileName: string = '';
+  public color: string = '';
 
   public placeholderConfig: PlaceholderConfig = {
     matIcon: 'widgets',
@@ -103,6 +104,10 @@ export class ComponentsComponent implements OnInit {
 
   public onFileChange(file: File): void {
     this.fileName = file.name;
+  }
+
+  public onColorChange(color: string): void {
+    this.color = color;
   }
 
   public onPlaceholderButtonClick(): void {

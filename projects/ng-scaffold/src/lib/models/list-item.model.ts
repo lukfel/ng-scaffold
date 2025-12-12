@@ -27,6 +27,7 @@ export interface ListHeader {
 
 export interface ListConfig {
   enableSelection?: boolean;
+  disableMultiselect?: boolean;
   enableDragging?: boolean;
   mode?: 'flat' | 'group';
   initialSortToken?: string;

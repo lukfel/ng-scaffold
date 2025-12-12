@@ -81,7 +81,7 @@
       </div>
 
       <!-- checkbox -->
-      @if (config?.enableSelection) {
+      @if (config?.enableSelection && !config?.disableMultiselect) {
         <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="allSelected"

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, inject, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CONFIG } from '../../../config/config.token';
 import { ScaffoldLibraryConfig } from '../../../models';
 import { Logger } from '../../../services';
@@ -18,11 +18,10 @@ export class FileUploadComponent {
   private logger: Logger = inject(Logger);
 
 
-  @ViewChild('file') public fileElement: ElementRef;
-
   @Input() public color: 'primary' | 'accent' | 'warn' = 'primary';
   @Input() public label: string;
   @Input() public matIcon: string;
+  // @Input() public loading: boolean;
   @Input() public disabled: boolean = false;
   @Input() public accept: string;
   @Input() public tooltip: string;
@@ -40,9 +39,5 @@ export class FileUploadComponent {
 
     this.logger.log('[FileUploadComponent]', file);
     this.fileChangeEvent.emit(file);
-  }
-
-  public triggerInput(): void {
-    this.fileElement.nativeElement.click();
   }
 }

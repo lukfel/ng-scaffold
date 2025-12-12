@@ -10,9 +10,9 @@
   <h2>List</h2>
   <a [routerLink]="['/documentation']" fragment="list">View Documentation</a>
   <p>
-    A flexible, Material Design–inspired list and table hybrid component for displaying structured
-    collections of items. It supports avatars, titles, subtitles, actions, and selection checkboxes
-    — making it ideal for dashboards, inventories, and administrative views.
+    A standalone Material Design inspired list and table hybrid component for displaying structured
+    collections of items. It supports avatars, titles, subtitles, actions, selections and dragging —
+    making it ideal for dashboards, inventories, and administrative views.
   </p>
   <lf-list
     [config]="listConfig"
@@ -28,9 +28,9 @@
   <h2>File-Upload</h2>
   <a [routerLink]="['/documentation']" fragment="file-upload">View Documentation</a>
   <p>
-    A lightweight Angular component that provides a clean, Material Design–styled button for
-    selecting and uploading files. It wraps a hidden native file input and exposes a simple,
-    customizable interface with built-in icon, tooltip, and state management.
+    A standalone Material Design styled button for selecting and uploading files. It wraps a hidden
+    native file input and exposes a simple, customizable interface with built-in icon, tooltip, and
+    state management.
     <br />
     <br />
   </p>
@@ -42,22 +42,39 @@
     accept="*"
     (fileChangeEvent)="onFileChange($event)"></lf-file-upload>
   <p>
-    File name:
+    File:
     <b>{{ fileName }}</b>
   </p>
 
   <mat-divider></mat-divider>
 
-  <!-- <h2>Color-Picker</h2>
-  <p>A</p>
+  <h2>Color-Picker</h2>
+  <a [routerLink]="['/documentation']" fragment="color-picker">View Documentation</a>
+  <p>
+    A standalone Material Design styled button for picking colors. It wraps a hidden native color
+    input and exposes a simple, customizable interface with built-in icon, tooltip, and state
+    management.
+    <br />
+    <br />
+  </p>
+  <lf-color-picker
+    color="accent"
+    label="Pick Color"
+    matIcon="color_lens"
+    [disabled]="false"
+    accept="*"
+    (colorChangeEvent)="onColorChange($event)"></lf-color-picker>
+  <p>
+    Color:
+    <b>{{ color }}</b>
+  </p>
 
-  <p></p>
-  <mat-divider></mat-divider> -->
+  <mat-divider></mat-divider>
 
   <h2>Placeholder</h2>
   <a [routerLink]="['/documentation']" fragment="placeholder">View Documentation</a>
   <p>
-    A versatile UI component designed to display an informative placeholder or empty state when no
+    A standalone UI component designed to display an informative placeholder or empty state when no
     data is available. It provides a structured layout for an icon, heading, message, and optional
     action — helping guide users toward the next step.
     <br />

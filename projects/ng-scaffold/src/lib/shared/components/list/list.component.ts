@@ -88,6 +88,7 @@ export class ListComponent implements OnInit, OnChanges {
 
   // Select single item
   public selectItem(item: ListItem, event: MatCheckboxChange): void {
+    if (this.config?.disableMultiselect) this.items.forEach((item: ListItem) => { item.checked = false; });
     this.allSelected = this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
     item.checked = event.checked;
     this.selectionChangeEvent.emit([item]);

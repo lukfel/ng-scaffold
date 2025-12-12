@@ -10,9 +10,10 @@ export * from './lib/models';
 export * from './lib/scaffold.module';
 /* COMPONENTS */
 export * from './lib/components/scaffold/scaffold.component';
-export * from './lib/shared/components/placeholder/placeholder.component';
-export * from './lib/shared/components/file-upload/file-upload.component';
 export * from './lib/shared/components/list/list.component';
+export * from './lib/shared/components/file-upload/file-upload.component';
+export * from './lib/shared/components/color-picker/color-picker.component';
+export * from './lib/shared/components/placeholder/placeholder.component';
 /* DIRECTIVES */
 export * from './lib/directives';
 /* SERVICES */

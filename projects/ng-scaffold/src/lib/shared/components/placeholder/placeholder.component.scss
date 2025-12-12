@@ -18,12 +18,11 @@
   .lf-placeholder-title {
     margin: 0;
     font-size: var(--placeholder-title-font-size);
-    color: var(--color-gray);
+    font-weight: 500;
   }
 
   .lf-placeholder-message {
     margin: 0;
     font-size: var(--placeholder-message-font-size);
-    color: var(--color-gray);
   }
 }

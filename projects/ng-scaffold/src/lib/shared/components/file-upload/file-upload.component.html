@@ -12,16 +12,26 @@
   type="button"
   [color]="color"
   [disabled]="disabled"
-  (click)="triggerInput()"
+  (click)="file.click()"
   [matTooltip]="tooltip">
+  <!-- <span class="lf-button-content"> -->
+  <!-- @if (!loading) {
+      <mat-progress-spinner
+        class="mr-1"
+        color="primary"
+        diameter="24"
+        mode="indeterminate"></mat-progress-spinner>
+    } @else { -->
   <!-- icon -->
   @if (matIcon) {
-    <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+    <mat-icon class="mr-1" [class.material-icons-outlined]="libraryConfig?.outlineIcons">
       {{ matIcon }}
     </mat-icon>
   }
   <!-- @else if (svgIcon) {
-    <mat-icon [svgIcon]="svgIcon"></mat-icon>
-  } -->
+      <mat-icon [svgIcon]="svgIcon"></mat-icon>
+    } -->
+  <!-- } -->
   {{ label }}
+  <!-- </span> -->
 </button>
