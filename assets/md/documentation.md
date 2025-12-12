@@ -383,7 +383,7 @@ In addition to the components provided by default by the the `ScaffoldModule` th
 * **Note:** Standalone components must be imported manually and are not part of the `ScaffoldModule` import
 
 ### List
-A flexible, Material Design–inspired list and table hybrid component for displaying structured collections of items. It supports avatars, titles, subtitles, actions, and selection checkboxes — making it ideal for dashboards, inventories, and administrative views.
+A standalone Material Design inspired list and table hybrid component for displaying structured collections of items. It supports avatars, titles, subtitles, actions, selections and dragging — making it ideal for dashboards, inventories, and administrative views.
 
 ```ts
 import { ListComponent } from '@lukfel/ng-scaffold';
@@ -455,7 +455,7 @@ public onListItemClick(item: ListItem): void {
 ```
 
 ### File-Upload
-A lightweight Angular component that provides a clean, Material Design–styled button for selecting and uploading files. It wraps a hidden native file input and exposes a simple, customizable interface with built-in icon, tooltip, and state management.
+A standalone Material Design styled button for selecting and uploading files. It wraps a hidden native file input and exposes a simple, customizable interface with built-in icon, tooltip, and state management.
 
 ```ts
 import { FileUploadComponent } from '@lukfel/ng-scaffold';
@@ -472,9 +472,30 @@ public onFileChange(file: File): void {
   color="accent"
   label="Upload File"
   matIcon="upload"
-  [disabled]="false"
   accept="*"
   (fileChangeEvent)="onFileChange($event)"></lf-file-upload>
+```
+
+### Color-Picker
+A standalone Material Design styled button for picking colors. It wraps a hidden native color input and exposes a simple, customizable interface with built-in icon, tooltip, and state management.
+
+```ts
+import { ColorPickerComponent } from '@lukfel/ng-scaffold';
+```
+
+```ts
+public onColorChange(color: string): void {
+  // handle color pick
+}
+```
+
+```html
+<lf-color-picker
+  color="accent"
+  label="Pick Color"
+  matIcon="color_lens"
+  accept="*"
+  (colorChangeEvent)="onColorChange($event)"></lf-color-picker>
 ```
 
 ### Placeholder
