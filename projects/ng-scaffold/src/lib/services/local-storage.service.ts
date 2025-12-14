@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { CONFIG } from '../config/config.token';
 import { ScaffoldLibraryConfig } from '../models';
 import { Logger } from './logger.service';
@@ -9,6 +10,7 @@ import { Logger } from './logger.service';
 export class LocalStorageService {
 
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+  private platformId = inject(PLATFORM_ID);
   private logger = inject(Logger);
 
 
@@ -19,6 +21,8 @@ export class LocalStorageService {
    * @param value value of the item
    */
   public setItem<T>(key: string, value: T | null): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     try {
       const stringValue: string = JSON.stringify(value);
       if (this.libraryConfig?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, stringValue);
@@ -35,6 +39,8 @@ export class LocalStorageService {
    * @param value value of the item
    */
   public setItemEncoded<T>(key: string, value: T | null): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     try {
       const encodedValue: string = btoa(JSON.stringify(value));
       if (this.libraryConfig?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, encodedValue);
@@ -51,6 +57,8 @@ export class LocalStorageService {
    * @returns value of the item
    */
   public getItem<T>(key: string): T | null {
+    if (!isPlatformBrowser(this.platformId)) return null;
+
     try {
       const item: string | null = localStorage.getItem(key);
       if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
@@ -68,6 +76,8 @@ export class LocalStorageService {
    * @returns value of the item
    */
   public getItemDecoded<T>(key: string): T | null {
+    if (!isPlatformBrowser(this.platformId)) return null;
+
     try {
       const item: string | null = localStorage.getItem(key);
       if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
@@ -84,6 +94,8 @@ export class LocalStorageService {
    * @param key key of the item
    */
   public getItemUnparsed(key: string): string | null {
+    if (!isPlatformBrowser(this.platformId)) return null;
+
     try {
       const item: string | null = localStorage.getItem(key);
       if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
@@ -101,6 +113,8 @@ export class LocalStorageService {
    * @returns value of the item
    */
   public removeItem(key: string): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     try {
       if (this.libraryConfig?.debugging) this.logger.log(`[REMOVE ITEM] ${key}`);
       localStorage.removeItem(key);
@@ -114,6 +128,8 @@ export class LocalStorageService {
    * 
    */
   public clear(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     localStorage.clear();
   }
 

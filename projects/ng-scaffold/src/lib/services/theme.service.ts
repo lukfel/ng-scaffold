@@ -7,6 +7,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root'
 })
 export class ThemeService {
+  
   private storageService = inject(LocalStorageService);
   private document = inject<Document>(DOCUMENT);
 
