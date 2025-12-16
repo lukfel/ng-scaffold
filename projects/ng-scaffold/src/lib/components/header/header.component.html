@@ -117,6 +117,7 @@
         [disabled]="menuButton.disabled"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
+        [aria-label]="menuButton.label"
         [matTooltip]="menuButton.tooltip">
         <!-- icon -->
         @if (menuButton.matIcon) {
@@ -139,7 +140,7 @@
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip"
-        [attr.aria-label]="menuButton.id">
+        [aria-label]="menuButton.id">
         <!-- icon -->
         @if (menuButton.matIcon) {
           <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
@@ -160,7 +161,7 @@
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip"
-        [attr.aria-label]="menuButton.id" />
+        [aria-label]="menuButton.id" />
     }
     <!-- menu -->
     <mat-menu #menu="matMenu">
@@ -174,7 +175,8 @@
             [ngClass]="button.cssClass"
             [disabled]="button.disabled"
             (click)="buttonClicked(button.id)"
-            [matTooltip]="button.tooltip">
+            [matTooltip]="button.tooltip"
+            [aria-label]="button.label">
             <!-- icon -->
             @if (button.matIcon) {
               <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
@@ -200,6 +202,7 @@
               [disabled]="button.disabled"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip"
+              [aria-label]="button.id"
               tabindex="0">
               <!-- icon -->
               @if (button.matIcon) {
