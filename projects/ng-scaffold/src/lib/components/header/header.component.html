@@ -117,7 +117,7 @@
         [disabled]="menuButton.disabled"
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
-        [aria-label]="menuButton.label"
+        [aria-label]="menuButton.label || menuButton.tooltip"
         [matTooltip]="menuButton.tooltip">
         <!-- icon -->
         @if (menuButton.matIcon) {
@@ -140,7 +140,7 @@
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip"
-        [aria-label]="menuButton.id">
+        [aria-label]="menuButton.id || menuButton.tooltip">
         <!-- icon -->
         @if (menuButton.matIcon) {
           <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
@@ -161,7 +161,7 @@
         (click)="buttonClicked(menuButton.id)"
         [matMenuTriggerFor]="menuButton.menuButtons ? menu : null"
         [matTooltip]="menuButton.tooltip"
-        [aria-label]="menuButton.id" />
+        [aria-label]="menuButton.id || menuButton.tooltip" />
     }
     <!-- menu -->
     <mat-menu #menu="matMenu">
@@ -202,7 +202,7 @@
               [disabled]="button.disabled"
               (click)="buttonClicked(button.id)"
               [matTooltip]="button.tooltip"
-              [aria-label]="button.id"
+              [aria-label]="button.id || button.tooltip"
               tabindex="0">
               <!-- icon -->
               @if (button.matIcon) {
