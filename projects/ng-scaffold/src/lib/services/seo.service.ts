@@ -35,6 +35,7 @@ export class SeoService {
     const title: string = seoConfig.metaPageTitle || '';
     const description: string = seoConfig.metaPageDescription || '';
     const imagePath: string = seoConfig.metaImagePath || '';
+    const imagePathIsAbsolute: boolean = seoConfig.metaImagePathIsAbsolute || false;
     const titleLimit: number = 60;
     const descriptionLimit: number = 160;
 
@@ -59,7 +60,7 @@ export class SeoService {
     // Set meta image
     const host: string = this.document.location.origin;
     if (imagePath) {
-      this._setMetaImage(`${host}/${imagePath}`);
+      this._setMetaImage(imagePathIsAbsolute ? imagePath : `${host}/${imagePath}`);
     }
   }
 
