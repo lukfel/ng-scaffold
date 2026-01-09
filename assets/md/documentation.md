@@ -494,7 +494,6 @@ public onColorChange(color: string): void {
   color="accent"
   label="Pick Color"
   matIcon="color_lens"
-  accept="*"
   (colorChangeEvent)="onColorChange($event)"></lf-color-picker>
 ```
 
