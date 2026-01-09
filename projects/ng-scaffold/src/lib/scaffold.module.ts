@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from './components/content-title-card/content-title-card.component';
@@ -30,7 +29,6 @@ import { SharedModule } from './shared/shared.module';
     BottomBarComponent
   ],
   imports: [
-    BrowserModule,
     RouterModule,
     SharedModule,
     InputComponent

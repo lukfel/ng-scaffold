@@ -22,7 +22,6 @@ export class ColorPickerComponent {
   @Input() public label: string;
   @Input() public matIcon: string;
   @Input() public disabled: boolean = false;
-  @Input() public accept: string;
   @Input() public tooltip: string;
 
   @Output() public colorChangeEvent: EventEmitter<string> = new EventEmitter<string>();

@@ -38,7 +38,6 @@
     color="accent"
     label="Upload File"
     matIcon="upload"
-    [disabled]="false"
     accept="*"
     (fileChangeEvent)="onFileChange($event)"></lf-file-upload>
   <p>
@@ -61,8 +60,6 @@
     color="accent"
     label="Pick Color"
     matIcon="color_lens"
-    [disabled]="false"
-    accept="*"
     (colorChangeEvent)="onColorChange($event)"></lf-color-picker>
   <p>
     Color:
