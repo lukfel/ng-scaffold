@@ -2,7 +2,6 @@ import { Injectable, Type, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
-import { InputComponent } from '../shared/components/input/input.component';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +45,9 @@ export class DialogService {
    * @param config of the dialog
    * @returns an asynchronous string response
    */
-  public openInputDialog(config: HeaderInputConfig): Promise<string | undefined> {
+  public async openInputDialog(config: HeaderInputConfig): Promise<string | undefined> {
+    const { InputComponent } = await import('../shared/components/input/input.component');
+
     const dialogRef = this.matDialog.open(InputComponent, {
       autoFocus: false,
       width: '100vw',

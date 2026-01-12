@@ -1,19 +1,36 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
+import { CommonModule } from '@angular/common';
 import { Component, DOCUMENT, ElementRef, inject, OnDestroy, OnInit, output, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { CONFIG } from '../../config/config.token';
+import { CONFIG } from '../../scaffold.config';
 import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
 import { BreakpointService, Logger, OverlayService, RouterService, ScaffoldService } from '../../services';
-import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
+import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
+import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
+import { DrawerComponent } from '../drawer/drawer.component';
+import { FloatingButtonComponent } from '../floating-button/floating-button.component';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'lf-scaffold',
   templateUrl: './scaffold.component.html',
   styleUrls: ['./scaffold.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    NavbarComponent,
+    DrawerComponent,
+    FooterComponent,
+    ContentTitleCardComponent,
+    FloatingButtonComponent,
+    BottomBarComponent
+  ]
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 
@@ -65,11 +82,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (this.libraryConfig?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
 
-      if (scaffoldConfig.loading) {
-        this.overlayService.open(LoadingOverlayComponent);
-      } else {
-        this.overlayService.close();
-      }
+      this.toggleLoadingOverlay(scaffoldConfig?.loading || false);
 
       this.scaffoldConfig = scaffoldConfig;
       this.headerConfig = this.scaffoldConfig.headerConfig!;
@@ -226,4 +239,14 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     this.bottomBarButtonClickEvent.emit(id);
   }
 
+
+  // Loading overlay
+  private async toggleLoadingOverlay(loading: boolean): Promise<void> {
+    if (loading) {
+      const { LoadingOverlayComponent } = await import('../loading-overlay/loading-overlay.component');
+      this.overlayService.open(LoadingOverlayComponent);
+    } else {
+      this.overlayService.close();
+    }
+  }
 }

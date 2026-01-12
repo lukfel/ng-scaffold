@@ -31,18 +31,14 @@ describe('NavbarComponent', () => {
   });
 
   it('should show the navbar if the config is enabled', () => {
-    component.navbarConfig = {
-      enable: true
-    };
+    fixture.componentRef.setInput('navbarConfig', { enable: true });
     fixture.detectChanges();
     const navbar = fixture.debugElement.query(By.css('.lf-navbar'));
     expect(navbar).toBeTruthy();
   });
 
   it('should not show the navbar if the config is disabled', () => {
-    component.navbarConfig = {
-      enable: false
-    };
+    fixture.componentRef.setInput('navbarConfig', { enable: false });
     fixture.detectChanges();
     const navbar = fixture.debugElement.query(By.css('.lf-navbar'));
     expect(navbar).toBeFalsy();

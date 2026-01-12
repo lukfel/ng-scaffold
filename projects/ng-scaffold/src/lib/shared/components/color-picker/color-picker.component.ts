@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, output } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CONFIG } from '../../../config/config.token';
 import { ScaffoldLibraryConfig } from '../../../models';
+import { CONFIG } from '../../../scaffold.config';
 import { Logger } from '../../../services';
 
 @Component({
@@ -21,22 +21,30 @@ import { Logger } from '../../../services';
     MatTooltipModule
   ]
 })
-export class ColorPickerComponent {
+export class ColorPickerComponent implements OnInit {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
   private logger: Logger = inject(Logger);
 
 
-  @Input() public color: 'primary' | 'accent' | 'warn' = 'primary';
-  @Input() public label: string;
-  @Input() public matIcon: string;
-  @Input() public disabled: boolean = false;
-  @Input() public tooltip: string;
+  public readonly color = input<'primary' | 'accent' | 'warn' | string>('primary');
+  public readonly label = input<string>();
+  public readonly matIcon = input<string>();
+  public readonly disabled = input<boolean>(false);
+  public readonly tooltip = input<string>();
 
   public readonly colorChangeEvent = output<string>();
 
   public selectedColor: string = '';
+
+
+  ngOnInit(): void {
+    const color: 'primary' | 'accent' | 'warn' | string = this.color();
+    if (color && color !== 'primary' && color !== 'accent' && color !== 'warn') {
+      this.selectedColor = color;
+    }
+  }
 
 
   public selectColor(event: string): void {

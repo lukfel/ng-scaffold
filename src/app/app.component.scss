@@ -5,7 +5,9 @@
   justify-content: space-between;
 
   .active {
-    .mat-icon, span {
+
+    .mat-icon,
+    span {
       font-weight: 500;
       color: var(--color-primary) !important;
     }
@@ -15,14 +17,14 @@
     overflow: unset;
   }
 
-  .hint {
-    font-size: 12px;
-    margin-bottom: 0;
-  }
-
   .title-small {
     font-size: 14px;
     line-height: 14px;
     padding-top: 2px;
+  }
+
+  .hint {
+    font-size: 12px;
+    margin-bottom: 0;
   }
 }

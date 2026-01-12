@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnChanges, OnInit, SimpleChanges, output, contentChild } from '@angular/core';
+import { Component, inject, OnChanges, OnInit, SimpleChanges, output, contentChild, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
@@ -8,7 +8,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CONFIG } from '../../../config/config.token';
+import { CONFIG } from '../../../scaffold.config';
 import { ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective } from '../../../directives';
 import { Button, ListConfig, ListHeader, ListItem, ScaffoldLibraryConfig } from '../../../models';
 
@@ -39,14 +39,14 @@ export class ListComponent implements OnInit, OnChanges {
   public readonly subtitleTemplate = contentChild(ListItemSubtitleDirective);
   public readonly buttonsTemplate = contentChild(ListItemButtonsDirective);
 
-  @Input() public config: ListConfig | null = null;
-  @Input() public header: ListHeader | null = null;
-  @Input() public items: ListItem[] = [];
-  @Input() public groupedItems: Map<string, ListItem[]> = new Map();
-  @Input() public buttons: Button[] = [];
+  public readonly config = input<ListConfig | null>(null);
+  public readonly header = input<ListHeader | null>(null);
+  public readonly items = input<ListItem[]>([]);
+  public readonly groupedItems = input<Map<string, ListItem[]>>(new Map());
+  public readonly buttons = input<Button[]>([]);
 
-  @Input() public dropListId: string;
-  @Input() public connectedDropListIds: string[];
+  public readonly dropListId = input<string>();
+  public readonly connectedDropListIds = input<string[]>();
 
   public readonly sortChangeEvent = output<{
     sortToken: string;
@@ -69,25 +69,26 @@ export class ListComponent implements OnInit, OnChanges {
   public allSelected: boolean = false;
 
   get someSelected(): boolean {
-    return this.items.length > 0 && this.items.some((item: ListItem) => item.checked) && !this.allSelected;
+    return this.items().length > 0 && this.items().some((item: ListItem) => item.checked) && !this.allSelected;
   }
 
   get hasAvatars(): boolean {
-    return !!this.items?.some((item: ListItem) => (item.avatar || item.matIcon || item.svgIcon));
+    return !!this.items()?.some((item: ListItem) => (item.avatar || item.matIcon || item.svgIcon));
   }
 
 
   ngOnInit(): void {
-    if (this.config) {
-      this.sortToken = this.config.initialSortToken || '';
-      this.sortAsc = this.config.initialSortAsc || false;
+    const config = this.config();
+    if (config) {
+      this.sortToken = config.initialSortToken || '';
+      this.sortAsc = config.initialSortAsc || false;
       this.updateSortToken(this.sortToken, true);
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items']) {
-      this.allSelected = this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
+      this.allSelected = this.items().length > 0 && this.items().every((item: ListItem) => item.checked);
     }
   }
 
@@ -104,17 +105,17 @@ export class ListComponent implements OnInit, OnChanges {
   public selectAll(event: MatCheckboxChange): void {
     this.allSelected = event.checked;
 
-    this.items.forEach((item: ListItem) => {
+    this.items().forEach((item: ListItem) => {
       if (!item.disabled) item.checked = this.allSelected;
     });
 
-    this.selectionChangeEvent.emit(this.items);
+    this.selectionChangeEvent.emit(this.items());
   }
 
   // Select single item
   public selectItem(item: ListItem, event: MatCheckboxChange): void {
-    if (this.config?.disableMultiselect) this.items.forEach((item: ListItem) => { item.checked = false; });
-    this.allSelected = this.items.length > 0 && this.items.every((item: ListItem) => item.checked);
+    if (this.config()?.disableMultiselect) this.items().forEach((item: ListItem) => { item.checked = false; });
+    this.allSelected = this.items().length > 0 && this.items().every((item: ListItem) => item.checked);
     item.checked = event.checked;
     this.selectionChangeEvent.emit([item]);
   }
@@ -139,13 +140,13 @@ export class ListComponent implements OnInit, OnChanges {
 
   // Combine list and item buttons
   public getCombinedButtons(item: ListItem): Button[] {
-    return [...(item.buttons ?? []), ...(this.buttons ?? [])];
+    return [...(item.buttons ?? []), ...(this.buttons() ?? [])];
   }
 
   // Handle image errors
   public onImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
-    target.src = this.config?.avatarFallbackPath || '';
+    target.src = this.config()?.avatarFallbackPath || '';
   }
 
   // Stop click trough events

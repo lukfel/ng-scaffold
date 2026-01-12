@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, output } from '@angular/core';
+import { Component, inject, output, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CONFIG } from '../../../config/config.token';
+import { CONFIG } from '../../../scaffold.config';
 import { ScaffoldLibraryConfig } from '../../../models';
 import { Logger } from '../../../services';
 
@@ -28,13 +28,13 @@ export class FileUploadComponent {
   private logger: Logger = inject(Logger);
 
 
-  @Input() public color: 'primary' | 'accent' | 'warn' = 'primary';
-  @Input() public label: string;
-  @Input() public matIcon: string;
+  public readonly color = input<'primary' | 'accent' | 'warn'>('primary');
+  public readonly label = input<string>();
+  public readonly matIcon = input<string>();
   // @Input() public loading: boolean;
-  @Input() public disabled: boolean = false;
-  @Input() public accept: string;
-  @Input() public tooltip: string;
+  public readonly disabled = input<boolean>(false);
+  public readonly accept = input<string>();
+  public readonly tooltip = input<string>();
 
   public readonly fileChangeEvent = output<File>();
 

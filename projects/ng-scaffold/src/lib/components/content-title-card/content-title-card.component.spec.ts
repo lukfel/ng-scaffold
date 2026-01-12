@@ -31,58 +31,58 @@ describe('ContentTitleCardComponent', () => {
   });
 
   it('should show the card if the config is enabled', () => {
-    component.contentTitleCardConfig = {
+    fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: true,
       showBackButton: true,
       label: 'Test Title'
-    };
+    });
     fixture.detectChanges();
     const card = fixture.debugElement.query(By.css('.lf-content-title-card'));
     expect(card).toBeTruthy();
   });
 
   it('should not show the card if the config is disabled', () => {
-    component.contentTitleCardConfig = {
+    fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: false,
       showBackButton: true,
       label: 'Test Title'
-    };
+    });
     fixture.detectChanges();
     const card = fixture.debugElement.query(By.css('.lf-content-title-card'));
     expect(card).toBeFalsy();
   });
 
   it('should show the back button if the config is enabled and there is route history', () => {
-    component.contentTitleCardConfig = {
+    fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: true,
       showBackButton: true,
       label: 'Test Title'
-    };
-    component.routeHistory = ['/route1', '/route2'];
+    });
+    fixture.componentRef.setInput('routeHistory', ['/route1', '/route2']);
     fixture.detectChanges();
     const backButton = fixture.debugElement.query(By.css('button'));
     expect(backButton).toBeTruthy();
   });
 
   it('should not show the back button if the config is disabled', () => {
-    component.contentTitleCardConfig = {
+    fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: true,
       showBackButton: false,
       label: 'Test Title'
-    };
-    component.routeHistory = ['/route'];
+    });
+    fixture.componentRef.setInput('routeHistory', ['/route']);
     fixture.detectChanges();
     const backButton = fixture.debugElement.query(By.css('button'));
     expect(backButton).toBeFalsy();
   });
 
   it('should not show the back button if there is no route history', () => {
-    component.contentTitleCardConfig = {
+    fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: true,
       showBackButton: true,
       label: 'Test Title'
-    };
-    component.routeHistory = [];
+    });
+    fixture.componentRef.setInput('routeHistory', []);
     fixture.detectChanges();
     const backButton = fixture.debugElement.query(By.css('button'));
     expect(backButton).toBeFalsy();
@@ -90,12 +90,12 @@ describe('ContentTitleCardComponent', () => {
 
   it('should call backButtonClicked when back button is clicked', () => {
     spyOn(component, 'backButtonClicked');
-    component.contentTitleCardConfig = {
+    fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: true,
       showBackButton: true,
       label: 'Test Title'
-    };
-    component.routeHistory = ['/route1', '/route2'];
+    });
+    fixture.componentRef.setInput('routeHistory', ['/route1', '/route2']);
     fixture.detectChanges();
     const backButton = fixture.debugElement.query(By.css('button'));
     backButton.triggerEventHandler('click', null);
@@ -103,11 +103,11 @@ describe('ContentTitleCardComponent', () => {
   });
 
   it('should display the label in the component', () => {
-    component.contentTitleCardConfig = {
+    fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: true,
       showBackButton: false,
       label: 'Test Title'
-    };
+    });
     fixture.detectChanges();
     const labelElement = fixture.debugElement.query(By.css('.lf-content-title-card-label'));
     expect(labelElement.nativeElement.textContent.trim()).toEqual('Test Title');

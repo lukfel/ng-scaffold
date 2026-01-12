@@ -2,7 +2,7 @@
   hidden
   #file
   type="file"
-  [accept]="accept"
+  [accept]="accept()"
   onclick="this.value = null"
   (change)="selectFile($event)" />
 
@@ -10,10 +10,10 @@
   mat-flat-button
   class="lf-button"
   type="button"
-  [color]="color"
-  [disabled]="disabled"
+  [color]="color()"
+  [disabled]="disabled()"
   (click)="file.click()"
-  [matTooltip]="tooltip">
+  [matTooltip]="tooltip()">
   <!-- <span class="lf-button-content"> -->
   <!-- @if (!loading) {
       <mat-progress-spinner
@@ -23,15 +23,15 @@
         mode="indeterminate"></mat-progress-spinner>
     } @else { -->
   <!-- icon -->
-  @if (matIcon) {
+  @if (matIcon()) {
     <mat-icon class="mr-1" [class.material-icons-outlined]="libraryConfig?.outlineIcons">
-      {{ matIcon }}
+      {{ matIcon() }}
     </mat-icon>
   }
   <!-- @else if (svgIcon) {
       <mat-icon [svgIcon]="svgIcon"></mat-icon>
     } -->
   <!-- } -->
-  {{ label }}
+  {{ label() }}
   <!-- </span> -->
 </button>

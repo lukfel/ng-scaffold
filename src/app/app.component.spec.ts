@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { ScaffoldModule } from '@lukfel/ng-scaffold';
+import { ScaffoldComponent } from '@lukfel/ng-scaffold';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/modules/material.module';
 
@@ -13,7 +13,7 @@ describe('AppComponent', () => {
         CommonModule,
         AppComponent,
         MaterialModule,
-        ScaffoldModule
+        ScaffoldComponent
       ],
       providers: [
         provideHttpClientTesting(),

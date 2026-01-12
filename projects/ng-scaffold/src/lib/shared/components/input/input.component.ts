@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, inject, output, viewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, computed, effect, inject, input, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -22,37 +22,33 @@ import { HeaderInputConfig } from '../../../models';
     MatIconModule
   ]
 })
-export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
+export class InputComponent implements OnDestroy {
 
   private dialogRef = inject<MatDialogRef<InputComponent>>(MatDialogRef, { optional: true });
-  private config = inject<HeaderInputConfig>(MAT_DIALOG_DATA, { optional: true });
-  private cd = inject(ChangeDetectorRef);
+  private inputConfigDialog = inject<HeaderInputConfig>(MAT_DIALOG_DATA, { optional: true });
 
 
   public readonly input = viewChild<ElementRef>('input');
 
-  @Input() public inputConfig: HeaderInputConfig = {};
-  @Input() public isMobile: boolean = false;
+  public readonly inputConfig = input<HeaderInputConfig | null>(null);
+  public readonly isMobile = input<boolean>(false);
 
   public readonly inputSubmitEvent = output<string>();
   public readonly inputChangeEvent = output<string>();
   public readonly inputPrefixActionEvent = output<void>();
 
+  public inputConfigComputed = computed<HeaderInputConfig>(() => this.inputConfigDialog ?? this.inputConfig() ?? {})
 
   public inputValue: string = '';
 
-  ngOnInit(): void {
-    if (this.config) {
-      this.inputConfig = this.config;
-    }
-  }
 
-  ngAfterViewInit(): void {
-    const input = this.input();
-    if (input && this.inputConfig.autoFocus) {
-      input.nativeElement.focus();
-      this.cd.detectChanges();
-    }
+  constructor() {
+    effect(() => {
+      const input = this.input();
+      if (input && this.inputConfigComputed().autoFocus) {
+        input.nativeElement.focus();
+      }
+    });
   }
 
   ngOnDestroy(): void {

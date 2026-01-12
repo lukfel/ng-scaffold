@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, Input, output } from '@angular/core';
+import { Component, output, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
@@ -45,10 +45,10 @@ import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
 })
 export class NavbarComponent {
 
-  @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
-  @Input() public navbarConfig: NavbarConfig | null = null;
-  @Input() public isMobile: boolean = false;
-  @Input() public currentRoute: string;
+  public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
+  public readonly navbarConfig = input<NavbarConfig | null>(null);
+  public readonly isMobile = input<boolean>(false);
+  public readonly currentRoute = input<string>();
 
   public readonly navbarButtonClickEvent = output<string>();
 
@@ -62,11 +62,12 @@ export class NavbarComponent {
   }
 
   public isActive(id: string): boolean {
-    if (!id || !this.currentRoute) {
+    const currentRoute = this.currentRoute();
+    if (!id || !currentRoute) {
       return false;
     }
 
-    const route: string = this.currentRoute.substring(this.currentRoute.indexOf('/') + 1);
+    const route: string = currentRoute.substring(currentRoute.indexOf('/') + 1);
     return route === id;
   }
 

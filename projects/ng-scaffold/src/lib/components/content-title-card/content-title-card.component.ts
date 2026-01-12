@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, output } from '@angular/core';
+import { Component, output, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,10 +19,10 @@ import { ContentTitleCardConfig, ScaffoldLibraryConfig } from '../../models';
 })
 export class ContentTitleCardComponent {
 
-  @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
-  @Input() public contentTitleCardConfig: ContentTitleCardConfig | null = null;
-  @Input() public isMobile: boolean = false;
-  @Input() public routeHistory: string[] = [];
+  public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
+  public readonly contentTitleCardConfig = input<ContentTitleCardConfig | null>(null);
+  public readonly isMobile = input<boolean>(false);
+  public readonly routeHistory = input<string[]>([]);
 
   public readonly backButtonClickEvent = output<void>();
 

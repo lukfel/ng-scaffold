@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -19,7 +19,7 @@ import { FooterConfig, ScaffoldLibraryConfig } from '../../models';
 })
 export class FooterComponent {
 
-  @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
-  @Input() public footerConfig: FooterConfig | null = null;
+  public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
+  public readonly footerConfig = input<FooterConfig | null>(null);
 
 }

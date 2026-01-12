@@ -40,14 +40,14 @@ describe('InputComponent', () => {
   });
 
   it('should set the label to the provided value if a label is provided', () => {
-    component.inputConfig.label = 'Test';
+    fixture.componentRef.setInput('inputConfig', { label: 'Test' });
     fixture.detectChanges();
     const labelElement = fixture.debugElement.query(By.css('mat-label')).nativeElement;
     expect(labelElement.textContent.trim()).toBe('Test');
   });
 
   it('should display the hint if a hint is provided', () => {
-    component.inputConfig.hint = 'Test hint';
+    fixture.componentRef.setInput('inputConfig', { hint: 'Test hint' });
     fixture.detectChanges();
     const hintElement = fixture.debugElement.query(By.css('mat-hint')).nativeElement;
     expect(hintElement.textContent.trim()).toBe('Test hint');

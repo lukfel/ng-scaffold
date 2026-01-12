@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BottomBarComponent } from './bottom-bar.component';
@@ -13,6 +14,7 @@ describe('BottomBarComponent', () => {
       imports: [
         BottomBarComponent,
         CommonModule,
+        MatButtonModule,
         MatIconModule,
         MatTooltipModule
       ]

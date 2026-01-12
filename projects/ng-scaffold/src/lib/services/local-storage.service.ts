@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
-import { CONFIG } from '../config/config.token';
+import { CONFIG } from '../scaffold.config';
 import { ScaffoldLibraryConfig } from '../models';
 import { Logger } from './logger.service';
 

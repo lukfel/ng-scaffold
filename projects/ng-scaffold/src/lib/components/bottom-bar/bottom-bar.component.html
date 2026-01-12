@@ -1,64 +1,66 @@
-@if (bottomBarConfig && bottomBarConfig.enable) {
-  <div
-    [@slideUpDown]
-    class="lf-bottom-bar lf-transitions px-4"
-    [ngClass]="bottomBarConfig.cssClass"
-    [class.lf-bottom-bar-show-navbar]="!isMobile && navbarEnabled"
-    [class.lf-bottom-bar-show-navbar-mobile]="isMobile && navbarEnabled">
-    @if (bottomBarConfig.closeButtonId) {
-      <button mat-icon-button (click)="closeClicked(bottomBarConfig.closeButtonId)">
-        <mat-icon>close</mat-icon>
-      </button>
-    }
-    @if (bottomBarConfig.message) {
-      <span class="ml-2">{{ bottomBarConfig.message }}</span>
-    }
-    @if (bottomBarConfig.buttons) {
-      <div class="lf-bottom-bar-buttons ml-4">
-        @for (button of bottomBarConfig.buttons; track button.id) {
-          <!-- label button -->
-          @if (button.label) {
-            <button
-              mat-button
-              class="lf-bottom-bar-button ml-2"
-              [ngClass]="button.cssClass"
-              [disabled]="button.disabled"
-              (click)="buttonClicked(button.id)"
-              [matTooltip]="button.tooltip">
-              <!-- icon -->
-              <!-- icon -->
-              @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
-                  {{ button.matIcon }}
-                </mat-icon>
-              } @else if (button.svgIcon) {
-                <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
-              }
-              <!-- label -->
-              {{ button.label }}
-            </button>
-            <!-- icon button -->
-          } @else {
-            <button
-              mat-icon-button
-              color="accent"
-              class="lf-bottom-bar-button-icon ml-2"
-              [ngClass]="button.cssClass"
-              [disabled]="button.disabled"
-              (click)="buttonClicked(button.id)"
-              [matTooltip]="button.tooltip">
-              <!-- icon -->
-              @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
-                  {{ button.matIcon }}
-                </mat-icon>
-              } @else if (button.svgIcon) {
-                <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
-              }
-            </button>
+@if (bottomBarConfig(); as config) {
+  @if (config.enable) {
+    <div
+      [@slideUpDown]
+      class="lf-bottom-bar lf-transitions px-4"
+      [ngClass]="config.cssClass"
+      [class.lf-bottom-bar-show-navbar]="!isMobile() && navbarEnabled()"
+      [class.lf-bottom-bar-show-navbar-mobile]="isMobile() && navbarEnabled()">
+      @if (config.closeButtonId) {
+        <button mat-icon-button (click)="closeClicked(config.closeButtonId)">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      @if (config.message) {
+        <span class="ml-2">{{ config.message }}</span>
+      }
+      @if (config.buttons) {
+        <div class="lf-bottom-bar-buttons ml-4">
+          @for (button of config.buttons; track button.id) {
+            <!-- label button -->
+            @if (button.label) {
+              <button
+                mat-button
+                class="lf-bottom-bar-button ml-2"
+                [ngClass]="button.cssClass"
+                [disabled]="button.disabled"
+                (click)="buttonClicked(button.id)"
+                [matTooltip]="button.tooltip">
+                <!-- icon -->
+                <!-- icon -->
+                @if (button.matIcon) {
+                  <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
+                    {{ button.matIcon }}
+                  </mat-icon>
+                } @else if (button.svgIcon) {
+                  <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+                }
+                <!-- label -->
+                {{ button.label }}
+              </button>
+              <!-- icon button -->
+            } @else {
+              <button
+                mat-icon-button
+                color="accent"
+                class="lf-bottom-bar-button-icon ml-2"
+                [ngClass]="button.cssClass"
+                [disabled]="button.disabled"
+                (click)="buttonClicked(button.id)"
+                [matTooltip]="button.tooltip">
+                <!-- icon -->
+                @if (button.matIcon) {
+                  <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
+                    {{ button.matIcon }}
+                  </mat-icon>
+                } @else if (button.svgIcon) {
+                  <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+                }
+              </button>
+            }
           }
-        }
-      </div>
-    }
-  </div>
+        </div>
+      }
+    </div>
+  }
 }

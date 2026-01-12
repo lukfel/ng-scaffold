@@ -1,12 +1,12 @@
 import { chain, Rule } from '@angular-devkit/schematics';
 import { addConfig } from './add-config';
-import { addModule } from './add-module';
+import { addComponent } from './add-component';
 import { addStyles } from './add-styles';
 import { addTemplate } from './add-template';
 
 export function ngAdd(): Rule {
     return chain([
-        addModule(),
+        addComponent(),
         addConfig(),
         addTemplate(),
         addStyles()

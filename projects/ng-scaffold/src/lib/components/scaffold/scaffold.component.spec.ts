@@ -5,14 +5,12 @@ import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { Logger } from '../../services';
-import { InputComponent } from '../../shared/components/input/input.component';
 import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
 import { DrawerComponent } from '../drawer/drawer.component';
 import { FloatingButtonComponent } from '../floating-button/floating-button.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
-import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { ScaffoldComponent } from './scaffold.component';
 
@@ -24,20 +22,16 @@ describe('ScaffoldComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ScaffoldComponent
-      ],
       imports: [
+        ScaffoldComponent,
         CommonModule,
-        LoadingOverlayComponent,
         HeaderComponent,
         NavbarComponent,
         DrawerComponent,
         FooterComponent,
         ContentTitleCardComponent,
         FloatingButtonComponent,
-        BottomBarComponent,
-        InputComponent
+        BottomBarComponent
       ],
       providers: [
         provideRouter([]),
@@ -83,7 +77,7 @@ describe('ScaffoldComponent', () => {
     expect(drawerDebugElement).toBeTruthy();
   });
 
-  it('should render the title component', () => {
+  it('should render the title card component', () => {
     component.contentTitleCardConfig = { enable: true };
     fixture.detectChanges();
     const titleDebugElement: DebugElement = fixture.debugElement.query(
@@ -101,11 +95,20 @@ describe('ScaffoldComponent', () => {
     expect(footerDebugElement).toBeTruthy();
   });
 
-  it('should render the button component', () => {
+  it('should render the floating button component', () => {
     component.floatingButtonConfig = { enable: true };
     fixture.detectChanges();
     const buttonDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(FloatingButtonComponent)
+    );
+    expect(buttonDebugElement).toBeTruthy();
+  });
+
+  it('should render the bottom bar component', () => {
+    component.bottomBarConfig = { enable: true };
+    fixture.detectChanges();
+    const buttonDebugElement: DebugElement = fixture.debugElement.query(
+      By.directive(BottomBarComponent)
     );
     expect(buttonDebugElement).toBeTruthy();
   });

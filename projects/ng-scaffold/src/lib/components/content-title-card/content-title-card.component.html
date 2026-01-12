@@ -1,25 +1,23 @@
-@if (contentTitleCardConfig && contentTitleCardConfig.enable) {
-  <mat-card
-    class="lf-content-title-card mat-elevation-z2 px-4"
-    [ngClass]="contentTitleCardConfig.cssClass">
-    <!-- back button -->
-    @if (contentTitleCardConfig.showBackButton && routeHistory.length > 0) {
-      <button mat-icon-button color="accent" (click)="backButtonClicked()">
-        <mat-icon>arrow_back_ios</mat-icon>
-      </button>
-    }
-    <!-- spacer -->
-    <div style="flex: 1 1 auto"></div>
-    <!-- label -->
-    <span class="lf-content-title-card-label">
-      {{ contentTitleCardConfig.label || "" }}
-    </span>
-    <!-- spacer -->
-    <div style="flex: 1 1 auto"></div>
-    <!-- empty button spacer -->
-    <div
-      [style.width]="
-        contentTitleCardConfig.showBackButton && routeHistory.length > 1 ? '48px' : '0px'
-      "></div>
-  </mat-card>
+@if (contentTitleCardConfig(); as config) {
+  @if (config.enable) {
+    <mat-card class="lf-content-title-card mat-elevation-z2 px-4" [ngClass]="config.cssClass">
+      <!-- back button -->
+      @if (config.showBackButton && routeHistory().length > 0) {
+        <button mat-icon-button color="accent" (click)="backButtonClicked()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+      }
+      <!-- spacer -->
+      <div style="flex: 1 1 auto"></div>
+      <!-- label -->
+      <span class="lf-content-title-card-label">
+        {{ config.label || "" }}
+      </span>
+      <!-- spacer -->
+      <div style="flex: 1 1 auto"></div>
+      <!-- empty button spacer -->
+      <div
+        [style.width]="config.showBackButton && routeHistory().length > 1 ? '48px' : '0px'"></div>
+    </mat-card>
+  }
 }

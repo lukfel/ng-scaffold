@@ -31,50 +31,50 @@ describe('FloatingButtonComponent', () => {
   });
 
   it('should display the button when enable is true and onTop is false', () => {
-    component.floatingButtonConfig = { enable: true };
-    component.onTop = false;
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: true });
+    fixture.componentRef.setInput('onTop', false);
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     expect(button).toBeTruthy();
   });
 
   it('should not display the button when enable is false', () => {
-    component.floatingButtonConfig = { enable: false };
-    component.onTop = false;
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: false });
+    fixture.componentRef.setInput('onTop', false);
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     expect(button).toBeFalsy();
   });
 
   it('should not display the button when onTop is true', () => {
-    component.floatingButtonConfig = { enable: true, autoHide: true };
-    component.onTop = true;
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: true, autoHide: true });
+    fixture.componentRef.setInput('onTop', true);
     fixture.detectChanges();
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     expect(button).toBeFalsy();
   });
 
   it('should emit the buttonClicked event when button is clicked', () => {
-    spyOn(component, 'buttonClicked');
-    component.floatingButtonConfig = { enable: true };
-    component.onTop = false;
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: true, id: 'id' });
+    fixture.componentRef.setInput('onTop', false);
     fixture.detectChanges();
+    spyOn(component, 'buttonClicked');
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     button.triggerEventHandler('click', null);
-    expect(component.buttonClicked).toHaveBeenCalledWith(component.floatingButtonConfig.id);
+    expect(component.buttonClicked).toHaveBeenCalledWith('id');
   });
 
   it('should display the label if it is provided', () => {
-    component.floatingButtonConfig = { enable: true, label: 'Test Button' };
-    component.onTop = false;
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: true, label: 'Test Button' });
+    fixture.componentRef.setInput('onTop', false);
     fixture.detectChanges();
     const label = fixture.debugElement.query(By.css('.lf-floating-button-label'));
     expect(label.nativeElement.innerText).toEqual('Test Button');
   });
 
   it('should not display the label if it is not provided', () => {
-    component.floatingButtonConfig = { enable: true };
-    component.onTop = false;
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: true });
+    fixture.componentRef.setInput('onTop', false);
     fixture.detectChanges();
     const label = fixture.debugElement.query(By.css('.lf-floating-button-label'));
     expect(label).toBeFalsy();

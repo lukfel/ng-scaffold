@@ -1,36 +1,37 @@
-@if (drawerConfig && drawerConfig.enable) {
-  <mat-sidenav-container
-    class="lf-drawer-container lf-transitions"
-    [ngClass]="drawerConfig.cssClass">
-    <!-- drawer -->
-    <mat-sidenav
-      class="lf-drawer mat-elevation-z2"
-      [class.mobile]="isMobile"
-      [mode]="isMobile ? 'over' : 'side'"
-      [opened]="drawerConfig.open"
-      [autoFocus]="false"
-      [fixedInViewport]="drawerConfig.fixed"
-      [class.lf-drawer-show-header]="headerEnabled && drawerConfig.fixed"
-      (closed)="drawerClosed()"
-      #drawer>
-      <!-- drawer content -->
-      <!-- <ng-content select="[drawerContent]"></ng-content> -->
-      @if (drawerPortal) {
-        <ng-template [cdkPortalOutlet]="drawerPortal"></ng-template>
-      } @else {
-        <ng-content select="[drawerContent]"></ng-content>
-      }
-    </mat-sidenav>
-    <mat-sidenav-content style="overflow: unset !important">
-      <!-- main content -->
-      <ng-container *ngTemplateOutlet="content"></ng-container>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+@if (drawerConfig(); as config) {
+  @if (config.enable) {
+    <mat-sidenav-container class="lf-drawer-container lf-transitions" [ngClass]="config.cssClass">
+      <!-- drawer -->
+      <mat-sidenav
+        class="lf-drawer mat-elevation-z2"
+        [class.mobile]="isMobile()"
+        [mode]="isMobile() ? 'over' : 'side'"
+        [opened]="config.open"
+        [autoFocus]="false"
+        [fixedInViewport]="config.fixed"
+        [class.lf-drawer-show-header]="headerEnabled() && config.fixed"
+        (closed)="drawerClosed()"
+        #drawer>
+        <!-- drawer content -->
+        <!-- <ng-content select="[drawerContent]"></ng-content> -->
+        @if (drawerPortal()) {
+          <ng-template [cdkPortalOutlet]="drawerPortal()"></ng-template>
+        } @else {
+          <ng-content select="[drawerContent]"></ng-content>
+        }
+      </mat-sidenav>
+      <mat-sidenav-content style="overflow: unset !important">
+        <!-- main content -->
+        <ng-container *ngTemplateOutlet="content"></ng-container>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  } @else {
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  }
 } @else {
+  <!-- render content without drawer -->
   <ng-container *ngTemplateOutlet="content"></ng-container>
 }
-
-<!-- render content without drawer -->
 
 <!-- this template is required to allow multiple <ng-content></ng-content> -->
 <ng-template #content><ng-content></ng-content></ng-template>

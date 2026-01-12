@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { CONFIG } from '../config/config.token';
+import { CONFIG } from '../scaffold.config';
 import { ScaffoldLibraryConfig } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +9,7 @@ export class Logger {
 
 
   /**
-   * Uses the regular console log but can be automatically disabled during production by using the ScaffoldLibraryConfig in the ScaffoldModule.forRoot
+   * Uses the regular console log but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
    * 
    * @param message message of the log
    * @param args arguments of the log
@@ -21,7 +21,7 @@ export class Logger {
   }
 
   /**
-   * Uses the regular console warn but can be automatically disabled during production by using the ScaffoldLibraryConfig in the ScaffoldModule.forRoot
+   * Uses the regular console warn but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
    * 
    * @param message message of the warn
    * @param args arguments of the warn
@@ -33,7 +33,7 @@ export class Logger {
   }
 
   /**
-   * Uses the regular console error but can be automatically disabled during production by using the ScaffoldLibraryConfig in the ScaffoldModule.forRoot
+   * Uses the regular console error but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
    * 
    * @param message message of the error
    * @param args arguments of the error

@@ -1,33 +1,33 @@
-@if (
-  floatingButtonConfig && floatingButtonConfig.enable && (!floatingButtonConfig.autoHide || !onTop)
-) {
-  <button
-    mat-fab
-    color="accent"
-    class="lf-floating-button lf-transitions"
-    [ngClass]="floatingButtonConfig.cssClass + ' ' + floatingButtonConfig.horizontalPosition"
-    [class.sticky]="floatingButtonConfig.sticky"
-    [class.show-navbar]="isMobile && !bottomBarEnabled"
-    [class.show-bottom-bar]="bottomBarEnabled && !isMobile"
-    [class.show-navbar-and-bottom-bar]="isMobile && bottomBarEnabled"
-    [extended]="!!floatingButtonConfig.label"
-    [disabled]="floatingButtonConfig.disabled"
-    (click)="buttonClicked(floatingButtonConfig.id)"
-    [matTooltip]="floatingButtonConfig.tooltip!">
-    <!-- icon -->
-    @if (floatingButtonConfig.matIcon) {
-      <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
-        {{ floatingButtonConfig.matIcon }}
-      </mat-icon>
-    } @else if (floatingButtonConfig.svgIcon) {
-      <mat-icon [svgIcon]="floatingButtonConfig.svgIcon"></mat-icon>
-    }
-    <!-- svg icon -->
-    <!-- label -->
-    @if (floatingButtonConfig.label) {
-      <span class="lf-floating-button-label">
-        {{ floatingButtonConfig.label }}
-      </span>
-    }
-  </button>
+@if (floatingButtonConfig(); as config) {
+  @if (config.enable && (!config.autoHide || !onTop())) {
+    <button
+      mat-fab
+      color="accent"
+      class="lf-floating-button lf-transitions"
+      [ngClass]="config.cssClass + ' ' + config.horizontalPosition"
+      [class.sticky]="config.sticky"
+      [class.show-navbar]="isMobile() && !bottomBarEnabled()"
+      [class.show-bottom-bar]="bottomBarEnabled() && !isMobile()"
+      [class.show-navbar-and-bottom-bar]="isMobile() && bottomBarEnabled()"
+      [extended]="!!config.label"
+      [disabled]="config.disabled"
+      (click)="buttonClicked(config.id)"
+      [matTooltip]="config.tooltip!">
+      <!-- icon -->
+      @if (config.matIcon) {
+        <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
+          {{ config.matIcon }}
+        </mat-icon>
+      } @else if (config.svgIcon) {
+        <mat-icon [svgIcon]="config.svgIcon"></mat-icon>
+      }
+      <!-- svg icon -->
+      <!-- label -->
+      @if (config.label) {
+        <span class="lf-floating-button-label">
+          {{ config.label }}
+        </span>
+      }
+    </button>
+  }
 }

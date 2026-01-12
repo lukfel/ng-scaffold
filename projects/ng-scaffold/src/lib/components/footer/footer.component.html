@@ -1,38 +1,40 @@
-@if (footerConfig && footerConfig.enable) {
-  <mat-card class="lf-footer lf-transitions mat-elevation-z2 p-4" [ngClass]="footerConfig.cssClass">
-    <!-- svg logo -->
-    @if (footerConfig.svgLogo) {
-      <mat-icon
-        class="lf-footer-logo mb-4"
-        color="primary"
-        [svgIcon]="footerConfig.svgLogo!"></mat-icon>
-    } @else {
-      @if (footerConfig.imgLogo) {
-        <img class="lf-footer-logo mb-4" [src]="footerConfig.imgLogo" alt="Logo" />
-      }
-    }
-    <!-- img logo -->
-    <!-- links -->
-    @if (footerConfig.links) {
-      <div class="lf-footer-links mb-4">
-        @for (link of footerConfig.links; track $index; let i = $index) {
-          <div class="lf-footer-link" [class.mr-2]="i < footerConfig.links!.length - 1">
-            @if (link.routerLink) {
-              <a [routerLink]="[link.routerLink]">{{ link.label || "" }}</a>
-            } @else {
-              <a [href]="link.href" [target]="link.externalTab ? '_blank' : null">
-                {{ link.label }}
-              </a>
-            }
-          </div>
+@if (footerConfig(); as config) {
+  @if (config.enable) {
+    <mat-card class="lf-footer lf-transitions mat-elevation-z2 p-4" [ngClass]="config.cssClass">
+      <!-- svg logo -->
+      @if (config.svgLogo) {
+        <mat-icon
+          class="lf-footer-logo mb-4"
+          color="primary"
+          [svgIcon]="config.svgLogo!"></mat-icon>
+      } @else {
+        @if (config.imgLogo) {
+          <img class="lf-footer-logo mb-4" [src]="config.imgLogo" alt="Logo" />
         }
-      </div>
-    }
-    <!-- copyright -->
-    @if (footerConfig.copyright) {
-      <span class="lf-footer-copyright">
-        {{ footerConfig.copyright }}
-      </span>
-    }
-  </mat-card>
+      }
+      <!-- img logo -->
+      <!-- links -->
+      @if (config.links) {
+        <div class="lf-footer-links mb-4">
+          @for (link of config.links; track $index; let i = $index) {
+            <div class="lf-footer-link" [class.mr-2]="i < config.links!.length - 1">
+              @if (link.routerLink) {
+                <a [routerLink]="[link.routerLink]">{{ link.label || "" }}</a>
+              } @else {
+                <a [href]="link.href" [target]="link.externalTab ? '_blank' : null">
+                  {{ link.label }}
+                </a>
+              }
+            </div>
+          }
+        </div>
+      }
+      <!-- copyright -->
+      @if (config.copyright) {
+        <span class="lf-footer-copyright">
+          {{ config.copyright }}
+        </span>
+      }
+    </mat-card>
+  }
 }

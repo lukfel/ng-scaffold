@@ -1,38 +1,40 @@
-@if (inputConfig) {
-  <mat-form-field class="lf-input" appearance="fill" [class.lf-hide-hint]="!inputConfig.hint">
-    <mat-label>{{ inputConfig.label || "Search" }}</mat-label>
-    @if (inputConfig.hint) {
-      <mat-hint>{{ inputConfig.hint }}</mat-hint>
-    }
-    <input
-      matInput
-      type="text"
-      [(ngModel)]="inputValue"
-      [disabled]="inputConfig.disabled!"
-      (keyup.enter)="inputSubmitted(inputValue)"
-      (ngModelChange)="inputChanged($event)"
-      #input />
-    @if (isMobile) {
-      <button mat-icon-button matPrefix color="accent" (click)="inputPrefixAction()">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-    }
-    @if (inputValue) {
-      <button class="lf-input-close-button" mat-icon-button matSuffix (click)="clearInput()">
-        <mat-icon>close</mat-icon>
-      </button>
-    }
-    @if (inputConfig.matIconSubmit) {
-      <button
-        mat-icon-button
-        matSuffix
-        color="accent"
-        type="submit"
-        (click)="inputSubmitted(inputValue)">
-        <mat-icon>
-          {{ inputConfig.matIconSubmit }}
-        </mat-icon>
-      </button>
-    }
-  </mat-form-field>
+@if (inputConfigComputed(); as config) {
+  @if (config) {
+    <mat-form-field class="lf-input" appearance="fill" [class.lf-hide-hint]="!config.hint">
+      <mat-label>{{ config.label || "Search" }}</mat-label>
+      @if (config.hint) {
+        <mat-hint>{{ config.hint }}</mat-hint>
+      }
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="inputValue"
+        [disabled]="config.disabled!"
+        (keyup.enter)="inputSubmitted(inputValue)"
+        (ngModelChange)="inputChanged($event)"
+        #input />
+      @if (isMobile()) {
+        <button mat-icon-button matPrefix color="accent" (click)="inputPrefixAction()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      }
+      @if (inputValue) {
+        <button class="lf-input-close-button" mat-icon-button matSuffix (click)="clearInput()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+      @if (config.matIconSubmit) {
+        <button
+          mat-icon-button
+          matSuffix
+          color="accent"
+          type="submit"
+          (click)="inputSubmitted(inputValue)">
+          <mat-icon>
+            {{ config.matIconSubmit }}
+          </mat-icon>
+        </button>
+      }
+    </mat-form-field>
+  }
 }

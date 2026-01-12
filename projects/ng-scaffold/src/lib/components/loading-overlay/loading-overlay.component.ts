@@ -2,7 +2,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { CONFIG } from '../../config/config.token';
+import { CONFIG } from '../../scaffold.config';
 import { LoadingOverlayConfig, ScaffoldLibraryConfig } from '../../models';
 import { ScaffoldService } from '../../services';
 

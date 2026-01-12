@@ -61,9 +61,9 @@
 
     <!-- ScaffoldConfig -->
     <h2>Scaffold</h2>
-    <a class="link" (click)="openMarkdownDialog('ScaffoldConfig', 'scaffoldConfig.md')">
+    <span class="link" (click)="openMarkdownDialog('ScaffoldConfig', 'scaffoldConfig.md')">
       View ScaffoldConfig
-    </a>
+    </span>
     <p>
       The
       <code>&lt;lf-scaffold&gt;</code>
@@ -99,9 +99,9 @@
     <!-- HeaderConfig -->
     @if (headerConfig) {
       <h2>Header</h2>
-      <a class="link" (click)="openMarkdownDialog('HeaderConfig', 'headerConfig.md')">
+      <span class="link" (click)="openMarkdownDialog('HeaderConfig', 'headerConfig.md')">
         View HeaderConfig
-      </a>
+      </span>
       <p>
         The header is a fixed responsive toolbar with a customizable logo, title, subtitle,
         menu-buttons and an input field.
@@ -188,11 +188,11 @@
     <!-- ContentTitleCardConfig -->
     @if (contentTitleCardConfig) {
       <h2>Title Card</h2>
-      <a
+      <span
         class="link"
         (click)="openMarkdownDialog('ContentTitleCardConfig', 'contentTitleCardConfig.md')">
         View ContentTitleCardConfig
-      </a>
+      </span>
       <p>
         The title card is a card below the header that can display a custom label such as a page
         title and also has a back button.
@@ -218,9 +218,9 @@
     <!-- NavbarConfig -->
     @if (navbarConfig) {
       <h2>Navbar</h2>
-      <a class="link" (click)="openMarkdownDialog('NavbarConfig', 'navbarConfig.md')">
+      <span class="link" (click)="openMarkdownDialog('NavbarConfig', 'navbarConfig.md')">
         View NavbarConfig
-      </a>
+      </span>
       <p>
         The navbar is a fixed navigation element that is positioned vertically left on desktop and
         responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation
@@ -258,9 +258,9 @@
     <!-- DrawerConfig -->
     @if (drawerConfig) {
       <h2>Drawer</h2>
-      <a class="link" (click)="openMarkdownDialog('DrawerConfig', 'drawerConfig.md')">
+      <span class="link" (click)="openMarkdownDialog('DrawerConfig', 'drawerConfig.md')">
         View DrawerConfig
-      </a>
+      </span>
       <p>
         The drawer is a collapsible element that allows you to place custom dynamic side content. It
         is responsive and changes to overlay mode on mobile.
@@ -296,9 +296,9 @@
     <!-- FooterConfig -->
     @if (footerConfig) {
       <h2>Footer</h2>
-      <a class="link" (click)="openMarkdownDialog('FooterConfig', 'footerConfig.md')">
+      <span class="link" (click)="openMarkdownDialog('FooterConfig', 'footerConfig.md')">
         View FooterConfig
-      </a>
+      </span>
       <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
       <p>
         <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
@@ -339,11 +339,11 @@
     <!-- FloatingButtonConfig -->
     @if (floatingButtonConfig) {
       <h2>Floating Button</h2>
-      <a
+      <span
         class="link"
         (click)="openMarkdownDialog('FloatingButtonConfig', 'floatingButtonConfig.md')">
         View FloatingButtonConfig
-      </a>
+      </span>
       <p>
         The floating button is a fixed action button that scrolls to the top on default, but you can
         also add an id for custom actions. By adding a label, the button will expand into a rounded
@@ -395,9 +395,9 @@
     <!-- BottomBarConfig -->
     @if (bottomBarConfig) {
       <h2>Bottom Bar</h2>
-      <a class="link" (click)="openMarkdownDialog('BottomBarConfig', 'bottomBarConfig.md')">
+      <span class="link" (click)="openMarkdownDialog('BottomBarConfig', 'bottomBarConfig.md')">
         View BottomBarConfig
-      </a>
+      </span>
       <p>
         The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
         enabled). It can be used to handle custom bulk actions for selected items in large lists.

@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
-import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldModule, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
+import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldComponent, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
 import { MaterialModule } from './shared/modules/material.module';
 
@@ -17,7 +17,7 @@ import { MaterialModule } from './shared/modules/material.module';
     CommonModule,
     RouterModule,
     MaterialModule,
-    ScaffoldModule
+    ScaffoldComponent
   ]
 })
 export class AppComponent {

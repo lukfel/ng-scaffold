@@ -1,44 +1,44 @@
-@if (placeholderConfig) {
-  <div class="lf-placeholder" [ngClass]="placeholderConfig.cssClass">
+@if (placeholderConfig(); as config) {
+  <div class="lf-placeholder" [ngClass]="config.cssClass">
     <!-- icon -->
-    @if (placeholderConfig.matIcon) {
+    @if (config.matIcon) {
       <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
-        {{ placeholderConfig.matIcon }}
+        {{ config.matIcon }}
       </mat-icon>
-    } @else if (placeholderConfig.svgIcon) {
-      <mat-icon [svgIcon]="placeholderConfig.svgIcon"></mat-icon>
+    } @else if (config.svgIcon) {
+      <mat-icon [svgIcon]="config.svgIcon"></mat-icon>
     }
     <!-- heading -->
-    @if (placeholderConfig.title) {
+    @if (config.title) {
       <p class="lf-placeholder-title mt-2">
-        {{ placeholderConfig.title }}
+        {{ config.title }}
       </p>
     }
     <!-- message -->
-    @if (placeholderConfig.message) {
+    @if (config.message) {
       <p class="lf-placeholder-message mt-1">
-        {{ placeholderConfig.message }}
+        {{ config.message }}
       </p>
     }
     <!-- action -->
-    @if (placeholderConfig.button) {
+    @if (config.button) {
       <button
         mat-button
         class="mt-4"
         color="accent"
-        [ngClass]="placeholderConfig.button.cssClass"
-        [disabled]="placeholderConfig.button.disabled"
+        [ngClass]="config.button.cssClass"
+        [disabled]="config.button.disabled"
         (click)="buttonClickEvent.emit()"
-        [matTooltip]="placeholderConfig.button.tooltip">
+        [matTooltip]="config.button.tooltip">
         <!-- icon -->
-        @if (placeholderConfig.button.matIcon) {
+        @if (config.button.matIcon) {
           <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
-            {{ placeholderConfig.button.matIcon }}
+            {{ config.button.matIcon }}
           </mat-icon>
-        } @else if (placeholderConfig.button.svgIcon) {
-          <mat-icon [svgIcon]="placeholderConfig.button.svgIcon"></mat-icon>
+        } @else if (config.button.svgIcon) {
+          <mat-icon [svgIcon]="config.button.svgIcon"></mat-icon>
         }
-        {{ placeholderConfig.button.label }}
+        {{ config.button.label }}
       </button>
     }
   </div>

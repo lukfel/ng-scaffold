@@ -3,11 +3,9 @@
  */
 
 /* CONFIG */
-export * from './lib/config/config.token';
+export * from './lib/scaffold.config';
 /* MODELS */
 export * from './lib/models';
-/* MODULES */
-export * from './lib/scaffold.module';
 /* COMPONENTS */
 export * from './lib/components/scaffold/scaffold.component';
 export * from './lib/shared/components/list/list.component';

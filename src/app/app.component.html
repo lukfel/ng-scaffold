@@ -7,7 +7,7 @@
   <ng-container drawerContent>
     <div class="drawer-container">
       <mat-nav-list>
-        <div mat-subheader class="hint">Navigation</div>
+        <p mat-subheader class="hint">Navigation</p>
         @for (item of scaffoldConfig.navbarConfig?.buttons; track item.id) {
           <a mat-list-item [routerLink]="[item.id]" routerLinkActive="active">
             <span matListItemTitle>{{ item.label }}</span>
@@ -27,7 +27,8 @@
             }
           </a>
         }
-        <div mat-subheader class="hint">Other projects</div>
+        <mat-divider class="my-3"></mat-divider>
+        <p mat-subheader class="hint">Other projects</p>
         @for (item of externalMenuButtons; track item.id) {
           <a mat-list-item [href]="item.id" target="_blank">
             <span matListItemTitle class="title-small">{{ item.label }}</span>

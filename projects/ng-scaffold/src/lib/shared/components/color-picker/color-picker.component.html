@@ -10,20 +10,20 @@
   mat-flat-button
   class="lf-button"
   type="button"
-  [color]="selectedColor ? null : color"
+  [color]="selectedColor ? null : color()"
   [style.background]="selectedColor"
   [style.color]="getContrastTextColor(selectedColor)"
-  [disabled]="disabled"
+  [disabled]="disabled()"
   (click)="colorPicker.click()"
-  [matTooltip]="tooltip">
+  [matTooltip]="tooltip()">
   <!-- icon -->
-  @if (matIcon) {
+  @if (matIcon()) {
     <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
-      {{ matIcon }}
+      {{ matIcon() }}
     </mat-icon>
   }
   <!-- @else if (svgIcon) {
     <mat-icon [svgIcon]="svgIcon"></mat-icon>
   } -->
-  {{ label }}
+  {{ label() }}
 </button>

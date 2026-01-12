@@ -1,6 +1,6 @@
 <div class="lf-list" cdkDropListGroup>
   <!-- Header -->
-  @if (header) {
+  @if (header(); as header) {
     <div class="lf-list-item lf-list-item-header">
       <!-- avatar -->
       @if (header.avatar) {
@@ -66,6 +66,7 @@
               [ngClass]="button.cssClass"
               [disabled]="button.disabled"
               [matTooltip]="button.tooltip"
+              [aria-label]="button.id || button.tooltip"
               (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
               <!-- icon -->
               @if (button.matIcon) {
@@ -81,7 +82,7 @@
       </div>
 
       <!-- checkbox -->
-      @if (config?.enableSelection && !config?.disableMultiselect) {
+      @if (config()?.enableSelection && !config()?.disableMultiselect) {
         <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="allSelected"
@@ -94,8 +95,8 @@
   }
 
   <!-- Grouped Items -->
-  @if (config?.mode === "group" && groupedItems) {
-    @for (group of groupedItems | keyvalue; track group.key; let first = $first) {
+  @if (config()?.mode === "group" && groupedItems()) {
+    @for (group of groupedItems() | keyvalue; track group.key; let first = $first) {
       <div class="lf-list-group" [class.mt-4]="!first">
         @if (group.key) {
           <div class="lf-list-item lf-list-group-header">
@@ -109,15 +110,15 @@
           [id]="group.key"
           cdkDropList
           [cdkDropListData]="group.value"
-          [cdkDropListDisabled]="!config?.enableDragging"
-          [cdkDropListConnectedTo]="connectedDropListIds"
+          [cdkDropListDisabled]="!config()?.enableDragging"
+          [cdkDropListConnectedTo]="connectedDropListIds()!"
           (cdkDropListDropped)="dropItem($event, group.key)"
-          [class.drop-zone]="config?.enableDragging && group.value.length <= 0">
+          [class.drop-zone]="config()?.enableDragging && group.value.length <= 0">
           @for (item of group.value; track item.id; let last = $last) {
             <div
               cdkDrag
               [cdkDragData]="item"
-              [cdkDragDisabled]="item.disabled || !config?.enableDragging">
+              [cdkDragDisabled]="item.disabled || !config()?.enableDragging">
               <ng-container
                 [ngTemplateOutlet]="listItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: item, last: last }"></ng-container>
@@ -129,18 +130,18 @@
     <!-- Flat Items -->
   } @else {
     <div
-      [id]="dropListId"
+      [id]="dropListId()!"
       cdkDropList
-      [cdkDropListData]="items"
-      [cdkDropListDisabled]="!config?.enableDragging"
-      [cdkDropListConnectedTo]="connectedDropListIds"
-      (cdkDropListDropped)="dropItem($event, dropListId)"
-      [class.drop-zone]="config?.enableDragging && items.length <= 0">
-      @for (item of items; track item.id; let last = $last) {
+      [cdkDropListData]="items()"
+      [cdkDropListDisabled]="!config()?.enableDragging"
+      [cdkDropListConnectedTo]="connectedDropListIds()!"
+      (cdkDropListDropped)="dropItem($event, dropListId()!)"
+      [class.drop-zone]="config()?.enableDragging && items().length <= 0">
+      @for (item of items(); track item.id; let last = $last) {
         <div
           cdkDrag
           [cdkDragData]="item"
-          [cdkDragDisabled]="item.disabled || !config?.enableDragging">
+          [cdkDragDisabled]="item.disabled || !config()?.enableDragging">
           <ng-container
             [ngTemplateOutlet]="listItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: item, last: last }"></ng-container>
@@ -248,6 +249,7 @@
                   [ngClass]="button.cssClass"
                   [disabled]="disabled"
                   [matTooltip]="button.tooltip"
+                  [aria-label]="button.id || button.tooltip"
                   (click)="clickButton({ buttonId: button.id, item }, $event)">
                   <!-- icon -->
                   @if (button.matIcon) {
@@ -264,12 +266,13 @@
         }
 
         <!-- drag -->
-        @if (config?.enableDragging) {
+        @if (config()?.enableDragging) {
           <button
             mat-icon-button
             class="lf-list-item-icon ml-2"
             [class.disabled]="item.disabled"
             [disabled]="item.disabled"
+            [aria-label]="'Drag handle'"
             (click)="stopPropagation($event)"
             cdkDragHandle>
             <mat-icon>drag_indicator</mat-icon>
@@ -278,7 +281,7 @@
       </div>
 
       <!-- checkbox -->
-      @if (config?.enableSelection) {
+      @if (config()?.enableSelection) {
         <div class="lf-list-item-checkbox ml-3">
           <mat-checkbox
             [(ngModel)]="item.checked"
@@ -289,7 +292,7 @@
       }
     </div>
 
-    @if (config?.showDividers && !last) {
+    @if (config()?.showDividers && !last) {
       <mat-divider></mat-divider>
     }
   </ng-template>

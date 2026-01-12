@@ -27,18 +27,18 @@ describe('DrawerComponent', () => {
   });
 
   it('should show the drawer if the config is enabled', () => {
-    component.drawerConfig = {
+    fixture.componentRef.setInput('drawerConfig', {
       enable: true
-    };
+    });
     fixture.detectChanges();
     const drawer = fixture.debugElement.query(By.css('.lf-drawer'));
     expect(drawer).toBeTruthy();
   });
 
   it('should not show the drawer if the config is disabled', () => {
-    component.drawerConfig = {
+    fixture.componentRef.setInput('drawerConfig', {
       enable: false
-    };
+    });
     fixture.detectChanges();
     const drawer = fixture.debugElement.query(By.css('.lf-drawer'));
     expect(drawer).toBeFalsy();
@@ -46,7 +46,9 @@ describe('DrawerComponent', () => {
 
   it('should call onDrawerClosed method when the drawer is closed', () => {
     spyOn(component, 'drawerClosed');
-    component.drawerConfig = { enable: true };
+    fixture.componentRef.setInput('drawerConfig', {
+      enable: true
+    });
     fixture.detectChanges();
     const drawer = fixture.debugElement.query(By.css('.lf-drawer'));
     drawer.nativeElement.dispatchEvent(new Event('closed'));

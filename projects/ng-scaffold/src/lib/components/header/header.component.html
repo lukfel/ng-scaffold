@@ -1,106 +1,108 @@
-@if (headerConfig && headerConfig.enable) {
-  <mat-toolbar
-    class="lf-header lf-transitions mat-elevation-z3"
-    [class.px-4]="!isMobile"
-    [class.px-1]="isMobile"
-    [ngClass]="headerConfig.cssClass"
-    [class.lf-gradient]="headerConfig.gradient"
-    color="primary">
-    <!-- left menu button -->
-    <ng-container
-      [ngTemplateOutlet]="menuButtonTemplate"
-      [ngTemplateOutletContext]="{
-        menuButton: headerConfig.leftMenuButton!,
-        hideLabel: true,
-      }"></ng-container>
-    <!-- logo & title -->
-    <div
-      class="lf-header-logo-title-wrapper ml-1 mr-2"
-      [class.ml-10]="headerConfig.leftMenuButton && !isMobile">
-      <!-- link wrapper -->
-      <div
-        class="lf-header-logo-title-wrapper-link"
-        [class.lf-clickable]="headerConfig.titleRouterLink"
-        [routerLink]="headerConfig.titleRouterLink ? [headerConfig.titleRouterLink] : null">
-        <!-- svg logo -->
-        @if (headerConfig.svgLogo) {
-          <mat-icon
-            class="lf-header-logo"
-            [class.mr-3]="headerConfig.title"
-            [svgIcon]="headerConfig.svgLogo!"></mat-icon>
-          <!-- img logo -->
-        } @else {
-          @if (headerConfig.imgLogo) {
-            <img
-              class="lf-header-logo"
-              [class.mr-3]="headerConfig.title"
-              [src]="headerConfig.imgLogo"
-              alt="Logo" />
-          }
-        }
-        <!-- title -->
-        @if (headerConfig.title) {
-          <div class="lf-header-title-wrapper">
-            @if (headerConfig.title) {
-              <span class="lf-header-title">
-                {{ headerConfig.title }}
-              </span>
-            }
-            @if (headerConfig.subtitle) {
-              <span class="lf-header-subtitle">
-                {{ headerConfig.subtitle }}
-              </span>
-            }
-          </div>
-        }
-      </div>
-    </div>
-    <!-- input -->
-    @if (headerConfig.inputConfig?.enable) {
-      <div class="spacer"></div>
-      <lf-input
-        [class.lf-header-input-mobile]="isMobile"
-        [class.mx-3]="!isMobile"
-        [inputConfig]="headerConfig.inputConfig!"
-        [isMobile]="isMobile"
-        (inputSubmitEvent)="inputSubmitted($event)"
-        (inputChangeEvent)="inputChanged($event)"
-        (inputPrefixActionEvent)="inputClosed()"></lf-input>
-    }
-    <!-- spacer -->
-    <div class="spacer"></div>
-    <!-- right menu buttons -->
-    @if (headerConfig.responsiveConfig?.enable && isMobile) {
-      @let exludedButtons = getRightExcludedButtons();
-      @for (button of exludedButtons; track button.id) {
-        <ng-container
-          [ngTemplateOutlet]="menuButtonTemplate"
-          [ngTemplateOutletContext]="{
-            menuButton: button,
-          }"></ng-container>
-      }
-      @let mobileButton = getRightMobileButton();
+@if (headerConfig(); as config) {
+  @if (config.enable) {
+    <mat-toolbar
+      class="lf-header lf-transitions mat-elevation-z3"
+      [class.px-4]="!isMobile()"
+      [class.px-1]="isMobile()"
+      [ngClass]="config.cssClass"
+      [class.lf-gradient]="config.gradient"
+      color="primary">
+      <!-- left menu button -->
       <ng-container
         [ngTemplateOutlet]="menuButtonTemplate"
         [ngTemplateOutletContext]="{
-          menuButton: mobileButton,
+          menuButton: config.leftMenuButton!,
+          hideLabel: true,
         }"></ng-container>
-    } @else {
-      @for (button of headerConfig.rightMenuButtons; track button.id) {
+      <!-- logo & title -->
+      <div
+        class="lf-header-logo-title-wrapper ml-1 mr-2"
+        [class.ml-10]="config.leftMenuButton && !isMobile()">
+        <!-- link wrapper -->
+        <div
+          class="lf-header-logo-title-wrapper-link"
+          [class.lf-clickable]="config.titleRouterLink"
+          [routerLink]="config.titleRouterLink ? [config.titleRouterLink] : null">
+          <!-- svg logo -->
+          @if (config.svgLogo) {
+            <mat-icon
+              class="lf-header-logo"
+              [class.mr-3]="config.title"
+              [svgIcon]="config.svgLogo!"></mat-icon>
+            <!-- img logo -->
+          } @else {
+            @if (config.imgLogo) {
+              <img
+                class="lf-header-logo"
+                [class.mr-3]="config.title"
+                [src]="config.imgLogo"
+                alt="Logo" />
+            }
+          }
+          <!-- title -->
+          @if (config.title) {
+            <div class="lf-header-title-wrapper">
+              @if (config.title) {
+                <span class="lf-header-title">
+                  {{ config.title }}
+                </span>
+              }
+              @if (config.subtitle) {
+                <span class="lf-header-subtitle">
+                  {{ config.subtitle }}
+                </span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <!-- input -->
+      @if (config.inputConfig?.enable) {
+        <div class="spacer"></div>
+        <lf-input
+          [class.lf-header-input-mobile]="isMobile()"
+          [class.mx-3]="!isMobile()"
+          [inputConfig]="config.inputConfig!"
+          [isMobile]="isMobile()"
+          (inputSubmitEvent)="inputSubmitted($event)"
+          (inputChangeEvent)="inputChanged($event)"
+          (inputPrefixActionEvent)="inputClosed()"></lf-input>
+      }
+      <!-- spacer -->
+      <div class="spacer"></div>
+      <!-- right menu buttons -->
+      @if (config.responsiveConfig?.enable && isMobile()) {
+        @let exludedButtons = getRightExcludedButtons();
+        @for (button of exludedButtons; track button.id) {
+          <ng-container
+            [ngTemplateOutlet]="menuButtonTemplate"
+            [ngTemplateOutletContext]="{
+              menuButton: button,
+            }"></ng-container>
+        }
+        @let mobileButton = getRightMobileButton();
         <ng-container
           [ngTemplateOutlet]="menuButtonTemplate"
           [ngTemplateOutletContext]="{
-            menuButton: button,
+            menuButton: mobileButton,
           }"></ng-container>
+      } @else {
+        @for (button of config.rightMenuButtons; track button.id) {
+          <ng-container
+            [ngTemplateOutlet]="menuButtonTemplate"
+            [ngTemplateOutletContext]="{
+              menuButton: button,
+            }"></ng-container>
+        }
       }
+    </mat-toolbar>
+    <!-- loading bar -->
+    @if (config.loading || (config.showRouteLoading && routeLoading())) {
+      <mat-progress-bar
+        class="lf-header-progress-bar"
+        color="accent"
+        mode="indeterminate"></mat-progress-bar>
     }
-  </mat-toolbar>
-  <!-- loading bar -->
-  @if (headerConfig.loading || (headerConfig.showRouteLoading && routeLoading)) {
-    <mat-progress-bar
-      class="lf-header-progress-bar"
-      color="accent"
-      mode="indeterminate"></mat-progress-bar>
   }
 }
 
@@ -121,7 +123,7 @@
         [matTooltip]="menuButton.tooltip">
         <!-- icon -->
         @if (menuButton.matIcon) {
-          <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+          <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
             {{ menuButton.matIcon }}
           </mat-icon>
         } @else if (menuButton.svgIcon) {
@@ -143,7 +145,7 @@
         [aria-label]="menuButton.id || menuButton.tooltip">
         <!-- icon -->
         @if (menuButton.matIcon) {
-          <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+          <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
             {{ menuButton.matIcon }}
           </mat-icon>
         } @else if (menuButton.svgIcon) {
@@ -179,7 +181,7 @@
             [aria-label]="button.label">
             <!-- icon -->
             @if (button.matIcon) {
-              <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+              <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
                 {{ button.matIcon }}
               </mat-icon>
             } @else if (button.svgIcon) {
@@ -206,7 +208,7 @@
               tabindex="0">
               <!-- icon -->
               @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
                   {{ button.matIcon }}
                 </mat-icon>
               } @else if (button.svgIcon) {

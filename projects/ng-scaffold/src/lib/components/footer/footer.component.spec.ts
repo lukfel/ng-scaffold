@@ -45,39 +45,35 @@ describe('FooterComponent', () => {
   });
 
   it('should show the footer if the config is enabled', () => {
-    component.footerConfig = {
-      enable: true
-    };
+    fixture.componentRef.setInput('footerConfig', { enable: true });
     fixture.detectChanges();
     const footer = fixture.debugElement.query(By.css('.lf-footer'));
     expect(footer).toBeTruthy();
   });
 
   it('should not show the footer if the config is disabled', () => {
-    component.footerConfig = {
-      enable: false
-    };
+    fixture.componentRef.setInput('footerConfig', { enable: false });
     fixture.detectChanges();
     const footer = fixture.debugElement.query(By.css('.lf-footer'));
     expect(footer).toBeFalsy();
   });
 
   it('should display svg logo if provided', () => {
-    component.footerConfig = { enable: true, svgLogo: 'logo' };
+    fixture.componentRef.setInput('footerConfig', { enable: true, svgLogo: 'logo' });
     fixture.detectChanges();
     const svgLogo = fixture.debugElement.query(By.css('.lf-footer mat-icon'));
     expect(svgLogo).toBeTruthy();
   });
 
   it('should display img logo if provided', () => {
-    component.footerConfig = { enable: true, imgLogo: 'assets/img/meta.jpg' };
+    fixture.componentRef.setInput('footerConfig', { enable: true, imgLogo: 'assets/img/meta.jpg' });
     fixture.detectChanges();
     const imgLogo = fixture.debugElement.query(By.css('.lf-footer img'));
     expect(imgLogo).toBeTruthy();
   });
 
   it('should not display logos if none provided', () => {
-    component.footerConfig = { enable: true };
+    fixture.componentRef.setInput('footerConfig', { enable: true });
     fixture.detectChanges();
     const svgLogo = fixture.debugElement.query(By.css('.lf-footer-logo mat-icon'));
     const imgLogo = fixture.debugElement.query(By.css('.lf-footer-logo img'));
@@ -86,34 +82,28 @@ describe('FooterComponent', () => {
   });
 
   it('should display links if provided', () => {
-    component.footerConfig = {
-      enable: true,
-      links: [
-        { label: 'Link 1', routerLink: '/link1' },
-        { label: 'Link 2', href: 'http://example.com', externalTab: true },
-      ]
-    };
+    fixture.componentRef.setInput('footerConfig', { enable: true, links: [{ label: 'Link 1', routerLink: '/link1' }, { label: 'Link 2', href: 'http://example.com', externalTab: true }] });
     fixture.detectChanges();
     const linkElements = fixture.debugElement.queryAll(By.css('.lf-footer-link'));
     expect(linkElements.length).toBe(2);
   });
 
   it('should not display links if none provided', () => {
-    component.footerConfig = { enable: true };
+    fixture.componentRef.setInput('footerConfig', { enable: true });
     fixture.detectChanges();
     const linkElements = fixture.debugElement.queryAll(By.css('.lf-footer-link'));
     expect(linkElements.length).toBe(0);
   });
 
   it('should display copyright if provided', () => {
-    component.footerConfig = { enable: true, copyright: 'Copyright © 2026' };
+    fixture.componentRef.setInput('footerConfig', { enable: true, copyright: 'Copyright © 2026' });
     fixture.detectChanges();
     const copyright = fixture.debugElement.query(By.css('.lf-footer-copyright'));
     expect((<HTMLElement>copyright.nativeElement).innerText).toContain('Copyright');
   });
 
   it('should not display copyright if none provided', () => {
-    component.footerConfig = { enable: true };
+    fixture.componentRef.setInput('footerConfig', { enable: true });
     fixture.detectChanges();
     const copyright = fixture.debugElement.query(By.css('.lf-footer-copyright'));
     expect(copyright).toBeFalsy();

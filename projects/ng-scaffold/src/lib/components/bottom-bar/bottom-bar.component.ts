@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, Input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
@@ -20,16 +21,17 @@ import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
   standalone: true,
   imports: [
     CommonModule,
+    MatButtonModule,
     MatIconModule,
     MatTooltipModule
   ]
 })
 export class BottomBarComponent {
 
-  @Input() public libraryConfig: ScaffoldLibraryConfig | null = null;
-  @Input() public bottomBarConfig: BottomBarConfig | null = null;
-  @Input() public isMobile: boolean = false;
-  @Input() public navbarEnabled: boolean = false;
+  public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
+  public readonly bottomBarConfig = input<BottomBarConfig | null>(null);
+  public readonly isMobile = input<boolean>(false);
+  public readonly navbarEnabled = input<boolean>(false);
 
   public readonly bottomBarCloseClickEvent = output<string>();
   public readonly bottomBarButtonClickEvent = output<string>();
