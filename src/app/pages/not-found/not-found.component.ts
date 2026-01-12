@@ -1,13 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { PlaceholderConfig, RouterService, ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
+import { PlaceholderComponent, PlaceholderConfig, RouterService, ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
 
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    PlaceholderComponent
+  ]
 })
 export class NotFoundComponent implements OnInit {
   private scaffoldService = inject(ScaffoldService);

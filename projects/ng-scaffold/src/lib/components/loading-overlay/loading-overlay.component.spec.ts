@@ -1,5 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared/shared.module';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { LoadingOverlayComponent } from './loading-overlay.component';
 
 describe('LoadingOverlayComponent', () => {
@@ -8,10 +9,12 @@ describe('LoadingOverlayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoadingOverlayComponent],
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        LoadingOverlayComponent,
+        CommonModule,
+        MatProgressSpinner
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LoadingOverlayComponent);
     component = fixture.componentInstance;

@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { Logger } from '../../services';
-import { SharedModule } from '../../shared/shared.module';
+import { InputComponent } from '../../shared/components/input/input.component';
 import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
 import { DrawerComponent } from '../drawer/drawer.component';
@@ -15,16 +16,6 @@ import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.comp
 import { NavbarComponent } from '../navbar/navbar.component';
 import { ScaffoldComponent } from './scaffold.component';
 
-// @Component({
-//   selector: 'lf-header',
-//   template: ''
-// })
-// class MockHeaderComponent {
-//   @Input() public headerConfig: HeaderConfig = {};
-//   @Input() public isMobile: boolean = false;
-//   @Input() public routeLoading: boolean = false;
-// }
-
 class MockLogger { }
 
 describe('ScaffoldComponent', () => {
@@ -34,22 +25,22 @@ describe('ScaffoldComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        // MockHeaderComponent
-        ScaffoldComponent,
+        ScaffoldComponent
+      ],
+      imports: [
+        CommonModule,
         LoadingOverlayComponent,
         HeaderComponent,
         NavbarComponent,
         DrawerComponent,
-        ContentTitleCardComponent,
         FooterComponent,
+        ContentTitleCardComponent,
         FloatingButtonComponent,
-        BottomBarComponent
-      ],
-      imports: [
-        SharedModule,
-        RouterTestingModule
+        BottomBarComponent,
+        InputComponent
       ],
       providers: [
+        provideRouter([]),
         provideAnimations(),
         { provide: Logger, useClass: MockLogger }
       ]

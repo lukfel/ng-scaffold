@@ -1,6 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
-import { SharedModule } from '../../shared/shared.module';
 import { FloatingButtonComponent } from './floating-button.component';
 
 describe('FloatingButtonComponent', () => {
@@ -9,10 +12,14 @@ describe('FloatingButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FloatingButtonComponent],
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        FloatingButtonComponent,
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FloatingButtonComponent);
     component = fixture.componentInstance;

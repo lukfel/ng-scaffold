@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BottomBarComponent } from './components/bottom-bar/bottom-bar.component';
@@ -11,13 +12,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ScaffoldComponent } from './components/scaffold/scaffold.component';
 import { CONFIG } from './config/config.token';
 import { ScaffoldLibraryConfig } from './models';
-import { ConfirmDialogComponent } from './shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { InputComponent } from './shared/components/input/input.component';
-import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    ScaffoldComponent,
+    ScaffoldComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
     LoadingOverlayComponent,
     HeaderComponent,
     NavbarComponent,
@@ -25,12 +28,7 @@ import { SharedModule } from './shared/shared.module';
     FooterComponent,
     ContentTitleCardComponent,
     FloatingButtonComponent,
-    ConfirmDialogComponent,
-    BottomBarComponent
-  ],
-  imports: [
-    RouterModule,
-    SharedModule,
+    BottomBarComponent,
     InputComponent
   ],
   exports: [

@@ -16,10 +16,10 @@
     "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ng-scaffold/"
   },
   "peerDependencies": {
-    "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0",
-    "@angular/material": "^21.0.0",
-    "@angular/animations": "^21.0.0"
+    "@angular/common": "^21.0.8",
+    "@angular/core": "^21.0.8",
+    "@angular/material": "^21.0.6",
+    "@angular/animations": "^21.0.8"
   },
   "devDependencies": {
     "copyfiles": "file:../../node_modules/copyfiles",

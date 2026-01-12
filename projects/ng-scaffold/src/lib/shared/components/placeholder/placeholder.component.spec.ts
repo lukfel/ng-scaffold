@@ -1,5 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { PlaceholderComponent } from './placeholder.component';
 
 describe('PlaceholderComponent', () => {
@@ -8,9 +11,14 @@ describe('PlaceholderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        PlaceholderComponent,
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PlaceholderComponent);
     component = fixture.componentInstance;

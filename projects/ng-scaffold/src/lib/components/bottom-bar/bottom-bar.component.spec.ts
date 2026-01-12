@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BottomBarComponent } from './bottom-bar.component';
 
 describe('BottomBarComponent', () => {
@@ -8,10 +10,13 @@ describe('BottomBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BottomBarComponent],
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        BottomBarComponent,
+        CommonModule,
+        MatIconModule,
+        MatTooltipModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BottomBarComponent);
     component = fixture.componentInstance;

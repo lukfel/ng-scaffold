@@ -1,5 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
@@ -14,7 +17,12 @@ import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
       transition(':leave', [animate('200ms linear', style({ transform: 'translateY(100%)' }))])
     ])
   ],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatTooltipModule
+  ]
 })
 export class BottomBarComponent {
 

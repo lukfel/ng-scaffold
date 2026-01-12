@@ -1,10 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, DomSanitizer } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
-import { SharedModule } from '../../shared/shared.module';
-import { FooterComponent } from './footer.component';
-import { MatIconRegistry } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { By, DomSanitizer } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -12,12 +13,14 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FooterComponent],
       imports: [
-        SharedModule,
-        RouterTestingModule
+        FooterComponent,
+        CommonModule,
+        MatCardModule,
+        MatIconModule
       ],
       providers: [
+        provideRouter([]),
         provideHttpClient()
       ]
     }).compileComponents();
@@ -67,7 +70,7 @@ describe('FooterComponent', () => {
   });
 
   it('should display img logo if provided', () => {
-    component.footerConfig = { enable: true, imgLogo: 'logo.png' };
+    component.footerConfig = { enable: true, imgLogo: 'assets/img/meta.jpg' };
     fixture.detectChanges();
     const imgLogo = fixture.debugElement.query(By.css('.lf-footer img'));
     expect(imgLogo).toBeTruthy();
@@ -103,7 +106,7 @@ describe('FooterComponent', () => {
   });
 
   it('should display copyright if provided', () => {
-    component.footerConfig = { enable: true, copyright: 'Copyright © 2025' };
+    component.footerConfig = { enable: true, copyright: 'Copyright © 2026' };
     fixture.detectChanges();
     const copyright = fixture.debugElement.query(By.css('.lf-footer-copyright'));
     expect((<HTMLElement>copyright.nativeElement).innerText).toContain('Copyright');

@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
 import { ColorPickerComponent, FileUploadComponent, ListComponent, PlaceholderComponent } from '@lukfel/ng-scaffold';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentsComponent } from './components.component';
 
 describe('ComponentsComponent', () => {
@@ -14,16 +14,17 @@ describe('ComponentsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComponentsComponent],
       imports: [
-        RouterTestingModule,
-        SharedModule,
+        CommonModule,
         PlaceholderComponent,
         FileUploadComponent,
         ColorPickerComponent,
         ListComponent
       ],
-      providers: [provideHttpClient()]
+      providers: [
+        provideHttpClient(),
+        { provide: ActivatedRoute, useValue: {} }
+      ]
     }).compileComponents();
 
     const iconRegistry = TestBed.inject(MatIconRegistry);

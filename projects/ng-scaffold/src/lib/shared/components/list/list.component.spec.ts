@@ -1,5 +1,13 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared.module';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
@@ -8,9 +16,19 @@ describe('ListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        ListComponent,
+        CommonModule,
+        FormsModule,
+        DragDropModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatRippleModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatDividerModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ListComponent);
     component = fixture.componentInstance;

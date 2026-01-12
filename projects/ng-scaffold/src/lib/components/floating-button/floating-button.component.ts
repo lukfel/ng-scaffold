@@ -1,11 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FloatingButtonConfig, ScaffoldLibraryConfig } from '../../models';
 
 @Component({
   selector: 'lf-floating-button',
   templateUrl: './floating-button.component.html',
   styleUrls: ['./floating-button.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule
+  ]
 })
 export class FloatingButtonComponent implements OnInit {
 

@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { By } from '@angular/platform-browser';
-import { SharedModule } from '../../shared/shared.module';
 import { DrawerComponent } from './drawer.component';
 
 describe('DrawerComponent', () => {
@@ -9,10 +10,12 @@ describe('DrawerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DrawerComponent],
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        DrawerComponent,
+        CommonModule,
+        MatSidenavModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DrawerComponent);
     component = fixture.componentInstance;

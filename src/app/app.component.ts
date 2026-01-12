@@ -1,18 +1,27 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
+import { Router, RouterModule } from '@angular/router';
+import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldModule, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
+import { MaterialModule } from './shared/modules/material.module';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    ScaffoldModule
+  ]
 })
 export class AppComponent {
+
   private router = inject(Router);
   private logger = inject(Logger);
   private iconRegistry = inject(MatIconRegistry);
@@ -130,7 +139,7 @@ export class AppComponent {
           externalTab: true
         },
       ],
-      copyright: `© Lukas Felbinger 2025. All rights reserved. (v${packageJson.version})`
+      copyright: `© Lukas Felbinger 2026. All rights reserved. (v${packageJson.version})`
     },
     // ContentTitleCardConfig
     contentTitleCardConfig: {

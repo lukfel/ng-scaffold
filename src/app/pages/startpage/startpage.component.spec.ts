@@ -1,12 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
-import { Observable, of } from 'rxjs';
-import { SharedModule } from 'src/app/shared/shared.module';
-
+import { FormsModule } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
+import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
+import { Observable, of } from 'rxjs';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { StartpageComponent } from './startpage.component';
 
 describe('StartpageComponent', () => {
@@ -15,12 +15,14 @@ describe('StartpageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [StartpageComponent],
       imports: [
-        SharedModule,
-        RouterTestingModule
+        StartpageComponent,
+        CommonModule,
+        MaterialModule,
+        FormsModule
       ],
       providers: [
+        provideRouter([]),
         { provide: ScaffoldService, useClass: MockScaffoldService }
       ]
     }).compileComponents();
@@ -137,7 +139,7 @@ class MockScaffoldService {
           externalTab: true
         },
       ],
-      copyright: '© Lukas Felbinger 2025. All rights reserved.'
+      copyright: '© Lukas Felbinger 2026. All rights reserved.'
     },
     // ContentTitleCardConfig
     contentTitleCardConfig: {

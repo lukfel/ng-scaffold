@@ -1,15 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CONFIG } from '../../../config/config.token';
 import { ScaffoldLibraryConfig } from '../../../models';
 import { Logger } from '../../../services';
-import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'lf-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
   standalone: true,
-  imports: [SharedModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule
+  ]
 })
 export class FileUploadComponent {
 

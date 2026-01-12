@@ -2,7 +2,6 @@ import { Injectable, Type, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
-import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 import { InputComponent } from '../shared/components/input/input.component';
 
 @Injectable({
@@ -30,7 +29,9 @@ export class DialogService {
    * @param config of the dialog
    * @returns an asynchronous boolean response
    */
-  public openConfirmDialog(config: ConfirmDialogConfig): Promise<boolean> {
+  public async openConfirmDialog(config: ConfirmDialogConfig): Promise<boolean> {
+    const { ConfirmDialogComponent } = await import('../shared/components/dialogs/confirm-dialog/confirm-dialog.component');
+
     const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
       autoFocus: false,
       maxWidth: '368px',

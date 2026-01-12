@@ -1,6 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
-import { SharedModule } from '../../shared/shared.module';
 import { ContentTitleCardComponent } from './content-title-card.component';
 
 describe('ContentTitleCardComponent', () => {
@@ -9,10 +12,14 @@ describe('ContentTitleCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContentTitleCardComponent],
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        ContentTitleCardComponent,
+        CommonModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ContentTitleCardComponent);
     component = fixture.componentInstance;

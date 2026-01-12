@@ -1,14 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { BottomBarConfig, Button, ListConfig, ListHeader, ListItem, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
+import { RouterModule } from '@angular/router';
+import { BottomBarConfig, Button, ColorPickerComponent, FileUploadComponent, ListComponent, ListConfig, ListHeader, ListItem, PlaceholderComponent, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @Component({
   selector: 'app-components',
   templateUrl: './components.component.html',
   styleUrls: ['./components.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    PlaceholderComponent,
+    FileUploadComponent,
+    ColorPickerComponent,
+    ListComponent
+  ]
 })
 export class ComponentsComponent implements OnInit {
+
   private scaffoldService = inject(ScaffoldService);
   private snackbarService = inject(SnackbarService);
 

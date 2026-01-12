@@ -1,8 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { InputComponent } from '../../shared/components/input/input.component';
-import { SharedModule } from '../../shared/shared.module';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -11,14 +17,21 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
       imports: [
-        RouterTestingModule,
-        SharedModule,
+        HeaderComponent,
+        CommonModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        MatProgressBarModule,
+        MatTooltipModule,
         InputComponent
+      ],
+      providers: [
+        provideRouter([]),
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -130,3 +143,4 @@ describe('HeaderComponent', () => {
     expect(inputElement).toBeTruthy();
   });
 });
+

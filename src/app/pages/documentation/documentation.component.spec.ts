@@ -1,8 +1,8 @@
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MarkdownModule } from 'ngx-markdown';
-
 import { ActivatedRoute } from '@angular/router';
+import { MarkdownModule, provideMarkdown } from 'ngx-markdown';
 import { DocumentationComponent } from './documentation.component';
 
 describe('DocumentationComponent', () => {
@@ -11,13 +11,15 @@ describe('DocumentationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DocumentationComponent],
       imports: [
-        MarkdownModule.forRoot({ loader: HttpClient })
+        DocumentationComponent,
+        CommonModule,
+        MarkdownModule
       ],
       providers: [
         provideHttpClient(withInterceptorsFromDi()),
-        { provide: ActivatedRoute, useValue: {} }
+        { provide: ActivatedRoute, useValue: {} },
+        provideMarkdown()
       ]
     })
       .compileComponents();

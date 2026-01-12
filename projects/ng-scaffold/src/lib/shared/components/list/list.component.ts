@@ -1,17 +1,33 @@
-import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
 import { Component, ContentChild, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CONFIG } from '../../../config/config.token';
 import { ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective } from '../../../directives';
 import { Button, ListConfig, ListHeader, ListItem, ScaffoldLibraryConfig } from '../../../models';
-import { SharedModule } from '../../shared.module';
 
 @Component({
   selector: 'lf-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   standalone: true,
-  imports: [SharedModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    DragDropModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatRippleModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatDividerModule
+  ]
 })
 export class ListComponent implements OnInit, OnChanges {
 

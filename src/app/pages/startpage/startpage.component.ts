@@ -1,16 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, LoadingOverlayConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
 import { Subscription } from 'rxjs';
 import { MarkdownComponent, MarkdownDialogData } from 'src/app/shared/components/markdown/markdown.component';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
   selector: 'app-startpage',
   templateUrl: './startpage.component.html',
   styleUrls: ['./startpage.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    FormsModule
+  ]
 })
 export class StartpageComponent implements OnInit, OnDestroy {
+
   private scaffoldService = inject(ScaffoldService);
   private themeService = inject(ThemeService);
   private dialogService = inject(DialogService);

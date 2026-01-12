@@ -1,5 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../shared.module';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ColorPickerComponent } from './color-picker.component';
 
 describe('ColorPickerComponent', () => {
@@ -10,7 +14,11 @@ describe('ColorPickerComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         ColorPickerComponent,
-        SharedModule
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule
       ]
     }).compileComponents();
 

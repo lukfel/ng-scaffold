@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { SharedModule } from '../../shared/shared.module';
 import { NavbarComponent } from './navbar.component';
 
 describe('NavbarComponent', () => {
@@ -10,8 +12,12 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NavbarComponent],
-      imports: [SharedModule],
+      imports: [
+        NavbarComponent,
+        CommonModule,
+        MatIconModule,
+        MatTooltipModule
+      ],
       providers: [provideAnimations()]
     }).compileComponents();
 

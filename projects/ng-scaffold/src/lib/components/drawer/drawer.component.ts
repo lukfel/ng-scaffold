@@ -1,12 +1,18 @@
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'lf-drawer',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatSidenavModule
+  ]
 })
 export class DrawerComponent implements OnInit {
 

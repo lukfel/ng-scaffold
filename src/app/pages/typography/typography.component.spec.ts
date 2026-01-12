@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { CommonModule } from '@angular/common';
 import { TypographyComponent } from './typography.component';
 
 describe('TypographyComponent', () => {
@@ -8,7 +9,10 @@ describe('TypographyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TypographyComponent]
+      imports: [
+        TypographyComponent,
+        CommonModule
+      ]
     })
       .compileComponents();
 

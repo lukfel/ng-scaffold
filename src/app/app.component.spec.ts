@@ -1,19 +1,23 @@
+import { CommonModule } from '@angular/common';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { ScaffoldModule } from '@lukfel/ng-scaffold';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { MaterialModule } from './shared/modules/material.module';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
-        SharedModule,
+        CommonModule,
+        AppComponent,
+        MaterialModule,
         ScaffoldModule
       ],
-      declarations: [
-        AppComponent
+      providers: [
+        provideHttpClientTesting(),
+        provideRouter([])
       ]
     }).compileComponents();
   });

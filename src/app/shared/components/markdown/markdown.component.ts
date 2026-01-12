@@ -1,10 +1,9 @@
-import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, inject, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SnackbarService } from '@lukfel/ng-scaffold';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownComponent as ExternalMarkdownComponent } from 'ngx-markdown';
+import { MaterialModule } from '../../modules/material.module';
 
 export interface MarkdownDialogData {
   title?: string;
@@ -15,10 +14,13 @@ export interface MarkdownDialogData {
 
 @Component({
   selector: 'app-markdown',
-  imports: [MarkdownModule, MatDialogModule, MatButtonModule, MatIconModule, ClipboardModule],
   templateUrl: './markdown.component.html',
   styleUrl: './markdown.component.scss',
-  standalone: true
+  standalone: true,
+  imports: [
+    MaterialModule,
+    ExternalMarkdownComponent
+  ]
 })
 export class MarkdownComponent implements OnInit {
 

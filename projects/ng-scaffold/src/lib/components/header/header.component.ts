@@ -1,6 +1,15 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
 import { HeaderConfig, HeaderResponsiveConfig, MenuButton, ScaffoldLibraryConfig } from '../../models';
+import { InputComponent } from '../../shared/components/input/input.component';
 
 @Component({
   selector: 'lf-header',
@@ -14,7 +23,18 @@ import { HeaderConfig, HeaderResponsiveConfig, MenuButton, ScaffoldLibraryConfig
       transition(':leave', [animate('200ms ease-in', style({ transform: 'translateY(-100%)' }))])
     ])
   ],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    InputComponent
+  ]
 })
 export class HeaderComponent {
 

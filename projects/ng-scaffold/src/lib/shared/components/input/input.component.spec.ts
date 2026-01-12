@@ -1,6 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { By } from '@angular/platform-browser';
-import { SharedModule } from '../../shared.module';
 import { InputComponent } from './input.component';
 
 describe('InputComponent', () => {
@@ -9,9 +14,16 @@ describe('InputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedModule]
-    })
-      .compileComponents();
+      imports: [
+        InputComponent,
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InputComponent);
     component = fixture.componentInstance;

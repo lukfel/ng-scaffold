@@ -25,6 +25,7 @@
             "assets": [
               "src/favicon.ico",
               "src/apple-touch-icon.png",
+              "src/robots.txt",
               "src/assets",
               "src/manifest.webmanifest"
             ],
@@ -51,7 +52,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
+                  "maximumWarning": "3kb",
                   "maximumError": "5kb"
                 }
               ],
@@ -97,6 +98,7 @@
             "assets": [
               "src/favicon.ico",
               "src/apple-touch-icon.png",
+              "src/robots.txt",
               "src/assets",
               "src/manifest.webmanifest"
             ],
