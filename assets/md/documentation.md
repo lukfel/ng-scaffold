@@ -22,28 +22,39 @@ ng add @lukfel/ng-scaffold
 ```
 
 The ng add command will additionally try to perform the following actions:
-* Import `ScaffoldModule`
+* Import `ScaffoldComponent` in root
 * Inject `ScaffoldService` and initialize `ScaffoldConfig`
-* Wrap template with `<lf-scaffold>` 
+* Wrap template with `<lf-scaffold>`
 * Include styles
 
 
-## Module
-Import the `ScaffoldModule` into your `app.module.ts` file.
-
-* **Note:** (Optional) The library includes a built-in logging service called `Logger`, which logs library debugging events when a `ScaffoldLibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `production` is set to `true`.
+## Component
+Import the `ScaffoldComponent` into your `app.module.ts` or `app.component.ts` (standalone).
 
 ```ts
-import { ScaffoldModule } from '@lukfel/ng-scaffold';
-import { isDevMode } from '@angular/core';
+import { ScaffoldComponent } from '@lukfel/ng-scaffold';
 
-@NgModule({
   ...
   imports: [
-    ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode() }),    // Omit .forRoot(...) if logging is not required
+    ScaffoldComponent
   ]
-})
-export class AppModule { }
+```
+
+### (Optional) Provider
+The library uses the built-in logging service `Logger` to log debugging events when a `ScaffoldLibraryConfig` is provided and `debugging` is set to `true`. Logging is automatically disabled in production mode when `production` is set to `true`.
+
+```ts
+import { provideScaffold } from '@lukfel/ng-scaffold';
+import { isDevMode } from '@angular/core';
+
+  ...
+  providers: [
+    provideScaffold({
+      production: !isDevMode(),
+      debugging: isDevMode(),
+      outlineIcons: true
+    })
+  ]
 ```
 
 
@@ -59,7 +70,7 @@ export class AppComponent {
 
   public scaffoldConfig: ScaffoldConfig = {
     // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
-    headerConfig: { enable: true, title: 'Scaffold works!', gradient: true }
+    headerConfig: { enable: true, title: 'Scaffold works!' }
   };
 
   constructor(private scaffoldService: ScaffoldService) {
@@ -265,8 +276,9 @@ This library includes several utility services:
 - **`LocalStorageService`** – Handle local storage
 
 ### Logger
-Logs internal library information if `debugging` is `true` and hides application logs during production if `production` is `true`.
-* **Note:** `ScaffoldLibraryConfig` must be set during initialization ``ScaffoldModule.forRoot( { production: !isDevMode(), debugging: isDevMode() } )``
+Logs information during development and hides all logs during production.
+
+* **Note:** Use the provoder `provideScaffold({ production: !isDevMode() })` to disable logs in production
 
 ```ts
 import { Logger } from '@lukfel/ng-scaffold';
@@ -378,9 +390,9 @@ export class AppComponent {
 
 
 ## (Optional) Standalone Components
-In addition to the components provided by default by the the `ScaffoldModule` there are several standalone components that can be utilized.
+In addition to the scaffold components provided by default by the the `ScaffoldComponent` there are several standalone components that can be utilized.
 
-* **Note:** Standalone components must be imported manually and are not part of the `ScaffoldModule` import
+* **Note:** Standalone components must be imported manually and are not part of the `ScaffoldComponent` import
 
 ### List
 A standalone Material Design inspired list and table hybrid component for displaying structured collections of items. It supports avatars, titles, subtitles, actions, selections and dragging — making it ideal for dashboards, inventories, and administrative views.
@@ -537,14 +549,10 @@ Intercept HTTP Calls and automatically show a loading spinner.
 * **Note:** The loading spinner can also be manually shown by udpating the value for `scaffoldConfig.loading` in the `ScaffoldService`
 
 ```ts
-import { ScaffoldLoadingInterceptor, ScaffoldModule } from '@lukfel/ng-scaffold';
+import { ScaffoldLoadingInterceptor, ScaffoldComponent } from '@lukfel/ng-scaffold';
 import { isDevMode } from '@angular/core';
 
-@NgModule({
   ...
-  imports: [
-    ScaffoldModule.forRoot({ production: !isDevMode(), debugging: isDevMode() }),    // Omit .forRoot(...) if logging is not required
-  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -552,6 +560,4 @@ import { isDevMode } from '@angular/core';
       multi: true
     }
   ]
-})
-export class AppModule { }
 ```
