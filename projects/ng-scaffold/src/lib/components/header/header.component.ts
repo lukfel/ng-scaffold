@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -44,10 +44,10 @@ export class HeaderComponent {
   @Input() public routeLoading: boolean = false;
   @Input() public currentRoute: string;
 
-  @Output() public headerConfigUpdateEvent = new EventEmitter<Partial<HeaderConfig>>();
-  @Output() public headerButtonClickEvent = new EventEmitter<string>();
-  @Output() public headerInputSubmitEvent = new EventEmitter<string>();
-  @Output() public headerInputChangeEvent = new EventEmitter<string>();
+  public readonly headerConfigUpdateEvent = output<Partial<HeaderConfig>>();
+  public readonly headerButtonClickEvent = output<string>();
+  public readonly headerInputSubmitEvent = output<string>();
+  public readonly headerInputChangeEvent = output<string>();
 
 
   public mobileButton: MenuButton;

@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, ContentChild, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges, output, contentChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
@@ -34,10 +34,10 @@ export class ListComponent implements OnInit, OnChanges {
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
 
-  @ContentChild(ListItemAvatarDirective) public avatarTemplate?: ListItemAvatarDirective;
-  @ContentChild(ListItemTitleDirective) public titleTemplate?: ListItemTitleDirective;
-  @ContentChild(ListItemSubtitleDirective) public subtitleTemplate?: ListItemSubtitleDirective;
-  @ContentChild(ListItemButtonsDirective) public buttonsTemplate?: ListItemButtonsDirective;
+  public readonly avatarTemplate = contentChild(ListItemAvatarDirective);
+  public readonly titleTemplate = contentChild(ListItemTitleDirective);
+  public readonly subtitleTemplate = contentChild(ListItemSubtitleDirective);
+  public readonly buttonsTemplate = contentChild(ListItemButtonsDirective);
 
   @Input() public config: ListConfig | null = null;
   @Input() public header: ListHeader | null = null;
@@ -48,11 +48,20 @@ export class ListComponent implements OnInit, OnChanges {
   @Input() public dropListId: string;
   @Input() public connectedDropListIds: string[];
 
-  @Output() public sortChangeEvent = new EventEmitter<{ sortToken: string, sortAsc: boolean }>();
-  @Output() public selectionChangeEvent = new EventEmitter<ListItem[]>();
-  @Output() public itemClickEvent = new EventEmitter<ListItem>();
-  @Output() public itemDropEvent = new EventEmitter<{ items: ListItem[], id: string }>();
-  @Output() public buttonClickEvent = new EventEmitter<{ buttonId: string, item: ListItem }>();
+  public readonly sortChangeEvent = output<{
+    sortToken: string;
+    sortAsc: boolean;
+}>();
+  public readonly selectionChangeEvent = output<ListItem[]>();
+  public readonly itemClickEvent = output<ListItem>();
+  public readonly itemDropEvent = output<{
+    items: ListItem[];
+    id: string;
+}>();
+  public readonly buttonClickEvent = output<{
+    buttonId: string;
+    item: ListItem;
+}>();
 
 
   public sortToken: string;

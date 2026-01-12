@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +24,7 @@ export class ContentTitleCardComponent {
   @Input() public isMobile: boolean = false;
   @Input() public routeHistory: string[] = [];
 
-  @Output() public backButtonClickEvent = new EventEmitter<void>();
+  public readonly backButtonClickEvent = output<void>();
 
 
   public backButtonClicked(): void {

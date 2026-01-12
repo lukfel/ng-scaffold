@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, inject, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -29,14 +29,14 @@ export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
   private cd = inject(ChangeDetectorRef);
 
 
-  @ViewChild('input') public input: ElementRef = null!;
+  public readonly input = viewChild<ElementRef>('input');
 
   @Input() public inputConfig: HeaderInputConfig = {};
   @Input() public isMobile: boolean = false;
 
-  @Output() public inputSubmitEvent = new EventEmitter<string>();
-  @Output() public inputChangeEvent = new EventEmitter<string>();
-  @Output() public inputPrefixActionEvent = new EventEmitter<void>();
+  public readonly inputSubmitEvent = output<string>();
+  public readonly inputChangeEvent = output<string>();
+  public readonly inputPrefixActionEvent = output<void>();
 
 
   public inputValue: string = '';
@@ -48,8 +48,9 @@ export class InputComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    if (this.input && this.inputConfig.autoFocus) {
-      this.input.nativeElement.focus();
+    const input = this.input();
+    if (input && this.inputConfig.autoFocus) {
+      input.nativeElement.focus();
       this.cd.detectChanges();
     }
   }

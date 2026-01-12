@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -25,8 +25,8 @@ export class FloatingButtonComponent implements OnInit {
   @Input() public isMobile: boolean = false;
   @Input() public bottomBarEnabled: boolean = false;
 
-  @Output() public floatingButtonConfigUpdateEvent = new EventEmitter<Partial<FloatingButtonConfig>>();
-  @Output() public floatingButtonClickEvent = new EventEmitter<string>();
+  public readonly floatingButtonConfigUpdateEvent = output<Partial<FloatingButtonConfig>>();
+  public readonly floatingButtonClickEvent = output<string>();
 
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class FloatingButtonComponent implements OnInit {
   }
 
   public buttonClicked(id?: string): void {
-    this.floatingButtonClickEvent.emit(id);
+    this.floatingButtonClickEvent.emit(id || '');
   }
 
 }

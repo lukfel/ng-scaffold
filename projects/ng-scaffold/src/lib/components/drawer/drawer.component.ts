@@ -1,5 +1,5 @@
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, output } from '@angular/core';
 import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
@@ -22,7 +22,7 @@ export class DrawerComponent implements OnInit {
   @Input() public headerEnabled: boolean = false;
   @Input() public drawerPortal: ComponentPortal<unknown> | TemplatePortal<unknown> | null;
 
-  @Output() public drawerConfigUpdateEvent = new EventEmitter<Partial<DrawerConfig>>();
+  public readonly drawerConfigUpdateEvent = output<Partial<DrawerConfig>>();
 
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
@@ -50,7 +50,7 @@ export class NavbarComponent {
   @Input() public isMobile: boolean = false;
   @Input() public currentRoute: string;
 
-  @Output() public navbarButtonClickEvent = new EventEmitter<string>();
+  public readonly navbarButtonClickEvent = output<string>();
 
 
   public buttonClicked(id: string): void {

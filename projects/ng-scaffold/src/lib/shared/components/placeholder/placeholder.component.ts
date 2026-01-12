@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, inject, Input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CONFIG } from '../../../config/config.token';
@@ -25,5 +25,5 @@ export class PlaceholderComponent {
 
   @Input() public placeholderConfig: PlaceholderConfig;
 
-  @Output() public buttonClickEvent = new EventEmitter<void>();
+  public readonly buttonClickEvent = output<void>();
 }

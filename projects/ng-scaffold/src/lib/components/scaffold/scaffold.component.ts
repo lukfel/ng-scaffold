@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 
-import { Component, DOCUMENT, ElementRef, EventEmitter, inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, DOCUMENT, ElementRef, inject, OnDestroy, OnInit, output, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { CONFIG } from '../../config/config.token';
@@ -28,15 +28,15 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   private document = inject<Document>(DOCUMENT);
 
 
-  @ViewChild('scrollContainer', { static: true }) public scrollContainer: ElementRef;
-  @ViewChild('content', { static: true }) public content: ElementRef;
+  public readonly scrollContainer = viewChild<ElementRef>('scrollContainer');
+  public readonly content = viewChild<ElementRef>('content');
 
-  @Output() public headerButtonClickEvent = new EventEmitter<string>();
-  @Output() public headerInputSubmitEvent = new EventEmitter<string>();
-  @Output() public headerInputChangeEvent = new EventEmitter<string>();
-  @Output() public navbarButtonClickEvent = new EventEmitter<string>();
-  @Output() public floatingButtonClickEvent = new EventEmitter<string>();
-  @Output() public bottomBarButtonClickEvent = new EventEmitter<string>();
+  public readonly headerButtonClickEvent = output<string>();
+  public readonly headerInputSubmitEvent = output<string>();
+  public readonly headerInputChangeEvent = output<string>();
+  public readonly navbarButtonClickEvent = output<string>();
+  public readonly floatingButtonClickEvent = output<string>();
+  public readonly bottomBarButtonClickEvent = output<string>();
 
 
   public scaffoldConfig: ScaffoldConfig | null = null;
@@ -111,8 +111,9 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         this.routeHistory = routeHistory;
       }
 
-      if (this.scrollContainer && this.scaffoldConfig?.scrollPositionRestoration) {
-        this.scrollContainer.nativeElement.scrollTop = 0;
+      const scrollContainer = this.scrollContainer();
+      if (scrollContainer && this.scaffoldConfig?.scrollPositionRestoration) {
+        scrollContainer.nativeElement.scrollTop = 0;
       }
     }));
 
@@ -127,8 +128,9 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
     }));
 
     // Listen to scroll events
-    if (this.scrollContainer) {
-      const element: HTMLElement = this.scrollContainer.nativeElement;
+    const scrollContainer = this.scrollContainer();
+    if (scrollContainer) {
+      const element: HTMLElement = scrollContainer.nativeElement;
 
       this._subscription.add(fromEvent(element, 'scroll').pipe(
         distinctUntilChanged(),
@@ -204,8 +206,9 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   }
 
   public floatingButtonClicked(id: string): void {
-    if (!id && this.scrollContainer) {
-      this.scrollContainer.nativeElement.scrollTop = 0;
+    const scrollContainer = this.scrollContainer();
+    if (!id && scrollContainer) {
+      scrollContainer.nativeElement.scrollTop = 0;
     } else {
       this.scaffoldService.buttonClickEventValue = id;
       this.floatingButtonClickEvent.emit(id);

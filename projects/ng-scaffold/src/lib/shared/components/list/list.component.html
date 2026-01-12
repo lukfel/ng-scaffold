@@ -161,9 +161,9 @@
       [matRippleDisabled]="!item.clickable"
       (click)="item.clickable && !item.disabled ? clickItem(item, $event) : null">
       <!-- avatar -->
-      @if (avatarTemplate) {
+      @if (avatarTemplate()) {
         <ng-container
-          [ngTemplateOutlet]="avatarTemplate.templateRef"
+          [ngTemplateOutlet]="avatarTemplate()!.templateRef"
           [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
       } @else if (item.avatar) {
         <div class="lf-list-item-avatar px-2">
@@ -188,19 +188,19 @@
       <!-- title -->
       <div class="lf-list-item-title-wrapper px-2">
         <span class="lf-list-item-title">
-          @if (titleTemplate) {
+          @if (titleTemplate()) {
             <ng-container
-              [ngTemplateOutlet]="titleTemplate.templateRef"
+              [ngTemplateOutlet]="titleTemplate()!.templateRef"
               [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
           } @else {
             {{ item.title }}
           }
         </span>
-        @if (item.subtitle || subtitleTemplate) {
+        @if (item.subtitle || subtitleTemplate()) {
           <span class="lf-list-item-subtitle">
-            @if (subtitleTemplate) {
+            @if (subtitleTemplate()) {
               <ng-container
-                [ngTemplateOutlet]="subtitleTemplate.templateRef"
+                [ngTemplateOutlet]="subtitleTemplate()!.templateRef"
                 [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
             } @else {
               {{ item.subtitle }}
@@ -211,9 +211,9 @@
 
       <!-- buttons -->
       <div class="lf-list-item-buttons">
-        @if (buttonsTemplate) {
+        @if (buttonsTemplate()) {
           <ng-container
-            [ngTemplateOutlet]="buttonsTemplate.templateRef"
+            [ngTemplateOutlet]="buttonsTemplate()!.templateRef"
             [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
         } @else {
           @let combinedButtons = getCombinedButtons(item);

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, inject, Input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,7 +36,7 @@ export class FileUploadComponent {
   @Input() public accept: string;
   @Input() public tooltip: string;
 
-  @Output() public fileChangeEvent: EventEmitter<File> = new EventEmitter<File>();
+  public readonly fileChangeEvent = output<File>();
 
 
   public selectFile(event: Event): void {
