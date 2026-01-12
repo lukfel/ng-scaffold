@@ -1,12 +1,13 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
 import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldComponent, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
-import { MaterialModule } from './shared/modules/material.module';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,10 @@ import { MaterialModule } from './shared/modules/material.module';
   imports: [
     CommonModule,
     RouterModule,
-    MaterialModule,
-    ScaffoldComponent
+    ScaffoldComponent,
+    MatListModule,
+    MatIconModule,
+    MatDividerModule
   ]
 })
 export class AppComponent {

@@ -1,9 +1,9 @@
-import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { CONFIG } from '../../scaffold.config';
 import { LoadingOverlayConfig, ScaffoldLibraryConfig } from '../../models';
+import { CONFIG } from '../../scaffold.config';
 import { ScaffoldService } from '../../services';
 
 @Component({
@@ -13,6 +13,7 @@ import { ScaffoldService } from '../../services';
     standalone: true,
     imports: [
         CommonModule,
+        PortalModule,
         MatProgressSpinner
     ]
 })

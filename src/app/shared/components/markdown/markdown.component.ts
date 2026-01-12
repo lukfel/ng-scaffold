@@ -1,9 +1,10 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { SnackbarService } from '@lukfel/ng-scaffold';
 import { MarkdownComponent as ExternalMarkdownComponent } from 'ngx-markdown';
-import { MaterialModule } from '../../modules/material.module';
 
 export interface MarkdownDialogData {
   title?: string;
@@ -18,7 +19,9 @@ export interface MarkdownDialogData {
   styleUrl: './markdown.component.scss',
   standalone: true,
   imports: [
-    MaterialModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
     ExternalMarkdownComponent
   ]
 })

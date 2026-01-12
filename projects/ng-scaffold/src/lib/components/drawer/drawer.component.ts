@@ -11,8 +11,8 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
   standalone: true,
   imports: [
     CommonModule,
-    MatSidenavModule,
-    PortalModule
+    PortalModule,
+    MatSidenavModule
   ]
 })
 export class DrawerComponent implements OnInit {

@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { provideRouter } from '@angular/router';
 import { ScaffoldComponent } from '@lukfel/ng-scaffold';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './shared/modules/material.module';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        AppComponent,
-        MaterialModule,
-        ScaffoldComponent
+        ScaffoldComponent,
+        MatListModule,
+        MatIconModule,
+        MatDividerModule
       ],
       providers: [
         provideHttpClientTesting(),

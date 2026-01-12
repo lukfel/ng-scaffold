@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { MatIconRegistry } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { DomSanitizer } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { Observable, of } from 'rxjs';
-import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { StartpageComponent } from './startpage.component';
 
 describe('StartpageComponent', () => {
@@ -16,10 +21,15 @@ describe('StartpageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        StartpageComponent,
         CommonModule,
-        MaterialModule,
-        FormsModule
+        FormsModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule
       ],
       providers: [
         provideRouter([]),

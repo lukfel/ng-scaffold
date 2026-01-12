@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommonModule } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +17,7 @@ describe('ComponentsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         CommonModule,
+        MatDividerModule,
         PlaceholderComponent,
         FileUploadComponent,
         ColorPickerComponent,

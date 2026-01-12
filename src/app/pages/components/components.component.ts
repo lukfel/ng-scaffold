@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { BottomBarConfig, Button, ColorPickerComponent, FileUploadComponent, ListComponent, ListConfig, ListHeader, ListItem, PlaceholderComponent, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
-import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @Component({
   selector: 'app-components',
@@ -13,7 +13,7 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
   imports: [
     CommonModule,
     RouterModule,
-    MaterialModule,
+    MatDividerModule,
     PlaceholderComponent,
     FileUploadComponent,
     ColorPickerComponent,
