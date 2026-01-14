@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -42,7 +42,6 @@ export class StartpageComponent implements OnInit, OnDestroy {
   private themeService = inject(ThemeService);
   private dialogService = inject(DialogService);
   private logger = inject(Logger);
-  private cd = inject(ChangeDetectorRef);
 
 
   public scaffoldConfig: ScaffoldConfig = {};
@@ -102,10 +101,6 @@ export class StartpageComponent implements OnInit, OnDestroy {
 
     this._subscription.add(this.scaffoldService.headerInputChangeValue$.subscribe((value: string) => {
       this.inputValue = value;
-
-      if (!this.inputValue) {
-        this.cd.detectChanges();
-      }
     }));
   }
 

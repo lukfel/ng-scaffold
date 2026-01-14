@@ -29,7 +29,7 @@ export const APP_CONFIG: ApplicationConfig = {
         provideHttpClient(withInterceptorsFromDi()),
         { provide: HTTP_INTERCEPTORS, useClass: ScaffoldLoadingInterceptor, multi: true },
         provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
-        provideScaffold({ production: !isDevMode(), debugging: isDevMode(), outlineIcons: true }),
+        provideScaffold({ production: false, debugging: true, outlineIcons: true }),
         provideMarkdown({ loader: HttpClient, markedOptions: { provide: MARKED_OPTIONS, useFactory: markedOptionsFactory, }, sanitize: { provide: SANITIZE, useValue: SecurityContext.NONE }, })
     ]
 }

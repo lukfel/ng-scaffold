@@ -43,6 +43,7 @@ export class AppComponent {
   public scaffoldConfig: ScaffoldConfig = {
     // ScaffoldConfig
     scrollPositionRestoration: true,
+    anchorScrolling: true,
     // LoadingOverlayConfig
     loading: false,
     loadingOverlayConfig: {},

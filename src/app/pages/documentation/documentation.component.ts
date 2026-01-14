@@ -28,14 +28,4 @@ export class DocumentationComponent implements OnInit {
       }
     });
   }
-
-  public onMarkdownLoad(): void {
-    const fragment = this.route.snapshot.fragment;
-    if (fragment) {
-      const el = document.getElementById(fragment);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-  }
 }

@@ -7,12 +7,17 @@ import {
 } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
-import { ScaffoldService } from '../services';
+import { ScaffoldLibraryConfig } from '../models';
+import { CONFIG } from '../scaffold.config';
+import { Logger, ScaffoldService } from '../services';
 
 @Injectable()
 export class ScaffoldLoadingInterceptor implements HttpInterceptor {
 
+  public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+
   private scaffoldService = inject(ScaffoldService);
+  private logger = inject(Logger);
 
   private activeRequests = 0;
   private loadingDelay = 100; // milliseconds
@@ -40,13 +45,12 @@ export class ScaffoldLoadingInterceptor implements HttpInterceptor {
       //   }
       // }),
       finalize(() => {
-        this.activeRequests--;
-        console.log('Request finalized', req.url, 'Active requests now:', this.activeRequests);
+        this.activeRequests = Math.max(0, this.activeRequests - 1);
+        if (this.libraryConfig?.debugging) this.logger.log(`[Interceptor] Request finalized: ${req.url}, Active requests now: ${this.activeRequests}`);
 
         if (this.activeRequests === 0) {
           clearTimeout(this.spinnerTimeout);
           this.scaffoldService.updateScaffoldProperty('loading', false);
-          console.log('Spinner hidden');
         }
       })
     );
