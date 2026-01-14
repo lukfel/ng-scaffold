@@ -1,6 +1,5 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-
 import { CommonModule } from '@angular/common';
 import { Component, DOCUMENT, ElementRef, inject, OnDestroy, OnInit, output, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -246,7 +245,6 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   // Loading overlay
   private async toggleLoadingOverlay(loading: boolean): Promise<void> {
     if (loading) {
-      // const { LoadingOverlayComponent } = await import('../loading-overlay/loading-overlay.component');
       this.overlayService.open(LoadingOverlayComponent);
     } else {
       this.overlayService.close();
