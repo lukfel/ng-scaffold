@@ -40,9 +40,9 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   private breakpointService = inject(BreakpointService);
   private routerService = inject(RouterService);
   private overlayService = inject(OverlayService)
-  private logger = inject(Logger);
   private route = inject(ActivatedRoute);
   private document = inject<Document>(DOCUMENT);
+  private logger = inject(Logger);
 
 
   public readonly scrollContainer = viewChild<ElementRef>('scrollContainer');
@@ -177,6 +177,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
       this._subscription.unsubscribe();
     }
   }
+
 
   // Header
   public headerConfigUpdated(headerConfig: Partial<HeaderConfig>): void {
