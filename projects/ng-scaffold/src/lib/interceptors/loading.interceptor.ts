@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   HttpEvent,
   HttpHandler,
@@ -10,11 +11,12 @@ import { ScaffoldService } from '../services';
 
 @Injectable()
 export class ScaffoldLoadingInterceptor implements HttpInterceptor {
+
   private scaffoldService = inject(ScaffoldService);
 
   private activeRequests = 0;
   private loadingDelay = 100; // milliseconds
-  private spinnerTimeout: any;
+  private spinnerTimeout: ReturnType<typeof setTimeout>;
 
   public intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.activeRequests++;
@@ -39,11 +41,12 @@ export class ScaffoldLoadingInterceptor implements HttpInterceptor {
       // }),
       finalize(() => {
         this.activeRequests--;
+        console.log('Request finalized', req.url, 'Active requests now:', this.activeRequests);
 
         if (this.activeRequests === 0) {
-          // Clear any pending spinner timeout
           clearTimeout(this.spinnerTimeout);
           this.scaffoldService.updateScaffoldProperty('loading', false);
+          console.log('Spinner hidden');
         }
       })
     );

@@ -1,9 +1,9 @@
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ApplicationConfig, isDevMode, provideZoneChangeDetection, SecurityContext } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
-import { provideScaffold } from '@lukfel/ng-scaffold';
+import { provideScaffold, ScaffoldLoadingInterceptor } from '@lukfel/ng-scaffold';
 import { marked, MarkedOptions, Tokens } from 'marked';
 import { MARKED_OPTIONS, provideMarkdown, SANITIZE } from 'ngx-markdown';
 import { APP_ROUTES } from './app.routes';
@@ -27,7 +27,7 @@ export const APP_CONFIG: ApplicationConfig = {
         provideZoneChangeDetection(),
         provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
-        // { provide: HTTP_INTERCEPTORS, useClass: ScaffoldLoadingInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ScaffoldLoadingInterceptor, multi: true },
         provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
         provideScaffold({ production: !isDevMode(), debugging: isDevMode(), outlineIcons: true }),
         provideMarkdown({ loader: HttpClient, markedOptions: { provide: MARKED_OPTIONS, useFactory: markedOptionsFactory, }, sanitize: { provide: SANITIZE, useValue: SecurityContext.NONE }, })
