@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
 import { Component, DOCUMENT, ElementRef, inject, OnDestroy, OnInit, output, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { CONFIG } from '../../scaffold.config';
 import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
+import { CONFIG } from '../../scaffold.config';
 import { BreakpointService, Logger, OverlayService, RouterService, ScaffoldService } from '../../services';
 import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
@@ -14,6 +14,7 @@ import { DrawerComponent } from '../drawer/drawer.component';
 import { FloatingButtonComponent } from '../floating-button/floating-button.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
+import { LoadingOverlayComponent } from '../loading-overlay/loading-overlay.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
@@ -29,7 +30,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
     FooterComponent,
     ContentTitleCardComponent,
     FloatingButtonComponent,
-    BottomBarComponent
+    BottomBarComponent,
+    LoadingOverlayComponent
   ]
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
@@ -244,7 +246,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   // Loading overlay
   private async toggleLoadingOverlay(loading: boolean): Promise<void> {
     if (loading) {
-      const { LoadingOverlayComponent } = await import('../loading-overlay/loading-overlay.component');
+      // const { LoadingOverlayComponent } = await import('../loading-overlay/loading-overlay.component');
       this.overlayService.open(LoadingOverlayComponent);
     } else {
       this.overlayService.close();
