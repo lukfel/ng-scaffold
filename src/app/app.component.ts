@@ -1,6 +1,6 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -13,6 +13,7 @@ import packageJson from '../../package.json';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
@@ -162,16 +163,8 @@ export class AppComponent {
     }
   };
 
-  // RightMenuButtons for mobile
-  public mobileRightMenuButtons: MenuButton[] = [
-    {
-      id: 'menu',
-      matIcon: 'more_vert'
-    }
-  ];
-
   // External links
-  public externalMenuButtons: MenuButton[] = [
+  public externalMenuButtons = signal<MenuButton[]>([
     {
       id: 'https://www.uglygotchi.at',
       label: 'Uglygotchi',
@@ -196,7 +189,7 @@ export class AppComponent {
       svgIcon: 'wowen_logo',
       cssClass: 'lf-wowen-black'
     },
-  ];
+  ]);
 
   private currentTheme: string = '';
 

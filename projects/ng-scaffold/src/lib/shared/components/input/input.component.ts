@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnDestroy, computed, effect, inject, input, output, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, computed, effect, inject, input, model, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { HeaderInputConfig } from '../../../models';
   selector: 'lf-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
@@ -39,7 +40,7 @@ export class InputComponent implements OnDestroy {
 
   public inputConfigComputed = computed<HeaderInputConfig>(() => this.inputConfigDialog ?? this.inputConfig() ?? {})
 
-  public inputValue: string = '';
+  public inputValue = model<string>('');
 
 
   constructor() {
@@ -52,8 +53,8 @@ export class InputComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.inputValue = '';
-    this.inputChangeEvent.emit(this.inputValue);
+    this.inputValue.set('');
+    this.inputChangeEvent.emit(this.inputValue());
   }
 
   public inputSubmitted(value: string): void {
@@ -77,7 +78,7 @@ export class InputComponent implements OnDestroy {
   }
 
   public clearInput(): void {
-    this.inputValue = '';
-    this.inputChangeEvent.emit(this.inputValue);
+    this.inputValue.set('');
+    this.inputChangeEvent.emit(this.inputValue());
   }
 }

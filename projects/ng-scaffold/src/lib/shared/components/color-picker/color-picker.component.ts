@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, input, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +12,7 @@ import { Logger } from '../../../services';
   selector: 'lf-color-picker',
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
@@ -36,25 +37,9 @@ export class ColorPickerComponent implements OnInit {
 
   public readonly colorChangeEvent = output<string>();
 
-  public selectedColor: string = '';
-
-
-  ngOnInit(): void {
-    const color: 'primary' | 'accent' | 'warn' | string = this.color();
-    if (color && color !== 'primary' && color !== 'accent' && color !== 'warn') {
-      this.selectedColor = color;
-    }
-  }
-
-
-  public selectColor(event: string): void {
-    this.selectedColor = event;
-    this.colorChangeEvent.emit(event);
-  }
-
-  // Get bright or dark color depeindung on background color
-  public getContrastTextColor(hexColor: string): string {
-    const hex = hexColor.replace('#', '');
+  public selectedColor = signal<string>('');
+  public backgroundColor = computed<string>(() => {
+    const hex = this.selectedColor().replace('#', '');
 
     const r = parseInt(hex.substr(0, 2), 16);
     const g = parseInt(hex.substr(2, 2), 16);
@@ -63,5 +48,19 @@ export class ColorPickerComponent implements OnInit {
     const brightness = (r * 299 + g * 587 + b * 114) / 1000;
 
     return brightness > 128 ? '#000000' : '#ffffff';
+  });
+
+
+  ngOnInit(): void {
+    const color: 'primary' | 'accent' | 'warn' | string = this.color();
+    if (color && color !== 'primary' && color !== 'accent' && color !== 'warn') {
+      this.selectedColor.set(color);
+    }
+  }
+
+
+  public selectColor(event: string): void {
+    this.selectedColor.set(event);
+    this.colorChangeEvent.emit(event);
   }
 }

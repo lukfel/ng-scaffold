@@ -1,6 +1,6 @@
 import { ComponentPortal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, input, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit, output } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
 
@@ -8,6 +8,7 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-drawer',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,

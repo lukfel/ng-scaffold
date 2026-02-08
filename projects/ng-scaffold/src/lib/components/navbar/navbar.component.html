@@ -13,7 +13,7 @@
           @if (i < 5) {
             <div
               class="lf-navbar-item"
-              [class.lf-navbar-item-active]="isActive(button.id)"
+              [class.lf-navbar-item-active]="isActive()(button.id)"
               [ngClass]="button.cssClass"
               (click)="buttonClicked(button.id)"
               tabindex="0"
@@ -32,7 +32,7 @@
               @if (button?.label) {
                 <span class="lf-navbar-item-label">
                   {{
-                    isActive(button.id) || config.showAllLabels
+                    isActive()(button.id) || config.showAllLabels
                       ? button.label
                       : isMobile()
                         ? ""

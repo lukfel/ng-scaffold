@@ -2,7 +2,7 @@
   #colorPicker
   type="color"
   onclick="this.value = null"
-  [ngModel]="selectedColor"
+  [ngModel]="selectedColor()"
   (ngModelChange)="selectColor($event)"
   style="opacity: 0; position: absolute; width: 0; height: 36px; border: none" />
 
@@ -10,9 +10,9 @@
   mat-flat-button
   class="lf-button"
   type="button"
-  [color]="selectedColor ? null : color()"
-  [style.background]="selectedColor"
-  [style.color]="getContrastTextColor(selectedColor)"
+  [color]="selectedColor() ? null : color()"
+  [style.background]="selectedColor()"
+  [style.color]="backgroundColor()"
   [disabled]="disabled()"
   (click)="colorPicker.click()"
   [matTooltip]="tooltip()">

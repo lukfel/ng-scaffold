@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { BottomBarConfig, Button, ColorPickerComponent, FileUploadComponent, ListComponent, ListConfig, ListHeader, ListItem, PlaceholderComponent, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
@@ -9,6 +9,7 @@ import { take } from 'rxjs';
   selector: 'app-components',
   templateUrl: './components.component.html',
   styleUrls: ['./components.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
@@ -26,35 +27,35 @@ export class ComponentsComponent implements OnInit {
   private snackbarService = inject(SnackbarService);
 
 
-  public listConfig: ListConfig = {
+  public listConfig = signal<ListConfig>({
     enableSelection: true,
     enableDragging: true,
     mode: 'flat',
     initialSortToken: 'title',
     initialSortAsc: true,
     showDividers: true
-  }
+  });
 
-  public listHeader: ListHeader = {
+  public listHeader = signal<ListHeader>({
     matIcon: 'sort',
     items: [
       { title: 'Items', sortToken: 'title' }
     ]
-  };
+  });
 
-  public listItems: ListItem[] = [
+  public listItems = signal<ListItem[]>([
     { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
     { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
     { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
-  ];
+  ]);
 
-  public listButtons: Button[] = [
+  public listButtons = signal<Button[]>([
     { id: 'edit', matIcon: 'edit' },
     { id: 'delete', matIcon: 'delete', cssClass: 'lf-ugly-orange' }
-  ];
+  ]);
 
-  public fileName: string = '';
-  public color: string = '';
+  public fileName = signal<string>('');
+  public color = signal<string>('');
 
   public placeholderConfig: PlaceholderConfig = {
     matIcon: 'widgets',
@@ -69,13 +70,13 @@ export class ComponentsComponent implements OnInit {
   ngOnInit(): void {
     this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (scaffoldConfig.contentTitleCardConfig) {
-        scaffoldConfig.contentTitleCardConfig.label = 'Components';
+        this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Components' });
       }
     });
 
     this.scaffoldService.buttonClickEventValue$.subscribe((buttonClickEventValue: string) => {
       if (buttonClickEventValue === 'bottombar_close') {
-        this.listItems = this.listItems.map((item: ListItem) => ({ ...item, checked: false }));
+        this.listItems.set(this.listItems().map((item: ListItem) => ({ ...item, checked: false })));
         this.onListSelectionChange();
       }
     });
@@ -83,16 +84,16 @@ export class ComponentsComponent implements OnInit {
 
   public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
     if (event?.sortToken === 'title') {
-      this.listItems.sort((a, b) => {
+      this.listItems.set(this.listItems().sort((a, b) => {
         if (!a.title || !b.title) return 0;
         if (event.sortAsc) return a.title.localeCompare(b.title);
         return b.title.localeCompare(a.title);
-      });
+      }));
     }
   }
 
   public onListSelectionChange(): void {
-    const checkedItems: ListItem[] = this.listItems.filter((item: ListItem) => item.checked);
+    const checkedItems: ListItem[] = this.listItems().filter((item: ListItem) => item.checked);
 
     const bottomBarConfig: BottomBarConfig = {
       enable: checkedItems?.length > 0,
@@ -116,11 +117,11 @@ export class ComponentsComponent implements OnInit {
   }
 
   public onFileChange(file: File): void {
-    this.fileName = file.name;
+    this.fileName.set(file.name);
   }
 
   public onColorChange(color: string): void {
-    this.color = color;
+    this.color.set(color);
   }
 
   public onPlaceholderButtonClick(): void {

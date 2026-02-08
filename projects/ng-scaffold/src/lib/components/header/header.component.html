@@ -72,7 +72,7 @@
       <div class="spacer"></div>
       <!-- right menu buttons -->
       @if (config.responsiveConfig?.enable && isMobile()) {
-        @let exludedButtons = getRightExcludedButtons();
+        @let exludedButtons = rightExcludedButtons();
         @for (button of exludedButtons; track button.id) {
           <ng-container
             [ngTemplateOutlet]="menuButtonTemplate"
@@ -80,7 +80,7 @@
               menuButton: button,
             }"></ng-container>
         }
-        @let mobileButton = getRightMobileButton();
+        @let mobileButton = rightMobileButton();
         <ng-container
           [ngTemplateOutlet]="menuButtonTemplate"
           [ngTemplateOutletContext]="{
@@ -114,7 +114,7 @@
       <button
         mat-button
         class="lf-header-menu-button"
-        [class.lf-header-menu-button-active]="isActive(menuButton.id) && !menuButton.disabled"
+        [class.lf-header-menu-button-active]="isActive()(menuButton.id) && !menuButton.disabled"
         [ngClass]="menuButton.cssClass"
         [disabled]="menuButton.disabled"
         (click)="buttonClicked(menuButton.id)"
@@ -173,7 +173,7 @@
         @if (button.label) {
           <button
             mat-menu-item
-            [class.lf-header-menu-button-active]="isActive(button.id)"
+            [class.lf-header-menu-button-active]="isActive()(button.id)"
             [ngClass]="button.cssClass"
             [disabled]="button.disabled"
             (click)="buttonClicked(button.id)"

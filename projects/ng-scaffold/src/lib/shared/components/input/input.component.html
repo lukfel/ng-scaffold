@@ -10,7 +10,7 @@
         type="text"
         [(ngModel)]="inputValue"
         [disabled]="config.disabled!"
-        (keyup.enter)="inputSubmitted(inputValue)"
+        (keyup.enter)="inputSubmitted(inputValue())"
         (ngModelChange)="inputChanged($event)"
         #input />
       @if (isMobile()) {
@@ -18,7 +18,7 @@
           <mat-icon>arrow_back</mat-icon>
         </button>
       }
-      @if (inputValue) {
+      @if (inputValue()) {
         <button class="lf-input-close-button" mat-icon-button matSuffix (click)="clearInput()">
           <mat-icon>close</mat-icon>
         </button>
@@ -29,7 +29,7 @@
           matSuffix
           color="accent"
           type="submit"
-          (click)="inputSubmitted(inputValue)">
+          (click)="inputSubmitted(inputValue())">
           <mat-icon>
             {{ config.matIconSubmit }}
           </mat-icon>

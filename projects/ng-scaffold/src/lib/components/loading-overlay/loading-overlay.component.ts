@@ -1,6 +1,6 @@
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { LoadingOverlayConfig, ScaffoldLibraryConfig } from '../../models';
 import { CONFIG } from '../../scaffold.config';
@@ -10,6 +10,7 @@ import { ScaffoldService } from '../../services';
     selector: 'lf-loading-overlay',
     templateUrl: './loading-overlay.component.html',
     styleUrls: ['./loading-overlay.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
         CommonModule,
@@ -24,15 +25,16 @@ export class LoadingOverlayComponent implements OnInit {
     private scaffoldService = inject(ScaffoldService);
 
 
-    public portal: ComponentPortal<any> | null = null;
-    public loadingOverlayConfig: LoadingOverlayConfig | null = null;
+    public loadingOverlayConfig = signal<LoadingOverlayConfig | null>(null);
+    public portal = signal<ComponentPortal<any> | null>(null);
 
 
     ngOnInit(): void {
-        this.loadingOverlayConfig = this.scaffoldService.scaffoldConfig?.loadingOverlayConfig || null;
+        this.loadingOverlayConfig.set(this.scaffoldService.scaffoldConfig?.loadingOverlayConfig || null);
 
-        if (this.loadingOverlayConfig?.customComponent) {
-            this.portal = new ComponentPortal(this.loadingOverlayConfig?.customComponent);
+        const customComponent = this.loadingOverlayConfig()?.customComponent || null;
+        if (customComponent) {
+            this.portal.set(new ComponentPortal(customComponent));
         }
     }
 }

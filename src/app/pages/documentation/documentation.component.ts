@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { MarkdownComponent } from 'ngx-markdown';
 import { take } from 'rxjs';
@@ -9,6 +8,7 @@ import { take } from 'rxjs';
   selector: 'app-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
@@ -18,13 +18,12 @@ import { take } from 'rxjs';
 export class DocumentationComponent implements OnInit {
 
   private scaffoldService = inject(ScaffoldService);
-  private route = inject(ActivatedRoute);
 
 
   ngOnInit(): void {
     this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (scaffoldConfig.contentTitleCardConfig) {
-        scaffoldConfig.contentTitleCardConfig.label = 'Documentation';
+        this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Documentation' });
       }
     });
   }

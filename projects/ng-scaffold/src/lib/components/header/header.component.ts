@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -8,13 +8,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { HeaderConfig, HeaderResponsiveConfig, MenuButton, ScaffoldLibraryConfig } from '../../models';
+import { HeaderConfig, MenuButton, ScaffoldLibraryConfig } from '../../models';
 import { InputComponent } from '../../shared/components/input/input.component';
 
 @Component({
   selector: 'lf-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slideDownUp', [
       state('void', style({ transform: 'translateY(-100%)' })),
@@ -49,8 +50,51 @@ export class HeaderComponent {
   public readonly headerInputSubmitEvent = output<string>();
   public readonly headerInputChangeEvent = output<string>();
 
+  public isActive = computed(() => {
+    const currentRoute = this.currentRoute();
+    const route: string = currentRoute?.substring(currentRoute.indexOf('/') + 1) || '';
+    return (id: string): boolean => !!route && !!id && route === id;
+  });
 
-  public mobileButton: MenuButton;
+
+  public rightMobileButton = computed<MenuButton | null>(() => {
+    const headerConfig = this.headerConfig();
+    const rightMenuButtons = headerConfig?.rightMenuButtons ?? [];
+
+    if (!rightMenuButtons.length) return null;
+
+    const config = headerConfig?.responsiveConfig;
+    if (!config?.enable) return null;
+
+    const includedButtons = rightMenuButtons.filter(
+      button => !config.excludeButtonIds?.includes(button.id)
+    );
+
+    return {
+      id: '',
+      matIcon:
+        !config.matIcon && !config.svgIcon && !config.label
+          ? 'more_vert'
+          : config.matIcon,
+      svgIcon: config.svgIcon,
+      label: config.label,
+      menuButtons: includedButtons
+    };
+  });
+
+  public rightExcludedButtons = computed<MenuButton[] | null>(() => {
+    const headerConfig = this.headerConfig();
+    const rightMenuButtons = headerConfig?.rightMenuButtons ?? [];
+
+    if (!rightMenuButtons.length) return null;
+
+    const config = headerConfig?.responsiveConfig;
+    if (!config?.enable) return null;
+
+    return rightMenuButtons.filter(button =>
+      config.excludeButtonIds?.includes(button.id)
+    );
+  });
 
 
   public buttonClicked(id?: string): void {
@@ -72,43 +116,5 @@ export class HeaderComponent {
   public inputClosed(): void {
     this.headerConfigUpdateEvent.emit({ inputConfig: { enable: false } });
   }
-
-  public isActive(id: string): boolean {
-    const currentRoute = this.currentRoute();
-    if (!id || !currentRoute) {
-      return false;
-    }
-
-    const route: string = currentRoute.substring(currentRoute.indexOf('/') + 1);
-    return route === id;
-  }
-
-  public getRightMobileButton(): MenuButton | null {
-    const rightMenuButtons: MenuButton[] = this.headerConfig()?.rightMenuButtons || [];
-    if (!rightMenuButtons?.length) return null;
-
-    const config: HeaderResponsiveConfig | undefined = this.headerConfig()?.responsiveConfig;
-    if (!config?.enable) return null;
-
-    const includedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => !config?.excludeButtonIds?.includes(button.id));
-    return {
-      id: '',
-      matIcon: (!config.matIcon && !config.svgIcon && !config.label) ? 'more_vert' : config.matIcon,
-      svgIcon: config.svgIcon,
-      label: config.label,
-      menuButtons: [...includedButtons]
-    };
-  }
-
-  public getRightExcludedButtons(): MenuButton[] | null {
-    const rightMenuButtons: MenuButton[] = this.headerConfig()?.rightMenuButtons || [];
-    if (!rightMenuButtons?.length) return null;
-
-    const config: HeaderResponsiveConfig | undefined = this.headerConfig()?.responsiveConfig;
-    if (!config?.enable) return null;
-
-    const excludedButtons: MenuButton[] = rightMenuButtons.filter((button: MenuButton) => config?.excludeButtonIds?.includes(button.id));
-    return excludedButtons;
-  }
-
+  
 }

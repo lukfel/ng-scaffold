@@ -50,7 +50,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the header component', () => {
-    component.headerConfig = { enable: true };
+    component.headerConfig.set({ enable: true });
     fixture.detectChanges();
     const headerDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(HeaderComponent)
@@ -60,7 +60,7 @@ describe('ScaffoldComponent', () => {
 
 
   it('should render the navbar component', () => {
-    component.navbarConfig = { enable: true };
+    component.navbarConfig.set({ enable: true });
     fixture.detectChanges();
     const navbarDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(NavbarComponent)
@@ -69,7 +69,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the drawer component', () => {
-    component.drawerConfig = { enable: true };
+    component.drawerConfig.set({ enable: true });
     fixture.detectChanges();
     const drawerDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(DrawerComponent)
@@ -78,7 +78,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the title card component', () => {
-    component.contentTitleCardConfig = { enable: true };
+    component.contentTitleCardConfig.set({ enable: true });
     fixture.detectChanges();
     const titleDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(ContentTitleCardComponent)
@@ -87,7 +87,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the footer component', () => {
-    component.footerConfig = { enable: true };
+    component.footerConfig.set({ enable: true });
     fixture.detectChanges();
     const footerDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(FooterComponent)
@@ -96,7 +96,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the floating button component', () => {
-    component.floatingButtonConfig = { enable: true };
+    component.floatingButtonConfig.set({ enable: true });
     fixture.detectChanges();
     const buttonDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(FloatingButtonComponent)
@@ -105,7 +105,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the bottom bar component', () => {
-    component.bottomBarConfig = { enable: true };
+    component.bottomBarConfig.set({ enable: true });
     fixture.detectChanges();
     const buttonDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(BottomBarComponent)

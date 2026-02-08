@@ -1,65 +1,65 @@
-@if (scaffoldConfig) {
-  <div class="lf-startpage">
-    <h1>Demo</h1>
-    <p>
-      This is a simple demo page for the Angular Scaffold library
-      <code>&#64;lukfel/ng-scaffold.</code>
-      <br />
-      Play around with the individual UI elements and copy the configuration to your Angular
-      application. For more technical information see the
-      <a class="lf-link" [routerLink]="['/documentation']">Documentation</a>
-      .
-    </p>
-    <button mat-flat-button color="accent" (click)="copyConfig()">
-      <mat-icon>content_copy</mat-icon>
-      Copy current config
-    </button>
-    <mat-divider></mat-divider>
+<div class="lf-startpage">
+  <h1>Demo</h1>
+  <p>
+    This is a simple demo page for the Angular Scaffold library
+    <code>&#64;lukfel/ng-scaffold.</code>
+    <br />
+    Play around with the individual UI elements and copy the configuration to your Angular
+    application. For more technical information see the
+    <a class="lf-link" [routerLink]="['/documentation']">Documentation</a>
+    .
+  </p>
+  <button mat-flat-button color="accent" (click)="copyConfig()">
+    <mat-icon>content_copy</mat-icon>
+    Copy current config
+  </button>
+  <mat-divider></mat-divider>
 
-    <!-- Themes -->
-    <h2>Themes</h2>
-    <p>
-      Define multiple themes and change them dynamically by using the library's
-      <code>ThemeService</code>
-      or manually setting the corresponding css class of the theme.
-    </p>
-    <div class="theme-selector">
-      <div class="theme-button light" (click)="setTheme('')">
-        <div class="preview">
-          <div class="header pink"></div>
-          <div class="body">
-            <div class="accent blue"></div>
-          </div>
-        </div>
-      </div>
-      <div class="theme-button dark" (click)="setTheme('theme2')">
-        <div class="preview">
-          <div class="header pink"></div>
-          <div class="body">
-            <div class="accent blue"></div>
-          </div>
-        </div>
-      </div>
-      <div class="theme-button light" (click)="setTheme('theme3')">
-        <div class="preview">
-          <div class="header blue"></div>
-          <div class="body">
-            <div class="accent pink"></div>
-          </div>
-        </div>
-      </div>
-      <div class="theme-button dark" (click)="setTheme('theme4')">
-        <div class="preview">
-          <div class="header blue"></div>
-          <div class="body">
-            <div class="accent pink"></div>
-          </div>
+  <!-- Themes -->
+  <h2>Themes</h2>
+  <p>
+    Define multiple themes and change them dynamically by using the library's
+    <code>ThemeService</code>
+    or manually setting the corresponding css class of the theme.
+  </p>
+  <div class="theme-selector">
+    <div class="theme-button light" (click)="setTheme('')">
+      <div class="preview">
+        <div class="header pink"></div>
+        <div class="body">
+          <div class="accent blue"></div>
         </div>
       </div>
     </div>
-    <mat-divider></mat-divider>
+    <div class="theme-button dark" (click)="setTheme('theme2')">
+      <div class="preview">
+        <div class="header pink"></div>
+        <div class="body">
+          <div class="accent blue"></div>
+        </div>
+      </div>
+    </div>
+    <div class="theme-button light" (click)="setTheme('theme3')">
+      <div class="preview">
+        <div class="header blue"></div>
+        <div class="body">
+          <div class="accent pink"></div>
+        </div>
+      </div>
+    </div>
+    <div class="theme-button dark" (click)="setTheme('theme4')">
+      <div class="preview">
+        <div class="header blue"></div>
+        <div class="body">
+          <div class="accent pink"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
 
-    <!-- ScaffoldConfig -->
+  <!-- ScaffoldConfig -->
+  @if (scaffoldConfig(); as scaffoldConfig) {
     <h2>Scaffold</h2>
     <span class="link" (click)="openMarkdownDialog('ScaffoldConfig', 'scaffoldConfig.md')">
       View ScaffoldConfig
@@ -73,7 +73,11 @@
       .
     </p>
     <p>
-      <mat-slide-toggle [(ngModel)]="scaffoldConfig.scrollPositionRestoration">
+      <mat-slide-toggle
+        [ngModel]="scaffoldConfig.scrollPositionRestoration"
+        (ngModelChange)="
+          scaffoldService.updateScaffoldProperty('scrollPositionRestoration', $event)
+        ">
         Reset scroll position after navigation
       </mat-slide-toggle>
     </p>
@@ -82,22 +86,27 @@
         Loading (3 seconds)
       </button>
     </p> -->
-    <p>
-      <mat-slide-toggle
-        [(ngModel)]="loadingOverlayConfig.gradient"
-        (change)="showContainerLoading()">
-        Gradient loading spinner
-      </mat-slide-toggle>
-    </p>
+    @if (loadingOverlayConfig(); as loadingOverlayConfig) {
+      <p>
+        <mat-slide-toggle
+          [ngModel]="loadingOverlayConfig.gradient"
+          (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('loadingOverlayConfig', { gradient: $event });
+            showContainerLoading()
+          ">
+          Gradient loading spinner
+        </mat-slide-toggle>
+      </p>
+    }
     <!-- <p>
-      <mat-slide-toggle [(ngModel)]="scaffoldConfig.anchorScrolling">
+      <mat-slide-toggle [ngModel]="scaffoldConfig.anchorScrolling">
         Enable navigation to anchors
       </mat-slide-toggle>
     </p> -->
     <mat-divider></mat-divider>
 
     <!-- HeaderConfig -->
-    @if (headerConfig) {
+    @if (headerConfig(); as headerConfig) {
       <h2>Header</h2>
       <span class="link" (click)="openMarkdownDialog('HeaderConfig', 'headerConfig.md')">
         View HeaderConfig
@@ -107,35 +116,70 @@
         menu-buttons and an input field.
       </p>
       <p>
-        <mat-slide-toggle [(ngModel)]="headerConfig.enable">Enable</mat-slide-toggle>
+        <mat-slide-toggle
+          [ngModel]="headerConfig.enable"
+          (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('headerConfig', { enable: $event })
+          ">
+          Enable
+        </mat-slide-toggle>
       </p>
 
       @if (headerConfig.enable) {
         <p>
-          <mat-slide-toggle [(ngModel)]="headerConfig.loading">Loading</mat-slide-toggle>
+          <mat-slide-toggle
+            [ngModel]="headerConfig.loading"
+            (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('headerConfig', { loading: $event })
+            ">
+            Loading
+          </mat-slide-toggle>
         </p>
         <p>
-          <mat-slide-toggle [(ngModel)]="headerConfig.showRouteLoading">
+          <mat-slide-toggle
+            [ngModel]="headerConfig.showRouteLoading"
+            (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('headerConfig', { showRouteLoading: $event })
+            ">
             Show header loading on navigation
           </mat-slide-toggle>
         </p>
         <p>
-          <mat-slide-toggle [(ngModel)]="headerConfig.gradient">Gradient</mat-slide-toggle>
+          <mat-slide-toggle
+            [ngModel]="headerConfig.gradient"
+            (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('headerConfig', { gradient: $event })
+            ">
+            Gradient
+          </mat-slide-toggle>
         </p>
         <mat-form-field>
           <mat-label>Image Logo (url)</mat-label>
           <input
             matInput
-            [(ngModel)]="headerConfig.imgLogo"
-            (ngModelChange)="headerImgLogoChange($event)" />
+            [ngModel]="headerConfig.imgLogo"
+            (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('headerConfig', { imgLogo: $event });
+              headerImgLogoChange($event)
+            " />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Titel</mat-label>
-          <input matInput [(ngModel)]="headerConfig.title" />
+          <input
+            matInput
+            [ngModel]="headerConfig.title"
+            (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('headerConfig', { title: $event })
+            " />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Subtitel</mat-label>
-          <input matInput [(ngModel)]="headerConfig.subtitle" />
+          <input
+            matInput
+            [ngModel]="headerConfig.subtitle"
+            (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('headerConfig', { subtitle: $event })
+            " />
         </mat-form-field>
         <h3>Header Menu Buttons</h3>
         <mat-expansion-panel>
@@ -150,7 +194,7 @@
                 isNavButton: false,
               }"></ng-container>
             <h4>Right Buttons (Label has priority over icon)</h4>
-            @for (menuButton of headerConfig.rightMenuButtons; track menuButton.id) {
+            @for (menuButton of headerConfig.rightMenuButtons; track $index) {
               <ng-container
                 [ngTemplateOutlet]="menuButtonFormTemplate"
                 [ngTemplateOutletContext]="{
@@ -164,320 +208,373 @@
             </button>
           </ng-template>
         </mat-expansion-panel>
+
         <!-- InputConfig -->
-        <h3>Header Input Field</h3>
-        <p>
-          <mat-slide-toggle [(ngModel)]="headerConfig.inputConfig!.enable">Enable</mat-slide-toggle>
-        </p>
+        @if (headerConfig.inputConfig) {
+          <h3>Header Input Field</h3>
+          <p>
+            <!-- eslint-disable -->
+    <mat-slide-toggle [ngModel]="headerConfig.inputConfig.enable" (ngModelChange)="updateInputConfig('enable', $event)">
+      Enable
+    </mat-slide-toggle>
+  </p>
 
-        @if (headerConfig.inputConfig?.enable) {
-          <p>&nbsp;Value: {{ inputValue || "empty" }}</p>
-          <mat-form-field>
-            <mat-label>Label</mat-label>
-            <input matInput [(ngModel)]="headerConfig.inputConfig!.label" />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Material Icon</mat-label>
-            <input matInput [(ngModel)]="headerConfig.inputConfig!.matIconSubmit" />
-          </mat-form-field>
-        }
-      }
-      <mat-divider></mat-divider>
-    }
+  @if (headerConfig.inputConfig.enable) {
+  <p>&nbsp;Value: {{ inputValue() || "" }}</p>
+  <mat-form-field>
+    <mat-label>Label</mat-label>
+    <input matInput [ngModel]="headerConfig.inputConfig.label" (ngModelChange)="updateInputConfig('label', $event)" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Material Icon</mat-label>
+    <input matInput [ngModel]="headerConfig.inputConfig.matIconSubmit"
+      (ngModelChange)="updateInputConfig('matIconSubmit', $event)" />
+  </mat-form-field>
+  }
+  }
+  }
+  <mat-divider></mat-divider>
+  }
 
-    <!-- ContentTitleCardConfig -->
-    @if (contentTitleCardConfig) {
-      <h2>Title Card</h2>
-      <span
-        class="link"
-        (click)="openMarkdownDialog('ContentTitleCardConfig', 'contentTitleCardConfig.md')">
-        View ContentTitleCardConfig
-      </span>
-      <p>
-        The title card is a card below the header that can display a custom label such as a page
-        title and also has a back button.
-      </p>
-      <p>
-        <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.enable">Enable</mat-slide-toggle>
-      </p>
+  <!-- ContentTitleCardConfig -->
+  @if (contentTitleCardConfig(); as contentTitleCardConfig) {
+  <h2>Title Card</h2>
+  <span class="link" (click)="openMarkdownDialog('ContentTitleCardConfig', 'contentTitleCardConfig.md')">
+    View ContentTitleCardConfig
+  </span>
+  <p>
+    The title card is a card below the header that can display a custom label such as a page
+    title and also has a back button.
+  </p>
+  <p>
+    <mat-slide-toggle [ngModel]="contentTitleCardConfig.enable" (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { enable: $event })
+          ">
+      Enable
+    </mat-slide-toggle>
+  </p>
 
-      @if (contentTitleCardConfig.enable) {
-        <p>
-          <mat-slide-toggle [(ngModel)]="contentTitleCardConfig.showBackButton">
-            Show back button
-          </mat-slide-toggle>
-        </p>
-        <mat-form-field>
-          <mat-label>Label</mat-label>
-          <input matInput [(ngModel)]="contentTitleCardConfig.label" />
-        </mat-form-field>
-      }
-      <mat-divider></mat-divider>
-    }
+  @if (contentTitleCardConfig.enable) {
+  <p>
+    <mat-slide-toggle [ngModel]="contentTitleCardConfig.showBackButton" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('contentTitleCardConfig', {
+                showBackButton: $event,
+              })
+            ">
+      Show back button
+    </mat-slide-toggle>
+  </p>
+  <mat-form-field>
+    <mat-label>Label</mat-label>
+    <input matInput [ngModel]="contentTitleCardConfig.label" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: $event })
+            " />
+  </mat-form-field>
+  }
+  <mat-divider></mat-divider>
+  }
 
-    <!-- NavbarConfig -->
-    @if (navbarConfig) {
-      <h2>Navbar</h2>
-      <span class="link" (click)="openMarkdownDialog('NavbarConfig', 'navbarConfig.md')">
-        View NavbarConfig
-      </span>
-      <p>
-        The navbar is a fixed navigation element that is positioned vertically left on desktop and
-        responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation
-        items.
-      </p>
-      <p>
-        <mat-slide-toggle [(ngModel)]="navbarConfig.enable">Enable</mat-slide-toggle>
-      </p>
+  <!-- NavbarConfig -->
+  @if (navbarConfig(); as navbarConfig) {
+  <h2>Navbar</h2>
+  <span class="link" (click)="openMarkdownDialog('NavbarConfig', 'navbarConfig.md')">
+    View NavbarConfig
+  </span>
+  <p>
+    The navbar is a fixed navigation element that is positioned vertically left on desktop and
+    responsively moves to the bottom horizontally on mobile. It can show up to 5 navigation
+    items.
+  </p>
+  <p>
+    <mat-slide-toggle [ngModel]="navbarConfig.enable" (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('navbarConfig', { enable: $event })
+          ">
+      Enable
+    </mat-slide-toggle>
+  </p>
 
-      @if (navbarConfig.enable) {
-        <p>
-          <mat-slide-toggle [(ngModel)]="navbarConfig.showAllLabels">
-            Always show labels
-          </mat-slide-toggle>
-        </p>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>Edit Nav Button</mat-expansion-panel-header>
-          <ng-template matExpansionPanelContent>
-            @for (menuButton of navbarConfig.buttons; track menuButton.id) {
-              <ng-container
-                [ngTemplateOutlet]="menuButtonFormTemplate"
-                [ngTemplateOutletContext]="{
+  @if (navbarConfig.enable) {
+  <p>
+    <mat-slide-toggle [ngModel]="navbarConfig.showAllLabels" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('navbarConfig', { showAllLabels: $event })
+            ">
+      Always show labels
+    </mat-slide-toggle>
+  </p>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>Edit Nav Button</mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      @for (menuButton of navbarConfig.buttons; track $index) {
+      <ng-container [ngTemplateOutlet]="menuButtonFormTemplate" [ngTemplateOutletContext]="{
                   menuButton: menuButton,
                   isLeftButton: false,
                   isNavButton: true,
                 }"></ng-container>
-            }
-            <button mat-flat-button color="accent" (click)="addNavButton()">Add button</button>
-          </ng-template>
-        </mat-expansion-panel>
       }
-      <mat-divider></mat-divider>
-    }
+      <button mat-flat-button color="accent" (click)="addNavButton()">Add button</button>
+    </ng-template>
+  </mat-expansion-panel>
+  }
+  <mat-divider></mat-divider>
+  }
 
-    <!-- DrawerConfig -->
-    @if (drawerConfig) {
-      <h2>Drawer</h2>
-      <span class="link" (click)="openMarkdownDialog('DrawerConfig', 'drawerConfig.md')">
-        View DrawerConfig
-      </span>
-      <p>
-        The drawer is a collapsible element that allows you to place custom dynamic side content. It
-        is responsive and changes to overlay mode on mobile.
-      </p>
-      <p>
-        <mat-slide-toggle [(ngModel)]="drawerConfig.enable">Enable</mat-slide-toggle>
-      </p>
+  <!-- DrawerConfig -->
+  @if (drawerConfig(); as drawerConfig) {
+  <h2>Drawer</h2>
+  <span class="link" (click)="openMarkdownDialog('DrawerConfig', 'drawerConfig.md')">
+    View DrawerConfig
+  </span>
+  <p>
+    The drawer is a collapsible element that allows you to place custom dynamic side content. It
+    is responsive and changes to overlay mode on mobile.
+  </p>
+  <p>
+    <mat-slide-toggle [ngModel]="drawerConfig.enable" (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('drawerConfig', { enable: $event })
+          ">
+      Enable
+    </mat-slide-toggle>
+  </p>
 
-      @if (drawerConfig.enable) {
-        <p>
-          <mat-slide-toggle [(ngModel)]="drawerConfig.open">Open</mat-slide-toggle>
-        </p>
-        <p>
-          <mat-slide-toggle [(ngModel)]="drawerConfig.fixed">Fixed</mat-slide-toggle>
-        </p>
-        <p>
-          Content can either be set by using content projection
-          <code>&lt;ng-content drawerContent&gt;</code>
-          or by using the component portal
-          <code>scaffoldService.drawerPortal</code>
-          .
-        </p>
-        <button mat-flat-button color="accent" class="mr-2" (click)="updateDrawerContent(true)">
-          Navigation
-        </button>
-        <button mat-flat-button color="primary" (click)="updateDrawerContent(false)">
-          Not found
-        </button>
-      }
-      <mat-divider></mat-divider>
-    }
+  @if (drawerConfig.enable) {
+  <p>
+    <mat-slide-toggle [ngModel]="drawerConfig.open" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('drawerConfig', { open: $event })
+            ">
+      Open
+    </mat-slide-toggle>
+  </p>
+  <p>
+    <mat-slide-toggle [ngModel]="drawerConfig.fixed" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('drawerConfig', { fixed: $event })
+            ">
+      Fixed
+    </mat-slide-toggle>
+  </p>
+  <p>
+    Content can either be set by using content projection
+    <code>&lt;ng-content drawerContent&gt;</code>
+    or by using the component portal
+    <code>scaffoldService.drawerPortal</code>
+    .
+  </p>
+  <button mat-flat-button color="accent" class="mr-2" (click)="updateDrawerContent(true)">
+    Navigation
+  </button>
+  <button mat-flat-button color="primary" (click)="updateDrawerContent(false)">
+    Not found
+  </button>
+  }
+  <mat-divider></mat-divider>
+  }
 
-    <!-- FooterConfig -->
-    @if (footerConfig) {
-      <h2>Footer</h2>
-      <span class="link" (click)="openMarkdownDialog('FooterConfig', 'footerConfig.md')">
-        View FooterConfig
-      </span>
-      <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
-      <p>
-        <mat-slide-toggle [(ngModel)]="footerConfig.enable">Enable</mat-slide-toggle>
-      </p>
+  <!-- FooterConfig -->
+  @if (footerConfig(); as footerConfig) {
+  <h2>Footer</h2>
+  <span class="link" (click)="openMarkdownDialog('FooterConfig', 'footerConfig.md')">
+    View FooterConfig
+  </span>
+  <p>The footer is a simple bottom element with a logo, navigation links and the copyright.</p>
+  <p>
+    <mat-slide-toggle [ngModel]="footerConfig.enable" (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('footerConfig', { enable: $event })
+          ">
+      Enable
+    </mat-slide-toggle>
+  </p>
 
-      @if (footerConfig.enable) {
-        <mat-form-field>
-          <mat-label>Image Logo (url)</mat-label>
-          <input
-            matInput
-            [(ngModel)]="footerConfig.imgLogo"
-            (ngModelChange)="footerImgLogoChange($event)" />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Copyright</mat-label>
-          <input matInput [(ngModel)]="footerConfig.copyright" />
-        </mat-form-field>
-        <h3>Footer Links</h3>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            Edit Links (Route has priority over link)
-          </mat-expansion-panel-header>
-          <ng-template matExpansionPanelContent>
-            @for (navigationLink of footerConfig.links; track $index) {
-              <ng-container
-                [ngTemplateOutlet]="navigationLinkTemplate"
-                [ngTemplateOutletContext]="{
+  @if (footerConfig.enable) {
+  <mat-form-field>
+    <mat-label>Image Logo (url)</mat-label>
+    <input matInput [ngModel]="footerConfig.imgLogo" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('footerConfig', { imgLogo: $event });
+              footerImgLogoChange($event)
+            " />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Copyright</mat-label>
+    <input matInput [ngModel]="footerConfig.copyright" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('footerConfig', { copyright: $event })
+            " />
+  </mat-form-field>
+  <h3>Footer Links</h3>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Edit Links (Route has priority over link)
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      @for (navigationLink of footerConfig.links; track $index) {
+      <ng-container [ngTemplateOutlet]="navigationLinkTemplate" [ngTemplateOutletContext]="{
                   navigationLink: navigationLink,
                 }"></ng-container>
-            }
-            <button mat-flat-button color="accent" (click)="addFooterLink()">Add link</button>
-          </ng-template>
-        </mat-expansion-panel>
       }
-      <mat-divider></mat-divider>
+      <button mat-flat-button color="accent" (click)="addFooterLink()">Add link</button>
+    </ng-template>
+  </mat-expansion-panel>
+  }
+  <mat-divider></mat-divider>
+  }
+
+  <!-- FloatingButtonConfig -->
+  @if (floatingButtonConfig(); as floatingButtonConfig) {
+  <h2>Floating Button</h2>
+  <span class="link" (click)="openMarkdownDialog('FloatingButtonConfig', 'floatingButtonConfig.md')">
+    View FloatingButtonConfig
+  </span>
+  <p>
+    The floating button is a fixed action button that scrolls to the top on default, but you can
+    also add an id for custom actions. By adding a label, the button will expand into a rounded
+    rectangle shape.
+  </p>
+  <p>
+    <mat-slide-toggle [ngModel]="floatingButtonConfig.enable" (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('floatingButtonConfig', { enable: $event })
+          ">
+      Enable
+    </mat-slide-toggle>
+  </p>
+
+  @if (floatingButtonConfig.enable) {
+  <mat-form-field>
+    <mat-label>Event id</mat-label>
+    <input matInput [ngModel]="floatingButtonConfig.id" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('floatingButtonConfig', { id: $event })
+            " />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Label</mat-label>
+    <input matInput [ngModel]="floatingButtonConfig.label" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('floatingButtonConfig', { label: $event })
+            " />
+  </mat-form-field>
+  <mat-form-field class="lf-form-field-small">
+    <mat-label>Material Icon</mat-label>
+    <input matInput [ngModel]="floatingButtonConfig.matIcon" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('floatingButtonConfig', { matIcon: $event })
+            " />
+    @if (floatingButtonConfig.matIcon) {
+    <mat-icon matPrefix>
+      {{ floatingButtonConfig.matIcon }}
+    </mat-icon>
     }
-
-    <!-- FloatingButtonConfig -->
-    @if (floatingButtonConfig) {
-      <h2>Floating Button</h2>
-      <span
-        class="link"
-        (click)="openMarkdownDialog('FloatingButtonConfig', 'floatingButtonConfig.md')">
-        View FloatingButtonConfig
-      </span>
-      <p>
-        The floating button is a fixed action button that scrolls to the top on default, but you can
-        also add an id for custom actions. By adding a label, the button will expand into a rounded
-        rectangle shape.
-      </p>
-      <p>
-        <mat-slide-toggle [(ngModel)]="floatingButtonConfig.enable">Enable</mat-slide-toggle>
-      </p>
-
-      @if (floatingButtonConfig.enable) {
-        <mat-form-field>
-          <mat-label>Event id</mat-label>
-          <input matInput [(ngModel)]="floatingButtonConfig.id" />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Label</mat-label>
-          <input matInput [(ngModel)]="floatingButtonConfig.label" />
-        </mat-form-field>
-        <mat-form-field class="lf-form-field-small">
-          <mat-label>Material Icon</mat-label>
-          <input matInput [(ngModel)]="floatingButtonConfig.matIcon" />
-          @if (floatingButtonConfig.matIcon) {
-            <mat-icon matPrefix>
-              {{ floatingButtonConfig.matIcon }}
-            </mat-icon>
-          }
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Tooltip</mat-label>
-          <input matInput [(ngModel)]="floatingButtonConfig.tooltip" />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Position</mat-label>
-          <mat-select [(ngModel)]="floatingButtonConfig.horizontalPosition">
-            @for (option of ["center", "right"]; track $index) {
-              <mat-option [value]="option">
-                {{ option }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-        <!-- <p>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Tooltip</mat-label>
+    <input matInput [ngModel]="floatingButtonConfig.tooltip" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('floatingButtonConfig', { tooltip: $event })
+            " />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Position</mat-label>
+    <mat-select [ngModel]="floatingButtonConfig.horizontalPosition" (ngModelChange)="
+              scaffoldService.updateScaffoldProperty('floatingButtonConfig', {
+                horizontalPosition: $event,
+              })
+            ">
+      @for (option of ["center", "right"]; track $index) {
+      <mat-option [value]="option">
+        {{ option }}
+      </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <!-- <p>
           <mat-slide-toggle [(ngModel)]="floatingButtonConfig.sticky">Sticky</mat-slide-toggle>
         </p> -->
-      }
-      <mat-divider></mat-divider>
-    }
+  }
+  <mat-divider></mat-divider>
+  }
 
-    <!-- BottomBarConfig -->
-    @if (bottomBarConfig) {
-      <h2 id="test">Bottom Bar</h2>
-      <span class="link" (click)="openMarkdownDialog('BottomBarConfig', 'bottomBarConfig.md')">
-        View BottomBarConfig
-      </span>
-      <p>
-        The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
-        enabled). It can be used to handle custom bulk actions for selected items in large lists.
-      </p>
-      <p>(select items to test the bottom bar)</p>
-      @for (item of bottomBarDemoList; track $index) {
-        <p>
-          <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectBottomBarItem()">
-            {{ item.label }}
-          </mat-checkbox>
-        </p>
-      }
-    }
-  </div>
-}
+  <!-- BottomBarConfig -->
+  @if (bottomBarConfig(); as bottomBarConfig) {
+  <h2 id="test">Bottom Bar</h2>
+  <span class="link" (click)="openMarkdownDialog('BottomBarConfig', 'bottomBarConfig.md')">
+    View BottomBarConfig
+  </span>
+  <p>
+    The bottom bar is a fixed element at the bottom of the page and above the mobile navbar (if
+    enabled). It can be used to handle custom bulk actions for selected items in large lists.
+  </p>
+  <p>(select items to test the bottom bar)</p>
+  @for (item of bottomBarDemoList(); track $index) {
+  <p>
+    <mat-checkbox [(ngModel)]="item.checked" (ngModelChange)="selectBottomBarItem()">
+      {{ item.label }}
+    </mat-checkbox>
+  </p>
+  }
+  }
+  }
+</div>
 
 <!-- header menu button form -->
-<ng-template
-  #menuButtonFormTemplate
-  let-menuButton="menuButton"
-  let-isLeftButton="isLeftButton"
+<ng-template #menuButtonFormTemplate let-menuButton="menuButton" let-isLeftButton="isLeftButton"
   let-isNavButton="isNavButton">
   @if (menuButton) {
-    <div class="flex-row mb-2">
-      <mat-form-field>
-        <mat-label>Event id</mat-label>
-        <input matInput [(ngModel)]="menuButton.id" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Label</mat-label>
-        <input [disabled]="isLeftButton" matInput [(ngModel)]="menuButton.label" />
-      </mat-form-field>
-      <mat-form-field class="lf-form-field-small">
-        <mat-label>Material Icon</mat-label>
-        <input matInput [(ngModel)]="menuButton.matIcon" />
-        @if (menuButton.matIcon) {
-          <mat-icon matPrefix>{{ menuButton.matIcon }}</mat-icon>
-        }
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Tooltop</mat-label>
-        <input matInput [(ngModel)]="menuButton.tooltip" />
-      </mat-form-field>
-      <button
-        mat-icon-button
-        color="warn"
-        (click)="removeHeaderButton(menuButton, isLeftButton, isNavButton)"
-        matTooltip="Remove button">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+  <div class="flex-row mb-2">
+    <mat-form-field>
+      <mat-label>Event id</mat-label>
+      <input matInput [ngModel]="menuButton.id" (ngModelChange)="
+            updateHeaderButton(menuButton, isLeftButton, isNavButton, 'id', $event)
+          " />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input [disabled]="isLeftButton" matInput [ngModel]="menuButton.label" (ngModelChange)="
+            updateHeaderButton(menuButton, isLeftButton, isNavButton, 'label', $event)
+          " />
+    </mat-form-field>
+    <mat-form-field class="lf-form-field-small">
+      <mat-label>Material Icon</mat-label>
+      <input matInput [ngModel]="menuButton.matIcon" (ngModelChange)="
+            updateHeaderButton(menuButton, isLeftButton, isNavButton, 'matIcon', $event)
+          " />
+      @if (menuButton.matIcon) {
+      <mat-icon matPrefix>{{ menuButton.matIcon }}</mat-icon>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tooltop</mat-label>
+      <input matInput [ngModel]="menuButton.tooltip" (ngModelChange)="
+            updateHeaderButton(menuButton, isLeftButton, isNavButton, 'tooltip', $event)
+          " />
+    </mat-form-field>
+    <button mat-icon-button color="warn" (click)="removeHeaderButton(menuButton, isLeftButton, isNavButton)"
+      matTooltip="Remove button">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
   }
 </ng-template>
 
 <!-- footer link form -->
 <ng-template #navigationLinkTemplate let-navigationLink="navigationLink">
   @if (navigationLink) {
-    <div class="flex-row mb-2">
-      <mat-form-field>
-        <mat-label>Label</mat-label>
-        <input matInput [(ngModel)]="navigationLink.label" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Route (internal)</mat-label>
-        <input matInput [(ngModel)]="navigationLink.routerLink" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Link (external)</mat-label>
-        <input matInput [(ngModel)]="navigationLink.href" />
-      </mat-form-field>
-      <!-- <p> -->
-      <mat-slide-toggle [(ngModel)]="navigationLink.externalTab">External Tab</mat-slide-toggle>
-      <!-- </p> -->
-      <button
-        mat-icon-button
-        color="warn"
-        (click)="removeFooterLink(navigationLink)"
-        matTooltip="Remove link">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+  <div class="flex-row mb-2">
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput [ngModel]="navigationLink.label"
+        (ngModelChange)="updateFooterLink(navigationLink, 'label', $event)" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Route (internal)</mat-label>
+      <input matInput [ngModel]="navigationLink.routerLink"
+        (ngModelChange)="updateFooterLink(navigationLink, 'routerLink', $event)" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Link (external)</mat-label>
+      <input matInput [ngModel]="navigationLink.href"
+        (ngModelChange)="updateFooterLink(navigationLink, 'href', $event)" />
+    </mat-form-field>
+    <!-- <p> -->
+    <mat-slide-toggle [ngModel]="navigationLink.externalTab"
+      (ngModelChange)="updateFooterLink(navigationLink, 'externalTab', $event)">
+      External Tab
+    </mat-slide-toggle>
+    <!-- </p> -->
+    <button mat-icon-button color="warn" (click)="removeFooterLink(navigationLink)" matTooltip="Remove link">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
   }
 </ng-template>

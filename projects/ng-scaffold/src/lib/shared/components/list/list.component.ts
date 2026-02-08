@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnChanges, OnInit, SimpleChanges, output, contentChild, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChild, inject, input, model, OnChanges, OnInit, output, signal, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
@@ -8,14 +8,15 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CONFIG } from '../../../scaffold.config';
 import { ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective } from '../../../directives';
 import { Button, ListConfig, ListHeader, ListItem, ScaffoldLibraryConfig } from '../../../models';
+import { CONFIG } from '../../../scaffold.config';
 
 @Component({
   selector: 'lf-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
@@ -64,12 +65,12 @@ export class ListComponent implements OnInit, OnChanges {
 }>();
 
 
-  public sortToken: string;
-  public sortAsc: boolean = true;
-  public allSelected: boolean = false;
+  public sortToken = signal<string>('');
+  public sortAsc = signal<boolean>(true);
+  public allSelected = model<boolean>(false);
 
   get someSelected(): boolean {
-    return this.items().length > 0 && this.items().some((item: ListItem) => item.checked) && !this.allSelected;
+    return this.items().length > 0 && this.items().some((item: ListItem) => item.checked) && !this.allSelected();
   }
 
   get hasAvatars(): boolean {
@@ -80,15 +81,15 @@ export class ListComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     const config = this.config();
     if (config) {
-      this.sortToken = config.initialSortToken || '';
-      this.sortAsc = config.initialSortAsc || false;
-      this.updateSortToken(this.sortToken, true);
+      this.sortToken.set(config.initialSortToken || '');
+      this.sortAsc.set(config.initialSortAsc || false);
+      this.updateSortToken(this.sortToken(), true);
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['items']) {
-      this.allSelected = this.items().length > 0 && this.items().every((item: ListItem) => item.checked);
+      this.allSelected.set(this.items().length > 0 && this.items().every((item: ListItem) => item.checked));
     }
   }
 
@@ -96,17 +97,17 @@ export class ListComponent implements OnInit, OnChanges {
   // Update the sort token
   public updateSortToken(sortToken: string | undefined, initial?: boolean): void {
     if (!sortToken) return;
-    if (this.sortToken === sortToken && !initial) this.sortAsc = !this.sortAsc;
-    this.sortToken = sortToken;
-    this.sortChangeEvent.emit({ sortToken: this.sortToken, sortAsc: this.sortAsc });
+    if (this.sortToken() === sortToken && !initial) this.sortAsc.set(!this.sortAsc());
+    this.sortToken.set(sortToken);
+    this.sortChangeEvent.emit({ sortToken: this.sortToken(), sortAsc: this.sortAsc() });
   }
 
   // Select all items
   public selectAll(event: MatCheckboxChange): void {
-    this.allSelected = event.checked;
+    this.allSelected.set(event.checked);
 
     this.items().forEach((item: ListItem) => {
-      if (!item.disabled) item.checked = this.allSelected;
+      if (!item.disabled) item.checked = this.allSelected();
     });
 
     this.selectionChangeEvent.emit(this.items());
@@ -115,7 +116,7 @@ export class ListComponent implements OnInit, OnChanges {
   // Select single item
   public selectItem(item: ListItem, event: MatCheckboxChange): void {
     if (this.config()?.disableMultiselect) this.items().forEach((item: ListItem) => { item.checked = false; });
-    this.allSelected = this.items().length > 0 && this.items().every((item: ListItem) => item.checked);
+    this.allSelected.set(this.items().length > 0 && this.items().every((item: ListItem) => item.checked));
     item.checked = event.checked;
     this.selectionChangeEvent.emit([item]);
   }

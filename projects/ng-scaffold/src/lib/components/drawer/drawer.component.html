@@ -3,6 +3,7 @@
     <mat-sidenav-container class="lf-drawer-container lf-transitions" [ngClass]="config.cssClass">
       <!-- drawer -->
       <mat-sidenav
+        #drawer
         class="lf-drawer mat-elevation-z2"
         [class.mobile]="isMobile()"
         [mode]="isMobile() ? 'over' : 'side'"
@@ -10,8 +11,7 @@
         [autoFocus]="false"
         [fixedInViewport]="config.fixed"
         [class.lf-drawer-show-header]="headerEnabled() && config.fixed"
-        (closed)="drawerClosed()"
-        #drawer>
+        (closed)="drawerClosed()">
         <!-- drawer content -->
         <!-- <ng-content select="[drawerContent]"></ng-content> -->
         @if (drawerPortal()) {

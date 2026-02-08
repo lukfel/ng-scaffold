@@ -1,4 +1,4 @@
-@if (config) {
+@if (config(); as config) {
   @if (config.title) {
     <h2 mat-dialog-title>{{ config.title }}</h2>
   }

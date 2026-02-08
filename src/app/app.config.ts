@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ApplicationConfig, isDevMode, provideZoneChangeDetection, SecurityContext } from '@angular/core';
+import { ApplicationConfig, isDevMode, provideZonelessChangeDetection, SecurityContext } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
@@ -24,7 +24,8 @@ export function markedOptionsFactory(): MarkedOptions {
 export const APP_CONFIG: ApplicationConfig = {
     providers: [
         provideRouter(APP_ROUTES, withHashLocation()),
-        provideZoneChangeDetection(),
+        // provideZoneChangeDetection(),
+        provideZonelessChangeDetection(),
         provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
         { provide: HTTP_INTERCEPTORS, useClass: ScaffoldLoadingInterceptor, multi: true },

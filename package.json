@@ -1,6 +1,6 @@
 {
   "name": "ng-scaffold-app",
-  "version": "21.1.22",
+  "version": "21.1.23",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -28,8 +28,7 @@
     "@lukfel/ng-scaffold": "file:dist/ng-scaffold",
     "marked": "^17.0.0",
     "ngx-markdown": "^21.0.0",
-    "rxjs": "~7.8.0",
-    "zone.js": "~0.15.0"
+    "rxjs": "~7.8.0"
   },
   "devDependencies": {
     "@angular-eslint/builder": "21.1.0",

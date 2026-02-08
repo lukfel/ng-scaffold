@@ -15,10 +15,10 @@
     making it ideal for dashboards, inventories, and administrative views.
   </p>
   <lf-list
-    [config]="listConfig"
-    [header]="listHeader"
-    [items]="listItems"
-    [buttons]="listButtons"
+    [config]="listConfig()"
+    [header]="listHeader()"
+    [items]="listItems()"
+    [buttons]="listButtons()"
     (sortChangeEvent)="onListSortChange($event)"
     (selectionChangeEvent)="onListSelectionChange()"
     (buttonClickEvent)="onListButtonClick($event)"
@@ -42,7 +42,7 @@
     (fileChangeEvent)="onFileChange($event)"></lf-file-upload>
   <p>
     File:
-    <b>{{ fileName }}</b>
+    <b>{{ fileName() }}</b>
   </p>
 
   <mat-divider></mat-divider>
@@ -63,7 +63,7 @@
     (colorChangeEvent)="onColorChange($event)"></lf-color-picker>
   <p>
     Color:
-    <b>{{ color }}</b>
+    <b>{{ color() }}</b>
   </p>
 
   <mat-divider></mat-divider>

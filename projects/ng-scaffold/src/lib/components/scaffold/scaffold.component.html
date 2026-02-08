@@ -1,13 +1,13 @@
 <div
   class="lf-scaffold lf-transitions mat-app-background mat-typography"
-  [ngClass]="scaffoldConfig?.cssClass">
+  [ngClass]="scaffoldConfig()?.cssClass">
   <!-- header -->
   <lf-header
     [libraryConfig]="libraryConfig"
-    [headerConfig]="headerConfig"
-    [isMobile]="isMobile"
-    [routeLoading]="routeLoading"
-    [currentRoute]="currentRoute"
+    [headerConfig]="headerConfig()"
+    [isMobile]="isMobile()!"
+    [routeLoading]="routeLoading()!"
+    [currentRoute]="currentRoute()"
     (headerConfigUpdateEvent)="headerConfigUpdated($event)"
     (headerButtonClickEvent)="headerButtonClicked($event)"
     (headerInputSubmitEvent)="headerInputSubmitted($event)"
@@ -15,66 +15,66 @@
   <!-- navbar -->
   <lf-navbar
     [libraryConfig]="libraryConfig"
-    [navbarConfig]="navbarConfig"
-    [isMobile]="isMobile"
-    [currentRoute]="currentRoute"
+    [navbarConfig]="navbarConfig()"
+    [isMobile]="isMobile()!"
+    [currentRoute]="currentRoute()"
     (navbarButtonClickEvent)="navbarButtonClicked($event)"></lf-navbar>
   <!-- content wrapper -->
   <div
     class="lf-content-wrapper"
-    [class.lf-show-navbar]="navbarConfig?.enable && !isMobile"
-    [class.lf-show-header]="headerConfig?.enable && !(navbarConfig?.enable && isMobile)"
-    [class.lf-show-navbar-mobile]="navbarConfig?.enable && isMobile && !headerConfig?.enable"
+    [class.lf-show-navbar]="navbarConfig()?.enable && !isMobile()"
+    [class.lf-show-header]="headerConfig()?.enable && !(navbarConfig()?.enable && isMobile())"
+    [class.lf-show-navbar-mobile]="navbarConfig()?.enable && isMobile() && !headerConfig()?.enable"
     [class.lf-show-header-and-navbar-mobile]="
-      headerConfig?.enable && navbarConfig?.enable && isMobile
+      headerConfig()?.enable && navbarConfig()?.enable && isMobile()
     "
-    [class.lf-transitions]="initialized"
+    [class.lf-transitions]="initialized()"
     #scrollContainer
     cdkScrollable>
     <!-- drawer -->
     <lf-drawer
       [libraryConfig]="libraryConfig"
-      [drawerConfig]="drawerConfig"
-      [drawerPortal]="drawerPortal"
-      [isMobile]="isMobile"
-      [headerEnabled]="headerConfig?.enable!"
+      [drawerConfig]="drawerConfig()"
+      [drawerPortal]="drawerPortal()"
+      [isMobile]="isMobile()!"
+      [headerEnabled]="headerConfig()?.enable!"
       (drawerConfigUpdateEvent)="drawerConfigUpdated($event)">
       <!-- drawer content -->
       <ng-content select="[drawerContent]" drawerContent></ng-content>
       <!-- content title card -->
       <lf-content-title-card
         [libraryConfig]="libraryConfig"
-        [contentTitleCardConfig]="contentTitleCardConfig"
-        [isMobile]="isMobile"
-        [routeHistory]="routeHistory"
+        [contentTitleCardConfig]="contentTitleCardConfig()"
+        [isMobile]="isMobile()!"
+        [routeHistory]="routeHistory()!"
         (backButtonClickEvent)="backButtonClicked()"></lf-content-title-card>
       <!-- main content -->
       <div
         class="lf-content"
-        [class.lf-content-mobile]="isMobile"
-        [class.lf-show-footer]="footerConfig?.enable"
+        [class.lf-content-mobile]="isMobile()"
+        [class.lf-show-footer]="footerConfig()?.enable"
         #content>
         <ng-content></ng-content>
         <!-- to top button -->
         <lf-floating-button
           [libraryConfig]="libraryConfig"
-          [floatingButtonConfig]="floatingButtonConfig"
-          [onTop]="scrollTopPosition <= 0"
-          [isMobile]="isMobile && navbarConfig?.enable!"
-          [bottomBarEnabled]="bottomBarConfig?.enable!"
+          [floatingButtonConfig]="floatingButtonConfig()"
+          [onTop]="scrollTopPosition() <= 0"
+          [isMobile]="isMobile()! && navbarConfig()?.enable!"
+          [bottomBarEnabled]="bottomBarConfig()?.enable!"
           (floatingButtonConfigUpdateEvent)="floatingButtonConfigUpdated($event)"
           (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
       </div>
       <!-- footer -->
-      <lf-footer [libraryConfig]="libraryConfig" [footerConfig]="footerConfig"></lf-footer>
+      <lf-footer [libraryConfig]="libraryConfig" [footerConfig]="footerConfig()"></lf-footer>
     </lf-drawer>
   </div>
   <!-- bottom bar -->
   <lf-bottom-bar
     [libraryConfig]="libraryConfig"
-    [bottomBarConfig]="bottomBarConfig"
-    [isMobile]="isMobile && navbarConfig?.enable!"
-    [navbarEnabled]="navbarConfig?.enable!"
+    [bottomBarConfig]="bottomBarConfig()"
+    [isMobile]="isMobile()! && navbarConfig()?.enable!"
+    [navbarEnabled]="navbarConfig()?.enable!"
     (bottomBarCloseClickEvent)="bottomBarCloseClicked($event)"
     (bottomBarButtonClickEvent)="bottomBarButtonClicked($event)"></lf-bottom-bar>
 </div>

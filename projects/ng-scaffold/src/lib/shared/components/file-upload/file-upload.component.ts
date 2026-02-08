@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CONFIG } from '../../../scaffold.config';
 import { ScaffoldLibraryConfig } from '../../../models';
+import { CONFIG } from '../../../scaffold.config';
 import { Logger } from '../../../services';
 
 @Component({
   selector: 'lf-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,

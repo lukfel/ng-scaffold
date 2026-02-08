@@ -27,9 +27,9 @@
         @for (item of header.items; track $index) {
           <span [class.clickable]="item.sortToken" (click)="updateSortToken(item.sortToken)">
             {{ item.title }}
-            @if (sortToken === item.sortToken) {
+            @if (sortToken() === item.sortToken) {
               <mat-icon class="lf-list-item-sort-icon">
-                {{ sortAsc ? "arrow_downward" : "arrow_upward" }}
+                {{ sortAsc() ? "arrow_downward" : "arrow_upward" }}
               </mat-icon>
             }
           </span>

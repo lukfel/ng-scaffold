@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CONFIG } from '../../../scaffold.config';
-import { PlaceholderConfig, ScaffoldLibraryConfig } from '../../../models';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PlaceholderConfig, ScaffoldLibraryConfig } from '../../../models';
+import { CONFIG } from '../../../scaffold.config';
 
 @Component({
   selector: 'lf-placeholder',
   templateUrl: './placeholder.component.html',
   styleUrls: ['./placeholder.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,

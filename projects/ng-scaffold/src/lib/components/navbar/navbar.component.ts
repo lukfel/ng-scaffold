@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
@@ -9,6 +9,7 @@ import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('responsiveSlide', [
       // States for desktop and mobile
@@ -52,6 +53,12 @@ export class NavbarComponent {
 
   public readonly navbarButtonClickEvent = output<string>();
 
+  public isActive = computed(() => {
+    const currentRoute = this.currentRoute();
+    const route: string = currentRoute?.substring(currentRoute.indexOf('/') + 1) || '';
+    return (id: string): boolean => !!route && !!id && route === id;
+  });
+
 
   public buttonClicked(id: string): void {
     if (!id) {
@@ -59,16 +66,6 @@ export class NavbarComponent {
     }
 
     this.navbarButtonClickEvent.emit(id);
-  }
-
-  public isActive(id: string): boolean {
-    const currentRoute = this.currentRoute();
-    if (!id || !currentRoute) {
-      return false;
-    }
-
-    const route: string = currentRoute.substring(currentRoute.indexOf('/') + 1);
-    return route === id;
   }
 
 }

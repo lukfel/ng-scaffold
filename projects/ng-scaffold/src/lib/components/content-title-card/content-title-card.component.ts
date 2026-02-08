@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { ContentTitleCardConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-content-title-card',
   templateUrl: './content-title-card.component.html',
   styleUrls: ['./content-title-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
