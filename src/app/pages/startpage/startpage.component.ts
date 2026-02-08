@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, HeaderInputConfig, LoadingOverlayConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { MarkdownComponent, MarkdownDialogData } from 'src/app/shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
@@ -89,6 +89,12 @@ export class StartpageComponent implements OnInit, OnDestroy {
       this.contentTitleCardConfig.set(scaffoldConfig.contentTitleCardConfig || {});
       this.floatingButtonConfig.set(scaffoldConfig.floatingButtonConfig || {});
       this.bottomBarConfig.set(scaffoldConfig.bottomBarConfig || {});
+    }));
+
+    this._subscription.add(this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
+      if(scaffoldConfig) {
+        this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Demo' });
+      }
     }));
 
     this._subscription.add(this.scaffoldService.buttonClickEventValue$.subscribe((value: string) => {

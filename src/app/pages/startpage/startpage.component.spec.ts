@@ -170,4 +170,8 @@ class MockScaffoldService {
 
   public buttonClickEventValue$: Observable<string> = of('');
   public headerInputChangeValue$: Observable<string> = of('');
+
+  public updateScaffoldProperty<K extends keyof ScaffoldConfig>(property: K, value: Partial<ScaffoldConfig[K]> | ScaffoldConfig[K]): void {
+
+  }
 }
