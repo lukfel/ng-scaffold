@@ -7,20 +7,9 @@ import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
   providedIn: 'root'
 })
 export class DialogService {
+
   private matDialog = inject(MatDialog);
 
-
-  /**
-   * Opens a dialog with custom template and custom config
-   *
-   * @param templateRef reference to the component or template
-   * @param config of the dialog
-   * @returns an asynchronous any response
-   */
-  public openCustomDialog<T>(templateRef: Type<T>, config: MatDialogConfig): Promise<any> {    // eslint-disable-line @typescript-eslint/no-explicit-any
-    const dialogRef = this.matDialog.open(templateRef, config);
-    return firstValueFrom(dialogRef.afterClosed());
-  }
 
   /**
    * Opens a simple pre-made confirm dialog
@@ -36,6 +25,18 @@ export class DialogService {
       maxWidth: '368px',
       data: config
     });
+    return firstValueFrom(dialogRef.afterClosed());
+  }
+
+  /**
+   * Opens a dialog with custom template and custom config
+   *
+   * @param templateRef reference to the component or template
+   * @param config of the dialog
+   * @returns an asynchronous any response
+   */
+  public openCustomDialog<T>(templateRef: Type<T>, config: MatDialogConfig): Promise<any> {    // eslint-disable-line @typescript-eslint/no-explicit-any
+    const dialogRef = this.matDialog.open(templateRef, config);
     return firstValueFrom(dialogRef.afterClosed());
   }
 

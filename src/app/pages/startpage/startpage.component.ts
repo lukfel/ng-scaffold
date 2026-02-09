@@ -250,11 +250,10 @@ export class StartpageComponent implements OnInit, OnDestroy {
     this.scaffoldService.drawerPortal = reset ? null! : NotFoundComponent;
   }
 
-  public bottomBarButtonClicked(): void {
+  public async bottomBarButtonClicked(): Promise<void> {
     const selected: number = this.bottomBarDemoList().filter(item => item.checked).length;
-    this.dialogService.openConfirmDialog({ title: 'Selection:', message: `You have selected ${selected} items`, closeLabel: 'Close', confirmLabel: 'Confirm' }).then(result => {
-      this.logger.log('close result: ', result);
-    });
+    const result: boolean = await this.dialogService.openConfirmDialog({ title: 'Selection:', message: `You have selected ${selected} items`, closeLabel: 'Close', confirmLabel: 'Confirm' });
+    this.logger.log('close result: ', result);
   }
 
   public bottomBarCloseClicked(): void {

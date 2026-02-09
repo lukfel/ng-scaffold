@@ -4,6 +4,7 @@ import { distinctUntilChanged } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BreakpointService {
+  
   private breakpointObserver = inject(BreakpointObserver);
 
 
