@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogConfig } from '../../../../models';
@@ -7,7 +7,7 @@ import { ConfirmDialogConfig } from '../../../../models';
   selector: 'lf-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
   styleUrls: ['./confirm-dialog.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     MatDialogModule,
@@ -16,6 +16,7 @@ import { ConfirmDialogConfig } from '../../../../models';
 })
 export class ConfirmDialogComponent {
   
-   public config = signal<ConfirmDialogConfig>(inject(MAT_DIALOG_DATA));
+   public configData = inject<ConfirmDialogConfig>(MAT_DIALOG_DATA);
+   public config = signal<ConfirmDialogConfig>(this.configData);
 
 }
