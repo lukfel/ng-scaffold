@@ -12,7 +12,7 @@
   type="button"
   [color]="selectedColor() ? null : color()"
   [style.background]="selectedColor()"
-  [style.color]="backgroundColor()"
+  [style.color]="labelColor()"
   [disabled]="disabled()"
   (click)="colorPicker.click()"
   [matTooltip]="tooltip()">

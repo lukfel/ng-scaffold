@@ -14,12 +14,13 @@ export class SnackbarService {
   private readonly SNACKBAR_POSITION_VERTICAL: MatSnackBarVerticalPosition = 'bottom';
 
   private readonly actionConfig: MatSnackBarConfig = {
+    duration: this.SNACKBAR_DURATION,
     horizontalPosition: this.SNACKBAR_POSITION_HORIZONTAL,
     verticalPosition: this.SNACKBAR_POSITION_VERTICAL
   };
 
   private readonly defaultConfig: MatSnackBarConfig = {
-    duration: this.SNACKBAR_DURATION,
+    duration: (this.SNACKBAR_DURATION / 2),
     horizontalPosition: this.SNACKBAR_POSITION_HORIZONTAL,
     verticalPosition: this.SNACKBAR_POSITION_VERTICAL
   };

@@ -16,7 +16,7 @@ import { ConfirmDialogConfig } from '../../../../models';
 })
 export class ConfirmDialogComponent {
   
-   public configData = inject<ConfirmDialogConfig>(MAT_DIALOG_DATA);
-   public config = signal<ConfirmDialogConfig>(this.configData);
+   private data = inject<ConfirmDialogConfig>(MAT_DIALOG_DATA);
+   public config = signal<ConfirmDialogConfig>(this.data);
 
 }

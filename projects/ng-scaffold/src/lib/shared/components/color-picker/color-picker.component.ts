@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScaffoldLibraryConfig } from '../../../models';
 import { CONFIG } from '../../../scaffold.config';
-import { Logger } from '../../../services';
 
 @Component({
   selector: 'lf-color-picker',
@@ -22,11 +21,9 @@ import { Logger } from '../../../services';
     MatTooltipModule
   ]
 })
-export class ColorPickerComponent implements OnInit {
+export class ColorPickerComponent {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
-
-  private logger: Logger = inject(Logger);
 
 
   public readonly color = input<'primary' | 'accent' | 'warn' | string>('primary');
@@ -37,8 +34,15 @@ export class ColorPickerComponent implements OnInit {
 
   public readonly colorChangeEvent = output<string>();
 
-  public selectedColor = signal<string>('');
-  public backgroundColor = computed<string>(() => {
+  public selectedColor = linkedSignal<string>(() => {
+    const color: 'primary' | 'accent' | 'warn' | string = this.color();
+    if (color && color !== 'primary' && color !== 'accent' && color !== 'warn') {
+      return color;
+    }
+
+    return '';
+  });
+  public labelColor = computed<string>(() => {
     const hex = this.selectedColor().replace('#', '');
 
     const r = parseInt(hex.substr(0, 2), 16);
@@ -49,14 +53,6 @@ export class ColorPickerComponent implements OnInit {
 
     return brightness > 128 ? '#000000' : '#ffffff';
   });
-
-
-  ngOnInit(): void {
-    const color: 'primary' | 'accent' | 'warn' | string = this.color();
-    if (color && color !== 'primary' && color !== 'accent' && color !== 'warn') {
-      this.selectedColor.set(color);
-    }
-  }
 
 
   public selectColor(event: string): void {
