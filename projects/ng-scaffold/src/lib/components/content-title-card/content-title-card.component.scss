@@ -6,10 +6,20 @@
   align-items: center;
   border-radius: 0;
 
+  &.lf-content-title-card-mobile {
+    .lf-content-title-card-label {
+      font-size: var(--content-title-card-label-font-size-mobile);
+    }
+  }
+
   .lf-content-title-card-label {
-    font-size: var(--content-title-card-labe-font-size);
-    white-space: nowrap;
+    font-size: var(--content-title-card-label-font-size);
+    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }

@@ -1,6 +1,9 @@
 @if (contentTitleCardConfig(); as config) {
   @if (config.enable) {
-    <mat-card class="lf-content-title-card mat-elevation-z2 px-4" [ngClass]="config.cssClass">
+    <mat-card
+      class="lf-content-title-card mat-elevation-z2 px-4"
+      [class.lf-content-title-card-mobile]="isMobile()"
+      [ngClass]="config.cssClass">
       <!-- back button -->
       @if (config.showBackButton && routeHistory().length > 0) {
         <button mat-icon-button color="accent" (click)="backButtonClicked()">
