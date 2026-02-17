@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1771160412635,
+  "timestamp": 1771369072872,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -11,23 +11,23 @@
         "ignoreVary": true
       },
       "urls": [
-        "/ng-scaffold/chunk-2MSY42TV.js",
-        "/ng-scaffold/chunk-52DSZ4KA.js",
-        "/ng-scaffold/chunk-6YYE7HMX.js",
-        "/ng-scaffold/chunk-CXTLWRZ7.js",
+        "/ng-scaffold/chunk-57EL6RQ4.js",
+        "/ng-scaffold/chunk-E5X74UPO.js",
+        "/ng-scaffold/chunk-EHBDYZ4I.js",
+        "/ng-scaffold/chunk-ERSNIJ6O.js",
+        "/ng-scaffold/chunk-HEYTQGTZ.js",
         "/ng-scaffold/chunk-IESGWGJO.js",
-        "/ng-scaffold/chunk-K6OV3NAD.js",
-        "/ng-scaffold/chunk-KSIJU2YU.js",
-        "/ng-scaffold/chunk-LYHRNJQL.js",
+        "/ng-scaffold/chunk-LKFKBJMD.js",
         "/ng-scaffold/chunk-M5FIR24Q.js",
-        "/ng-scaffold/chunk-OYGJS5JQ.js",
-        "/ng-scaffold/chunk-YO3KJLC2.js",
+        "/ng-scaffold/chunk-RX7JGK7T.js",
+        "/ng-scaffold/chunk-WMG72LLQ.js",
+        "/ng-scaffold/chunk-ZITE34XW.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-M5U4JFYD.js",
+        "/ng-scaffold/main-MNIM5Y3M.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/scripts-5A55CVEY.js",
-        "/ng-scaffold/styles-WRO6QU4G.css"
+        "/ng-scaffold/styles-RRULSBSN.css"
       ],
       "patterns": []
     },
@@ -129,23 +129,23 @@
     "/ng-scaffold/assets/md/headerConfig.md": "9b227de9330288cc4e2ca5876ae30b805cbc8934",
     "/ng-scaffold/assets/md/navbarConfig.md": "11163319a2a70d8f099add337c311bbba537215a",
     "/ng-scaffold/assets/md/scaffoldConfig.md": "ba58291605e0552d2cc3a7686ea7820096ac9458",
-    "/ng-scaffold/chunk-2MSY42TV.js": "6d85ef12a48686152e8e9768e448531ac82de753",
-    "/ng-scaffold/chunk-52DSZ4KA.js": "9243b0d76fb66dfea106ba93ba26ca4fe3274367",
-    "/ng-scaffold/chunk-6YYE7HMX.js": "d38604ed5e8d092175e51e6f018a5402f8f2d72c",
-    "/ng-scaffold/chunk-CXTLWRZ7.js": "478663c90a198823b159cb35dd5e822a60acf6c5",
+    "/ng-scaffold/chunk-57EL6RQ4.js": "e137891f377a26be7c3f5f3b4ed6e9d3c19ebbcf",
+    "/ng-scaffold/chunk-E5X74UPO.js": "c70b50670c8ddad32a1261426761c99bde384aa3",
+    "/ng-scaffold/chunk-EHBDYZ4I.js": "d43e160ab5128dbfa26955739b2a40411e1c1a11",
+    "/ng-scaffold/chunk-ERSNIJ6O.js": "15d471f1c06de549123a3e8d8253215dc90167aa",
+    "/ng-scaffold/chunk-HEYTQGTZ.js": "9c47a5484441b9651a7b16dd12568ab989776a80",
     "/ng-scaffold/chunk-IESGWGJO.js": "23241e890a7cd0a710e7fedceb956fc27e54e06a",
-    "/ng-scaffold/chunk-K6OV3NAD.js": "c74d70832c7d78d51da76f8469ebe6b7dde7dad7",
-    "/ng-scaffold/chunk-KSIJU2YU.js": "74bc41c4d9ca36251f7b36c18f319bc410abcef9",
-    "/ng-scaffold/chunk-LYHRNJQL.js": "bb32013aed3e2ccebfa8c6080732987fcc7135d3",
+    "/ng-scaffold/chunk-LKFKBJMD.js": "870e99fa0458822208300586c0b561dbc74372d6",
     "/ng-scaffold/chunk-M5FIR24Q.js": "f9196dffaad8dcc21bcf8a82566c447a65f75283",
-    "/ng-scaffold/chunk-OYGJS5JQ.js": "8a4f6dc6c7016b69a0d09635d3721c4c747af04d",
-    "/ng-scaffold/chunk-YO3KJLC2.js": "fc17a914b8c87d01b044dd3bb3f6a94ba8cb9a4d",
+    "/ng-scaffold/chunk-RX7JGK7T.js": "824454ee252ea1f8fbaefda87e31ba820710dce4",
+    "/ng-scaffold/chunk-WMG72LLQ.js": "f8404e52421cbde0a9611e10166a8da7dc0de2a9",
+    "/ng-scaffold/chunk-ZITE34XW.js": "80063334b2811d8659cbebddfc10123525769c1d",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/ng-scaffold/index.html": "710f5ebfc0ce9cf3672fc9752074b07a1a4b8795",
-    "/ng-scaffold/main-M5U4JFYD.js": "329940ed46e41928b8399a2c4bc72e8aa887cee0",
+    "/ng-scaffold/index.html": "cd7cba473aa799a0d74ed39860dabf2a270cb168",
+    "/ng-scaffold/main-MNIM5Y3M.js": "7ee71e04c13ec35be24330ae36395f81bce5409d",
     "/ng-scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
-    "/ng-scaffold/styles-WRO6QU4G.css": "1302d0689f51470072ccebce3f63bc3789d8dd56"
+    "/ng-scaffold/styles-RRULSBSN.css": "b04dd8ba6a52c0f4bb13da607e3184ae3deb5a32"
   },
   "navigationUrls": [
     {
