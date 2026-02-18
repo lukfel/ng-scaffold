@@ -3,6 +3,7 @@
     <mat-card
       class="lf-content-title-card mat-elevation-z2 px-4"
       [class.lf-content-title-card-mobile]="isMobile()"
+      [class.px-2]="isMobile()"
       [ngClass]="config.cssClass">
       <!-- back button -->
       @if (config.showBackButton && routeHistory().length > 0) {
