@@ -1,8 +1,9 @@
 @if (contentTitleCardConfig(); as config) {
   @if (config.enable) {
     <mat-card
-      class="lf-content-title-card mat-elevation-z2 px-4"
+      class="lf-content-title-card mat-elevation-z2"
       [class.lf-content-title-card-mobile]="isMobile()"
+      [class.px-4]="!isMobile()"
       [class.px-2]="isMobile()"
       [ngClass]="config.cssClass">
       <!-- back button -->
