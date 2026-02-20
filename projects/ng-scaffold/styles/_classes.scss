@@ -49,25 +49,25 @@ $init: 0;
 .flex-row-nowrap { display: flex; flex-direction: row; flex-wrap: nowrap; }
 .flex-col { display: flex; flex-direction: column; flex-wrap: wrap; }
 
-.justify-start { justify-content: flex-start; }
-.justify-center { justify-content: center; }
-.justify-end { justify-content: flex-end; }
-.justify-between { justify-content: space-between; }
-.justify-around { justify-content: space-around; }
-.justify-evenly { justify-content: space-evenly; }
+.justify-start { justify-content: flex-start !important; }
+.justify-center { justify-content: center !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+.justify-evenly { justify-content: space-evenly !important; }
 
-.align-start { align-items: flex-start; }
-.align-center { align-items: center; }
-.align-end { align-items: flex-end; }
-.align-stretch { align-items: stretch; }
-.align-baseline { align-items: baseline; }
+.align-start { align-items: flex-start !important; }
+.align-center { align-items: center !important; }
+.align-end { align-items: flex-end !important; }
+.align-stretch { align-items: stretch !important; }
+.align-baseline { align-items: baseline !important; }
 
-.align-self-start { align-self: flex-start; }
-.align-self-center { align-self: center; }
-.align-self-end { align-self: flex-end; }
+.align-self-start { align-self: flex-start !important; }
+.align-self-center { align-self: center !important; }
+.align-self-end { align-self: flex-end !important; }
 
 .flex-1 { flex: 1 1 0%; }
-.flex-auto { flex: 1 0 auto; }
+.flex-auto { flex: 1 1 auto; }
 .flex-none { flex: none; }
 
 // Position
@@ -101,8 +101,9 @@ $init: 0;
 .mh-100 { min-height: 100%; }
 
 // Overflow
-.overflow-hidden { overflow: hidden; }
-.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden !important; }
+.overflow-auto { overflow: auto !important; }
+.overflow-unset { overflow: unset !important; }
 
 // Text
 .text-center { text-align: center; }
