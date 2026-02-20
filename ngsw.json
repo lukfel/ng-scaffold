@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1771628884017,
+  "timestamp": 1771631659834,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -24,10 +24,10 @@
         "/ng-scaffold/chunk-WZOTXJ3Y.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-AVHWWJQZ.js",
+        "/ng-scaffold/main-XFKKDP6F.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/scripts-5A55CVEY.js",
-        "/ng-scaffold/styles-D4VTDNFX.css"
+        "/ng-scaffold/styles-LDAWMEUW.css"
       ],
       "patterns": []
     },
@@ -141,11 +141,11 @@
     "/ng-scaffold/chunk-U6OXA6PC.js": "7ff6cbd687de3e09d6ae8b4a6efd08b949d4d458",
     "/ng-scaffold/chunk-WZOTXJ3Y.js": "43cdd05826e6becb006f26f42c9e3a92bbf8d2c9",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/ng-scaffold/index.html": "12c774b87df0beea6dad0b2f33544702993ed5dc",
-    "/ng-scaffold/main-AVHWWJQZ.js": "2c6d6aa299016c12302a2f83558ec6ce15c5b272",
+    "/ng-scaffold/index.html": "badba62d08cac01cff0ad9ec55b54e236143cb6f",
+    "/ng-scaffold/main-XFKKDP6F.js": "985b5b57b72e813a65ca93b86b7b5eda6fc2bf12",
     "/ng-scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
-    "/ng-scaffold/styles-D4VTDNFX.css": "1e4c79666f8bf56ea287d7e2a59b39dc66805ee4"
+    "/ng-scaffold/styles-LDAWMEUW.css": "1980cd4ad5d664c734e4aa13cb46a4e2c95fcc00"
   },
   "navigationUrls": [
     {
