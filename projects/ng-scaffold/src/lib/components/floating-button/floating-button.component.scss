@@ -1,6 +1,5 @@
 .lf-floating-button {
   z-index: var(--floating-button-z-index);
-  position: fixed;
   bottom: var(--floating-button-bottom);
 
   &.sticky {
@@ -14,14 +13,20 @@
     &.center {
       left: 50%;
       transform: translateX(-50%);
+
+      &.show-drawer {
+        left: calc(50% + (var(--drawer-width) / 2)) !important;
+      }
     }
 
     &.right {
-      left: 100%
+      left: 100%;
     }
   }
 
   &:not(.sticky) {
+    position: fixed !important;
+
     &.show-navbar {
       bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile));
     }
@@ -34,19 +39,18 @@
       bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile) + var(--bottom-bar-height));
     }
 
-    // &.left {
-    //   left: var(--floating-button-right);
-    // }
-
     &.center {
-      left: 50%;
+      left: calc(50% - 4px);
       transform: translateX(-50%);
+
+      &.show-drawer {
+        left: calc(50% + (var(--drawer-width) / 2) - 4px) !important;
+      }
     }
 
     &.right {
-      left: calc(100% - var(--floating-button-right));
+      left: calc(100% - (var(--floating-button-right) + 8px));
       transform: translateX(-100%);
     }
   }
-
 }

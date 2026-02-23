@@ -435,6 +435,14 @@
   </p>
 
   @if (floatingButtonConfig.enable) {
+      <p>
+    <mat-slide-toggle [ngModel]="floatingButtonConfig.sticky" (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('floatingButtonConfig', { sticky: $event })
+          ">
+      Sticky
+    </mat-slide-toggle>
+  </p>
+
   <mat-form-field>
     <mat-label>Event id</mat-label>
     <input matInput [ngModel]="floatingButtonConfig.id" (ngModelChange)="

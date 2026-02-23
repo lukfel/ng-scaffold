@@ -60,7 +60,9 @@
           [libraryConfig]="libraryConfig"
           [floatingButtonConfig]="floatingButtonConfig()"
           [onTop]="scrollTopPosition() <= 0"
-          [isMobile]="isMobile()! && navbarConfig()?.enable!"
+          [isMobile]="isMobile()!"
+          [drawerEnabled]="drawerConfig()?.enable! && drawerConfig()?.open!"
+          [navbarEnabled]="navbarConfig()?.enable!"
           [bottomBarEnabled]="bottomBarConfig()?.enable!"
           (floatingButtonConfigUpdateEvent)="floatingButtonConfigUpdated($event)"
           (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>

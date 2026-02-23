@@ -24,6 +24,8 @@ export class FloatingButtonComponent implements OnInit {
   public readonly floatingButtonConfig = input<FloatingButtonConfig | null>(null);
   public readonly onTop = input<boolean>(false);
   public readonly isMobile = input<boolean>(false);
+  public readonly drawerEnabled = input<boolean>(false);
+  public readonly navbarEnabled = input<boolean>(false);
   public readonly bottomBarEnabled = input<boolean>(false);
 
   public readonly floatingButtonConfigUpdateEvent = output<Partial<FloatingButtonConfig>>();
