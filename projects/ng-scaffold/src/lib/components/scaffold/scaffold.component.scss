@@ -1,5 +1,5 @@
 .lf-scaffold {
-  height: 100vh;
+  height: 100dvh;
 
   .lf-content-wrapper {
     position: absolute;
@@ -15,16 +15,16 @@
 
     &.lf-show-header {
       top: var(--header-height);
-      height: calc(100vh - var(--header-height));
+      height: calc(100dvh - var(--header-height));
     }
 
     &.lf-show-navbar-mobile {
-      height: calc(100vh - var(--navbar-height-mobile));
+      height: calc(100dvh - var(--navbar-height-mobile));
     }
 
     &.lf-show-header-and-navbar-mobile {
       top: var(--header-height);
-      height: calc(100vh - var(--header-height) - var(--navbar-height-mobile));
+      height: calc(100dvh - var(--header-height) - var(--navbar-height-mobile));
     }
 
     .lf-content {
