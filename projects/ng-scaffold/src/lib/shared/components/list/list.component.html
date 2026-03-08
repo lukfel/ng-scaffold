@@ -11,7 +11,7 @@
         <div class="lf-list-item-avatar px-2">
           <!-- icon -->
           @if (header.matIcon) {
-            <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+            <mat-icon>
               {{ header.matIcon }}
             </mat-icon>
           } @else if (header.svgIcon) {
@@ -50,7 +50,7 @@
               (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
               <!-- icon -->
               @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                <mat-icon>
                   {{ button.matIcon }}
                 </mat-icon>
               } @else if (button.svgIcon) {
@@ -70,7 +70,7 @@
               (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
               <!-- icon -->
               @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                <mat-icon>
                   {{ button.matIcon }}
                 </mat-icon>
               } @else if (button.svgIcon) {
@@ -177,7 +177,7 @@
         <div class="lf-list-item-avatar px-2">
           <!-- icon -->
           @if (item.matIcon) {
-            <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+            <mat-icon>
               {{ item.matIcon }}
             </mat-icon>
           } @else if (item.svgIcon) {
@@ -233,7 +233,7 @@
                   (click)="clickButton({ buttonId: button.id, item }, $event)">
                   <!-- icon -->
                   @if (button.matIcon) {
-                    <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                    <mat-icon>
                       {{ button.matIcon }}
                     </mat-icon>
                   } @else if (button.svgIcon) {
@@ -253,7 +253,7 @@
                   (click)="clickButton({ buttonId: button.id, item }, $event)">
                   <!-- icon -->
                   @if (button.matIcon) {
-                    <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+                    <mat-icon>
                       {{ button.matIcon }}
                     </mat-icon>
                   } @else if (button.svgIcon) {

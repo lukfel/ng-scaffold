@@ -76,10 +76,22 @@
     action — helping guide users toward the next step.
     <br />
   </p>
-  <div class="placeholder-wrapper">
-    <lf-placeholder
-      [placeholderConfig]="placeholderConfig"
-      (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
+  <div class="flex-row gap-8">
+    <div class="placeholder-wrapper">
+      <lf-placeholder
+        [placeholderConfig]="placeholderConfigMatIcon"
+        (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
+    </div>
+    <div class="placeholder-wrapper">
+      <lf-placeholder
+        [placeholderConfig]="placeholderConfigSvgIcon"
+        (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
+    </div>
+    <div class="placeholder-wrapper">
+      <lf-placeholder
+        [placeholderConfig]="placeholderConfigImgIcon"
+        (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
+    </div>
   </div>
 
   <p><br /></p>

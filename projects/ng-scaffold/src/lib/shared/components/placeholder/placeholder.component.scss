@@ -5,14 +5,18 @@
   justify-content: center;
   text-align: center;
 
-  ::ng-deep {
-    .mat-icon {
-      width: var(--placeholder-icon-size);
-      height: var(--placeholder-icon-size);
-      font-size: var(--placeholder-icon-size);
-      line-height: var(--placeholder-icon-size);
-      color: var(--color-gray);
-    }
+  .lf-placeholder-icon {
+    width: var(--placeholder-icon-size);
+    height: var(--placeholder-icon-size);
+    font-size: var(--placeholder-icon-size);
+    line-height: var(--placeholder-icon-size);
+    color: var(--color-gray);
+  }
+
+  .lf-placeholder-image {
+    width: var(--placeholder-icon-size);
+    height: var(--placeholder-icon-size);
+    object-fit: contain;
   }
 
   .lf-placeholder-title {

@@ -57,10 +57,30 @@ export class ComponentsComponent implements OnInit {
   public fileName = signal<string>('');
   public color = signal<string>('');
 
-  public placeholderConfig: PlaceholderConfig = {
+  public placeholderConfigMatIcon: PlaceholderConfig = {
     matIcon: 'widgets',
     title: 'Title',
-    message: 'This is a placeholder message.',
+    message: 'Placeholder with MatIcon.',
+    button: {
+      id: 'placeholder',
+      label: 'ACTION'
+    }
+  }
+
+  public placeholderConfigSvgIcon: PlaceholderConfig = {
+    svgIcon: 'logo',
+    title: 'Title',
+    message: 'Placeholder with SvgIcon.',
+    button: {
+      id: 'placeholder',
+      label: 'ACTION'
+    }
+  }
+
+  public placeholderConfigImgIcon: PlaceholderConfig = {
+    imgIcon: 'assets/img/location.svg',
+    title: 'Title',
+    message: 'Placeholder with Image.',
     button: {
       id: 'placeholder',
       label: 'ACTION'

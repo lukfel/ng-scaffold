@@ -12,18 +12,11 @@
           <a mat-list-item [routerLink]="[item.id]" routerLinkActive="active">
             <span matListItemTitle>{{ item.label }}</span>
             @if (item.matIcon) {
-              <mat-icon
-                matListItemIcon
-                class="mx-3"
-                [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+              <mat-icon matListItemIcon class="mx-3">
                 {{ item.matIcon }}
               </mat-icon>
             } @else {
-              <mat-icon
-                matListItemIcon
-                class="mx-3"
-                [class.material-icons-outlined]="libraryConfig?.outlineIcons"
-                [svgIcon]="item.svgIcon!"></mat-icon>
+              <mat-icon matListItemIcon class="mx-3" [svgIcon]="item.svgIcon!"></mat-icon>
             }
           </a>
         }

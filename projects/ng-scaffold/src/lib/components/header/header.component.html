@@ -123,7 +123,7 @@
         [matTooltip]="menuButton.tooltip">
         <!-- icon -->
         @if (menuButton.matIcon) {
-          <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
+          <mat-icon>
             {{ menuButton.matIcon }}
           </mat-icon>
         } @else if (menuButton.svgIcon) {
@@ -145,7 +145,7 @@
         [aria-label]="menuButton.id || menuButton.tooltip">
         <!-- icon -->
         @if (menuButton.matIcon) {
-          <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
+          <mat-icon>
             {{ menuButton.matIcon }}
           </mat-icon>
         } @else if (menuButton.svgIcon) {
@@ -181,7 +181,7 @@
             [aria-label]="button.label">
             <!-- icon -->
             @if (button.matIcon) {
-              <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
+              <mat-icon>
                 {{ button.matIcon }}
               </mat-icon>
             } @else if (button.svgIcon) {
@@ -208,7 +208,7 @@
               tabindex="0">
               <!-- icon -->
               @if (button.matIcon) {
-                <mat-icon [class.material-icons-outlined]="libraryConfig()?.outlineIcons">
+                <mat-icon>
                   {{ button.matIcon }}
                 </mat-icon>
               } @else if (button.svgIcon) {

@@ -51,8 +51,7 @@ import { isDevMode } from '@angular/core';
   providers: [
     provideScaffold({
       production: !isDevMode(),
-      debugging: isDevMode(),
-      outlineIcons: true
+      debugging: isDevMode()
     })
   ]
 ```

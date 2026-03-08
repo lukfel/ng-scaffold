@@ -95,4 +95,18 @@ $lf-default-theme: (
       --color-warn-#{$hue}: #{mat.m2-get-color-from-palette(map-get($theme, 'warn'), $hue)};
     }
   }
+
+  // Utility classes
+  @each $palette in ('primary', 'accent', 'warn') {
+    .color-#{$palette} { color: var(--color-#{$palette}) !important; }
+    .color-bg-#{$palette} { background-color: var(--color-#{$palette}) !important; }
+
+    @for $i from 0 through 9 {
+      $hue: $i * 100;
+      @if ($hue == 0) { $hue: 50; }
+
+      .color-#{$palette}-#{$hue} { color: var(--color-#{$palette}-#{$hue}) !important; }
+      .color-bg-#{$palette}-#{$hue} { background-color: var(--color-#{$palette}-#{$hue}) !important; }
+    }
+  }
 }

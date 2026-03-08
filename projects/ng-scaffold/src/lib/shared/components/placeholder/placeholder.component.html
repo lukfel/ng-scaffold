@@ -2,11 +2,18 @@
   <div class="lf-placeholder" [ngClass]="config.cssClass">
     <!-- icon -->
     @if (config.matIcon) {
-      <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+      <mat-icon class="lf-placeholder-icon">
         {{ config.matIcon }}
       </mat-icon>
     } @else if (config.svgIcon) {
-      <mat-icon [svgIcon]="config.svgIcon"></mat-icon>
+      <mat-icon class="lf-placeholder-icon" [svgIcon]="config.svgIcon"></mat-icon>
+    } @else if (config.imgIcon) {
+      <img
+        class="lf-placeholder-image"
+        [src]="config.imgIcon"
+        width="96"
+        alt="Placeholder image"
+        loading="lazy" />
     }
     <!-- heading -->
     @if (config.title) {
@@ -32,7 +39,7 @@
         [matTooltip]="config.button.tooltip">
         <!-- icon -->
         @if (config.button.matIcon) {
-          <mat-icon [class.material-icons-outlined]="libraryConfig?.outlineIcons">
+          <mat-icon>
             {{ config.button.matIcon }}
           </mat-icon>
         } @else if (config.button.svgIcon) {
