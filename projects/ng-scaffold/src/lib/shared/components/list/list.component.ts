@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
+import { NgClass, NgTemplateOutlet, KeyValuePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChild, inject, input, model, OnChanges, OnInit, output, signal, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +19,6 @@ import { CONFIG } from '../../../scaffold.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     DragDropModule,
     MatButtonModule,
@@ -27,8 +26,11 @@ import { CONFIG } from '../../../scaffold.config';
     MatRippleModule,
     MatIconModule,
     MatTooltipModule,
-    MatDividerModule
-  ]
+    MatDividerModule,
+    KeyValuePipe,
+    NgClass,
+    NgTemplateOutlet
+]
 })
 export class ListComponent implements OnInit, OnChanges {
 

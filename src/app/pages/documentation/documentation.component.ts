@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -11,9 +11,8 @@ import { take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     MarkdownComponent
-  ]
+]
 })
 export class DocumentationComponent implements OnInit {
 

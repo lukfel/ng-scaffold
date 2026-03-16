@@ -1,5 +1,5 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -16,13 +16,13 @@ import packageJson from '../../package.json';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
-    ScaffoldComponent,
     MatListModule,
     MatIconModule,
-    MatDividerModule
-  ]
+    MatDividerModule,
+    ScaffoldComponent,
+    NgClass
+]
 })
 export class AppComponent {
 

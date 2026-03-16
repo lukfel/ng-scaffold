@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,12 +14,11 @@ import { CONFIG } from '../../../scaffold.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatButtonModule,
     MatIconModule,
     MatTooltipModule
-  ]
+]
 })
 export class ColorPickerComponent {
 

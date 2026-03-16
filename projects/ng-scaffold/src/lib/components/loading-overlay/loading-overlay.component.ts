@@ -1,5 +1,5 @@
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { LoadingOverlayConfig, ScaffoldLibraryConfig } from '../../models';
@@ -13,10 +13,10 @@ import { ScaffoldService } from '../../services';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        CommonModule,
-        PortalModule,
-        MatProgressSpinner
-    ]
+    PortalModule,
+    MatProgressSpinner,
+    NgClass
+]
 })
 export class LoadingOverlayComponent implements OnInit {
 

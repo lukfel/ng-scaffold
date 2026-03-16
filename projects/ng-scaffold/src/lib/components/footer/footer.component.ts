@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,11 +12,11 @@ import { FooterConfig, ScaffoldLibraryConfig } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     MatCardModule,
-    MatIconModule
-  ]
+    MatIconModule,
+    NgClass
+]
 })
 export class FooterComponent {
 

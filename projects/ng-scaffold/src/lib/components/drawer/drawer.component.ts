@@ -1,5 +1,5 @@
 import { ComponentPortal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, OnInit, output } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
@@ -11,10 +11,11 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     PortalModule,
-    MatSidenavModule
-  ]
+    MatSidenavModule,
+    NgClass,
+    NgTemplateOutlet
+]
 })
 export class DrawerComponent implements OnInit {
 

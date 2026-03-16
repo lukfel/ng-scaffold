@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, computed, effect, inject, input, model, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,13 +15,12 @@ import { HeaderInputConfig } from '../../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule
-  ]
+]
 })
 export class InputComponent implements OnDestroy {
 

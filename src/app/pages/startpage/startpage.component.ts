@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +24,6 @@ import { NotFoundComponent } from '../not-found/not-found.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     FormsModule,
     MatExpansionModule,
@@ -35,8 +34,9 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     MatCheckboxModule,
     MatSlideToggleModule,
     MatIconModule,
-    MatDividerModule
-  ]
+    MatDividerModule,
+    NgTemplateOutlet
+]
 })
 export class StartpageComponent implements OnInit, OnDestroy {
 

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,11 +13,11 @@ import { CONFIG } from '../../../scaffold.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+    NgClass
+]
 })
 export class PlaceholderComponent {
 

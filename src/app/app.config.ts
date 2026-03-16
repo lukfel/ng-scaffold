@@ -25,13 +25,12 @@ export function markedOptionsFactory(): MarkedOptions {
 export const APP_CONFIG: ApplicationConfig = {
     providers: [
         provideRouter(APP_ROUTES, withHashLocation()),
-        // provideZoneChangeDetection(),
         provideZonelessChangeDetection(),
         provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
-        { provide: HTTP_INTERCEPTORS, useClass: ScaffoldLoadingInterceptor, multi: true },
         provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
         provideScaffold({ production: !isDevMode(), debugging: isDevMode() }),
+        { provide: HTTP_INTERCEPTORS, useClass: ScaffoldLoadingInterceptor, multi: true },
         provideMarkdown({ loader: HttpClient, markedOptions: { provide: MARKED_OPTIONS, useFactory: markedOptionsFactory, }, sanitize: { provide: SANITIZE, useValue: SecurityContext.NONE }, }),
         { provide: MAT_ICON_DEFAULT_OPTIONS, useValue: { fontSet: 'material-icons-outlined' } }
     ]

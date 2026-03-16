@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,11 +12,11 @@ import { ContentTitleCardConfig, ScaffoldLibraryConfig } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
-  ]
+    MatIconModule,
+    NgClass
+]
 })
 export class ContentTitleCardComponent {
 

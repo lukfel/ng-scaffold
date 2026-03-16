@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
@@ -9,9 +9,7 @@ import { take } from 'rxjs';
   styleUrls: ['./typography.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    CommonModule
-  ]
+  imports: []
 })
 export class TypographyComponent implements OnInit {
   

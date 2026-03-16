@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -39,10 +39,10 @@ import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
   ],
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+    NgClass
+]
 })
 export class NavbarComponent {
 

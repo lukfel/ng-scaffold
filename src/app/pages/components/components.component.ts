@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
@@ -12,14 +12,13 @@ import { take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     MatDividerModule,
     PlaceholderComponent,
     FileUploadComponent,
     ColorPickerComponent,
     ListComponent
-  ]
+]
 })
 export class ComponentsComponent implements OnInit {
 

@@ -1,6 +1,6 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DOCUMENT, ElementRef, inject, OnDestroy, OnInit, output, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -24,16 +24,15 @@ import { NavbarComponent } from '../navbar/navbar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
+    NgClass,
     HeaderComponent,
     NavbarComponent,
     DrawerComponent,
     FooterComponent,
     ContentTitleCardComponent,
     FloatingButtonComponent,
-    BottomBarComponent,
-    LoadingOverlayComponent
-  ]
+    BottomBarComponent
+]
 })
 export class ScaffoldComponent implements OnInit, OnDestroy {
 

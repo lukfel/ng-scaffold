@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, OnInit, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,11 +12,11 @@ import { FloatingButtonConfig, ScaffoldLibraryConfig } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+    NgClass
+]
 })
 export class FloatingButtonComponent implements OnInit {
 

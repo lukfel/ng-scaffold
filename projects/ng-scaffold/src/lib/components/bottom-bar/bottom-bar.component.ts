@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,11 +21,11 @@ import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
   ],
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+    NgClass
+]
 })
 export class BottomBarComponent {
 

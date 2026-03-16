@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,6 @@ import { InputComponent } from '../../shared/components/input/input.component';
   ],
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     MatToolbarModule,
     MatMenuModule,
@@ -34,8 +33,10 @@ import { InputComponent } from '../../shared/components/input/input.component';
     MatIconModule,
     MatProgressBarModule,
     MatTooltipModule,
+    NgClass,
+    NgTemplateOutlet,
     InputComponent
-  ]
+]
 })
 export class HeaderComponent {
 
