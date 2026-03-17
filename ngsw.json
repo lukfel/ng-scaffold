@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1773686303521,
+  "timestamp": 1773777843662,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -24,7 +24,7 @@
         "/ng-scaffold/chunk-ZMJP26FL.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-USA7CUWT.js",
+        "/ng-scaffold/main-U2ZXHJHY.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/scripts-5A55CVEY.js",
         "/ng-scaffold/styles-V7R5LMSF.css"
@@ -124,7 +124,7 @@
     "/ng-scaffold/assets/img/wowen.svg": "7330390e650bfa6f48733f806d367e3ce80cf2b8",
     "/ng-scaffold/assets/md/bottomBarConfig.md": "19c663ab16d13f72b73a14f6756a53f5c7471862",
     "/ng-scaffold/assets/md/contentTitleCardConfig.md": "113026539fe35770e8d1897625924eca7ce64f58",
-    "/ng-scaffold/assets/md/documentation.md": "aa285f23f44495df9d7b1df7e1d10892d58384aa",
+    "/ng-scaffold/assets/md/documentation.md": "9cd73530caf15f80ff498a5e5c90c48690e8e84a",
     "/ng-scaffold/assets/md/drawerConfig.md": "808183059698f50af510d2878085c12d94f036bb",
     "/ng-scaffold/assets/md/floatingButtonConfig.md": "62d2c299c60172ceb94fc478c189c5f5eeb8042b",
     "/ng-scaffold/assets/md/footerConfig.md": "8f21a1664fd3689d32d05d797c11c6547de6e23c",
@@ -143,8 +143,8 @@
     "/ng-scaffold/chunk-RZALO67W.js": "9946304b2dcac323df0b80739f65d543da8b5c97",
     "/ng-scaffold/chunk-ZMJP26FL.js": "3555eb2e5debfb7a814f2c889bff309d27571ec9",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
-    "/ng-scaffold/index.html": "a2d724245faedce8ef194253accfc61aa2064685",
-    "/ng-scaffold/main-USA7CUWT.js": "5aa25b721f362fd7b14ae1eb72ba4a486989fce6",
+    "/ng-scaffold/index.html": "d73fc4f1f8bdd12d4b8d100a804d55b8924acec3",
+    "/ng-scaffold/main-U2ZXHJHY.js": "1dc3a2911c9d3f3059ea9cc63a6417fab6b89a89",
     "/ng-scaffold/manifest.webmanifest": "1cf3e0d65ecd9c918857cb33379865c7f754159a",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
     "/ng-scaffold/styles-V7R5LMSF.css": "be6e673cea174ec0041b66c0c51a544aab118aff"
