@@ -35,19 +35,19 @@ export function addComponent(): Rule {
 }
 
 /** Add ScaffoldComponent to NgModule app */
-function addToNgModule(tree: Tree, context: SchematicContext, path: string): Tree {
-    const text = tree.read(path)!.toString('utf-8');
-    if (text.includes('ScaffoldComponent')) {
+function addToNgModule(tree: Tree, context: SchematicContext, filePath: string): Tree {
+    const content = tree.read(filePath)!.toString('utf-8');
+    if (content.includes('from \'@lukfel/ng-scaffold\'') && content.includes('ScaffoldComponent')) {
         context.logger.info('[Component] ScaffoldComponent already imported. Skip.');
         return tree;
     }
 
-    const isModule = path.includes('module');
+    const isModule = filePath.includes('module');
 
-    const recorder = tree.beginUpdate(path);
+    const recorder = tree.beginUpdate(filePath);
     recorder.insertLeft(0, 'import { ScaffoldComponent } from \'@lukfel/ng-scaffold\';\n');
 
-    const sourceFile = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
+    const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
     const ngModuleDecoratorCall = findDecorator(sourceFile, isModule ? 'NgModule' : 'Component');
 
     if (!ngModuleDecoratorCall) {

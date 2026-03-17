@@ -21,7 +21,7 @@ export function addConfig(): Rule {
         }
 
         const content = tree.read(filePath)!.toString('utf-8');
-        if (content.includes('from \'@lukfel/ng-scaffold\'')) {
+        if (content.includes('from \'@lukfel/ng-scaffold\'') && content.includes('ScaffoldConfig')) {
             context.logger.info('[Config] Config already added. Skip.');
             return tree;
         }
@@ -30,7 +30,7 @@ export function addConfig(): Rule {
         const recorder = tree.beginUpdate(filePath);
 
         // Add imports if missing
-        if (!content.includes('from \'@lukfel/ng-scaffold\'')) {
+        if (!content.includes('from \'@lukfel/ng-scaffold\'') || !content.includes('ScaffoldConfig')) {
             context.logger.info('[Config] Adding config import ...');
             recorder.insertLeft(0, 'import { ScaffoldConfig, ScaffoldService } from \'@lukfel/ng-scaffold\';\n');
         }

@@ -67,12 +67,14 @@ import { ScaffoldService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
-  public scaffoldConfig: ScaffoldConfig = {
+  private scaffoldService = inject(ScaffoldService);
+
+  private scaffoldConfig: ScaffoldConfig = {
     // Create your own config or generate it at https://lukfel.github.io/ng-scaffold
     headerConfig: { enable: true, title: 'Scaffold works!' }
   };
 
-  constructor(private scaffoldService: ScaffoldService) {
+  constructor() {
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
   }
 }
@@ -212,7 +214,10 @@ There are two ways to listen to scaffold user events (button clicks, input chang
 ### (Recommended) Option 1 – Subscribe to Event Observables
 Subscribe to the event Observables and listen to changes
 ```ts
-constructor(private scaffoldService: ScaffoldService, private router: Router) {
+private scaffoldService = inject(ScaffoldService);
+private router = inject(Router);
+
+constructor() {
   // Listen to click events (header menu and navbar buttons - click)
   this.scaffoldService.buttonClickEventValue$.subscribe((id: string) => {
     this.router.navigate([id]);
@@ -284,7 +289,7 @@ import { Logger } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
-  constructor(private logger: Logger) {}
+  private logger = inject(Logger);
   
   // Generic api call with logging
   public apiCallWithLogging(): void {
@@ -305,7 +310,7 @@ import { SnackbarService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
-  constructor(private snackbarService: SnackbarService) {}
+  private snackbarService = inject(SnackbarService);
   
   // Generic api call with snackbar response
   public apiCallWithSnackbarResponse(): void {
@@ -326,7 +331,7 @@ import { DialogService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
-  constructor(private dialogService: DialogService) {}
+  private dialogService = inject(DialogService);
   
   // Generic api call with a subsequent confirmation dialog
   public apiCallWithDialogConfirmation(): void {
@@ -352,7 +357,9 @@ import { BreakpointService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
-  constructor(private breakpointService: BreakpointService) {
+  private breakpointService = inject(BreakpointService);
+
+  constructor() {
     this.breakpointService.breakpoint$.subscribe((result: BreakpointState) => {
       // Check which breakpoint is active
       if (result.breakpoints[Breakpoints.XSmall]) {
@@ -379,8 +386,10 @@ import { ThemeService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
 
+  private themeService = inject(ThemeService);
+
   constructor(private themeService: ThemeService) {
-    this.themeService.setTheme('my-theme2', true);    // the second parameter allows to persists the theme in the LocalStorage (using the built in LocalStorageService)
+    this.themeService.setTheme('my-theme2', true);    // set theme and store in local storage (using the built in LocalStorageService)
   }
 }
 ```
@@ -403,31 +412,31 @@ import { ListComponent } from '@lukfel/ng-scaffold';
 ```ts
 import { Button, ListConfig, ListHeader, ListItem } from '@lukfel/ng-scaffold';
 
-public listConfig: ListConfig = {   // (Optional) list config
+public listConfig = signal<ListConfig>({    // (Optional) list config
   enableSelection: true,
   enableDragging: true,
   initialSortToken: 'title',
   initialSortAsc: true,
   showDividers: true
-}
+});
 
-public listHeader: ListHeader = {   // (Optional) list header
+public listHeader = signal<ListHeader>({    // (Optional) list header
   matIcon: 'sort',
   items: [
     { title: 'Items', sortToken: 'title' }
   ]
-};
+});
 
-public listItems: ListItem[] = [
+public listItems = signal<ListItem[]>([
   { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
   { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
   { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
-];
+]);
 
-public buttons: Button[] = [        // (Optional) list buttons
+public buttons = signal<Button[]>([         // (Optional) list buttons
   { id: 'edit', matIcon: 'edit' },
   { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
-];
+]);
 
 // (Optional) Handle sort events
 public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
@@ -455,10 +464,10 @@ public onListItemClick(item: ListItem): void {
 
 ```html
 <lf-list
-  [config]="listConfig"
-  [header]="listHeader"
-  [items]="listItems"
-  [buttons]="listButtons"
+  [config]="listConfig()"
+  [header]="listHeader()"
+  [items]="listItems()"
+  [buttons]="listButtons()"
   (sortChangeEvent)="onListSortChange($event)"
   (selectionChangeEvent)="onListSelectionChange()"
   (buttonClickEvent)="onListButtonClick($event)"
@@ -518,7 +527,7 @@ import { PlaceholderComponent } from '@lukfel/ng-scaffold';
 ```ts
 import { PlaceholderConfig } from '@lukfel/ng-scaffold';
 
-public placeholderConfig: PlaceholderConfig = {
+public placeholderConfig = signal<PlaceholderConfig>({
   matIcon: 'widgets',
   title: 'Title',
   message: 'This is a placeholder message.',
@@ -526,7 +535,7 @@ public placeholderConfig: PlaceholderConfig = {
     id: 'placeholder',
     label: 'ACTION'
   }
-}
+});
 
 public onPlaceholderButtonClick(): void {
   // handle placeholder click
@@ -535,7 +544,7 @@ public onPlaceholderButtonClick(): void {
 
 ```html
 <lf-placeholder
-  [placeholderConfig]="placeholderConfig"
+  [placeholderConfig]="placeholderConfig()"
   (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
 ```
 
@@ -548,8 +557,7 @@ Intercept HTTP Calls and automatically show a loading spinner.
 * **Note:** The loading spinner can also be manually shown by udpating the value for `scaffoldConfig.loading` in the `ScaffoldService`
 
 ```ts
-import { ScaffoldLoadingInterceptor, ScaffoldComponent } from '@lukfel/ng-scaffold';
-import { isDevMode } from '@angular/core';
+import { ScaffoldLoadingInterceptor } from '@lukfel/ng-scaffold';
 
   ...
   providers: [

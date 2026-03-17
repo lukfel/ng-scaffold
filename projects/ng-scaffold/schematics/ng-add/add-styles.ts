@@ -21,7 +21,7 @@ export function addStyles(): Rule {
         };
 
         const content = tree.read(path)!.toString('utf-8');
-        if (content.includes('@lukfel/ng-scaffold/styles') || content.includes('lf.scaffold-theme')) {
+        if (content.includes('@lukfel/ng-scaffold/styles') && content.includes('lf.scaffold-theme')) {
             context.logger.info('[Styles] Styles already added. Skip.');
             return tree;
         }
