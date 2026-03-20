@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { By } from '@angular/platform-browser';
+import { vi } from 'vitest';
 import { InputComponent } from './input.component';
 
 describe('InputComponent', () => {
@@ -64,7 +65,7 @@ describe('InputComponent', () => {
   });
 
   it('should call inputChanged when input value is changed', () => {
-    spyOn(component, 'inputChanged');
+    vi.spyOn(component, 'inputChanged');
     const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
     inputElement.value = 'test';
     inputElement.dispatchEvent(new Event('input'));

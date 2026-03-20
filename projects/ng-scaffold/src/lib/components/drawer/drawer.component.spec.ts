@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { By } from '@angular/platform-browser';
+import { vi } from 'vitest';
 import { DrawerComponent } from './drawer.component';
 
 describe('DrawerComponent', () => {
@@ -45,7 +46,7 @@ describe('DrawerComponent', () => {
   });
 
   it('should call onDrawerClosed method when the drawer is closed', () => {
-    spyOn(component, 'drawerClosed');
+    vi.spyOn(component, 'drawerClosed');
     fixture.componentRef.setInput('drawerConfig', {
       enable: true
     });

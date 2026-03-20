@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
+import { vi } from 'vitest';
 import { FloatingButtonComponent } from './floating-button.component';
 
 describe('FloatingButtonComponent', () => {
@@ -58,7 +59,7 @@ describe('FloatingButtonComponent', () => {
     fixture.componentRef.setInput('floatingButtonConfig', { enable: true, id: 'id' });
     fixture.componentRef.setInput('onTop', false);
     fixture.detectChanges();
-    spyOn(component, 'buttonClicked');
+    vi.spyOn(component, 'buttonClicked');
     const button = fixture.debugElement.query(By.css('.lf-floating-button'));
     button.triggerEventHandler('click', null);
     expect(component.buttonClicked).toHaveBeenCalledWith('id');
@@ -69,7 +70,7 @@ describe('FloatingButtonComponent', () => {
     fixture.componentRef.setInput('onTop', false);
     fixture.detectChanges();
     const label = fixture.debugElement.query(By.css('.lf-floating-button-label'));
-    expect(label.nativeElement.innerText).toEqual('Test Button');
+    expect(label.nativeElement.innerText.trim()).toEqual('Test Button');
   });
 
   it('should not display the label if it is not provided', () => {

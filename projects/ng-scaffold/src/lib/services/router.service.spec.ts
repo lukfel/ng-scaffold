@@ -2,6 +2,7 @@ import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { vi } from 'vitest';
 import { RouterService } from './router.service';
 
 describe('RouterService', () => {
@@ -14,9 +15,9 @@ describe('RouterService', () => {
 
     mockRouter = {
       events: routerEvents$.asObservable(),
-      currentNavigation: jasmine.createSpy('currentNavigation').and.returnValue({ extras: { state: {} } }),
-      navigateByUrl: jasmine.createSpy('navigateByUrl').and.returnValue(Promise.resolve(true)),
-      navigate: jasmine.createSpy('navigate').and.returnValue(Promise.resolve(true)),
+      currentNavigation: vi.fn().mockReturnValue({ extras: { state: {} } }),
+      navigateByUrl: vi.fn().mockResolvedValue(true),
+      navigate: vi.fn().mockResolvedValue(true),
     };
 
     TestBed.configureTestingModule({
@@ -30,53 +31,52 @@ describe('RouterService', () => {
     service = TestBed.inject(RouterService);
   });
 
-  it('should track current and previous routes', (done) => {
+  it('should track current and previous routes', async () => {
     routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
     routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
 
-    setTimeout(() => {
-      expect(service.currentRoute).toBe('/about');
-      expect(service.previousRoute).toBe('/home');
-      done();
-    }, 0);
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(service.currentRoute).toBe('/about');
+    expect(service.previousRoute).toBe('/home');
   });
 
-  it('should push previous route into route history on navigation', (done) => {
+  it('should push previous route into route history on navigation', async () => {
     routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
     routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
 
-    setTimeout(() => {
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    await new Promise<void>(resolve => {
       service.routeHistory$.subscribe(history => {
         expect(history).toEqual(['/home']);
-        done();
+        resolve();
       });
-    }, 0);
+    });
   });
 
-  it('should handle back navigation correctly', (done) => {
+  it('should handle back navigation correctly', async () => {
     routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
     routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
 
-    setTimeout(() => {
-      service.navigateBack();
-      setTimeout(() => {
-        expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/home', { state: { back: true } });
-        done();
-      }, 0);
-    }, 0);
+    await new Promise(resolve => setTimeout(resolve, 0));
+    service.navigateBack();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/home', { state: { back: true } });
   });
 
-
-  it('should clear route history', (done) => {
+  it('should clear route history', async () => {
     routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
     routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
 
-    setTimeout(() => {
-      service.clearRouteHistory();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    service.clearRouteHistory();
+
+    await new Promise<void>(resolve => {
       service.routeHistory$.subscribe(history => {
         expect(history).toEqual([]);
-        done();
+        resolve();
       });
-    }, 0);
+    });
   });
 });

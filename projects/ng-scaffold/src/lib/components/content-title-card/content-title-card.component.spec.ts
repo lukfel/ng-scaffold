@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
+import { vi } from 'vitest';
 import { ContentTitleCardComponent } from './content-title-card.component';
 
 describe('ContentTitleCardComponent', () => {
@@ -89,7 +90,7 @@ describe('ContentTitleCardComponent', () => {
   });
 
   it('should call backButtonClicked when back button is clicked', () => {
-    spyOn(component, 'backButtonClicked');
+    vi.spyOn(component, 'backButtonClicked');
     fixture.componentRef.setInput('contentTitleCardConfig', {
       enable: true,
       showBackButton: true,
