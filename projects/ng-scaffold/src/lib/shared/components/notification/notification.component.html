@@ -8,12 +8,16 @@
   [class]="[cssClass(), color()]"
   animate.enter="lf-anim-scale-enter">
   <div
-    class="lf-notification-content flex-row-nowrap align-center gap-2"
+    class="lf-notification-content flex-row-nowrap gap-2"
     [class.justify-center]="minimal()"
     [class.justify-between]="!minimal()"
     [class.flex-col]="isMobile()"
+    [class.align-center]="!isMobile()"
     [class.align-start]="isMobile()">
-    <span class="lf-notification-message flex-row-nowrap align-center justify-start gap-4">
+    <span
+      class="lf-notification-message flex-row-nowrap align-center justify-start"
+      [class.gap-4]="!isMobile()"
+      [class.gap-2]="isMobile()">
       @if (matIcon()) {
         <mat-icon class="flex-none" [color]="color()">{{ matIcon() }}</mat-icon>
       }
