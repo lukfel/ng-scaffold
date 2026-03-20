@@ -133,7 +133,7 @@ export class LocalStorageService {
     localStorage.clear();
   }
 
-  private dateReviver(key: any, value: any): any {     // eslint-disable-line
+  private dateReviver(key: any, value: any): any {      
     if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value)) {
       return new Date(value);
     }

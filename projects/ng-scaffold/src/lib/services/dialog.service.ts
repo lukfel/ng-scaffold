@@ -35,7 +35,7 @@ export class DialogService {
    * @param config of the dialog
    * @returns an asynchronous any response
    */
-  public openCustomDialog<T>(templateRef: Type<T>, config: MatDialogConfig): Promise<any> {    // eslint-disable-line @typescript-eslint/no-explicit-any
+  public openCustomDialog<T>(templateRef: Type<T>, config: MatDialogConfig): Promise<any> {     
     const dialogRef = this.matDialog.open(templateRef, config);
     return firstValueFrom(dialogRef.afterClosed());
   }
