@@ -1,7 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ApplicationConfig, isDevMode, provideZonelessChangeDetection, SecurityContext } from '@angular/core';
 import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideScaffold, ScaffoldLoadingInterceptor } from '@lukfel/ng-scaffold';
@@ -26,7 +25,6 @@ export const APP_CONFIG: ApplicationConfig = {
     providers: [
         provideRouter(APP_ROUTES, withHashLocation()),
         provideZonelessChangeDetection(),
-        provideAnimations(),
         provideHttpClient(withInterceptorsFromDi()),
         provideServiceWorker('ngsw-worker.js', { enabled: !isDevMode(), registrationStrategy: 'registerWhenStable:30000' }),
         provideScaffold({ production: !isDevMode(), debugging: isDevMode() }),

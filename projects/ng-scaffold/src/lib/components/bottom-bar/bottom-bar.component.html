@@ -1,7 +1,8 @@
 @if (bottomBarConfig(); as config) {
   @if (config.enable) {
     <div
-      [@slideUpDown]
+      animate.enter="lf-anim-slide-up-enter"
+      animate.leave="lf-anim-slide-up-leave"
       class="lf-bottom-bar lf-transitions px-4"
       [ngClass]="config.cssClass"
       [class.lf-bottom-bar-show-navbar]="!isMobile() && navbarEnabled()"

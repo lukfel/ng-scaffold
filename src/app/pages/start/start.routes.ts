@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { StartpageComponent } from './startpage.component';
+import { StartComponent } from './start.component';
 
 export const START_ROUTES: Routes = [
   {
     path: '',
-    component: StartpageComponent
+    component: StartComponent
   }
 ];

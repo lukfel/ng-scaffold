@@ -403,7 +403,9 @@ In addition to the scaffold components provided by default by the the `ScaffoldC
 * **Note:** Standalone components must be imported manually and are not part of the `ScaffoldComponent` import
 
 ### List
-A standalone Material Design inspired list and table hybrid component for displaying structured collections of items. It supports avatars, titles, subtitles, actions, selections and dragging — making it ideal for dashboards, inventories, and administrative views.
+A standalone Material Design inspired list and table hybrid component for displaying structured
+collections of items. It supports avatars, titles, subtitles, actions, selections and dragging —
+making it ideal for dashboards, inventories, and administrative views.
 
 ```ts
 import { ListComponent } from '@lukfel/ng-scaffold';
@@ -475,7 +477,9 @@ public onListItemClick(item: ListItem): void {
 ```
 
 ### File-Upload
-A standalone Material Design styled button for selecting and uploading files. It wraps a hidden native file input and exposes a simple, customizable interface with built-in icon, tooltip, and state management.
+A standalone Material Design styled button for selecting and uploading files. It wraps a hidden
+native file input and exposes a simple, customizable interface with built-in icon, tooltip, and
+state management.
 
 ```ts
 import { FileUploadComponent } from '@lukfel/ng-scaffold';
@@ -497,7 +501,9 @@ public onFileChange(file: File): void {
 ```
 
 ### Color-Picker
-A standalone Material Design styled button for picking colors. It wraps a hidden native color input and exposes a simple, customizable interface with built-in icon, tooltip, and state management.
+A standalone Material Design styled button for picking colors. It wraps a hidden native color
+input and exposes a simple, customizable interface with built-in icon, tooltip, and state
+management.
 
 ```ts
 import { ColorPickerComponent } from '@lukfel/ng-scaffold';
@@ -518,7 +524,9 @@ public onColorChange(color: string): void {
 ```
 
 ### Placeholder
-A versatile UI component designed to display an informative placeholder or empty state when no data is available. It provides a structured layout for an icon, heading, message, and optional action — helping guide users toward the next step.
+A standalone UI component designed to display an informative placeholder or empty state when no
+data is available. It provides a structured layout for an icon, heading, message, and optional
+action — helping guide users toward the next step.
 
 ```ts
 import { PlaceholderComponent } from '@lukfel/ng-scaffold';
@@ -546,6 +554,25 @@ public onPlaceholderButtonClick(): void {
 <lf-placeholder
   [placeholderConfig]="placeholderConfig()"
   (buttonClickEvent)="onPlaceholderButtonClick()"></lf-placeholder>
+```
+
+### Notification
+A standalone standalone Material Design inspired notification component for displaying transient
+messages to users. It supports different severity levels (primary, accent, warn), optional
+icons, optional actions, and links.
+
+```ts
+import { NotificationComponent } from '@lukfel/ng-scaffold';
+```
+
+```html
+<lf-notification
+  [static]="true"
+  color="accent"
+  message="This is an info notification with action."
+  matIcon="info"
+  action="Action"
+  (clickEvent)="onNotificationClick()"></lf-notification>
 ```
 
 

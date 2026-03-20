@@ -1,0 +1,98 @@
+.lf-notification {
+  overflow: hidden;
+  padding: var(--notification-padding);
+  box-sizing: border-box;
+  border-radius: var(--border-radius);
+  color: var(--mat-snack-bar-supporting-text-color, var(--mat-sys-inverse-on-surface));
+  background-color: var(--mat-snack-bar-container-color, var(--mat-sys-inverse-surface));
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: transparent;
+
+  &.lf-mobile {
+    &.lf-notification-fixed {
+      position: fixed;
+      top: auto;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      max-width: 100vw !important;
+      min-width: 0 !important;
+    }
+
+    .lf-notification-message {
+      gap: var(--lf-gap-medium) !important;
+    }
+  }
+
+  &.lf-notification-fixed {
+    z-index: 1000;
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    display: inline-table;
+    max-width: var(--notification-max-width);
+    min-width: var(--notification-min-width);
+    margin: var(--notification-fixed-margin);
+  }
+
+  &.lf-notification-static {
+    margin: var(--notification-static-margin);
+  }
+
+  &.lf-notification-minimal {
+    padding: var(--notification-padding-minimal);
+    outline: none !important;
+    margin: 0 !important;
+  }
+
+  &.primary {
+    color: unset !important;
+    background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    outline-color: var(--color-primary-200);
+
+    .lf-notification-link {
+      color: unset !important;
+    }
+  }
+
+  &.accent {
+    color: unset !important;
+    background-color: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    outline-color: var(--color-accent-200);
+
+    .lf-notification-link {
+      color: unset !important;
+    }
+  }
+
+  &.warn {
+    color: unset !important;
+    background-color: color-mix(in srgb, var(--color-warn) 12%, transparent);
+    outline-color: var(--color-warn-200);
+
+    .lf-notification-link {
+      color: unset !important;
+    }
+  }
+
+  .lf-notification-content {
+    .lf-notification-message {
+      font-size: var(--lf-font-size-medium);
+      font-weight: var(--lf-font-weight-default);
+
+      .lf-notification-link {
+        color: var(--mat-snack-bar-supporting-text-color, var(--mat-sys-inverse-on-surface));
+        text-decoration: underline;
+      }
+    }
+
+    .lf-notification-action {
+      min-width: unset !important;
+      flex-shrink: 0;
+      margin: -8px 0 -8px 8px;
+    }
+  }
+}

@@ -18,9 +18,9 @@ import { MarkdownComponent, MarkdownDialogData } from 'src/app/shared/components
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
-  selector: 'app-startpage',
-  templateUrl: './startpage.component.html',
-  styleUrls: ['./startpage.component.scss'],
+  selector: 'app-start',
+  templateUrl: './start.component.html',
+  styleUrl: './start.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
@@ -38,7 +38,7 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     NgTemplateOutlet
 ]
 })
-export class StartpageComponent implements OnInit, OnDestroy {
+export class StartComponent implements OnInit, OnDestroy {
 
   public scaffoldService = inject(ScaffoldService);
   private themeService = inject(ThemeService);

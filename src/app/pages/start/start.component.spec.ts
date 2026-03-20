@@ -12,11 +12,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { Observable, of } from 'rxjs';
-import { StartpageComponent } from './startpage.component';
+import { StartComponent } from './start.component';
 
 describe('StartpageComponent', () => {
-  let component: StartpageComponent;
-  let fixture: ComponentFixture<StartpageComponent>;
+  let component: StartComponent;
+  let fixture: ComponentFixture<StartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -47,7 +47,7 @@ describe('StartpageComponent', () => {
     iconRegistry.addSvgIcon('waw_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/waw.svg'));
     iconRegistry.addSvgIcon('ugly_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/uglygotchi.svg'));
 
-    fixture = TestBed.createComponent(StartpageComponent);
+    fixture = TestBed.createComponent(StartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -94,5 +94,33 @@
     </div>
   </div>
 
+  <mat-divider></mat-divider>
+
+  <h2>Notification</h2>
+  <a [routerLink]="['/documentation']" fragment="notification">View Documentation</a>
+  <p>
+    A standalone standalone Material Design inspired notification component for displaying transient
+    messages to users. It supports different severity levels (primary, accent, warn), optional
+    icons, optional actions, and links.
+    <br />
+    <br />
+  </p>
+  <lf-notification
+    [static]="true"
+    color="accent"
+    message="This is an info notification with action."
+    matIcon="info"
+    action="Action"
+    (clickEvent)="onNotificationClick()"></lf-notification>
+  <lf-notification
+    [static]="true"
+    color="warn"
+    message="This is an error notification with action and link."
+    linkText="Documentation"
+    link="/#/documentation#notification"
+    matIcon="warning_amber"
+    action="Action"
+    (clickEvent)="onNotificationClick()"></lf-notification>
+
   <p><br /></p>
 </div>

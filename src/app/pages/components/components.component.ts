@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@ang
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { BottomBarConfig, Button, ColorPickerComponent, FileUploadComponent, ListComponent, ListConfig, ListHeader, ListItem, PlaceholderComponent, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
+import { NotificationComponent } from 'projects/ng-scaffold/src/public-api';
 import { take } from 'rxjs';
 
 @Component({
@@ -17,8 +18,9 @@ import { take } from 'rxjs';
     PlaceholderComponent,
     FileUploadComponent,
     ColorPickerComponent,
-    ListComponent
-]
+    ListComponent,
+    NotificationComponent
+  ]
 })
 export class ComponentsComponent implements OnInit {
 
@@ -145,5 +147,9 @@ export class ComponentsComponent implements OnInit {
 
   public onPlaceholderButtonClick(): void {
     this.snackbarService.openSnackbar('Clicked placeholder button', 'Close');
+  }
+
+  public onNotificationClick(): void {
+    this.snackbarService.openSnackbar('Clicked notification button', 'Close');
   }
 }

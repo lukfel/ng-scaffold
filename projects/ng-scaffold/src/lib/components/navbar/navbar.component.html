@@ -1,7 +1,8 @@
 @if (navbarConfig(); as config) {
   @if (config.enable) {
     <div
-      [@responsiveSlide]="isMobile() ? 'mobile' : 'desktop'"
+      [animate.enter]="isMobile() ? 'lf-anim-slide-up-enter' : 'lf-anim-slide-left-enter'"
+      [animate.leave]="isMobile() ? 'lf-anim-slide-up-leave' : 'lf-anim-slide-left-leave'"
       class="mat-app-background lf-transitions mat-elevation-z3"
       [class.lf-navbar]="!isMobile()"
       [class.lf-navbar-mobile]="isMobile()"

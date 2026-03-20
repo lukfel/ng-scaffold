@@ -1,0 +1,39 @@
+<div
+  class="lf-notification"
+  [class.mat-elevation-z2]="!static()"
+  [class.lf-notification-fixed]="!static()"
+  [class.lf-notification-static]="static()"
+  [class.lf-notification-minimal]="minimal()"
+  [class.lf-mobile]="isMobile()"
+  [class]="[cssClass(), color()]"
+  animate.enter="lf-anim-scale-enter">
+  <div
+    class="lf-notification-content flex-row-nowrap align-center gap-2"
+    [class.justify-center]="minimal()"
+    [class.justify-between]="!minimal()"
+    [class.flex-col]="isMobile()"
+    [class.align-start]="isMobile()">
+    <span class="lf-notification-message flex-row-nowrap align-center justify-start gap-4">
+      @if (matIcon()) {
+        <mat-icon class="flex-none" [color]="color()">{{ matIcon() }}</mat-icon>
+      }
+      <span [class.ml-1]="!matIcon()">
+        {{ message() }}
+        @if (link() && linkText()) {
+          <a class="lf-notification-link" [href]="link()">{{ linkText() }}</a>
+        }
+      </span>
+    </span>
+
+    @if (action(); as action) {
+      <button
+        mat-flat-button
+        class="lf-notification-action"
+        [class.align-self-end]="isMobile()"
+        [color]="color()"
+        (click)="clickEvent.emit()">
+        {{ action }}
+      </button>
+    }
+  </div>
+</div>

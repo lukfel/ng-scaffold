@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,33 +9,6 @@ import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('responsiveSlide', [
-      // States for desktop and mobile
-      state('desktop', style({ transform: 'translateX(0)' })),
-      state('mobile', style({ transform: 'translateY(0)' })),
-
-      // Desktop enter (slide in from left)
-      transition('void => desktop', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('200ms linear')
-      ]),
-      // Desktop leave (slide back to left)
-      transition('desktop => void', [
-        animate('200ms linear', style({ transform: 'translateX(-100%)' }))
-      ]),
-
-      // Mobile enter (slide in from bottom)
-      transition('void => mobile', [
-        style({ transform: 'translateY(100%)' }),
-        animate('200ms linear')
-      ]),
-      // Mobile leave (slide back to bottom)
-      transition('mobile => void', [
-        animate('200ms linear', style({ transform: 'translateY(100%)' }))
-      ]),
-    ])
-  ],
   standalone: true,
   imports: [
     MatIconModule,

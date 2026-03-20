@@ -1,6 +1,6 @@
 {
   "name": "ng-scaffold-app",
-  "version": "21.1.43",
+  "version": "21.1.44",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,7 +15,6 @@
     "lib:publish": "npm publish ./dist/ng-scaffold --access public"
   },
   "dependencies": {
-    "@angular/animations": "^21.0.8",
     "@angular/cdk": "^21.0.6",
     "@angular/common": "^21.0.8",
     "@angular/compiler": "^21.0.8",

@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,14 +10,6 @@ import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
   templateUrl: './bottom-bar.component.html',
   styleUrls: ['./bottom-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('slideUpDown', [
-      state('void', style({ transform: 'translateY(100%)' })),
-      state('*', style({ transform: 'translateY(0)' })),
-      transition(':enter', [style({ transform: 'translateY(100%)' }), animate('200ms linear')]),
-      transition(':leave', [animate('200ms linear', style({ transform: 'translateY(100%)' }))])
-    ])
-  ],
   standalone: true,
   imports: [
     MatButtonModule,

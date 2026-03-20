@@ -1,0 +1,63 @@
+// Slide up — enter from bottom, leave to bottom
+// Used by: bottom-bar, navbar (mobile)
+.lf-anim-slide-up-enter {
+  animation: lf-slide-up 200ms linear forwards;
+}
+@keyframes lf-slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.lf-anim-slide-up-leave {
+  animation: lf-slide-up-out 200ms linear forwards;
+}
+@keyframes lf-slide-up-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+// Slide down — enter from top, leave to top
+// Used by: header
+.lf-anim-slide-down-enter {
+  animation: lf-slide-down 200ms ease-out forwards;
+}
+@keyframes lf-slide-down {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+.lf-anim-slide-down-leave {
+  animation: lf-slide-down-out 200ms ease-in forwards;
+}
+@keyframes lf-slide-down-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+
+// Slide from left — enter from left, leave to left
+// Used by: navbar (desktop)
+.lf-anim-slide-left-enter {
+  animation: lf-slide-left 200ms linear forwards;
+}
+@keyframes lf-slide-left {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+.lf-anim-slide-left-leave {
+  animation: lf-slide-left-out 200ms linear forwards;
+}
+@keyframes lf-slide-left-out {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+// Scale in — enter with scale
+// Used by: notification
+.lf-anim-scale-enter {
+  animation: lf-scale-in 200ms cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+}
+@keyframes lf-scale-in {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1); }
+}

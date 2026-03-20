@@ -6,7 +6,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'start',
-    loadChildren: () => import('./pages/startpage/startpage.routes').then(m => m.START_ROUTES)
+    loadChildren: () => import('./pages/start/start.routes').then(m => m.START_ROUTES)
   },
   {
     path: 'components',
