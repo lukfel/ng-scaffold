@@ -1,14 +1,17 @@
 <div class="lf-list" cdkDropListGroup>
   <!-- Header -->
   @if (header(); as header) {
-    <div class="lf-list-item lf-list-item-header">
+    <div
+      class="lf-list-item lf-list-item-header"
+      [class.gap-2]="!isMobile()"
+      [class.gap-1]="isMobile()">
       <!-- avatar -->
       @if (header.avatar) {
-        <div class="lf-list-item-avatar px-2">
+        <div class="lf-list-item-avatar px-1">
           <img [src]="header.avatar" alt="Avatar of header" (error)="onImageError($event)" />
         </div>
       } @else if (header.matIcon || header.svgIcon) {
-        <div class="lf-list-item-avatar px-2">
+        <div class="lf-list-item-avatar px-1">
           <!-- icon -->
           @if (header.matIcon) {
             <mat-icon>
@@ -19,11 +22,11 @@
           }
         </div>
       } @else if (hasAvatars) {
-        <div class="lf-list-item-avatar px-2"></div>
+        <div class="lf-list-item-avatar px-1"></div>
       }
 
       <!-- title -->
-      <div class="lf-list-item-title-wrapper flex-row px-2">
+      <div class="lf-list-item-title-wrapper flex-row">
         @for (item of header.items; track $index) {
           <span [class.clickable]="item.sortToken" (click)="updateSortToken(item.sortToken)">
             {{ item.title }}
@@ -37,12 +40,12 @@
       </div>
 
       <!-- buttons -->
-      <div class="lf-list-item-buttons">
+      <div class="lf-list-item-buttons" [class.gap-2]="!isMobile()" [class.gap-1]="isMobile()">
         @for (button of header.buttons; track button.id) {
           @if (button.label) {
             <button
               mat-button
-              class="lf-list-item-button ml-2"
+              class="lf-list-item-button"
               [class.disabled]="button.disabled"
               [ngClass]="button.cssClass"
               [disabled]="button.disabled"
@@ -61,7 +64,7 @@
           } @else {
             <button
               mat-icon-button
-              class="lf-list-item-icon ml-2"
+              class="lf-list-item-icon"
               [class.disabled]="button.disabled"
               [ngClass]="button.cssClass"
               [disabled]="button.disabled"
@@ -83,7 +86,7 @@
 
       <!-- checkbox -->
       @if (config()?.enableSelection && !config()?.disableMultiselect) {
-        <div class="lf-list-item-checkbox ml-3">
+        <div class="lf-list-item-checkbox">
           <mat-checkbox
             [(ngModel)]="allSelected"
             [indeterminate]="someSelected"
@@ -99,9 +102,12 @@
     @for (group of groupedItems() | keyvalue; track group.key; let first = $first) {
       <div class="lf-list-group" [class.mt-4]="!first">
         @if (group.key) {
-          <div class="lf-list-item lf-list-group-header">
-            <div class="lf-list-item-avatar px-2"></div>
-            <div class="lf-list-item-title-wrapper flex-row px-2">
+          <div
+            class="lf-list-item lf-list-group-header"
+            [class.gap-2]="!isMobile()"
+            [class.gap-1]="isMobile()">
+            <div class="lf-list-item-avatar px-1"></div>
+            <div class="lf-list-item-title-wrapper flex-row">
               <span>{{ group.key }}</span>
             </div>
           </div>
@@ -154,6 +160,8 @@
   <ng-template #listItemTemplate let-item let-last="last">
     <div
       class="lf-list-item lf-list-item-data"
+      [class.gap-2]="!isMobile()"
+      [class.gap-1]="isMobile()"
       [class.active]="item.checked"
       [class.disabled]="item.disabled"
       [class.clickable]="item.clickable && !item.disabled"
@@ -167,14 +175,14 @@
           [ngTemplateOutlet]="avatarTemplate()!.templateRef"
           [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
       } @else if (item.avatar) {
-        <div class="lf-list-item-avatar px-2">
+        <div class="lf-list-item-avatar px-1">
           <img
             [src]="item.avatar"
             [alt]="'Avatar of ' + item.title"
             (error)="onImageError($event)" />
         </div>
       } @else if (item.matIcon || item.svgIcon) {
-        <div class="lf-list-item-avatar px-2">
+        <div class="lf-list-item-avatar px-1">
           <!-- icon -->
           @if (item.matIcon) {
             <mat-icon>
@@ -187,7 +195,7 @@
       }
 
       <!-- title -->
-      <div class="lf-list-item-title-wrapper px-2">
+      <div class="lf-list-item-title-wrapper">
         <span class="lf-list-item-title">
           @if (titleTemplate()) {
             <ng-container
@@ -211,7 +219,7 @@
       </div>
 
       <!-- buttons -->
-      <div class="lf-list-item-buttons">
+      <div class="lf-list-item-buttons" [class.gap-2]="!isMobile()" [class.gap-1]="isMobile()">
         @if (buttonsTemplate()) {
           <ng-container
             [ngTemplateOutlet]="buttonsTemplate()!.templateRef"
@@ -225,7 +233,7 @@
               @if (button.label) {
                 <button
                   mat-button
-                  class="lf-list-item-button ml-2"
+                  class="lf-list-item-button"
                   [class.disabled]="disabled"
                   [ngClass]="button.cssClass"
                   [disabled]="disabled"
@@ -244,7 +252,7 @@
               } @else {
                 <button
                   mat-icon-button
-                  class="lf-list-item-icon ml-2"
+                  class="lf-list-item-icon"
                   [class.disabled]="disabled"
                   [ngClass]="button.cssClass"
                   [disabled]="disabled"
@@ -269,7 +277,7 @@
         @if (config()?.enableDragging) {
           <button
             mat-icon-button
-            class="lf-list-item-icon ml-2"
+            class="lf-list-item-icon"
             [class.disabled]="item.disabled"
             [disabled]="item.disabled"
             [aria-label]="'Drag handle'"
@@ -282,7 +290,7 @@
 
       <!-- checkbox -->
       @if (config()?.enableSelection) {
-        <div class="lf-list-item-checkbox ml-3">
+        <div class="lf-list-item-checkbox">
           <mat-checkbox
             [(ngModel)]="item.checked"
             [disabled]="item.disabled!"

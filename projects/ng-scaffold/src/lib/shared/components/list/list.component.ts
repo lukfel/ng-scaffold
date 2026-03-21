@@ -1,6 +1,8 @@
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
-import { NgClass, NgTemplateOutlet, KeyValuePipe } from '@angular/common';
+import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { KeyValuePipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, contentChild, inject, input, model, OnChanges, OnInit, output, signal, SimpleChanges } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
@@ -8,9 +10,11 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { map } from 'rxjs';
 import { ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective } from '../../../directives';
 import { Button, ListConfig, ListHeader, ListItem, ScaffoldLibraryConfig } from '../../../models';
 import { CONFIG } from '../../../scaffold.config';
+import { BreakpointService } from '../../../services';
 
 @Component({
   selector: 'lf-list',
@@ -30,11 +34,12 @@ import { CONFIG } from '../../../scaffold.config';
     KeyValuePipe,
     NgClass,
     NgTemplateOutlet
-]
+  ]
 })
 export class ListComponent implements OnInit, OnChanges {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+  private breakpointService = inject(BreakpointService);
 
 
   public readonly avatarTemplate = contentChild(ListItemAvatarDirective);
@@ -51,21 +56,14 @@ export class ListComponent implements OnInit, OnChanges {
   public readonly dropListId = input<string>();
   public readonly connectedDropListIds = input<string[]>();
 
-  public readonly sortChangeEvent = output<{
-    sortToken: string;
-    sortAsc: boolean;
-}>();
+  public readonly sortChangeEvent = output<{ sortToken: string; sortAsc: boolean; }>();
   public readonly selectionChangeEvent = output<ListItem[]>();
   public readonly itemClickEvent = output<ListItem>();
-  public readonly itemDropEvent = output<{
-    items: ListItem[];
-    id: string;
-}>();
-  public readonly buttonClickEvent = output<{
-    buttonId: string;
-    item: ListItem;
-}>();
+  public readonly itemDropEvent = output<{ items: ListItem[]; id: string; }>();
+  public readonly buttonClickEvent = output<{ buttonId: string; item: ListItem; }>();
 
+
+  public isMobile = toSignal(this.breakpointService.breakpoint$.pipe(map((state: BreakpointState) => state.breakpoints[Breakpoints.XSmall])));
 
   public sortToken = signal<string>('');
   public sortAsc = signal<boolean>(true);
