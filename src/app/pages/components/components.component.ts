@@ -1,9 +1,9 @@
 
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { BottomBarConfig, Button, ColorPickerComponent, FileUploadComponent, ListComponent, ListConfig, ListHeader, ListItem, PlaceholderComponent, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
-import { NotificationComponent } from 'projects/ng-scaffold/src/public-api';
+import { BottomBarConfig, Button, ColorPickerComponent, FileUploadComponent, ListComponent, ListConfig, ListHeader, ListItem, NotificationComponent, PlaceholderComponent, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
 
 @Component({
@@ -22,7 +22,7 @@ import { take } from 'rxjs';
     NotificationComponent
   ]
 })
-export class ComponentsComponent implements OnInit {
+export class ComponentsComponent {
 
   private scaffoldService = inject(ScaffoldService);
   private snackbarService = inject(SnackbarService);
@@ -88,14 +88,14 @@ export class ComponentsComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
+  constructor() {
+    this.scaffoldService.scaffoldConfig$.pipe(take(1), takeUntilDestroyed()).subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (scaffoldConfig.contentTitleCardConfig) {
         this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Components' });
       }
     });
 
-    this.scaffoldService.buttonClickEventValue$.subscribe((buttonClickEventValue: string) => {
+    this.scaffoldService.buttonClickEventValue$.pipe(takeUntilDestroyed()).subscribe((buttonClickEventValue: string) => {
       if (buttonClickEventValue === 'bottombar_close') {
         this.listItems.set(this.listItems().map((item: ListItem) => ({ ...item, checked: false })));
         this.onListSelectionChange();

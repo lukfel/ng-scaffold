@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ColorPickerComponent, FileUploadComponent, ListComponent, PlaceholderComponent } from '@lukfel/ng-scaffold';
 import { ComponentsComponent } from './components.component';
 
+const TEST_SVG_ICON: string = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>';
+
 describe('ComponentsComponent', () => {
   let component: ComponentsComponent;
   let fixture: ComponentFixture<ComponentsComponent>;
@@ -31,13 +33,14 @@ describe('ComponentsComponent', () => {
 
     const iconRegistry = TestBed.inject(MatIconRegistry);
     const sanitizer = TestBed.inject(DomSanitizer);
-    iconRegistry.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'));
-    iconRegistry.addSvgIcon('lf_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
-    iconRegistry.addSvgIcon('github_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
-    iconRegistry.addSvgIcon('npm_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/npm.svg'));
-    iconRegistry.addSvgIcon('cat_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/cat.svg'));
-    iconRegistry.addSvgIcon('waw_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/waw.svg'));
-    iconRegistry.addSvgIcon('ugly_logo', sanitizer.bypassSecurityTrustResourceUrl('assets/img/uglygotchi.svg'));
+  const svgLiteral = sanitizer.bypassSecurityTrustHtml(TEST_SVG_ICON);
+  iconRegistry.addSvgIconLiteral('logo', svgLiteral);
+  iconRegistry.addSvgIconLiteral('lf_logo', svgLiteral);
+  iconRegistry.addSvgIconLiteral('github_logo', svgLiteral);
+  iconRegistry.addSvgIconLiteral('npm_logo', svgLiteral);
+  iconRegistry.addSvgIconLiteral('cat_logo', svgLiteral);
+  iconRegistry.addSvgIconLiteral('waw_logo', svgLiteral);
+  iconRegistry.addSvgIconLiteral('ugly_logo', svgLiteral);
 
     fixture = TestBed.createComponent(ComponentsComponent);
     component = fixture.componentInstance;

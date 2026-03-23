@@ -1,7 +1,7 @@
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { KeyValuePipe, NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, contentChild, inject, input, model, OnChanges, OnInit, output, signal, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, contentChild, effect, inject, input, model, output, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,7 +36,7 @@ import { BreakpointService } from '../../../services';
     NgTemplateOutlet
   ]
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private breakpointService = inject(BreakpointService);
@@ -78,19 +78,28 @@ export class ListComponent implements OnInit, OnChanges {
   }
 
 
-  ngOnInit(): void {
-    const config = this.config();
-    if (config) {
-      this.sortToken.set(config.initialSortToken || '');
-      this.sortAsc.set(config.initialSortAsc || false);
-      this.updateSortToken(this.sortToken(), true);
-    }
-  }
+  constructor() {
+    effect(() => {
+      const config: ListConfig | null = this.config();
+      if (!config) return;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['items']) {
-      this.allSelected.set(this.items().length > 0 && this.items().every((item: ListItem) => item.checked));
-    }
+      const initialSortToken: string = config.initialSortToken || '';
+      const initialSortAsc: boolean = config.initialSortAsc || false;
+
+      this.sortToken.set(initialSortToken);
+      this.sortAsc.set(initialSortAsc);
+
+      if (initialSortToken) {
+        queueMicrotask(() => {
+          this.updateSortToken(initialSortToken, true);
+        });
+      }
+    });
+
+    effect(() => {
+      const items: ListItem[] = this.items();
+      this.allSelected.set(items.length > 0 && items.every((item: ListItem) => item.checked));
+    });
   }
 
 

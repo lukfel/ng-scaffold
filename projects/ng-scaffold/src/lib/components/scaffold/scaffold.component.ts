@@ -1,10 +1,10 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DOCUMENT, ElementRef, inject, OnDestroy, OnInit, output, signal, viewChild } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, DOCUMENT, effect, ElementRef, inject, output, signal, viewChild } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, tap } from 'rxjs';
 import { BottomBarConfig, ContentTitleCardConfig, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, NavbarConfig, ScaffoldConfig, ScaffoldLibraryConfig } from '../../models';
 import { CONFIG } from '../../scaffold.config';
 import { BreakpointService, Logger, OverlayService, RouterService, ScaffoldService } from '../../services';
@@ -34,10 +34,9 @@ import { NavbarComponent } from '../navbar/navbar.component';
     BottomBarComponent
 ]
 })
-export class ScaffoldComponent implements OnInit, OnDestroy {
+export class ScaffoldComponent {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
-
   private scaffoldService = inject(ScaffoldService);
   private breakpointService = inject(BreakpointService);
   private routerService = inject(RouterService);
@@ -69,7 +68,7 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
 
   public routeHistory = toSignal<string[]>(this.routerService.routeHistory$.pipe(tap((routeHistory: string[]) => {
     if (this.libraryConfig?.debugging) this.logger.log('[RouteHistory]', routeHistory);
-    const scrollContainer = this.scrollContainer();
+    const scrollContainer: ElementRef | undefined = this.scrollContainer();
     if (scrollContainer && this.scaffoldConfig()?.scrollPositionRestoration) {
       scrollContainer.nativeElement.scrollTop = 0;
     }
@@ -82,15 +81,11 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
   })));
 
   public scrollTopPosition = signal<number>(0);
-
   public initialized = signal<boolean>(false);
 
-  private _subscription: Subscription = new Subscription;
 
-
-  ngOnInit(): void {
-    // Listen for config changes
-    this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
+  constructor() {
+    this.scaffoldService.scaffoldConfig$.pipe(takeUntilDestroyed()).subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (this.libraryConfig?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
 
       if (scaffoldConfig) {
@@ -105,44 +100,41 @@ export class ScaffoldComponent implements OnInit, OnDestroy {
         this.floatingButtonConfig.set(scaffoldConfig.floatingButtonConfig || null);
         this.bottomBarConfig.set(scaffoldConfig.bottomBarConfig || null);
       }
-    }));
+    });
 
-    // Listen to scroll events
-    const scrollContainer = this.scrollContainer();
-    if (scrollContainer) {
+    effect((onCleanup) => {
+      const scrollContainer: ElementRef | undefined = this.scrollContainer();
+      if (!scrollContainer) return;
+
       const element: HTMLElement = scrollContainer.nativeElement;
-
-      this._subscription.add(fromEvent(element, 'scroll').pipe(
+      const subscription = fromEvent(element, 'scroll').pipe(
         distinctUntilChanged(),
         debounceTime(100)
       ).subscribe((e: Event) => {
         const target: HTMLElement = e.target as HTMLElement;
         this.scrollTopPosition.set(target.scrollTop);
-      }));
-    }
+      });
 
-    // Listen for fragments in the current route
-    if (this.scaffoldConfig()?.anchorScrolling) {
-      this._subscription.add(this.route.fragment.subscribe((fragment: string | null) => {
+      onCleanup(() => {
+        subscription.unsubscribe();
+      });
+    });
+
+    this.route.fragment.pipe(takeUntilDestroyed()).subscribe((fragment: string | null) => {
+      if (this.scaffoldConfig()?.anchorScrolling) {
         if (fragment) {
           if (this.libraryConfig?.debugging) this.logger.log('[RouteFragment]', fragment);
           setTimeout(() => {
-            const element = this.document.querySelector(`#${fragment}`);
+            const element: Element | null = this.document.querySelector(`#${fragment}`);
             if (element) {
               element.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'nearest' });
             }
           }, 100);
         }
-      }));
-    }
+      }
+    });
 
     setTimeout(() => { this.initialized.set(true); });
-  }
-
-  ngOnDestroy(): void {
-    if (this._subscription) {
-      this._subscription.unsubscribe();
-    }
   }
 
 

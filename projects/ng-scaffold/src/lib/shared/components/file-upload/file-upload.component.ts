@@ -24,7 +24,6 @@ import { Logger } from '../../../services';
 export class FileUploadComponent {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
-
   private logger: Logger = inject(Logger);
 
 

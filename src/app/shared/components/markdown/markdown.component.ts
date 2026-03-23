@@ -1,5 +1,5 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,17 +26,17 @@ export interface MarkdownDialogData {
     ExternalMarkdownComponent
   ]
 })
-export class MarkdownComponent implements OnInit {
+export class MarkdownComponent {
 
   public data = inject<MarkdownDialogData>(MAT_DIALOG_DATA, { optional: true }) ?? {};
   private snackbarService = inject(SnackbarService);
   private clipboard = inject(Clipboard);
 
 
-  public dataSnippet: string;
+  public dataSnippet: string = '';
 
 
-  ngOnInit(): void {
+  constructor() {
     if (this.data?.data) {
       this.dataSnippet =
         `\`\`\`ts
@@ -49,7 +49,6 @@ ${this.data.data}
       }, 150);
     }
   }
-
 
   public copy(): void {
     if (this.data.showCopy && this.data.data) {

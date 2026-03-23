@@ -1,5 +1,6 @@
 
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { PlaceholderComponent, PlaceholderConfig, RouterService, ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
@@ -14,7 +15,7 @@ import { take } from 'rxjs';
     PlaceholderComponent
 ]
 })
-export class NotFoundComponent implements OnInit {
+export class NotFoundComponent {
   
   private scaffoldService = inject(ScaffoldService);
   private routerService = inject(RouterService);
@@ -31,8 +32,8 @@ export class NotFoundComponent implements OnInit {
     }
   });
 
-  ngOnInit(): void {
-    this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
+  constructor() {
+    this.scaffoldService.scaffoldConfig$.pipe(take(1), takeUntilDestroyed()).subscribe((scaffoldConfig: ScaffoldConfig) => {
       if (scaffoldConfig.contentTitleCardConfig && this.routerService.currentRoute !== '/start') {
         this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: '404 Not Found' });
       }

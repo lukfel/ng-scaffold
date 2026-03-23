@@ -1,5 +1,5 @@
 
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, computed, effect, inject, input, model, output, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, computed, effect, inject, input, model, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -22,10 +22,11 @@ import { HeaderInputConfig } from '../../../models';
     MatIconModule
 ]
 })
-export class InputComponent implements OnDestroy {
+export class InputComponent {
 
   private dialogRef = inject<MatDialogRef<InputComponent>>(MatDialogRef, { optional: true });
   private inputConfigDialog = inject<HeaderInputConfig>(MAT_DIALOG_DATA, { optional: true });
+  private destroyRef = inject(DestroyRef);
 
 
   public readonly input = viewChild<ElementRef>('input');
@@ -44,20 +45,21 @@ export class InputComponent implements OnDestroy {
 
   constructor() {
     effect(() => {
-      const input = this.input();
+      const input: ElementRef | undefined = this.input();
       if (input && this.inputConfigComputed().autoFocus) {
         input.nativeElement.focus();
       }
     });
-  }
 
-  ngOnDestroy(): void {
-    this.inputValue.set('');
-    this.inputChangeEvent.emit(this.inputValue());
+    this.destroyRef.onDestroy(() => {
+      this.inputValue.set('');
+    });
   }
 
   public inputSubmitted(value: string): void {
-    this.inputSubmitEvent.emit(value);
+    if (!this.destroyRef.destroyed) {
+      this.inputSubmitEvent.emit(value);
+    }
 
     if (this.dialogRef) {
       this.dialogRef.close(value);
@@ -65,11 +67,15 @@ export class InputComponent implements OnDestroy {
   }
 
   public inputChanged(value: string): void {
-    this.inputChangeEvent.emit(value);
+    if (!this.destroyRef.destroyed) {
+      this.inputChangeEvent.emit(value);
+    }
   }
 
   public inputPrefixAction(): void {
-    this.inputPrefixActionEvent.emit();
+    if (!this.destroyRef.destroyed) {
+      this.inputPrefixActionEvent.emit();
+    }
 
     if (this.dialogRef) {
       this.dialogRef.close();
@@ -78,6 +84,9 @@ export class InputComponent implements OnDestroy {
 
   public clearInput(): void {
     this.inputValue.set('');
-    this.inputChangeEvent.emit(this.inputValue());
+
+    if (!this.destroyRef.destroyed) {
+      this.inputChangeEvent.emit(this.inputValue());
+    }
   }
 }

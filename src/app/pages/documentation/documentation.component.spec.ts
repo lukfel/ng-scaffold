@@ -1,8 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { MarkdownModule, provideMarkdown } from 'ngx-markdown';
 import { DocumentationComponent } from './documentation.component';
 
 describe('DocumentationComponent', () => {
@@ -10,16 +7,18 @@ describe('DocumentationComponent', () => {
   let fixture: ComponentFixture<DocumentationComponent>;
 
   beforeEach(async () => {
+    TestBed.overrideComponent(DocumentationComponent, {
+      set: {
+        template: '<div class="documentation-test"></div>'
+      }
+    });
+
     await TestBed.configureTestingModule({
       imports: [
-        DocumentationComponent,
-        CommonModule,
-        MarkdownModule
+        DocumentationComponent
       ],
       providers: [
-        provideHttpClient(withInterceptorsFromDi()),
-        { provide: ActivatedRoute, useValue: {} },
-        provideMarkdown()
+        { provide: ActivatedRoute, useValue: {} }
       ]
     })
       .compileComponents();

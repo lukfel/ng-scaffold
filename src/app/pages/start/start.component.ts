@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, HeaderInputConfig, LoadingOverlayConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import { MarkdownComponent, MarkdownDialogData } from 'src/app/shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
@@ -38,7 +38,7 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     NgTemplateOutlet
 ]
 })
-export class StartComponent implements OnInit, OnDestroy {
+export class StartComponent {
 
   public scaffoldService = inject(ScaffoldService);
   private themeService = inject(ThemeService);
@@ -46,15 +46,15 @@ export class StartComponent implements OnInit, OnDestroy {
   private logger = inject(Logger);
 
 
-  public scaffoldConfig = signal<ScaffoldConfig | null>(null);
-  public loadingOverlayConfig = signal<LoadingOverlayConfig | null>(null);
-  public headerConfig = signal<HeaderConfig | null>(null);
-  public navbarConfig = signal<NavbarConfig | null>(null);
-  public drawerConfig = signal<DrawerConfig | null>(null);
-  public footerConfig = signal<FooterConfig | null>(null);
-  public contentTitleCardConfig = signal<ContentTitleCardConfig | null>(null);
-  public floatingButtonConfig = signal<FloatingButtonConfig | null>(null);
-  public bottomBarConfig = signal<BottomBarConfig | null>(null);
+  public scaffoldConfig = toSignal<ScaffoldConfig | null>(this.scaffoldService.scaffoldConfig$, { initialValue: null });
+  public loadingOverlayConfig = computed<LoadingOverlayConfig>(() => this.scaffoldConfig()?.loadingOverlayConfig || {});
+  public headerConfig = computed<HeaderConfig>(() => this.scaffoldConfig()?.headerConfig || {});
+  public navbarConfig = computed<NavbarConfig>(() => this.scaffoldConfig()?.navbarConfig || {});
+  public drawerConfig = computed<DrawerConfig>(() => this.scaffoldConfig()?.drawerConfig || {});
+  public footerConfig = computed<FooterConfig>(() => this.scaffoldConfig()?.footerConfig || {});
+  public contentTitleCardConfig = computed<ContentTitleCardConfig>(() => this.scaffoldConfig()?.contentTitleCardConfig || {});
+  public floatingButtonConfig = computed<FloatingButtonConfig>(() => this.scaffoldConfig()?.floatingButtonConfig || {});
+  public bottomBarConfig = computed<BottomBarConfig>(() => this.scaffoldConfig()?.bottomBarConfig || {});
 
   public bottomBarDemoList = signal([
     {
@@ -74,42 +74,21 @@ export class StartComponent implements OnInit, OnDestroy {
   public theme = toSignal<string>(this.themeService.currentTheme$);
   public inputValue = toSignal<string>(this.scaffoldService.headerInputChangeValue$);
 
-  private _subscription: Subscription = new Subscription;
 
-
-  ngOnInit(): void {
-    // Listen for config changes
-    this._subscription.add(this.scaffoldService.scaffoldConfig$.subscribe((scaffoldConfig: ScaffoldConfig) => {
-      this.scaffoldConfig.set(scaffoldConfig);
-      this.loadingOverlayConfig.set(scaffoldConfig.loadingOverlayConfig || {});
-      this.headerConfig.set(scaffoldConfig.headerConfig || {});
-      this.navbarConfig.set(scaffoldConfig.navbarConfig || {});
-      this.drawerConfig.set(scaffoldConfig.drawerConfig || {});
-      this.footerConfig.set(scaffoldConfig.footerConfig || {});
-      this.contentTitleCardConfig.set(scaffoldConfig.contentTitleCardConfig || {});
-      this.floatingButtonConfig.set(scaffoldConfig.floatingButtonConfig || {});
-      this.bottomBarConfig.set(scaffoldConfig.bottomBarConfig || {});
-    }));
-
-    this._subscription.add(this.scaffoldService.scaffoldConfig$.pipe(take(1)).subscribe((scaffoldConfig: ScaffoldConfig) => {
+  constructor() {
+    this.scaffoldService.scaffoldConfig$.pipe(take(1), takeUntilDestroyed()).subscribe((scaffoldConfig: ScaffoldConfig) => {
       if(scaffoldConfig) {
         this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Demo' });
       }
-    }));
+    });
 
-    this._subscription.add(this.scaffoldService.buttonClickEventValue$.subscribe((value: string) => {
+    this.scaffoldService.buttonClickEventValue$.pipe(takeUntilDestroyed()).subscribe((value: string) => {
       if (value === 'bottom-bar_submit') {
         this.bottomBarButtonClicked();
       } else if (value === 'bottom-bar_close') {
         this.bottomBarCloseClicked();
       }
-    }));
-  }
-
-  ngOnDestroy(): void {
-    if (this._subscription) {
-      this._subscription.unsubscribe();
-    }
+    });
   }
 
 

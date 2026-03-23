@@ -12,7 +12,6 @@ import { Logger } from './logger.service';
 export class OverlayService {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
-
   private overlay = inject(Overlay);
   private logger = inject(Logger);
 

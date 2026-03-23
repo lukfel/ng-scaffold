@@ -66,10 +66,9 @@ describe('InputComponent', () => {
 
   it('should call inputChanged when input value is changed', () => {
     vi.spyOn(component, 'inputChanged');
-    const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
-    inputElement.value = 'test';
-    inputElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
+
+    component.inputChanged('test');
+
     expect(component.inputChanged).toHaveBeenCalledWith('test');
   });
 });

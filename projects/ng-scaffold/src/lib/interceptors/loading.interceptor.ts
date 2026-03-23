@@ -15,9 +15,9 @@ import { Logger, ScaffoldService } from '../services';
 export class ScaffoldLoadingInterceptor implements HttpInterceptor {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
-
   private scaffoldService = inject(ScaffoldService);
   private logger = inject(Logger);
+  
 
   private activeRequests = 0;
   private loadingDelay = 100; // milliseconds

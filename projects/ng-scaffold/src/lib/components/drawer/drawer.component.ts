@@ -1,6 +1,6 @@
 import { ComponentPortal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, output, signal } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
 
@@ -17,7 +17,7 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
     NgTemplateOutlet
 ]
 })
-export class DrawerComponent implements OnInit {
+export class DrawerComponent {
 
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly drawerConfig = input<DrawerConfig | null>(null);
@@ -27,13 +27,20 @@ export class DrawerComponent implements OnInit {
 
   public readonly drawerConfigUpdateEvent = output<Partial<DrawerConfig>>();
 
+  private readonly initialized = signal<boolean>(false);
 
-  ngOnInit(): void {
-    // Avoid initializing an open drawer on mobile
-    const drawerConfig = this.drawerConfig();
-    if (this.isMobile() && drawerConfig?.enable && drawerConfig?.open) {
-      this.drawerConfigUpdateEvent.emit({ open: false });
-    }
+
+  constructor() {
+    effect(() => {
+      const drawerConfig: DrawerConfig | null = this.drawerConfig();
+      if (!drawerConfig || this.initialized()) return;
+
+      this.initialized.set(true);
+
+      if (this.isMobile() && drawerConfig.enable && drawerConfig.open) {
+        this.drawerConfigUpdateEvent.emit({ open: false });
+      }
+    });
   }
 
 
