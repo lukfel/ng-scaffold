@@ -1,7 +1,7 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DOCUMENT, effect, ElementRef, inject, output, signal, viewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, DestroyRef, DOCUMENT, effect, ElementRef, inject, output, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, map, tap } from 'rxjs';
@@ -32,7 +32,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
     ContentTitleCardComponent,
     FloatingButtonComponent,
     BottomBarComponent
-]
+  ]
 })
 export class ScaffoldComponent {
 
@@ -44,6 +44,7 @@ export class ScaffoldComponent {
   private route = inject(ActivatedRoute);
   private document = inject<Document>(DOCUMENT);
   private logger = inject(Logger);
+  private destroyRef = inject(DestroyRef);
 
 
   public readonly scrollContainer = viewChild<ElementRef>('scrollContainer');
@@ -56,15 +57,15 @@ export class ScaffoldComponent {
   public readonly floatingButtonClickEvent = output<string>();
   public readonly bottomBarButtonClickEvent = output<string>();
 
-  public scaffoldConfig = signal<ScaffoldConfig | null>(null);
-  public headerConfig = signal<HeaderConfig | null>(null);
-  public navbarConfig = signal<NavbarConfig | null>(null);
-  public drawerConfig = signal<DrawerConfig | null>(null);
+  public scaffoldConfig = toSignal<ScaffoldConfig | null>(this.scaffoldService.scaffoldConfig$, { initialValue: null });
+  public headerConfig = computed<HeaderConfig | null>(() => this.scaffoldConfig()?.headerConfig || null);
+  public navbarConfig = computed<NavbarConfig | null>(() => this.scaffoldConfig()?.navbarConfig || null);
+  public drawerConfig = computed<DrawerConfig | null>(() => this.scaffoldConfig()?.drawerConfig || null);
   public drawerPortal = toSignal<ComponentPortal<unknown> | TemplatePortal<unknown> | null>(this.scaffoldService.drawerPortal$);
-  public footerConfig = signal<FooterConfig | null>(null);
-  public contentTitleCardConfig = signal<ContentTitleCardConfig | null>(null);
-  public floatingButtonConfig = signal<FloatingButtonConfig | null>(null);
-  public bottomBarConfig = signal<BottomBarConfig | null>(null);
+  public footerConfig = computed<FooterConfig | null>(() => this.scaffoldConfig()?.footerConfig || null);
+  public contentTitleCardConfig = computed<ContentTitleCardConfig | null>(() => this.scaffoldConfig()?.contentTitleCardConfig || null);
+  public floatingButtonConfig = computed<FloatingButtonConfig | null>(() => this.scaffoldConfig()?.floatingButtonConfig || null);
+  public bottomBarConfig = computed<BottomBarConfig | null>(() => this.scaffoldConfig()?.bottomBarConfig || null);
 
   public routeHistory = toSignal<string[]>(this.routerService.routeHistory$.pipe(tap((routeHistory: string[]) => {
     if (this.libraryConfig?.debugging) this.logger.log('[RouteHistory]', routeHistory);
@@ -83,23 +84,18 @@ export class ScaffoldComponent {
   public scrollTopPosition = signal<number>(0);
   public initialized = signal<boolean>(false);
 
+  private fragmentAnimationFrameId: number | null = null;
+  private readonly FRAGMENT_SCROLL_MAX_ATTEMPTS: number = 180;
+
 
   constructor() {
-    this.scaffoldService.scaffoldConfig$.pipe(takeUntilDestroyed()).subscribe((scaffoldConfig: ScaffoldConfig) => {
+    effect(() => {
+      const scaffoldConfig: ScaffoldConfig | null = this.scaffoldConfig();
+
       if (this.libraryConfig?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
+      if (!scaffoldConfig) return;
 
-      if (scaffoldConfig) {
-        this.toggleLoadingOverlay(scaffoldConfig?.loading || false);
-
-        this.scaffoldConfig.set(scaffoldConfig);
-        this.headerConfig.set(scaffoldConfig.headerConfig || null);
-        this.navbarConfig.set(scaffoldConfig.navbarConfig || null);
-        this.drawerConfig.set(scaffoldConfig.drawerConfig || null);
-        this.footerConfig.set(scaffoldConfig.footerConfig || null);
-        this.contentTitleCardConfig.set(scaffoldConfig.contentTitleCardConfig || null);
-        this.floatingButtonConfig.set(scaffoldConfig.floatingButtonConfig || null);
-        this.bottomBarConfig.set(scaffoldConfig.bottomBarConfig || null);
-      }
+      this.toggleLoadingOverlay(scaffoldConfig.loading || false);
     });
 
     effect((onCleanup) => {
@@ -121,20 +117,19 @@ export class ScaffoldComponent {
     });
 
     this.route.fragment.pipe(takeUntilDestroyed()).subscribe((fragment: string | null) => {
-      if (this.scaffoldConfig()?.anchorScrolling) {
-        if (fragment) {
-          if (this.libraryConfig?.debugging) this.logger.log('[RouteFragment]', fragment);
-          setTimeout(() => {
-            const element: Element | null = this.document.querySelector(`#${fragment}`);
-            if (element) {
-              element.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'nearest' });
-            }
-          }, 100);
-        }
-      }
+      if (!this.scaffoldConfig()?.anchorScrolling || !fragment) return;
+      if (this.libraryConfig?.debugging) this.logger.log('[RouteFragment]', fragment);
+
+      this.scrollToFragmentWhenReady(fragment);
     });
 
-    setTimeout(() => { this.initialized.set(true); });
+    afterNextRender(() => {
+      this.initialized.set(true);
+    });
+
+    this.destroyRef.onDestroy(() => {
+      this.cancelFragmentScroll();
+    });
   }
 
 
@@ -207,5 +202,50 @@ export class ScaffoldComponent {
     } else {
       this.overlayService.close();
     }
+  }
+
+  // Anchor scrolling
+  private scrollToFragmentWhenReady(fragment: string): void {
+    this.cancelFragmentScroll();
+
+    const defaultView: Window | null = this.document.defaultView;
+    if (!defaultView) return;
+
+    let attempts: number = 0;
+
+    const tryScroll = (): void => {
+      if (this.tryScrollToFragment(fragment)) {
+        this.fragmentAnimationFrameId = null;
+        return;
+      }
+
+      attempts += 1;
+      if (attempts >= this.FRAGMENT_SCROLL_MAX_ATTEMPTS) {
+        if (this.libraryConfig?.debugging) this.logger.log('[RouteFragmentNotFound]', fragment);
+        this.fragmentAnimationFrameId = null;
+        return;
+      }
+
+      this.fragmentAnimationFrameId = defaultView.requestAnimationFrame(tryScroll);
+    };
+
+    this.fragmentAnimationFrameId = defaultView.requestAnimationFrame(tryScroll);
+  }
+
+  // Tries to scroll to the element with the given fragment as id. Returns true if successful, false otherwise.
+  private tryScrollToFragment(fragment: string): boolean {
+    const element: HTMLElement | null = this.document.getElementById(fragment);
+    if (!element) return false;
+
+    element.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'nearest' });
+    return true;
+  }
+
+  private cancelFragmentScroll(): void {
+    const defaultView: Window | null = this.document.defaultView;
+    if (!defaultView || this.fragmentAnimationFrameId === null) return;
+
+    defaultView.cancelAnimationFrame(this.fragmentAnimationFrameId);
+    this.fragmentAnimationFrameId = null;
   }
 }

@@ -3,8 +3,11 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { ActivatedRoute, provideRouter } from '@angular/router';
+import { Subject } from 'rxjs';
+import { afterEach, vi } from 'vitest';
 import { Logger } from '../../services';
+import { ScaffoldService } from '../../services/scaffold.service';
 import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
 import { DrawerComponent } from '../drawer/drawer.component';
@@ -19,8 +22,17 @@ class MockLogger { }
 describe('ScaffoldComponent', () => {
   let component: ScaffoldComponent;
   let fixture: ComponentFixture<ScaffoldComponent>;
+  let fragment$: Subject<string | null>;
+  let scaffoldService: ScaffoldService;
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.useRealTimers();
+  });
 
   beforeEach(async () => {
+    fragment$ = new Subject<string | null>();
+
     await TestBed.configureTestingModule({
       imports: [
         ScaffoldComponent,
@@ -36,12 +48,14 @@ describe('ScaffoldComponent', () => {
       providers: [
         provideRouter([]),
         provideAnimations(),
+        { provide: ActivatedRoute, useValue: { fragment: fragment$.asObservable() } },
         { provide: Logger, useClass: MockLogger }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ScaffoldComponent);
     component = fixture.componentInstance;
+    scaffoldService = TestBed.inject(ScaffoldService);
     fixture.detectChanges();
   });
 
@@ -50,7 +64,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the header component', () => {
-    component.headerConfig.set({ enable: true });
+    scaffoldService.scaffoldConfig = { headerConfig: { enable: true } };
     fixture.detectChanges();
     const headerDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(HeaderComponent)
@@ -60,7 +74,7 @@ describe('ScaffoldComponent', () => {
 
 
   it('should render the navbar component', () => {
-    component.navbarConfig.set({ enable: true });
+    scaffoldService.scaffoldConfig = { navbarConfig: { enable: true } };
     fixture.detectChanges();
     const navbarDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(NavbarComponent)
@@ -69,7 +83,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the drawer component', () => {
-    component.drawerConfig.set({ enable: true });
+    scaffoldService.scaffoldConfig = { drawerConfig: { enable: true } };
     fixture.detectChanges();
     const drawerDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(DrawerComponent)
@@ -78,7 +92,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the title card component', () => {
-    component.contentTitleCardConfig.set({ enable: true });
+    scaffoldService.scaffoldConfig = { contentTitleCardConfig: { enable: true } };
     fixture.detectChanges();
     const titleDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(ContentTitleCardComponent)
@@ -87,7 +101,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the footer component', () => {
-    component.footerConfig.set({ enable: true });
+    scaffoldService.scaffoldConfig = { footerConfig: { enable: true } };
     fixture.detectChanges();
     const footerDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(FooterComponent)
@@ -96,7 +110,7 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the floating button component', () => {
-    component.floatingButtonConfig.set({ enable: true });
+    scaffoldService.scaffoldConfig = { floatingButtonConfig: { enable: true } };
     fixture.detectChanges();
     const buttonDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(FloatingButtonComponent)
@@ -105,11 +119,32 @@ describe('ScaffoldComponent', () => {
   });
 
   it('should render the bottom bar component', () => {
-    component.bottomBarConfig.set({ enable: true });
+    scaffoldService.scaffoldConfig = { bottomBarConfig: { enable: true } };
     fixture.detectChanges();
     const buttonDebugElement: DebugElement = fixture.debugElement.query(
       By.directive(BottomBarComponent)
     );
     expect(buttonDebugElement).toBeTruthy();
+  });
+
+  it('should scroll to the fragment element when anchor scrolling is enabled', async () => {
+    vi.useFakeTimers();
+
+    const scrollIntoViewSpy = vi.fn();
+    const requestAnimationFrameSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback: FrameRequestCallback): number => {
+      return window.setTimeout(() => callback(0), 0);
+    });
+    const getElementByIdSpy = vi.spyOn(document, 'getElementById').mockReturnValue({
+      scrollIntoView: scrollIntoViewSpy
+    } as unknown as HTMLElement);
+
+    scaffoldService.scaffoldConfig = { anchorScrolling: true };
+
+    fragment$.next('target-anchor');
+    await vi.runAllTimersAsync();
+
+    expect(requestAnimationFrameSpy).toHaveBeenCalled();
+    expect(getElementByIdSpy).toHaveBeenCalledWith('target-anchor');
+    expect(scrollIntoViewSpy).toHaveBeenCalledWith({ behavior: 'auto', block: 'start', inline: 'nearest' });
   });
 });

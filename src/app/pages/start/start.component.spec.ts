@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { Observable, of } from 'rxjs';
+import { afterEach, vi } from 'vitest';
 import { StartComponent } from './start.component';
 
 const TEST_SVG_ICON: string = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>';
@@ -19,6 +20,10 @@ const TEST_SVG_ICON: string = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="
 describe('StartpageComponent', () => {
   let component: StartComponent;
   let fixture: ComponentFixture<StartComponent>;
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,14 +46,14 @@ describe('StartpageComponent', () => {
 
     const iconRegistry = TestBed.inject(MatIconRegistry);
     const sanitizer = TestBed.inject(DomSanitizer);
-  const svgLiteral = sanitizer.bypassSecurityTrustHtml(TEST_SVG_ICON);
-  iconRegistry.addSvgIconLiteral('logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('lf_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('github_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('npm_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('cat_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('waw_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('ugly_logo', svgLiteral);
+    const svgLiteral = sanitizer.bypassSecurityTrustHtml(TEST_SVG_ICON);
+    iconRegistry.addSvgIconLiteral('logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('lf_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('github_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('npm_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('cat_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('waw_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('ugly_logo', svgLiteral);
 
     fixture = TestBed.createComponent(StartComponent);
     component = fixture.componentInstance;
@@ -57,6 +62,20 @@ describe('StartpageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should enable loading immediately and disable it after 2 seconds', () => {
+    vi.useFakeTimers();
+
+    const updateScaffoldPropertySpy = vi.spyOn(component.scaffoldService, 'updateScaffoldProperty');
+
+    component.showContainerLoading();
+
+    expect(updateScaffoldPropertySpy).toHaveBeenNthCalledWith(1, 'loading', true);
+
+    vi.advanceTimersByTime(2000);
+
+    expect(updateScaffoldPropertySpy).toHaveBeenNthCalledWith(2, 'loading', false);
   });
 });
 
