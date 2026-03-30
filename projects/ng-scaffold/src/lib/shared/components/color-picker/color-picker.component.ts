@@ -1,5 +1,6 @@
 
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, output, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, output, PLATFORM_ID, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,6 +24,7 @@ import { CONFIG } from '../../../scaffold.config';
 export class ColorPickerComponent {
 
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+  private platformId = inject(PLATFORM_ID);
 
 
   public readonly color = input<'primary' | 'accent' | 'warn' | string>('primary');
@@ -33,7 +35,7 @@ export class ColorPickerComponent {
 
   public readonly colorChangeEvent = output<string>();
 
-  public isSafari = signal<boolean>(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+  public isSafari = signal<boolean>(false);
 
   public selectedColor = linkedSignal<string>(() => {
     const color: 'primary' | 'accent' | 'warn' | string = this.color();
@@ -43,6 +45,15 @@ export class ColorPickerComponent {
 
     return '';
   });
+
+
+  constructor() {
+    if(isPlatformBrowser(this.platformId)) {
+      this.isSafari.set(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+    }
+  }
+
+
   public labelColor = computed<string>(() => {
     const hex = this.selectedColor().replace('#', '');
 
