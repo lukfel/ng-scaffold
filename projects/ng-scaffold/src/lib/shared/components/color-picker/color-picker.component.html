@@ -1,29 +1,38 @@
-<input
-  style="opacity: 0; position: absolute; width: 0; height: 36px; border: none"
-  #colorPicker
-  type="color"
-  onclick="this.value = null"
-  [ngModel]="selectedColor()"
-  (ngModelChange)="selectColor($event)" />
+@if (!isSafari()) {
+  <input
+    style="opacity: 0; position: absolute; width: 0; height: 36px; border: none"
+    #colorPicker
+    type="color"
+    onclick="this.value = null"
+    [ngModel]="selectedColor()"
+    (ngModelChange)="selectColor($event)" />
 
-<button
-  mat-flat-button
-  class="lf-button"
-  type="button"
-  [color]="selectedColor() ? null : color()"
-  [style.background]="selectedColor()"
-  [style.color]="labelColor()"
-  [disabled]="disabled()"
-  (click)="colorPicker.click()"
-  [matTooltip]="tooltip()">
-  <!-- icon -->
-  @if (matIcon()) {
-    <mat-icon>
-      {{ matIcon() }}
-    </mat-icon>
-  }
-  <!-- @else if (svgIcon) {
+  <button
+    mat-flat-button
+    class="lf-button"
+    type="button"
+    [color]="selectedColor() ? null : color()"
+    [style.background]="selectedColor()"
+    [style.color]="labelColor()"
+    [disabled]="disabled()"
+    (click)="colorPicker.click()"
+    [matTooltip]="tooltip()">
+    <!-- icon -->
+    @if (matIcon()) {
+      <mat-icon>
+        {{ matIcon() }}
+      </mat-icon>
+    }
+    <!-- @else if (svgIcon) {
     <mat-icon [svgIcon]="svgIcon"></mat-icon>
   } -->
-  {{ label() }}
-</button>
+    {{ label() }}
+  </button>
+} @else {
+  <input
+    style="width: 36px; height: 36px"
+    #colorPicker
+    type="color"
+    [ngModel]="selectedColor()"
+    (ngModelChange)="selectColor($event)" />
+}

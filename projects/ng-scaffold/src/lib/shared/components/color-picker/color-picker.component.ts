@@ -1,5 +1,5 @@
 
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +32,8 @@ export class ColorPickerComponent {
   public readonly tooltip = input<string>();
 
   public readonly colorChangeEvent = output<string>();
+
+  public isSafari = signal<boolean>(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
 
   public selectedColor = linkedSignal<string>(() => {
     const color: 'primary' | 'accent' | 'warn' | string = this.color();

@@ -501,7 +501,7 @@ public onFileChange(file: File): void {
 ```
 
 ### Color-Picker
-A standalone Material Design styled button for picking colors. It wraps a hidden native color
+A standalone Material Design styled button for picking colors (uses native design on Safari). It wraps a hidden native color
 input and exposes a simple, customizable interface with built-in icon, tooltip, and state
 management.
 
