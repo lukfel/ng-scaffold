@@ -2,7 +2,11 @@
 @include mat.elevation-classes();
 @include mat.app-background();
 
-// Default theme
+// ============================================================================
+// Material 2 (M2) Theming
+// ============================================================================
+
+// Default M2 theme
 $lf-default-theme: (
   primary: mat.m2-define-palette(mat.$m2-blue-palette),
   accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400),
@@ -11,7 +15,7 @@ $lf-default-theme: (
   font-family: 'Roboto'
 );
 
-// Set theme
+// Set M2 theme
 // Material requires to split up the mat.all-component-themes and mat.all-component-colors
 // since mat.all-component-themes should also be imported once, but mat.all-component-colors
 // can be imported multiple times
@@ -48,7 +52,7 @@ $lf-default-theme: (
   @include color-variables($theme, 'body');
 }
 
-// Set colors
+// Set M2 colors
 @mixin scaffold-colors($theme: $lf-default-theme, $class) {
   $theme: map-merge($lf-default-theme, $theme);
 
@@ -77,7 +81,7 @@ $lf-default-theme: (
   @include color-variables($theme, #{'body.'+$class});
 }
 
-// Set variables
+// Set M2 variables
 @mixin color-variables($theme, $scope) {
   #{$scope}{
     --color-primary: #{mat.m2-get-color-from-palette(map-get($theme, 'primary'))};
@@ -108,5 +112,90 @@ $lf-default-theme: (
       .color-#{$palette}-#{$hue} { color: var(--color-#{$palette}-#{$hue}) !important; }
       .color-bg-#{$palette}-#{$hue} { background-color: var(--color-#{$palette}-#{$hue}) !important; }
     }
+  }
+}
+
+// ============================================================================
+// Material 3 (M3) Theming
+// ============================================================================
+
+// Default M3 theme
+// M3 uses: primary, tertiary (instead of accent), and error (instead of warn)
+// theme-type: 'light', 'dark', or 'color-scheme' (auto light/dark based on user preference)
+$lf-default-theme-m3: (
+  primary: mat.$blue-palette,
+  tertiary: mat.$rose-palette,
+  theme-type: color-scheme,
+  font-family: 'Roboto',
+  density: 0,
+);
+
+// Set M3 theme
+// Uses mat.theme() which outputs CSS variables (design tokens) instead of static styles.
+// Includes color-variants-backwards-compatibility so that component [color] inputs
+// (color="primary", color="accent", color="warn") continue to work.
+@mixin scaffold-theme-m3($theme: $lf-default-theme-m3) {
+  $theme: map-merge($lf-default-theme-m3, $theme);
+
+  $color-config: (
+    primary: map-get($theme, 'primary'),
+    tertiary: map-get($theme, 'tertiary'),
+    theme-type: map-get($theme, 'theme-type'),
+  );
+
+  html {
+    @include mat.theme((
+      color: $color-config,
+      typography: map-get($theme, 'font-family'),
+      density: map-get($theme, 'density'),
+    ));
+    @include mat.color-variants-backwards-compatibility($theme: mat.define-theme((
+      color: $color-config,
+    )));
+    @include mat.system-classes();
+  }
+
+  @include color-variables-m3('body');
+}
+
+// Set M3 colors (scoped to a class, for multi-theme support)
+// Only overrides color tokens; typography and density are inherited from the base theme.
+@mixin scaffold-colors-m3($theme: $lf-default-theme-m3, $class) {
+  $theme: map-merge($lf-default-theme-m3, $theme);
+
+  $color-config: (
+    primary: map-get($theme, 'primary'),
+    tertiary: map-get($theme, 'tertiary'),
+    theme-type: map-get($theme, 'theme-type'),
+  );
+
+  .#{$class} {
+    @include mat.theme((
+      color: $color-config,
+    ));
+    @include mat.color-variants-backwards-compatibility($theme: mat.define-theme((
+      color: $color-config,
+    )));
+  }
+
+  @include color-variables-m3(#{'body.'+$class});
+}
+
+// Set M3 variables
+// Bridges the M3 system tokens to the same --color-* CSS variables that existing
+// components use, so all library components work without template changes.
+// Note: M3 does not have numbered hue variants (50-900). Only the base semantic
+// colors are bridged. Hue-specific variables are not available in M3.
+@mixin color-variables-m3($scope) {
+  #{$scope} {
+    --color-primary: var(--mat-sys-primary);
+    --color-accent: var(--mat-sys-secondary);
+    --color-warn: var(--mat-sys-error);
+  }
+
+  // Utility classes (same API as M2, backed by M3 tokens)
+  @each $palette in ('primary', 'accent', 'warn') {
+    .color-#{$palette} { color: var(--color-#{$palette}) !important; }
+    .color-bg-#{$palette} { background-color: var(--color-#{$palette}) !important; }
   }
 }
