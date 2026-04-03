@@ -5,36 +5,36 @@
 // Option A: Material 2 Theming (current)
 // =============================================================================
 
-// $base-theme: (
-//   primary: mat.m2-define-palette(mat.$m2-pink-palette),
-//   accent: mat.m2-define-palette(mat.$m2-blue-palette),
-//   warn: mat.m2-define-palette(mat.$m2-red-palette),
-//   dark: false,
-//   font-family: 'Roboto'
-// );
+$base-theme: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  warn: mat.m2-define-palette(mat.$m2-red-palette),
+  dark: false,
+  font-family: 'Roboto'
+);
 
-// $theme2: (
-//   primary: mat.m2-define-palette(mat.$m2-pink-palette),
-//   accent: mat.m2-define-palette(mat.$m2-blue-palette),
-//   dark: true
-// );
+$theme2: (
+  primary: mat.m2-define-palette(mat.$m2-pink-palette),
+  accent: mat.m2-define-palette(mat.$m2-blue-palette),
+  dark: true
+);
 
-// $theme3: (
-//   primary: mat.m2-define-palette(mat.$m2-blue-palette),
-//   accent: mat.m2-define-palette(mat.$m2-pink-palette),
-//   dark: false
-// );
+$theme3: (
+  primary: mat.m2-define-palette(mat.$m2-blue-palette),
+  accent: mat.m2-define-palette(mat.$m2-pink-palette),
+  dark: false
+);
 
-// $theme4: (
-//   primary: mat.m2-define-palette(mat.$m2-blue-palette),
-//   accent: mat.m2-define-palette(mat.$m2-pink-palette),
-//   dark: true
-// );
+$theme4: (
+  primary: mat.m2-define-palette(mat.$m2-blue-palette),
+  accent: mat.m2-define-palette(mat.$m2-pink-palette),
+  dark: true
+);
 
-// @include lf.scaffold-theme($base-theme);
-// @include lf.scaffold-colors($theme2, 'theme2');
-// @include lf.scaffold-colors($theme3, 'theme3');
-// @include lf.scaffold-colors($theme4, 'theme4');
+@include lf.scaffold-theme($base-theme);
+@include lf.scaffold-colors($theme2, 'theme2');
+@include lf.scaffold-colors($theme3, 'theme3');
+@include lf.scaffold-colors($theme4, 'theme4');
 
 // =============================================================================
 // Option B: Material 3 Theming
@@ -42,38 +42,38 @@
 // M3 uses 'primary' and 'tertiary' (replaces accent). Error replaces warn.
 // 'theme-type' controls light/dark: 'light', 'dark', or 'color-scheme' (auto).
 
-$base-theme-m3: (
-  primary: mat.$rose-palette,
-  tertiary: mat.$blue-palette,
-  theme-type: light,
-  font-family: 'Roboto',
-);
+// $base-theme-m3: (
+//   primary: mat.$rose-palette,
+//   tertiary: mat.$blue-palette,
+//   theme-type: light,
+//   font-family: 'Roboto',
+// );
 
-$theme2-m3: (
-  primary: mat.$rose-palette,
-  tertiary: mat.$blue-palette,
-  theme-type: dark,
-);
+// $theme2-m3: (
+//   primary: mat.$rose-palette,
+//   tertiary: mat.$blue-palette,
+//   theme-type: dark,
+// );
 
-$theme3-m3: (
-  primary: mat.$blue-palette,
-  tertiary: mat.$rose-palette,
-  theme-type: light,
-);
+// $theme3-m3: (
+//   primary: mat.$blue-palette,
+//   tertiary: mat.$rose-palette,
+//   theme-type: light,
+// );
 
-$theme4-m3: (
-  primary: mat.$blue-palette,
-  tertiary: mat.$rose-palette,
-  theme-type: dark,
-);
+// $theme4-m3: (
+//   primary: mat.$blue-palette,
+//   tertiary: mat.$rose-palette,
+//   theme-type: dark,
+// );
 
-// Main theme
-@include lf.scaffold-theme-m3($base-theme-m3);
+// // Main theme
+// @include lf.scaffold-theme-m3($base-theme-m3);
 
-// Additional themes
-@include lf.scaffold-colors-m3($theme2-m3, 'theme2');
-@include lf.scaffold-colors-m3($theme3-m3, 'theme3');
-@include lf.scaffold-colors-m3($theme4-m3, 'theme4');
+// // Additional themes
+// @include lf.scaffold-colors-m3($theme2-m3, 'theme2');
+// @include lf.scaffold-colors-m3($theme3-m3, 'theme3');
+// @include lf.scaffold-colors-m3($theme4-m3, 'theme4');
 
 // Additional classes
 .lf-cat-blue:not(.disabled) {

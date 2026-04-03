@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   min-height: var(--footer-height);
-  // border-radius: 0;
-  border-top: 1px solid var(--mat-sys-outline-variant, transparent);
+  border-radius: 0;
+  border-top: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
 
   .lf-footer-logo {
     width: var(--footer-logo-size);

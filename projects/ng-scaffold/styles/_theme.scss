@@ -198,7 +198,8 @@ $lf-default-theme-m3: (
     color: var(--mat-sys-on-primary);
 
     .mat-icon,
-    .mat-mdc-icon-button {
+    .mat-mdc-icon-button,
+    .mat-mdc-button {
       color: var(--mat-sys-on-primary);
     }
   }
@@ -208,7 +209,8 @@ $lf-default-theme-m3: (
     color: var(--mat-sys-on-tertiary);
 
     .mat-icon,
-    .mat-mdc-icon-button {
+    .mat-mdc-icon-button,
+    .mat-mdc-button {
       color: var(--mat-sys-on-tertiary);
     }
   }
@@ -218,7 +220,8 @@ $lf-default-theme-m3: (
     color: var(--mat-sys-on-error);
 
     .mat-icon,
-    .mat-mdc-icon-button {
+    .mat-mdc-icon-button,
+    .mat-mdc-button {
       color: var(--mat-sys-on-error);
     }
   }

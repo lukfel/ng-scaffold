@@ -5,11 +5,7 @@
   bottom: 0;
   right: 0;
   height: var(--bottom-bar-height);
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  background-color: var(--color-accent);
-  color: white;
+  font-size: var(--bottom-bar-font-size);
 
   &.lf-bottom-bar-show-navbar-mobile {
     bottom: calc(var(--navbar-height-mobile) + (2 * var(--navbar-padding))) !important;
@@ -22,14 +18,10 @@
   .lf-bottom-bar-buttons {
     display: flex;
     align-items: center;
-    
+
     .lf-bottom-bar-button {
       color: var(--color-accent) !important;
       background-color: white !important;
-    }
-
-    .lf-bottom-bar-button-icon {
-      color: white !important;
     }
   }
 }
