@@ -4,6 +4,10 @@
   top: 0;
   height: var(--header-height);
 
+  &.lf-gradient {
+    color: white !important;
+  }
+
   .lf-header-menu-button {
     flex-shrink: 0;
     max-width: var(--header-menu-button-max-width);

@@ -155,6 +155,7 @@ $lf-default-theme-m3: (
     @include mat.system-classes();
   }
 
+  @include toolbar-color-compat();
   @include color-variables-m3('body');
 }
 
@@ -178,7 +179,49 @@ $lf-default-theme-m3: (
     )));
   }
 
+  @include toolbar-color-compat(#{'.' + $class});
   @include color-variables-m3(#{'body.'+$class});
+}
+
+// Toolbar color backwards compatibility
+// M3's color-variants-backwards-compatibility does not cover mat-toolbar.
+// This mixin restores [color] input support for toolbar and ensures icons/buttons
+// inside colored toolbars use the correct contrast color.
+@mixin toolbar-color-compat($scope: null) {
+  $prefix: '';
+  @if ($scope) {
+    $prefix: '#{$scope} ';
+  }
+
+  #{$prefix}.mat-toolbar.mat-primary {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+
+    .mat-icon,
+    .mat-mdc-icon-button {
+      color: var(--mat-sys-on-primary);
+    }
+  }
+
+  #{$prefix}.mat-toolbar.mat-accent {
+    background-color: var(--mat-sys-tertiary);
+    color: var(--mat-sys-on-tertiary);
+
+    .mat-icon,
+    .mat-mdc-icon-button {
+      color: var(--mat-sys-on-tertiary);
+    }
+  }
+
+  #{$prefix}.mat-toolbar.mat-warn {
+    background-color: var(--mat-sys-error);
+    color: var(--mat-sys-on-error);
+
+    .mat-icon,
+    .mat-mdc-icon-button {
+      color: var(--mat-sys-on-error);
+    }
+  }
 }
 
 // Set M3 variables
