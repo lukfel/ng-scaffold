@@ -189,7 +189,7 @@ $lf-default-theme-m3: (
 @mixin color-variables-m3($scope) {
   #{$scope} {
     --color-primary: var(--mat-sys-primary);
-    --color-accent: var(--mat-sys-secondary);
+    --color-accent: var(--mat-sys-tertiary);
     --color-warn: var(--mat-sys-error);
   }
 

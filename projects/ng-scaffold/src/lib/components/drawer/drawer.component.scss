@@ -5,6 +5,7 @@
   .lf-drawer {
     z-index: var(--drawer-z-index);
     width: var(--drawer-width);
+    border-right: 1px solid var(--mat-sys-outline-variant, transparent);
 
     &.mobile {
       z-index: var(--drawer-z-index-mobile);
