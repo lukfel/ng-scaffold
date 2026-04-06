@@ -5,28 +5,24 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 
 export function addStyles(): Rule {
-    return (tree: Tree, context: SchematicContext) => {
-        context.logger.info('[Styles] Searching for root styles ...');
+  return (tree: Tree, context: SchematicContext) => {
+    context.logger.info('[Styles] Searching for root styles ...');
 
-        const possiblePaths = [
-            'src/styles.scss',
-            'src/styles.sass',
-            'src/styles.css'
-        ];
+    const possiblePaths = ['src/styles.scss', 'src/styles.sass', 'src/styles.css'];
 
-        const path = possiblePaths.find(p => tree.exists(p));
-        if (!path) {
-            context.logger.warn('[Styles] No global styles file found. Skip.');
-            return tree
-        };
+    const path = possiblePaths.find((p) => tree.exists(p));
+    if (!path) {
+      context.logger.warn('[Styles] No global styles file found. Skip.');
+      return tree;
+    }
 
-        const content = tree.read(path)!.toString('utf-8');
-        if (content.includes('@lukfel/ng-scaffold/styles') && content.includes('lf.scaffold-theme')) {
-            context.logger.info('[Styles] Styles already added. Skip.');
-            return tree;
-        }
+    const content = tree.read(path)!.toString('utf-8');
+    if (content.includes('@lukfel/ng-scaffold/styles') && content.includes('lf.scaffold-theme')) {
+      context.logger.info('[Styles] Styles already added. Skip.');
+      return tree;
+    }
 
-        const SNIPPET = `
+    const SNIPPET = `
 @use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
 
@@ -51,10 +47,10 @@ $theme2: (
 
 `;
 
-        const recorder = tree.beginUpdate(path);
-        recorder.insertLeft(0, SNIPPET);
-        tree.commitUpdate(recorder);
-        context.logger.info('[Styles] Successfully added.');
-        return tree;
-    };
+    const recorder = tree.beginUpdate(path);
+    recorder.insertLeft(0, SNIPPET);
+    tree.commitUpdate(recorder);
+    context.logger.info('[Styles] Successfully added.');
+    return tree;
+  };
 }

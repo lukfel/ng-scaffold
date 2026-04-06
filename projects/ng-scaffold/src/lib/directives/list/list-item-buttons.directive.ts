@@ -1,8 +1,8 @@
 import { Directive, inject, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[lfListItemButtons]'
+  selector: '[lfListItemButtons]',
 })
 export class ListItemButtonsDirective {
-    public templateRef = inject(TemplateRef<any>);
+  public templateRef = inject(TemplateRef<any>);
 }

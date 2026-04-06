@@ -1,9 +1,23 @@
-
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { BottomBarConfig, Button, ColorPickerComponent, FileUploadComponent, ListComponent, ListConfig, ListHeader, ListItem, NotificationComponent, PlaceholderComponent, PlaceholderConfig, ScaffoldConfig, ScaffoldService, SnackbarService } from '@lukfel/ng-scaffold';
+import {
+  BottomBarConfig,
+  Button,
+  ColorPickerComponent,
+  FileUploadComponent,
+  ListComponent,
+  ListConfig,
+  ListHeader,
+  ListItem,
+  NotificationComponent,
+  PlaceholderComponent,
+  PlaceholderConfig,
+  ScaffoldConfig,
+  ScaffoldService,
+  SnackbarService,
+} from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
 
 @Component({
@@ -19,14 +33,12 @@ import { take } from 'rxjs';
     FileUploadComponent,
     ColorPickerComponent,
     ListComponent,
-    NotificationComponent
-  ]
+    NotificationComponent,
+  ],
 })
 export class ComponentsComponent {
-
   private scaffoldService = inject(ScaffoldService);
   private snackbarService = inject(SnackbarService);
-
 
   public listConfig = signal<ListConfig>({
     enableSelection: true,
@@ -34,25 +46,35 @@ export class ComponentsComponent {
     mode: 'flat',
     initialSortToken: 'title',
     initialSortAsc: true,
-    showDividers: true
+    showDividers: true,
   });
 
   public listHeader = signal<ListHeader>({
     matIcon: 'sort',
-    items: [
-      { title: 'Items', sortToken: 'title' }
-    ]
+    items: [{ title: 'Items', sortToken: 'title' }],
   });
 
   public listItems = signal<ListItem[]>([
     { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
-    { id: 0, avatar: 'assets/img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
-    { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
+    {
+      id: 0,
+      avatar: 'assets/img/logos/ic_launcher-web.png',
+      title: 'Item 1',
+      subtitle: 'I am clickable',
+      clickable: true,
+    },
+    {
+      id: 2,
+      matIcon: 'person',
+      title: 'Item 3',
+      subtitle: 'I have no edit buton',
+      hiddenButtonIds: ['edit'],
+    },
   ]);
 
   public listButtons = signal<Button[]>([
     { id: 'edit', matIcon: 'edit' },
-    { id: 'delete', matIcon: 'delete', cssClass: 'lf-ugly-orange' }
+    { id: 'delete', matIcon: 'delete', cssClass: 'lf-ugly-orange' },
   ]);
 
   public fileName = signal<string>('');
@@ -64,9 +86,9 @@ export class ComponentsComponent {
     message: 'Placeholder with MatIcon.',
     button: {
       id: 'placeholder',
-      label: 'ACTION'
-    }
-  }
+      label: 'ACTION',
+    },
+  };
 
   public placeholderConfigSvgIcon: PlaceholderConfig = {
     svgIcon: 'logo',
@@ -74,9 +96,9 @@ export class ComponentsComponent {
     message: 'Placeholder with SvgIcon.',
     button: {
       id: 'placeholder',
-      label: 'ACTION'
-    }
-  }
+      label: 'ACTION',
+    },
+  };
 
   public placeholderConfigImgIcon: PlaceholderConfig = {
     imgIcon: 'assets/img/location.svg',
@@ -84,32 +106,42 @@ export class ComponentsComponent {
     message: 'Placeholder with Image.',
     button: {
       id: 'placeholder',
-      label: 'ACTION'
-    }
-  }
+      label: 'ACTION',
+    },
+  };
 
   constructor() {
-    this.scaffoldService.scaffoldConfig$.pipe(take(1), takeUntilDestroyed()).subscribe((scaffoldConfig: ScaffoldConfig) => {
-      if (scaffoldConfig.contentTitleCardConfig) {
-        this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Components' });
-      }
-    });
+    this.scaffoldService.scaffoldConfig$
+      .pipe(take(1), takeUntilDestroyed())
+      .subscribe((scaffoldConfig: ScaffoldConfig) => {
+        if (scaffoldConfig.contentTitleCardConfig) {
+          this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', {
+            label: 'Components',
+          });
+        }
+      });
 
-    this.scaffoldService.buttonClickEventValue$.pipe(takeUntilDestroyed()).subscribe((buttonClickEventValue: string) => {
-      if (buttonClickEventValue === 'bottombar_close') {
-        this.listItems.set(this.listItems().map((item: ListItem) => ({ ...item, checked: false })));
-        this.onListSelectionChange();
-      }
-    });
+    this.scaffoldService.buttonClickEventValue$
+      .pipe(takeUntilDestroyed())
+      .subscribe((buttonClickEventValue: string) => {
+        if (buttonClickEventValue === 'bottombar_close') {
+          this.listItems.set(
+            this.listItems().map((item: ListItem) => ({ ...item, checked: false })),
+          );
+          this.onListSelectionChange();
+        }
+      });
   }
 
-  public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
+  public onListSortChange(event: { sortToken: string; sortAsc: boolean }): void {
     if (event?.sortToken === 'title') {
-      this.listItems.set(this.listItems().sort((a, b) => {
-        if (!a.title || !b.title) return 0;
-        if (event.sortAsc) return a.title.localeCompare(b.title);
-        return b.title.localeCompare(a.title);
-      }));
+      this.listItems.set(
+        this.listItems().sort((a, b) => {
+          if (!a.title || !b.title) return 0;
+          if (event.sortAsc) return a.title.localeCompare(b.title);
+          return b.title.localeCompare(a.title);
+        }),
+      );
     }
   }
 
@@ -119,13 +151,13 @@ export class ComponentsComponent {
     const bottomBarConfig: BottomBarConfig = {
       enable: checkedItems?.length > 0,
       message: `Selected: ${checkedItems?.length || 0}`,
-      closeButtonId: 'bottombar_close'
-    }
+      closeButtonId: 'bottombar_close',
+    };
 
     this.scaffoldService.updateScaffoldProperty('bottomBarConfig', bottomBarConfig);
   }
 
-  public onListButtonClick(event: { buttonId: string, item: ListItem }): void {
+  public onListButtonClick(event: { buttonId: string; item: ListItem }): void {
     if (event?.buttonId === 'edit') {
       this.snackbarService.openSnackbar(`Edit ${event?.item?.title}`, 'Close');
     } else if (event?.buttonId === 'delete') {

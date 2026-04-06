@@ -11,15 +11,9 @@ import { FloatingButtonConfig, ScaffoldLibraryConfig } from '../../models';
   styleUrls: ['./floating-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    NgClass
-]
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, NgClass],
 })
 export class FloatingButtonComponent {
-
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly floatingButtonConfig = input<FloatingButtonConfig | null>(null);
   public readonly onTop = input<boolean>(false);
@@ -33,7 +27,6 @@ export class FloatingButtonComponent {
 
   private readonly initialized = signal<boolean>(false);
 
-
   constructor() {
     effect(() => {
       const floatingButtonConfig: FloatingButtonConfig | null = this.floatingButtonConfig();
@@ -42,11 +35,16 @@ export class FloatingButtonComponent {
       this.initialized.set(true);
 
       const updatedFloatingButtonConfigConfig: Partial<FloatingButtonConfig> = {
-        matIcon: (!floatingButtonConfig.matIcon && !floatingButtonConfig.svgIcon) ? 'arrow_upward' : floatingButtonConfig.matIcon || floatingButtonConfig.svgIcon,
-        horizontalPosition: floatingButtonConfig.horizontalPosition ?? 'right'
+        matIcon:
+          !floatingButtonConfig.matIcon && !floatingButtonConfig.svgIcon
+            ? 'arrow_upward'
+            : floatingButtonConfig.matIcon || floatingButtonConfig.svgIcon,
+        horizontalPosition: floatingButtonConfig.horizontalPosition ?? 'right',
       };
 
-      if (JSON.stringify(updatedFloatingButtonConfigConfig) !== JSON.stringify(floatingButtonConfig)) {
+      if (
+        JSON.stringify(updatedFloatingButtonConfigConfig) !== JSON.stringify(floatingButtonConfig)
+      ) {
         this.floatingButtonConfigUpdateEvent.emit(updatedFloatingButtonConfigConfig);
       }
     });
@@ -55,5 +53,4 @@ export class FloatingButtonComponent {
   public buttonClicked(id?: string): void {
     this.floatingButtonClickEvent.emit(id || '');
   }
-
 }

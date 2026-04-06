@@ -12,16 +12,9 @@ import { BottomBarConfig, ScaffoldLibraryConfig } from '../../models';
   styleUrls: ['./bottom-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NgClass
-]
+  imports: [MatButtonModule, MatIconModule, MatToolbarModule, MatTooltipModule, NgClass],
 })
 export class BottomBarComponent {
-
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly bottomBarConfig = input<BottomBarConfig | null>(null);
   public readonly isMobile = input<boolean>(false);
@@ -29,7 +22,6 @@ export class BottomBarComponent {
 
   public readonly bottomBarCloseClickEvent = output<string>();
   public readonly bottomBarButtonClickEvent = output<string>();
-
 
   public buttonClicked(id?: string): void {
     if (!id) {
@@ -42,5 +34,4 @@ export class BottomBarComponent {
   public closeClicked(closeButtonId: string): void {
     this.bottomBarCloseClickEvent.emit(closeButtonId);
   }
-
 }

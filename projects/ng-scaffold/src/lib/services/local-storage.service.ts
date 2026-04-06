@@ -5,18 +5,16 @@ import { ScaffoldLibraryConfig } from '../models';
 import { Logger } from './logger.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
-
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private platformId = inject(PLATFORM_ID);
   private logger = inject(Logger);
 
-
   /**
    * Set an item into the browser's local storage
-   * 
+   *
    * @param key key of the item
    * @param value value of the item
    */
@@ -25,7 +23,8 @@ export class LocalStorageService {
 
     try {
       const stringValue: string = JSON.stringify(value);
-      if (this.libraryConfig?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, stringValue);
+      if (this.libraryConfig?.debugging)
+        this.logger.log(`[SET ITEM] ${key} with value:`, stringValue);
       localStorage.setItem(key, stringValue);
     } catch (error) {
       this.logger.error(`[ERROR SET ITEM] ${key}: ${error}`);
@@ -34,7 +33,7 @@ export class LocalStorageService {
 
   /**
    * Set an item encoded into the browser's local storage
-   * 
+   *
    * @param key key of the item
    * @param value value of the item
    */
@@ -43,7 +42,8 @@ export class LocalStorageService {
 
     try {
       const encodedValue: string = btoa(JSON.stringify(value));
-      if (this.libraryConfig?.debugging) this.logger.log(`[SET ITEM] ${key} with value:`, encodedValue);
+      if (this.libraryConfig?.debugging)
+        this.logger.log(`[SET ITEM] ${key} with value:`, encodedValue);
       localStorage.setItem(key, encodedValue);
     } catch (error) {
       this.logger.error(`[ERROR SET ITEM] ${key}: ${error}`);
@@ -52,7 +52,7 @@ export class LocalStorageService {
 
   /**
    * Get an item from the browser's local storage by key
-   * 
+   *
    * @param key key of the item
    * @returns value of the item
    */
@@ -62,7 +62,7 @@ export class LocalStorageService {
     try {
       const item: string | null = localStorage.getItem(key);
       if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
-      return item ? JSON.parse(item, this.dateReviver) as T : null;
+      return item ? (JSON.parse(item, this.dateReviver) as T) : null;
     } catch (error) {
       this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
       return null;
@@ -71,7 +71,7 @@ export class LocalStorageService {
 
   /**
    * Get an item and decode it from the browser's local storage by key
-   * 
+   *
    * @param key key of the item
    * @returns value of the item
    */
@@ -81,7 +81,7 @@ export class LocalStorageService {
     try {
       const item: string | null = localStorage.getItem(key);
       if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
-      return item ? JSON.parse(atob(item), this.dateReviver) as T : null;
+      return item ? (JSON.parse(atob(item), this.dateReviver) as T) : null;
     } catch (error) {
       this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
       return null;
@@ -90,7 +90,7 @@ export class LocalStorageService {
 
   /**
    * Get an unparsed string item from the browser's local storage by key
-   * 
+   *
    * @param key key of the item
    */
   public getItemUnparsed(key: string): string | null {
@@ -108,7 +108,7 @@ export class LocalStorageService {
 
   /**
    * Remove an item from the browser's local storage by key
-   * 
+   *
    * @param key key of the item
    * @returns value of the item
    */
@@ -125,7 +125,7 @@ export class LocalStorageService {
 
   /**
    * Clear the browser's local storage for this application
-   * 
+   *
    */
   public clear(): void {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -133,7 +133,7 @@ export class LocalStorageService {
     localStorage.clear();
   }
 
-  private dateReviver(key: any, value: any): any {      
+  private dateReviver(key: any, value: any): any {
     if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value)) {
       return new Date(value);
     }

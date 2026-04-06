@@ -7,13 +7,13 @@ import { Logger } from './logger.service';
 
 @Injectable({ providedIn: 'root' })
 export class ScaffoldService {
-
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private logger = inject(Logger);
 
-
   // Scaffold Config
-  private _scaffoldConfig$: BehaviorSubject<ScaffoldConfig> = new BehaviorSubject<ScaffoldConfig>({});
+  private _scaffoldConfig$: BehaviorSubject<ScaffoldConfig> = new BehaviorSubject<ScaffoldConfig>(
+    {},
+  );
 
   public get scaffoldConfig$(): Observable<ScaffoldConfig> {
     return this._scaffoldConfig$.asObservable();
@@ -52,9 +52,13 @@ export class ScaffoldService {
   }
 
   // Drawer component
-  private _drawerPortal$ = new BehaviorSubject<ComponentPortal<unknown> | TemplatePortal<unknown> | null>(null);
+  private _drawerPortal$ = new BehaviorSubject<
+    ComponentPortal<unknown> | TemplatePortal<unknown> | null
+  >(null);
 
-  public get drawerPortal$(): Observable<ComponentPortal<unknown> | TemplatePortal<unknown> | null> {
+  public get drawerPortal$(): Observable<
+    ComponentPortal<unknown> | TemplatePortal<unknown> | null
+  > {
     return this._drawerPortal$.asObservable();
   }
 
@@ -64,7 +68,10 @@ export class ScaffoldService {
   }
 
   // Update a specific property in the ScaffoldConfig
-  public updateScaffoldProperty<K extends keyof ScaffoldConfig>(property: K, value: Partial<ScaffoldConfig[K]> | ScaffoldConfig[K]): void {
+  public updateScaffoldProperty<K extends keyof ScaffoldConfig>(
+    property: K,
+    value: Partial<ScaffoldConfig[K]> | ScaffoldConfig[K],
+  ): void {
     const currentState: ScaffoldConfig = this._scaffoldConfig$.getValue();
     const currentValue: ScaffoldConfig[K] = currentState[property];
     let newValue: ScaffoldConfig[K];
@@ -76,11 +83,13 @@ export class ScaffoldService {
     }
 
     if (newValue === currentValue) {
-      if (this.libraryConfig?.debugging) this.logger.log(`[UNCHANGED] ScaffoldConfig.${property}`, newValue)
+      if (this.libraryConfig?.debugging)
+        this.logger.log(`[UNCHANGED] ScaffoldConfig.${property}`, newValue);
       return;
     }
 
-    if (this.libraryConfig?.debugging) this.logger.log(`[UPDATE] ScaffoldConfig.${property}`, newValue);
+    if (this.libraryConfig?.debugging)
+      this.logger.log(`[UPDATE] ScaffoldConfig.${property}`, newValue);
     this._scaffoldConfig$.next({ ...currentState, [property]: newValue });
   }
 }

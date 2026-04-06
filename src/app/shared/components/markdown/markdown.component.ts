@@ -19,27 +19,18 @@ export interface MarkdownDialogData {
   styleUrl: './markdown.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    ExternalMarkdownComponent
-  ]
+  imports: [MatDialogModule, MatButtonModule, MatIconModule, ExternalMarkdownComponent],
 })
 export class MarkdownComponent {
-
   public data = inject<MarkdownDialogData>(MAT_DIALOG_DATA, { optional: true }) ?? {};
   private snackbarService = inject(SnackbarService);
   private clipboard = inject(Clipboard);
 
-
   public dataSnippet: string = '';
-
 
   constructor() {
     if (this.data?.data) {
-      this.dataSnippet =
-        `\`\`\`ts
+      this.dataSnippet = `\`\`\`ts
 // Configure the demo page and copy the config to your application:
 ${this.data.data}
 \`\`\``;
@@ -52,7 +43,7 @@ ${this.data.data}
 
   public copy(): void {
     if (this.data.showCopy && this.data.data) {
-      this.clipboard.copy(this.data.data)
+      this.clipboard.copy(this.data.data);
       this.snackbarService.openSnackbar('Copied', 'Close');
     }
   }

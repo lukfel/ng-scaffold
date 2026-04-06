@@ -12,15 +12,10 @@ import { BreakpointService } from '../../../services';
   styleUrls: ['./notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule
-  ]
+  imports: [MatButtonModule, MatIconModule],
 })
 export class NotificationComponent {
-
   private breakpointService = inject(BreakpointService);
-
 
   public readonly color = input<'primary' | 'accent' | 'warn'>('primary');
   public readonly message = input<string>('');
@@ -35,5 +30,9 @@ export class NotificationComponent {
 
   public readonly clickEvent = output();
 
-  public isMobile = toSignal(this.breakpointService.breakpoint$.pipe(map((state: BreakpointState) => state.breakpoints[Breakpoints.XSmall])));
+  public isMobile = toSignal(
+    this.breakpointService.breakpoint$.pipe(
+      map((state: BreakpointState) => state.breakpoints[Breakpoints.XSmall]),
+    ),
+  );
 }

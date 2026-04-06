@@ -2,7 +2,7 @@
   min-height: 100dvh;
 }
 
-.drawer-container {
+ .drawer-container {
   height: 100%;
   display: flex;
   flex-flow: column;
@@ -10,7 +10,7 @@
 
   .active {
     .mat-icon,
-    span {
+    span { 
       font-weight: 500;
       color: var(--color-primary) !important;
     }

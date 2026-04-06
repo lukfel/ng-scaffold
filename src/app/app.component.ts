@@ -6,7 +6,19 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, RouterModule } from '@angular/router';
-import { BreakpointService, CONFIG, DialogService, Logger, MenuButton, ScaffoldComponent, ScaffoldConfig, ScaffoldLibraryConfig, ScaffoldService, SeoService, ThemeService } from '@lukfel/ng-scaffold';
+import {
+  BreakpointService,
+  CONFIG,
+  DialogService,
+  Logger,
+  MenuButton,
+  ScaffoldComponent,
+  ScaffoldConfig,
+  ScaffoldLibraryConfig,
+  ScaffoldService,
+  SeoService,
+  ThemeService,
+} from '@lukfel/ng-scaffold';
 import packageJson from '../../package.json';
 
 @Component({
@@ -21,11 +33,10 @@ import packageJson from '../../package.json';
     MatIconModule,
     MatDividerModule,
     ScaffoldComponent,
-    NgClass
-]
+    NgClass,
+  ],
 })
 export class AppComponent {
-
   private router = inject(Router);
   private logger = inject(Logger);
   private iconRegistry = inject(MatIconRegistry);
@@ -37,7 +48,6 @@ export class AppComponent {
   private themeService = inject(ThemeService);
   private dialogService = inject(DialogService);
   private breakpointService = inject(BreakpointService);
-
 
   public version = packageJson.version;
 
@@ -58,42 +68,42 @@ export class AppComponent {
       titleRouterLink: 'start',
       leftMenuButton: {
         id: 'drawer',
-        matIcon: 'menu'
+        matIcon: 'menu',
       },
       rightMenuButtons: [
         {
           id: 'start',
-          label: 'Demo'
+          label: 'Demo',
         },
         {
           id: 'components',
-          label: 'Components'
+          label: 'Components',
         },
         {
           id: 'documentation',
-          label: 'Docs'
+          label: 'Docs',
         },
         {
           id: 'github',
           svgIcon: 'github_logo',
-          tooltip: 'GitHub'
+          tooltip: 'GitHub',
         },
         {
           id: 'npm',
           svgIcon: 'npm_logo',
-          tooltip: 'NPM'
-        }
+          tooltip: 'NPM',
+        },
       ],
       gradient: true,
       responsiveConfig: {
-        enable: true
+        enable: true,
       },
       inputConfig: {
         enable: false,
         label: 'Search',
         matIconSubmit: 'search',
-        autoFocus: false
-      }
+        autoFocus: false,
+      },
     },
     // NavbarConfig
     navbarConfig: {
@@ -103,25 +113,25 @@ export class AppComponent {
         {
           id: 'start',
           label: 'Demo',
-          matIcon: 'home'
+          matIcon: 'home',
         },
         {
           id: 'components',
           label: 'Components',
-          matIcon: 'widgets'
+          matIcon: 'widgets',
         },
         {
           id: 'documentation',
           label: 'Docs',
-          matIcon: 'description'
-        }
-      ]
+          matIcon: 'description',
+        },
+      ],
     },
     // DrawerConfig
     drawerConfig: {
       enable: true,
       open: true,
-      fixed: true
+      fixed: true,
     },
     // FooterConfig
     footerConfig: {
@@ -131,36 +141,36 @@ export class AppComponent {
         {
           label: 'About me',
           href: 'https://www.lukasfelbinger.at',
-          externalTab: true
+          externalTab: true,
         },
         {
           label: 'GitHub',
           href: 'https://github.com/lukfel/ng-scaffold',
-          externalTab: true
+          externalTab: true,
         },
         {
           label: 'NPM',
           href: 'https://www.npmjs.com/package/@lukfel/ng-scaffold',
-          externalTab: true
+          externalTab: true,
         },
       ],
-      copyright: `© Lukas Felbinger 2026. All rights reserved. (v${packageJson.version})`
+      copyright: `© Lukas Felbinger 2026. All rights reserved. (v${packageJson.version})`,
     },
     // ContentTitleCardConfig
     contentTitleCardConfig: {
       enable: true,
-      showBackButton: true
+      showBackButton: true,
     },
     // FloatingButtonConfig
     floatingButtonConfig: {
       enable: true,
-      autoHide: true
+      autoHide: true,
     },
     // BottomBarConfig
     bottomBarConfig: {
       enable: false,
-      closeButtonId: 'bottom-bar_close'
-    }
+      closeButtonId: 'bottom-bar_close',
+    },
   };
 
   // External links
@@ -169,51 +179,79 @@ export class AppComponent {
       id: 'https://www.uglygotchi.at',
       label: 'Uglygotchi',
       svgIcon: 'ugly_logo',
-      cssClass: 'lf-ugly-orange'
+      cssClass: 'lf-ugly-orange',
     },
     {
       id: 'https://www.what-a-waste.at',
       label: 'What A Waste',
       svgIcon: 'waw_logo',
-      cssClass: 'lf-waw-cyan'
+      cssClass: 'lf-waw-cyan',
     },
     {
       id: 'https://www.create-a-tournament.com',
       label: 'Create A Tournament',
       svgIcon: 'cat_logo',
-      cssClass: 'lf-cat-blue'
+      cssClass: 'lf-cat-blue',
     },
     {
       id: 'https://www.wowen.at',
       label: 'Wowen',
       svgIcon: 'wowen_logo',
-      cssClass: 'lf-wowen-black'
+      cssClass: 'lf-wowen-black',
     },
   ]);
 
   private currentTheme: string = '';
 
-
   constructor() {
     // Register custom svg for header logo
-    this.iconRegistry.addSvgIcon('logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'));
-    this.iconRegistry.addSvgIcon('lf_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'));
-    this.iconRegistry.addSvgIcon('github_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'));
-    this.iconRegistry.addSvgIcon('npm_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/npm.svg'));
-    this.iconRegistry.addSvgIcon('cat_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/cat.svg'));
-    this.iconRegistry.addSvgIcon('waw_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/waw.svg'));
-    this.iconRegistry.addSvgIcon('ugly_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/uglygotchi.svg'));
-    this.iconRegistry.addSvgIcon('wowen_logo', this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/wowen.svg'));
+    this.iconRegistry.addSvgIcon(
+      'logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'),
+    );
+    this.iconRegistry.addSvgIcon(
+      'lf_logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'),
+    );
+    this.iconRegistry.addSvgIcon(
+      'github_logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'),
+    );
+    this.iconRegistry.addSvgIcon(
+      'npm_logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/npm.svg'),
+    );
+    this.iconRegistry.addSvgIcon(
+      'cat_logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/cat.svg'),
+    );
+    this.iconRegistry.addSvgIcon(
+      'waw_logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/waw.svg'),
+    );
+    this.iconRegistry.addSvgIcon(
+      'ugly_logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/uglygotchi.svg'),
+    );
+    this.iconRegistry.addSvgIcon(
+      'wowen_logo',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/wowen.svg'),
+    );
 
     // Set config for scaffold
     this.scaffoldService.scaffoldConfig = this.scaffoldConfig;
 
     // Listen to theme changes
-    this.themeService.currentTheme$.subscribe((currentTheme: string) => this.currentTheme = currentTheme);
+    this.themeService.currentTheme$.subscribe(
+      (currentTheme: string) => (this.currentTheme = currentTheme),
+    );
 
     // Listen for breakpoint changes
     this.breakpointService.breakpoint$.subscribe((breakpointState: BreakpointState) => {
-      if (breakpointState.breakpoints[Breakpoints.XSmall] || breakpointState.breakpoints[Breakpoints.Small]) {
+      if (
+        breakpointState.breakpoints[Breakpoints.XSmall] ||
+        breakpointState.breakpoints[Breakpoints.Small]
+      ) {
         this.scaffoldService.updateScaffoldProperty('drawerConfig', { open: false });
       }
     });
@@ -221,8 +259,9 @@ export class AppComponent {
     // Set Seo tags
     this.seoService.setMetaTags({
       metaPageTitle: 'Demo | Scaffold Library',
-      metaPageDescription: 'This Angular library provides a basic UI scaffold and services for modern web and mobile apps',
-      metaImagePath: 'scaffold/assets/img/meta.jpg'
+      metaPageDescription:
+        'This Angular library provides a basic UI scaffold and services for modern web and mobile apps',
+      metaImagePath: 'scaffold/assets/img/meta.jpg',
     });
   }
 
@@ -240,7 +279,12 @@ export class AppComponent {
     } else if (id === 'npm') {
       window.open('https://www.npmjs.com/package/@lukfel/ng-scaffold', '_blank');
       return;
-    } else if (id === 'start' || id === 'components' || id === 'documentation' || id === 'typography') {
+    } else if (
+      id === 'start' ||
+      id === 'components' ||
+      id === 'documentation' ||
+      id === 'typography'
+    ) {
       this.router.navigate([id]);
       return;
     }
@@ -248,9 +292,16 @@ export class AppComponent {
 
   // Listen to header input submit events
   public headerInputSubmitEvent(value: string): void {
-    this.dialogService.openConfirmDialog({ title: 'You have entered:', message: value, closeLabel: 'Close', confirmLabel: 'Confirm' }).then((result: boolean) => {
-      this.logger.log('close result: ', result);
-    });
+    this.dialogService
+      .openConfirmDialog({
+        title: 'You have entered:',
+        message: value,
+        closeLabel: 'Close',
+        confirmLabel: 'Confirm',
+      })
+      .then((result: boolean) => {
+        this.logger.log('close result: ', result);
+      });
   }
 
   // Listen to header input change events

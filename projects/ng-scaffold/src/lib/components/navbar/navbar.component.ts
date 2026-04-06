@@ -10,14 +10,9 @@ import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
   styleUrls: ['./navbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatIconModule,
-    MatTooltipModule,
-    NgClass
-]
+  imports: [MatIconModule, MatTooltipModule, NgClass],
 })
 export class NavbarComponent {
-
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly navbarConfig = input<NavbarConfig | null>(null);
   public readonly isMobile = input<boolean>(false);
@@ -31,7 +26,6 @@ export class NavbarComponent {
     return (id: string): boolean => !!route && !!id && route === id;
   });
 
-
   public buttonClicked(id: string): void {
     if (!id) {
       return;
@@ -39,5 +33,4 @@ export class NavbarComponent {
 
     this.navbarButtonClickEvent.emit(id);
   }
-
 }

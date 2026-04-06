@@ -12,9 +12,29 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
-import { BottomBarConfig, ContentTitleCardConfig, DialogService, DrawerConfig, FloatingButtonConfig, FooterConfig, HeaderConfig, HeaderInputConfig, LoadingOverlayConfig, Logger, MenuButton, NavbarConfig, NavigationLink, ScaffoldConfig, ScaffoldService, ThemeService } from '@lukfel/ng-scaffold';
+import {
+  BottomBarConfig,
+  ContentTitleCardConfig,
+  DialogService,
+  DrawerConfig,
+  FloatingButtonConfig,
+  FooterConfig,
+  HeaderConfig,
+  HeaderInputConfig,
+  LoadingOverlayConfig,
+  Logger,
+  MenuButton,
+  NavbarConfig,
+  NavigationLink,
+  ScaffoldConfig,
+  ScaffoldService,
+  ThemeService,
+} from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
-import { MarkdownComponent, MarkdownDialogData } from 'src/app/shared/components/markdown/markdown.component';
+import {
+  MarkdownComponent,
+  MarkdownDialogData,
+} from 'src/app/shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
@@ -35,66 +55,75 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     MatSlideToggleModule,
     MatIconModule,
     MatDividerModule,
-    NgTemplateOutlet
-]
+    NgTemplateOutlet,
+  ],
 })
 export class StartComponent {
-
   public scaffoldService = inject(ScaffoldService);
   private themeService = inject(ThemeService);
   private dialogService = inject(DialogService);
   private logger = inject(Logger);
 
-
-  public scaffoldConfig = toSignal<ScaffoldConfig | null>(this.scaffoldService.scaffoldConfig$, { initialValue: null });
-  public loadingOverlayConfig = computed<LoadingOverlayConfig>(() => this.scaffoldConfig()?.loadingOverlayConfig || {});
+  public scaffoldConfig = toSignal<ScaffoldConfig | null>(this.scaffoldService.scaffoldConfig$, {
+    initialValue: null,
+  });
+  public loadingOverlayConfig = computed<LoadingOverlayConfig>(
+    () => this.scaffoldConfig()?.loadingOverlayConfig || {},
+  );
   public headerConfig = computed<HeaderConfig>(() => this.scaffoldConfig()?.headerConfig || {});
   public navbarConfig = computed<NavbarConfig>(() => this.scaffoldConfig()?.navbarConfig || {});
   public drawerConfig = computed<DrawerConfig>(() => this.scaffoldConfig()?.drawerConfig || {});
   public footerConfig = computed<FooterConfig>(() => this.scaffoldConfig()?.footerConfig || {});
-  public contentTitleCardConfig = computed<ContentTitleCardConfig>(() => this.scaffoldConfig()?.contentTitleCardConfig || {});
-  public floatingButtonConfig = computed<FloatingButtonConfig>(() => this.scaffoldConfig()?.floatingButtonConfig || {});
-  public bottomBarConfig = computed<BottomBarConfig>(() => this.scaffoldConfig()?.bottomBarConfig || {});
+  public contentTitleCardConfig = computed<ContentTitleCardConfig>(
+    () => this.scaffoldConfig()?.contentTitleCardConfig || {},
+  );
+  public floatingButtonConfig = computed<FloatingButtonConfig>(
+    () => this.scaffoldConfig()?.floatingButtonConfig || {},
+  );
+  public bottomBarConfig = computed<BottomBarConfig>(
+    () => this.scaffoldConfig()?.bottomBarConfig || {},
+  );
 
   public bottomBarDemoList = signal([
     {
       checked: false,
-      label: 'Demo item 1'
+      label: 'Demo item 1',
     },
     {
       checked: false,
-      label: 'Demo item 2'
+      label: 'Demo item 2',
     },
     {
       checked: false,
-      label: 'Demo item 3'
-    }
+      label: 'Demo item 3',
+    },
   ]);
 
   public theme = toSignal<string>(this.themeService.currentTheme$);
   public inputValue = toSignal<string>(this.scaffoldService.headerInputChangeValue$);
 
-
   constructor() {
-    this.scaffoldService.scaffoldConfig$.pipe(take(1), takeUntilDestroyed()).subscribe((scaffoldConfig: ScaffoldConfig) => {
-      if(scaffoldConfig) {
-        this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Demo' });
-      }
-    });
+    this.scaffoldService.scaffoldConfig$
+      .pipe(take(1), takeUntilDestroyed())
+      .subscribe((scaffoldConfig: ScaffoldConfig) => {
+        if (scaffoldConfig) {
+          this.scaffoldService.updateScaffoldProperty('contentTitleCardConfig', { label: 'Demo' });
+        }
+      });
 
-    this.scaffoldService.buttonClickEventValue$.pipe(takeUntilDestroyed()).subscribe((value: string) => {
-      if (value === 'bottom-bar_submit') {
-        this.bottomBarButtonClicked();
-      } else if (value === 'bottom-bar_close') {
-        this.bottomBarCloseClicked();
-      }
-    });
+    this.scaffoldService.buttonClickEventValue$
+      .pipe(takeUntilDestroyed())
+      .subscribe((value: string) => {
+        if (value === 'bottom-bar_submit') {
+          this.bottomBarButtonClicked();
+        } else if (value === 'bottom-bar_close') {
+          this.bottomBarCloseClicked();
+        }
+      });
   }
-
 
   public copyConfig(): void {
     const replacer = (key: string, value: any): void => {
-
       // Remove empty strings, null, undefined, false
       if (value === '' || value === null || value === undefined || value === false) {
         return undefined;
@@ -106,27 +135,41 @@ export class StartComponent {
       }
 
       // Remove empty objects
-      if (value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === 0) {
+      if (
+        value &&
+        typeof value === 'object' &&
+        !Array.isArray(value) &&
+        Object.keys(value).length === 0
+      ) {
         return undefined;
       }
 
       return value;
     };
 
-    const formatted: string = 'public scaffoldConfig: ScaffoldConfig = ' + JSON.stringify(this.scaffoldConfig(), replacer, 2).replace(/"([^"]+)":/g, '$1:').replace(/"/g, '\'');
-    this.openMarkdownDialog('Copy current config', '', formatted, true)
+    const formatted: string =
+      'public scaffoldConfig: ScaffoldConfig = ' +
+      JSON.stringify(this.scaffoldConfig(), replacer, 2)
+        .replace(/"([^"]+)":/g, '$1:')
+        .replace(/"/g, "'");
+    this.openMarkdownDialog('Copy current config', '', formatted, true);
   }
 
-  public openMarkdownDialog(title: string, file: string, data?: string, showCopy: boolean = false): void {
+  public openMarkdownDialog(
+    title: string,
+    file: string,
+    data?: string,
+    showCopy: boolean = false,
+  ): void {
     this.dialogService.openCustomDialog(MarkdownComponent, {
       autoFocus: false,
       data: {
         title,
         src: file ? `assets/md/${file}` : '',
         data,
-        showCopy
+        showCopy,
       } as MarkdownDialogData,
-      maxWidth: '1000px'
+      maxWidth: '1000px',
     });
   }
 
@@ -141,7 +184,7 @@ export class StartComponent {
   public updateInputConfig(key: keyof HeaderInputConfig, value: string): void {
     this.scaffoldService.updateScaffoldProperty('headerConfig', {
       inputConfig: { ...this.headerConfig()?.inputConfig, [key]: value },
-    })
+    });
   }
 
   public headerImgLogoChange(event: string): void {
@@ -166,62 +209,92 @@ export class StartComponent {
 
   public addHeaderButton(isLeftButton: boolean): void {
     if (!isLeftButton) {
-      this.scaffoldService.updateScaffoldProperty('headerConfig', { rightMenuButtons: [...this.headerConfig()!.rightMenuButtons || [], { id: '' }] });
+      this.scaffoldService.updateScaffoldProperty('headerConfig', {
+        rightMenuButtons: [...(this.headerConfig()!.rightMenuButtons || []), { id: '' }],
+      });
     } else if (isLeftButton && !this.headerConfig()?.leftMenuButton) {
       this.scaffoldService.updateScaffoldProperty('headerConfig', { leftMenuButton: { id: '' } });
     }
   }
 
-  public removeHeaderButton(menuButton: MenuButton, isLeftButton: boolean, isNavButton: boolean): void {
+  public removeHeaderButton(
+    menuButton: MenuButton,
+    isLeftButton: boolean,
+    isNavButton: boolean,
+  ): void {
     if (isNavButton) {
-      this.scaffoldService.updateScaffoldProperty('navbarConfig', { buttons: this.navbarConfig()!.buttons?.filter((button: MenuButton) => button !== menuButton) });
+      this.scaffoldService.updateScaffoldProperty('navbarConfig', {
+        buttons: this.navbarConfig()!.buttons?.filter(
+          (button: MenuButton) => button !== menuButton,
+        ),
+      });
     } else if (!isLeftButton) {
-      this.scaffoldService.updateScaffoldProperty('headerConfig', { rightMenuButtons: this.headerConfig()!.rightMenuButtons?.filter((button: MenuButton) => button !== menuButton) });
+      this.scaffoldService.updateScaffoldProperty('headerConfig', {
+        rightMenuButtons: this.headerConfig()!.rightMenuButtons?.filter(
+          (button: MenuButton) => button !== menuButton,
+        ),
+      });
     } else if (isLeftButton && this.headerConfig()?.leftMenuButton === menuButton) {
       this.scaffoldService.updateScaffoldProperty('headerConfig', { leftMenuButton: undefined });
     }
   }
 
-  public updateHeaderButton(menuButton: MenuButton, isLeftButton: boolean, isNavButton: boolean, key: keyof MenuButton, value: string): void {
+  public updateHeaderButton(
+    menuButton: MenuButton,
+    isLeftButton: boolean,
+    isNavButton: boolean,
+    key: keyof MenuButton,
+    value: string,
+  ): void {
     if (isNavButton) {
       this.scaffoldService.updateScaffoldProperty('navbarConfig', {
-        buttons: this.navbarConfig()?.buttons?.map(button =>
-          button === menuButton ? { ...button, [key]: value } : button
-        )
+        buttons: this.navbarConfig()?.buttons?.map((button) =>
+          button === menuButton ? { ...button, [key]: value } : button,
+        ),
       });
     } else if (!isLeftButton) {
       this.scaffoldService.updateScaffoldProperty('headerConfig', {
-        rightMenuButtons: this.headerConfig()?.rightMenuButtons?.map(button =>
-          button === menuButton ? { ...button, [key]: value } : button
-        )
+        rightMenuButtons: this.headerConfig()?.rightMenuButtons?.map((button) =>
+          button === menuButton ? { ...button, [key]: value } : button,
+        ),
       });
     } else if (isLeftButton && this.headerConfig()?.leftMenuButton === menuButton) {
       this.scaffoldService.updateScaffoldProperty('headerConfig', {
         leftMenuButton: {
           ...this.headerConfig()!.leftMenuButton!,
-          [key]: value
-        }
+          [key]: value,
+        },
       });
     }
   }
 
   public addNavButton(): void {
-    this.scaffoldService.updateScaffoldProperty('navbarConfig', { buttons: [...this.navbarConfig()!.buttons || [], { id: '' }] });
+    this.scaffoldService.updateScaffoldProperty('navbarConfig', {
+      buttons: [...(this.navbarConfig()!.buttons || []), { id: '' }],
+    });
   }
 
   public addFooterLink(): void {
-    this.scaffoldService.updateScaffoldProperty('footerConfig', { links: [...this.footerConfig()!.links || [], {}] });
+    this.scaffoldService.updateScaffoldProperty('footerConfig', {
+      links: [...(this.footerConfig()!.links || []), {}],
+    });
   }
 
   public removeFooterLink(navigationLink: NavigationLink): void {
-    this.scaffoldService.updateScaffoldProperty('footerConfig', { links: this.footerConfig()!.links?.filter((link: NavigationLink) => link !== navigationLink) });
+    this.scaffoldService.updateScaffoldProperty('footerConfig', {
+      links: this.footerConfig()!.links?.filter((link: NavigationLink) => link !== navigationLink),
+    });
   }
 
-  public updateFooterLink(navigationLink: NavigationLink, key: keyof NavigationLink, value: string): void {
+  public updateFooterLink(
+    navigationLink: NavigationLink,
+    key: keyof NavigationLink,
+    value: string,
+  ): void {
     this.scaffoldService.updateScaffoldProperty('footerConfig', {
-      links: this.footerConfig()?.links?.map(link =>
-        link === navigationLink ? { ...link, [key]: value } : link
-      )
+      links: this.footerConfig()?.links?.map((link) =>
+        link === navigationLink ? { ...link, [key]: value } : link,
+      ),
     });
   }
 
@@ -230,13 +303,18 @@ export class StartComponent {
   }
 
   public async bottomBarButtonClicked(): Promise<void> {
-    const selected: number = this.bottomBarDemoList().filter(item => item.checked).length;
-    const result: boolean = await this.dialogService.openConfirmDialog({ title: 'Selection:', message: `You have selected ${selected} items`, closeLabel: 'Close', confirmLabel: 'Confirm' });
+    const selected: number = this.bottomBarDemoList().filter((item) => item.checked).length;
+    const result: boolean = await this.dialogService.openConfirmDialog({
+      title: 'Selection:',
+      message: `You have selected ${selected} items`,
+      closeLabel: 'Close',
+      confirmLabel: 'Confirm',
+    });
     this.logger.log('close result: ', result);
   }
 
   public bottomBarCloseClicked(): void {
-    this.bottomBarDemoList.update(list => list.map(item => ({ ...item, checked: false })));
+    this.bottomBarDemoList.update((list) => list.map((item) => ({ ...item, checked: false })));
     this.updateBottomBar();
   }
 
@@ -245,7 +323,7 @@ export class StartComponent {
   }
 
   private updateBottomBar(): void {
-    const selected: number = this.bottomBarDemoList().filter(item => item.checked).length;
+    const selected: number = this.bottomBarDemoList().filter((item) => item.checked).length;
 
     if (selected > 0) {
       this.scaffoldService.updateScaffoldProperty('bottomBarConfig', {
@@ -254,9 +332,9 @@ export class StartComponent {
         buttons: [
           {
             id: 'bottom-bar_submit',
-            label: 'Submit'
-          }
-        ]
+            label: 'Submit',
+          },
+        ],
       });
     } else {
       this.scaffoldService.updateScaffoldProperty('bottomBarConfig', { enable: false });

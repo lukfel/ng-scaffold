@@ -1,7 +1,17 @@
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { KeyValuePipe, NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, contentChild, effect, inject, input, model, output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  contentChild,
+  effect,
+  inject,
+  input,
+  model,
+  output,
+  signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +21,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { map } from 'rxjs';
-import { ListItemAvatarDirective, ListItemButtonsDirective, ListItemSubtitleDirective, ListItemTitleDirective } from '../../../directives';
+import {
+  ListItemAvatarDirective,
+  ListItemButtonsDirective,
+  ListItemSubtitleDirective,
+  ListItemTitleDirective,
+} from '../../../directives';
 import { Button, ListConfig, ListHeader, ListItem, ScaffoldLibraryConfig } from '../../../models';
 import { CONFIG } from '../../../scaffold.config';
 import { BreakpointService } from '../../../services';
@@ -33,14 +48,12 @@ import { BreakpointService } from '../../../services';
     MatDividerModule,
     KeyValuePipe,
     NgClass,
-    NgTemplateOutlet
-  ]
+    NgTemplateOutlet,
+  ],
 })
 export class ListComponent {
-
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private breakpointService = inject(BreakpointService);
-
 
   public readonly avatarTemplate = contentChild(ListItemAvatarDirective);
   public readonly titleTemplate = contentChild(ListItemTitleDirective);
@@ -56,27 +69,33 @@ export class ListComponent {
   public readonly dropListId = input<string>();
   public readonly connectedDropListIds = input<string[]>();
 
-  public readonly sortChangeEvent = output<{ sortToken: string; sortAsc: boolean; }>();
+  public readonly sortChangeEvent = output<{ sortToken: string; sortAsc: boolean }>();
   public readonly selectionChangeEvent = output<ListItem[]>();
   public readonly itemClickEvent = output<ListItem>();
-  public readonly itemDropEvent = output<{ items: ListItem[]; id: string; }>();
-  public readonly buttonClickEvent = output<{ buttonId: string; item: ListItem; }>();
+  public readonly itemDropEvent = output<{ items: ListItem[]; id: string }>();
+  public readonly buttonClickEvent = output<{ buttonId: string; item: ListItem }>();
 
-
-  public isMobile = toSignal(this.breakpointService.breakpoint$.pipe(map((state: BreakpointState) => state.breakpoints[Breakpoints.XSmall])));
+  public isMobile = toSignal(
+    this.breakpointService.breakpoint$.pipe(
+      map((state: BreakpointState) => state.breakpoints[Breakpoints.XSmall]),
+    ),
+  );
 
   public sortToken = signal<string>('');
   public sortAsc = signal<boolean>(true);
   public allSelected = model<boolean>(false);
 
   get someSelected(): boolean {
-    return this.items().length > 0 && this.items().some((item: ListItem) => item.checked) && !this.allSelected();
+    return (
+      this.items().length > 0 &&
+      this.items().some((item: ListItem) => item.checked) &&
+      !this.allSelected()
+    );
   }
 
   get hasAvatars(): boolean {
-    return !!this.items()?.some((item: ListItem) => (item.avatar || item.matIcon || item.svgIcon));
+    return !!this.items()?.some((item: ListItem) => item.avatar || item.matIcon || item.svgIcon);
   }
-
 
   constructor() {
     effect(() => {
@@ -102,7 +121,6 @@ export class ListComponent {
     });
   }
 
-
   // Update the sort token
   public updateSortToken(sortToken: string | undefined, initial?: boolean): void {
     if (!sortToken) return;
@@ -124,8 +142,13 @@ export class ListComponent {
 
   // Select single item
   public selectItem(item: ListItem, event: MatCheckboxChange): void {
-    if (this.config()?.disableMultiselect) this.items().forEach((item: ListItem) => { item.checked = false; });
-    this.allSelected.set(this.items().length > 0 && this.items().every((item: ListItem) => item.checked));
+    if (this.config()?.disableMultiselect)
+      this.items().forEach((item: ListItem) => {
+        item.checked = false;
+      });
+    this.allSelected.set(
+      this.items().length > 0 && this.items().every((item: ListItem) => item.checked),
+    );
     item.checked = event.checked;
     this.selectionChangeEvent.emit([item]);
   }
@@ -133,17 +156,22 @@ export class ListComponent {
   // Handle item click events
   public clickItem(item: ListItem, click: Event): void {
     this.stopPropagation(click);
-    this.itemClickEvent.emit(item)
+    this.itemClickEvent.emit(item);
   }
 
   // Handle item drop events
   public dropItem(event: CdkDragDrop<ListItem[]>, id: string): void {
-    transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
     this.itemDropEvent.emit({ items: event.container.data, id });
   }
 
   // Handle button click events
-  public clickButton(event: { buttonId: string, item: ListItem }, click: Event): void {
+  public clickButton(event: { buttonId: string; item: ListItem }, click: Event): void {
     this.stopPropagation(click);
     this.buttonClickEvent.emit(event);
   }

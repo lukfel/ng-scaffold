@@ -4,12 +4,10 @@ import { firstValueFrom } from 'rxjs';
 import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DialogService {
-
   private matDialog = inject(MatDialog);
-
 
   /**
    * Opens a simple pre-made confirm dialog
@@ -18,12 +16,13 @@ export class DialogService {
    * @returns an asynchronous boolean response
    */
   public async openConfirmDialog(config: ConfirmDialogConfig): Promise<boolean> {
-    const { ConfirmDialogComponent } = await import('../shared/components/dialogs/confirm-dialog/confirm-dialog.component');
+    const { ConfirmDialogComponent } =
+      await import('../shared/components/dialogs/confirm-dialog/confirm-dialog.component');
 
     const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
       autoFocus: false,
       maxWidth: '368px',
-      data: config
+      data: config,
     });
     return firstValueFrom(dialogRef.afterClosed());
   }
@@ -35,7 +34,7 @@ export class DialogService {
    * @param config of the dialog
    * @returns an asynchronous any response
    */
-  public openCustomDialog<T>(templateRef: Type<T>, config: MatDialogConfig): Promise<any> {     
+  public openCustomDialog<T>(templateRef: Type<T>, config: MatDialogConfig): Promise<any> {
     const dialogRef = this.matDialog.open(templateRef, config);
     return firstValueFrom(dialogRef.afterClosed());
   }
@@ -53,7 +52,7 @@ export class DialogService {
       autoFocus: false,
       width: '100vw',
       data: config,
-      panelClass: 'lf-input-dialog'
+      panelClass: 'lf-input-dialog',
     });
     return firstValueFrom(dialogRef.afterClosed());
   }

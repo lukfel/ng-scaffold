@@ -19,7 +19,7 @@
           @for (link of config.links; track $index; let i = $index) {
             <div class="lf-footer-link" [class.mr-2]="i < config.links!.length - 1">
               @if (link.routerLink) {
-                <a [routerLink]="[link.routerLink]">{{ link.label || "" }}</a>
+                <a [routerLink]="[link.routerLink]">{{ link.label || '' }}</a>
               } @else {
                 <a [href]="link.href" [target]="link.externalTab ? '_blank' : null">
                   {{ link.label }}

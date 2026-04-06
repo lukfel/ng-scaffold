@@ -32,7 +32,7 @@
             {{ item.title }}
             @if (sortToken() === item.sortToken) {
               <mat-icon class="lf-list-item-sort-icon">
-                {{ sortAsc() ? "arrow_downward" : "arrow_upward" }}
+                {{ sortAsc() ? 'arrow_downward' : 'arrow_upward' }}
               </mat-icon>
             }
           </span>
@@ -98,7 +98,7 @@
   }
 
   <!-- Grouped Items -->
-  @if (config()?.mode === "group" && groupedItems()) {
+  @if (config()?.mode === 'group' && groupedItems()) {
     @for (group of groupedItems() | keyvalue; track group.key; let first = $first) {
       <div class="lf-list-group" [class.mt-4]="!first">
         @if (group.key) {

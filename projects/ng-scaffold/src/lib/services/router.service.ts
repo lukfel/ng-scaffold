@@ -4,11 +4,9 @@ import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from 
 import { BehaviorSubject, Observable, take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-
 export class RouterService {
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
-
 
   private _loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -47,11 +45,15 @@ export class RouterService {
       history.replaceState({ ...history.state, back: false }, '');
     }
 
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       let asyncLoadCount: number = 0;
 
-      if (event instanceof RouteConfigLoadStart) { asyncLoadCount++; }
-      if (event instanceof RouteConfigLoadEnd) { asyncLoadCount--; }
+      if (event instanceof RouteConfigLoadStart) {
+        asyncLoadCount++;
+      }
+      if (event instanceof RouteConfigLoadEnd) {
+        asyncLoadCount--;
+      }
       if (event instanceof NavigationEnd) {
         const previousRoute: string = this._currentRoute$.value;
         this._previousRoute$.next(previousRoute);
@@ -74,16 +76,16 @@ export class RouterService {
 
   /**
    * Navigates to the previous route found in the routeHistory Observable
-   * 
+   *
    * @param fallbackRoute fallback in case there is no previous route
    */
   public navigateBack(fallbackRoute?: string): void {
-    this._routeHistory$.pipe(take(1)).subscribe(routeHistory => {
+    this._routeHistory$.pipe(take(1)).subscribe((routeHistory) => {
       if (routeHistory.length > 0) {
         const previousRoute: string = routeHistory[routeHistory.length - 1];
 
         if (previousRoute) {
-          this.router.navigateByUrl(previousRoute, { state: { back: true } }).then(result => {
+          this.router.navigateByUrl(previousRoute, { state: { back: true } }).then((result) => {
             if (result) {
               routeHistory.pop();
             }
@@ -92,7 +94,7 @@ export class RouterService {
           this.router.navigate([fallbackRoute]);
         }
       }
-    })
+    });
   }
 
   /**
@@ -101,5 +103,4 @@ export class RouterService {
   public clearRouteHistory(): void {
     this._routeHistory$.next([]);
   }
-
 }

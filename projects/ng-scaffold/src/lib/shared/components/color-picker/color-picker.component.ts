@@ -1,6 +1,15 @@
-
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal, output, PLATFORM_ID, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  output,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,18 +23,11 @@ import { CONFIG } from '../../../scaffold.config';
   styleUrls: ['./color-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule
-]
+  imports: [FormsModule, MatButtonModule, MatIconModule, MatTooltipModule],
 })
 export class ColorPickerComponent {
-
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private platformId = inject(PLATFORM_ID);
-
 
   public readonly color = input<'primary' | 'accent' | 'warn' | string>('primary');
   public readonly label = input<string>();
@@ -46,13 +48,11 @@ export class ColorPickerComponent {
     return '';
   });
 
-
   constructor() {
-    if(isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId)) {
       this.isSafari.set(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
     }
   }
-
 
   public labelColor = computed<string>(() => {
     const hex = this.selectedColor().replace('#', '');
@@ -65,7 +65,6 @@ export class ColorPickerComponent {
 
     return brightness > 128 ? '#000000' : '#ffffff';
   });
-
 
   public selectColor(event: string): void {
     this.selectedColor.set(event);

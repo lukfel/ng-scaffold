@@ -1,4 +1,3 @@
-
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,18 +13,11 @@ import { Logger } from '../../../services';
   styleUrls: ['./file-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule
-]
+  imports: [FormsModule, MatButtonModule, MatIconModule, MatTooltipModule],
 })
 export class FileUploadComponent {
-
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private logger: Logger = inject(Logger);
-
 
   public readonly color = input<'primary' | 'accent' | 'warn'>('primary');
   public readonly label = input<string>();
@@ -36,7 +28,6 @@ export class FileUploadComponent {
   public readonly tooltip = input<string>();
 
   public readonly fileChangeEvent = output<File>();
-
 
   public selectFile(event: Event): void {
     const input: HTMLInputElement = event.target as HTMLInputElement;

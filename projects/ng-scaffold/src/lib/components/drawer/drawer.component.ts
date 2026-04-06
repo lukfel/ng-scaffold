@@ -10,15 +10,9 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
   styleUrls: ['./drawer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    PortalModule,
-    MatSidenavModule,
-    NgClass,
-    NgTemplateOutlet
-]
+  imports: [PortalModule, MatSidenavModule, NgClass, NgTemplateOutlet],
 })
 export class DrawerComponent {
-
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly drawerConfig = input<DrawerConfig | null>(null);
   public readonly isMobile = input<boolean>(false);
@@ -28,7 +22,6 @@ export class DrawerComponent {
   public readonly drawerConfigUpdateEvent = output<Partial<DrawerConfig>>();
 
   private readonly initialized = signal<boolean>(false);
-
 
   constructor() {
     effect(() => {
@@ -43,12 +36,10 @@ export class DrawerComponent {
     });
   }
 
-
   // Detect when the drawer is closed without clicking a button
   public drawerClosed(): void {
     if (this.drawerConfig()) {
       this.drawerConfigUpdateEvent.emit({ open: false });
-    };
+    }
   }
-
 }

@@ -7,34 +7,29 @@ import { CONFIG } from '../../scaffold.config';
 import { ScaffoldService } from '../../services';
 
 @Component({
-    selector: 'lf-loading-overlay',
-    templateUrl: './loading-overlay.component.html',
-    styleUrls: ['./loading-overlay.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-    PortalModule,
-    MatProgressSpinner,
-    NgClass
-]
+  selector: 'lf-loading-overlay',
+  templateUrl: './loading-overlay.component.html',
+  styleUrls: ['./loading-overlay.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [PortalModule, MatProgressSpinner, NgClass],
 })
 export class LoadingOverlayComponent {
+  public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 
-    public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+  private scaffoldService = inject(ScaffoldService);
 
-    private scaffoldService = inject(ScaffoldService);
+  public loadingOverlayConfig = signal<LoadingOverlayConfig | null>(null);
+  public portal = signal<ComponentPortal<any> | null>(null);
 
+  constructor() {
+    this.loadingOverlayConfig.set(
+      this.scaffoldService.scaffoldConfig?.loadingOverlayConfig || null,
+    );
 
-    public loadingOverlayConfig = signal<LoadingOverlayConfig | null>(null);
-    public portal = signal<ComponentPortal<any> | null>(null);
-
-
-    constructor() {
-        this.loadingOverlayConfig.set(this.scaffoldService.scaffoldConfig?.loadingOverlayConfig || null);
-
-        const customComponent: any = this.loadingOverlayConfig()?.customComponent || null;
-        if (customComponent) {
-            this.portal.set(new ComponentPortal(customComponent));
-        }
+    const customComponent: any = this.loadingOverlayConfig()?.customComponent || null;
+    if (customComponent) {
+      this.portal.set(new ComponentPortal(customComponent));
     }
+  }
 }

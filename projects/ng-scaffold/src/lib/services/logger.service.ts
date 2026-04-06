@@ -4,44 +4,41 @@ import { ScaffoldLibraryConfig } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class Logger {
-
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
-
 
   /**
    * Uses the regular console log but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
-   * 
+   *
    * @param message message of the log
    * @param args arguments of the log
    */
-  public log(message: string, ...args: any[]): void {      
+  public log(message: string, ...args: any[]): void {
     if (this.libraryConfig?.production === false) {
-      console.log(message, ...args);                      // eslint-disable-line no-console
+      console.log(message, ...args); // eslint-disable-line no-console
     }
   }
 
   /**
    * Uses the regular console warn but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
-   * 
+   *
    * @param message message of the warn
    * @param args arguments of the warn
    */
-  public warn(message: string, ...args: any[]): void {     
+  public warn(message: string, ...args: any[]): void {
     if (this.libraryConfig?.production === false) {
-      console.warn(message, ...args);                     // eslint-disable-line no-console
+      console.warn(message, ...args); // eslint-disable-line no-console
     }
   }
 
   /**
    * Uses the regular console error but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
-   * 
+   *
    * @param message message of the error
    * @param args arguments of the error
    */
-  public error(message: string, ...args: any[]): void {    
+  public error(message: string, ...args: any[]): void {
     if (this.libraryConfig?.production === false) {
-      console.error(message, ...args);                    // eslint-disable-line no-console
+      console.error(message, ...args); // eslint-disable-line no-console
     }
   }
-
 }

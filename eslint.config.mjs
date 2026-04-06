@@ -25,14 +25,48 @@ const commonTsRules = {
   ],
   '@typescript-eslint/explicit-function-return-type': 'error',
   '@typescript-eslint/no-explicit-any': 'off',
-  'quotes': ['error', 'single'],
-  '@typescript-eslint/no-unused-vars': 'error',
-  'object-curly-spacing': ['error', 'always'],
+  '@typescript-eslint/no-unused-vars': 'off',
   '@typescript-eslint/no-inferrable-types': 'off',
   'no-console': 'error',
   'no-else-return': 'error',
   'unused-imports/no-unused-imports': 'error',
+  'unused-imports/no-unused-vars': [
+    'error',
+    { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+  ],
+  'prettier/prettier': 'error',
 };
+
+/**
+ * Creates a TypeScript config block for an Angular project.
+ */
+function tsConfig(files, prefix) {
+  return {
+    files,
+    extends: [
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...angular.configs.tsRecommended,
+      prettierConfig,
+    ],
+    processor: angular.processInlineTemplates,
+    plugins: {
+      'unused-imports': unusedImports,
+      prettier: prettierPlugin,
+    },
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        { type: 'attribute', prefix, style: 'camelCase' },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: 'element', prefix, style: 'kebab-case' },
+      ],
+      ...commonTsRules,
+    },
+  };
+}
 
 /** @type {import('typescript-eslint').ConfigArray} */
 export default tseslint.config(
@@ -46,57 +80,8 @@ export default tseslint.config(
       '**/*.spec.ts',
     ],
   },
-  // App TypeScript files
-  {
-    files: ['src/**/*.ts'],
-    extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...angular.configs.tsRecommended,
-      prettierConfig,
-    ],
-    processor: angular.processInlineTemplates,
-    plugins: {
-      'unused-imports': unusedImports,
-    },
-    rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        { type: 'attribute', prefix: 'app', style: 'camelCase' },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        { type: 'element', prefix: 'app', style: 'kebab-case' },
-      ],
-      ...commonTsRules,
-    },
-  },
-  // Library TypeScript files
-  {
-    files: ['projects/ng-scaffold/**/*.ts'],
-    extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...angular.configs.tsRecommended,
-      prettierConfig,
-    ],
-    processor: angular.processInlineTemplates,
-    plugins: {
-      'unused-imports': unusedImports,
-    },
-    rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
-        { type: 'attribute', prefix: 'lf', style: 'camelCase' },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        { type: 'element', prefix: 'lf', style: 'kebab-case' },
-      ],
-      ...commonTsRules,
-    },
-  },
-  // HTML templates
+  tsConfig(['src/**/*.ts'], 'app'),
+  tsConfig(['projects/ng-scaffold/**/*.ts'], 'lf'),
   {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended],
@@ -104,16 +89,7 @@ export default tseslint.config(
       prettier: prettierPlugin,
     },
     rules: {
-      'prettier/prettier': [
-        'error',
-        {
-          bracketSameLine: true,
-          bracketSpacing: true,
-          htmlWhitespaceSensitivity: 'ignore',
-          endOfLine: 'auto',
-          printWidth: 100,
-        },
-      ],
+      'prettier/prettier': 'error',
     },
   },
 );

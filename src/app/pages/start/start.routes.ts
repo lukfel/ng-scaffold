@@ -4,6 +4,6 @@ import { StartComponent } from './start.component';
 export const START_ROUTES: Routes = [
   {
     path: '',
-    component: StartComponent
-  }
+    component: StartComponent,
+  },
 ];

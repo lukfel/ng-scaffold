@@ -26,11 +26,10 @@ import { InputComponent } from '../../shared/components/input/input.component';
     MatTooltipModule,
     NgClass,
     NgTemplateOutlet,
-    InputComponent
-]
+    InputComponent,
+  ],
 })
 export class HeaderComponent {
-
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly headerConfig = input<HeaderConfig | null>(null);
   public readonly isMobile = input<boolean>(false);
@@ -48,7 +47,6 @@ export class HeaderComponent {
     return (id: string): boolean => !!route && !!id && route === id;
   });
 
-
   public rightMobileButton = computed<MenuButton | null>(() => {
     const headerConfig = this.headerConfig();
     const rightMenuButtons = headerConfig?.rightMenuButtons ?? [];
@@ -59,18 +57,15 @@ export class HeaderComponent {
     if (!config?.enable) return null;
 
     const includedButtons = rightMenuButtons.filter(
-      button => !config.excludeButtonIds?.includes(button.id)
+      (button) => !config.excludeButtonIds?.includes(button.id),
     );
 
     return {
       id: '',
-      matIcon:
-        !config.matIcon && !config.svgIcon && !config.label
-          ? 'more_vert'
-          : config.matIcon,
+      matIcon: !config.matIcon && !config.svgIcon && !config.label ? 'more_vert' : config.matIcon,
       svgIcon: config.svgIcon,
       label: config.label,
-      menuButtons: includedButtons
+      menuButtons: includedButtons,
     };
   });
 
@@ -83,11 +78,8 @@ export class HeaderComponent {
     const config = headerConfig?.responsiveConfig;
     if (!config?.enable) return null;
 
-    return rightMenuButtons.filter(button =>
-      config.excludeButtonIds?.includes(button.id)
-    );
+    return rightMenuButtons.filter((button) => config.excludeButtonIds?.includes(button.id));
   });
-
 
   public buttonClicked(id?: string): void {
     if (!id) {
@@ -108,5 +100,4 @@ export class HeaderComponent {
   public inputClosed(): void {
     this.headerConfigUpdateEvent.emit({ inputConfig: { enable: false } });
   }
-  
 }

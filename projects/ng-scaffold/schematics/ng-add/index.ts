@@ -5,10 +5,5 @@ import { addStyles } from './add-styles';
 import { addTemplate } from './add-template';
 
 export function ngAdd(): Rule {
-    return chain([
-        addComponent(),
-        addConfig(),
-        addTemplate(),
-        addStyles()
-    ]);
+  return chain([addComponent(), addConfig(), addTemplate(), addStyles()]);
 }

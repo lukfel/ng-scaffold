@@ -12,17 +12,10 @@ import { CONFIG } from '../../../scaffold.config';
   styleUrls: ['./placeholder.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    NgClass
-]
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, NgClass],
 })
 export class PlaceholderComponent {
-
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
-
 
   public readonly placeholderConfig = input<PlaceholderConfig>();
 

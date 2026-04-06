@@ -11,15 +11,9 @@ import { ContentTitleCardConfig, ScaffoldLibraryConfig } from '../../models';
   styleUrls: ['./content-title-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    NgClass
-]
+  imports: [MatCardModule, MatButtonModule, MatIconModule, NgClass],
 })
 export class ContentTitleCardComponent {
-
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly contentTitleCardConfig = input<ContentTitleCardConfig | null>(null);
   public readonly isMobile = input<boolean>(false);
@@ -27,9 +21,7 @@ export class ContentTitleCardComponent {
 
   public readonly backButtonClickEvent = output<void>();
 
-
   public backButtonClicked(): void {
     this.backButtonClickEvent.emit();
   }
-
 }

@@ -1,16 +1,13 @@
-
 import { DOCUMENT, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
-  
   private storageService = inject(LocalStorageService);
   private document = inject<Document>(DOCUMENT);
-
 
   private readonly THEME_KEY: string = 'THEME';
 

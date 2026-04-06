@@ -11,16 +11,9 @@ import { FooterConfig, ScaffoldLibraryConfig } from '../../models';
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    RouterModule,
-    MatCardModule,
-    MatIconModule,
-    NgClass
-]
+  imports: [RouterModule, MatCardModule, MatIconModule, NgClass],
 })
 export class FooterComponent {
-
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
   public readonly footerConfig = input<FooterConfig | null>(null);
-
 }

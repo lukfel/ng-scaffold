@@ -1,7 +1,7 @@
 @if (inputConfigComputed(); as config) {
   @if (config) {
     <mat-form-field class="lf-input" appearance="fill" [class.lf-hide-hint]="!config.hint">
-      <mat-label>{{ config.label || "Search" }}</mat-label>
+      <mat-label>{{ config.label || 'Search' }}</mat-label>
       @if (config.hint) {
         <mat-hint>{{ config.hint }}</mat-hint>
       }

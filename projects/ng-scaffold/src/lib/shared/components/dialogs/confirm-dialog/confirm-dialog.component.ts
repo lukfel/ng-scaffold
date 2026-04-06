@@ -9,14 +9,9 @@ import { ConfirmDialogConfig } from '../../../../models';
   styleUrls: ['./confirm-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule
-  ]
+  imports: [MatDialogModule, MatButtonModule],
 })
 export class ConfirmDialogComponent {
-  
-   private data = inject<ConfirmDialogConfig>(MAT_DIALOG_DATA);
-   public config = signal<ConfirmDialogConfig>(this.data);
-
+  private data = inject<ConfirmDialogConfig>(MAT_DIALOG_DATA);
+  public config = signal<ConfirmDialogConfig>(this.data);
 }

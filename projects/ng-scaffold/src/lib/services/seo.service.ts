@@ -1,4 +1,3 @@
-
 import { DOCUMENT, inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -6,7 +5,7 @@ import { SeoConfig } from '../models';
 import { Logger } from './logger.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SeoService {
   private metaTitle = inject(Title);
@@ -14,19 +13,17 @@ export class SeoService {
   private document = inject<Document>(DOCUMENT);
   private logger = inject(Logger);
 
-
   private _config$: BehaviorSubject<SeoConfig | null> = new BehaviorSubject<SeoConfig | null>(null);
 
   public get config$(): Observable<SeoConfig | null> {
     return this._config$.asObservable();
   }
 
-
   /**
    * Pass a configuration to set meta tags such as title, description and image for search results and social media
-   * 
+   *
    * @param seoConfig config that contains all the meta information
-   * 
+   *
    */
   public setMetaTags(seoConfig: SeoConfig): void {
     this._config$.next(seoConfig);
@@ -42,18 +39,26 @@ export class SeoService {
     // Set meta title
     if (title) {
       if (autoTrim && title.length > titleLimit) {
-        this.logger.error(`[SeoService] The set meta title is too long. Recommended length is ${titleLimit}. The title will be trimmed.`);
+        this.logger.error(
+          `[SeoService] The set meta title is too long. Recommended length is ${titleLimit}. The title will be trimmed.`,
+        );
       }
-      const titleTrim: string = (title.length > titleLimit) ? title.substring(0, titleLimit - 3) + '...' : title;
+      const titleTrim: string =
+        title.length > titleLimit ? title.substring(0, titleLimit - 3) + '...' : title;
       this._setMetaTitle(autoTrim ? titleTrim : title);
     }
 
     // Set meta description
     if (description) {
       if (autoTrim && description.length > descriptionLimit) {
-        this.logger.error(`[SeoService] The set meta description is too long. Recommended length is ${descriptionLimit}. The description will be trimmed.`);
+        this.logger.error(
+          `[SeoService] The set meta description is too long. Recommended length is ${descriptionLimit}. The description will be trimmed.`,
+        );
       }
-      const descriptionTrim: string = (description.length > descriptionLimit) ? description.substring(0, descriptionLimit - 3) + '...' : description;
+      const descriptionTrim: string =
+        description.length > descriptionLimit
+          ? description.substring(0, descriptionLimit - 3) + '...'
+          : description;
       this._setMetaDescription(autoTrim ? descriptionTrim : description);
     }
 

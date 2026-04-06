@@ -1,5 +1,16 @@
-
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, computed, effect, inject, input, model, output, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  input,
+  model,
+  output,
+  viewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -14,20 +25,12 @@ import { HeaderInputConfig } from '../../../models';
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule
-]
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
 })
 export class InputComponent {
-
   private dialogRef = inject<MatDialogRef<InputComponent>>(MatDialogRef, { optional: true });
   private inputConfigDialog = inject<HeaderInputConfig>(MAT_DIALOG_DATA, { optional: true });
   private destroyRef = inject(DestroyRef);
-
 
   public readonly input = viewChild<ElementRef>('input');
 
@@ -38,10 +41,11 @@ export class InputComponent {
   public readonly inputChangeEvent = output<string>();
   public readonly inputPrefixActionEvent = output<void>();
 
-  public inputConfigComputed = computed<HeaderInputConfig>(() => this.inputConfigDialog ?? this.inputConfig() ?? {})
+  public inputConfigComputed = computed<HeaderInputConfig>(
+    () => this.inputConfigDialog ?? this.inputConfig() ?? {},
+  );
 
   public inputValue = model<string>('');
-
 
   constructor() {
     effect(() => {
