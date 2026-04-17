@@ -11,6 +11,10 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [PortalModule, MatSidenavModule, NgClass, NgTemplateOutlet],
+  host: {
+    '(document:touchstart)': 'onTouchStart($event)',
+    '(document:touchend)': 'onTouchEnd($event)',
+  },
 })
 export class DrawerComponent {
   public readonly libraryConfig = input<ScaffoldLibraryConfig | null>(null);
@@ -22,6 +26,10 @@ export class DrawerComponent {
   public readonly drawerConfigUpdateEvent = output<Partial<DrawerConfig>>();
 
   private readonly initialized = signal<boolean>(false);
+
+  private touchStartX = 0;
+  private readonly TOUCH_ZONE_WIDTH_PX: number = 40;
+  private readonly SWIPE_THRESHOLD_PX: number = 30;
 
   constructor() {
     effect(() => {
@@ -40,6 +48,26 @@ export class DrawerComponent {
   public drawerClosed(): void {
     if (this.drawerConfig()) {
       this.drawerConfigUpdateEvent.emit({ open: false });
+    }
+  }
+
+  // Track touches starting within the left-edge swipe zone
+  public onTouchStart(event: TouchEvent): void {
+    const x = event.touches[0].clientX;
+    this.touchStartX = x <= this.TOUCH_ZONE_WIDTH_PX ? x : -1;
+  }
+
+  // Open drawer on rightward swipe originating from the left edge
+  public onTouchEnd(event: TouchEvent): void {
+    if (this.touchStartX < 0) return;
+    const deltaX: number = event.changedTouches[0].clientX - this.touchStartX;
+    if (
+      deltaX >= this.SWIPE_THRESHOLD_PX &&
+      this.isMobile() &&
+      this.drawerConfig()?.enable &&
+      !this.drawerConfig()?.open
+    ) {
+      this.drawerConfigUpdateEvent.emit({ open: true });
     }
   }
 }
