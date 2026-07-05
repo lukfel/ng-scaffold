@@ -1,6 +1,6 @@
 <div
   class="lf-scaffold lf-transitions mat-app-background mat-typography"
-  [ngClass]="$safeNavigationMigration(scaffoldConfig()?.cssClass)">
+  [ngClass]="scaffoldConfig()?.cssClass">
   <!-- header -->
   <lf-header
     [libraryConfig]="libraryConfig"
@@ -37,7 +37,7 @@
       [drawerConfig]="drawerConfig()"
       [drawerPortal]="drawerPortal()"
       [isMobile]="isMobile()!"
-      [headerEnabled]="$safeNavigationMigration(headerConfig()?.enable)!"
+      [headerEnabled]="headerConfig()?.enable!"
       (drawerConfigUpdateEvent)="drawerConfigUpdated($event)">
       <!-- drawer content -->
       <ng-content select="[drawerContent]" drawerContent></ng-content>
@@ -62,8 +62,8 @@
           [onTop]="scrollTopPosition() <= 0"
           [isMobile]="isMobile()!"
           [drawerEnabled]="drawerConfig()?.enable! && drawerConfig()?.open!"
-          [navbarEnabled]="$safeNavigationMigration(navbarConfig()?.enable)!"
-          [bottomBarEnabled]="$safeNavigationMigration(bottomBarConfig()?.enable)!"
+          [navbarEnabled]="navbarConfig()?.enable!"
+          [bottomBarEnabled]="bottomBarConfig()?.enable!"
           (floatingButtonConfigUpdateEvent)="floatingButtonConfigUpdated($event)"
           (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
       </div>
@@ -76,7 +76,7 @@
     [libraryConfig]="libraryConfig"
     [bottomBarConfig]="bottomBarConfig()"
     [isMobile]="isMobile()! && navbarConfig()?.enable!"
-    [navbarEnabled]="$safeNavigationMigration(navbarConfig()?.enable)!"
+    [navbarEnabled]="navbarConfig()?.enable!"
     (bottomBarCloseClickEvent)="bottomBarCloseClicked($event)"
     (bottomBarButtonClickEvent)="bottomBarButtonClicked($event)"></lf-bottom-bar>
 </div>

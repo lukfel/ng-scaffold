@@ -2,7 +2,7 @@
   <ng-template [cdkPortalOutlet]="portal"></ng-template>
 } @else {
   <div
-    [ngClass]="$safeNavigationMigration(loadingOverlayConfig()?.cssClass)"
+    [ngClass]="loadingOverlayConfig()?.cssClass"
     [class.lf-gradient-spinner]="loadingOverlayConfig()?.gradient">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
