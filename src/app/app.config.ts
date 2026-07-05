@@ -3,6 +3,7 @@ import {
   HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
 import {
   ApplicationConfig,
@@ -38,7 +39,7 @@ export const APP_CONFIG: ApplicationConfig = {
   providers: [
     provideRouter(APP_ROUTES, withHashLocation()),
     provideZonelessChangeDetection(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

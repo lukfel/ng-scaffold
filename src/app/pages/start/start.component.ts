@@ -34,7 +34,7 @@ import { take } from 'rxjs';
 import {
   MarkdownComponent,
   MarkdownDialogData,
-} from 'src/app/shared/components/markdown/markdown.component';
+} from '../../shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({

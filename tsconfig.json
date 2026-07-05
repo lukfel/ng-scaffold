@@ -5,11 +5,10 @@
   "compilerOptions": {
     "paths": {
       "@lukfel/ng-scaffold": [
-        "dist/ng-scaffold"
+        "./dist/ng-scaffold"
       ]
     },
     "resolveJsonModule": true,
-    "baseUrl": "./",
     "esModuleInterop": true,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

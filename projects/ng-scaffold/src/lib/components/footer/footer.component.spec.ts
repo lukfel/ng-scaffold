@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -7,7 +7,8 @@ import { By, DomSanitizer } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { FooterComponent } from './footer.component';
 
-const TEST_SVG_ICON: string = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>';
+const TEST_SVG_ICON: string =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z"/></svg>';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -15,28 +16,20 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        FooterComponent,
-        CommonModule,
-        MatCardModule,
-        MatIconModule
-      ],
-      providers: [
-        provideRouter([]),
-        provideHttpClient()
-      ]
+      imports: [FooterComponent, CommonModule, MatCardModule, MatIconModule],
+      providers: [provideRouter([]), provideHttpClient(withXhr())],
     }).compileComponents();
 
     const iconRegistry = TestBed.inject(MatIconRegistry);
     const sanitizer = TestBed.inject(DomSanitizer);
-  const svgLiteral = sanitizer.bypassSecurityTrustHtml(TEST_SVG_ICON);
-  iconRegistry.addSvgIconLiteral('logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('lf_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('github_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('npm_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('cat_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('waw_logo', svgLiteral);
-  iconRegistry.addSvgIconLiteral('ugly_logo', svgLiteral);
+    const svgLiteral = sanitizer.bypassSecurityTrustHtml(TEST_SVG_ICON);
+    iconRegistry.addSvgIconLiteral('logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('lf_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('github_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('npm_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('cat_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('waw_logo', svgLiteral);
+    iconRegistry.addSvgIconLiteral('ugly_logo', svgLiteral);
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
@@ -85,7 +78,13 @@ describe('FooterComponent', () => {
   });
 
   it('should display links if provided', () => {
-    fixture.componentRef.setInput('footerConfig', { enable: true, links: [{ label: 'Link 1', routerLink: '/link1' }, { label: 'Link 2', href: 'http://example.com', externalTab: true }] });
+    fixture.componentRef.setInput('footerConfig', {
+      enable: true,
+      links: [
+        { label: 'Link 1', routerLink: '/link1' },
+        { label: 'Link 2', href: 'http://example.com', externalTab: true },
+      ],
+    });
     fixture.detectChanges();
     const linkElements = fixture.debugElement.queryAll(By.css('.lf-footer-link'));
     expect(linkElements.length).toBe(2);
