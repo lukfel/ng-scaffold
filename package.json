@@ -1,6 +1,6 @@
 {
   "name": "ng-scaffold-app",
-  "version": "22.0.2",
+  "version": "22.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -26,7 +26,7 @@
     "@angular/router": "^22.0.5",
     "@angular/service-worker": "^22.0.5",
     "@lukfel/ng-scaffold": "file:dist/ng-scaffold",
-    "marked": "^17.0.0",
+    "marked": "^18.0.0",
     "ngx-markdown": "^22.0.0",
     "prismjs": "^1.30.0",
     "rxjs": "~7.8.0"
