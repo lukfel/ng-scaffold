@@ -48,6 +48,7 @@ $init: 0;
 .flex-row { display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; }
 .flex-row-nowrap { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; }
 .flex-col { display: flex !important; flex-direction: column !important; flex-wrap: wrap !important; }
+.flex-col-nowrap { display: flex !important; flex-direction: column !important; flex-wrap: nowrap !important; }
 
 .justify-start { justify-content: flex-start !important; }
 .justify-center { justify-content: center !important; }
@@ -71,7 +72,7 @@ $init: 0;
 .flex-none { flex: none !important; }
 
 // Position
-.relative { position: absolute !important; }
+.relative { position: relative !important; }
 .absolute { position: absolute !important; }
 .fixed { position: fixed !important; }
 .static { position: static !important; }
