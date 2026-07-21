@@ -206,6 +206,8 @@ function deepMerge(base: TransMap, override: TransMap): TransMap {
   return result;
 }
 
-function isTransMap(value: string | TransMap | undefined): value is TransMap {
-  return typeof value === 'object' && value !== null;
+// Only plain objects are merged recursively; arrays (and other leaf values) are
+// replaced wholesale by the override locale so array shapes are never corrupted.
+function isTransMap(value: unknown): value is TransMap {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

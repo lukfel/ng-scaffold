@@ -119,6 +119,28 @@ describe('TranslationService', () => {
     expect(service.transMap()).toEqual(MERGED);
   });
 
+  it('replaces array values wholesale instead of merging them index-wise', async () => {
+    const enArrays: TransMap = {
+      paragraphs: ['a', 'b', 'c'] as unknown as TransMap,
+      onlyEn: ['x'] as unknown as TransMap,
+    };
+    const deArrays: TransMap = { paragraphs: ['ä', 'b'] as unknown as TransMap };
+
+    configure({ locales: ['de', 'en'], fallbackLocale: 'en' });
+    const service = TestBed.inject(TranslationService);
+    flush('en', enArrays); // fallback cached
+
+    const promise: Promise<void> = service.setLocale('de');
+    flush('de', deArrays);
+    await promise;
+
+    // de.paragraphs replaces en.paragraphs (still an array); en.onlyEn fills the gap.
+    const result = service.transMap() as Record<string, unknown>;
+    expect(result['paragraphs']).toEqual(['ä', 'b']);
+    expect(Array.isArray(result['paragraphs'])).toBe(true);
+    expect(result['onlyEn']).toEqual(['x']);
+  });
+
   it('caches locale files and does not refetch them', async () => {
     configure({ locales: ['de', 'en'], fallbackLocale: 'en' });
     const service = TestBed.inject(TranslationService);
