@@ -14,3 +14,5 @@ export { NavigationLink } from './navigation-link.model';
 export { PlaceholderConfig } from './placeholder-config.model';
 export { ScaffoldConfig } from './scaffold-config.model';
 export { SeoConfig } from './seo-config.model';
+export { TransMap } from './trans-map.model';
+export { TranslationConfig } from './translation-config.model';

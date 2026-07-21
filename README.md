@@ -1,7 +1,7 @@
 # Documentation
 ## Introduction
 
-This Angular library provides a foundational scaffold for modern web and mobile applications. It includes essential UI elements such as a header, sidebar, drawer, footer, floating button, and built-in services for theme switching, snackbar notifications, dialog management, and breakpoint detection. Simply wrap your `router-outlet` with the `lf-scaffold` element and configure the `ScaffoldConfig` within the `ScaffoldService`.
+This Angular library provides a foundational scaffold for modern web and mobile applications. It includes essential UI elements such as a header, sidebar, drawer, footer, floating button, and built-in services for theme switching, language switching, snackbar notifications, dialog management, and breakpoint detection. Simply wrap your `router-outlet` with the `lf-scaffold` element and configure the `ScaffoldConfig` within the `ScaffoldService`.
 
 - **NPM**: [@lukfel/ng-scaffold](https://www.npmjs.com/package/@lukfel/ng-scaffold)
 - **Demo**: [lukfel.github.io/ng-scaffold](https://lukfel.github.io/ng-scaffold)
@@ -278,6 +278,7 @@ This library includes several utility services:
 - **`RouterService`** – Track route changes and retrieve route history
 - **`SeoService`** – Manage meta tags
 - **`LocalStorageService`** – Handle local storage
+- **`TranslationService`** – Switch languages at runtime with per-locale JSON files
 
 ### Logger
 Logs information during development and hides all logs during production.
@@ -393,6 +394,52 @@ export class AppComponent {
   }
 }
 ```
+
+### TranslationService
+Switches the application language at runtime by loading a separate JSON file per locale (e.g. `de.json`, `en.json`) that share the same keys. Keys missing from a locale are automatically resolved from the `fallbackLocale`.
+
+* **Note:** Configure the available locales in the `provideScaffold` provider and serve the `<locale>.json` files from the configured `path` (default `assets/i18n/`)
+
+```ts
+import { provideScaffold } from '@lukfel/ng-scaffold';
+
+  ...
+  providers: [
+    provideScaffold({
+      language: {
+        locales: ['de', 'en'],    // available locales (also drives a language picker)
+        fallbackLocale: 'en',     // used when a locale is unknown or a key is missing
+        path: 'assets/i18n/',     // (Optional) base path of the <locale>.json files
+        persist: true             // (Optional) store the active locale in local storage
+      }
+    })
+  ]
+```
+
+Inject the `TranslationService` to read the translations and switch the locale. Each app keeps its own strongly-typed `TransMap` interface and reads the labels through the typed accessors.
+
+```ts
+import { TranslationService } from '@lukfel/ng-scaffold';
+
+export class AppComponent {
+
+  private translationService = inject(TranslationService);
+
+  // Typed signal of the active translations (empty until the first load)
+  public transMap = this.translationService.transMapAs<TransMap>();
+
+  // Active locale and all configured locales (e.g. for a language picker)
+  public locale = this.translationService.locale;
+  public locales = this.translationService.locales;
+
+  // Switch the active language (persisted according to the config)
+  public changeLanguage(locale: string): void {
+    this.translationService.setLocale(locale);
+  }
+}
+```
+
+* **Note:** For observable consumers use `locale$` and `transMap$` (or the typed `transMapStream<TransMap>()`, which only emits once translations are loaded). Track the loading state with the `loading` signal or `loading$`.
 
 
 
