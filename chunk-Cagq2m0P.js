@@ -1,1 +1,0 @@
-import {F}from'./chunk-CleKRM9-.js';import'./main-D4DLPZYD.js';var n=[{path:"",component:F}];export{n as NOT_FOUND_ROUTES};
