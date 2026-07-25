@@ -482,7 +482,7 @@ public listItems = signal<ListItem[]>([
   { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
 ]);
 
-public buttons = signal<Button[]>([         // (Optional) list buttons
+public listButtons = signal<Button[]>([         // (Optional) list buttons
   { id: 'edit', matIcon: 'edit' },
   { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
 ]);
@@ -490,7 +490,7 @@ public buttons = signal<Button[]>([         // (Optional) list buttons
 // (Optional) Handle sort events
 public onListSortChange(event: { sortToken: string, sortAsc: boolean }): void {
   if (event?.sortToken === 'title') {
-    this.listItems.sort((a, b) => {
+    this.listItems().sort((a, b) => {
       if (!a.title || !b.title) return 0;
       if (event.sortAsc) return a.title.localeCompare(b.title);
       return b.title.localeCompare(a.title);
