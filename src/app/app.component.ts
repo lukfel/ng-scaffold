@@ -207,35 +207,35 @@ export class AppComponent {
     // Register custom svg for header logo
     this.iconRegistry.addSvgIcon(
       'logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logos/logo.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/logos/logo.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'lf_logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/logo.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/logo.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'github_logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/github.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/github.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'npm_logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/npm.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/npm.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'cat_logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/cat.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/cat.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'waw_logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/waw.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/waw.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'ugly_logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/uglygotchi.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/uglygotchi.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'wowen_logo',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/img/wowen.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('img/wowen.svg'),
     );
 
     // Set config for scaffold
@@ -261,7 +261,7 @@ export class AppComponent {
       metaPageTitle: 'Demo | Scaffold Library',
       metaPageDescription:
         'This Angular library provides a basic UI scaffold and services for modern web and mobile apps',
-      metaImagePath: 'scaffold/assets/img/meta.jpg',
+      metaImagePath: 'scaffold/img/meta.jpg',
     });
   }
 

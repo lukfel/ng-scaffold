@@ -58,7 +58,7 @@ export class ComponentsComponent {
     { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
     {
       id: 0,
-      avatar: 'assets/img/logos/ic_launcher-web.png',
+      avatar: 'img/logos/ic_launcher-web.png',
       title: 'Item 1',
       subtitle: 'I am clickable',
       clickable: true,
@@ -101,7 +101,7 @@ export class ComponentsComponent {
   };
 
   public placeholderConfigImgIcon: PlaceholderConfig = {
-    imgIcon: 'assets/img/location.svg',
+    imgIcon: 'img/location.svg',
     title: 'Title',
     message: 'Placeholder with Image.',
     button: {

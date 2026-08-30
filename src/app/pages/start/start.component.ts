@@ -165,7 +165,7 @@ export class StartComponent {
       autoFocus: false,
       data: {
         title,
-        src: file ? `assets/md/${file}` : '',
+        src: file ? `md/${file}` : '',
         data,
         showCopy,
       } as MarkdownDialogData,
