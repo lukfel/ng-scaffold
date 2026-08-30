@@ -1,1 +1,0 @@
-import {F}from'./chunk-DZ2bY5Kz.js';import'./main-LVMYCSIB.js';var n=[{path:"",component:F}];export{n as NOT_FOUND_ROUTES};
