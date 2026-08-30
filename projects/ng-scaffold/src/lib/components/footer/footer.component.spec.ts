@@ -62,7 +62,7 @@ describe('FooterComponent', () => {
   });
 
   it('should display img logo if provided', () => {
-    fixture.componentRef.setInput('footerConfig', { enable: true, imgLogo: 'assets/img/meta.jpg' });
+    fixture.componentRef.setInput('footerConfig', { enable: true, imgLogo: 'img/meta.jpg' });
     fixture.detectChanges();
     const imgLogo = fixture.debugElement.query(By.css('.lf-footer img'));
     expect(imgLogo).toBeTruthy();
