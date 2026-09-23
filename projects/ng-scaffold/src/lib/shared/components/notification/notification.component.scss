@@ -74,9 +74,68 @@
     }
   }
 
+  // An outline cannot hold a gradient and border-image would drop the corner
+  // radius, so the edge is a masked overlay: the ring is painted over the card
+  // and its middle cut out, which leaves the fill free to stay translucent.
+  &.lf-notification-gradient {
+    position: relative;
+    outline: none;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-primary) 12%, transparent),
+      color-mix(in srgb, var(--color-accent) 12%, transparent)
+    );
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+    }
+
+    // Projected content belongs to the host, so encapsulated selectors never reach it
+    ::ng-deep .lf-notification-body .mat-mdc-text-field-wrapper {
+      background-color: var(--mat-app-background-color, #fff);
+      border-radius: var(--border-radius);
+    }
+  }
+
   .lf-notification-content {
     .lf-notification-message {
       font-size: var(--notification-font-size);
+      align-items: center;
+
+      // Only top-align the icon once a body is actually projected
+      &:has(.lf-notification-body:not(:empty)) {
+        align-items: flex-start;
+      }
+
+      .lf-notification-title {
+        font-weight: 500;
+      }
+
+      .lf-notification-body {
+        width: 100%;
+
+        &:empty {
+          display: none;
+        }
+
+        &:not(:empty) {
+          margin-top: 4px;
+        }
+      }
 
       .lf-notification-link {
         color: var(--mat-snack-bar-supporting-text-color, var(--mat-sys-inverse-on-surface));
@@ -88,6 +147,13 @@
       min-width: unset !important;
       flex-shrink: 0;
       margin: -8px 0 -8px 8px;
+    }
+  }
+
+  // Once the layout stacks, the action's negative top margin closes the gap under a projected body
+  &.lf-mobile .lf-notification-content:has(.lf-notification-body:not(:empty)) {
+    .lf-notification-action {
+      margin-top: 4px;
     }
   }
 }

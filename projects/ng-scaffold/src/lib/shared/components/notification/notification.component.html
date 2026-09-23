@@ -4,6 +4,7 @@
   [class.lf-notification-fixed]="!static()"
   [class.lf-notification-static]="static()"
   [class.lf-notification-minimal]="minimal()"
+  [class.lf-notification-gradient]="gradient()"
   [class.lf-mobile]="isMobile()"
   [class]="[cssClass(), color()]"
   animate.enter="lf-anim-scale-enter">
@@ -15,17 +16,26 @@
     [class.align-center]="!isMobile()"
     [class.align-start]="isMobile()">
     <span
-      class="lf-notification-message flex-row-nowrap align-center justify-start"
+      class="lf-notification-message flex-row-nowrap justify-start"
       [class.gap-4]="!isMobile()"
       [class.gap-2]="isMobile()">
-      @if (matIcon()) {
+      <!-- The spinner takes the icon's own 24px box, so swapping them shifts no text -->
+      @if (loading()) {
+        <mat-spinner class="flex-none" [diameter]="24"></mat-spinner>
+      } @else if (matIcon()) {
         <mat-icon class="flex-none" [color]="color()">{{ matIcon() }}</mat-icon>
       }
-      <span [class.ml-1]="!matIcon()">
-        {{ message() }}
-        @if (link() && linkText()) {
-          <a class="lf-notification-link" [href]="link()">{{ linkText() }}</a>
+      <span class="flex-col" [class.ml-1]="!matIcon() && !loading()">
+        @if (title()) {
+          <span class="lf-notification-title">{{ title() }}</span>
         }
+        <span>
+          {{ message() }}
+          @if (link() && linkText()) {
+            <a class="lf-notification-link" [href]="link()">{{ linkText() }}</a>
+          }
+        </span>
+        <div class="lf-notification-body"><ng-content></ng-content></div>
       </span>
     </span>
 
@@ -36,6 +46,7 @@
         type="button"
         [class.align-self-end]="isMobile()"
         [color]="color()"
+        [disabled]="disabled() || loading()"
         (click)="clickEvent.emit()">
         {{ action }}
       </button>

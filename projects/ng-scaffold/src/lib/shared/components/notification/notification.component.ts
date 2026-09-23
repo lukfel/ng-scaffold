@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, input, output } from '@angu
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { map } from 'rxjs';
 import { BreakpointService } from '../../../services';
 
@@ -12,12 +13,13 @@ import { BreakpointService } from '../../../services';
   styleUrls: ['./notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule],
 })
 export class NotificationComponent {
   private breakpointService = inject(BreakpointService);
 
   public readonly color = input<'primary' | 'accent' | 'warn'>('primary');
+  public readonly title = input<string>('');
   public readonly message = input<string>('');
   public readonly link = input<string>('');
   public readonly linkText = input<string>('');
@@ -26,6 +28,9 @@ export class NotificationComponent {
   public readonly svgIcon = input<string>('');
   public readonly static = input<boolean>(false);
   public readonly minimal = input<boolean>(false);
+  public readonly gradient = input<boolean>(false);
+  public readonly loading = input<boolean>(false);
+  public readonly disabled = input<boolean>(false);
   public readonly cssClass = input<string>('');
 
   public readonly clickEvent = output();
