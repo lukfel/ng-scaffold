@@ -122,13 +122,58 @@ $lf-default-theme: (
 // Default M3 theme
 // M3 uses: primary, tertiary (instead of accent), and error (instead of warn)
 // theme-type: 'light', 'dark', or 'color-scheme' (auto light/dark based on user preference)
+// m2-compat takes the M2 palettes an app already has (primary/accent/warn) and opts
+// it into M2 colour behaviour; null leaves everything at stock M3.
 $lf-default-theme-m3: (
   primary: mat.$blue-palette,
   tertiary: mat.$rose-palette,
   theme-type: color-scheme,
   font-family: 'Roboto',
   density: 0,
+  m2-compat: null,
 );
+
+// Main hue of an M2 palette, and the contrast colour M2 paired with it
+@function m2-main($m2, $key) {
+  $palette: map-get($m2, $key);
+  @return if($palette, map-get($palette, 500), null);
+}
+
+@function m2-contrast($m2, $key) {
+  $palette: map-get($m2, $key);
+  @return if($palette, map-get(map-get($palette, 'contrast'), 500), null);
+}
+
+// M3 reads tone 40 for the light base role and tone 80 for the dark one, and a
+// generated ramp puts neither at the M2 500 it was seeded from. Splicing the 500
+// into both slots is what carries the branding through to the baked [color]
+// variants, which hold literal values and so ignore any later token override.
+// Both slots, not just 40: a theme-invariant main hue is what lets a brand fill
+// keep one fixed foreground, the way it did under M2. Tone 20 carries that
+// foreground - it is the dark theme's on- slot, and nothing else reads it, so
+// without this a dark theme pairs the mid-tone brand with near-black text.
+@function m2-compat-palettes($theme) {
+  $m2: map-get($theme, 'm2-compat');
+  @if ($m2 == null) {
+    @return $theme;
+  }
+
+  $primary: map-get($theme, 'primary');
+  $tertiary: map-get($theme, 'tertiary');
+
+  @if (m2-main($m2, 'primary')) {
+    $primary: map-merge($primary, (40: m2-main($m2, 'primary'), 80: m2-main($m2, 'primary'), 20: m2-contrast($m2, 'primary')));
+  }
+  @if (m2-main($m2, 'accent')) {
+    $tertiary: map-merge($tertiary, (40: m2-main($m2, 'accent'), 80: m2-main($m2, 'accent'), 20: m2-contrast($m2, 'accent')));
+  }
+  @if (m2-main($m2, 'warn') and map-has-key($primary, 'error')) {
+    $error: map-merge(map-get($primary, 'error'), (40: m2-main($m2, 'warn'), 80: m2-main($m2, 'warn'), 20: m2-contrast($m2, 'warn')));
+    $primary: map-merge($primary, (error: $error));
+  }
+
+  @return map-merge($theme, (primary: $primary, tertiary: $tertiary));
+}
 
 // Set M3 theme
 // Uses mat.theme() which outputs CSS variables (design tokens) instead of static styles.
@@ -136,6 +181,8 @@ $lf-default-theme-m3: (
 // (color="primary", color="accent", color="warn") continue to work.
 @mixin scaffold-theme-m3($theme: $lf-default-theme-m3) {
   $theme: map-merge($lf-default-theme-m3, $theme);
+  $theme: m2-compat-palettes($theme);
+  $m2: map-get($theme, 'm2-compat');
 
   $color-config: (
     primary: map-get($theme, 'primary'),
@@ -155,14 +202,18 @@ $lf-default-theme-m3: (
     @include mat.system-classes();
   }
 
+  @include shape-variables-m3();
   @include toolbar-color-compat();
-  @include color-variables-m3('body');
+  @include container-color-compat($m2);
+  @include color-variables-m3('body', $m2);
 }
 
 // Set M3 colors (scoped to a class, for multi-theme support)
 // Only overrides color tokens; typography and density are inherited from the base theme.
 @mixin scaffold-colors-m3($theme: $lf-default-theme-m3, $class) {
   $theme: map-merge($lf-default-theme-m3, $theme);
+  $theme: m2-compat-palettes($theme);
+  $m2: map-get($theme, 'm2-compat');
 
   $color-config: (
     primary: map-get($theme, 'primary'),
@@ -180,7 +231,8 @@ $lf-default-theme-m3: (
   }
 
   @include toolbar-color-compat(#{'.' + $class});
-  @include color-variables-m3(#{'body.'+$class});
+  @include container-color-compat($m2, #{'.' + $class});
+  @include color-variables-m3(#{'body.'+$class}, $m2);
 }
 
 // Toolbar color backwards compatibility
@@ -227,21 +279,100 @@ $lf-default-theme-m3: (
   }
 }
 
+// M3 shape scale
+// M3 gives the drawer a 16px trailing edge, which reads as a floating panel
+// rather than the flush sidebar the scaffold lays out; M2 kept it square.
+// --border-radius needs no override here, it reads the scale itself.
+@mixin shape-variables-m3() {
+  :root {
+    --mat-sidenav-container-shape: 0;
+  }
+}
+
+// Container colour backwards compatibility
+// M3 renders FABs and selected chips on a *container* tone, where M2 used the main
+// hue. Container and foreground are restored as a pair: the container alone would
+// leave M3's dark on-container text sitting on a saturated fill.
+@mixin container-color-compat($m2, $scope: null) {
+  @if ($m2) {
+    $prefix: 'html ';
+    @if ($scope) {
+      $prefix: '#{$scope} ';
+    }
+
+    @each $name in ('primary', 'accent', 'warn') {
+      $container: m2-main($m2, $name);
+      $foreground: m2-contrast($m2, $name);
+
+      // The M2 500 is used literally rather than via --color-*: the base role
+      // flips to a light tone in dark themes, which the M2 contrast colour,
+      // fixed against the 500, would then be unreadable on.
+      @if ($container and $foreground) {
+        #{$prefix}.mat-mdc-fab.mat-#{$name},
+        #{$prefix}.mat-mdc-mini-fab.mat-#{$name} {
+          --mat-fab-container-color: #{$container};
+          --mat-fab-foreground-color: #{$foreground};
+          --mat-fab-state-layer-color: #{$foreground};
+          --mat-fab-ripple-color: color-mix(in srgb, #{$foreground} 12%, transparent);
+          --mat-fab-small-container-color: #{$container};
+          --mat-fab-small-foreground-color: #{$foreground};
+          --mat-fab-small-state-layer-color: #{$foreground};
+          --mat-fab-small-ripple-color: color-mix(in srgb, #{$foreground} 12%, transparent);
+        }
+
+        #{$prefix}.mat-mdc-standard-chip.mat-#{$name} {
+          --mat-chip-elevated-selected-container-color: #{$container};
+          --mat-chip-selected-label-text-color: #{$foreground};
+          --mat-chip-selected-trailing-icon-color: #{$foreground};
+        }
+      }
+    }
+  }
+}
+
 // Set M3 variables
 // Bridges the M3 system tokens to the same --color-* CSS variables that existing
 // components use, so all library components work without template changes.
 // Note: M3 does not have numbered hue variants (50-900). Only the base semantic
 // colors are bridged. Hue-specific variables are not available in M3.
-@mixin color-variables-m3($scope) {
+@mixin color-variables-m3($scope, $m2: null) {
   #{$scope} {
     --color-primary: var(--mat-sys-primary);
     --color-accent: var(--mat-sys-tertiary);
     --color-warn: var(--mat-sys-error);
+
+    // M3 has no numbered hues, so under m2-compat they come from the M2 ramps
+    @if ($m2) {
+      @each $name in ('primary', 'accent', 'warn') {
+        $palette: map-get($m2, $name);
+
+        @if ($palette) {
+          @for $i from 0 through 9 {
+            $hue: $i * 100;
+            @if ($hue == 0) {
+              $hue: 50;
+            }
+
+            --color-#{$name}-#{$hue}: #{map-get($palette, $hue)};
+          }
+        }
+      }
+    }
   }
 
   // Utility classes (same API as M2, backed by M3 tokens)
   @each $palette in ('primary', 'accent', 'warn') {
     .color-#{$palette} { color: var(--color-#{$palette}) !important; }
     .color-bg-#{$palette} { background-color: var(--color-#{$palette}) !important; }
+
+    @if ($m2 and map-get($m2, $palette)) {
+      @for $i from 0 through 9 {
+        $hue: $i * 100;
+        @if ($hue == 0) { $hue: 50; }
+
+        .color-#{$palette}-#{$hue} { color: var(--color-#{$palette}-#{$hue}) !important; }
+        .color-bg-#{$palette}-#{$hue} { background-color: var(--color-#{$palette}-#{$hue}) !important; }
+      }
+    }
   }
 }

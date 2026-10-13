@@ -47,7 +47,7 @@
   &.primary {
     color: unset !important;
     background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
-    outline-color: var(--color-primary-200);
+    outline-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
 
     .lf-notification-link {
       color: unset !important;
@@ -57,7 +57,7 @@
   &.accent {
     color: unset !important;
     background-color: color-mix(in srgb, var(--color-accent) 12%, transparent);
-    outline-color: var(--color-accent-200);
+    outline-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
 
     .lf-notification-link {
       color: unset !important;
@@ -67,7 +67,7 @@
   &.warn {
     color: unset !important;
     background-color: color-mix(in srgb, var(--color-warn) 12%, transparent);
-    outline-color: var(--color-warn-200);
+    outline-color: color-mix(in srgb, var(--color-warn) 50%, transparent);
 
     .lf-notification-link {
       color: unset !important;
@@ -106,7 +106,7 @@
 
     // Projected content belongs to the host, so encapsulated selectors never reach it
     ::ng-deep .lf-notification-body .mat-mdc-text-field-wrapper {
-      background-color: var(--mat-app-background-color, #fff);
+      background-color: var(--mat-app-background-color, var(--mat-sys-surface, #fff));
       border-radius: var(--border-radius);
     }
   }

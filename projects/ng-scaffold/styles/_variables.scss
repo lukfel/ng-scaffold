@@ -1,6 +1,6 @@
 :root {
     --transition: 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
-    --border-radius: 4px;
+    --border-radius: var(--mat-sys-corner-medium, 4px);
 
     --loading-overlay-z-index: 1001;
 
