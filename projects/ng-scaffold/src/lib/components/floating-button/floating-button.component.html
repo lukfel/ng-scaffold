@@ -9,6 +9,7 @@
       [class.show-navbar]="isMobile() && navbarEnabled() && !bottomBarEnabled()"
       [class.show-bottom-bar]="bottomBarEnabled() && !(isMobile() && navbarEnabled())"
       [class.show-navbar-and-bottom-bar]="isMobile() && navbarEnabled() && bottomBarEnabled()"
+      [class.show-snackbar]="bottomSnackbarOpen()"
       [class.show-drawer]="!isMobile() && drawerEnabled()"
       [extended]="!!config.label"
       [disabled]="config.disabled"

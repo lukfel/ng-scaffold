@@ -1,13 +1,17 @@
 .lf-floating-button {
   z-index: var(--floating-button-z-index);
-  bottom: var(--floating-button-bottom);
+  bottom: calc(var(--floating-button-bottom) + var(--lf-fab-snackbar-offset, 0px));
+
+  &.show-snackbar {
+    --lf-fab-snackbar-offset: var(--floating-button-snackbar-offset);
+  }
 
   &.sticky {
     position: sticky !important;
 
     &.show-bottom-bar,
     &.show-navbar-and-bottom-bar {
-      bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height));
+      bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height) + var(--lf-fab-snackbar-offset, 0px));
     }
 
     &.center {
@@ -28,15 +32,15 @@
     position: fixed !important;
 
     &.show-navbar {
-      bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile));
+      bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile) + var(--lf-fab-snackbar-offset, 0px));
     }
 
     &.show-bottom-bar {
-      bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height));
+      bottom: calc(var(--floating-button-bottom) + var(--bottom-bar-height) + var(--lf-fab-snackbar-offset, 0px));
     }
 
     &.show-navbar-and-bottom-bar {
-      bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile) + var(--bottom-bar-height));
+      bottom: calc(var(--floating-button-bottom) + var(--navbar-height-mobile) + var(--bottom-bar-height) + var(--lf-fab-snackbar-offset, 0px));
     }
 
     &.center {

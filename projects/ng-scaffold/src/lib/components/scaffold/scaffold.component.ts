@@ -13,6 +13,7 @@ import {
   inject,
   output,
   signal,
+  Signal,
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
@@ -36,6 +37,7 @@ import {
   OverlayService,
   RouterService,
   ScaffoldService,
+  SnackbarService,
 } from '../../services';
 import { BottomBarComponent } from '../bottom-bar/bottom-bar.component';
 import { ContentTitleCardComponent } from '../content-title-card/content-title-card.component';
@@ -67,6 +69,7 @@ export class ScaffoldComponent {
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private scaffoldService = inject(ScaffoldService);
   private breakpointService = inject(BreakpointService);
+  private snackbarService = inject(SnackbarService);
   private routerService = inject(RouterService);
   private overlayService = inject(OverlayService);
   private route = inject(ActivatedRoute);
@@ -111,6 +114,9 @@ export class ScaffoldComponent {
   public bottomBarConfig = computed<BottomBarConfig | null>(
     () => this.scaffoldConfig()?.bottomBarConfig || null,
   );
+
+  // The floating button lifts itself clear of a snackbar along the bottom edge
+  public bottomSnackbarOpen: Signal<boolean> = this.snackbarService.bottomSnackbarOpen;
 
   public routeHistory = toSignal<string[]>(
     this.routerService.routeHistory$.pipe(

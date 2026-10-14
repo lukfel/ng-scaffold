@@ -64,6 +64,7 @@
           [drawerEnabled]="drawerConfig()?.enable! && drawerConfig()?.open!"
           [navbarEnabled]="navbarConfig()?.enable!"
           [bottomBarEnabled]="bottomBarConfig()?.enable!"
+          [bottomSnackbarOpen]="bottomSnackbarOpen()"
           (floatingButtonConfigUpdateEvent)="floatingButtonConfigUpdated($event)"
           (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
       </div>

@@ -21,6 +21,7 @@ export class FloatingButtonComponent {
   public readonly drawerEnabled = input<boolean>(false);
   public readonly navbarEnabled = input<boolean>(false);
   public readonly bottomBarEnabled = input<boolean>(false);
+  public readonly bottomSnackbarOpen = input<boolean>(false);
 
   public readonly floatingButtonConfigUpdateEvent = output<Partial<FloatingButtonConfig>>();
   public readonly floatingButtonClickEvent = output<string>();

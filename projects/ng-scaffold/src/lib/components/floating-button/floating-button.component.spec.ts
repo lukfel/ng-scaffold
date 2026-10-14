@@ -80,4 +80,20 @@ describe('FloatingButtonComponent', () => {
     const label = fixture.debugElement.query(By.css('.lf-floating-button-label'));
     expect(label).toBeFalsy();
   });
+
+  it('marks the button to clear a bottom snackbar', () => {
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: true });
+    fixture.componentRef.setInput('bottomSnackbarOpen', true);
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('.lf-floating-button'));
+    expect(button.nativeElement.classList).toContain('show-snackbar');
+  });
+
+  it('does not mark the button when no bottom snackbar is open', () => {
+    fixture.componentRef.setInput('floatingButtonConfig', { enable: true });
+    fixture.componentRef.setInput('bottomSnackbarOpen', false);
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('.lf-floating-button'));
+    expect(button.nativeElement.classList).not.toContain('show-snackbar');
+  });
 });
