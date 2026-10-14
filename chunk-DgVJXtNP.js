@@ -1,1 +1,0 @@
-import {F}from'./chunk-BWd2pXgO.js';import'./main-7J7VM74U.js';var n=[{path:"",component:F}];export{n as NOT_FOUND_ROUTES};
