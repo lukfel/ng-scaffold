@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
@@ -37,6 +38,16 @@ import {
 } from '../../shared/components/markdown/markdown.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
+type SwatchColor = 'pink' | 'blue';
+
+interface ThemeOption {
+  label: string;
+  key: string;
+  primary: SwatchColor;
+  accent: SwatchColor;
+  dark: boolean;
+}
+
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
@@ -49,12 +60,14 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
+    MatRadioModule,
     MatSelectModule,
     MatButtonModule,
     MatCheckboxModule,
     MatSlideToggleModule,
     MatIconModule,
     MatDividerModule,
+    NgClass,
     NgTemplateOutlet,
   ],
 })
@@ -99,8 +112,18 @@ export class StartComponent {
     },
   ]);
 
+  public readonly themes: ThemeOption[] = [
+    { label: 'Pink, light', key: '', primary: 'pink', accent: 'blue', dark: false },
+    { label: 'Pink, dark', key: 'theme2', primary: 'pink', accent: 'blue', dark: true },
+    { label: 'Blue, light', key: 'theme3', primary: 'blue', accent: 'pink', dark: false },
+    { label: 'Blue, dark', key: 'theme4', primary: 'blue', accent: 'pink', dark: true },
+  ];
+
   public theme = toSignal<string>(this.themeService.currentTheme$);
   public inputValue = toSignal<string>(this.scaffoldService.headerInputChangeValue$);
+
+  public readonly isM2 = computed(() => (this.theme() ?? '').startsWith('m2'));
+  public readonly themeKey = computed(() => (this.theme() ?? '').replace(/^m2-?/, ''));
 
   constructor() {
     this.scaffoldService.scaffoldConfig$
@@ -203,8 +226,20 @@ export class StartComponent {
     }
   }
 
-  public setTheme(theme: string): void {
-    this.themeService.setTheme(theme, true);
+  public setTheme(key: string): void {
+    this.themeService.setTheme(this.themeClass(key, this.isM2()), true);
+  }
+
+  public setMaterialVersion(useM2: boolean): void {
+    this.themeService.setTheme(this.themeClass(this.themeKey(), useM2), true);
+  }
+
+  private themeClass(key: string, useM2: boolean): string {
+    if (!useM2) {
+      return key;
+    }
+
+    return key ? `m2-${key}` : 'm2';
   }
 
   public addHeaderButton(isLeftButton: boolean): void {

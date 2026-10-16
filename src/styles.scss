@@ -1,8 +1,9 @@
 @use "@lukfel/ng-scaffold/styles" as lf;
 @use '@angular/material' as mat;
+@use 'sass:map';
 
 // =============================================================================
-// Option A: Material 2 Theming (current)
+// Option A: Material 2 Theming
 // =============================================================================
 
 $base-theme: (
@@ -31,10 +32,10 @@ $theme4: (
   dark: true
 );
 
-@include lf.scaffold-theme($base-theme);
-@include lf.scaffold-colors($theme2, 'theme2');
-@include lf.scaffold-colors($theme3, 'theme3');
-@include lf.scaffold-colors($theme4, 'theme4');
+@include lf.scaffold-colors($base-theme, 'm2');
+@include lf.scaffold-colors($theme2, 'm2-theme2');
+@include lf.scaffold-colors($theme3, 'm2-theme3');
+@include lf.scaffold-colors($theme4, 'm2-theme4');
 
 // =============================================================================
 // Option B: Material 3 Theming
@@ -42,38 +43,38 @@ $theme4: (
 // M3 uses 'primary' and 'tertiary' (replaces accent). Error replaces warn.
 // 'theme-type' controls light/dark: 'light', 'dark', or 'color-scheme' (auto).
 
-// $base-theme-m3: (
-//   primary: mat.$rose-palette,
-//   tertiary: mat.$blue-palette,
-//   theme-type: light,
-//   font-family: 'Roboto',
-// );
+$base-theme-m3: (
+  primary: mat.$rose-palette,
+  tertiary: mat.$blue-palette,
+  theme-type: light,
+  font-family: 'Roboto',
+);
 
-// $theme2-m3: (
-//   primary: mat.$rose-palette,
-//   tertiary: mat.$blue-palette,
-//   theme-type: dark,
-// );
+$theme2-m3: (
+  primary: mat.$rose-palette,
+  tertiary: mat.$blue-palette,
+  theme-type: dark,
+);
 
-// $theme3-m3: (
-//   primary: mat.$blue-palette,
-//   tertiary: mat.$rose-palette,
-//   theme-type: light,
-// );
+$theme3-m3: (
+  primary: mat.$blue-palette,
+  tertiary: mat.$rose-palette,
+  theme-type: light,
+);
 
-// $theme4-m3: (
-//   primary: mat.$blue-palette,
-//   tertiary: mat.$rose-palette,
-//   theme-type: dark,
-// );
+$theme4-m3: (
+  primary: mat.$blue-palette,
+  tertiary: mat.$rose-palette,
+  theme-type: dark,
+);
 
-// // Main theme
-// @include lf.scaffold-theme-m3($base-theme-m3);
+// Main theme
+@include lf.scaffold-theme-m3($base-theme-m3);
 
-// // Additional themes
-// @include lf.scaffold-colors-m3($theme2-m3, 'theme2');
-// @include lf.scaffold-colors-m3($theme3-m3, 'theme3');
-// @include lf.scaffold-colors-m3($theme4-m3, 'theme4');
+// Additional themes
+@include lf.scaffold-colors-m3($theme2-m3, 'theme2');
+@include lf.scaffold-colors-m3($theme3-m3, 'theme3');
+@include lf.scaffold-colors-m3($theme4-m3, 'theme4');
 
 // Additional classes
 .lf-cat-blue:not(.disabled) {
@@ -98,4 +99,42 @@ code {
   border-radius: 4px;
   padding: 1px 3px;
   white-space: nowrap;
+}
+
+
+
+// =============================================================================
+// Patching for Material 2 of demo page (not needed in real implementation) 
+// =============================================================================
+body:where(.m2, .m2-theme2, .m2-theme3, .m2-theme4) {
+  // M3's tokens are always loaded, so the M2 fallbacks never fire on their own
+  --border-radius: 4px;
+  --mat-sys-outline-variant: rgba(0, 0, 0, 0.12);
+
+  @include mat.all-component-themes(mat.m2-define-light-theme((
+    color: (
+      primary: map.get($base-theme, 'primary'),
+      accent: map.get($base-theme, 'accent'),
+      warn: map.get($base-theme, 'warn'),
+    ),
+    typography: mat.m2-define-typography-config(
+      $font-family: map.get($base-theme, 'font-family')
+    ),
+    density: 0,
+  )));
+}
+
+
+// =============================================================================
+// Patching for Material 3 of demo page (not needed in real implementation) 
+// =============================================================================
+html {
+  --mat-app-background-color: var(--mat-sys-background);
+  --mat-app-text-color: var(--mat-sys-on-background);
+
+  @each $level, $elevations in (0: (0), 1: (1, 2), 2: (3, 4, 5), 3: (6, 7), 4: (8, 9, 10, 11), 5: (12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)) {
+    @each $z in $elevations {
+      --mat-app-elevation-shadow-level-#{$z}: var(--mat-sys-level#{$level});
+    }
+  }
 }
