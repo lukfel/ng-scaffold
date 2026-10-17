@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1791992672222,
+  "timestamp": 1792266089691,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -11,19 +11,19 @@
         "ignoreVary": true
       },
       "urls": [
-        "/ng-scaffold/chunk-BSsREaw5.js",
-        "/ng-scaffold/chunk-BcFgTbUS.js",
-        "/ng-scaffold/chunk-BwYPY09s.js",
-        "/ng-scaffold/chunk-CozzbE6G.js",
-        "/ng-scaffold/chunk-D8ovKTKv.js",
-        "/ng-scaffold/chunk-DpWJZRHx.js",
-        "/ng-scaffold/chunk-TLCtRKL2.js",
+        "/ng-scaffold/chunk-CEEDkXfG.js",
+        "/ng-scaffold/chunk-CVLXu2x7.js",
+        "/ng-scaffold/chunk-CjuRaSty.js",
+        "/ng-scaffold/chunk-D7kJr_ol.js",
+        "/ng-scaffold/chunk-DJwcJL2U.js",
+        "/ng-scaffold/chunk-DtV8wRiO.js",
+        "/ng-scaffold/chunk-U5mmSHXm.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-ISMTNJNC.js",
+        "/ng-scaffold/main-2SFXZ3VE.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/scripts-5A55CVEY.js",
-        "/ng-scaffold/styles-IHCFTDZA.css"
+        "/ng-scaffold/styles-64GGNSFY.css"
       ],
       "patterns": []
     },
@@ -106,13 +106,13 @@
   "dataGroups": [],
   "hashTable": {
     "/ng-scaffold/apple-touch-icon.png": "e1e3cc7de31cd0d272fde7c5a8bb184d3f072e8a",
-    "/ng-scaffold/chunk-BSsREaw5.js": "b480662eb5d4b7c3b0e707804b9c1b62ba72e604",
-    "/ng-scaffold/chunk-BcFgTbUS.js": "076a735bfb86e3c630190a9291391d240c8baf16",
-    "/ng-scaffold/chunk-BwYPY09s.js": "ebd379c7e958de1b0d962086f87a33952d825298",
-    "/ng-scaffold/chunk-CozzbE6G.js": "ee2d488d545b814240ace4f0c125b0029d8aefb4",
-    "/ng-scaffold/chunk-D8ovKTKv.js": "5fd8b83eb538a0a4acc0c80c796b18eac5c9a0b9",
-    "/ng-scaffold/chunk-DpWJZRHx.js": "aee67253dce35f20d862e878c801221c40706bbd",
-    "/ng-scaffold/chunk-TLCtRKL2.js": "0e76f72a4ccd8e6b06102da208b98056af81f595",
+    "/ng-scaffold/chunk-CEEDkXfG.js": "dbebe3c4ab047715720bd114851ffe845ad04a20",
+    "/ng-scaffold/chunk-CVLXu2x7.js": "63a2cf2c735b926d845ffc81f0d65dddd8279bc6",
+    "/ng-scaffold/chunk-CjuRaSty.js": "0be23f964675f59984117c8d78bbc8079cc0da40",
+    "/ng-scaffold/chunk-D7kJr_ol.js": "5aaec008be4cda2d22189ea4a55bdc6548ca0c96",
+    "/ng-scaffold/chunk-DJwcJL2U.js": "12f6c9b9cb66ee234f92ec02ec5dbce7e7875747",
+    "/ng-scaffold/chunk-DtV8wRiO.js": "4f810fd8b7c7c22783b9ed363f9e75caa2f5aea7",
+    "/ng-scaffold/chunk-U5mmSHXm.js": "f58b4ed2b2d570ee7f6e822fa7b1f707c28d8009",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
     "/ng-scaffold/img/cat.svg": "feb48d3ee921c2486ce4ccc8ee0c676864b7aa0e",
     "/ng-scaffold/img/error/missing.png": "4feb249451b24043272eb7226628c3d92069d0cc",
@@ -146,12 +146,12 @@
     "/ng-scaffold/img/uglygotchi.svg": "4217a98c5bcc2309835fdfe6177d1999d62a44c0",
     "/ng-scaffold/img/waw.svg": "58d211b8f9dfab2ab0352d6132ef06232f3599f8",
     "/ng-scaffold/img/wowen.svg": "7330390e650bfa6f48733f806d367e3ce80cf2b8",
-    "/ng-scaffold/index.html": "2d7ecc0a5a1729068d7e25c5a8d111200832862d",
-    "/ng-scaffold/main-ISMTNJNC.js": "acf4a82947329ac9d21fb75139efa6d30fc08e01",
+    "/ng-scaffold/index.html": "ef5248a8a7644e464bce07834a1b0bf8fd3ed3aa",
+    "/ng-scaffold/main-2SFXZ3VE.js": "9bc25819d42269605733a9b275316a05da4fe69f",
     "/ng-scaffold/manifest.webmanifest": "d487cb7bc84a5e7ccfef9ca406e917bfe555b1f8",
     "/ng-scaffold/md/bottomBarConfig.md": "19c663ab16d13f72b73a14f6756a53f5c7471862",
     "/ng-scaffold/md/contentTitleCardConfig.md": "113026539fe35770e8d1897625924eca7ce64f58",
-    "/ng-scaffold/md/documentation.md": "70e44d601ed6c3fbbd685b4c76f2088f47df6326",
+    "/ng-scaffold/md/documentation.md": "742ca809cc4df8aacb860a773e1736de3cb853ec",
     "/ng-scaffold/md/drawerConfig.md": "808183059698f50af510d2878085c12d94f036bb",
     "/ng-scaffold/md/floatingButtonConfig.md": "62d2c299c60172ceb94fc478c189c5f5eeb8042b",
     "/ng-scaffold/md/footerConfig.md": "8f21a1664fd3689d32d05d797c11c6547de6e23c",
@@ -181,7 +181,7 @@
     "/ng-scaffold/media/roboto-v30-latin-regular-6KEU5XHX.woff2": "7ca9c5967f3bb8bffeab24b639b49c1e7d03fa52",
     "/ng-scaffold/media/roboto-v30-latin-regular-EJHJLMHI.woff": "d9cfe6b477b49d47b6241b4281f4858d98eaca65",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
-    "/ng-scaffold/styles-IHCFTDZA.css": "cd86ef58181ceb27052b0e997c990e6251ab3a2f"
+    "/ng-scaffold/styles-64GGNSFY.css": "ed0eb1d68810824d360a928d6c4e3549274adcf0"
   },
   "navigationUrls": [
     {

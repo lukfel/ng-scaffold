@@ -132,11 +132,13 @@ Import the styles in your `styles.scss` and apply the default theme.
 
 ```scss
 @use "@lukfel/ng-scaffold/styles" as lf;
-@include lf.scaffold-theme();           // Include default theme
+@include lf.scaffold-theme-m3();        // Include default theme
 ```
 
+* **Note:** `ng add` sets this up for you and can generate the Material 2 variant instead.
+
 ### (Optional) Custom Themes
-To customize the default theme, define a new theme map specifying `primary`, `accent`, and `warn` colors using Material palettes. Enabling the `dark` option applies a dark theme. Pass your custom theme to `lf.scaffold-theme($my-theme)`.
+To customize the default theme, define a new theme map specifying `primary` and `tertiary` colors using Material palettes. `theme-type` takes `light`, `dark` or `color-scheme` (follows the OS setting). Pass your custom theme to `lf.scaffold-theme-m3($my-theme)`.
 
 ```scss
 @use "@lukfel/ng-scaffold/styles" as lf;
@@ -144,17 +146,16 @@ To customize the default theme, define a new theme map specifying `primary`, `ac
 
 // Define theme (use Material palettes or create your own)
 $base-theme: (
-  primary: mat.m2-define-palette(mat.$m2-pink-palette),
-  accent: mat.m2-define-palette(mat.$m2-blue-palette),
-  warn: mat.m2-define-palette(mat.$m2-red-palette),
-  dark: false
+  primary: mat.$rose-palette,
+  tertiary: mat.$blue-palette,
+  theme-type: light
 );
 
-@include lf.scaffold-theme($base-theme);
+@include lf.scaffold-theme-m3($base-theme);
 ```
 
 ### (Optional) Multiple Themes
-To switch between multiple themes dynamically, define additional themes using `lf.scaffold-colors($theme, 'theme-class')`, then apply the class to the `<body class="theme-class">` tag.
+To switch between multiple themes dynamically, define additional themes using `lf.scaffold-colors-m3($theme, 'theme-class')`, then apply the class to the `<body class="theme-class">` tag.
 
 * **Note:** The `ThemeService` allows dynamic theme switching.
 
@@ -164,21 +165,20 @@ To switch between multiple themes dynamically, define additional themes using `l
 
 // Define themes (use Material palettes or create your own)
 $base-theme: (
-  primary: mat.m2-define-palette(mat.$m2-pink-palette),
-  accent: mat.m2-define-palette(mat.$m2-blue-palette),
-  warn: mat.m2-define-palette(mat.$m2-red-palette),
-  dark: false
+  primary: mat.$rose-palette,
+  tertiary: mat.$blue-palette,
+  theme-type: light
 );
 
 $theme2: (
-  primary: mat.m2-define-palette(mat.$m2-pink-palette),
-  accent: mat.m2-define-palette(mat.$m2-blue-palette),
-  dark: true
+  primary: mat.$rose-palette,
+  tertiary: mat.$blue-palette,
+  theme-type: dark
 );
 
 // Include themes (use ThemeService to switch between themes)
-@include lf.scaffold-theme($base-theme);
-@include lf.scaffold-colors($theme2, 'theme2');
+@include lf.scaffold-theme-m3($base-theme);
+@include lf.scaffold-colors-m3($theme2, 'theme2');
 ```
 
 ### (Optional) Custom Typography
@@ -191,19 +191,23 @@ To change the default typography from Roboto, pass an additional parameter ``fon
 @use '@angular/material' as mat;
 
 $base-theme: (
-  primary: mat.m2-define-palette(mat.$m2-pink-palette),
-  accent: mat.m2-define-palette(mat.$m2-blue-palette),
-  warn: mat.m2-define-palette(mat.$m2-red-palette),
-  dark: false,
+  primary: mat.$rose-palette,
+  tertiary: mat.$blue-palette,
+  theme-type: light,
   font-family: 'Comic Sans'
 );
 
-@include lf.scaffold-theme($base-theme);
+@include lf.scaffold-theme-m3($base-theme);
 
 body {
     font-family: "Comic Sans MS" !important;
 }
 ```
+
+### (Optional) Material 2 Theming
+Material 2 is still supported through `lf.scaffold-theme-m2($theme)` and `lf.scaffold-colors-m2($theme, 'theme-class')`. Its theme map uses `primary`, `accent`, `warn` and `dark`, with palettes from `mat.m2-define-palette()`. Use one API or the other, not both.
+
+* **Note:** To keep the exact colors of an existing Material 2 theme after moving to Material 3, pass the same M2 palettes as `m2-compat` to `lf.scaffold-theme-m3()`.
 
 
 
@@ -386,8 +390,6 @@ Dynamically change between your defined themes.
 import { ThemeService } from '@lukfel/ng-scaffold';
 
 export class AppComponent {
-
-  private themeService = inject(ThemeService);
 
   constructor(private themeService: ThemeService) {
     this.themeService.setTheme('my-theme2', true);    // set theme and store in local storage (using the built in LocalStorageService)
