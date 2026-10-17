@@ -110,6 +110,7 @@ body:where(.m2, .m2-theme2, .m2-theme3, .m2-theme4) {
   // M3's tokens are always loaded, so the M2 fallbacks never fire on their own
   --border-radius: 4px;
   --mat-sys-outline-variant: rgba(0, 0, 0, 0.12);
+  --mat-sys-on-primary: white;
 
   @include mat.all-component-themes(mat.m2-define-light-theme((
     color: (

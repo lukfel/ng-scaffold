@@ -11,6 +11,14 @@ bump_version() {
   echo "Bumping version from $current_version to $new_version"
 }
 
+revert_version() {
+  npm version "$current_version" --no-git-tag-version
+  pushd ./projects/ng-scaffold > /dev/null
+  npm version "$current_version" --no-git-tag-version
+  popd > /dev/null
+  echo "Revert version to v$current_version"
+}
+
 # Main script execution starts here
 npm run lint              # Lints and formats the code based on the .eslintrc.json
 if [ $? -ne 0 ]; then
@@ -45,30 +53,35 @@ fi
 npm run build             # Builds the application in production environment
 if [ $? -ne 0 ]; then
   echo "Build failed."
+  revert_version
   exit 1
 fi
 
 npm run lib:build         # Builds the library in production environment
 if [ $? -ne 0 ]; then
   echo "Build failed. Aborting release."
+  revert_version
   exit 1
 fi
 
 npm run lib:schematics    # Builds the library schematics
 if [ $? -ne 0 ]; then
   echo "Schematics failed. Aborting release."
+  revert_version
   exit 1
 fi
 
 npm run deploy            # Deploy the application
 if [ $? -ne 0 ]; then
   echo "Deploy failed."
+  revert_version
   exit 1
 fi
 
 npm run lib:publish       # Publish the library
 if [ $? -ne 0 ]; then
   echo "Publish failed."
+  revert_version
   exit 1
 fi
 

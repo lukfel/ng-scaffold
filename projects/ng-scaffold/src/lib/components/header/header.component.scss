@@ -13,8 +13,10 @@
       text-overflow: ellipsis;
     }
 
+    // The pill sits on the primary-coloured header, so on-primary is its fill
     &.lf-header-menu-button-active {
-      background-color: white;
+      background-color: var(--mat-sys-on-primary, white);
+      color: var(--color-primary) !important;
     }
   }
 
