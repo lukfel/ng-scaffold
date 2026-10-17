@@ -205,7 +205,7 @@ body {
 ```
 
 ### (Optional) Material 2 Theming
-Material 2 is still supported through `lf.scaffold-theme($theme)` and `lf.scaffold-colors($theme, 'theme-class')`. Its theme map uses `primary`, `accent`, `warn` and `dark`, with palettes from `mat.m2-define-palette()`. Use one API or the other, not both.
+Material 2 is still supported through `lf.scaffold-theme-m2($theme)` and `lf.scaffold-colors-m2($theme, 'theme-class')`. Its theme map uses `primary`, `accent`, `warn` and `dark`, with palettes from `mat.m2-define-palette()`. Use one API or the other, not both.
 
 * **Note:** To keep the exact colors of an existing Material 2 theme after moving to Material 3, pass the same M2 palettes as `m2-compat` to `lf.scaffold-theme-m3()`.
 

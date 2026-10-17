@@ -50,8 +50,8 @@ $theme2: (
 );
 
 // Include themes (use ThemeService to switch between themes)
-@include lf.scaffold-theme($base-theme);
-@include lf.scaffold-colors($theme2, 'theme2');
+@include lf.scaffold-theme-m2($base-theme);
+@include lf.scaffold-colors-m2($theme2, 'theme2');
 
 `;
 

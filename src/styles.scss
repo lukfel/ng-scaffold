@@ -33,12 +33,12 @@ $theme4: (
 );
 
 // Main theme
-@include lf.scaffold-colors($base-theme, 'm2');
+@include lf.scaffold-colors-m2($base-theme, 'm2');
 
 // Additional themes
-@include lf.scaffold-colors($theme2, 'm2-theme2');
-@include lf.scaffold-colors($theme3, 'm2-theme3');
-@include lf.scaffold-colors($theme4, 'm2-theme4');
+@include lf.scaffold-colors-m2($theme2, 'm2-theme2');
+@include lf.scaffold-colors-m2($theme3, 'm2-theme3');
+@include lf.scaffold-colors-m2($theme4, 'm2-theme4');
 
 // =============================================================================
 // Option B: Material 3 Theming

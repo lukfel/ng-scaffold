@@ -19,7 +19,7 @@ $lf-default-theme: (
 // Material requires to split up the mat.all-component-themes and mat.all-component-colors
 // since mat.all-component-themes should also be imported once, but mat.all-component-colors
 // can be imported multiple times
-@mixin scaffold-theme($theme: $lf-default-theme) {
+@mixin scaffold-theme-m2($theme: $lf-default-theme) {
   $theme: map-merge($lf-default-theme, $theme);
 
   @if(map-get($theme, 'dark') == false) {
@@ -53,7 +53,7 @@ $lf-default-theme: (
 }
 
 // Set M2 colors
-@mixin scaffold-colors($theme: $lf-default-theme, $class) {
+@mixin scaffold-colors-m2($theme: $lf-default-theme, $class) {
   $theme: map-merge($lf-default-theme, $theme);
 
   .#{$class} {
@@ -113,6 +113,16 @@ $lf-default-theme: (
       .color-bg-#{$palette}-#{$hue} { background-color: var(--color-#{$palette}-#{$hue}) !important; }
     }
   }
+}
+
+// Legacy aliases for apps written before the -m2 suffix existed.
+// These always mean M2; never repoint them at M3.
+@mixin scaffold-theme($theme: $lf-default-theme) {
+  @include scaffold-theme-m2($theme);
+}
+
+@mixin scaffold-colors($theme: $lf-default-theme, $class) {
+  @include scaffold-colors-m2($theme, $class);
 }
 
 // ============================================================================
