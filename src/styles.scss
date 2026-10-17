@@ -32,7 +32,10 @@ $theme4: (
   dark: true
 );
 
+// Main theme
 @include lf.scaffold-colors($base-theme, 'm2');
+
+// Additional themes
 @include lf.scaffold-colors($theme2, 'm2-theme2');
 @include lf.scaffold-colors($theme3, 'm2-theme3');
 @include lf.scaffold-colors($theme4, 'm2-theme4');
@@ -123,19 +126,4 @@ body:where(.m2, .m2-theme2, .m2-theme3, .m2-theme4) {
     ),
     density: 0,
   )));
-}
-
-
-// =============================================================================
-// Patching for Material 3 of demo page (not needed in real implementation) 
-// =============================================================================
-html {
-  --mat-app-background-color: var(--mat-sys-background);
-  --mat-app-text-color: var(--mat-sys-on-background);
-
-  @each $level, $elevations in (0: (0), 1: (1, 2), 2: (3, 4, 5), 3: (6, 7), 4: (8, 9, 10, 11), 5: (12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)) {
-    @each $z in $elevations {
-      --mat-app-elevation-shadow-level-#{$z}: var(--mat-sys-level#{$level});
-    }
-  }
 }

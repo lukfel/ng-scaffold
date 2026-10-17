@@ -3,5 +3,20 @@
   "$id": "NgAddSchema",
   "title": "Ng Add Options",
   "type": "object",
-  "properties": {}
+  "properties": {
+    "materialVersion": {
+      "type": "string",
+      "description": "Which Angular Material theming API to set up in the global styles.",
+      "enum": ["m3", "m2"],
+      "default": "m3",
+      "x-prompt": {
+        "message": "Which Angular Material theming API should be used?",
+        "type": "list",
+        "items": [
+          { "value": "m3", "label": "Material 3 (recommended)" },
+          { "value": "m2", "label": "Material 2 (legacy)" }
+        ]
+      }
+    }
+  }
 }

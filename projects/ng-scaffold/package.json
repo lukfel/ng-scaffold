@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
-    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ng-scaffold/"
+    "postbuild": "copyfiles schematics/package.json schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ng-scaffold/"
   },
   "peerDependencies": {
     "@angular/common": "^22.0.5",
