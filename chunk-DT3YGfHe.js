@@ -1,1 +1,0 @@
-import {F}from'./chunk-B-Pp0KRm.js';import'./main-AC4MCPAK.js';var n=[{path:"",component:F}];export{n as NOT_FOUND_ROUTES};

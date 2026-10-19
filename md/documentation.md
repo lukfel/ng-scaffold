@@ -482,6 +482,7 @@ public listItems = signal<ListItem[]>([
   { id: 1, svgIcon: 'logo', title: 'Item 2', subtitle: 'I am disabled', disabled: true },
   { id: 0, avatar: 'img/logos/ic_launcher-web.png', title: 'Item 1', subtitle: 'I am clickable', clickable: true },
   { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
+  { id: 3, matIcon: 'link', title: 'Item 4', subtitle: 'I am a link', routerLink: '/documentation' },
 ]);
 
 public listButtons = signal<Button[]>([         // (Optional) list buttons
