@@ -20,6 +20,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
 import { map } from 'rxjs';
 import {
   ListItemAvatarDirective,
@@ -38,6 +39,7 @@ import { BreakpointService } from '../../../services';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    RouterModule,
     FormsModule,
     DragDropModule,
     MatButtonModule,
@@ -179,6 +181,11 @@ export class ListComponent {
   // Combine list and item buttons
   public getCombinedButtons(item: ListItem): Button[] {
     return [...(item.buttons ?? []), ...(this.buttons() ?? [])];
+  }
+
+  // Check if an item navigates instead of emitting a click event
+  public isLink(item: ListItem): boolean {
+    return !!item.routerLink || !!item.href;
   }
 
   // Handle image errors

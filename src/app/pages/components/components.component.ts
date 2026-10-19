@@ -70,6 +70,13 @@ export class ComponentsComponent {
       subtitle: 'I have no edit buton',
       hiddenButtonIds: ['edit'],
     },
+    {
+      id: 3,
+      matIcon: 'link',
+      title: 'Item 4',
+      subtitle: 'I am a link',
+      routerLink: '/documentation',
+    },
   ]);
 
   public listButtons = signal<Button[]>([

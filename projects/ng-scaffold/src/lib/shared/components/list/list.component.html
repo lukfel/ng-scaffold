@@ -168,55 +168,37 @@
       [ngClass]="item.cssClass"
       matRipple
       [matRippleDisabled]="!item.clickable"
-      (click)="item.clickable && !item.disabled ? clickItem(item, $event) : null">
-      <!-- avatar -->
-      @if (avatarTemplate()) {
-        <ng-container
-          [ngTemplateOutlet]="avatarTemplate()!.templateRef"
-          [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
-      } @else if (item.avatar) {
-        <div class="lf-list-item-avatar px-1">
-          <img
-            [src]="item.avatar"
-            [alt]="'Avatar of ' + item.title"
-            (error)="onImageError($event)" />
-        </div>
-      } @else if (item.matIcon || item.svgIcon) {
-        <div class="lf-list-item-avatar px-1">
-          <!-- icon -->
-          @if (item.matIcon) {
-            <mat-icon>
-              {{ item.matIcon }}
-            </mat-icon>
-          } @else if (item.svgIcon) {
-            <mat-icon [svgIcon]="item.svgIcon"></mat-icon>
-          }
-        </div>
-      }
-
-      <!-- title -->
-      <div class="lf-list-item-title-wrapper">
-        <span class="lf-list-item-title">
-          @if (titleTemplate()) {
+      (click)="item.clickable && !item.disabled && !isLink(item) ? clickItem(item, $event) : null">
+      <!-- content (anchor only when the item links, so buttons stay outside it) -->
+      @if (isLink(item)) {
+        @if (item.routerLink) {
+          <a
+            class="lf-list-item-link flex-row-nowrap align-center flex-auto h-100 overflow-hidden"
+            [class.gap-2]="!isMobile()"
+            [class.gap-1]="isMobile()"
+            [routerLink]="item.routerLink">
             <ng-container
-              [ngTemplateOutlet]="titleTemplate()!.templateRef"
+              [ngTemplateOutlet]="listItemContentTemplate"
               [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
-          } @else {
-            {{ item.title }}
-          }
-        </span>
-        @if (item.subtitle || subtitleTemplate()) {
-          <span class="lf-list-item-subtitle">
-            @if (subtitleTemplate()) {
-              <ng-container
-                [ngTemplateOutlet]="subtitleTemplate()!.templateRef"
-                [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
-            } @else {
-              {{ item.subtitle }}
-            }
-          </span>
+          </a>
+        } @else {
+          <a
+            class="lf-list-item-link flex-row-nowrap align-center flex-auto h-100 overflow-hidden"
+            [class.gap-2]="!isMobile()"
+            [class.gap-1]="isMobile()"
+            [href]="item.href"
+            [target]="item.externalTab ? '_blank' : null"
+            [rel]="item.externalTab ? 'noopener' : null">
+            <ng-container
+              [ngTemplateOutlet]="listItemContentTemplate"
+              [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+          </a>
         }
-      </div>
+      } @else {
+        <ng-container
+          [ngTemplateOutlet]="listItemContentTemplate"
+          [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+      }
 
       <!-- buttons -->
       <div class="lf-list-item-buttons" [class.gap-2]="!isMobile()" [class.gap-1]="isMobile()">
@@ -303,5 +285,54 @@
     @if (config()?.showDividers && !last) {
       <mat-divider></mat-divider>
     }
+  </ng-template>
+
+  <!-- Item content (template) -->
+  <ng-template #listItemContentTemplate let-item>
+    <!-- avatar -->
+    @if (avatarTemplate()) {
+      <ng-container
+        [ngTemplateOutlet]="avatarTemplate()!.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+    } @else if (item.avatar) {
+      <div class="lf-list-item-avatar px-1">
+        <img [src]="item.avatar" [alt]="'Avatar of ' + item.title" (error)="onImageError($event)" />
+      </div>
+    } @else if (item.matIcon || item.svgIcon) {
+      <div class="lf-list-item-avatar px-1">
+        <!-- icon -->
+        @if (item.matIcon) {
+          <mat-icon>
+            {{ item.matIcon }}
+          </mat-icon>
+        } @else if (item.svgIcon) {
+          <mat-icon [svgIcon]="item.svgIcon"></mat-icon>
+        }
+      </div>
+    }
+
+    <!-- title -->
+    <div class="lf-list-item-title-wrapper">
+      <span class="lf-list-item-title">
+        @if (titleTemplate()) {
+          <ng-container
+            [ngTemplateOutlet]="titleTemplate()!.templateRef"
+            [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+        } @else {
+          {{ item.title }}
+        }
+      </span>
+      @if (item.subtitle || subtitleTemplate()) {
+        <span class="lf-list-item-subtitle">
+          @if (subtitleTemplate()) {
+            <ng-container
+              [ngTemplateOutlet]="subtitleTemplate()!.templateRef"
+              [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+          } @else {
+            {{ item.subtitle }}
+          }
+        </span>
+      }
+    </div>
   </ng-template>
 </div>

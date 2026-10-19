@@ -10,6 +10,9 @@ export interface ListItem {
   checked?: boolean;
   disabled?: boolean;
   clickable?: boolean;
+  routerLink?: string | (string | number)[];
+  href?: string;
+  externalTab?: boolean;
   buttons?: Button[];
   hiddenButtonIds?: string[];
   disabledButtonIds?: string[];

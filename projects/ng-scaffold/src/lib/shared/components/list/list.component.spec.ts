@@ -8,6 +8,8 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { provideRouter } from '@angular/router';
+import { ListItem } from '../../../models';
 import { ListComponent } from './list.component';
 
 describe('ListComponent', () => {
@@ -27,7 +29,8 @@ describe('ListComponent', () => {
         MatIconModule,
         MatTooltipModule,
         MatDividerModule
-      ]
+      ],
+      providers: [provideRouter([])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListComponent);
@@ -37,5 +40,39 @@ describe('ListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should detect link items', () => {
+    expect(component.isLink({ id: 1, title: 'Link', routerLink: '/foo' })).toBe(true);
+    expect(component.isLink({ id: 2, title: 'Href', href: 'https://example.com' })).toBe(true);
+    expect(component.isLink({ id: 3, title: 'Plain' })).toBe(false);
+  });
+
+  it('should render a link item as an anchor', () => {
+    fixture.componentRef.setInput('items', [
+      { id: 1, title: 'Link', routerLink: '/foo' },
+      { id: 2, title: 'Plain' }
+    ]);
+    fixture.detectChanges();
+
+    const anchors: NodeListOf<HTMLAnchorElement> =
+      fixture.nativeElement.querySelectorAll('a.lf-list-item-link');
+
+    expect(anchors.length).toBe(1);
+    expect(anchors[0].getAttribute('href')).toBe('/foo');
+  });
+
+  it('should not emit itemClickEvent for a link item', () => {
+    const clicked: ListItem[] = [];
+    component.itemClickEvent.subscribe((item: ListItem) => clicked.push(item));
+
+    fixture.componentRef.setInput('items', [
+      { id: 1, title: 'Link', routerLink: '/foo', clickable: true }
+    ]);
+    fixture.detectChanges();
+
+    fixture.nativeElement.querySelector('.lf-list-item-data').click();
+
+    expect(clicked.length).toBe(0);
   });
 });
