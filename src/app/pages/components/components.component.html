@@ -106,21 +106,11 @@
     <br />
   </p>
   <lf-notification
-    [static]="true"
-    color="accent"
-    message="This is an info notification with action."
-    matIcon="info"
-    action="Action"
-    (clickEvent)="onNotificationClick()"></lf-notification>
+    [notificationConfig]="notificationConfigAction"
+    (buttonClickEvent)="onNotificationClick()"></lf-notification>
   <lf-notification
-    [static]="true"
-    color="warn"
-    message="This is an error notification with action and link."
-    linkText="Documentation"
-    link="/#/documentation#notification"
-    matIcon="warning_amber"
-    action="Action"
-    (clickEvent)="onNotificationClick()"></lf-notification>
+    [notificationConfig]="notificationConfigLink"
+    (buttonClickEvent)="onNotificationClick()"></lf-notification>
 
   <p><br /></p>
 </div>

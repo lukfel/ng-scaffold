@@ -11,6 +11,7 @@ export { LoadingOverlayConfig } from './loading-overlay-config.model';
 export { Button, MenuButton } from './menu-button.model';
 export { NavbarConfig } from './navbar-config.model';
 export { NavigationLink } from './navigation-link.model';
+export { NotificationConfig } from './notification-config.model';
 export { PlaceholderConfig } from './placeholder-config.model';
 export { ScaffoldConfig } from './scaffold-config.model';
 export { SeoConfig } from './seo-config.model';

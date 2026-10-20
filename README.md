@@ -614,14 +614,30 @@ icons, optional actions, and links.
 import { NotificationComponent } from '@lukfel/ng-scaffold';
 ```
 
+```ts
+import { NotificationConfig } from '@lukfel/ng-scaffold';
+
+public notificationConfig = signal<NotificationConfig>({
+  color: 'accent',
+  matIcon: 'info',
+  message: 'This is an info notification with action.',
+  static: true,
+  button: {
+    id: 'notification',
+    label: 'ACTION',
+    matIcon: 'auto_awesome'
+  }
+});
+
+public onNotificationClick(): void {
+  // handle notification click
+}
+```
+
 ```html
 <lf-notification
-  [static]="true"
-  color="accent"
-  message="This is an info notification with action."
-  matIcon="info"
-  action="Action"
-  (clickEvent)="onNotificationClick()"></lf-notification>
+  [notificationConfig]="notificationConfig()"
+  (buttonClickEvent)="onNotificationClick()"></lf-notification>
 ```
 
 

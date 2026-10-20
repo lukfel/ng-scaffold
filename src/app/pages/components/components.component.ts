@@ -12,6 +12,7 @@ import {
   ListHeader,
   ListItem,
   NotificationComponent,
+  NotificationConfig,
   PlaceholderComponent,
   PlaceholderConfig,
   ScaffoldConfig,
@@ -86,6 +87,30 @@ export class ComponentsComponent {
 
   public fileName = signal<string>('');
   public color = signal<string>('');
+
+  public notificationConfigAction: NotificationConfig = {
+    color: 'accent',
+    matIcon: 'info',
+    message: 'This is an info notification with action.',
+    static: true,
+    button: {
+      id: 'notification',
+      label: 'Action',
+    },
+  };
+
+  public notificationConfigLink: NotificationConfig = {
+    color: 'warn',
+    matIcon: 'warning_amber',
+    message: 'This is an error notification with action and link.',
+    link: '/#/documentation#notification',
+    linkText: 'Documentation',
+    static: true,
+    button: {
+      id: 'notification',
+      label: 'Action',
+    },
+  };
 
   public placeholderConfigMatIcon: PlaceholderConfig = {
     matIcon: 'widgets',

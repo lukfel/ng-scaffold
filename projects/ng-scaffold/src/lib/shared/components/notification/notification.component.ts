@@ -1,10 +1,13 @@
 import { BreakpointState, Breakpoints } from '@angular/cdk/layout';
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { map } from 'rxjs';
+import { NotificationConfig } from '../../../models';
 import { BreakpointService } from '../../../services';
 
 @Component({
@@ -13,27 +16,14 @@ import { BreakpointService } from '../../../services';
   styleUrls: ['./notification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule],
+  imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatTooltipModule, NgClass],
 })
 export class NotificationComponent {
   private breakpointService = inject(BreakpointService);
 
-  public readonly color = input<'primary' | 'accent' | 'warn'>('primary');
-  public readonly title = input<string>('');
-  public readonly message = input<string>('');
-  public readonly link = input<string>('');
-  public readonly linkText = input<string>('');
-  public readonly action = input<string>('');
-  public readonly matIcon = input<string>('');
-  public readonly svgIcon = input<string>('');
-  public readonly static = input<boolean>(false);
-  public readonly minimal = input<boolean>(false);
-  public readonly gradient = input<boolean>(false);
-  public readonly loading = input<boolean>(false);
-  public readonly disabled = input<boolean>(false);
-  public readonly cssClass = input<string>('');
+  public readonly notificationConfig = input<NotificationConfig>();
 
-  public readonly clickEvent = output();
+  public readonly buttonClickEvent = output<void>();
 
   public isMobile = toSignal(
     this.breakpointService.breakpoint$.pipe(
