@@ -42,45 +42,13 @@
       <!-- buttons -->
       <div class="lf-list-item-buttons" [class.gap-2]="!isMobile()" [class.gap-1]="isMobile()">
         @for (button of header.buttons; track button.id) {
-          @if (button.label) {
-            <button
-              mat-button
-              class="lf-list-item-button"
-              [class.disabled]="button.disabled"
-              [ngClass]="button.cssClass"
-              [disabled]="button.disabled"
-              [matTooltip]="button.tooltip"
-              (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
-              <!-- icon -->
-              @if (button.matIcon) {
-                <mat-icon>
-                  {{ button.matIcon }}
-                </mat-icon>
-              } @else if (button.svgIcon) {
-                <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
-              }
-              {{ button.label }}
-            </button>
-          } @else {
-            <button
-              mat-icon-button
-              class="lf-list-item-icon"
-              [class.disabled]="button.disabled"
-              [ngClass]="button.cssClass"
-              [disabled]="button.disabled"
-              [matTooltip]="button.tooltip"
-              [aria-label]="button.id || button.tooltip"
-              (click)="clickButton({ buttonId: button.id, item: null! }, $event)">
-              <!-- icon -->
-              @if (button.matIcon) {
-                <mat-icon>
-                  {{ button.matIcon }}
-                </mat-icon>
-              } @else if (button.svgIcon) {
-                <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
-              }
-            </button>
-          }
+          <ng-container
+            [ngTemplateOutlet]="listButtonTemplate"
+            [ngTemplateOutletContext]="{
+              button: button,
+              item: null,
+              disabled: button.disabled,
+            }"></ng-container>
         }
       </div>
 
@@ -210,47 +178,14 @@
           @let combinedButtons = getCombinedButtons(item);
           @for (button of combinedButtons; track button.id) {
             @if (!item.hiddenButtonIds?.includes(button.id)) {
-              @let disabled =
-                button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id);
-              @if (button.label) {
-                <button
-                  mat-button
-                  class="lf-list-item-button"
-                  [class.disabled]="disabled"
-                  [ngClass]="button.cssClass"
-                  [disabled]="disabled"
-                  [matTooltip]="button.tooltip"
-                  (click)="clickButton({ buttonId: button.id, item }, $event)">
-                  <!-- icon -->
-                  @if (button.matIcon) {
-                    <mat-icon>
-                      {{ button.matIcon }}
-                    </mat-icon>
-                  } @else if (button.svgIcon) {
-                    <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
-                  }
-                  {{ button.label }}
-                </button>
-              } @else {
-                <button
-                  mat-icon-button
-                  class="lf-list-item-icon"
-                  [class.disabled]="disabled"
-                  [ngClass]="button.cssClass"
-                  [disabled]="disabled"
-                  [matTooltip]="button.tooltip"
-                  [aria-label]="button.id || button.tooltip"
-                  (click)="clickButton({ buttonId: button.id, item }, $event)">
-                  <!-- icon -->
-                  @if (button.matIcon) {
-                    <mat-icon>
-                      {{ button.matIcon }}
-                    </mat-icon>
-                  } @else if (button.svgIcon) {
-                    <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
-                  }
-                </button>
-              }
+              <ng-container
+                [ngTemplateOutlet]="listButtonTemplate"
+                [ngTemplateOutletContext]="{
+                  button: button,
+                  item: item,
+                  disabled:
+                    button.disabled || item.disabled || item.disabledButtonIds?.includes(button.id),
+                }"></ng-container>
             }
           }
         }
@@ -336,3 +271,72 @@
     </div>
   </ng-template>
 </div>
+
+<!-- button (template) -->
+<!-- The menu lives inside this template, so every button instantiation owns its own -->
+<ng-template #listButtonTemplate let-button="button" let-item="item" let-disabled="disabled">
+  @if (button.label) {
+    <button
+      mat-button
+      class="lf-list-item-button"
+      [class.disabled]="disabled"
+      [ngClass]="button.cssClass"
+      [disabled]="disabled"
+      [matTooltip]="button.tooltip"
+      [matMenuTriggerFor]="button.menuButtons?.length ? menu : null"
+      (click)="clickButton({ buttonId: button.id, item }, $event)">
+      <!-- icon -->
+      @if (button.matIcon) {
+        <mat-icon>
+          {{ button.matIcon }}
+        </mat-icon>
+      } @else if (button.svgIcon) {
+        <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+      }
+      {{ button.label }}
+    </button>
+  } @else {
+    <button
+      mat-icon-button
+      class="lf-list-item-icon"
+      [class.disabled]="disabled"
+      [ngClass]="button.cssClass"
+      [disabled]="disabled"
+      [matTooltip]="button.tooltip"
+      [aria-label]="button.id || button.tooltip"
+      [matMenuTriggerFor]="button.menuButtons?.length ? menu : null"
+      (click)="clickButton({ buttonId: button.id, item }, $event)">
+      <!-- icon -->
+      @if (button.matIcon) {
+        <mat-icon>
+          {{ button.matIcon }}
+        </mat-icon>
+      } @else if (button.svgIcon) {
+        <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+      }
+    </button>
+  }
+
+  <!-- menu -->
+  <mat-menu #menu="matMenu" xPosition="before">
+    @for (menuButton of button.menuButtons; track menuButton.id) {
+      <button
+        mat-menu-item
+        [ngClass]="menuButton.cssClass"
+        [disabled]="menuButton.disabled"
+        [matTooltip]="menuButton.tooltip"
+        (click)="clickButton({ buttonId: menuButton.id, item }, $event)">
+        <!-- icon -->
+        @if (menuButton.matIcon) {
+          <mat-icon>
+            {{ menuButton.matIcon }}
+          </mat-icon>
+        } @else if (menuButton.svgIcon) {
+          <mat-icon [svgIcon]="menuButton.svgIcon"></mat-icon>
+        }
+        <!-- label -->
+        <span>{{ menuButton.label }}</span>
+      </button>
+    }
+  </mat-menu>
+</ng-template>

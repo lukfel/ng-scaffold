@@ -19,6 +19,7 @@ import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox
 import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { map } from 'rxjs';
@@ -28,7 +29,13 @@ import {
   ListItemSubtitleDirective,
   ListItemTitleDirective,
 } from '../../../directives';
-import { Button, ListConfig, ListHeader, ListItem, ScaffoldLibraryConfig } from '../../../models';
+import {
+  ListConfig,
+  ListHeader,
+  ListItem,
+  MenuButton,
+  ScaffoldLibraryConfig,
+} from '../../../models';
 import { CONFIG } from '../../../scaffold.config';
 import { BreakpointService } from '../../../services';
 
@@ -46,6 +53,7 @@ import { BreakpointService } from '../../../services';
     MatCheckboxModule,
     MatRippleModule,
     MatIconModule,
+    MatMenuModule,
     MatTooltipModule,
     MatDividerModule,
     KeyValuePipe,
@@ -66,7 +74,7 @@ export class ListComponent {
   public readonly header = input<ListHeader | null>(null);
   public readonly items = input<ListItem[]>([]);
   public readonly groupedItems = input<Map<string, ListItem[]>>(new Map());
-  public readonly buttons = input<Button[]>([]);
+  public readonly buttons = input<MenuButton[]>([]);
 
   public readonly dropListId = input<string>();
   public readonly connectedDropListIds = input<string[]>();
@@ -179,7 +187,7 @@ export class ListComponent {
   }
 
   // Combine list and item buttons
-  public getCombinedButtons(item: ListItem): Button[] {
+  public getCombinedButtons(item: ListItem): MenuButton[] {
     return [...(item.buttons ?? []), ...(this.buttons() ?? [])];
   }
 

@@ -453,7 +453,8 @@ In addition to the scaffold components provided by default by the the `ScaffoldC
 
 ### List
 A standalone Material Design inspired list and table hybrid component for displaying structured
-collections of items. It supports avatars, titles, subtitles, actions, selections and dragging —
+collections of items. It supports avatars, titles, subtitles, actions, menus, selections and
+dragging —
 making it ideal for dashboards, inventories, and administrative views.
 
 ```ts
@@ -461,7 +462,7 @@ import { ListComponent } from '@lukfel/ng-scaffold';
 ```
 
 ```ts
-import { Button, ListConfig, ListHeader, ListItem } from '@lukfel/ng-scaffold';
+import { ListConfig, ListHeader, ListItem, MenuButton } from '@lukfel/ng-scaffold';
 
 public listConfig = signal<ListConfig>({    // (Optional) list config
   enableSelection: true,
@@ -484,9 +485,17 @@ public listItems = signal<ListItem[]>([
   { id: 2, matIcon: 'person', title: 'Item 3', subtitle: 'I have no edit buton', hiddenButtonIds: ['edit'] },
 ]);
 
-public listButtons = signal<Button[]>([         // (Optional) list buttons
+public listButtons = signal<MenuButton[]>([     // (Optional) list buttons
   { id: 'edit', matIcon: 'edit' },
-  { id: 'delete', matIcon: 'delete', cssClass: 'warn' }
+  { id: 'delete', matIcon: 'delete', cssClass: 'warn' },
+  {                                            // A button with menuButtons opens a menu
+    id: 'more',
+    matIcon: 'more_vert',
+    menuButtons: [
+      { id: 'share', matIcon: 'share', label: 'Share' },
+      { id: 'archive', matIcon: 'archive', label: 'Archive' }
+    ]
+  }
 ]);
 
 // (Optional) Handle sort events
@@ -505,7 +514,7 @@ public onListSelectionChange(items: ListItem[]): void {
 }
 
 public onListButtonClick(event: { buttonId: string, item: ListItem }): void {
-  // handle button click
+  // handle button click, menu entries report their own id here too
 }
 
 public onListItemClick(item: ListItem): void {

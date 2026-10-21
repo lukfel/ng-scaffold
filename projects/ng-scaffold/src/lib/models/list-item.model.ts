@@ -1,4 +1,4 @@
-import { Button } from './menu-button.model';
+import { MenuButton } from './menu-button.model';
 
 export interface ListItem {
   id: string | number;
@@ -13,7 +13,7 @@ export interface ListItem {
   routerLink?: string | (string | number)[];
   href?: string;
   externalTab?: boolean;
-  buttons?: Button[];
+  buttons?: MenuButton[];
   hiddenButtonIds?: string[];
   disabledButtonIds?: string[];
   data?: any;
@@ -25,7 +25,7 @@ export interface ListHeader {
   svgIcon?: string;
   avatar?: string;
   items?: ListHeaderItem[];
-  buttons?: Button[];
+  buttons?: MenuButton[];
 }
 
 export interface ListConfig {

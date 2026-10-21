@@ -4,7 +4,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import {
   BottomBarConfig,
-  Button,
+  MenuButton,
   ColorPickerComponent,
   FileUploadComponent,
   ListComponent,
@@ -80,9 +80,17 @@ export class ComponentsComponent {
     },
   ]);
 
-  public listButtons = signal<Button[]>([
+  public listButtons = signal<MenuButton[]>([
     { id: 'edit', matIcon: 'edit' },
     { id: 'delete', matIcon: 'delete', cssClass: 'lf-ugly-orange' },
+    {
+      id: 'more',
+      matIcon: 'more_vert',
+      menuButtons: [
+        { id: 'share', matIcon: 'share', label: 'Share' },
+        { id: 'archive', matIcon: 'archive', label: 'Archive' },
+      ],
+    },
   ]);
 
   public fileName = signal<string>('');
@@ -194,6 +202,10 @@ export class ComponentsComponent {
       this.snackbarService.openSnackbar(`Edit ${event?.item?.title}`, 'Close');
     } else if (event?.buttonId === 'delete') {
       this.snackbarService.openSnackbar(`Delete ${event?.item?.title}`, 'Close');
+    } else if (event?.buttonId === 'share') {
+      this.snackbarService.openSnackbar(`Share ${event?.item?.title}`, 'Close');
+    } else if (event?.buttonId === 'archive') {
+      this.snackbarService.openSnackbar(`Archive ${event?.item?.title}`, 'Close');
     }
   }
 
