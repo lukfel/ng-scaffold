@@ -1,6 +1,31 @@
-.lf-floating-button {
+.lf-floating-button-group {
+  display: inline-flex;
+  align-items: stretch;
+
   z-index: var(--floating-button-z-index);
   bottom: calc(var(--floating-button-bottom) + var(--lf-fab-snackbar-offset, 0px));
+
+  // Only the split variant hands its shape and shadow to the group. A single button keeps
+  // its own, so Material's M2 and M3 radii never have to be reconciled.
+  &.split {
+    border-radius: var(--floating-button-group-radius);
+    box-shadow: var(--floating-button-group-shadow);
+    overflow: hidden;
+
+    .lf-floating-button {
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .lf-floating-button:first-of-type {
+      border-right: 1px solid var(--floating-button-divider-color);
+    }
+
+    .lf-floating-button-secondary {
+      min-width: 0 !important;
+      padding: 0 var(--floating-button-secondary-padding) !important;
+    }
+  }
 
   &.show-snackbar {
     --lf-fab-snackbar-offset: var(--floating-button-snackbar-offset);

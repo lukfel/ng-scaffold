@@ -90,6 +90,17 @@ export class StartComponent {
   public contentTitleCardConfig = computed<ContentTitleCardConfig>(
     () => this.scaffoldConfig()?.contentTitleCardConfig || {},
   );
+
+  public readonly secondaryButton: MenuButton = {
+    id: 'floatingButton_secondary',
+    matIcon: 'expand_less',
+    tooltip: 'More actions',
+    menuButtons: [
+      { id: 'floatingButton_print', matIcon: 'print', label: 'Print' },
+      { id: 'floatingButton_share', matIcon: 'share', label: 'Share' },
+    ],
+  };
+
   public floatingButtonConfig = computed<FloatingButtonConfig>(
     () => this.scaffoldConfig()?.floatingButtonConfig || {},
   );

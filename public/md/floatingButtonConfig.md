@@ -11,5 +11,6 @@ interface FloatingButtonConfig {
   autoHide?: boolean;
   sticky?: boolean;
   cssClass?: string;
+  secondaryButton?: MenuButton;
 }
 ```

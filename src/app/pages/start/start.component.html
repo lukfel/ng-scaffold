@@ -435,6 +435,16 @@
     </mat-slide-toggle>
   </p>
 
+  <p>
+    <mat-slide-toggle [ngModel]="!!floatingButtonConfig.secondaryButton" (ngModelChange)="
+            scaffoldService.updateScaffoldProperty('floatingButtonConfig', {
+              secondaryButton: $event ? secondaryButton : undefined
+            })
+          ">
+      Split
+    </mat-slide-toggle>
+  </p>
+
   <mat-form-field>
     <mat-label>Event id</mat-label>
     <input matInput [ngModel]="floatingButtonConfig.id" (ngModelChange)="
