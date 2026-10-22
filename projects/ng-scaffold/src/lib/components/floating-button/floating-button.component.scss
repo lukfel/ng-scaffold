@@ -41,7 +41,7 @@
 
     &.center {
       left: 50%;
-      transform: translateX(-50%);
+      translate: -50%;
 
       &.show-drawer {
         left: calc(50% + (var(--drawer-width) / 2)) !important;
@@ -70,7 +70,7 @@
 
     &.center {
       left: calc(50% - 4px);
-      transform: translateX(-50%);
+      translate: -50%;
 
       &.show-drawer {
         left: calc(50% + (var(--drawer-width) / 2) - 4px) !important;
@@ -79,7 +79,7 @@
 
     &.right {
       left: calc(100% - (var(--floating-button-right) + 8px));
-      transform: translateX(-100%);
+      translate: -100%;
     }
   }
 }

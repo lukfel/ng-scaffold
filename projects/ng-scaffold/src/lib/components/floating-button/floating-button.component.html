@@ -3,7 +3,7 @@
     <!-- The group carries the placement, so both halves move as one -->
     <div
       class="lf-floating-button-group lf-transitions"
-      [ngClass]="config.horizontalPosition"
+      [ngClass]="config.cssClass + ' ' + config.horizontalPosition"
       [class.split]="!!config.secondaryButton"
       [class.sticky]="config.sticky"
       [class.show-navbar]="isMobile() && navbarEnabled() && !bottomBarEnabled()"
@@ -15,7 +15,6 @@
         mat-fab
         color="accent"
         class="lf-floating-button"
-        [ngClass]="config.cssClass"
         [extended]="!!config.label"
         [disabled]="config.disabled"
         (click)="buttonClicked(config.id)"
