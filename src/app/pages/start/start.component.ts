@@ -1,5 +1,12 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -154,6 +161,11 @@ export class StartComponent {
           this.bottomBarCloseClicked();
         }
       });
+
+    // The bottom bar is global, so don't leave it open on other pages
+    inject(DestroyRef).onDestroy(() =>
+      this.scaffoldService.updateScaffoldProperty('bottomBarConfig', { enable: false }),
+    );
   }
 
   public copyConfig(): void {
@@ -375,6 +387,7 @@ export class StartComponent {
       this.scaffoldService.updateScaffoldProperty('bottomBarConfig', {
         enable: true,
         message: `${selected} selected`,
+        closeButtonId: 'bottom-bar_close',
         buttons: [
           {
             id: 'bottom-bar_submit',

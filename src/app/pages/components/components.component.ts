@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
@@ -83,14 +83,14 @@ export class ComponentsComponent {
   public listButtons = signal<MenuButton[]>([
     { id: 'edit', matIcon: 'edit' },
     { id: 'delete', matIcon: 'delete', cssClass: 'lf-ugly-orange' },
-    {
-      id: 'more',
-      matIcon: 'more_vert',
-      menuButtons: [
-        { id: 'share', matIcon: 'share', label: 'Share' },
-        { id: 'archive', matIcon: 'archive', label: 'Archive' },
-      ],
-    },
+    // {
+    //   id: 'more',
+    //   matIcon: 'more_vert',
+    //   menuButtons: [
+    //     { id: 'share', matIcon: 'share', label: 'Share' },
+    //     { id: 'archive', matIcon: 'archive', label: 'Archive' },
+    //   ],
+    // },
   ]);
 
   public fileName = signal<string>('');
@@ -171,6 +171,11 @@ export class ComponentsComponent {
           this.onListSelectionChange();
         }
       });
+
+    // The bottom bar is global, so don't leave it open on other pages
+    inject(DestroyRef).onDestroy(() =>
+      this.scaffoldService.updateScaffoldProperty('bottomBarConfig', { enable: false }),
+    );
   }
 
   public onListSortChange(event: { sortToken: string; sortAsc: boolean }): void {

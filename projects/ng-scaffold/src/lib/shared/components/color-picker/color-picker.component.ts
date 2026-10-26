@@ -54,7 +54,12 @@ export class ColorPickerComponent {
     }
   }
 
-  public labelColor = computed<string>(() => {
+  // Without a picked colour, the button's own theme colour pairs the foreground
+  public labelColor = computed<string | null>(() => {
+    if (!this.selectedColor()) {
+      return null;
+    }
+
     const hex = this.selectedColor().replace('#', '');
 
     const r = parseInt(hex.substr(0, 2), 16);

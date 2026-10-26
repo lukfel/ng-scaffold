@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   height: var(--list-item-height);
-  border-radius: var(--list-item-border-radius);
+  border-radius: var(--border-radius);
   box-sizing: border-box;
   overflow: hidden;
 
@@ -117,7 +117,7 @@
   width: 100%;
   height: var(--list-item-height);
   border: 2px dashed var(--color-gray);
-  border-radius: var(--list-item-border-radius);
+  border-radius: var(--border-radius);
   box-sizing: border-box;
 }
 
@@ -130,7 +130,7 @@
   color: var(--mat-app-text-color, inherit) !important;
   background: var(--mat-app-background-color, inherit) !important;
   box-sizing: border-box;
-  border-radius: var(--list-item-border-radius);
+  border-radius: var(--border-radius);
   opacity: 0.8;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14),

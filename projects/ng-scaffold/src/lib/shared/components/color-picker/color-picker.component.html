@@ -5,6 +5,7 @@
     type="color"
     onclick="this.value = null"
     [ngModel]="selectedColor()"
+    [disabled]="disabled()"
     (ngModelChange)="selectColor($event)" />
 
   <button
@@ -12,8 +13,8 @@
     class="lf-button"
     type="button"
     [color]="selectedColor() ? null : color()"
-    [style.background]="selectedColor()"
-    [style.color]="labelColor()"
+    [style.background]="disabled() ? null : selectedColor()"
+    [style.color]="disabled() ? null : labelColor()"
     [disabled]="disabled()"
     (click)="colorPicker.click()"
     [matTooltip]="tooltip()">
@@ -34,5 +35,6 @@
     #colorPicker
     type="color"
     [ngModel]="selectedColor()"
+    [disabled]="disabled()"
     (ngModelChange)="selectColor($event)" />
 }
