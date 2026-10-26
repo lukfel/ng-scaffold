@@ -6,6 +6,8 @@
     z-index: var(--drawer-z-index);
     width: var(--drawer-width);
     border-right: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+    // M3 navigation drawer
+    background-color: var(--mat-sys-surface-container-low, var(--mat-sidenav-container-background-color));
 
     &.mobile {
       z-index: var(--drawer-z-index-mobile);

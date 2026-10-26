@@ -5,7 +5,10 @@
   top: 0;
   height: 100dvh;
   padding: calc(var(--header-height) + 16px) var(--navbar-padding) 0 var(--navbar-padding);
-  border-right: solid 1px rgba(0, 0, 0, 0.12);
+  border-right: solid 1px var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+  // M3 navigation rail
+  background-color: var(--mat-sys-surface, var(--mat-app-background-color));
+  color: var(--mat-sys-on-surface, var(--mat-app-text-color));
 
   .lf-navbar-items {
     display: flex;
@@ -22,7 +25,10 @@
   width: 100vw;
   padding: var(--navbar-padding) 0;
   box-sizing: border-box;
-  border-top: solid 1px rgba(0, 0, 0, 0.12);
+  border-top: solid 1px var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+  // M3 navigation bar
+  background-color: var(--mat-sys-surface-container, var(--mat-app-background-color));
+  color: var(--mat-sys-on-surface, var(--mat-app-text-color));
 
   .lf-navbar-mobile-items {
     display: flex;

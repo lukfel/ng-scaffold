@@ -35,6 +35,7 @@ $lf-default-theme: (
       density: 0,
     ));
     @include mat.all-component-themes($mat-theme);
+    @include m2-system($mat-theme, false);
   } @else {
     $mat-theme: mat.m2-define-dark-theme((
       color: (
@@ -48,8 +49,10 @@ $lf-default-theme: (
       density: 0,
     ));
     @include mat.all-component-themes($mat-theme);
+    @include m2-system($mat-theme, true);
   }
   @include color-variables($theme, 'body');
+  @include shape-variables-m2('body');
 }
 
 // Set M2 colors
@@ -66,6 +69,7 @@ $lf-default-theme: (
         )
       ));
       @include mat.all-component-colors($mat-theme);
+      @include m2-system($mat-theme, false);
     } @else {
       $mat-theme: mat.m2-define-dark-theme((
         color: (
@@ -75,10 +79,29 @@ $lf-default-theme: (
         )
       ));
       @include mat.all-component-colors($mat-theme);
+      @include m2-system($mat-theme, true);
     }
   }
 
   @include color-variables($theme, #{'body.'+$class});
+  @include shape-variables-m2(#{'body.'+$class});
+}
+
+// M2 system tokens
+// Emits the --mat-sys-* tokens with M2 values, so library styles read one set of
+// tokens under both versions. M2's divider is "outline"; M3 uses outline-variant.
+@mixin m2-system($mat-theme, $dark) {
+  $divider: if($dark, rgba(white, 0.12), rgba(black, 0.12));
+  @include mat.m2-theme($mat-theme, (outline-variant: $divider));
+}
+
+// M2 shape
+// The M2 system scale also puts corner-medium at 12px, which --border-radius would
+// pick up. Set on body, since :root outranks the html that mat.m2-theme writes to.
+@mixin shape-variables-m2($scope) {
+  #{$scope} {
+    --border-radius: 4px;
+  }
 }
 
 // Set M2 variables

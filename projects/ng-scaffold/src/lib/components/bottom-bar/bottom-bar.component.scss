@@ -21,7 +21,7 @@
 
     .lf-bottom-bar-button {
       color: var(--color-accent) !important;
-      background-color: white !important;
+      background-color: var(--mat-sys-on-tertiary, white) !important;
     }
   }
 }
