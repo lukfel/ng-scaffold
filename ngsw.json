@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1792688494227,
+  "timestamp": 1793051238079,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -11,19 +11,19 @@
         "ignoreVary": true
       },
       "urls": [
-        "/ng-scaffold/chunk-BVeBXTkC.js",
-        "/ng-scaffold/chunk-C_NqI85U.js",
-        "/ng-scaffold/chunk-CxGEy1OH.js",
-        "/ng-scaffold/chunk-D2JDl5WW.js",
-        "/ng-scaffold/chunk-DD5RYiKU.js",
-        "/ng-scaffold/chunk-DQuoV75Z.js",
-        "/ng-scaffold/chunk-DlLj2vGL.js",
+        "/ng-scaffold/chunk-C4CULSoI.js",
+        "/ng-scaffold/chunk-CZLtPznu.js",
+        "/ng-scaffold/chunk-DGbvTEQG.js",
+        "/ng-scaffold/chunk-Dik5tOFM.js",
+        "/ng-scaffold/chunk-Ll7Fjz38.js",
+        "/ng-scaffold/chunk-YXUK028R.js",
+        "/ng-scaffold/chunk-yW8xcT-K.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-EXYASF5M.js",
+        "/ng-scaffold/main-TBSJYXZU.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/scripts-5A55CVEY.js",
-        "/ng-scaffold/styles-WPNTVMQ5.css"
+        "/ng-scaffold/styles-2CEL5ZNE.css"
       ],
       "patterns": []
     },
@@ -106,13 +106,13 @@
   "dataGroups": [],
   "hashTable": {
     "/ng-scaffold/apple-touch-icon.png": "e1e3cc7de31cd0d272fde7c5a8bb184d3f072e8a",
-    "/ng-scaffold/chunk-BVeBXTkC.js": "be7f2fcd8d0aa89b5ca83c001e8b05f7ddc5ab66",
-    "/ng-scaffold/chunk-C_NqI85U.js": "4fa69ca80778f9d85a0b8a9a2a92d25897887245",
-    "/ng-scaffold/chunk-CxGEy1OH.js": "564c441d581f44b0202239d14e52f198b7e0f612",
-    "/ng-scaffold/chunk-D2JDl5WW.js": "5a2b155c2ce07f53eb2633f96018d67a22609efb",
-    "/ng-scaffold/chunk-DD5RYiKU.js": "0c43c1e7fe042693397576fda85edf920a424dca",
-    "/ng-scaffold/chunk-DQuoV75Z.js": "8d386e4fa4caed6ecdcc5d7ffc069eae77b02a60",
-    "/ng-scaffold/chunk-DlLj2vGL.js": "5d7f653bcb729ab096c1d945577786685ce11d9a",
+    "/ng-scaffold/chunk-C4CULSoI.js": "60639f2bbb962432ce2d78c7b7c39ce958b2d720",
+    "/ng-scaffold/chunk-CZLtPznu.js": "4dfc72c654fb12fbb9144a15f97d33bdbbcf833b",
+    "/ng-scaffold/chunk-DGbvTEQG.js": "db6f48ad1ccd24ca9e0f70675ced3d70297d1f43",
+    "/ng-scaffold/chunk-Dik5tOFM.js": "e2a6b42e8d884593ea89bf4611917918de7c4ccd",
+    "/ng-scaffold/chunk-Ll7Fjz38.js": "de93ccf40e447d204d8c864991e94fa9b57318be",
+    "/ng-scaffold/chunk-YXUK028R.js": "36f5d59b802296f2c389f2d8678240810e58403e",
+    "/ng-scaffold/chunk-yW8xcT-K.js": "7f6a4705e2b357890cc3731a16ab81755d91cac8",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
     "/ng-scaffold/img/cat.svg": "feb48d3ee921c2486ce4ccc8ee0c676864b7aa0e",
     "/ng-scaffold/img/error/missing.png": "4feb249451b24043272eb7226628c3d92069d0cc",
@@ -146,8 +146,8 @@
     "/ng-scaffold/img/uglygotchi.svg": "4217a98c5bcc2309835fdfe6177d1999d62a44c0",
     "/ng-scaffold/img/waw.svg": "58d211b8f9dfab2ab0352d6132ef06232f3599f8",
     "/ng-scaffold/img/wowen.svg": "7330390e650bfa6f48733f806d367e3ce80cf2b8",
-    "/ng-scaffold/index.html": "83ed8e157c1c23c86af9970e7acf2d9d87fbda5d",
-    "/ng-scaffold/main-EXYASF5M.js": "dc78e46648a3203da65688336c3512a00c83d5d5",
+    "/ng-scaffold/index.html": "88b401cb863ce3857eb3fbb2ac1b584f5aea594b",
+    "/ng-scaffold/main-TBSJYXZU.js": "64f654b7995844353ae8d1bf22ac0d11b4c2ccbd",
     "/ng-scaffold/manifest.webmanifest": "d487cb7bc84a5e7ccfef9ca406e917bfe555b1f8",
     "/ng-scaffold/md/bottomBarConfig.md": "19c663ab16d13f72b73a14f6756a53f5c7471862",
     "/ng-scaffold/md/contentTitleCardConfig.md": "113026539fe35770e8d1897625924eca7ce64f58",
@@ -181,7 +181,7 @@
     "/ng-scaffold/media/roboto-v30-latin-regular-6KEU5XHX.woff2": "7ca9c5967f3bb8bffeab24b639b49c1e7d03fa52",
     "/ng-scaffold/media/roboto-v30-latin-regular-EJHJLMHI.woff": "d9cfe6b477b49d47b6241b4281f4858d98eaca65",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
-    "/ng-scaffold/styles-WPNTVMQ5.css": "cbe69df088c0cc592e8658a31600f0b35931654c"
+    "/ng-scaffold/styles-2CEL5ZNE.css": "e1073b7106e913eb9dca66fde9a9a4f4cfd2d4bd"
   },
   "navigationUrls": [
     {
