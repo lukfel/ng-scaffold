@@ -272,7 +272,8 @@ $lf-default-theme-m3: (
 // Toolbar color backwards compatibility
 // M3's color-variants-backwards-compatibility does not cover mat-toolbar.
 // This mixin restores [color] input support for toolbar and ensures icons/buttons
-// inside colored toolbars use the correct contrast color.
+// inside colored toolbars use the correct contrast color. Form fields (the header
+// search) sit on their own surface and keep their icon colours.
 @mixin toolbar-color-compat($scope: null) {
   $prefix: '';
   @if ($scope) {
@@ -286,7 +287,9 @@ $lf-default-theme-m3: (
     .mat-icon,
     .mat-mdc-icon-button,
     .mat-mdc-button {
-      color: var(--mat-sys-on-primary);
+      &:where(:not(.mat-mdc-form-field *)) {
+        color: var(--mat-sys-on-primary);
+      }
     }
   }
 
@@ -297,7 +300,9 @@ $lf-default-theme-m3: (
     .mat-icon,
     .mat-mdc-icon-button,
     .mat-mdc-button {
-      color: var(--mat-sys-on-tertiary);
+      &:where(:not(.mat-mdc-form-field *)) {
+        color: var(--mat-sys-on-tertiary);
+      }
     }
   }
 
@@ -308,7 +313,9 @@ $lf-default-theme-m3: (
     .mat-icon,
     .mat-mdc-icon-button,
     .mat-mdc-button {
-      color: var(--mat-sys-on-error);
+      &:where(:not(.mat-mdc-form-field *)) {
+        color: var(--mat-sys-on-error);
+      }
     }
   }
 }

@@ -27,6 +27,11 @@
     }
   }
 
+  // Letter-spacing also trails the last letter, widening the label's right side (1.25px on M2)
+  .lf-floating-button-label {
+    margin-right: calc(-1 * var(--mat-fab-extended-label-text-tracking, var(--mat-sys-label-large-tracking, 0px)));
+  }
+
   &.show-snackbar {
     --lf-fab-snackbar-offset: var(--floating-button-snackbar-offset);
   }
