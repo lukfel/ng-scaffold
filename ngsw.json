@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1793051238079,
+  "timestamp": 1793129835996,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -11,19 +11,19 @@
         "ignoreVary": true
       },
       "urls": [
-        "/ng-scaffold/chunk-C4CULSoI.js",
-        "/ng-scaffold/chunk-CZLtPznu.js",
-        "/ng-scaffold/chunk-DGbvTEQG.js",
-        "/ng-scaffold/chunk-Dik5tOFM.js",
-        "/ng-scaffold/chunk-Ll7Fjz38.js",
-        "/ng-scaffold/chunk-YXUK028R.js",
-        "/ng-scaffold/chunk-yW8xcT-K.js",
+        "/ng-scaffold/chunk-B67wujYH.js",
+        "/ng-scaffold/chunk-B7nQZS8N.js",
+        "/ng-scaffold/chunk-BjWD6IlD.js",
+        "/ng-scaffold/chunk-D1AuCxeX.js",
+        "/ng-scaffold/chunk-DXYKnhmX.js",
+        "/ng-scaffold/chunk-G2Fzdb0C.js",
+        "/ng-scaffold/chunk-rGe3_zgd.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-TBSJYXZU.js",
+        "/ng-scaffold/main-KLEJX4RG.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/scripts-5A55CVEY.js",
-        "/ng-scaffold/styles-2CEL5ZNE.css"
+        "/ng-scaffold/styles-X4BCC7KB.css"
       ],
       "patterns": []
     },
@@ -106,13 +106,13 @@
   "dataGroups": [],
   "hashTable": {
     "/ng-scaffold/apple-touch-icon.png": "e1e3cc7de31cd0d272fde7c5a8bb184d3f072e8a",
-    "/ng-scaffold/chunk-C4CULSoI.js": "60639f2bbb962432ce2d78c7b7c39ce958b2d720",
-    "/ng-scaffold/chunk-CZLtPznu.js": "4dfc72c654fb12fbb9144a15f97d33bdbbcf833b",
-    "/ng-scaffold/chunk-DGbvTEQG.js": "db6f48ad1ccd24ca9e0f70675ced3d70297d1f43",
-    "/ng-scaffold/chunk-Dik5tOFM.js": "e2a6b42e8d884593ea89bf4611917918de7c4ccd",
-    "/ng-scaffold/chunk-Ll7Fjz38.js": "de93ccf40e447d204d8c864991e94fa9b57318be",
-    "/ng-scaffold/chunk-YXUK028R.js": "36f5d59b802296f2c389f2d8678240810e58403e",
-    "/ng-scaffold/chunk-yW8xcT-K.js": "7f6a4705e2b357890cc3731a16ab81755d91cac8",
+    "/ng-scaffold/chunk-B67wujYH.js": "60e7b550812b41658f1cf0835160e9982b14f69d",
+    "/ng-scaffold/chunk-B7nQZS8N.js": "5ac4b472de64792f7f33d2654b88a65fbe81d1ed",
+    "/ng-scaffold/chunk-BjWD6IlD.js": "14b0b8fb1c3c20bd18f3c6621df36bea9923f7a1",
+    "/ng-scaffold/chunk-D1AuCxeX.js": "542dfd376a422f2351f176aaab320f2addafabd7",
+    "/ng-scaffold/chunk-DXYKnhmX.js": "6db3aad972d1d668fc11b9b6e579d620a134f029",
+    "/ng-scaffold/chunk-G2Fzdb0C.js": "e3d1afd9170d60978ec0a0d5d0187da89d01a016",
+    "/ng-scaffold/chunk-rGe3_zgd.js": "906aef85425bb8a5b8b36a44a40dd53bd8943be3",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
     "/ng-scaffold/img/cat.svg": "feb48d3ee921c2486ce4ccc8ee0c676864b7aa0e",
     "/ng-scaffold/img/error/missing.png": "4feb249451b24043272eb7226628c3d92069d0cc",
@@ -146,8 +146,8 @@
     "/ng-scaffold/img/uglygotchi.svg": "4217a98c5bcc2309835fdfe6177d1999d62a44c0",
     "/ng-scaffold/img/waw.svg": "58d211b8f9dfab2ab0352d6132ef06232f3599f8",
     "/ng-scaffold/img/wowen.svg": "7330390e650bfa6f48733f806d367e3ce80cf2b8",
-    "/ng-scaffold/index.html": "88b401cb863ce3857eb3fbb2ac1b584f5aea594b",
-    "/ng-scaffold/main-TBSJYXZU.js": "64f654b7995844353ae8d1bf22ac0d11b4c2ccbd",
+    "/ng-scaffold/index.html": "2320f196026211d666f9a044b23483304e650057",
+    "/ng-scaffold/main-KLEJX4RG.js": "eff3b23ec0a6dffad8e07f56e1603908188f2e2f",
     "/ng-scaffold/manifest.webmanifest": "d487cb7bc84a5e7ccfef9ca406e917bfe555b1f8",
     "/ng-scaffold/md/bottomBarConfig.md": "19c663ab16d13f72b73a14f6756a53f5c7471862",
     "/ng-scaffold/md/contentTitleCardConfig.md": "113026539fe35770e8d1897625924eca7ce64f58",
@@ -181,7 +181,7 @@
     "/ng-scaffold/media/roboto-v30-latin-regular-6KEU5XHX.woff2": "7ca9c5967f3bb8bffeab24b639b49c1e7d03fa52",
     "/ng-scaffold/media/roboto-v30-latin-regular-EJHJLMHI.woff": "d9cfe6b477b49d47b6241b4281f4858d98eaca65",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
-    "/ng-scaffold/styles-2CEL5ZNE.css": "e1073b7106e913eb9dca66fde9a9a4f4cfd2d4bd"
+    "/ng-scaffold/styles-X4BCC7KB.css": "7d0b4556e0a93082541f4cc2ef59fdb1330910a0"
   },
   "navigationUrls": [
     {

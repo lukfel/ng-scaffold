@@ -1,0 +1,1 @@
+import {F}from'./chunk-rGe3_zgd.js';import'./main-KLEJX4RG.js';var n=[{path:"",component:F}];export{n as NOT_FOUND_ROUTES};
