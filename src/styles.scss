@@ -121,4 +121,38 @@ body:where(.m2, .m2-theme2, .m2-theme3, .m2-theme4) {
     ),
     density: 0,
   )));
+
+  // M3's [color] compatibility bakes its light text and icon colours onto each component,
+  // which outranks the M2 theme on body; inherit hands them back to it
+  :is(.mat-primary, .mat-accent, .mat-warn),
+  :is(.mat-primary, .mat-accent, .mat-warn):is(.mat-mdc-checkbox, .mat-mdc-radio-button, .mat-mdc-slide-toggle,
+    .mat-mdc-form-field, .mat-mdc-standard-chip, .mat-mdc-tab-group, .mat-mdc-tab-nav-bar) {
+    @each $token in (
+      checkbox-disabled-label-color, checkbox-disabled-selected-icon-color, checkbox-disabled-unselected-icon-color,
+      checkbox-label-text-color, checkbox-unselected-focus-icon-color, checkbox-unselected-hover-icon-color,
+      checkbox-unselected-icon-color,
+      chip-disabled-label-text-color, chip-label-text-color, chip-selected-disabled-trailing-icon-color,
+      chip-with-icon-disabled-icon-color, chip-with-icon-icon-color,
+      chip-with-trailing-icon-disabled-trailing-icon-color, chip-with-trailing-icon-trailing-icon-color,
+      form-field-disabled-input-text-placeholder-color, form-field-disabled-leading-icon-color,
+      form-field-disabled-select-arrow-color, form-field-disabled-trailing-icon-color,
+      form-field-enabled-select-arrow-color, form-field-filled-disabled-input-text-color,
+      form-field-filled-disabled-label-text-color, form-field-filled-hover-label-text-color,
+      form-field-filled-input-text-color, form-field-filled-input-text-placeholder-color,
+      form-field-filled-label-text-color, form-field-leading-icon-color,
+      form-field-select-disabled-option-text-color, form-field-select-option-text-color, form-field-trailing-icon-color,
+      option-label-text-color,
+      radio-disabled-label-color, radio-disabled-selected-icon-color, radio-disabled-unselected-icon-color,
+      radio-label-text-color, radio-unselected-focus-icon-color, radio-unselected-hover-icon-color,
+      radio-unselected-pressed-icon-color,
+      select-disabled-arrow-color, select-disabled-trigger-text-color, select-enabled-arrow-color,
+      select-enabled-trigger-text-color, select-placeholder-text-color,
+      slide-toggle-disabled-label-text-color, slide-toggle-disabled-selected-icon-color, slide-toggle-label-text-color,
+      tab-active-focus-label-text-color, tab-active-hover-label-text-color, tab-active-label-text-color,
+      tab-inactive-focus-label-text-color, tab-inactive-hover-label-text-color, tab-inactive-label-text-color,
+      tab-pagination-icon-color
+    ) {
+      --mat-#{$token}: inherit;
+    }
+  }
 }

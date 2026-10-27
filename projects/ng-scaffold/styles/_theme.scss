@@ -52,7 +52,7 @@ $lf-default-theme: (
     @include m2-system($mat-theme, true);
   }
   @include color-variables($theme, 'body');
-  @include shape-variables-m2('body');
+  @include shape-variables-m2(':root');
 }
 
 // Set M2 colors
@@ -97,7 +97,8 @@ $lf-default-theme: (
 
 // M2 shape
 // The M2 system scale also puts corner-medium at 12px, which --border-radius would
-// pick up. Set on body, since :root outranks the html that mat.m2-theme writes to.
+// pick up. The base theme sets :root, after _variables, so it holds at every level;
+// a theme class can only reach body.
 @mixin shape-variables-m2($scope) {
   #{$scope} {
     --border-radius: 4px;
