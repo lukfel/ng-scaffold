@@ -1,3 +1,4 @@
+import { SeoLibraryConfig } from './seo-config.model';
 import { TranslationConfig } from './translation-config.model';
 
 export interface ScaffoldLibraryConfig {
@@ -5,4 +6,5 @@ export interface ScaffoldLibraryConfig {
   debugging?: boolean;
   language?: TranslationConfig;
   ssrBreakpoints?: boolean;
+  seo?: SeoLibraryConfig;
 }
