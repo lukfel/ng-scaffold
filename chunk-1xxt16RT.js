@@ -1,1 +1,0 @@
-import {F}from'./chunk-HOHvOCID.js';import'./main-MDR3T3Z4.js';var n=[{path:"",component:F}];export{n as NOT_FOUND_ROUTES};
