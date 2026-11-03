@@ -3,9 +3,10 @@
     <div
       [animate.enter]="isMobile() ? 'lf-anim-slide-up-enter' : 'lf-anim-slide-left-enter'"
       [animate.leave]="isMobile() ? 'lf-anim-slide-up-leave' : 'lf-anim-slide-left-leave'"
-      class="lf-transitions mat-elevation-z3"
+      class="lf-transitions"
       [class.lf-navbar]="!isMobile()"
       [class.lf-navbar-mobile]="isMobile()"
+      [class.lf-elevation-z3-up]="isMobile() && !bottomBarEnabled()"
       [ngClass]="config.cssClass">
       <!-- items -->
       <div [class.lf-navbar-items]="!isMobile()" [class.lf-navbar-mobile-items]="isMobile()">

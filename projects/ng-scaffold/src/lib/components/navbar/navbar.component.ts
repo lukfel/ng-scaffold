@@ -17,6 +17,7 @@ export class NavbarComponent {
   public readonly navbarConfig = input<NavbarConfig | null>(null);
   public readonly isMobile = input<boolean>(false);
   public readonly currentRoute = input<string>();
+  public readonly bottomBarEnabled = input<boolean>(false);
 
   public readonly navbarButtonClickEvent = output<string>();
 

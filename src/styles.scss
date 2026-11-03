@@ -155,4 +155,16 @@ body:where(.m2, .m2-theme2, .m2-theme3, .m2-theme4) {
       --mat-#{$token}: inherit;
     }
   }
+
+  // Accent is M2's checkbox default, so it ships no accent variant and M3's tertiary one wins
+  .mat-accent.mat-mdc-checkbox {
+    @each $token in (
+      selected-checkmark-color, selected-focus-icon-color, selected-focus-state-layer-color,
+      selected-hover-icon-color, selected-hover-state-layer-color, selected-icon-color,
+      selected-pressed-icon-color, selected-pressed-state-layer-color, disabled-selected-checkmark-color,
+      unselected-focus-state-layer-color, unselected-hover-state-layer-color, unselected-pressed-state-layer-color
+    ) {
+      --mat-checkbox-#{$token}: inherit;
+    }
+  }
 }

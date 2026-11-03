@@ -1,6 +1,6 @@
 @if (footerConfig(); as config) {
   @if (config.enable) {
-    <mat-card class="lf-footer lf-transitions mat-elevation-z2 p-4" [ngClass]="config.cssClass">
+    <mat-card class="lf-footer lf-transitions p-4" [ngClass]="config.cssClass">
       <!-- svg logo -->
       @if (config.svgLogo) {
         <mat-icon

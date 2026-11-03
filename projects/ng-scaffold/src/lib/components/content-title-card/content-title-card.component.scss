@@ -5,6 +5,8 @@
   flex-flow: row nowrap;
   align-items: center;
   border-radius: 0;
+  border-bottom: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.12));
+  box-shadow: none;
 
   &.lf-content-title-card-mobile {
     .lf-content-title-card-label {
