@@ -55,6 +55,23 @@ describe('RouterService', () => {
     });
   });
 
+  // Consumers read the history through toSignal, which compares by reference. Pushing into
+  // the stored array and re-emitting it leaves them on the value they first saw, which is
+  // what hid the content title card's back button until something else ran change detection.
+  it('should emit a new array for every history change', async () => {
+    const emissions: string[][] = [];
+    service.routeHistory$.subscribe(history => emissions.push(history));
+
+    routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
+    routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
+    routerEvents$.next(new NavigationEnd(3, '/contact', '/contact'));
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(emissions.map(history => history.length)).toEqual([0, 1, 2]);
+    expect(new Set(emissions).size).toBe(emissions.length);
+  });
+
   it('should handle back navigation correctly', async () => {
     routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
     routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
@@ -63,6 +80,22 @@ describe('RouterService', () => {
     service.navigateBack();
     await new Promise(resolve => setTimeout(resolve, 0));
     expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/home', { state: { back: true } });
+  });
+
+  it('should drop the route it navigated back to, as a new array', async () => {
+    routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
+    routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    const emissions: string[][] = [];
+    service.routeHistory$.subscribe(history => emissions.push(history));
+
+    service.navigateBack();
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(emissions.map(history => history.length)).toEqual([1, 0]);
+    expect(emissions[0]).not.toBe(emissions[1]);
   });
 
   it('should clear route history', async () => {

@@ -63,9 +63,11 @@ export class RouterService {
 
         if (!this.router.currentNavigation()?.extras?.state?.['back']) {
           if (previousRoute) {
-            const routeHistory: string[] = this._routeHistory$.value;
-            routeHistory.push(previousRoute);
-            this._routeHistory$.next(routeHistory);
+            // A new array rather than a push into the stored one: the scaffold reads this
+            // through toSignal, which compares by reference, so a mutated array never
+            // reaches the back button and it only appears once something else happens to
+            // run change detection
+            this._routeHistory$.next([...this._routeHistory$.value, previousRoute]);
           }
         }
       }
@@ -87,7 +89,7 @@ export class RouterService {
         if (previousRoute) {
           this.router.navigateByUrl(previousRoute, { state: { back: true } }).then((result) => {
             if (result) {
-              routeHistory.pop();
+              this._routeHistory$.next(routeHistory.slice(0, -1));
             }
           });
         } else if (fallbackRoute) {
