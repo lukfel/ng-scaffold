@@ -98,6 +98,39 @@ describe('RouterService', () => {
     expect(emissions[0]).not.toBe(emissions[1]);
   });
 
+  it('should expose the current history synchronously', async () => {
+    routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
+    routerEvents$.next(new NavigationEnd(2, '/about', '/about'));
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(service.routeHistory).toEqual(['/home']);
+  });
+
+  // A deep link arrives with no history, so the page seeds the parent it belongs under
+  it('should push a route of its own as a new array', () => {
+    const emissions: string[][] = [];
+    service.routeHistory$.subscribe(history => emissions.push(history));
+
+    service.pushRouteHistory('/inbox');
+
+    expect(service.routeHistory).toEqual(['/inbox']);
+    expect(emissions.map(history => history.length)).toEqual([0, 1]);
+    expect(emissions[0]).not.toBe(emissions[1]);
+  });
+
+  it('should navigate back to a pushed route', async () => {
+    routerEvents$.next(new NavigationEnd(1, '/inbox/a', '/inbox/a'));
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    service.pushRouteHistory('/inbox');
+    service.navigateBack();
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/inbox', { state: { back: true } });
+    expect(service.routeHistory).toEqual([]);
+  });
+
   it('should clear route history', async () => {
     routerEvents$.next(new NavigationEnd(1, '/home', '/home'));
     routerEvents$.next(new NavigationEnd(2, '/about', '/about'));

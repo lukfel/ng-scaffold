@@ -20,6 +20,10 @@ export class RouterService {
     return this._routeHistory$.asObservable();
   }
 
+  public get routeHistory(): string[] {
+    return this._routeHistory$.value;
+  }
+
   private _currentRoute$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public get currentRoute$(): Observable<string> {
@@ -97,6 +101,16 @@ export class RouterService {
         }
       }
     });
+  }
+
+  /**
+   * Add a route to the history, e.g. the parent page of a deep link that arrived without one,
+   * so the back navigation has somewhere to go
+   *
+   * @param route route the next back navigation leads to
+   */
+  public pushRouteHistory(route: string): void {
+    this._routeHistory$.next([...this._routeHistory$.value, route]);
   }
 
   /**
