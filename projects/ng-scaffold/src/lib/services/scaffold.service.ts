@@ -1,11 +1,11 @@
 import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CONFIG } from '../scaffold.config';
 import { ScaffoldConfig, ScaffoldLibraryConfig } from '../models';
 import { Logger } from './logger.service';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ScaffoldService {
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private logger = inject(Logger);

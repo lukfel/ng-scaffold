@@ -1,4 +1,4 @@
-import { DOCUMENT, inject, Injectable, InjectionToken } from '@angular/core';
+import { DOCUMENT, inject, Service, InjectionToken } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
@@ -9,9 +9,7 @@ import { Logger } from './logger.service';
 // Own token rather than CONFIG, because provideScaffold imports this service to start it
 export const SEO_LIBRARY_CONFIG = new InjectionToken<SeoLibraryConfig>('seoLibraryConfig');
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class SeoService {
   private metaTitle = inject(Title);
   private metaTags = inject(Meta);

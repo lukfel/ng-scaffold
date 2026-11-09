@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
@@ -8,8 +8,6 @@ import { NavbarConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatIconModule, MatTooltipModule, NgClass],
 })
 export class NavbarComponent {

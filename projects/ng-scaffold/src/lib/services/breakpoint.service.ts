@@ -1,8 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class BreakpointService {
   private breakpointObserver = inject(BreakpointObserver);
 

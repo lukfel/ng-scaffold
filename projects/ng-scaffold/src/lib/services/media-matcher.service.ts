@@ -1,6 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, REQUEST, inject } from '@angular/core';
+import { Service, PLATFORM_ID, REQUEST, inject } from '@angular/core';
 
 /**
  * Viewports assumed during SSR. A request reveals a device class, never an actual viewport, and
@@ -21,7 +21,7 @@ const MOBILE_USER_AGENT_REGEX = /Android|iPhone|iPod|Windows Phone|IEMobile|Blac
  * on the request, so whatever serves it must `Vary` on `Sec-CH-UA-Mobile` and `User-Agent` or a
  * cached mobile render will be handed to a desktop client.
  */
-@Injectable()
+@Service({ autoProvided: false })
 export class ScaffoldMediaMatcher extends MediaMatcher {
   private platformId = inject(PLATFORM_ID);
   private request = inject(REQUEST, { optional: true });

@@ -1,6 +1,6 @@
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { LoadingOverlayConfig, ScaffoldLibraryConfig } from '../../models';
 import { CONFIG } from '../../scaffold.config';
@@ -10,8 +10,6 @@ import { ScaffoldService } from '../../services';
   selector: 'lf-loading-overlay',
   templateUrl: './loading-overlay.component.html',
   styleUrls: ['./loading-overlay.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PortalModule, MatProgressSpinner, NgClass],
 })
 export class LoadingOverlayComponent {

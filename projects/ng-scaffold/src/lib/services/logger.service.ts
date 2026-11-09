@@ -1,8 +1,8 @@
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { CONFIG } from '../scaffold.config';
 import { ScaffoldLibraryConfig } from '../models';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class Logger {
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
 

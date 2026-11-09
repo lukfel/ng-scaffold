@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, Signal, signal } from '@angular/core';
+import { computed, inject, Service, Signal, signal } from '@angular/core';
 import {
   MatSnackBar,
   MatSnackBarConfig,
@@ -9,9 +9,7 @@ import {
 } from '@angular/material/snack-bar';
 import { firstValueFrom } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class SnackbarService {
   private snackbar = inject(MatSnackBar);
 

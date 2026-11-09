@@ -1,12 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -59,8 +52,6 @@ interface ThemeOption {
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrl: './start.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     RouterModule,
     FormsModule,
@@ -368,7 +359,7 @@ export class StartComponent {
       closeLabel: 'Close',
       confirmLabel: 'Confirm',
     });
-    this.logger.log('close result: ', result);
+    this.logger.log('[Start - ConfirmDialog]', result);
   }
 
   public bottomBarCloseClicked(): void {

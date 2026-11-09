@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -23,8 +22,6 @@ import { HeaderInputConfig } from '../../../models';
   selector: 'lf-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
 })
 export class InputComponent {

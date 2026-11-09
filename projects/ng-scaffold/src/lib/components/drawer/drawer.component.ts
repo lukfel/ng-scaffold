@@ -1,6 +1,6 @@
 import { ComponentPortal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, input, output, signal } from '@angular/core';
+import { Component, effect, input, output, signal } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
 
@@ -8,8 +8,6 @@ import { DrawerConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-drawer',
   templateUrl: './drawer.component.html',
   styleUrls: ['./drawer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [PortalModule, MatSidenavModule, NgClass, NgTemplateOutlet],
   host: {
     '(document:touchstart)': 'onTouchStart($event)',

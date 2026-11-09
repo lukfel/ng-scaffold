@@ -2,7 +2,6 @@ import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/dra
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { KeyValuePipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   contentChild,
   effect,
@@ -43,8 +42,6 @@ import { BreakpointService } from '../../../services';
   selector: 'lf-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     RouterModule,
     FormsModule,

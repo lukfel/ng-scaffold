@@ -1,11 +1,9 @@
-import { Injectable, Type, inject } from '@angular/core';
+import { Service, Type, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { ConfirmDialogConfig, HeaderInputConfig } from '../models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class DialogService {
   private matDialog = inject(MatDialog);
 

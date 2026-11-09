@@ -1,5 +1,5 @@
 import { BreakpointState, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,8 +14,6 @@ import { BreakpointService } from '../../../services';
   selector: 'lf-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatTooltipModule, NgClass],
 })
 export class NotificationComponent {

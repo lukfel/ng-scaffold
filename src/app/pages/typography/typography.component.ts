@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { take } from 'rxjs';
@@ -7,8 +7,6 @@ import { take } from 'rxjs';
   selector: 'app-typography',
   templateUrl: './typography.component.html',
   styleUrls: ['./typography.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [],
 })
 export class TypographyComponent {

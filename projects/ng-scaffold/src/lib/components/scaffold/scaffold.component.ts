@@ -3,7 +3,6 @@ import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import { NgClass } from '@angular/common';
 import {
   afterNextRender,
-  ChangeDetectionStrategy,
   Component,
   computed,
   DestroyRef,
@@ -52,8 +51,6 @@ import { NavbarComponent } from '../navbar/navbar.component';
   selector: 'lf-scaffold',
   templateUrl: './scaffold.component.html',
   styleUrls: ['./scaffold.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     NgClass,
     HeaderComponent,

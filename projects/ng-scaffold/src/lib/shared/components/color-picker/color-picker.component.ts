@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -21,8 +20,6 @@ import { CONFIG } from '../../../scaffold.config';
   selector: 'lf-color-picker',
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [FormsModule, MatButtonModule, MatIconModule, MatTooltipModule],
 })
 export class ColorPickerComponent {

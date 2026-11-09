@@ -1,11 +1,11 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
 import { ScaffoldLibraryConfig } from '../models';
 import { CONFIG } from '../scaffold.config';
 import { Logger, ScaffoldService } from '../services';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScaffoldLoadingInterceptor implements HttpInterceptor {
   public libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private scaffoldService = inject(ScaffoldService);

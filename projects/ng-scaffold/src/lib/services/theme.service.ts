@@ -1,10 +1,8 @@
-import { DOCUMENT, inject, Injectable } from '@angular/core';
+import { DOCUMENT, inject, Service } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ThemeService {
   private storageService = inject(LocalStorageService);
   private document = inject<Document>(DOCUMENT);

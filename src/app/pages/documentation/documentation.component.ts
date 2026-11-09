@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScaffoldConfig, ScaffoldService } from '@lukfel/ng-scaffold';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -8,8 +8,6 @@ import { take } from 'rxjs';
   selector: 'app-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MarkdownComponent],
 })
 export class DocumentationComponent {

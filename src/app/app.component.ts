@@ -1,6 +1,6 @@
 import { Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -25,8 +25,6 @@ import packageJson from '../../package.json';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     RouterModule,
     MatListModule,
@@ -267,7 +265,7 @@ export class AppComponent {
 
   // Listen to header click events
   public headerButtonClickEvent(id: string): void {
-    this.logger.log('You clicked the header button with id: ', id);
+    this.logger.log('[App - HeaderButton]', id);
 
     if (id === 'drawer') {
       const open: boolean = this.scaffoldService?.scaffoldConfig?.drawerConfig?.open || false;
@@ -300,13 +298,13 @@ export class AppComponent {
         confirmLabel: 'Confirm',
       })
       .then((result: boolean) => {
-        this.logger.log('close result: ', result);
+        this.logger.log('[App - ConfirmDialog]', result);
       });
   }
 
   // Listen to header input change events
   public headerInputChangeEvent(value: string): void {
-    this.logger.log(value);
+    this.logger.log('[App - HeaderInput]', value);
   }
 
   // Listen to navbar click events
@@ -316,6 +314,6 @@ export class AppComponent {
 
   // Listen to floating button click events
   public floatingButtonClickEvent(id: string): void {
-    this.logger.log('You clicked the floating button with id: ', id);
+    this.logger.log('[App - FloatingButton]', id);
   }
 }

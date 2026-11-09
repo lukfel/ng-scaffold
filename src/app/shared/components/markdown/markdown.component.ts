@@ -1,5 +1,5 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,8 +17,6 @@ export interface MarkdownDialogData {
   selector: 'app-markdown',
   templateUrl: './markdown.component.html',
   styleUrl: './markdown.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatDialogModule, MatButtonModule, MatIconModule, ExternalMarkdownComponent],
 })
 export class MarkdownComponent {

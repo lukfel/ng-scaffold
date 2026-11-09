@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { DOCUMENT, Injectable, PLATFORM_ID, Signal, inject, signal } from '@angular/core';
+import { DOCUMENT, Service, PLATFORM_ID, Signal, inject, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Observable, filter, firstValueFrom } from 'rxjs';
 import { TransMap, TranslationConfig } from '../models';
@@ -20,7 +20,7 @@ const DEFAULT_CONFIG: Required<Omit<TranslationConfig, 'locales' | 'fallbackLoca
  * its own strongly-typed `TransMap` interface and reads the labels via
  * {@link TranslationService.transMapAs}.
  */
-@Injectable({ providedIn: 'root' })
+@Service()
 export class TranslationService {
   private readonly http = inject(HttpClient);
   private readonly document = inject<Document>(DOCUMENT);

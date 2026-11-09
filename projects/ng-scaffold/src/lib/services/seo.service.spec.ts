@@ -7,7 +7,7 @@ import { ScaffoldLibraryConfig } from '../models';
 import { provideScaffold } from '../scaffold.config';
 import { SeoService } from './seo.service';
 
-@Component({ template: '', standalone: true })
+@Component({ template: '' })
 class PageComponent {}
 
 const BASE = 'https://www.example.com';

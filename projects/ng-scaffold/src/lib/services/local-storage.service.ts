@@ -1,12 +1,10 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { Service, PLATFORM_ID, inject } from '@angular/core';
 import { CONFIG } from '../scaffold.config';
 import { ScaffoldLibraryConfig } from '../models';
 import { Logger } from './logger.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class LocalStorageService {
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
   private platformId = inject(PLATFORM_ID);

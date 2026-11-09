@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, input, output, signal } from '@angular/core';
+import { Component, effect, input, output, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -10,8 +10,6 @@ import { FloatingButtonConfig, ScaffoldLibraryConfig } from '../../models';
   selector: 'lf-floating-button',
   templateUrl: './floating-button.component.html',
   styleUrls: ['./floating-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, NgClass],
 })
 export class FloatingButtonComponent {

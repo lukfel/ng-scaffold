@@ -1,9 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { Service, PLATFORM_ID, inject } from '@angular/core';
 import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { BehaviorSubject, Observable, take } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class RouterService {
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
