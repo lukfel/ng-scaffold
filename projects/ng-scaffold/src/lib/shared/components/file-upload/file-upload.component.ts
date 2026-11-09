@@ -37,7 +37,7 @@ export class FileUploadComponent {
 
     if (!file) return;
 
-    this.logger.log('[FileUploadComponent]', file);
+    if (this.libraryConfig?.debugging) this.logger.log('[FileUpload - Select]', file);
     this.fileChangeEvent.emit(file);
   }
 }

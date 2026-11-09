@@ -24,7 +24,7 @@ export class OverlayService {
       scrollStrategy: this.overlay.scrollStrategies.block(),
     });
 
-    if (this.libraryConfig?.debugging) this.logger.log('[Overlay] attach', this.overlayRef);
+    if (this.libraryConfig?.debugging) this.logger.log('[Overlay - Attach]', this.overlayRef);
 
     const portal: ComponentPortal<T> = new ComponentPortal(component);
     this.overlayRef.attach(portal);
@@ -33,7 +33,7 @@ export class OverlayService {
   public close(): void {
     if (!this.overlayRef) return;
 
-    if (this.libraryConfig?.debugging) this.logger.log('[Overlay] detach', this.overlayRef);
+    if (this.libraryConfig?.debugging) this.logger.log('[Overlay - Detach]', this.overlayRef);
     this.overlayRef.detach();
     this.overlayRef.dispose();
     this.overlayRef = null;

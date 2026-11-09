@@ -143,10 +143,7 @@ export class TranslationService {
         } catch (error) {
           // Fallback file unavailable — keep the loaded active locale rather than
           // discarding it and rendering blank.
-          this.logger.warn(
-            `[TRANSLATION] Fallback locale '${this.config.fallbackLocale}' failed to load`,
-            error,
-          );
+          this.logger.warn('[Translation - Fallback]', error, this.config.fallbackLocale);
         }
       }
 
@@ -155,7 +152,7 @@ export class TranslationService {
         this._transMap.set(merged);
       }
     } catch (error) {
-      this.logger.error(`[TRANSLATION] Failed to load locale '${locale}'`, error);
+      this.logger.error('[Translation - Load]', error, locale);
     } finally {
       this._loading.set(false);
     }

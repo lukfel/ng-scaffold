@@ -24,10 +24,10 @@ export class LocalStorageService {
     try {
       const stringValue: string = JSON.stringify(value);
       if (this.libraryConfig?.debugging)
-        this.logger.log(`[SET ITEM] ${key} with value:`, stringValue);
+        this.logger.log(`[LocalStorage - Set] ${key}`, stringValue);
       localStorage.setItem(key, stringValue);
     } catch (error) {
-      this.logger.error(`[ERROR SET ITEM] ${key}: ${error}`);
+      this.logger.error('[LocalStorage - Set]', error, key);
     }
   }
 
@@ -43,10 +43,10 @@ export class LocalStorageService {
     try {
       const encodedValue: string = btoa(JSON.stringify(value));
       if (this.libraryConfig?.debugging)
-        this.logger.log(`[SET ITEM] ${key} with value:`, encodedValue);
+        this.logger.log(`[LocalStorage - Set] ${key}`, encodedValue);
       localStorage.setItem(key, encodedValue);
     } catch (error) {
-      this.logger.error(`[ERROR SET ITEM] ${key}: ${error}`);
+      this.logger.error('[LocalStorage - Set]', error, key);
     }
   }
 
@@ -61,10 +61,10 @@ export class LocalStorageService {
 
     try {
       const item: string | null = localStorage.getItem(key);
-      if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
+      if (this.libraryConfig?.debugging) this.logger.log(`[LocalStorage - Get] ${key}`, item);
       return item ? (JSON.parse(item, this.dateReviver) as T) : null;
     } catch (error) {
-      this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
+      this.logger.error('[LocalStorage - Get]', error, key);
       return null;
     }
   }
@@ -80,10 +80,10 @@ export class LocalStorageService {
 
     try {
       const item: string | null = localStorage.getItem(key);
-      if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
+      if (this.libraryConfig?.debugging) this.logger.log(`[LocalStorage - Get] ${key}`, item);
       return item ? (JSON.parse(atob(item), this.dateReviver) as T) : null;
     } catch (error) {
-      this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
+      this.logger.error('[LocalStorage - Get]', error, key);
       return null;
     }
   }
@@ -98,10 +98,10 @@ export class LocalStorageService {
 
     try {
       const item: string | null = localStorage.getItem(key);
-      if (this.libraryConfig?.debugging) this.logger.log(`[GET ITEM] ${key} with value:`, item);
+      if (this.libraryConfig?.debugging) this.logger.log(`[LocalStorage - Get] ${key}`, item);
       return item || null;
     } catch (error) {
-      this.logger.error(`[ERROR GET ITEM] ${key}: ${error}`);
+      this.logger.error('[LocalStorage - Get]', error, key);
       return null;
     }
   }
@@ -116,10 +116,10 @@ export class LocalStorageService {
     if (!isPlatformBrowser(this.platformId)) return;
 
     try {
-      if (this.libraryConfig?.debugging) this.logger.log(`[REMOVE ITEM] ${key}`);
+      if (this.libraryConfig?.debugging) this.logger.log(`[LocalStorage - Remove] ${key}`);
       localStorage.removeItem(key);
     } catch (error) {
-      this.logger.error(`[ERROR REMOVE ITEM] ${key}: ${error}`);
+      this.logger.error('[LocalStorage - Remove]', error, key);
     }
   }
 

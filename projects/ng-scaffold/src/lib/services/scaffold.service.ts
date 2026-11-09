@@ -20,7 +20,7 @@ export class ScaffoldService {
   }
 
   public set scaffoldConfig(value: ScaffoldConfig) {
-    if (this.libraryConfig?.debugging) this.logger.log('[UPDATE] ScaffoldConfig', value);
+    if (this.libraryConfig?.debugging) this.logger.log('[Config - Update]', value);
     this._scaffoldConfig$.next(value);
   }
 
@@ -84,12 +84,11 @@ export class ScaffoldService {
 
     if (newValue === currentValue) {
       if (this.libraryConfig?.debugging)
-        this.logger.log(`[UNCHANGED] ScaffoldConfig.${property}`, newValue);
+        this.logger.log(`[Config - Unchanged] ${property}`, newValue);
       return;
     }
 
-    if (this.libraryConfig?.debugging)
-      this.logger.log(`[UPDATE] ScaffoldConfig.${property}`, newValue);
+    if (this.libraryConfig?.debugging) this.logger.log(`[Config - Update] ${property}`, newValue);
     this._scaffoldConfig$.next({ ...currentState, [property]: newValue });
   }
 }

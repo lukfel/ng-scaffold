@@ -60,9 +60,7 @@ export class SeoService {
     // Set meta title
     if (title) {
       if (autoTrim && title.length > titleLimit) {
-        this.logger.error(
-          `[SeoService] The set meta title is too long. Recommended length is ${titleLimit}. The title will be trimmed.`,
-        );
+        this.logger.warn(`[Seo - Title] too long, trimmed to ${titleLimit}`);
       }
       const titleTrim: string =
         title.length > titleLimit ? title.substring(0, titleLimit - 3) + '...' : title;
@@ -72,9 +70,7 @@ export class SeoService {
     // Set meta description
     if (description) {
       if (autoTrim && description.length > descriptionLimit) {
-        this.logger.error(
-          `[SeoService] The set meta description is too long. Recommended length is ${descriptionLimit}. The description will be trimmed.`,
-        );
+        this.logger.warn(`[Seo - Description] too long, trimmed to ${descriptionLimit}`);
       }
       const descriptionTrim: string =
         description.length > descriptionLimit

@@ -40,7 +40,7 @@ export class ScaffoldLoadingInterceptor implements HttpInterceptor {
         this.activeRequests = Math.max(0, this.activeRequests - 1);
         if (this.libraryConfig?.debugging)
           this.logger.log(
-            `[Interceptor] Request finalized: ${req.url}, Active requests now: ${this.activeRequests}`,
+            `[Loading - Finalize] ${req.url}, Active requests now: ${this.activeRequests}`,
           );
 
         if (this.activeRequests === 0) {

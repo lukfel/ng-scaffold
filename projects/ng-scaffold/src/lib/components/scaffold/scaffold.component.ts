@@ -121,7 +121,8 @@ export class ScaffoldComponent {
   public routeHistory = toSignal<string[]>(
     this.routerService.routeHistory$.pipe(
       tap((routeHistory: string[]) => {
-        if (this.libraryConfig?.debugging) this.logger.log('[RouteHistory]', routeHistory);
+        if (this.libraryConfig?.debugging)
+          this.logger.log('[Scaffold - RouteHistory]', routeHistory);
         const scrollContainer: ElementRef | undefined = this.scrollContainer();
         if (scrollContainer && this.scaffoldConfig()?.scrollPositionRestoration) {
           scrollContainer.nativeElement.scrollTop = 0;
@@ -134,7 +135,8 @@ export class ScaffoldComponent {
   public isMobile = toSignal<boolean>(
     this.breakpointService.breakpoint$.pipe(
       map((breakpointState: BreakpointState) => {
-        if (this.libraryConfig?.debugging) this.logger.log('[BreakpointState]', breakpointState);
+        if (this.libraryConfig?.debugging)
+          this.logger.log('[Scaffold - Breakpoint]', breakpointState);
         return (
           breakpointState.breakpoints[Breakpoints.XSmall] ||
           breakpointState.breakpoints[Breakpoints.Small]
@@ -153,7 +155,7 @@ export class ScaffoldComponent {
     effect(() => {
       const scaffoldConfig: ScaffoldConfig | null = this.scaffoldConfig();
 
-      if (this.libraryConfig?.debugging) this.logger.log('[ScaffoldConfig]', scaffoldConfig);
+      if (this.libraryConfig?.debugging) this.logger.log('[Scaffold - Config]', scaffoldConfig);
       if (!scaffoldConfig) return;
 
       this.toggleLoadingOverlay(scaffoldConfig.loading || false);
@@ -178,7 +180,7 @@ export class ScaffoldComponent {
 
     this.route.fragment.pipe(takeUntilDestroyed()).subscribe((fragment: string | null) => {
       if (!this.scaffoldConfig()?.anchorScrolling || !fragment) return;
-      if (this.libraryConfig?.debugging) this.logger.log('[RouteFragment]', fragment);
+      if (this.libraryConfig?.debugging) this.logger.log('[Scaffold - Fragment]', fragment);
 
       this.scrollToFragmentWhenReady(fragment);
     });
@@ -279,7 +281,8 @@ export class ScaffoldComponent {
 
       attempts += 1;
       if (attempts >= this.FRAGMENT_SCROLL_MAX_ATTEMPTS) {
-        if (this.libraryConfig?.debugging) this.logger.log('[RouteFragmentNotFound]', fragment);
+        if (this.libraryConfig?.debugging)
+          this.logger.log('[Scaffold - Fragment] not found', fragment);
         this.fragmentAnimationFrameId = null;
         return;
       }

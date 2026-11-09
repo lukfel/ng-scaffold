@@ -33,12 +33,13 @@ export class Logger {
   /**
    * Uses the regular console error but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
    *
-   * @param message message of the error
-   * @param args arguments of the error
+   * @param message context of the error, e.g. `[Scope - Action]`
+   * @param error the caught error
+   * @param args further arguments of the error
    */
-  public error(message: string, ...args: any[]): void {
+  public error(message: string, error?: unknown, ...args: any[]): void {
     if (this.libraryConfig?.production === false) {
-      console.error(message, ...args); // eslint-disable-line no-console
+      console.error(message, ...(error === undefined ? [] : [error]), ...args); // eslint-disable-line no-console
     }
   }
 }
