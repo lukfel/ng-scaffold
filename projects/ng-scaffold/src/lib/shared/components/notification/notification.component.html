@@ -4,15 +4,15 @@
     [class.mat-elevation-z2]="!config.static"
     [class.lf-notification-fixed]="!config.static"
     [class.lf-notification-static]="config.static"
-    [class.lf-notification-minimal]="config.minimal"
+    [class.lf-notification-compact]="config.compact"
     [class.lf-notification-gradient]="config.gradient"
     [class.lf-mobile]="isMobile()"
     [class]="[config.cssClass ?? '', config.color ?? 'primary']"
     animate.enter="lf-anim-scale-enter">
     <div
       class="lf-notification-content flex-row-nowrap gap-2"
-      [class.justify-center]="config.minimal"
-      [class.justify-between]="!config.minimal"
+      [class.justify-center]="config.compact"
+      [class.justify-between]="!config.compact"
       [class.flex-col]="isMobile()"
       [class.align-center]="!isMobile()"
       [class.align-start]="isMobile()">

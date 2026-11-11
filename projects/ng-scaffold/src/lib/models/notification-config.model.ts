@@ -10,7 +10,7 @@ export interface NotificationConfig {
   svgIcon?: string;
   button?: Button;
   static?: boolean;
-  minimal?: boolean;
+  compact?: boolean;
   gradient?: boolean;
   loading?: boolean;
   cssClass?: string;
