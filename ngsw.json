@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1794241701139,
+  "timestamp": 1794427492023,
   "index": "/ng-scaffold/index.html",
   "assetGroups": [
     {
@@ -11,19 +11,19 @@
         "ignoreVary": true
       },
       "urls": [
-        "/ng-scaffold/chunk--S66ba8K.js",
-        "/ng-scaffold/chunk-B9OnwoAv.js",
-        "/ng-scaffold/chunk-Bj_EcW-x.js",
-        "/ng-scaffold/chunk-C6We2mgQ.js",
-        "/ng-scaffold/chunk-C958Ynwx.js",
-        "/ng-scaffold/chunk-T1iUaGUy.js",
-        "/ng-scaffold/chunk-inaT3O3H.js",
+        "/ng-scaffold/chunk--2m5xSQH.js",
+        "/ng-scaffold/chunk-BX5xYcuz.js",
+        "/ng-scaffold/chunk-Bz_SOSrP.js",
+        "/ng-scaffold/chunk-CIkREWhV.js",
+        "/ng-scaffold/chunk-CiZw_bt7.js",
+        "/ng-scaffold/chunk-DuRFxMuU.js",
+        "/ng-scaffold/chunk-xw28Gkx0.js",
         "/ng-scaffold/favicon.ico",
         "/ng-scaffold/index.html",
-        "/ng-scaffold/main-5TYGJMZN.js",
+        "/ng-scaffold/main-6FZWQBOZ.js",
         "/ng-scaffold/manifest.webmanifest",
         "/ng-scaffold/scripts-5A55CVEY.js",
-        "/ng-scaffold/styles-VWD2EJRL.css"
+        "/ng-scaffold/styles-CTNLHG2B.css"
       ],
       "patterns": []
     },
@@ -106,13 +106,13 @@
   "dataGroups": [],
   "hashTable": {
     "/ng-scaffold/apple-touch-icon.png": "e1e3cc7de31cd0d272fde7c5a8bb184d3f072e8a",
-    "/ng-scaffold/chunk--S66ba8K.js": "a7fcf48d101879b35cde83da2235fc7b1bc42485",
-    "/ng-scaffold/chunk-B9OnwoAv.js": "2d21af5855ee5743369d14702224d11017d3b3b3",
-    "/ng-scaffold/chunk-Bj_EcW-x.js": "ea2b15a1700656b73db0b776250b495701245bc8",
-    "/ng-scaffold/chunk-C6We2mgQ.js": "6caaa10bbcca8ee6d97c814b4447883c1aee739a",
-    "/ng-scaffold/chunk-C958Ynwx.js": "441c9efc594b6d82fd78b22bc3ae9be330b7cae3",
-    "/ng-scaffold/chunk-T1iUaGUy.js": "b9af204f0056d71c58686e2a6f8a7b156c054608",
-    "/ng-scaffold/chunk-inaT3O3H.js": "054bf3fac9efeee0b7a26c10f30e7dd99ef1a65f",
+    "/ng-scaffold/chunk--2m5xSQH.js": "95a7e2ccb80fa09f689d568700b8dcc8f89308ae",
+    "/ng-scaffold/chunk-BX5xYcuz.js": "7a9e931bf05511fdc7664d61e2d61ed3d4a7ca2f",
+    "/ng-scaffold/chunk-Bz_SOSrP.js": "4bf9cc6e5e52fb0d044524f0164c72ba84009f33",
+    "/ng-scaffold/chunk-CIkREWhV.js": "e18f02fab93fcbceefa1e03179014ddd709b1df1",
+    "/ng-scaffold/chunk-CiZw_bt7.js": "2bdf7a3f577e74a249a55afe2df13f0fc627b9a5",
+    "/ng-scaffold/chunk-DuRFxMuU.js": "bf61b1365045dde8212294ae1417cc2420725b94",
+    "/ng-scaffold/chunk-xw28Gkx0.js": "78e3096cf880803b7e1f13d0ceb36227b44f3475",
     "/ng-scaffold/favicon.ico": "327b85d988631eb1a2ce4d1a4865327e4fc2c426",
     "/ng-scaffold/img/cat.svg": "feb48d3ee921c2486ce4ccc8ee0c676864b7aa0e",
     "/ng-scaffold/img/error/missing.png": "4feb249451b24043272eb7226628c3d92069d0cc",
@@ -146,8 +146,8 @@
     "/ng-scaffold/img/uglygotchi.svg": "4217a98c5bcc2309835fdfe6177d1999d62a44c0",
     "/ng-scaffold/img/waw.svg": "58d211b8f9dfab2ab0352d6132ef06232f3599f8",
     "/ng-scaffold/img/wowen.svg": "7330390e650bfa6f48733f806d367e3ce80cf2b8",
-    "/ng-scaffold/index.html": "fb30a360aac2b9c0607207639a45bb9daee2375b",
-    "/ng-scaffold/main-5TYGJMZN.js": "3492ee1c14308fb969f1e232ea4af20547bf2698",
+    "/ng-scaffold/index.html": "86a215d3188acf9020cce15cebd1c813fd2020f8",
+    "/ng-scaffold/main-6FZWQBOZ.js": "0d2cc5ea8753eb5db132763ba0b902d401a2cb44",
     "/ng-scaffold/manifest.webmanifest": "d487cb7bc84a5e7ccfef9ca406e917bfe555b1f8",
     "/ng-scaffold/md/bottomBarConfig.md": "19c663ab16d13f72b73a14f6756a53f5c7471862",
     "/ng-scaffold/md/contentTitleCardConfig.md": "113026539fe35770e8d1897625924eca7ce64f58",
@@ -181,7 +181,7 @@
     "/ng-scaffold/media/roboto-v30-latin-regular-6KEU5XHX.woff2": "7ca9c5967f3bb8bffeab24b639b49c1e7d03fa52",
     "/ng-scaffold/media/roboto-v30-latin-regular-EJHJLMHI.woff": "d9cfe6b477b49d47b6241b4281f4858d98eaca65",
     "/ng-scaffold/scripts-5A55CVEY.js": "11556f74d78a6bdc611887cdf5fb487079615eab",
-    "/ng-scaffold/styles-VWD2EJRL.css": "6d31b0efd8bc7f7db99e4f7591d41bada24cbe31"
+    "/ng-scaffold/styles-CTNLHG2B.css": "a54cf75b516eb607ff0c2657c0f41cb579696fa9"
   },
   "navigationUrls": [
     {
