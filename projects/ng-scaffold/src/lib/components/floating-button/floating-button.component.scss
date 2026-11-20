@@ -56,6 +56,11 @@
     &.right {
       left: 100%;
     }
+
+    &.anchored {
+      left: var(--lf-fab-anchor-left);
+      translate: -50%;
+    }
   }
 
   &:not(.sticky) {
@@ -85,6 +90,11 @@
     &.right {
       left: calc(100% - (var(--floating-button-right) + 8px));
       translate: -100%;
+    }
+
+    &.anchored {
+      left: var(--lf-fab-anchor-left);
+      translate: -50%;
     }
   }
 }

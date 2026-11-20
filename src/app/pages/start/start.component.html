@@ -491,6 +491,16 @@
   <!-- <p>
           <mat-slide-toggle [(ngModel)]="floatingButtonConfig.sticky">Sticky</mat-slide-toggle>
         </p> -->
+  <p>
+    <mat-slide-toggle [ngModel]="floatingButtonAnchorDemo()" (ngModelChange)="floatingButtonAnchorDemo.set($event)">
+      Anchor
+    </mat-slide-toggle>
+  </p>
+  @if (floatingButtonAnchorDemo()) {
+  <div class="anchor-demo" lfFloatingButtonAnchor>
+    The button centres itself under this box (lfFloatingButtonAnchor)
+  </div>
+  }
   }
   <mat-divider></mat-divider>
   }

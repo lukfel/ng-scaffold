@@ -108,6 +108,10 @@ export class ScaffoldComponent {
   public floatingButtonConfig = computed<FloatingButtonConfig | null>(
     () => this.scaffoldConfig()?.floatingButtonConfig || null,
   );
+  public floatingButtonAnchor = toSignal<HTMLElement | null>(
+    this.scaffoldService.floatingButtonAnchor$,
+    { initialValue: null },
+  );
   public bottomBarConfig = computed<BottomBarConfig | null>(
     () => this.scaffoldConfig()?.bottomBarConfig || null,
   );

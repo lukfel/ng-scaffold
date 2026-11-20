@@ -66,6 +66,7 @@
           [navbarEnabled]="navbarConfig()?.enable!"
           [bottomBarEnabled]="bottomBarConfig()?.enable!"
           [bottomSnackbarOpen]="bottomSnackbarOpen()"
+          [anchor]="floatingButtonAnchor()"
           (floatingButtonConfigUpdateEvent)="floatingButtonConfigUpdated($event)"
           (floatingButtonClickEvent)="floatingButtonClicked($event)"></lf-floating-button>
       </div>

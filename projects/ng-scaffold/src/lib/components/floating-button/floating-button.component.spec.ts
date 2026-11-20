@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
-import { vi } from 'vitest';
+import { afterEach, vi } from 'vitest';
 import { FloatingButtonComponent } from './floating-button.component';
 
 describe('FloatingButtonComponent', () => {
@@ -183,5 +183,81 @@ describe('FloatingButtonComponent', () => {
     fixture.detectChanges();
     const group = fixture.debugElement.query(By.css('.lf-floating-button-group'));
     expect(group.nativeElement.classList).not.toContain('show-snackbar');
+  });
+
+  describe('anchor', () => {
+    let measure: () => void;
+
+    beforeEach(() => {
+      vi.stubGlobal(
+        'ResizeObserver',
+        class {
+          constructor(callback: () => void) {
+            measure = callback;
+          }
+          observe(): void {}
+          disconnect(): void {}
+        },
+      );
+    });
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+      document.querySelectorAll('.anchor').forEach((element: Element) => element.remove());
+    });
+
+    const anchorAt = (left: number, width: number): HTMLElement => {
+      const anchor: HTMLElement = document.createElement('div');
+      anchor.className = 'anchor';
+      anchor.getBoundingClientRect = () => ({ left, width }) as DOMRect;
+      document.body.appendChild(anchor);
+      return anchor;
+    };
+
+    const groupFor = (anchor: HTMLElement | null): HTMLElement => {
+      fixture.componentRef.setInput('floatingButtonConfig', {
+        enable: true,
+        horizontalPosition: 'center',
+      });
+      fixture.componentRef.setInput('anchor', anchor);
+      fixture.detectChanges();
+      if (anchor) measure();
+      fixture.detectChanges();
+      return fixture.debugElement.query(By.css('.lf-floating-button-group')).nativeElement;
+    };
+
+    it('centres the button under the anchor', () => {
+      const group: HTMLElement = groupFor(anchorAt(200, 400));
+
+      expect(group.classList).toContain('anchored');
+      expect(group.classList).not.toContain('center');
+      expect(group.style.getPropertyValue('--lf-fab-anchor-left')).toBe('400px');
+    });
+
+    it('keeps its position without an anchor', () => {
+      const group: HTMLElement = groupFor(null);
+
+      expect(group.classList).toContain('center');
+      expect(group.classList).not.toContain('anchored');
+    });
+
+    // A phone may drop the anchored column while the button stays
+    it('falls back once the anchor leaves the page', () => {
+      const anchor: HTMLElement = anchorAt(200, 400);
+      groupFor(anchor);
+
+      anchor.remove();
+      measure();
+      fixture.detectChanges();
+
+      const group: HTMLElement = fixture.debugElement.query(
+        By.css('.lf-floating-button-group'),
+      ).nativeElement;
+      expect(group.classList).toContain('center');
+    });
+
+    it('adds no undefined class without a cssClass', () => {
+      expect(groupFor(null).classList).not.toContain('undefined');
+    });
   });
 });

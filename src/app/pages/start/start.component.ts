@@ -23,6 +23,7 @@ import {
   HeaderConfig,
   HeaderInputConfig,
   LoadingOverlayConfig,
+  FloatingButtonAnchorDirective,
   Logger,
   MenuButton,
   NavbarConfig,
@@ -67,6 +68,7 @@ interface ThemeOption {
     MatDividerModule,
     NgClass,
     NgTemplateOutlet,
+    FloatingButtonAnchorDirective,
   ],
 })
 export class StartComponent {
@@ -106,6 +108,7 @@ export class StartComponent {
     () => this.scaffoldConfig()?.bottomBarConfig || {},
   );
 
+  public floatingButtonAnchorDemo = signal<boolean>(false);
   public bottomBarDemoList = signal([
     {
       checked: false,

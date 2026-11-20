@@ -1,9 +1,14 @@
 @if (floatingButtonConfig(); as config) {
   @if (config.enable && (!config.autoHide || !onTop())) {
-    <!-- The group carries the placement, so both halves move as one -->
+    <!-- The group carries the placement, so both halves move as one; an anchor replaces the position -->
     <div
       class="lf-floating-button-group lf-transitions"
-      [ngClass]="config.cssClass + ' ' + config.horizontalPosition"
+      [ngClass]="
+        (config.cssClass ?? '') +
+        ' ' +
+        (anchorLeft() === null ? config.horizontalPosition : 'anchored')
+      "
+      [style.--lf-fab-anchor-left]="anchorLeft() === null ? null : anchorLeft() + 'px'"
       [class.split]="!!config.secondaryButton"
       [class.sticky]="config.sticky"
       [class.show-navbar]="isMobile() && navbarEnabled() && !bottomBarEnabled()"

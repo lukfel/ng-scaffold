@@ -67,6 +67,22 @@ export class ScaffoldService {
     this._drawerPortal$.next(value ? componentPortal : null);
   }
 
+  // Floating button anchor, the element the button centres itself under (lfFloatingButtonAnchor)
+  private _floatingButtonAnchor$: BehaviorSubject<HTMLElement | null> =
+    new BehaviorSubject<HTMLElement | null>(null);
+
+  public get floatingButtonAnchor$(): Observable<HTMLElement | null> {
+    return this._floatingButtonAnchor$.asObservable();
+  }
+
+  public set floatingButtonAnchor(value: HTMLElement | null) {
+    this._floatingButtonAnchor$.next(value);
+  }
+
+  public get floatingButtonAnchor(): HTMLElement | null {
+    return this._floatingButtonAnchor$.value;
+  }
+
   // Update a specific property in the ScaffoldConfig
   public updateScaffoldProperty<K extends keyof ScaffoldConfig>(
     property: K,

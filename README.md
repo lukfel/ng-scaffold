@@ -271,6 +271,32 @@ public navbarButtonClickEvent(id: string): void {
 
 
 
+## (Optional) Floating Button Anchor
+By default the floating button sits at the `horizontalPosition` of the whole content. To centre it under one element instead, such as the list column of a split layout, put `lfFloatingButtonAnchor` on that element:
+
+```html
+<div class="split">
+  <div lfFloatingButtonAnchor>
+    <!-- list -->
+  </div>
+  <div>
+    <!-- detail -->
+  </div>
+</div>
+```
+
+```ts
+import { FloatingButtonAnchorDirective } from '@lukfel/ng-scaffold';
+
+@Component({
+  imports: [FloatingButtonAnchorDirective],
+})
+```
+
+* **Note:** The button follows the element when the window, the drawer or the element itself changes size, and returns to its `horizontalPosition` once the element is gone (e.g. hidden by an `@if`)
+
+
+
 ## (Optional) Additional Services
 This library includes several utility services:
 
