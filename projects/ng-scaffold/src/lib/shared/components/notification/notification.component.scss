@@ -154,6 +154,12 @@
     }
   }
 
+  // Pulled into the padding, so a compact notification keeps its height
+  .lf-notification-close {
+    flex-shrink: 0;
+    margin: -8px -8px -8px 0;
+  }
+
   // Once the layout stacks, the action's negative top margin closes the gap under a projected body
   &.lf-mobile .lf-notification-content:has(.lf-notification-body:not(:empty)) {
     .lf-notification-action {

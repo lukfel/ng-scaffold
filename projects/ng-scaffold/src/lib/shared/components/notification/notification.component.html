@@ -9,62 +9,89 @@
     [class.lf-mobile]="isMobile()"
     [class]="[config.cssClass ?? '', config.color ?? 'primary']"
     animate.enter="lf-anim-scale-enter">
-    <div
-      class="lf-notification-content flex-row-nowrap gap-2"
-      [class.justify-center]="config.compact"
-      [class.justify-between]="!config.compact"
-      [class.flex-col]="isMobile()"
-      [class.align-center]="!isMobile()"
-      [class.align-start]="isMobile()">
-      <span
-        class="lf-notification-message flex-row-nowrap justify-start"
-        [class.gap-4]="!isMobile()"
-        [class.gap-2]="isMobile()">
-        <!-- The spinner takes the icon's own 24px box, so swapping them shifts no text -->
-        @if (config.loading) {
-          <mat-spinner class="flex-none" [diameter]="24"></mat-spinner>
-        } @else if (config.matIcon) {
-          <mat-icon class="flex-none" [color]="config.color ?? 'primary'">
-            {{ config.matIcon }}
-          </mat-icon>
-        } @else if (config.svgIcon) {
-          <mat-icon
-            class="flex-none"
-            [color]="config.color ?? 'primary'"
-            [svgIcon]="config.svgIcon"></mat-icon>
-        }
-        <span class="flex-col" [class.ml-1]="!config.matIcon && !config.svgIcon && !config.loading">
-          @if (config.title) {
-            <span class="lf-notification-title">{{ config.title }}</span>
+    <!-- The close button stays beside the content, which stacks its own action under the message on mobile -->
+    <div class="flex-row-nowrap align-center gap-2">
+      <div
+        class="lf-notification-content flex-1 flex-row-nowrap gap-2"
+        [class.justify-center]="config.compact && !config.button && !config.closeButton"
+        [class.justify-between]="!config.compact || config.button || config.closeButton"
+        [class.flex-col]="isMobile()"
+        [class.align-center]="!isMobile()"
+        [class.align-start]="isMobile()">
+        <span
+          class="lf-notification-message flex-row-nowrap justify-start"
+          [class.gap-4]="!isMobile()"
+          [class.gap-2]="isMobile()">
+          <!-- The spinner takes the icon's own 24px box, so swapping them shifts no text -->
+          @if (config.loading) {
+            <mat-spinner class="flex-none" [diameter]="24"></mat-spinner>
+          } @else if (config.matIcon) {
+            <mat-icon class="flex-none" [color]="config.color ?? 'primary'">
+              {{ config.matIcon }}
+            </mat-icon>
+          } @else if (config.svgIcon) {
+            <mat-icon
+              class="flex-none"
+              [color]="config.color ?? 'primary'"
+              [svgIcon]="config.svgIcon"></mat-icon>
           }
-          <span>
-            {{ config.message }}
-            @if (config.link && config.linkText) {
-              <a class="lf-notification-link" [href]="config.link">{{ config.linkText }}</a>
+          <span
+            class="flex-col"
+            [class.ml-1]="!config.matIcon && !config.svgIcon && !config.loading">
+            @if (config.title) {
+              <span class="lf-notification-title">{{ config.title }}</span>
             }
+            <span>
+              {{ config.message }}
+              @if (routerLinkTree() && config.linkText) {
+                <a class="lf-notification-link" [routerLink]="routerLinkTree()">
+                  {{ config.linkText }}
+                </a>
+              } @else if (config.link && config.linkText) {
+                <a class="lf-notification-link" [href]="config.link">{{ config.linkText }}</a>
+              }
+            </span>
+            <div class="lf-notification-body"><ng-content></ng-content></div>
           </span>
-          <div class="lf-notification-body"><ng-content></ng-content></div>
         </span>
-      </span>
 
-      @if (config.button; as button) {
+        @if (config.button; as button) {
+          <button
+            mat-flat-button
+            class="lf-notification-action"
+            type="button"
+            [class.align-self-end]="isMobile()"
+            [ngClass]="button.cssClass"
+            [color]="config.color ?? 'primary'"
+            [disabled]="button.disabled || config.loading"
+            [matTooltip]="button.tooltip"
+            (click)="buttonClickEvent.emit()">
+            <!-- icon -->
+            @if (button.matIcon) {
+              <mat-icon>{{ button.matIcon }}</mat-icon>
+            } @else if (button.svgIcon) {
+              <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+            }
+            {{ button.label }}
+          </button>
+        }
+      </div>
+
+      @if (config.closeButton; as closeButton) {
         <button
-          mat-flat-button
-          class="lf-notification-action"
+          mat-icon-button
+          class="lf-notification-close"
           type="button"
-          [class.align-self-end]="isMobile()"
-          [ngClass]="button.cssClass"
-          [color]="config.color ?? 'primary'"
-          [disabled]="button.disabled || config.loading"
-          [matTooltip]="button.tooltip"
-          (click)="buttonClickEvent.emit()">
-          <!-- icon -->
-          @if (button.matIcon) {
-            <mat-icon>{{ button.matIcon }}</mat-icon>
-          } @else if (button.svgIcon) {
-            <mat-icon [svgIcon]="button.svgIcon"></mat-icon>
+          [ngClass]="closeButton.cssClass"
+          [disabled]="closeButton.disabled"
+          [matTooltip]="closeButton.tooltip"
+          [attr.aria-label]="closeButton.tooltip || closeButton.id"
+          (click)="closeClickEvent.emit()">
+          @if (closeButton.svgIcon) {
+            <mat-icon [svgIcon]="closeButton.svgIcon"></mat-icon>
+          } @else {
+            <mat-icon>{{ closeButton.matIcon ?? 'close' }}</mat-icon>
           }
-          {{ button.label }}
         </button>
       }
     </div>

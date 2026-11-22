@@ -5,10 +5,12 @@ export interface NotificationConfig {
   title?: string;
   message?: string;
   link?: string;
+  routerLink?: string;
   linkText?: string;
   matIcon?: string;
   svgIcon?: string;
   button?: Button;
+  closeButton?: Button;
   static?: boolean;
   compact?: boolean;
   gradient?: boolean;
