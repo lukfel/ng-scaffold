@@ -3,7 +3,7 @@ import { Service, inject } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
 import { ScaffoldLibraryConfig } from '../models';
 import { CONFIG } from '../scaffold.config';
-import { Logger, ScaffoldService } from '../services';
+import { Logger, SKIP_SERVER_LOGGING, ScaffoldService } from '../services';
 
 @Service({ autoProvided: false })
 export class ScaffoldLoadingInterceptor implements HttpInterceptor {
@@ -16,6 +16,9 @@ export class ScaffoldLoadingInterceptor implements HttpInterceptor {
   private spinnerTimeout: ReturnType<typeof setTimeout>;
 
   public intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    // Error reports run in the background, a spinner would announce them
+    if (req.context.get(SKIP_SERVER_LOGGING)) return next.handle(req);
+
     this.activeRequests++;
 
     // Set a delayed spinner timeout

@@ -301,10 +301,24 @@ export class AppComponent {
     this.apiService.apiCall().then(result => {
       this.logger.log(result);
     }).catch(error => {
-      this.logger.error(error);
+      this.logger.error('[Api - Call]', error);
     });
   }
 }
+```
+
+#### (Optional) Server Logging
+With a URL or a class, `Logger.error(message, error)` and uncaught errors (`[Global - Uncaught]`) are also reported to a server, in production too. Only the message and the error's `name`, `code`, `message` and first stack lines are sent, never further `args`. Query strings are stripped, status `0` HTTP errors skipped, each message is sent once per session (max. 10), batched every 5 s.
+
+```ts
+// POST { entries: LogEntry[] } through your HttpClient, marked with SKIP_SERVER_LOGGING for your interceptors
+provideScaffold({ serverLoggingUrl: '/api/log' })
+
+// Or any other transport; the class wins if both are given
+provideScaffold({
+  serverLogger: ErrorReporter, // implements LogReporter { report(entries: LogEntry[]): Promise<void> }
+  serverLoggerOptions: { batchDelay: 5000, maxPerSession: 10, beforeSend: (entry) => entry }, // null drops it
+})
 ```
 
 ### SnackbarService

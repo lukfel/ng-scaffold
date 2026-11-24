@@ -7,6 +7,7 @@ export { OverlayService } from './overlay.service';
 export { RouterService } from './router.service';
 export { ScaffoldService } from './scaffold.service';
 export { SeoService } from './seo.service';
+export { SKIP_SERVER_LOGGING } from './server-logging.service';
 export { SnackbarService } from './snackbar.service';
 export { ThemeService } from './theme.service';
 export { TranslationService } from './translation.service';

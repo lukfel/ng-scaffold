@@ -1,10 +1,12 @@
 import { Service, inject } from '@angular/core';
 import { CONFIG } from '../scaffold.config';
 import { ScaffoldLibraryConfig } from '../models';
+import { ServerLoggingService } from './server-logging.service';
 
 @Service()
 export class Logger {
   private libraryConfig = inject<ScaffoldLibraryConfig>(CONFIG, { optional: true });
+  private serverLogging = inject(ServerLoggingService);
 
   /**
    * Uses the regular console log but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
@@ -31,7 +33,8 @@ export class Logger {
   }
 
   /**
-   * Uses the regular console error but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider
+   * Uses the regular console error but can be automatically disabled during production by using the ScaffoldLibraryConfig in the scaffoldProvider.
+   * With `serverLoggingUrl` or `serverLogger` set, the message and error are also reported to the server, in production too; `args` never are
    *
    * @param message context of the error, e.g. `[Scope - Action]`
    * @param error the caught error
@@ -41,5 +44,6 @@ export class Logger {
     if (this.libraryConfig?.production === false) {
       console.error(message, ...(error === undefined ? [] : [error]), ...args); // eslint-disable-line no-console
     }
+    this.serverLogging.report(message, error);
   }
 }

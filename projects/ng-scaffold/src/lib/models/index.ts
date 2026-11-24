@@ -15,5 +15,6 @@ export { NotificationConfig } from './notification-config.model';
 export { PlaceholderConfig } from './placeholder-config.model';
 export { ScaffoldConfig } from './scaffold-config.model';
 export { SeoConfig, SeoLibraryConfig } from './seo-config.model';
+export { LogEntry, LogReporter, ServerLoggerOptions } from './server-logging.model';
 export { TransMap } from './trans-map.model';
 export { TranslationConfig } from './translation-config.model';
